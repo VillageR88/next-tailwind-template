@@ -7,9 +7,9 @@ import Image from 'next/image';
 
 export default function Home() {
   return (
-    <main className="flex h-screen flex-col items-center justify-center">
+    <main className="flex max-h-full flex-col items-center justify-center">
       {/* wrapper */}
-      <div className="flex flex-col-reverse rounded-3xl bg-white p-5 md:pb-5 pb-12 tracking-tight text-dark-slate-grey md:flex-row">
+      <div className="flex flex-col-reverse rounded-3xl bg-white md:pt-5 md:pr-5 md:pb-5 pb-12 tracking-tight text-dark-slate-grey md:flex-row">
         {/* column1 */}
         <div className="flex w-full flex-col pl-10 pr-14 md:w-[30em]">
           <span className="pt-16 text-[2.5rem] font-bold tracking-tighter md:text-[3.5rem]">Stay updated!</span>
@@ -44,7 +44,7 @@ export default function Home() {
         </div>
         {/* column2 */}
         <Image className="hidden md:flex" src={illustration_desktop as string} alt="illustration" />
-        <Image className="flex w-full md:hidden" src={illustration_mobile as string} alt="illustration" />
+        <Image className="flex w-screen self-center md:hidden" src={illustration_mobile as string} alt="illustration" />
       </div>
     </main>
   );
