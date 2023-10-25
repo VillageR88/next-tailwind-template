@@ -29,12 +29,12 @@ export default function Home() {
           <span>Email address</span>
           <input type="text" name="emailAddress" id="emailAddress" placeholder="email@company.com" />
           <button>Subscribe to monthly newsletter</button>
+          <div className="font-sans">Ten tekst używa czcionki "Roboto".</div>
         </div>
         {/* column2 */}
         <Image className="hidden md:flex" src={illustration_desktop as string} alt="illustration" />
         <Image className="flex md:hidden" src={illustration_mobile as string} alt="illustration" />
       </div>
-      <source />
     </main>
   );
 }
