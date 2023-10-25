@@ -11,24 +11,24 @@ export default function Home() {
 
     <main className="flex h-screen flex-col items-center justify-center">
       {/* wrapper */}
-      <div className="flex flex-col-reverse md:flex-row text-dark-slate-grey bg-white p-5 rounded-3xl">
+      <div className="flex flex-col-reverse md:flex-row text-dark-slate-grey bg-white p-5 rounded-3xl tracking-tight">
         {/* column1 */}
-        <div className="flex flex-col px-20 w-[35em]">
-          <span className="pt-16 text-[3.5rem] font-bold">Stay updated!</span>
+        <div className="flex flex-col pl-10 pr-14 w-[30em]">
+          <span className="pt-16 text-[3.5rem] font-bold tracking-tighter">Stay updated!</span>
           <span className='pt-6 font-medium'>Join 60,000+ product managers receiving monthly updates on:</span>
-          <div className="flex pt-4 gap-4">
+          <div className="flex pt-4 gap-4 font-medium">
             <Image className="" src={icon_list as string} alt="icon of list" />
             <span>Product discovery and building what matters</span>
           </div>
-          <div className="flex pt-2 gap-4">
+          <div className="flex pt-2 gap-4 font-medium">
             <Image className="" src={icon_list as string} alt="icon of list" />
             <span>Measuring to ensure updates are a success</span>
           </div>
-          <div className="flex pt-2 gap-4">
+          <div className="flex pt-2 gap-4 font-medium">
             <Image className="" src={icon_list as string} alt="icon of list" />
             <span>And much more!</span>
           </div>
-          <span className='text-xs font-semibold pt-8'>Email address</span>
+          <span className='text-xs font-semibold pt-8 tracking-tighter'>Email address</span>
           <input className='border solid px-6 py-4' type="text" name="emailAddress" id="emailAddress" placeholder="email@company.com" />
           <button>Subscribe to monthly newsletter</button>
         </div>
