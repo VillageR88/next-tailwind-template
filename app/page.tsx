@@ -29,30 +29,13 @@ export default function Home() {
             <Image className="" src={iconList as string} alt="icon of list" />
             <span>And much more!</span>
           </div>
-          <div className="flex justify-between pb-2 pt-10 font-semibold tracking-tighter md:text-xs">
-            <span>Email address</span>
-            <span className="tom text-tomato">Valid email required</span>
-          </div>
-
-          <div className="flex flex-col gap-6">
-            <input
-              className="solid rounded-lg border px-6 py-4"
-              type="text"
-              name="emailInput"
-              id="emailInput"
-              placeholder="email@company.com"
-            />
-            <button className="solid rounded-lg border bg-[#232742] px-6 py-4 text-white">
-              Subscribe to monthly newsletter
-            </button>
-          </div>
+          {/* Add the SignUpForm component here */}
+          <SignUpForm />
         </div>
         {/* column2 */}
         <Image className="hidden md:flex" src={illustrationDesktop as string} alt="illustration" />
         <Image className="flex w-screen self-center md:hidden" src={illustrationMobile as string} alt="illustration" />
       </div>
-      {/* Add the SignUpForm component here */}
-      <SignUpForm />
     </main>
   );
 }
@@ -71,17 +54,17 @@ function SignUpForm() {
     if (isValidEmail(email)) {
       setErrorMessage('Thank you!');
     } else {
-      setErrorMessage('Please provide a valid email address');
+      setErrorMessage('Valid email required');
     }
   }
 
   return (
-    <div>
-      <div>
+    <div className="flex flex-col">
+      <div className="flex justify-between pb-2 pt-10 font-semibold tracking-tighter md:text-xs">
         <span>Email address</span>
         <span className="errorMessage text-tomato">{errorMessage || 'Valid email required'}</span>
       </div>
-      <div>
+      <div className="flex flex-col gap-6">
         <input
           className="solid rounded-lg border px-6 py-4"
           type="text"
