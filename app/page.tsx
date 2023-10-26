@@ -3,14 +3,30 @@
 import React, { useState } from 'react';
 import Image from 'next/image';
 import iconList from './assets/images/icon-list.svg';
+import iconSuccess from './assets/images/icon-success.svg';
 import illustrationDesktop from './assets/images/illustration-sign-up-desktop.svg';
 import illustrationMobile from './assets/images/illustration-sign-up-mobile.svg';
 
 export default function Home() {
   return (
     <main className="flex min-h-screen flex-col items-center justify-center">
-      {/* wrapper */}
-      <div className="flex flex-col-reverse rounded-[2em] bg-white pb-12 tracking-tight text-dark-slate-grey md:flex-row md:pb-6 md:pl-6 md:pr-6 md:pt-6">
+      {/* wrapper2 */}
+      <div className="wrapper2 hidden w-[25em] flex-col bg-white text-dark-slate-grey">
+        <Image className="hidden md:flex" src={iconSuccess as string} alt="icon" />
+        <span className="pt-6 text-[2.5rem] font-bold tracking-tighter md:text-[3.5rem]">Thanks for subscribing!</span>
+        <span>
+          A confirmation email has been sent to{' '}
+          <span className="pt-6 font-bold">
+            {document.getElementById('emailId')?.textContent ?? 'ash@loremcompany.com'}
+          </span>
+          . Please open it and click the button inside to confirm your subscription.
+        </span>
+        <button className="solid rounded-lg border bg-[#232742] from-[#FF5378] to-[#FF693E] px-6 py-4 text-white after:bg-white hover:bg-gradient-to-r">
+          Dismiss message
+        </button>
+      </div>
+      {/* wrapper1 */}
+      <div className="wrapper1 flex flex-col-reverse rounded-[2em] bg-white pb-12 tracking-tight text-dark-slate-grey md:flex-row md:pb-6 md:pl-6 md:pr-6 md:pt-6">
         {/* column1 */}
         <div className="flex w-full flex-col pl-10 pr-14 md:w-[30em]">
           <span className="pt-16 text-[2.5rem] font-bold tracking-tighter md:text-[3.5rem]">Stay updated!</span>
@@ -44,33 +60,19 @@ export default function Home() {
 function SignUpForm() {
   const [email, setEmail] = useState('');
   const [isValidEmail, setIsValidEmail] = useState<boolean | null>(null);
+  const [isTyping, setIsTyping] = useState(false);
 
   function checkEmail() {
-    const pattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-    setIsValidEmail(pattern.test(email));
+    setIsValidEmail(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(email));
+    setIsTyping(false);
   }
 
-  function hideLabel(e: { key: string }) {
-    if (e.key !== 'Enter') {
-      try {
-        const label = document.getElementsByClassName('label')[0];
-        label.classList.replace('flex', 'hidden');
-      } catch (error) {}
-    }
-  }
-
-  function showLabel() {
-    try {
-      const label = document.getElementsByClassName('label')[0];
-      label.classList.replace('hidden', 'flex');
-    } catch (error) {}
-  }
   return (
     <div className="flex flex-col">
       <div className="flex justify-between pb-2 pt-10 font-semibold tracking-tighter md:text-xs">
         <span>Email address</span>
-        {isValidEmail === true && <span className="label flex text-green-700">Thank You!</span>}
-        {isValidEmail === false && <span className="label flex text-tomato">Valid email required</span>}
+        {isValidEmail === true && !isTyping && <span className="label flex text-green-700">Thank You!</span>}
+        {isValidEmail === false && !isTyping && <span className="label flex text-tomato">Valid email required</span>}
       </div>
 
       {/* input */}
@@ -81,7 +83,9 @@ function SignUpForm() {
       >
         <div className="flex flex-col gap-6">
           <input
-            onKeyUp={hideLabel}
+            onKeyUp={(e) => {
+              e.key !== 'Enter' ? setIsTyping(true) : null;
+            }}
             className="solid rounded-lg border px-6 py-4 hover:cursor-pointer hover:border-dark-slate-grey"
             type="text"
             name="emailInput"
@@ -94,10 +98,7 @@ function SignUpForm() {
           <button
             type="submit"
             className="solid rounded-lg border bg-[#232742] from-[#FF5378] to-[#FF693E] px-6 py-4 text-white after:bg-white hover:bg-gradient-to-r"
-            onClick={() => {
-              checkEmail();
-              showLabel();
-            }}
+            onClick={checkEmail}
           >
             Subscribe to monthly newsletter
           </button>
