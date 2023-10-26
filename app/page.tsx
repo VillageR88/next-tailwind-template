@@ -82,7 +82,7 @@ function SignUpForm() {
         <div className="flex flex-col gap-6">
           <input
             onKeyUp={hideLabel}
-            className="solid rounded-lg border px-6 py-4"
+            className="solid rounded-lg border px-6 py-4 hover:cursor-pointer hover:border-dark-slate-grey"
             type="text"
             name="emailInput"
             placeholder="email@company.com"
@@ -93,7 +93,7 @@ function SignUpForm() {
           />
           <button
             type="submit"
-            className="solid rounded-lg border bg-[#232742] px-6 py-4 text-white"
+            className="solid rounded-lg border bg-[#232742] from-[#FF5378] to-[#FF693E] px-6 py-4 text-white after:bg-white hover:bg-gradient-to-r"
             onClick={() => {
               checkEmail();
               showLabel();
