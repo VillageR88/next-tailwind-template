@@ -7,10 +7,68 @@ import iconSuccess from './assets/images/icon-success.svg';
 import illustrationDesktop from './assets/images/illustration-sign-up-desktop.svg';
 import illustrationMobile from './assets/images/illustration-sign-up-mobile.svg';
 
+function SignUpForm({ onValidEmail }: { onValidEmail: (email: string) => void }) {
+  const [email, setEmail] = useState<string>('');
+  const [isValidEmail, setIsValidEmail] = useState<boolean | null>(null);
+  const [isTyping, setIsTyping] = useState(false);
+
+  function checkEmail() {
+    const isValid = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(email);
+    setIsValidEmail(isValid);
+    setIsTyping(false);
+
+    if (isValid) {
+      onValidEmail(email);
+    }
+  }
+
+  return (
+    <div className="flex flex-col">
+      <div className="flex justify-between pb-2 pt-10 font-semibold tracking-tighter md:text-xs">
+        <span>Email address</span>
+        {isValidEmail === true && !isTyping && <span className="label flex text-green-700">Thank You!</span>}
+        {isValidEmail === false && !isTyping && <span className="label flex text-tomato">Valid email required</span>}
+      </div>
+
+      <form
+        onSubmit={(e) => {
+          e.preventDefault();
+          checkEmail();
+        }}
+      >
+        <div className="flex flex-col gap-6">
+          <input
+            onKeyUp={(e) => {
+              e.key !== 'Enter' ? setIsTyping(true) : null;
+            }}
+            className="solid rounded-lg border px-6 py-4 hover:cursor-pointer hover:border-dark-slate-grey"
+            type="text"
+            name="emailInput"
+            placeholder="email@company.com"
+            value={email}
+            onChange={(e) => {
+              setEmail(e.target.value);
+            }}
+          />
+          <button
+            type="submit"
+            className="solid rounded-lg border bg-[#232742] from-[#FF5378] to-[#FF693E] px-6 py-4 text-white after:bg-white hover:bg-gradient-to-r"
+            onClick={checkEmail}
+          >
+            Subscribe to monthly newsletter
+          </button>
+        </div>
+      </form>
+    </div>
+  );
+}
+
 export default function Home() {
   const [navigation, changeStage] = useState<string>('stage1');
+  const [subscribedEmail, setSubscribedEmail] = useState<string>('');
 
-  function goTo2() {
+  function goTo2(email: string) {
+    setSubscribedEmail(email);
     changeStage('stage2');
   }
 
@@ -28,14 +86,12 @@ export default function Home() {
           </span>
           <span>
             A confirmation email has been sent to{' '}
-            <span className="pt-6 font-bold">
-              {document.getElementById('emailId')?.textContent ?? 'ash@loremcompany.com'}
-            </span>
-            . Please open it and click the button inside to confirm your subscription.
+            <span className="pt-6 font-bold">{subscribedEmail || 'ash@loremcompany.com'}</span>. Please open it and
+            click the button inside to confirm your subscription.
           </span>
           <button
             className="solid rounded-lg border bg-[#232742] from-[#FF5378] to-[#FF693E] px-6 py-4 text-white after:bg-white hover:bg-gradient-to-r"
-            onClick={goTo1} // Powrót do stage1
+            onClick={goTo1}
           >
             Dismiss message
           </button>
@@ -71,61 +127,5 @@ export default function Home() {
         </div>
       )}
     </main>
-  );
-}
-
-function SignUpForm({ onValidEmail }: { onValidEmail: () => void }) {
-  const [email, setEmail] = useState<string>('');
-  const [isValidEmail, setIsValidEmail] = useState<boolean | null>(null);
-  const [isTyping, setIsTyping] = useState(false);
-
-  function checkEmail() {
-    setIsValidEmail(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(email));
-    setIsTyping(false);
-
-    if (isValidEmail === true) {
-      onValidEmail();
-    }
-  }
-
-  return (
-    <div className="flex flex-col">
-      <div className="flex justify-between pb-2 pt-10 font-semibold tracking-tighter md:text-xs">
-        <span>Email address</span>
-        {isValidEmail === true && !isTyping && <span className="label flex text-green-700">Thank You!</span>}
-        {isValidEmail === false && !isTyping && <span className="label flex text-tomato">Valid email required</span>}
-      </div>
-
-      <form
-        onSubmit={(e) => {
-          e.preventDefault();
-          checkEmail();
-        }}
-      >
-        <div className="flex flex-col gap-6">
-          <input
-            onKeyUp={(e) => {
-              e.key !== 'Enter' ? setIsTyping(true) : null;
-              setIsValidEmail(null);
-            }}
-            className="solid rounded-lg border px-6 py-4 hover:cursor-pointer hover:border-dark-slate-grey"
-            type="text"
-            name="emailInput"
-            placeholder="email@company.com"
-            value={email}
-            onChange={(e) => {
-              setEmail(e.target.value);
-            }}
-          />
-          <button
-            type="submit"
-            className="solid rounded-lg border bg-[#232742] from-[#FF5378] to-[#FF693E] px-6 py-4 text-white after:bg-white hover:bg-gradient-to-r"
-            onClick={checkEmail}
-          >
-            Subscribe to monthly newsletter
-          </button>
-        </div>
-      </form>
-    </div>
   );
 }
