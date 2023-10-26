@@ -64,7 +64,7 @@ function SignUpForm({ onValidEmail }: { onValidEmail: (email: string) => void })
 }
 
 export default function Home() {
-  const [navigation, changeStage] = useState<string>('stage1');
+  const [navigation, changeStage] = useState<string>('stage2');
   const [subscribedEmail, setSubscribedEmail] = useState<string>('');
 
   function goTo2(email: string) {
@@ -79,12 +79,12 @@ export default function Home() {
   return (
     <main className="flex min-h-screen flex-col items-center justify-center">
       {navigation === 'stage2' && (
-        <div className="wrapper2 flex w-[25em] flex-col bg-white text-dark-slate-grey">
-          <Image className="hidden md:flex" src={iconSuccess as string} alt="icon" />
-          <span className="pt-6 text-[2.5rem] font-bold tracking-tighter md:text-[3.5rem]">
+        <div className="wrapper2 flex flex-col rounded-[2em] bg-white px-14 py-14 text-dark-slate-grey md:w-[32em]">
+          <Image className="flex" src={iconSuccess as string} alt="icon" />
+          <span className="pt-8 text-[1.2rem] font-bold leading-[1em] tracking-tighter md:text-[3.5rem]">
             Thanks for subscribing!
           </span>
-          <span>
+          <span className="pb-10 pt-6">
             A confirmation email has been sent to{' '}
             <span className="pt-6 font-bold">{subscribedEmail || 'ash@loremcompany.com'}</span>. Please open it and
             click the button inside to confirm your subscription.
