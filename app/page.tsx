@@ -8,63 +8,84 @@ import illustrationDesktop from './assets/images/illustration-sign-up-desktop.sv
 import illustrationMobile from './assets/images/illustration-sign-up-mobile.svg';
 
 export default function Home() {
+  const [navigation, changeStage] = useState<string>('stage1');
+
+  function goTo2() {
+    changeStage('stage2');
+  }
+
+  function goTo1() {
+    changeStage('stage1');
+  }
+
   return (
     <main className="flex min-h-screen flex-col items-center justify-center">
-      {/* wrapper2 */}
-      <div className="wrapper2 hidden w-[25em] flex-col bg-white text-dark-slate-grey">
-        <Image className="hidden md:flex" src={iconSuccess as string} alt="icon" />
-        <span className="pt-6 text-[2.5rem] font-bold tracking-tighter md:text-[3.5rem]">Thanks for subscribing!</span>
-        <span>
-          A confirmation email has been sent to{' '}
-          <span className="pt-6 font-bold">
-            {document.getElementById('emailId')?.textContent ?? 'ash@loremcompany.com'}
+      {navigation === 'stage2' && (
+        <div className="wrapper2 flex w-[25em] flex-col bg-white text-dark-slate-grey">
+          <Image className="hidden md:flex" src={iconSuccess as string} alt="icon" />
+          <span className="pt-6 text-[2.5rem] font-bold tracking-tighter md:text-[3.5rem]">
+            Thanks for subscribing!
           </span>
-          . Please open it and click the button inside to confirm your subscription.
-        </span>
-        <button className="solid rounded-lg border bg-[#232742] from-[#FF5378] to-[#FF693E] px-6 py-4 text-white after:bg-white hover:bg-gradient-to-r">
-          Dismiss message
-        </button>
-      </div>
-      {/* wrapper1 */}
-      <div className="wrapper1 flex flex-col-reverse rounded-[2em] bg-white pb-12 tracking-tight text-dark-slate-grey md:flex-row md:pb-6 md:pl-6 md:pr-6 md:pt-6">
-        {/* column1 */}
-        <div className="flex w-full flex-col pl-10 pr-14 md:w-[30em]">
-          <span className="pt-16 text-[2.5rem] font-bold tracking-tighter md:text-[3.5rem]">Stay updated!</span>
-          <span className="w-[20em] pt-4 font-medium md:w-full">
-            Join 60,000+ product managers receiving monthly updates on:
+          <span>
+            A confirmation email has been sent to{' '}
+            <span className="pt-6 font-bold">
+              {document.getElementById('emailId')?.textContent ?? 'ash@loremcompany.com'}
+            </span>
+            . Please open it and click the button inside to confirm your subscription.
           </span>
-          <div className="flex gap-4 pt-4 font-medium">
-            <Image className="" src={iconList as string} alt="icon of list" />
-            <span>Product discovery and building what matters</span>
-          </div>
-          <div className="flex gap-4 pt-2 font-medium">
-            <Image className="" src={iconList as string} alt="icon of list" />
-            <span>Measuring to ensure updates are a success</span>
-          </div>
-          <div className="flex gap-4 pt-2 font-medium">
-            <Image className="" src={iconList as string} alt="icon of list" />
-            <span>And much more!</span>
-          </div>
-          {/* Add the SignUpForm component here */}
-          <SignUpForm />
+          <button
+            className="solid rounded-lg border bg-[#232742] from-[#FF5378] to-[#FF693E] px-6 py-4 text-white after:bg-white hover:bg-gradient-to-r"
+            onClick={goTo1} // Powrót do stage1
+          >
+            Dismiss message
+          </button>
         </div>
-        {/* column2 */}
-        <Image className="hidden md:flex" src={illustrationDesktop as string} alt="illustration" />
-        <Image className="flex w-screen self-center md:hidden" src={illustrationMobile as string} alt="illustration" />
-      </div>
+      )}
+      {navigation === 'stage1' && (
+        <div className="wrapper1 flex flex-col-reverse rounded-[2em] bg-white pb-12 tracking-tight text-dark-slate-grey md:flex-row md:pb-6 md:pl-6 md:pr-6 md:pt-6">
+          <div className="flex w-full flex-col pl-10 pr-14 md:w-[30em]">
+            <span className="pt-16 text-[2.5rem] font-bold tracking-tighter md:text-[3.5rem]">Stay updated!</span>
+            <span className="w-[20em] pt-4 font-medium md:w-full">
+              Join 60,000+ product managers receiving monthly updates on:
+            </span>
+            <div className="flex gap-4 pt-4 font-medium">
+              <Image className="" src={iconList as string} alt="icon of list" />
+              <span>Product discovery and building what matters</span>
+            </div>
+            <div className="flex gap-4 pt-2 font-medium">
+              <Image className="" src={iconList as string} alt="icon of list" />
+              <span>Measuring to ensure updates are a success</span>
+            </div>
+            <div className="flex gap-4 pt-2 font-medium">
+              <Image className="" src={iconList as string} alt="icon of list" />
+              <span>And much more!</span>
+            </div>
+            <SignUpForm onValidEmail={goTo2} />
+          </div>
+          <Image className="hidden md:flex" src={illustrationDesktop as string} alt="illustration" />
+          <Image
+            className="flex w-screen self-center md:hidden"
+            src={illustrationMobile as string}
+            alt="illustration"
+          />
+        </div>
+      )}
     </main>
   );
 }
 
-// SignUpForm component
-function SignUpForm() {
-  const [email, setEmail] = useState('');
+function SignUpForm({ onValidEmail }: { onValidEmail: () => void }) {
+  const [email, setEmail] = useState<string>('');
   const [isValidEmail, setIsValidEmail] = useState<boolean | null>(null);
   const [isTyping, setIsTyping] = useState(false);
 
   function checkEmail() {
     setIsValidEmail(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(email));
     setIsTyping(false);
+
+    if (isValidEmail === true) {
+      onValidEmail();
+    }
   }
 
   return (
@@ -75,16 +96,17 @@ function SignUpForm() {
         {isValidEmail === false && !isTyping && <span className="label flex text-tomato">Valid email required</span>}
       </div>
 
-      {/* input */}
       <form
         onSubmit={(e) => {
           e.preventDefault();
+          checkEmail();
         }}
       >
         <div className="flex flex-col gap-6">
           <input
             onKeyUp={(e) => {
               e.key !== 'Enter' ? setIsTyping(true) : null;
+              setIsValidEmail(null);
             }}
             className="solid rounded-lg border px-6 py-4 hover:cursor-pointer hover:border-dark-slate-grey"
             type="text"
