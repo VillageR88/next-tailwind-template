@@ -1,9 +1,10 @@
+'use client';
+
+import React, { useState } from 'react';
+import Image from 'next/image';
 import iconList from './assets/images/icon-list.svg';
-import iconSuccess from './assets/images/icon-success.svg';
 import illustrationDesktop from './assets/images/illustration-sign-up-desktop.svg';
 import illustrationMobile from './assets/images/illustration-sign-up-mobile.svg';
-
-import Image from 'next/image';
 
 export default function Home() {
   return (
@@ -28,13 +29,17 @@ export default function Home() {
             <Image className="" src={iconList as string} alt="icon of list" />
             <span>And much more!</span>
           </div>
-          <span className="pb-2 pt-10 font-semibold tracking-tighter md:text-xs">Email address</span>
+          <div className="flex justify-between pb-2 pt-10 font-semibold tracking-tighter md:text-xs">
+            <span>Email address</span>
+            <span className="tom text-tomato">Valid email required</span>
+          </div>
+
           <div className="flex flex-col gap-6">
             <input
               className="solid rounded-lg border px-6 py-4"
               type="text"
-              name="emailAddress"
-              id="emailAddress"
+              name="emailInput"
+              id="emailInput"
               placeholder="email@company.com"
             />
             <button className="solid rounded-lg border bg-[#232742] px-6 py-4 text-white">
@@ -46,6 +51,51 @@ export default function Home() {
         <Image className="hidden md:flex" src={illustrationDesktop as string} alt="illustration" />
         <Image className="flex w-screen self-center md:hidden" src={illustrationMobile as string} alt="illustration" />
       </div>
+      {/* Add the SignUpForm component here */}
+      <SignUpForm />
     </main>
+  );
+}
+
+// SignUpForm component
+function SignUpForm() {
+  const [email, setEmail] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
+
+  function isValidEmail(email: string) {
+    const pattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    return pattern.test(email);
+  }
+
+  function handleSubmit() {
+    if (isValidEmail(email)) {
+      setErrorMessage('Thank you!');
+    } else {
+      setErrorMessage('Please provide a valid email address');
+    }
+  }
+
+  return (
+    <div>
+      <div>
+        <span>Email address</span>
+        <span className="errorMessage text-tomato">{errorMessage || 'Valid email required'}</span>
+      </div>
+      <div>
+        <input
+          className="solid rounded-lg border px-6 py-4"
+          type="text"
+          name="emailInput"
+          placeholder="email@company.com"
+          value={email}
+          onChange={(e) => {
+            setEmail(e.target.value);
+          }}
+        />
+        <button className="solid rounded-lg border bg-[#232742] px-6 py-4 text-white" onClick={handleSubmit}>
+          Subscribe to monthly newsletter
+        </button>
+      </div>
+    </div>
   );
 }
