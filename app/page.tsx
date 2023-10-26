@@ -10,7 +10,7 @@ export default function Home() {
   return (
     <main className="flex min-h-screen flex-col items-center justify-center">
       {/* wrapper */}
-      <div className="flex flex-col-reverse rounded-3xl bg-white pb-12 tracking-tight text-dark-slate-grey md:flex-row md:pb-5 md:pr-5 md:pt-5">
+      <div className="flex flex-col-reverse rounded-[2em] bg-white pb-12 tracking-tight text-dark-slate-grey md:flex-row md:pb-6 md:pl-6 md:pr-6 md:pt-6">
         {/* column1 */}
         <div className="flex w-full flex-col pl-10 pr-14 md:w-[30em]">
           <span className="pt-16 text-[2.5rem] font-bold tracking-tighter md:text-[3.5rem]">Stay updated!</span>
@@ -47,16 +47,30 @@ function SignUpForm() {
 
   function checkEmail() {
     const pattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-
     setIsValidEmail(pattern.test(email));
   }
 
+  function hideLabel(e: { key: string }) {
+    if (e.key !== 'Enter') {
+      try {
+        const label = document.getElementsByClassName('label')[0];
+        label.classList.replace('flex', 'hidden');
+      } catch (error) {}
+    }
+  }
+
+  function showLabel() {
+    try {
+      const label = document.getElementsByClassName('label')[0];
+      label.classList.replace('hidden', 'flex');
+    } catch (error) {}
+  }
   return (
     <div className="flex flex-col">
       <div className="flex justify-between pb-2 pt-10 font-semibold tracking-tighter md:text-xs">
         <span>Email address</span>
-        {isValidEmail === true && <span className="text-green-700">Thank You!</span>}
-        {isValidEmail === false && <span className="text-tomato">Valid email required</span>}
+        {isValidEmail === true && <span className="label flex text-green-700">Thank You!</span>}
+        {isValidEmail === false && <span className="label flex text-tomato">Valid email required</span>}
       </div>
 
       {/* input */}
@@ -67,6 +81,7 @@ function SignUpForm() {
       >
         <div className="flex flex-col gap-6">
           <input
+            onKeyUp={hideLabel}
             className="solid rounded-lg border px-6 py-4"
             type="text"
             name="emailInput"
@@ -79,7 +94,10 @@ function SignUpForm() {
           <button
             type="submit"
             className="solid rounded-lg border bg-[#232742] px-6 py-4 text-white"
-            onClick={checkEmail}
+            onClick={() => {
+              checkEmail();
+              showLabel();
+            }}
           >
             Subscribe to monthly newsletter
           </button>
