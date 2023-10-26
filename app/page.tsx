@@ -43,42 +43,48 @@ export default function Home() {
 // SignUpForm component
 function SignUpForm() {
   const [email, setEmail] = useState('');
-  const [errorMessage, setErrorMessage] = useState('');
+  const [isValidEmail, setIsValidEmail] = useState<boolean | null>(null);
 
-  function isValidEmail(email: string) {
+  function checkEmail() {
     const pattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-    return pattern.test(email);
-  }
 
-  function handleSubmit() {
-    if (isValidEmail(email)) {
-      setErrorMessage('Thank you!');
-    } else {
-      setErrorMessage('Valid email required');
-    }
+    setIsValidEmail(pattern.test(email));
   }
 
   return (
     <div className="flex flex-col">
       <div className="flex justify-between pb-2 pt-10 font-semibold tracking-tighter md:text-xs">
         <span>Email address</span>
-        <span className="errorMessage text-tomato">{errorMessage || 'Valid email required'}</span>
+        {isValidEmail === true && <span className="text-green-700">Thank You!</span>}
+        {isValidEmail === false && <span className="text-tomato">Valid email required</span>}
       </div>
-      <div className="flex flex-col gap-6">
-        <input
-          className="solid rounded-lg border px-6 py-4"
-          type="text"
-          name="emailInput"
-          placeholder="email@company.com"
-          value={email}
-          onChange={(e) => {
-            setEmail(e.target.value);
-          }}
-        />
-        <button className="solid rounded-lg border bg-[#232742] px-6 py-4 text-white" onClick={handleSubmit}>
-          Subscribe to monthly newsletter
-        </button>
-      </div>
+
+      {/* input */}
+      <form
+        onSubmit={(e) => {
+          e.preventDefault();
+        }}
+      >
+        <div className="flex flex-col gap-6">
+          <input
+            className="solid rounded-lg border px-6 py-4"
+            type="text"
+            name="emailInput"
+            placeholder="email@company.com"
+            value={email}
+            onChange={(e) => {
+              setEmail(e.target.value);
+            }}
+          />
+          <button
+            type="submit"
+            className="solid rounded-lg border bg-[#232742] px-6 py-4 text-white"
+            onClick={checkEmail}
+          >
+            Subscribe to monthly newsletter
+          </button>
+        </div>
+      </form>
     </div>
   );
 }
