@@ -1,9 +1,10 @@
 import Image from 'next/image';
 import iconArrow from './assets/images/icon-arrow.svg';
+import '@fontsource/poppins'; // Defaults to weight 400
 
 export default function Home() {
   return (
-    <main className="flex h-screen  items-center justify-center">
+    <main className="flex h-screen  items-center justify-center font-['Poppins']">
       {/* wrapper */}
       <div className="flex flex-col bg-white">
         {/* sub_wrapper1 */}
