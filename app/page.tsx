@@ -1,28 +1,47 @@
 import Image from 'next/image';
 import iconArrow from './assets/images/icon-arrow.svg';
-import '@fontsource/poppins'; // Defaults to weight 400
+import '@fontsource/poppins';
+import '@fontsource/poppins/700.css';
+import '@fontsource/poppins/800-italic.css';
 
 export default function Home() {
   return (
-    <main className="flex h-screen  items-center justify-center font-['Poppins']">
+    <main className="flex h-screen items-center justify-center font-['Poppins']">
       {/* wrapper */}
-      <div className="flex flex-col bg-white">
+      <div className="flex flex-col rounded-t-3xl rounded-bl-3xl rounded-br-[12em] bg-white p-16">
         {/* sub_wrapper1 */}
-        <div className="flex">
+        <div className="flex gap-5">
           <div className="flex flex-col">
-            <span>DAY</span>
-            <input type="text" name="dayInput" id="" placeholder="DD" />
+            <span className="text-smokeyGrey text-sm font-bold">DAY</span>
+            <input
+              className="placeholder-grey h-12 w-24 border border-solid text-3xl font-bold"
+              type="text"
+              name="dayInput"
+              id=""
+              placeholder="DD"
+            />
           </div>
           <div className="flex flex-col">
-            <span>MONTH</span>
-            <input type="text" name="monthInput" id="" placeholder="MM" />
+            <span className="text-smokeyGrey text-sm font-bold">MONTH</span>
+            <input
+              className="placeholder-grey h-12 w-24 border border-solid text-3xl font-bold"
+              type="text"
+              name="monthInput"
+              id=""
+              placeholder="MM"
+            />
           </div>
           <div className="flex flex-col">
-            <span>YEAR</span>
-            <input type="text" name="yearInput" id="" placeholder="YYYY" />
+            <span className="text-smokeyGrey text-sm font-bold">YEAR</span>
+            <input
+              className="placeholder-grey h-12 w-24 border border-solid text-3xl font-bold"
+              type="text"
+              name="yearInput"
+              id=""
+              placeholder="YYYY"
+            />
           </div>
         </div>
-
         {/* sub_wrapper2 */}
         <div className="flex justify-between">
           <hr className="flex w-full self-center"></hr>
@@ -33,7 +52,17 @@ export default function Home() {
           />
         </div>
         {/* sub_wrapper3 */}
-        <div></div>
+        <div className="flex flex-col text-[6.5rem] font-[800] italic leading-[1.1em] text-[#864CFF]">
+          <span className="flex gap-3">
+            - -<span className="text-[black]">years</span>
+          </span>
+          <span className="flex gap-3">
+            - -<span className="text-[black]">months</span>
+          </span>
+          <span className="flex gap-3">
+            - -<span className="text-[black]">days</span>
+          </span>
+        </div>
       </div>
     </main>
   );
