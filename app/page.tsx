@@ -37,9 +37,9 @@ export default function Home() {
   function renderInput(label: string, value: string, setValue: (value: string) => void, placeholder: string) {
     return (
       <div className="flex flex-col gap-2">
-        <span className="text-sm font-bold tracking-[0.2em] text-smokeyGrey">{label}</span>
+        <span className="text-smokeyGrey text-sm font-bold tracking-[0.2em]">{label}</span>
         <input
-          className="h-14 w-24 rounded-lg border border-solid px-6 font-bold placeholder-grey [appearance:textfield] hover:cursor-pointer md:h-[2.4em] md:w-40 md:text-3xl [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none"
+          className="placeholder-grey h-14 w-24 rounded-lg border border-solid px-6 font-bold [appearance:textfield] hover:cursor-pointer md:h-[2.4em] md:w-40 md:text-3xl [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none"
           type="number"
           name={`${label.toLowerCase()}Input`}
           id=""
