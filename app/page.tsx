@@ -14,19 +14,13 @@ export default function Home() {
   const [difference, setDifference] = useState<{ years: number; months: number; days: number } | null>(null);
 
   const calculateDifference = () => {
-    const dayValue = parseInt(day, 10);
-    const monthValue = parseInt(month, 10);
-    const yearValue = parseInt(year, 10);
+    const dayValue = Number(day);
+    const monthValue = Number(month);
+    const yearValue = Number(year);
 
     if (!isNaN(dayValue) && !isNaN(monthValue) && !isNaN(yearValue)) {
-      // Ensure the input year is in the range 1900 to 2099
-      const inputYear = yearValue;
-      if (inputYear >= 0 && inputYear <= 99) {
-        inputYear;
-      }
-
       const currentDate = new Date();
-      const yearDifference = inputYear - currentDate.getFullYear();
+      const yearDifference = yearValue - currentDate.getFullYear();
       const monthDifference = monthValue + -1 - currentDate.getMonth();
       const dayDifference = dayValue - currentDate.getDate();
 
