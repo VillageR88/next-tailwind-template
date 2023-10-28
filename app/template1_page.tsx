@@ -27,7 +27,7 @@ function SignUpForm({ onValidEmail }: { onValidEmail: (email: string) => void })
       <div className="flex justify-between pb-2 pt-10 font-semibold tracking-tighter md:text-xs">
         <span>Email address</span>
         {isValidEmail === true && !isTyping && <span className="label flex text-green-700">Thank You!</span>}
-        {isValidEmail === false && !isTyping && <span className="label text-tomato flex">Valid email required</span>}
+        {isValidEmail === false && !isTyping && <span className="label flex text-tomato">Valid email required</span>}
       </div>
 
       <form
@@ -41,7 +41,7 @@ function SignUpForm({ onValidEmail }: { onValidEmail: (email: string) => void })
             onKeyUp={(e) => {
               e.key !== 'Enter' ? setIsTyping(true) : null;
             }}
-            className="solid hover:border-dark-slate-grey rounded-lg border px-6 py-4 hover:cursor-pointer"
+            className="solid rounded-lg border px-6 py-4 hover:cursor-pointer hover:border-dark-slate-grey"
             type="text"
             name="emailInput"
             placeholder="email@company.com"
@@ -79,7 +79,7 @@ export default function Home() {
   return (
     <main className="flex min-h-screen flex-col items-center justify-center">
       {navigation === 'stage2' && (
-        <div className="wrapper2 text-dark-slate-grey flex h-screen flex-col bg-white px-6 pt-32 md:h-auto md:w-[32em] md:rounded-[2em] md:px-14 md:py-14 md:pt-10">
+        <div className="wrapper2 flex h-screen flex-col bg-white px-6 pt-32 text-dark-slate-grey md:h-auto md:w-[32em] md:rounded-[2em] md:px-14 md:py-14 md:pt-10">
           <Image className="flex" src={iconSuccess as string} alt="icon" />
           <span className="pt-8 text-[2.5rem] font-bold leading-[1em] tracking-tighter md:text-[3.5rem]">
             Thanks for subscribing!
@@ -98,7 +98,7 @@ export default function Home() {
         </div>
       )}
       {navigation === 'stage1' && (
-        <div className="wrapper1 text-dark-slate-grey flex flex-col-reverse rounded-[2em] bg-white pb-12 tracking-tight md:flex-row md:pb-6 md:pl-6 md:pr-6 md:pt-6">
+        <div className="wrapper1 flex flex-col-reverse rounded-[2em] bg-white pb-12 tracking-tight text-dark-slate-grey md:flex-row md:pb-6 md:pl-6 md:pr-6 md:pt-6">
           <div className="flex w-full flex-col pl-10 pr-14 md:w-[30em]">
             <span className="pt-16 text-[2.5rem] font-bold tracking-tighter md:text-[3.5rem]">Stay updated!</span>
             <span className="w-[20em] pt-4 font-medium md:w-full">
