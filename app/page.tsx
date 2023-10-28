@@ -21,13 +21,14 @@ export default function Home() {
         setDifference(null);
       } else {
         const currentDate = new Date();
-        const timeDifference = currentDate.getTime() - inputDate.getTime();
-        const yearDifference = Math.floor(timeDifference / (365 * 24 * 60 * 60 * 1000));
-        const monthDifference =
-          currentDate.getMonth() - inputDate.getMonth() + 12 * (currentDate.getFullYear() - inputDate.getFullYear());
-        const dayDifference = Math.floor(timeDifference / (24 * 60 * 60 * 1000));
+        const timeDifference = inputDate.getTime() - currentDate.getTime();
+        const yearDifference = Math.floor(timeDifference / (365.25 * 24 * 60 * 60 * 1000));
+        const monthDifference = Math.floor(
+          (timeDifference % (365.25 * 24 * 60 * 60 * 1000)) / (30.44 * 24 * 60 * 60 * 1000),
+        );
+        const dayDifference = Math.floor((timeDifference % (30.44 * 24 * 60 * 60 * 1000)) / (24 * 60 * 60 * 1000));
 
-        setDifference({ years: yearDifference, months: monthDifference, days: dayDifference });
+        setDifference({ years: -yearDifference, months: -monthDifference, days: -dayDifference });
       }
     }
   };
