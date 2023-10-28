@@ -12,9 +12,9 @@ export default function Home() {
         {/* sub_wrapper1 */}
         <div className="flex  gap-5 md:gap-8">
           <div className="flex flex-col gap-2">
-            <span className="text-smokeyGrey text-sm font-bold tracking-[0.2em]">DAY</span>
+            <span className="text-sm font-bold tracking-[0.2em] text-smokeyGrey">DAY</span>
             <input
-              className="placeholder-grey  h-14 w-24 rounded-lg border border-solid px-6 font-bold hover:cursor-pointer md:h-[2.4em] md:w-40 md:text-3xl"
+              className="h-14  w-24 rounded-lg border border-solid px-6 font-bold placeholder-grey hover:cursor-pointer md:h-[2.4em] md:w-40 md:text-3xl"
               type="text"
               name="dayInput"
               id=""
@@ -22,9 +22,9 @@ export default function Home() {
             />
           </div>
           <div className="flex flex-col gap-2">
-            <span className="text-smokeyGrey text-sm font-bold tracking-[0.2em]">MONTH</span>
+            <span className="text-sm font-bold tracking-[0.2em] text-smokeyGrey">MONTH</span>
             <input
-              className="placeholder-grey h-14 w-24 rounded-lg border border-solid px-6 font-bold hover:cursor-pointer md:h-[2.4em] md:w-40 md:text-3xl"
+              className="h-14 w-24 rounded-lg border border-solid px-6 font-bold placeholder-grey hover:cursor-pointer md:h-[2.4em] md:w-40 md:text-3xl"
               type="text"
               name="monthInput"
               id=""
@@ -32,9 +32,9 @@ export default function Home() {
             />
           </div>
           <div className="flex flex-col gap-2">
-            <span className="text-smokeyGrey text-sm font-bold tracking-[0.2em]">YEAR</span>
+            <span className="text-sm font-bold tracking-[0.2em] text-smokeyGrey">YEAR</span>
             <input
-              className="placeholder-grey h-14 w-24 rounded-lg border border-solid px-6 font-bold hover:cursor-pointer md:h-[2.4em] md:w-40 md:text-3xl"
+              className="h-14 w-24 rounded-lg border border-solid px-6 font-bold placeholder-grey hover:cursor-pointer md:h-[2.4em] md:w-40 md:text-3xl"
               type="text"
               name="yearInput"
               id=""
@@ -46,7 +46,7 @@ export default function Home() {
         <div className="flex justify-between">
           <hr className="flex w-full self-center md:w-[40em]"></hr>
           <Image
-            className="h-auto w-14 rounded-full bg-[#864CFF] p-4 hover:cursor-pointer hover:bg-black md:w-24 md:p-5"
+            className="h-auto w-14 rounded-full bg-[#864CFF] p-4 hover:cursor-pointer hover:bg-black md:w-24 md:p-6"
             src={iconArrow as string}
             alt="arrow image"
           />
