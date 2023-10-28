@@ -15,21 +15,14 @@ export default function Home() {
 
   const calculateDifference = () => {
     if (day && month && year) {
-      const inputDate = new Date(Number(year), Number(month) - 1, Number(day));
+      const inputDate = new Date(Number(year), Number(month) - 1, Number(day)); // Dodaj 1 do daty wejściowej
+      const currentDate = new Date();
 
-      if (isNaN(inputDate.getTime())) {
-        setDifference(null);
-      } else {
-        const currentDate = new Date();
-        const timeDifference = inputDate.getTime() - currentDate.getTime();
-        const yearDifference = Math.floor(timeDifference / (365.25 * 24 * 60 * 60 * 1000));
-        const monthDifference = Math.floor(
-          (timeDifference % (365.25 * 24 * 60 * 60 * 1000)) / (30.44 * 24 * 60 * 60 * 1000),
-        );
-        const dayDifference = Math.floor((timeDifference % (30.44 * 24 * 60 * 60 * 1000)) / (24 * 60 * 60 * 1000));
+      const yearDifference = inputDate.getFullYear() - currentDate.getFullYear();
+      const monthDifference = inputDate.getMonth() - currentDate.getMonth();
+      const dayDifference = inputDate.getDate() - currentDate.getDate();
 
-        setDifference({ years: -yearDifference, months: -monthDifference, days: -dayDifference });
-      }
+      setDifference({ years: -yearDifference, months: -monthDifference, days: -dayDifference });
     }
   };
 
