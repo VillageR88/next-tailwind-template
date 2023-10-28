@@ -53,6 +53,13 @@ export default function Home() {
     );
   }
 
+  const years = 'years';
+  const months = 'months';
+  const days = 'days';
+  const YEAR = 'YEAR';
+  const MONTH = 'MONTH';
+  const DAY = 'DAY';
+
   function renderDifference(label: string, value: number | undefined) {
     return (
       <div className="flex gap-3">
@@ -66,9 +73,9 @@ export default function Home() {
     <main className="flex min-h-screen items-center justify-center font-['Poppins']">
       <div className="flex max-w-full flex-col gap-6 rounded-t-3xl rounded-bl-3xl rounded-br-[12em] bg-white p-6 md:gap-1 md:p-14">
         <div className="flex gap-5 md:gap-8">
-          {renderInput('DAY', day, setDay, 'DD')}
-          {renderInput('MONTH', month, setMonth, 'MM')}
-          {renderInput('YEAR', year, setYear, 'YYYY')}
+          {renderInput(DAY, day, setDay, 'DD')}
+          {renderInput(MONTH, month, setMonth, 'MM')}
+          {renderInput(YEAR, year, setYear, 'YYYY')}
         </div>
         <div className="flex justify-between">
           <hr className="flex w-full self-center text-[#864CFF] md:w-[40em]"></hr>
@@ -81,9 +88,9 @@ export default function Home() {
           <hr className="flex w-full self-center text-[#864CFF] md:hidden"></hr>
         </div>
         <div className="flex flex-col text-[3rem] font-[800] italic leading-[1.1em] text-[#864CFF] md:text-[6.5rem]">
-          {renderDifference('years', difference?.years)}
-          {renderDifference('months', difference?.months)}
-          {renderDifference('days', difference?.days)}
+          {renderDifference(years, difference?.years)}
+          {renderDifference(months, difference?.months)}
+          {renderDifference(days, difference?.days)}
         </div>
       </div>
     </main>
