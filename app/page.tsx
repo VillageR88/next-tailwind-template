@@ -22,7 +22,7 @@ export default function Home() {
     const dayValue = parseInt(day, 10);
     const monthValue = parseInt(month, 10);
     const yearValue = parseInt(year, 10);
-
+    const errorField = 'This field is required';
     if (!isNaN(dayValue) && !isNaN(monthValue) && !isNaN(yearValue)) {
       const currentDate = new Date();
       const yearDifference = yearValue - currentDate.getFullYear();
@@ -30,9 +30,18 @@ export default function Home() {
       const dayDifference = dayValue - currentDate.getDate();
       setDifference({ years: yearDifference, months: monthDifference, days: dayDifference });
     } else {
-      if (isNaN(dayValue)) setError1('error');
-      if (isNaN(monthValue)) setError2('error');
-      if (isNaN(yearValue)) setError3('error');
+      if (isNaN(dayValue)) {
+        setError1(errorField);
+        document.getElementsByClassName('input')[0].style.borderColor = ' red';
+      }
+      if (isNaN(monthValue)) {
+        setError2(errorField);
+        document.getElementsByClassName('input')[1].style.borderColor = ' red';
+      }
+      if (isNaN(yearValue)) {
+        setError3(errorField);
+        document.getElementsByClassName('input')[2].style.borderColor = ' red';
+      }
     }
   };
 
@@ -48,7 +57,8 @@ export default function Home() {
       <div className="flex flex-col gap-2">
         <span className="text-sm font-bold tracking-[0.2em] text-smokeyGrey">{label}</span>
         <input
-          className="h-14 w-24 rounded-lg border border-solid px-6 font-bold placeholder-grey [appearance:textfield] hover:cursor-pointer md:h-[2.4em] md:w-40 md:text-3xl [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none"
+          id="inputs"
+          className="input h-14 w-24 rounded-lg border border-solid px-6 font-bold placeholder-grey [appearance:textfield] hover:cursor-pointer md:h-[2.4em] md:w-40 md:text-3xl [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none"
           type="number"
           name={`${label}`}
           placeholder={placeholder}
