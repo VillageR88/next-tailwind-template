@@ -14,6 +14,8 @@ const nextConfig = {
   distDir: 'build',
 
   reactStrictMode: true,
+
+  assetPrefix: 'Frontend_Mentor/age-calculator-app-main/'
 }
 
 module.exports = nextConfig
