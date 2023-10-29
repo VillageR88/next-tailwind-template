@@ -15,7 +15,7 @@ const nextConfig = {
 
   reactStrictMode: true,
 
-  assetPrefix: 'Frontend_Mentor/age-calculator-app-main/'
+  assetPrefix: '/Frontend_Mentor/age-calculator-app-main/'
 }
 
 module.exports = nextConfig
