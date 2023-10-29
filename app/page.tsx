@@ -32,7 +32,7 @@ export default function Home() {
       !isNaN(dayValue) &&
       !isNaN(monthValue) &&
       !isNaN(yearValue) &&
-      present > new Date(yearValue, monthValue, dayValue)
+      present > new Date(yearValue, monthValue - 1, dayValue)
     ) {
       const yearDifference = yearValue - present.getFullYear();
       const monthDifference = monthValue - 1 - present.getMonth();
@@ -57,7 +57,7 @@ export default function Home() {
       setError3(errorField);
       setToggle3(true);
     }
-    if (present <= new Date(yearValue, monthValue, dayValue)) {
+    if (present <= new Date(yearValue, monthValue - 1, dayValue)) {
       setError3(errorNotPast);
       setToggle1(true);
       setToggle2(true);
@@ -109,7 +109,7 @@ export default function Home() {
   function renderDifference(label: string, valueN: number | undefined) {
     return (
       <div className="flex gap-3">
-        <span className={`text-${'#864CFF'}`}>{valueN ?? '- -'}</span>
+        <span className={`text-${'#864CFF'}`}>{!hasErrors1 && !hasErrors2 && !hasErrors3 ? valueN : '- -'}</span>
         <span className="text-black">{label}</span>
       </div>
     );
