@@ -26,6 +26,7 @@ export default function Home() {
     const monthValue = parseInt(month, 10);
     const yearValue = parseInt(year, 10);
     const errorField = 'This field is required';
+    const errorNotPast = 'Must be in the past';
     if (!isNaN(dayValue) && !isNaN(monthValue) && !isNaN(yearValue)) {
       const currentDate = new Date();
       const yearDifference = yearValue - currentDate.getFullYear();
@@ -43,6 +44,9 @@ export default function Home() {
       }
       if (isNaN(yearValue)) {
         setError3(errorField);
+        setToggle3(true);
+      } else if (yearValue > new Date().getFullYear()) {
+        setError3(errorNotPast);
         setToggle3(true);
       }
     }
