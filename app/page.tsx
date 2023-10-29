@@ -27,28 +27,41 @@ export default function Home() {
     const yearValue = parseInt(year, 10);
     const errorField = 'This field is required';
     const errorNotPast = 'Must be in the past';
-    if (!isNaN(dayValue) && !isNaN(monthValue) && !isNaN(yearValue)) {
-      const currentDate = new Date();
-      const yearDifference = yearValue - currentDate.getFullYear();
-      const monthDifference = monthValue - 1 - currentDate.getMonth();
-      const dayDifference = dayValue - currentDate.getDate();
-      setDifference({ years: yearDifference, months: monthDifference, days: dayDifference });
-    } else {
-      if (isNaN(dayValue)) {
-        setError1(errorField);
-        setToggle1(true);
-      }
-      if (isNaN(monthValue)) {
-        setError2(errorField);
-        setToggle2(true);
-      }
-      if (isNaN(yearValue)) {
-        setError3(errorField);
-        setToggle3(true);
-      } else if (yearValue > new Date().getFullYear()) {
-        setError3(errorNotPast);
-        setToggle3(true);
-      }
+    const present = new Date();
+    if (
+      !isNaN(dayValue) &&
+      !isNaN(monthValue) &&
+      !isNaN(yearValue) &&
+      present > new Date(yearValue, monthValue, dayValue)
+    ) {
+      const yearDifference = yearValue - present.getFullYear();
+      const monthDifference = monthValue - 1 - present.getMonth();
+      const dayDifference = dayValue - present.getDate();
+      setDifference({ years: -yearDifference, months: -monthDifference, days: -dayDifference });
+      setToggle1(false);
+      setToggle2(false);
+      setToggle3(false);
+      setError1('');
+      setError2('');
+      setError3('');
+    }
+    if (isNaN(dayValue)) {
+      setError1(errorField);
+      setToggle1(true);
+    }
+    if (isNaN(monthValue)) {
+      setError2(errorField);
+      setToggle2(true);
+    }
+    if (isNaN(yearValue)) {
+      setError3(errorField);
+      setToggle3(true);
+    }
+    if (present <= new Date(yearValue, monthValue, dayValue)) {
+      setError3(errorNotPast);
+      setToggle1(true);
+      setToggle2(true);
+      setToggle3(true);
     }
   };
 
@@ -63,7 +76,7 @@ export default function Home() {
   ) {
     return (
       <div className="flex flex-col gap-2">
-        <label className={`${hasErrors ? 'text-red-500' : ''} text-sm font-bold tracking-[0.2em] text-smokeyGrey`}>
+        <label className={` ${hasErrors ? 'text-red-500' : 'text-smokeyGrey'} text-sm font-bold tracking-[0.2em]`}>
           {label}
         </label>
         <input
