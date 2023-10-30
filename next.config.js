@@ -2,8 +2,6 @@
  * @type {import('next').NextConfig}
  */
 const nextConfig = {
-  output: 'export',
-
   // Optional: Change links `/me` -> `/me/` and emit `/me.html` -> `/me/index.html`
   trailingSlash: true,
 
@@ -12,6 +10,11 @@ const nextConfig = {
 
   // Optional: Change the output directory `out` -> `dist`
   distDir: 'build',
+
+  // Dodaj konfigurację obrazów, aby wyłączyć optymalizację
+  images: {
+    unoptimized: true,
+  },
 
   reactStrictMode: true,
 }
