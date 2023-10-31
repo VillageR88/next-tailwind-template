@@ -50,6 +50,13 @@ export default function Home() {
         <nav className="flex justify-between pb-10 ">
           <Image className="h-8 w-14 md:h-auto md:w-auto" src={logo as string} alt="logo" />
           {/* desktop-menu */}
+          <div className="hidden gap-10 font-medium text-darkGrayishBlue md:flex">
+            <button>Home</button>
+            <button>New</button>
+            <button>Popular</button>
+            <button>Trending</button>
+            <button>Categories</button>
+          </div>
           <Image
             className={`${navbarVisibility ? 'hidden' : 'flex'} z-10 h-[1.2em] hover:cursor-pointer md:hidden`}
             src={navBar as string}
