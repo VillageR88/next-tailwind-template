@@ -1,3 +1,6 @@
+'use client';
+import React, { useState } from 'react';
+
 import Image from 'next/image';
 import logo from './assets/images/logo.svg';
 import navBar from './assets/images/icon-menu.svg';
@@ -13,11 +16,28 @@ import '@fontsource/inter/700.css';
 import '@fontsource/inter/800.css';
 
 export default function Home() {
+  const [navbarVisibility, toggleNavbarVisibility] = useState(false);
+
   return (
     <div>
-      <mask className="absolute h-full w-full bg-veryDarkBlue opacity-50 md:hidden"></mask>
+      <mask
+        className={`${navbarVisibility ? 'flex' : 'hidden'} absolute
+        h-full
+        w-full
+        bg-veryDarkBlue
+        opacity-50
+        md:hidden`}
+      />
       {/* mobile-menu */}
-      <div className="absolute flex w-full justify-end">
+      <div className={`${navbarVisibility ? 'flex' : 'hidden'} absolute w-full justify-end`}>
+        <Image
+          className="absolute right-6 top-8 z-10 h-auto hover:cursor-pointer md:hidden"
+          src={navBarClose as string}
+          alt="close navigation bar"
+          onClick={() => {
+            toggleNavbarVisibility(!navbarVisibility);
+          }}
+        />
         <div className="flex w-[17em] flex-col items-start gap-10 bg-white pb-96 pl-8 pt-24 font-medium text-veryDarkBlue md:hidden">
           <button>Home</button>
           <button>New</button>
@@ -30,18 +50,13 @@ export default function Home() {
         <nav className="flex justify-between pb-10 ">
           <Image className="h-8 w-14 md:h-auto md:w-auto" src={logo as string} alt="logo" />
           {/* desktop-menu */}
-          <div className="hidden gap-10 font-medium text-darkGrayishBlue md:flex">
-            <button>Home</button>
-            <button>New</button>
-            <button>Popular</button>
-            <button>Trending</button>
-            <button>Categories</button>
-          </div>
-          <Image className="h-[1.2em] hover:cursor-pointer md:hidden" src={navBar as string} alt="navigation bar" />
           <Image
-            className="z-10 h-auto hover:cursor-pointer md:hidden"
-            src={navBarClose as string}
-            alt="close navigation bar"
+            className={`${navbarVisibility ? 'hidden' : 'flex'} z-10 h-[1.2em] hover:cursor-pointer md:hidden`}
+            src={navBar as string}
+            alt="navigation bar"
+            onClick={() => {
+              toggleNavbarVisibility(!navbarVisibility);
+            }}
           />
         </nav>
         <main>
