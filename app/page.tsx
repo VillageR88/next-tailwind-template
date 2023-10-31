@@ -21,24 +21,24 @@ export default function Home() {
   return (
     <div>
       <mask
-        className={`${navbarVisibility ? 'flex' : 'hidden'} absolute
-        h-full
+        className={`${navbarVisibility ? 'flex' : 'hidden'} fixed h-screen
         w-full
         bg-veryDarkBlue
         opacity-50
-        md:hidden`}
+        md:hidden
+        `}
       />
       {/* mobile-menu */}
-      <div className={`${navbarVisibility ? 'flex' : 'hidden'} absolute w-full justify-end`}>
+      <div className={`${navbarVisibility ? 'flex' : 'hidden'} fixed h-screen w-full justify-end `}>
         <Image
-          className="absolute right-6 top-8 z-10 h-auto hover:cursor-pointer md:hidden"
+          className="fixed right-6 top-8 z-10 h-auto hover:cursor-pointer md:hidden"
           src={navBarClose as string}
           alt="close navigation bar"
           onClick={() => {
             toggleNavbarVisibility(!navbarVisibility);
           }}
         />
-        <div className="flex w-[17em] flex-col items-start gap-10 bg-white pb-96 pl-8 pt-24 font-medium text-veryDarkBlue md:hidden">
+        <div className="flex w-[17em] flex-col items-start gap-10 bg-white pl-8 pt-24 font-medium text-veryDarkBlue	md:hidden	">
           <button>Home</button>
           <button>New</button>
           <button>Popular</button>
@@ -58,7 +58,7 @@ export default function Home() {
             <button>Categories</button>
           </div>
           <Image
-            className={`${navbarVisibility ? 'hidden' : 'flex'} z-10 h-[1.2em] hover:cursor-pointer md:hidden`}
+            className={`${navbarVisibility ? 'hidden' : 'flex'} z-10 h-[1.2em] w-auto hover:cursor-pointer md:hidden`}
             src={navBar as string}
             alt="navigation bar"
             onClick={() => {

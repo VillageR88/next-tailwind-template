@@ -12,9 +12,7 @@ const nextConfig = {
   distDir: 'build',
 
   // Dodaj konfigurację obrazów, aby wyłączyć optymalizację
-  images: {
-    unoptimized: true,
-  },
+
 
   reactStrictMode: true,
 }
