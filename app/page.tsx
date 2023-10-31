@@ -29,9 +29,9 @@ export default function Home() {
         `}
       />
       {/* mobile-menu */}
-      <div className={`${navbarVisibility ? 'flex' : 'hidden'} fixed h-screen w-full justify-end `}>
+      <div className={`${navbarVisibility ? 'flex' : 'hidden'} fixed h-screen w-full justify-end md:hidden `}>
         <Image
-          className="fixed right-6 top-8 z-10 h-auto hover:cursor-pointer md:hidden"
+          className="fixed right-6 top-8 h-auto hover:cursor-pointer md:hidden"
           src={navBarClose as string}
           alt="close navigation bar"
           onClick={() => {
@@ -39,11 +39,11 @@ export default function Home() {
           }}
         />
         <div className="flex w-[17em] flex-col items-start gap-10 bg-white pl-8 pt-24 font-medium text-veryDarkBlue	md:hidden	">
-          <button>Home</button>
-          <button>New</button>
-          <button>Popular</button>
-          <button>Trending</button>
-          <button>Categories</button>
+          <button className="cursor-pointer hover:text-softRed">Home</button>
+          <button className="cursor-pointer hover:text-softRed">New</button>
+          <button className="cursor-pointer hover:text-softRed">Popular</button>
+          <button className="cursor-pointer hover:text-softRed">Trending</button>
+          <button className="cursor-pointer hover:text-softRed">Categories</button>
         </div>
       </div>
       <div className="block w-full gap-6 px-4 pb-20 pt-10 md:px-[5em] md:py-20">
@@ -51,11 +51,11 @@ export default function Home() {
           <Image className="h-8 w-14 md:h-auto md:w-auto" src={logo as string} alt="logo" />
           {/* desktop-menu */}
           <div className="hidden gap-10 font-medium text-darkGrayishBlue md:flex">
-            <button>Home</button>
-            <button>New</button>
-            <button>Popular</button>
-            <button>Trending</button>
-            <button>Categories</button>
+            <button className="cursor-pointer hover:text-softRed">Home</button>
+            <button className="cursor-pointer hover:text-softRed">New</button>
+            <button className="cursor-pointer hover:text-softRed">Popular</button>
+            <button className="cursor-pointer hover:text-softRed">Trending</button>
+            <button className="cursor-pointer hover:text-softRed">Categories</button>
           </div>
           <Image
             className={`${navbarVisibility ? 'hidden' : 'flex'} z-10 h-[1.2em] w-auto hover:cursor-pointer md:hidden`}
@@ -82,7 +82,7 @@ export default function Home() {
                     We dive into the next evolution of the web that claims to put the power of the platforms back into
                     the hands of the people. But is it really fulfilling its promise?
                   </span>
-                  <button className="self-start bg-softRed px-10 py-3 text-[0.9rem] font-medium tracking-[0.2em] text-white">
+                  <button className="self-start bg-softRed px-10 py-3 text-[0.9rem] font-medium tracking-[0.2em] text-white hover:bg-veryDarkBlue">
                     READ MORE
                   </button>
                 </div>
@@ -92,19 +92,25 @@ export default function Home() {
             <div className="flex flex-col justify-between gap-4 bg-veryDarkBlue pb-10 pl-6 pr-10 pt-6 text-white md:max-w-[22.5em] md:gap-0">
               <span className="text-[2.5rem] font-bold text-softOrange">New</span>
               <div className="flex flex-col">
-                <span className="text-[1.2rem] font-bold">Hydrogen VS Electric Cars</span>
+                <span className="cursor-pointer text-[1.2rem] font-bold hover:text-softOrange">
+                  Hydrogen VS Electric Cars
+                </span>
                 <span className="text-[0.95rem] text-grayishBlue">Will hydrogen-fueled cars ever catch up to EVs?</span>
               </div>
               <hr className="my-4 h-px border-0 bg-darkGrayishBlue"></hr>
               <div className="flex flex-col">
-                <span className="text-[1.2rem] font-bold">The Downsides of AI Artistry</span>
+                <span className="cursor-pointer text-[1.2rem] font-bold hover:text-softOrange">
+                  The Downsides of AI Artistry
+                </span>
                 <span className="text-[0.95rem] text-grayishBlue">
                   What are the possible adverse effects of on-demand AI image generation?
                 </span>
               </div>
               <hr className="my-4 h-px border-0 bg-darkGrayishBlue"></hr>
               <div className="flex flex-col">
-                <span className="text-[1.2rem] font-bold">Is VC Funding Drying Up?</span>
+                <span className="cursor-pointer text-[1.2rem] font-bold hover:text-softOrange">
+                  Is VC Funding Drying Up?
+                </span>
                 <span className="text-[0.95rem] text-grayishBlue">
                   Private funding by VC firms is down 50% YOY. We take a look at what that means.
                 </span>
@@ -117,7 +123,9 @@ export default function Home() {
               <Image className="h-full w-auto" src={picture1} alt="image of retro computer" />
               <div className="flex flex-col justify-between md:max-w-[14em]">
                 <span className="text-[2rem] font-bold text-grayishBlue">01</span>
-                <span className="text-[1.1rem] font-extrabold">Reviving Retro PCs</span>
+                <span className="cursor-pointer text-[1.1rem] font-extrabold hover:text-softRed">
+                  Reviving Retro PCs
+                </span>
                 <span className="text-[0.95rem] text-darkGrayishBlue">
                   What happens when old PCs are given modern upgrades?
                 </span>
@@ -127,7 +135,9 @@ export default function Home() {
               <Image className="h-full w-auto" src={picture2} alt="image of laptop's keyboard" />
               <div className="flex flex-col justify-between md:max-w-[14em]">
                 <span className="text-[2rem] font-bold text-grayishBlue">02</span>
-                <span className="text-[1.1rem] font-extrabold">Top 10 Laptops of 2022</span>
+                <span className="cursor-pointer text-[1.1rem] font-extrabold hover:text-softRed">
+                  Top 10 Laptops of 2022
+                </span>
                 <span className="text-[0.95rem] text-darkGrayishBlue">
                   Our best picks for various needs and budgets.
                 </span>
@@ -137,7 +147,9 @@ export default function Home() {
               <Image className="h-full w-auto" src={picture3} alt="image of gamepad falling on hand" />
               <div className="flex flex-col justify-between md:max-w-[14em]">
                 <span className="text-[2rem] font-bold text-grayishBlue">03</span>
-                <span className="text-[1.1rem] font-extrabold">The Growth of Gaming</span>
+                <span className="cursor-pointer text-[1.1rem] font-extrabold hover:text-softRed">
+                  The Growth of Gaming
+                </span>
                 <span className="text-[0.95rem] text-darkGrayishBlue">
                   How the pandemic has sparked fresh opportunities.
                 </span>
