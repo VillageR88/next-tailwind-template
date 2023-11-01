@@ -11,6 +11,7 @@ const config: Config = {
       fontFamily: {
         sans: ['var(--font-sans)'],
         mono: ['var(--font-mono)'],
+        plusJakartaSans: ['Plus Jakarta Sans'],
       },
       colors: {
         red: 'hsl(1, 90%, 64%)',
