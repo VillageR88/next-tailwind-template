@@ -31,6 +31,7 @@ function MyComponent() {
       });
   }, []);
 
+  const messageCounter = messages?.filter((message) => message.boolean1).length;
   const prepDate = new Date('2023-11-01T10:00:00Z').getTime();
   function timeDiff(parameter: string | number | Date) {
     const days = Math.floor((prepDate - new Date(parameter).getTime()) / (1000 * 60 * 60 * 24));
@@ -46,6 +47,17 @@ function MyComponent() {
   if (messages) {
     return (
       <div className="flex flex-col gap-2">
+        {/*top*/}
+        <div className="flex w-[42em] max-w-full justify-between py-7">
+          <span className="text-[1.5rem] font-bold text-veryDarkBlue">
+            Notifications{' '}
+            <span className="ml-1.5 rounded-md bg-blue px-[0.7em] py-0.5 align-[3px] text-[1rem] font-semibold text-white">
+              {messageCounter ?? null}
+            </span>
+          </span>
+          <button className="font-medium text-darkGrayishBlue">Mark all as read</button>
+        </div>
+        {/*comments section*/}
         {messages.map((message, index) => (
           <div
             key={index}
@@ -89,17 +101,6 @@ export default function Home() {
     <main className="flex h-screen max-w-full flex-col items-center py-[4em] font-plusJakartaSans">
       {/*wrapper*/}
       <div className="flex h-full max-w-full flex-col items-center rounded-xl bg-white px-8 ">
-        {/*top*/}
-        <div className="flex w-[42em] max-w-full justify-between py-7">
-          <span className="text-[1.5rem] font-bold text-veryDarkBlue">
-            Notifications{' '}
-            <span className="ml-1.5 rounded-md bg-blue px-[0.7em] py-0.5 align-[3px] text-[1rem] font-semibold text-white">
-              3
-            </span>
-          </span>
-          <button className="font-medium text-darkGrayishBlue">Mark all as read</button>
-        </div>
-        {/*comments section*/}
         <div>
           <MyComponent></MyComponent>
         </div>
