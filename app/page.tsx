@@ -59,7 +59,7 @@ function MyComponent() {
     return (
       <div className="flex flex-col gap-2 pb-6 pt-8">
         {/*top*/}
-        <div className="flex w-[42em] justify-between pb-4">
+        <div className="flex justify-between pb-4 md:w-[42em]">
           <span className="text-[1.5rem] font-bold text-veryDarkBlue">
             Notifications{' '}
             <span className="ml-1.5 rounded-md bg-blue px-[0.7em] py-0.5 align-[3px] text-[1rem] font-semibold text-white">
@@ -87,7 +87,7 @@ function MyComponent() {
             key={index}
             className={`${message.boolean1 ? 'cursor-pointer bg-veryLightGrayishBlue' : null}
               ${selectedMessageIndex === index ? (message.boolean1 = false) : null}
-            } flex w-[42em] gap-2.5 rounded-xl px-5 py-4`}
+            } flex gap-2.5 rounded-[0.5em] py-4 md:w-[42em] md:px-5`}
           >
             <Image
               className="h-[2.7em] w-auto"
@@ -97,7 +97,7 @@ function MyComponent() {
               height={10}
             />
 
-            <div className="ml-2 flex w-full flex-col">
+            <div className="ml-1 flex w-full flex-col md:ml-2">
               <div className="flex justify-between">
                 <div className="flex flex-col">
                   <div className="flex items-center">
@@ -153,9 +153,9 @@ function MyComponent() {
 
 export default function Home() {
   return (
-    <main className="flex min-h-screen max-w-full flex-col items-center py-[4em] font-plusJakartaSans">
+    <main className="flex min-h-screen max-w-full flex-col items-center font-plusJakartaSans md:py-[4em]">
       {/*wrapper*/}
-      <div className="flex flex-col items-center rounded-xl bg-white px-8">
+      <div className="flex flex-col items-center rounded-xl bg-white px-4 md:px-8">
         <div>
           <MyComponent></MyComponent>
         </div>
