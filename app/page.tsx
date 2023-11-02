@@ -64,7 +64,15 @@ function MyComponent() {
               {dummyCount}
             </span>
           </span>
-          <button className="font-medium text-darkGrayishBlue">Mark all as read</button>
+          <button
+            onClick={() => {
+              setInitialCount((dummyCount = 0));
+              messages.map((message) => (message.boolean1 = false));
+            }}
+            className="font-medium text-darkGrayishBlue"
+          >
+            Mark all as read
+          </button>
         </div>
         {/*comments section*/}
         {messages.map((message, index) => (
