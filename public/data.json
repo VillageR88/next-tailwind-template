@@ -4,12 +4,12 @@
             "person": "avatar-mark-webber.webp",
             "text1": "Mark Webber",
             "text2": "reacted to your recent post",
-            "text3": "MY first tournament today!",
+            "text3": "My first tournament today!",
             "boolean1": true,
             "timestamp1": "2023-11-01T09:59:00Z",
-            "text4": ""
+            "text4": "",
+            "pictureRated": ""
         },
-
         {
             "person": "avatar-angela-gray.webp",
             "text1": "Angela Gray",
@@ -17,7 +17,8 @@
             "text3": "",
             "boolean1": true,
             "timestamp1": "2023-11-01T07:55:00Z",
-            "text4": ""
+            "text4": "",
+            "pictureRated": ""
         },
         {
             "person": "avatar-jacob-thompson.webp",
@@ -26,7 +27,8 @@
             "text3": "Chess Club",
             "boolean1": true,
             "timestamp1": "2023-10-31T10:00:00Z",
-            "text4": ""
+            "text4": "",
+            "pictureRated": ""
         },
         {
             "person": "avatar-rizky-hasanuddin.webp",
@@ -35,7 +37,18 @@
             "text3": "",
             "boolean1": false,
             "timestamp1": "2023-10-27T10:00:00Z",
-            "text4": "Hello, thanks for setting up the Chess Club. I've been a member for a few weeks now and I'm already having lots of fun and improving my game."
+            "text4": "Hello, thanks for setting up the Chess Club. I've been a member for a few weeks now and I'm already having lots of fun and improving my game.",
+            "pictureRated": ""
+        },
+        {
+            "person": "avatar-kimberly-smith.webp",
+            "text1": "Rizky Hasanuddin",
+            "text2": "commented on your picture",
+            "text3": "",
+            "boolean1": false,
+            "timestamp1": "2023-10-22T10:00:00Z",
+            "text4": "",
+            "pictureRated": "image-chess.webp"
         }
     ]
 }

@@ -14,6 +14,7 @@ interface Message {
   boolean1: boolean;
   timestamp1: string;
   text4: string;
+  pictureRated: string;
 }
 
 function MyComponent() {
@@ -44,7 +45,9 @@ function MyComponent() {
     const hours = Math.floor((prepDate - new Date(parameter).getTime()) / 3600000);
     const minutes = ((prepDate - new Date(parameter).getTime()) % (1000 * 60 * 60)) / (1000 * 60);
     return [
-      (days || null)?.toString().concat(days === 1 ? ' day ago' : ' days ago'),
+      days < 7
+        ? (days || null)?.toString().concat(days === 1 ? ' day ago' : ' days ago')
+        : (Math.floor(days / 7) || null)?.toString().concat(Math.floor(days / 7) === 1 ? ' week ago' : ' weeks ago'),
       hours < 24 ? (hours || null)?.toString().concat(' h ago') : null,
       hours < 1 && minutes < 60 ? (minutes || null)?.toString().concat(' m ago') : null,
     ];
@@ -83,20 +86,35 @@ function MyComponent() {
               width={45}
               height={10}
             />
-            <div className="ml-2 flex flex-col">
-              <div className="flex items-center">
-                <div className="flex">
-                  <span className="font-semibold">
-                    {message.text1}
-                    <span className="ml-1.5 font-medium text-darkGrayishBlue">
-                      {message.text2}
-                      <span className="ml-1.5 font-semibold text-darkGrayishBlue">{message.text3}</span>
-                    </span>
-                  </span>
+
+            <div className="ml-2 flex w-full flex-col">
+              <div className="flex justify-between">
+                <div className="flex flex-col">
+                  <div className="flex items-center">
+                    <div className="flex">
+                      <span className="font-semibold">
+                        {message.text1}
+                        <span className="ml-1.5 font-medium text-darkGrayishBlue">
+                          {message.text2}
+                          <span className="ml-1.5 font-semibold text-darkGrayishBlue">{message.text3}</span>
+                        </span>
+                      </span>
+                    </div>
+                    <div className={`${message.boolean1 ? 'ml-1.5 flex h-1 w-1 rounded-full bg-red p-1' : null}`}></div>
+                  </div>
+                  <span className="font-medium text-grayishBlue">{timeDiff(message.timestamp1)}</span>
                 </div>
-                <div className={`${message.boolean1 ? 'ml-1.5 flex h-1 w-1 rounded-full bg-red p-1' : null}`}></div>
+                {message.pictureRated !== '' ? (
+                  <Image
+                    className="flex h-[2.7em] w-auto"
+                    src={`./images/${message.pictureRated}`}
+                    alt={`Image of ${message.pictureRated}`}
+                    width={45}
+                    height={10}
+                  />
+                ) : null}
               </div>
-              <span className="font-medium text-grayishBlue">{timeDiff(message.timestamp1)}</span>
+
               <span
                 className={`${
                   message.text4 != ''
