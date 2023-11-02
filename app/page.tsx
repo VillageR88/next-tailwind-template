@@ -87,7 +87,7 @@ function MyComponent() {
             key={index}
             className={`${message.boolean1 ? 'cursor-pointer bg-lightGrayishBlue1 md:bg-veryLightGrayishBlue' : null}
               ${selectedMessageIndex === index ? (message.boolean1 = false) : null}
-            } flex gap-2.5 rounded-[0.5em] py-4 md:w-[42em] md:px-5`}
+            } flex gap-2.5 rounded-[0.5em] px-2 py-4 md:w-[42em] md:px-5`}
           >
             <Image
               className="h-[2.8em] w-auto"
@@ -133,7 +133,7 @@ function MyComponent() {
                 </div>
                 {message.pictureRated && (
                   <Image
-                    className="flex h-[2.8em] w-auto cursor-pointer"
+                    className="flex h-[2.8em] w-auto cursor-pointer pl-6"
                     src={`./images/${message.pictureRated}`}
                     alt={`Image of ${message.pictureRated}`}
                     width={45}
