@@ -5,12 +5,14 @@ import '@fontsource/plus-jakarta-sans';
 import '@fontsource/plus-jakarta-sans/500.css';
 import '@fontsource/plus-jakarta-sans/800.css';
 import Image from 'next/image';
+import { text } from 'stream/consumers';
 
 interface Message {
   person: string;
   text1: string;
   text2: string;
   text3: string;
+  alternateText1: boolean;
   boolean1: boolean;
   timestamp1: string;
   text4: string;
@@ -69,7 +71,7 @@ function MyComponent() {
               setInitialCount((dummyCount = 0));
               messages.map((message) => (message.boolean1 = false));
             }}
-            className="font-medium text-darkGrayishBlue"
+            className="font-medium text-darkGrayishBlue hover:text-blue"
           >
             Mark all as read
           </button>
@@ -99,18 +101,25 @@ function MyComponent() {
               <div className="flex justify-between">
                 <div className="flex flex-col">
                   <div className="flex items-center">
-                    <div className="flex">
-                      <span className="font-semibold">
-                        {message.text1}
-                        <span className="ml-1.5 font-medium text-darkGrayishBlue">
-                          {message.text2}
-                          <span className="ml-1.5 font-semibold text-darkGrayishBlue">{message.text3}</span>
-                        </span>
+                    <div className="w-full flex-grow">
+                      <span className="font-semibold hover:cursor-pointer hover:text-blue">{message.text1}</span>
+                      <span className="ml-1.5 font-medium text-darkGrayishBlue hover:cursor-default">
+                        {message.text2}
+                      </span>
+                      <span
+                        className={`${
+                          message.alternateText1 ? 'text-blue' : ''
+                        } ml-1.5 font-semibold text-darkGrayishBlue hover:cursor-pointer hover:text-blue`}
+                      >
+                        {message.text3}
                       </span>
                     </div>
+
                     <div className={`${message.boolean1 ? 'ml-1.5 flex h-1 w-1 rounded-full bg-red p-1' : null}`}></div>
                   </div>
-                  <span className="font-medium text-grayishBlue">{timeDiff(message.timestamp1)}</span>
+                  <span className="font-medium text-grayishBlue hover:cursor-default">
+                    {timeDiff(message.timestamp1)}
+                  </span>
                 </div>
                 {message.pictureRated !== '' ? (
                   <Image
@@ -128,7 +137,7 @@ function MyComponent() {
                   message.text4 != ''
                     ? 'mt-[0.6em] rounded-md border border-solid px-4 py-3.5 font-medium leading-5 text-darkGrayishBlue'
                     : null
-                }`}
+                } hover:cursor-pointer hover:bg-lightGrayishBlue1`}
               >
                 {message.text4}
               </span>
