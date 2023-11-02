@@ -10,12 +10,21 @@
             "text4": ""
         },
         {
+            "person": "avatar-jacob-thompson.webp",
+            "text1": "Jacob Thompson",
+            "text2": "followed you",
+            "text3": "",
+            "boolean1": true,
+            "timestamp1": "2023-11-01T09:01:00Z",
+            "text4": ""
+        },
+        {
             "person": "avatar-angela-gray.webp",
             "text1": "Angela Gray",
             "text2": "followed you",
             "text3": "",
             "boolean1": true,
-            "timestamp1": "2023-11-01T09:55:00Z",
+            "timestamp1": "2023-11-01T07:55:00Z",
             "text4": ""
         },
         {
@@ -25,6 +34,15 @@
             "text3": "Chess Club",
             "boolean1": true,
             "timestamp1": "2023-10-31T10:00:00Z",
+            "text4": ""
+        },
+        {
+            "person": "avatar-rizky-hasanuddin.webp",
+            "text1": "Jacob Thompson",
+            "text2": "has joined your group",
+            "text3": "Chess Club",
+            "boolean1": false,
+            "timestamp1": "2023-10-27T10:00:00Z",
             "text4": ""
         }
     ]

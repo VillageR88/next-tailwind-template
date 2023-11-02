@@ -34,10 +34,12 @@ function MyComponent() {
   const prepDate = new Date('2023-11-01T10:00:00Z').getTime();
   function timeDiff(parameter: string | number | Date) {
     const days = Math.floor((prepDate - new Date(parameter).getTime()) / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((prepDate - new Date(parameter).getTime()) / 3600000);
     const minutes = ((prepDate - new Date(parameter).getTime()) % (1000 * 60 * 60)) / (1000 * 60);
     return [
       (days || null)?.toString().concat(days === 1 ? ' day ago' : ' days ago'),
-      (minutes || null)?.toString().concat(' m ago'),
+      hours < 24 ? (hours || null)?.toString().concat(' h ago') : null,
+      hours < 1 && minutes < 60 ? (minutes || null)?.toString().concat(' m ago') : null,
     ];
   }
 
@@ -45,7 +47,12 @@ function MyComponent() {
     return (
       <div className="flex flex-col gap-2">
         {messages.map((message, index) => (
-          <div key={index} className="flex w-[42em] max-w-full gap-2.5 rounded-xl bg-veryLightGrayishBlue px-5 py-4">
+          <div
+            key={index}
+            className={`${
+              message.boolean1 ? 'bg-veryLightGrayishBlue' : null
+            } flex w-[42em] max-w-full gap-2.5 rounded-xl  px-5 py-4`}
+          >
             <Image
               className="h-[2.7em] w-auto"
               src={`./images/${message.person}`}
@@ -64,7 +71,7 @@ function MyComponent() {
                     </span>
                   </span>
                 </div>
-                <div className="ml-1.5 flex h-1 w-1 rounded-full bg-red p-1"></div>
+                <div className={`${message.boolean1 ? 'ml-1.5 flex h-1 w-1 rounded-full bg-red p-1' : null}`}></div>
               </div>
               <span className="font-medium text-grayishBlue">{timeDiff(message.timestamp1)}</span>
             </div>
