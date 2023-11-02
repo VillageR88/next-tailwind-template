@@ -9,15 +9,7 @@
             "timestamp1": "2023-11-01T09:59:00Z",
             "text4": ""
         },
-        {
-            "person": "avatar-jacob-thompson.webp",
-            "text1": "Jacob Thompson",
-            "text2": "followed you",
-            "text3": "",
-            "boolean1": true,
-            "timestamp1": "2023-11-01T09:01:00Z",
-            "text4": ""
-        },
+
         {
             "person": "avatar-angela-gray.webp",
             "text1": "Angela Gray",
@@ -38,12 +30,12 @@
         },
         {
             "person": "avatar-rizky-hasanuddin.webp",
-            "text1": "Jacob Thompson",
-            "text2": "has joined your group",
-            "text3": "Chess Club",
+            "text1": "Rizky Hasanuddin",
+            "text2": "sent you a private message",
+            "text3": "",
             "boolean1": false,
             "timestamp1": "2023-10-27T10:00:00Z",
-            "text4": ""
+            "text4": "Hello, thanks for setting up the Chess Club. I've been a member for a few weeks now and I'm already having lots of fun and improving my game."
         }
     ]
 }
