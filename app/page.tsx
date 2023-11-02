@@ -60,7 +60,7 @@ function MyComponent() {
       <div className="flex flex-col gap-2 pb-6 pt-8">
         {/*top*/}
         <div className="flex justify-between pb-4 md:w-[42em]">
-          <span className="text-[1.5rem] font-bold text-veryDarkBlue">
+          <span className="text-[1.5rem] font-bold text-veryDarkBlue hover:cursor-default">
             Notifications{' '}
             <span className="ml-1.5 rounded-md bg-blue px-[0.7em] py-0.5 align-[3px] text-[1rem] font-semibold text-white">
               {dummyCount}
@@ -103,7 +103,11 @@ function MyComponent() {
                   <div className="flex items-center">
                     <div className="w-full flex-grow">
                       <span className="font-semibold hover:cursor-pointer hover:text-blue">{message.text1}</span>
-                      <span className="ml-1.5 font-medium text-darkGrayishBlue hover:cursor-default">
+                      <span
+                        className={`ml-1.5 font-medium text-darkGrayishBlue ${
+                          message.boolean1 ? 'hover:cursor-pointer' : 'hover:cursor-default'
+                        }`}
+                      >
                         {message.text2}
                       </span>
                       <span
@@ -119,7 +123,11 @@ function MyComponent() {
                       ></span>
                     </div>
                   </div>
-                  <span className="font-medium text-grayishBlue hover:cursor-default">
+                  <span
+                    className={`${
+                      message.boolean1 ? 'hover:cursor-pointer' : 'hover:cursor-default'
+                    } 'font-medium ' text-grayishBlue`}
+                  >
                     {timeDiff(message.timestamp1)}
                   </span>
                 </div>
