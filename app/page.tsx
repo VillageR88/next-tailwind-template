@@ -43,7 +43,7 @@ function MyComponent() {
 
   if (messages) {
     return (
-      <div className="flex flex-col gap-4">
+      <div className="flex flex-col gap-2">
         {messages.map((message, index) => (
           <div key={index} className="flex w-[42em] max-w-full gap-2.5 rounded-xl bg-veryLightGrayishBlue px-5 py-4">
             <Image
