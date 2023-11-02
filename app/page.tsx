@@ -3,9 +3,9 @@ import React, { useState } from 'react';
 
 import '@fontsource/plus-jakarta-sans';
 import '@fontsource/plus-jakarta-sans/500.css';
+import '@fontsource/plus-jakarta-sans/600.css';
 import '@fontsource/plus-jakarta-sans/800.css';
 import Image from 'next/image';
-import { text } from 'stream/consumers';
 
 interface Message {
   person: string;
@@ -57,7 +57,7 @@ function MyComponent() {
 
   if (messages) {
     return (
-      <div className="flex flex-col gap-2 pb-6 pt-8">
+      <div className="flex flex-col gap-2 pb-6 pt-8 md:pb-0">
         {/*top*/}
         <div className="flex justify-between pb-4 md:w-[42em]">
           <span className="text-[1.5rem] font-bold text-veryDarkBlue hover:cursor-default">
@@ -71,7 +71,7 @@ function MyComponent() {
               setInitialCount((dummyCount = 0));
               messages.map((message) => (message.boolean1 = false));
             }}
-            className="font-medium text-darkGrayishBlue hover:text-blue"
+            className="font-[600] text-darkGrayishBlue hover:text-blue"
           >
             Mark all as read
           </button>
@@ -85,12 +85,12 @@ function MyComponent() {
               setSelectedMessageIndex(index);
             }}
             key={index}
-            className={`${message.boolean1 ? 'cursor-pointer bg-veryLightGrayishBlue' : null}
+            className={`${message.boolean1 ? 'cursor-pointer bg-lightGrayishBlue1 md:bg-veryLightGrayishBlue' : null}
               ${selectedMessageIndex === index ? (message.boolean1 = false) : null}
             } flex gap-2.5 rounded-[0.5em] py-4 md:w-[42em] md:px-5`}
           >
             <Image
-              className="h-[2.7em] w-auto"
+              className="h-[2.8em] w-auto"
               src={`./images/${message.person}`}
               alt={`Image of ${message.person}`}
               width={45}
@@ -133,7 +133,7 @@ function MyComponent() {
                 </div>
                 {message.pictureRated && (
                   <Image
-                    className="flex h-[2.7em] w-auto"
+                    className="flex h-[2.8em] w-auto cursor-pointer"
                     src={`./images/${message.pictureRated}`}
                     alt={`Image of ${message.pictureRated}`}
                     width={45}
@@ -145,7 +145,7 @@ function MyComponent() {
               <span
                 className={`${
                   message.text4 &&
-                  'mt-[0.6em] rounded-md border border-solid px-4 py-3.5 font-medium leading-5 text-darkGrayishBlue'
+                  'mb-3 mt-[0.6em] rounded-md border border-solid px-5 pb-4 pt-4 font-medium leading-5 text-darkGrayishBlue'
                 } hover:cursor-pointer hover:bg-lightGrayishBlue1`}
               >
                 {message.text4}
