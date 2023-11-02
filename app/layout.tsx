@@ -2,19 +2,6 @@ import './globals.css';
 import type { Metadata } from 'next';
 import { Inter, Source_Code_Pro } from 'next/font/google';
 
-const fontSans = Inter({
-  subsets: ['latin'],
-  display: 'block',
-  variable: '--font-sans',
-});
-
-const fontMono = Source_Code_Pro({
-  weight: ['400', '700'],
-  subsets: ['latin'],
-  display: 'block',
-  variable: '--font-mono',
-});
-
 export const metadata: Metadata = {
   title: 'My App',
   applicationName: 'My App',
