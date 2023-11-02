@@ -1,5 +1,5 @@
 'use client';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import '@fontsource/plus-jakarta-sans';
 import '@fontsource/plus-jakarta-sans/500.css';
@@ -18,6 +18,7 @@ interface Message {
   text4: string;
   pictureRated: string;
 }
+const startTime = new Date().getTime();
 
 function MyComponent() {
   const [messages, setMessages] = useState<Message[] | null>(null);
@@ -40,6 +41,16 @@ function MyComponent() {
         console.error('Error loading JSON: ', error);
       });
   });
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      const currentTime = new Date().getTime();
+      console.log(currentTime - startTime);
+    }, 1000);
+
+    return () => {
+      clearInterval(intervalId);
+    };
+  }, []);
 
   const prepDate = new Date('2023-11-01T10:00:00Z').getTime();
   function timeDiff(parameter: string | number | Date) {
@@ -80,9 +91,10 @@ function MyComponent() {
         {messages.map((message, index) => (
           <div
             onClick={() => {
-              console.log('test3');
-              setInitialCount(dummyCount ? (dummyCount -= 1) : 0);
-              setSelectedMessageIndex(index);
+              if (message.boolean1) {
+                setInitialCount(dummyCount ? (dummyCount -= 1) : 0);
+                setSelectedMessageIndex(index);
+              }
             }}
             key={index}
             className={`${message.boolean1 ? 'cursor-pointer bg-lightGrayishBlue1 md:bg-veryLightGrayishBlue' : null}
@@ -90,7 +102,7 @@ function MyComponent() {
             } flex gap-2.5 rounded-[0.5em] px-2 py-4 md:w-[42em] md:px-5`}
           >
             <Image
-              className="h-[2.8em] w-auto"
+              className="h-11 w-auto"
               src={`./images/${message.person}`}
               alt={`Image of ${message.person}`}
               width={45}
@@ -133,7 +145,7 @@ function MyComponent() {
                 </div>
                 {message.pictureRated && (
                   <Image
-                    className="flex h-[2.8em] w-auto cursor-pointer pl-6"
+                    className="ml-6 flex h-14 w-auto cursor-pointer rounded-xl border-4 border-solid border-transparent hover:border-lightGrayishBlue1"
                     src={`./images/${message.pictureRated}`}
                     alt={`Image of ${message.pictureRated}`}
                     width={45}
