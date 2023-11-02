@@ -1,0 +1,31 @@
+{
+    "messages": [
+        {
+            "person": "avatar-mark-webber.webp",
+            "text1": "Mark Webber",
+            "text2": "reacted to your recent post",
+            "text3": "MY first tournament today!",
+            "boolean1": true,
+            "timestamp1": "2023-11-01T09:59:00Z",
+            "text4": ""
+        },
+        {
+            "person": "avatar-angela-gray.webp",
+            "text1": "Angela Gray",
+            "text2": "followed you",
+            "text3": "",
+            "boolean1": true,
+            "timestamp1": "2023-11-01T09:55:00Z",
+            "text4": ""
+        },
+        {
+            "person": "avatar-jacob-thompson.webp",
+            "text1": "Jacob Thompson",
+            "text2": "has joined your group",
+            "text3": "Chess Club",
+            "boolean1": true,
+            "timestamp1": "2023-10-31T10:00:00Z",
+            "text4": ""
+        }
+    ]
+}
