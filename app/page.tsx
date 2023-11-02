@@ -1,5 +1,5 @@
 'use client';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 
 import '@fontsource/plus-jakarta-sans';
 import '@fontsource/plus-jakarta-sans/500.css';
@@ -18,20 +18,26 @@ interface Message {
 
 function MyComponent() {
   const [messages, setMessages] = useState<Message[] | null>(null);
+  const [initialCount, setInitialCount] = useState<number | null>(null);
+  const [selectedMessageIndex, setSelectedMessageIndex] = useState<number | null>(null);
+  let dummyCount = initialCount ?? null;
+
   const dataJson = './data.json';
 
-  useEffect(() => {
+  useState(() => {
     fetch(dataJson)
       .then((response) => response.json())
       .then((jsonData: { messages: Message[] }) => {
         setMessages(jsonData.messages);
+        const count = jsonData.messages.filter((message) => message.boolean1).length;
+        setInitialCount(count);
+        console.log('test');
       })
       .catch((error) => {
         console.error('Error loading JSON: ', error);
       });
-  }, []);
+  });
 
-  const messageCounter = messages?.filter((message) => message.boolean1).length;
   const prepDate = new Date('2023-11-01T10:00:00Z').getTime();
   function timeDiff(parameter: string | number | Date) {
     const days = Math.floor((prepDate - new Date(parameter).getTime()) / (1000 * 60 * 60 * 24));
@@ -46,13 +52,13 @@ function MyComponent() {
 
   if (messages) {
     return (
-      <div className="flex flex-col gap-2">
+      <div className="flex flex-col gap-2 pb-60">
         {/*top*/}
         <div className="flex w-[42em] max-w-full justify-between py-7">
           <span className="text-[1.5rem] font-bold text-veryDarkBlue">
             Notifications{' '}
             <span className="ml-1.5 rounded-md bg-blue px-[0.7em] py-0.5 align-[3px] text-[1rem] font-semibold text-white">
-              {messageCounter ?? null}
+              {dummyCount}
             </span>
           </span>
           <button className="font-medium text-darkGrayishBlue">Mark all as read</button>
@@ -60,10 +66,15 @@ function MyComponent() {
         {/*comments section*/}
         {messages.map((message, index) => (
           <div
+            onClick={() => {
+              console.log('test3');
+              setInitialCount(dummyCount ? (dummyCount -= 1) : 0);
+              setSelectedMessageIndex(index);
+            }}
             key={index}
-            className={`${
-              message.boolean1 ? 'bg-veryLightGrayishBlue' : null
-            } flex w-[42em] max-w-full gap-2.5 rounded-xl  px-5 py-4`}
+            className={`${message.boolean1 ? 'cursor-pointer bg-veryLightGrayishBlue' : null}
+              ${selectedMessageIndex === index ? (message.boolean1 = false) : null}
+            } flex w-[42em] max-w-full gap-2.5 rounded-xl px-5 py-4`}
           >
             <Image
               className="h-[2.7em] w-auto"
