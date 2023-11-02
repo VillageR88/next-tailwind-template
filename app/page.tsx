@@ -50,8 +50,8 @@ function MyComponent() {
       days < 7
         ? (days || null)?.toString().concat(days === 1 ? ' day ago' : ' days ago')
         : (Math.floor(days / 7) || null)?.toString().concat(Math.floor(days / 7) === 1 ? ' week ago' : ' weeks ago'),
-      hours < 24 ? (hours || null)?.toString().concat(' h ago') : null,
-      hours < 1 && minutes < 60 ? (minutes || null)?.toString().concat(' m ago') : null,
+      hours < 24 ? (hours || null)?.toString().concat('h ago') : null,
+      hours < 1 && minutes < 60 ? (minutes || null)?.toString().concat('m ago') : null,
     ];
   }
 
@@ -107,21 +107,23 @@ function MyComponent() {
                         {message.text2}
                       </span>
                       <span
-                        className={`${
-                          message.alternateText1 ? 'text-blue' : ''
-                        } ml-1.5 font-semibold text-darkGrayishBlue hover:cursor-pointer hover:text-blue`}
+                        className={`${message.alternateText1 && 'text-blue'} ${
+                          message.text3 &&
+                          'ml-1.5 font-semibold text-darkGrayishBlue hover:cursor-pointer hover:text-blue'
+                        }`}
                       >
                         {message.text3}
                       </span>
+                      <span
+                        className={`${message.boolean1 && 'ml-1.5 rounded-full bg-red px-1 align-middle text-[6.5px]'}`}
+                      ></span>
                     </div>
-
-                    <div className={`${message.boolean1 ? 'ml-1.5 flex h-1 w-1 rounded-full bg-red p-1' : null}`}></div>
                   </div>
                   <span className="font-medium text-grayishBlue hover:cursor-default">
                     {timeDiff(message.timestamp1)}
                   </span>
                 </div>
-                {message.pictureRated !== '' ? (
+                {message.pictureRated && (
                   <Image
                     className="flex h-[2.7em] w-auto"
                     src={`./images/${message.pictureRated}`}
@@ -129,14 +131,13 @@ function MyComponent() {
                     width={45}
                     height={10}
                   />
-                ) : null}
+                )}
               </div>
 
               <span
                 className={`${
-                  message.text4 != ''
-                    ? 'mt-[0.6em] rounded-md border border-solid px-4 py-3.5 font-medium leading-5 text-darkGrayishBlue'
-                    : null
+                  message.text4 &&
+                  'mt-[0.6em] rounded-md border border-solid px-4 py-3.5 font-medium leading-5 text-darkGrayishBlue'
                 } hover:cursor-pointer hover:bg-lightGrayishBlue1`}
               >
                 {message.text4}
