@@ -55,11 +55,11 @@ export default function Home() {
           </div>
         </div>
         {/* second column */}
-        <div className="flex h-full w-full items-center justify-center bg-[#FFFFFF]">
-          <div className="flex w-[25em]">
-            <form className="flex w-full flex-col">
+        <div className="mr-[4.7em] flex h-full w-full items-center justify-center bg-[#FFFFFF]">
+          <div className="flex w-[23.8em]">
+            <form className="flex h-full w-full flex-col gap-[1.4em]">
               <div>
-                <label className="mb-2 block text-[0.8rem] font-bold text-gray-700" htmlFor="username">
+                <label className="mb-2 block text-[0.8rem] font-bold tracking-[0.1em] text-gray-700" htmlFor="username">
                   CARDHOLDER NAME
                 </label>
                 <input
@@ -69,7 +69,7 @@ export default function Home() {
                 />
               </div>
               <div className="">
-                <label className="mb-2 block text-[0.8rem] font-bold text-gray-700" htmlFor="username">
+                <label className="mb-2 block text-[0.8rem] font-bold tracking-[0.1em] text-gray-700" htmlFor="username">
                   CARD NUMBER
                 </label>
                 <input
@@ -80,19 +80,33 @@ export default function Home() {
               </div>
               <div className="flex justify-between">
                 <div>
-                  <label className="mb-2 block w-full text-[0.8rem] font-bold text-gray-700" htmlFor="username">
+                  <label
+                    className="mb-2 block w-full text-[0.8rem] font-bold tracking-[0.1em] text-gray-700"
+                    htmlFor="username"
+                  >
                     EXP. DATE (MM/YY)
                   </label>
-                  <div className="flex">
-                    <input type="text" className="w-20 border border-solid px-4 py-2 text-[1.1rem]" placeholder="MM" />
-                    <input type="text" className="w-20 border border-solid px-4 py-2 text-[1.1rem]" placeholder="MM" />
+                  <div className="flex gap-[0.7em]">
+                    <input
+                      type="text"
+                      className="w-[4.5em] border border-solid px-4 py-2 text-[1.1rem]"
+                      placeholder="MM"
+                    />
+                    <input
+                      type="text"
+                      className="w-[4.5em] border border-solid px-4 py-2 text-[1.1rem]"
+                      placeholder="MM"
+                    />
                   </div>
                 </div>
                 <div>
-                  <label className="mb-2 block w-full text-[0.8rem] font-bold text-gray-700" htmlFor="username">
+                  <label
+                    className="mb-2 block w-full text-[0.8rem] font-bold tracking-[0.1em] text-gray-700"
+                    htmlFor="username"
+                  >
                     CVC
                   </label>
-                  <div className="flex">
+                  <div className="flex w-[12em]">
                     <input
                       type="text"
                       className="w-full border border-solid px-4 py-2 text-[1.1rem]"
@@ -101,6 +115,7 @@ export default function Home() {
                   </div>
                 </div>
               </div>
+              <button className="mt-4 bg-[#220930] py-[0.9em] text-white">Confirm</button>
             </form>
           </div>
         </div>
