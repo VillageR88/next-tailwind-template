@@ -12,6 +12,7 @@ const config: Config = {
       fontFamily: {
         sans: ['var(--font-sans)'],
         mono: ['var(--font-mono)'],
+        spaceGrotesk: ['Space Grotesk'],
       },
       colors: {
         // Slate
@@ -20,9 +21,10 @@ const config: Config = {
         // 'accent-brand-600': '#475569',
       },
       screens: {
-        minTall1: { raw: '(min-height: 800px)' },
-        minTall2: { raw: '(min-height: 600px)' },
-        maxTall2: { raw: '(max-height: 600px)' },
+        minTall450: { raw: '(min-height: 450px)' },
+        minTall320: { raw: '(min-height: 320px)' },
+        maxTall450: { raw: '(max-height: 450px)' },
+        maxTall320: { raw: '(max-height: 320px)' },
         // => @media (min-height: 800px) { ... }
       },
     },
