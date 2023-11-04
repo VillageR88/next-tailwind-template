@@ -9,7 +9,6 @@ import Image from 'next/image';
 
 const MyComponent = (placeholderText: string, width: string, maxInputLength: number, groupDigits: boolean) => {
   const [inputValue, setInputValue] = useState<string>('');
-
   const handleInputChange = (e: string) => {
     const rawValue = e.replace(/[^0-9]/g, '');
     setInputValue(groupDigits ? formatWithSpaces(rawValue) : rawValue);
@@ -23,7 +22,6 @@ const MyComponent = (placeholderText: string, width: string, maxInputLength: num
       return '';
     }
   };
-
   return (
     <div>
       <input
@@ -50,7 +48,7 @@ export default function Home() {
           {/* first column wrapper */}
           <div className="flex h-full w-full flex-col items-center justify-center md:max-w-full md:gap-[2.3em]">
             {/* card1 */}
-            <div className="flex h-[12em] w-full flex-col justify-around rounded-[0.8em] bg-bgCardFront bg-[length:100%_100%] bg-no-repeat md:h-[15.5em] md:w-[27.9em] md:max-w-full xl:ml-[15em]">
+            <div className="flex h-[12em] w-full flex-col justify-around rounded-[0.8em] bg-bgCardFront bg-[length:100%_100%] bg-no-repeat md:h-[15.5em] md:w-[27.9em] md:max-w-full xl:ml-[6em]">
               <Image
                 className=" ml-8 flex h-auto w-[5em]"
                 src={'./images/card-logo.svg' as string}
@@ -71,7 +69,7 @@ export default function Home() {
               </div>
             </div>
             {/* card2 */}
-            <div className="flex h-[12em] w-full rounded-[0.8em] bg-bgCardBack bg-[length:100%_100%] bg-no-repeat md:h-[15.5em] md:w-[27.9em] md:max-w-full xl:ml-[15em]"></div>
+            <div className="flex h-[12em] w-full rounded-[0.8em] bg-bgCardBack bg-[length:100%_100%] bg-no-repeat md:h-[15.5em] md:w-[27.9em] md:max-w-full xl:ml-[17em]"></div>
           </div>
         </div>
         {/* second column */}
@@ -87,7 +85,7 @@ export default function Home() {
                 </label>
                 <input
                   type="text"
-                  className="text-veryDarkViolet w-full rounded-lg border border-solid px-4 py-2 text-[1.1rem] font-medium placeholder-[#C8C4C9] outline-0 focus:border-violet-900"
+                  className="w-full rounded-lg border border-solid px-4 py-2 text-[1.1rem] font-medium text-veryDarkViolet placeholder-[#C8C4C9] outline-0 focus:border-violet-900"
                   placeholder="e.g. Jane Appleseed"
                 />
               </div>
@@ -120,7 +118,7 @@ export default function Home() {
                   <div className="flex w-[12em]">{MyComponent('YY', 'full', 3, false)}</div>
                 </div>
               </div>
-              <button className="bg-veryDarkViolet mt-4 rounded-lg py-[0.75em] text-[1.1rem] text-white">
+              <button className="mt-4 rounded-lg bg-veryDarkViolet py-[0.75em] text-[1.1rem] text-white">
                 Confirm
               </button>
             </form>
