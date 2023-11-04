@@ -69,7 +69,9 @@ export default function Home() {
               </div>
             </div>
             {/* card2 */}
-            <div className="flex h-[12em] w-full rounded-[0.8em] bg-bgCardBack bg-[length:100%_100%] bg-no-repeat drop-shadow-2xl md:h-[15.5em] md:w-[27.9em] md:max-w-full xl:ml-[17em]"></div>
+            <div className="flex h-[12em] w-full items-center justify-end rounded-[0.8em] bg-bgCardBack bg-[length:100%_100%] bg-no-repeat drop-shadow-2xl md:h-[15.5em] md:w-[27.9em] md:max-w-full xl:ml-[17em]">
+              <span className="mb-1 mr-16 text-sm tracking-widest text-white">000</span>
+            </div>
           </div>
         </div>
         {/* second column */}
