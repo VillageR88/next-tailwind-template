@@ -11,7 +11,7 @@ export default function Home() {
         {/* first column */}
         <div className="bg-bgMainDesktop flex w-full justify-center bg-cover md:bg-contain md:bg-no-repeat ">
           {/* first column wrapper */}
-          <div className="flex h-auto max-w-full flex-col justify-center gap-[2.3em]">
+          <div className="flex h-full max-w-full flex-col justify-center gap-[2.3em]">
             {/* card1 */}
             <div
               className="bg-bgCardFront flex h-[15em] max-w-full flex-col justify-around rounded-[0.8em] md:w-[27.9em] 
