@@ -5,16 +5,16 @@ import Image from 'next/image';
 
 export default function Home() {
   return (
-    <main className="main font-spaceGrotesk flex min-h-screen max-w-full pb-[1.7em] pt-[1.72em]">
+    <main className="main font-spaceGrotesk flex min-h-screen max-w-full md:pb-[1.7em] md:pt-[1.72em]">
       {/* main wrapper */}
-      <div className="flex max-h-full w-full flex-col bg-white md:flex-row">
+      <div className="flex max-h-full w-full flex-col gap-4 bg-white md:flex-row">
         {/* first column */}
-        <div className="bg-bgMainDesktop flex w-full justify-center bg-cover md:bg-contain md:bg-no-repeat ">
+        <div className="bg-bgMainDesktop flex justify-center bg-cover md:w-1/2 md:bg-contain md:bg-no-repeat md:pl-1">
           {/* first column wrapper */}
           <div className="flex h-full max-w-full flex-col justify-center gap-[2.3em]">
             {/* card1 */}
             <div
-              className="bg-bgCardFront flex h-[15em] max-w-full flex-col justify-around rounded-[0.8em] md:w-[27.9em] 
+              className="bg-bgCardFront flex h-[15em] max-w-full flex-col justify-around rounded-[0.8em] bg-no-repeat md:w-[27.9em] 
               xl:ml-[10em]"
             >
               <Image
@@ -35,13 +35,13 @@ export default function Home() {
               </div>
             </div>
             {/* card2 */}
-            <div className="bg-bgCardBack flex h-[15em] max-w-full rounded-[0.8em] md:w-[27.9em] xl:ml-[15em]"></div>
+            <div className="bg-bgCardBack flex h-[15em] max-w-full rounded-[0.8em] md:bg-contain bg-no-repeat md:w-[27.9em] xl:ml-[15em]"></div>
           </div>
         </div>
         {/* second column */}
-        <div className="mr-[4.7em] flex max-h-auto w-full items-center justify-center bg-[#FFFFFF]">
+        <div className="max-h-auto mr-[4.7em flex w-full items-center justify-center bg-[#FFFFFF] md:w-1/2">
           <div className="flex w-[23.8em]">
-            <form className="flex max-h-auto max-w-full flex-col gap-[1.4em]">
+            <form className="max-h-auto flex max-w-full flex-col gap-[1.4em]">
               <div>
                 <label className="mb-2 block text-[0.8rem] font-bold tracking-[0.1em] text-gray-700" htmlFor="username">
                   CARDHOLDER NAME
