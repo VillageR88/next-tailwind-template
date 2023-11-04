@@ -14,9 +14,6 @@ const config: Config = {
         mono: ['var(--font-mono)'],
         spaceGrotesk: ['Space Grotesk'],
       },
-      boxShadow: {
-        customShadow: '0 35px 60px -15px rgba(0, 0, 0, 0.3)',
-      },
       colors: {
         redInputErrors: 'hsl(0, 100%, 66%)',
         white: 'hsl(0, 0%, 100%)',
