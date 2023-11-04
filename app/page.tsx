@@ -1,10 +1,34 @@
 'use client';
+import React, { useState } from 'react';
 import '@fontsource/space-grotesk';
 import '@fontsource/space-grotesk/400.css';
 import '@fontsource/space-grotesk/500.css';
 import '@fontsource/space-grotesk/600.css';
 
 import Image from 'next/image';
+
+const MyComponent: React.FC = () => {
+  const [inputValue, setInputValue] = useState<string>('');
+
+  const handleInputChange = (e: string) => {
+    setInputValue(e.replace(/[^0-9]/g, ''));
+  };
+
+  return (
+    <div>
+      <input
+        type="text"
+        value={inputValue}
+        onChange={(e) => {
+          handleInputChange(e.target.value);
+        }}
+        className="text-veryDarkViolet w-[4.5em] rounded-lg border border-solid px-4 py-2 text-[1.1rem] font-medium placeholder-[#C8C4C9] outline-0 focus:border-violet-900 [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none"
+        maxLength={2}
+        placeholder="MM"
+      />
+    </div>
+  );
+};
 
 export default function Home() {
   return (
@@ -57,7 +81,7 @@ export default function Home() {
                 </label>
                 <input
                   type="text"
-                  className="w-full rounded-lg border border-solid px-4 py-2 text-[1.1rem] font-medium placeholder-[#C8C4C9]"
+                  className="text-veryDarkViolet w-full rounded-lg border border-solid px-4 py-2 text-[1.1rem] font-medium placeholder-[#C8C4C9] outline-0 focus:border-violet-900"
                   placeholder="e.g. Jane Appleseed"
                 />
               </div>
@@ -67,7 +91,7 @@ export default function Home() {
                 </label>
                 <input
                   type="text"
-                  className="w-full rounded-lg border border-solid px-4 py-2 text-[1.1rem] font-medium placeholder-[#C8C4C9]"
+                  className="text-veryDarkViolet w-full rounded-lg border border-solid px-4 py-2 text-[1.1rem] font-medium placeholder-[#C8C4C9] outline-0 focus:border-violet-900"
                   placeholder="e.g. 1234 5678 9123 0000"
                 />
               </div>
@@ -80,14 +104,11 @@ export default function Home() {
                     EXP. DATE (MM/YY)
                   </label>
                   <div className="flex gap-[0.7em]">
+                    <MyComponent />
                     <input
                       type="text"
-                      className="w-[4.5em] rounded-lg border border-solid px-4 py-2 text-[1.1rem] font-medium placeholder-[#C8C4C9]"
-                      placeholder="MM"
-                    />
-                    <input
-                      type="text"
-                      className="w-[4.5em] rounded-lg border border-solid px-4 py-2 text-[1.1rem] font-medium placeholder-[#C8C4C9]"
+                      max="99"
+                      className="text-veryDarkViolet w-[4.5em] rounded-lg border border-solid px-4 py-2 text-[1.1rem] font-medium placeholder-[#C8C4C9] outline-0 focus:border-violet-900"
                       placeholder="YY"
                     />
                   </div>
@@ -102,7 +123,7 @@ export default function Home() {
                   <div className="flex w-[12em]">
                     <input
                       type="text"
-                      className="w-full rounded-lg border border-solid px-4 py-2 text-[1.1rem] font-medium placeholder-[#C8C4C9]"
+                      className="text-veryDarkViolet w-full rounded-lg border border-solid px-4 py-2 text-[1.1rem] font-medium placeholder-[#C8C4C9] outline-0 focus:border-violet-900"
                       placeholder="e.g. 123"
                     />
                   </div>
