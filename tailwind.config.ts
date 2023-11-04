@@ -15,6 +15,11 @@ const config: Config = {
         spaceGrotesk: ['Space Grotesk'],
       },
       colors: {
+        redInputErrors: 'hsl(0, 100%, 66%)',
+        white: 'hsl(0, 0%, 100%)',
+        lightGrayishViolet: 'hsl(270, 3%, 87%)',
+        darkGrayishViolet: 'hsl(279, 6%, 55%)',
+        veryDarkViolet: 'hsl(278, 68%, 11%)',
         // Slate
         // 'accent-brand-800': '#1e293b',
         // 'accent-brand-700': '#334155',

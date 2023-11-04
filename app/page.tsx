@@ -1,6 +1,9 @@
 'use client';
 import '@fontsource/space-grotesk';
 import '@fontsource/space-grotesk/400.css';
+import '@fontsource/space-grotesk/500.css';
+import '@fontsource/space-grotesk/600.css';
+
 import Image from 'next/image';
 
 export default function Home() {
@@ -44,14 +47,17 @@ export default function Home() {
         {/* second column */}
         <div className="max-h-auto flex w-full items-center justify-center bg-[#FFFFFF] md:mr-[4em] md:w-1/2">
           <div className="flex">
-            <form className="max-h-auto flex max-w-full flex-col gap-[1.4em]">
+            <form className="max-h-auto flex max-w-full flex-col gap-[1.4em] ">
               <div>
-                <label className="mb-2 block text-[0.8rem] font-bold tracking-[0.1em] text-gray-700" htmlFor="username">
+                <label
+                  className="mb-2 block text-[0.75rem] font-bold tracking-[0.1em] text-gray-700"
+                  htmlFor="username"
+                >
                   CARDHOLDER NAME
                 </label>
                 <input
                   type="text"
-                  className="w-full border border-solid px-4 py-2 text-[1.1rem]"
+                  className="w-full rounded-lg border border-solid px-4 py-2 text-[1.1rem] font-medium placeholder-[#C8C4C9]"
                   placeholder="e.g. Jane Appleseed"
                 />
               </div>
@@ -61,14 +67,14 @@ export default function Home() {
                 </label>
                 <input
                   type="text"
-                  className="w-full border border-solid px-4 py-2 text-[1.1rem]"
+                  className="w-full rounded-lg border border-solid px-4 py-2 text-[1.1rem] font-medium placeholder-[#C8C4C9]"
                   placeholder="e.g. 1234 5678 9123 0000"
                 />
               </div>
               <div className="flex justify-between gap-5">
                 <div>
                   <label
-                    className="mb-2 block w-full text-[0.8rem] font-bold tracking-[0.1em] text-gray-700"
+                    className="mb-2 block w-full text-[0.8rem] font-bold  tracking-[0.1em] text-gray-700 placeholder-[#C8C4C9]"
                     htmlFor="username"
                   >
                     EXP. DATE (MM/YY)
@@ -76,12 +82,12 @@ export default function Home() {
                   <div className="flex gap-[0.7em]">
                     <input
                       type="text"
-                      className="w-[4.5em] border border-solid px-4 py-2 text-[1.1rem]"
+                      className="w-[4.5em] rounded-lg border border-solid px-4 py-2 text-[1.1rem] font-medium placeholder-[#C8C4C9]"
                       placeholder="MM"
                     />
                     <input
                       type="text"
-                      className="w-[4.5em] border border-solid px-4 py-2 text-[1.1rem]"
+                      className="w-[4.5em] rounded-lg border border-solid px-4 py-2 text-[1.1rem] font-medium placeholder-[#C8C4C9]"
                       placeholder="YY"
                     />
                   </div>
@@ -96,13 +102,15 @@ export default function Home() {
                   <div className="flex w-[12em]">
                     <input
                       type="text"
-                      className="w-full border border-solid px-4 py-2 text-[1.1rem]"
+                      className="w-full rounded-lg border border-solid px-4 py-2 text-[1.1rem] font-medium placeholder-[#C8C4C9]"
                       placeholder="e.g. 123"
                     />
                   </div>
                 </div>
               </div>
-              <button className="mt-4 bg-[#220930] py-[0.9em] text-white">Confirm</button>
+              <button className="bg-veryDarkViolet mt-4 rounded-lg py-[0.75em] text-[1.1rem] text-white">
+                Confirm
+              </button>
             </form>
           </div>
         </div>
