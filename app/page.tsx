@@ -7,7 +7,7 @@ import '@fontsource/space-grotesk/600.css';
 
 import Image from 'next/image';
 
-const MyComponent: React.FC = () => {
+const MyComponent = (placeholderText: string, width: string) => {
   const [inputValue, setInputValue] = useState<string>('');
 
   const handleInputChange = (e: string) => {
@@ -22,9 +22,9 @@ const MyComponent: React.FC = () => {
         onChange={(e) => {
           handleInputChange(e.target.value);
         }}
-        className="text-veryDarkViolet w-[4.5em] rounded-lg border border-solid px-4 py-2 text-[1.1rem] font-medium placeholder-[#C8C4C9] outline-0 focus:border-violet-900 [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none"
+        className={`text-veryDarkViolet w-[${width}] rounded-lg border border-solid px-4 py-2 text-[1.1rem] font-medium placeholder-[#C8C4C9] outline-0 focus:border-violet-900`}
         maxLength={2}
-        placeholder="MM"
+        placeholder={placeholderText}
       />
     </div>
   );
@@ -104,13 +104,8 @@ export default function Home() {
                     EXP. DATE (MM/YY)
                   </label>
                   <div className="flex gap-[0.7em]">
-                    <MyComponent />
-                    <input
-                      type="text"
-                      max="99"
-                      className="text-veryDarkViolet w-[4.5em] rounded-lg border border-solid px-4 py-2 text-[1.1rem] font-medium placeholder-[#C8C4C9] outline-0 focus:border-violet-900"
-                      placeholder="YY"
-                    />
+                    {MyComponent('MM', '4.5em')}
+                    {MyComponent('YY', '4.5em')}
                   </div>
                 </div>
                 <div>
