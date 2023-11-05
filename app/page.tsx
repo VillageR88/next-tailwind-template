@@ -12,6 +12,12 @@ enum isType {
   isNumber,
 }
 
+enum errorText {
+  blank = `Can't be blank`,
+  incomplete = `Incomplete`,
+  nameIncomplete = `Require First name (max 8 letters) and last name (max 11 letters)`,
+}
+
 const MyComponent = (
   placeholderText: string,
   width: string,
@@ -39,16 +45,19 @@ const MyComponent = (
   };
 
   const inputElement = (
-    <input
-      type="text"
-      value={inputValue}
-      onChange={(e) => {
-        handleInputChange(e.target.value);
-      }}
-      className={`text-veryDarkViolet ${width} rounded-lg border border-solid px-4 py-2 text-[1.1rem] font-medium text-veryDarkViolet placeholder-[#C8C4C9] outline-0 focus:border-violet-900`}
-      maxLength={maxInputLength}
-      placeholder={placeholderText}
-    />
+    <div className="flex flex-col">
+      <input
+        type="text"
+        value={inputValue}
+        onChange={(e) => {
+          handleInputChange(e.target.value);
+        }}
+        className={`flex w-full text-veryDarkViolet ${width} rounded-lg border border-solid px-4 py-2 text-[1.1rem] font-medium text-veryDarkViolet placeholder-[#C8C4C9] outline-0 focus:border-violet-900`}
+        maxLength={maxInputLength}
+        placeholder={placeholderText}
+      />
+      <span className={`${'flex'} text-xs font-medium text-redInputErrors`}>{}</span>
+    </div>
   );
 
   const elementsArray = [inputElement, inputValue];
@@ -57,11 +66,11 @@ const MyComponent = (
 };
 
 export default function Home() {
-  const cardNumber = MyComponent('e.g. 1234 5678 9123 0000', 'w-full', 19, true, isType.isNumber);
-  const cardOwner = MyComponent('JANE APPLESEED', 'w-full', 24, true, isType.isName);
-  const cardMM = MyComponent('MM', 'w-[4.5em]', 2, false, isType.isNumber);
-  const cardYY = MyComponent('YY', 'w-[4.5em]', 2, false, isType.isNumber);
-  const cardCVC = MyComponent('e.g. 123', 'w-[10.5em]', 3, false, isType.isNumber);
+  const cardNumber = MyComponent('e.g. 1234 5678 9123 0000', 'md:w-full', 19, true, isType.isNumber);
+  const cardOwner = MyComponent('JANE APPLESEED', 'md:w-full', 24, true, isType.isName);
+  const cardMM = MyComponent('MM', 'md:w-[4.5em]', 2, false, isType.isNumber);
+  const cardYY = MyComponent('YY', 'md:w-[4.5em]', 2, false, isType.isNumber);
+  const cardCVC = MyComponent('e.g. 123', 'md:w-[10.5em]', 3, false, isType.isNumber);
 
   return (
     <main className="main flex min-h-screen max-w-full font-spaceGrotesk md:pb-[1.7em] md:pt-[1.72em]">
@@ -111,7 +120,7 @@ export default function Home() {
           </div>
         </div>
         {/* second column */}
-        <div className="max-h-auto flex w-full items-center justify-center bg-[#FFFFFF] md:mr-[4em] md:w-1/2">
+        <div className="max-h-auto flex w-full items-center justify-center bg-[#FFFFFF] md:mr-[5.5em] md:w-1/2">
           <div className="flex">
             <form className="max-h-auto flex flex-col gap-[1.4em] ">
               <div>
