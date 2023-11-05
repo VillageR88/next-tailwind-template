@@ -7,10 +7,16 @@ import '@fontsource/space-grotesk/600.css';
 
 import Image from 'next/image';
 
-const MyComponent = (placeholderText: string, width: string, maxInputLength: number, groupDigits: boolean) => {
+const MyComponent = (
+  placeholderText: string,
+  width: string,
+  maxInputLength: number,
+  groupDigits: boolean,
+  isType: string,
+) => {
   const [inputValue, setInputValue] = useState<string>('');
   const handleInputChange = (e: string) => {
-    const rawValue = e.replace(/[^0-9]/g, '');
+    const rawValue = isType == 'isNumber' ? e.replace(/[^0-9]/g, '') : e.replace(/[^A-Za-z\s\-.'"]+/g, '');
     setInputValue(groupDigits ? formatWithSpaces(rawValue) : rawValue);
   };
 
@@ -30,7 +36,7 @@ const MyComponent = (placeholderText: string, width: string, maxInputLength: num
       onChange={(e) => {
         handleInputChange(e.target.value);
       }}
-      className={`text-veryDarkViolet ${width} focus-border-violet-900 rounded-lg border border-solid px-4 py-2 text-[1.1rem] font-medium placeholder-[#C8C4C9] outline-0`}
+      className={`text-veryDarkViolet ${width} rounded-lg border border-solid px-4 py-2 text-[1.1rem] font-medium text-veryDarkViolet placeholder-[#C8C4C9] outline-0 focus:border-violet-900`}
       maxLength={maxInputLength}
       placeholder={placeholderText}
     />
@@ -42,7 +48,7 @@ const MyComponent = (placeholderText: string, width: string, maxInputLength: num
 };
 
 export default function Home() {
-  const cardNumber = MyComponent('e.g. 1234 5678 9123 0000', 'w-full', 19, true);
+  const cardNumber = MyComponent('e.g. 1234 5678 9123 0000', 'w-full', 19, true, 'isNumber');
 
   return (
     <main className="main flex min-h-screen max-w-full font-spaceGrotesk md:pb-[1.7em] md:pt-[1.72em]">
@@ -65,7 +71,9 @@ export default function Home() {
                 <div
                   className={`flex w-full justify-center gap-[2.5%] px-[1em] text-[1.75rem] text-white md:tracking-[0.12em]`}
                 >
-                  <span className="md:whitespace-nowrap">{cardNumber[1]}</span>
+                  <span className="md:whitespace-nowrap">
+                    {cardNumber[1] !== '' ? cardNumber[1] : '0000 0000 0000 0000'}
+                  </span>
                 </div>
                 <div className="flex w-full justify-between px-[1.5em] text-[0.9rem] tracking-[0.12em] text-white md:px-[2.5em]">
                   <span>JANE APPLESEED</span>
@@ -94,11 +102,7 @@ export default function Home() {
                 >
                   CARDHOLDER NAME
                 </label>
-                <input
-                  type="text"
-                  className="w-full rounded-lg border border-solid px-4 py-2 text-[1.1rem] font-medium text-veryDarkViolet placeholder-[#C8C4C9] outline-0 focus:border-violet-900"
-                  placeholder="e.g. Jane Appleseed"
-                />
+                {MyComponent('e.g. Jane Appleseed', 'w-full', 40, false, 'isString')[0]}
               </div>
               <div className="">
                 <label className="mb-2 block text-[0.8rem] font-bold tracking-[0.1em] text-gray-700" htmlFor="username">
@@ -115,8 +119,8 @@ export default function Home() {
                     EXP. DATE (MM/YY)
                   </label>
                   <div className="flex gap-[0.7em]">
-                    {MyComponent('MM', 'w-[4.5em]', 2, false)[0]}
-                    {MyComponent('YY', 'w-[4.5em]', 2, false)[0]}
+                    {MyComponent('MM', 'w-[4.5em]', 2, false, 'isNumber')[0]}
+                    {MyComponent('YY', 'w-[4.5em]', 2, false, 'isNumber')[0]}
                   </div>
                 </div>
                 <div>
@@ -126,7 +130,7 @@ export default function Home() {
                   >
                     CVC
                   </label>
-                  <div>{MyComponent('YY', 'w-[10.5em]', 3, false)[0]}</div>
+                  <div>{MyComponent('YY', 'w-[10.5em]', 3, false, 'isNumber')[0]}</div>
                 </div>
               </div>
               <button className="mt-4 rounded-lg bg-veryDarkViolet py-[0.75em] text-[1.1rem] text-white">
