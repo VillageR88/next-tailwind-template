@@ -64,7 +64,11 @@ export default function Home() {
                 </div>
                 <div className="flex w-full justify-between px-[1.5em] text-[0.9rem] tracking-[0.12em] text-white md:px-[2.5em]">
                   <span>JANE APPLESEED</span>
-                  <span>00/00</span>
+                  <div>
+                    <span>00</span>
+                    <span>/</span>
+                    <span>00</span>
+                  </div>
                 </div>
               </div>
             </div>
