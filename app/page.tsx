@@ -7,16 +7,21 @@ import '@fontsource/space-grotesk/600.css';
 
 import Image from 'next/image';
 
+enum isType {
+  isName,
+  isNumber,
+}
+
 const MyComponent = (
   placeholderText: string,
   width: string,
   maxInputLength: number,
   groupDigits: boolean,
-  isType: string,
+  type: isType,
 ) => {
   const [inputValue, setInputValue] = useState<string>('');
   const handleInputChange = (e: string) => {
-    const rawValue = isType == 'isNumber' ? e.replace(/[^0-9]/g, '') : e.replace(/[^A-Za-z\s\-.'"]+/g, '');
+    const rawValue = type === isType.isNumber ? e.replace(/[^0-9]/g, '') : e.replace(/[^A-Za-z\s\-.'"]+/g, '');
     setInputValue(groupDigits ? formatWithSpaces(rawValue) : rawValue);
   };
 
@@ -48,7 +53,7 @@ const MyComponent = (
 };
 
 export default function Home() {
-  const cardNumber = MyComponent('e.g. 1234 5678 9123 0000', 'w-full', 19, true, 'isNumber');
+  const cardNumber = MyComponent('e.g. 1234 5678 9123 0000', 'w-full', 19, true, isType.isNumber);
 
   return (
     <main className="main flex min-h-screen max-w-full font-spaceGrotesk md:pb-[1.7em] md:pt-[1.72em]">
@@ -102,7 +107,7 @@ export default function Home() {
                 >
                   CARDHOLDER NAME
                 </label>
-                {MyComponent('e.g. Jane Appleseed', 'w-full', 40, false, 'isString')[0]}
+                {MyComponent('e.g. Jane Appleseed', 'w-full', 40, false, isType.isName)[0]}
               </div>
               <div className="">
                 <label className="mb-2 block text-[0.8rem] font-bold tracking-[0.1em] text-gray-700" htmlFor="username">
@@ -119,8 +124,8 @@ export default function Home() {
                     EXP. DATE (MM/YY)
                   </label>
                   <div className="flex gap-[0.7em]">
-                    {MyComponent('MM', 'w-[4.5em]', 2, false, 'isNumber')[0]}
-                    {MyComponent('YY', 'w-[4.5em]', 2, false, 'isNumber')[0]}
+                    {MyComponent('MM', 'w-[4.5em]', 2, false, isType.isNumber)[0]}
+                    {MyComponent('YY', 'w-[4.5em]', 2, false, isType.isNumber)[0]}
                   </div>
                 </div>
                 <div>
@@ -130,7 +135,7 @@ export default function Home() {
                   >
                     CVC
                   </label>
-                  <div>{MyComponent('YY', 'w-[10.5em]', 3, false, 'isNumber')[0]}</div>
+                  <div>{MyComponent('YY', 'w-[10.5em]', 3, false, isType.isNumber)[0]}</div>
                 </div>
               </div>
               <button className="mt-4 rounded-lg bg-veryDarkViolet py-[0.75em] text-[1.1rem] text-white">
