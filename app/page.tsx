@@ -30,7 +30,7 @@ const MyComponent = (placeholderText: string, width: string, maxInputLength: num
         onChange={(e) => {
           handleInputChange(e.target.value);
         }}
-        className={`text-veryDarkViolet w-${width} rounded-lg border border-solid px-4 py-2 text-[1.1rem] font-medium placeholder-[#C8C4C9] outline-0 focus:border-violet-900`}
+        className={`text-veryDarkViolet ${width} rounded-lg border border-solid px-4 py-2 text-[1.1rem] font-medium placeholder-[#C8C4C9] outline-0 focus:border-violet-900`}
         maxLength={maxInputLength}
         placeholder={placeholderText}
       />
@@ -44,7 +44,7 @@ export default function Home() {
       {/* main wrapper */}
       <div className="flex max-h-full w-full flex-col gap-4 bg-white md:flex-row md:pr-8">
         {/* first column */}
-        <div className="flex w-full justify-center bg-bgMainDesktop bg-cover md:w-[50%] md:bg-[length:30.2em_100%] md:bg-no-repeat">
+        <div className="flex w-full justify-center bg-bgMainDesktop bg-cover md:w-1/2 md:bg-[length:30.2em_100%] md:bg-no-repeat">
           {/* first column wrapper */}
           <div className="flex h-full w-full flex-col items-center justify-center md:max-w-full md:gap-[2.3em]">
             {/* card1 */}
@@ -95,19 +95,19 @@ export default function Home() {
                 <label className="mb-2 block text-[0.8rem] font-bold tracking-[0.1em] text-gray-700" htmlFor="username">
                   CARD NUMBER
                 </label>
-                {MyComponent('e.g. 1234 5678 9123 0000', 'full', 19, true)}
+                {MyComponent('e.g. 1234 5678 9123 0000', 'w-full', 19, true)}
               </div>
               <div className="flex justify-between gap-5">
                 <div>
                   <label
-                    className="mb-2 block w-full text-[0.8rem] font-bold  tracking-[0.1em] text-gray-700 placeholder-[#C8C4C9]"
+                    className="mb-2 block w-full text-[0.8rem] font-bold tracking-[0.1em] text-gray-700 placeholder-[#C8C4C9]"
                     htmlFor="username"
                   >
                     EXP. DATE (MM/YY)
                   </label>
                   <div className="flex gap-[0.7em]">
-                    {MyComponent('MM', '[4.5em]', 2, false)}
-                    {MyComponent('YY', '[4.5em]', 2, false)}
+                    {MyComponent('MM', 'w-[4.5em]', 2, false)}
+                    {MyComponent('YY', 'w-[4.5em]', 2, false)}
                   </div>
                 </div>
                 <div>
@@ -117,7 +117,7 @@ export default function Home() {
                   >
                     CVC
                   </label>
-                  <div className="flex w-[12em]">{MyComponent('YY', 'full', 3, false)}</div>
+                  <div>{MyComponent('YY', 'w-[10.5em]', 3, false)}</div>
                 </div>
               </div>
               <button className="mt-4 rounded-lg bg-veryDarkViolet py-[0.75em] text-[1.1rem] text-white">
