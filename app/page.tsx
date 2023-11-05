@@ -22,23 +22,28 @@ const MyComponent = (placeholderText: string, width: string, maxInputLength: num
       return '';
     }
   };
-  return (
-    <div>
-      <input
-        type="text"
-        value={inputValue}
-        onChange={(e) => {
-          handleInputChange(e.target.value);
-        }}
-        className={`text-veryDarkViolet ${width} rounded-lg border border-solid px-4 py-2 text-[1.1rem] font-medium placeholder-[#C8C4C9] outline-0 focus:border-violet-900`}
-        maxLength={maxInputLength}
-        placeholder={placeholderText}
-      />
-    </div>
+
+  const inputElement = (
+    <input
+      type="text"
+      value={inputValue}
+      onChange={(e) => {
+        handleInputChange(e.target.value);
+      }}
+      className={`text-veryDarkViolet ${width} focus-border-violet-900 rounded-lg border border-solid px-4 py-2 text-[1.1rem] font-medium placeholder-[#C8C4C9] outline-0`}
+      maxLength={maxInputLength}
+      placeholder={placeholderText}
+    />
   );
+
+  const elementsArray = [inputElement, inputValue];
+
+  return elementsArray;
 };
 
 export default function Home() {
+  const cardNumber = MyComponent('e.g. 1234 5678 9123 0000', 'w-full', 19, true);
+
   return (
     <main className="main flex min-h-screen max-w-full font-spaceGrotesk md:pb-[1.7em] md:pt-[1.72em]">
       {/* main wrapper */}
@@ -60,7 +65,7 @@ export default function Home() {
                 <div
                   className={`flex w-full justify-center gap-[2.5%] px-[1em] text-[1.75rem] text-white md:tracking-[0.12em]`}
                 >
-                  <span className="md:whitespace-nowrap">0000 0000 0000 0000</span>
+                  <span className="md:whitespace-nowrap">{cardNumber[1]}</span>
                 </div>
                 <div className="flex w-full justify-between px-[1.5em] text-[0.9rem] tracking-[0.12em] text-white md:px-[2.5em]">
                   <span>JANE APPLESEED</span>
@@ -99,7 +104,7 @@ export default function Home() {
                 <label className="mb-2 block text-[0.8rem] font-bold tracking-[0.1em] text-gray-700" htmlFor="username">
                   CARD NUMBER
                 </label>
-                {MyComponent('e.g. 1234 5678 9123 0000', 'w-full', 19, true)}
+                {cardNumber[0]}
               </div>
               <div className="flex justify-between gap-5">
                 <div>
@@ -110,8 +115,8 @@ export default function Home() {
                     EXP. DATE (MM/YY)
                   </label>
                   <div className="flex gap-[0.7em]">
-                    {MyComponent('MM', 'w-[4.5em]', 2, false)}
-                    {MyComponent('YY', 'w-[4.5em]', 2, false)}
+                    {MyComponent('MM', 'w-[4.5em]', 2, false)[0]}
+                    {MyComponent('YY', 'w-[4.5em]', 2, false)[0]}
                   </div>
                 </div>
                 <div>
@@ -121,7 +126,7 @@ export default function Home() {
                   >
                     CVC
                   </label>
-                  <div>{MyComponent('YY', 'w-[10.5em]', 3, false)}</div>
+                  <div>{MyComponent('YY', 'w-[10.5em]', 3, false)[0]}</div>
                 </div>
               </div>
               <button className="mt-4 rounded-lg bg-veryDarkViolet py-[0.75em] text-[1.1rem] text-white">
