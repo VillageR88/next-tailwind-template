@@ -29,7 +29,7 @@ const MyComponent = (
     const matches =
       type === isType.isNumber
         ? value.match(new RegExp(/.{0,4}/g))
-        : value.match(new RegExp(/(?! )[A-Za-z\-.'"]{0,8}(?![A-Za-z\-.'"]) {0,1}[A-Za-z\-.'"]{0,11}/));
+        : value.match(new RegExp(/(?! )[A-Za-z\-.'"]{1,8}(?![A-Za-z\-.'"]) {0,1}[A-Za-z\-.'"]{0,11}/));
     if (matches && type == isType.isNumber) {
       return matches.join(' ').trim();
     } else if (matches && type == isType.isName) return matches.join(' ');
