@@ -21,15 +21,19 @@ const MyComponent = (
 ) => {
   const [inputValue, setInputValue] = useState<string>('');
   const handleInputChange = (e: string) => {
-    const rawValue = type === isType.isNumber ? e.replace(/[^0-9]/g, '') : e.replace(/[^A-Za-z\s\-.'"]+/g, '');
+    const rawValue = type === isType.isNumber ? e.replace(/[^0-9]/g, '') : e;
     setInputValue(groupDigits ? formatWithSpaces(rawValue) : rawValue);
   };
 
   const formatWithSpaces = (value: string) => {
-    const matches = value.match(new RegExp(/.{0,4}/g));
-    if (matches) {
+    const matches =
+      type === isType.isNumber
+        ? value.match(new RegExp(/.{0,4}/g))
+        : value.match(new RegExp(/(?! )[A-Za-z\-.'"]{0,8}(?![A-Za-z\-.'"]) {0,1}[A-Za-z\-.'"]{0,11}/));
+    if (matches && type == isType.isNumber) {
       return matches.join(' ').trim();
-    } else {
+    } else if (matches && type == isType.isName) return matches.join(' ');
+    else {
       return '';
     }
   };
@@ -54,6 +58,7 @@ const MyComponent = (
 
 export default function Home() {
   const cardNumber = MyComponent('e.g. 1234 5678 9123 0000', 'w-full', 19, true, isType.isNumber);
+  const cardOwner = MyComponent('JANE APPLESEED', 'w-full', 24, true, isType.isName);
 
   return (
     <main className="main flex min-h-screen max-w-full font-spaceGrotesk md:pb-[1.7em] md:pt-[1.72em]">
@@ -81,7 +86,11 @@ export default function Home() {
                   </span>
                 </div>
                 <div className="flex w-full justify-between px-[1.5em] text-[0.9rem] tracking-[0.12em] text-white md:px-[2.5em]">
-                  <span>JANE APPLESEED</span>
+                  <span>
+                    {typeof cardOwner[1] === 'string' && cardOwner[1] != ''
+                      ? cardOwner[1].toUpperCase()
+                      : 'JANE APPLESEED'}
+                  </span>
                   <div>
                     <span>00</span>
                     <span>/</span>
@@ -107,7 +116,7 @@ export default function Home() {
                 >
                   CARDHOLDER NAME
                 </label>
-                {MyComponent('e.g. Jane Appleseed', 'w-full', 40, false, isType.isName)[0]}
+                {cardOwner[0]}
               </div>
               <div className="">
                 <label className="mb-2 block text-[0.8rem] font-bold tracking-[0.1em] text-gray-700" htmlFor="username">
