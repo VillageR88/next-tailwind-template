@@ -43,12 +43,18 @@ enum warning {
   nameIncomplete = `Require first name (max 8 letters) and last name (max 11 letters)`,
 }
 
+enum borderStyleLayout {
+  error = 'border-redInputErrors',
+  normal = 'focus:border-violet-900',
+  initial = 'border-current',
+}
+
 const MyComponent = (
   idText: string,
   showStandardLabel: boolean,
   placeholderText: string,
   width: string,
-  outlineLayout: string,
+  borderStyle: string,
   maxInputLength: number,
   groupDigits: boolean,
   type: isType,
@@ -94,28 +100,26 @@ const MyComponent = (
         onChange={(e) => {
           handleInputChange(e.target.value);
         }}
-        className={`flex w-full ${width} ${outlineLayout} rounded-lg border border-solid px-4 py-2 text-[1.1rem] font-medium text-veryDarkViolet placeholder-[#C8C4C9] outline-0 `}
+        className={`flex w-full ${width} ${borderStyle} rounded-lg border border-solid px-4 py-2 text-[1.1rem] font-medium text-veryDarkViolet placeholder-[#C8C4C9] outline-0 `}
         maxLength={maxInputLength}
         placeholder={placeholderText}
       />
     </div>
   );
 
-  const labelElement = <span className="flex pt-2 text-xs font-medium text-redInputErrors">{warningMessage()}</span>;
+  const labelElement = <span className="flex pt-2 text-xs font-medium text-redInputErrors"></span>;
 
-  const elementsArray = [inputElement, inputValue, labelElement];
-
-  return elementsArray;
+  return { inputElement, inputValue, labelElement };
 };
 
 export default function Home() {
-  const [outlineLayout, setOutlineLayout] = useState('focus:border-violet-900');
+  const [borderStyle, setBorderStyle] = useState(borderStyleLayout.normal);
   const cardNumber = MyComponent(
     entity.cardNumber,
     true,
     placeholder.eg123Long,
     contractualMdLength.full,
-    outlineLayout,
+    borderStyle,
     19,
     true,
     isType.isNumber,
@@ -125,7 +129,7 @@ export default function Home() {
     true,
     placeholder.JaneAppleseed,
     contractualMdLength.full,
-    outlineLayout,
+    borderStyle,
     24,
     true,
     isType.isName,
@@ -135,7 +139,7 @@ export default function Home() {
     false,
     placeholder.MM,
     contractualMdLength._4n5,
-    outlineLayout,
+    borderStyle,
     2,
     false,
     isType.isNumber,
@@ -145,7 +149,7 @@ export default function Home() {
     false,
     placeholder.YY,
     contractualMdLength._4n5,
-    outlineLayout,
+    borderStyle,
     2,
     false,
     isType.isNumber,
@@ -155,14 +159,13 @@ export default function Home() {
     true,
     placeholder.eg123Short,
     contractualMdLength._10,
-    outlineLayout,
+    borderStyle,
     3,
     false,
     isType.isNumber,
   );
 
   const [labelForEXP, switchLabelForEXP] = useState(entity.cardYY);
-  const [showWarning, setShowWarning] = useState<boolean>(false);
 
   return (
     <main className="main flex min-h-screen max-w-full font-spaceGrotesk md:pb-[1.7em] md:pt-[1.72em]">
@@ -186,19 +189,19 @@ export default function Home() {
                   className={`flex w-full justify-center gap-[2.5%] px-[1em] text-[1.75rem] text-white md:tracking-[0.12em]`}
                 >
                   <span className="md:whitespace-nowrap">
-                    {cardNumber[1] !== '' ? cardNumber[1] : placeholder.zerosLong}
+                    {cardNumber.inputValue !== '' ? cardNumber.inputValue : placeholder.zerosLong}
                   </span>
                 </div>
                 <div className="flex w-full justify-between px-[1.5em] text-[0.9rem] tracking-[0.12em] text-white md:px-[2.5em]">
                   <span>
-                    {typeof cardOwner[1] === 'string' && cardOwner[1] != ''
-                      ? cardOwner[1].toUpperCase()
+                    {typeof cardOwner.inputValue === 'string' && cardOwner.inputValue != ''
+                      ? cardOwner.inputValue.toUpperCase()
                       : placeholder.JaneAppleseed}
                   </span>
                   <div>
-                    <span>{cardMM[1] !== '' ? cardMM[1] : placeholder.zerosShort}</span>
+                    <span>{cardMM.inputValue !== '' ? cardMM.inputValue : placeholder.zerosShort}</span>
                     <span>/</span>
-                    <span>{cardYY[1] !== '' ? cardYY[1] : placeholder.zerosShort}</span>
+                    <span>{cardYY.inputValue !== '' ? cardYY.inputValue : placeholder.zerosShort}</span>
                   </div>
                 </div>
               </div>
@@ -206,7 +209,7 @@ export default function Home() {
             {/* card2 */}
             <div className="flex h-[12em] w-full items-center justify-end rounded-[0.8em] bg-bgCardBack bg-[length:100%_100%] bg-no-repeat drop-shadow-2xl md:h-[15.5em] md:w-[27.9em] md:max-w-full xl:ml-[17em]">
               <span className="mb-1 mr-16 text-sm tracking-widest text-white">
-                {cardCVC[1] !== '' ? cardCVC[1] : placeholder.zerosMedium}
+                {cardCVC.inputValue !== '' ? cardCVC.inputValue : placeholder.zerosMedium}
               </span>
             </div>
           </div>
@@ -216,12 +219,12 @@ export default function Home() {
           <div className="flex">
             <form className="max-h-auto flex flex-col gap-3">
               <div>
-                {cardOwner[0]}
-                {showWarning && cardOwner[2]}
+                {cardOwner.inputElement}
+                {cardOwner.labelElement}
               </div>
               <div className="">
-                {cardNumber[0]}
-                {showWarning && cardNumber[2]}
+                {cardNumber.inputElement}
+                {cardNumber.labelElement}
               </div>
               <div className="flex justify-between gap-5">
                 <div className="flex flex-col">
@@ -236,27 +239,26 @@ export default function Home() {
                   </label>
                   <div className="inline-flex space-x-3">
                     <div>
-                      {cardMM[0]}
-                      {showWarning && cardMM[2]}
+                      {cardMM.inputElement}
+                      {cardMM.labelElement}
                     </div>
                     <div>
-                      {cardYY[0]}
-                      {showWarning && cardYY[2]}
+                      {cardYY.inputElement}
+                      {cardYY.labelElement}
                     </div>
                   </div>
                 </div>
                 <div>
                   <div>
-                    {cardCVC[0]}
-                    {showWarning && cardCVC[2]}
+                    {cardCVC.inputElement}
+                    {cardCVC.labelElement}
                   </div>
                 </div>
               </div>
               <button
                 type="button"
                 onClick={() => {
-                  setShowWarning(true);
-                  setOutlineLayout('border-redInputErrors');
+                  null;
                 }}
                 className="mt-4 rounded-lg bg-veryDarkViolet py-[0.75em] text-[1.1rem] text-white"
               >
