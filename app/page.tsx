@@ -26,6 +26,7 @@ enum placeholder {
   eg123Short = 'e.g. 123',
   eg123Long = '1234 5678 9123 0000',
   zerosShort = '00',
+  zerosMedium = '000',
   zerosLong = '0000 0000 0000 0000',
   exp = 'EXP. DATE (MM/YY)',
 }
@@ -39,7 +40,7 @@ enum contractualMdLength {
 enum warning {
   blank = `Can't be blank`,
   incomplete = `Incomplete`,
-  nameIncomplete = `Require First name (max 8 letters) and last name (max 11 letters)`,
+  nameIncomplete = `Require first name (max 8 letters) and last name (max 11 letters)`,
 }
 
 const MyComponent = (
@@ -183,7 +184,7 @@ export default function Home() {
             {/* card2 */}
             <div className="flex h-[12em] w-full items-center justify-end rounded-[0.8em] bg-bgCardBack bg-[length:100%_100%] bg-no-repeat drop-shadow-2xl md:h-[15.5em] md:w-[27.9em] md:max-w-full xl:ml-[17em]">
               <span className="mb-1 mr-16 text-sm tracking-widest text-white">
-                {cardCVC[1] !== '' ? cardCVC[1] : placeholder.zerosLong}
+                {cardCVC[1] !== '' ? cardCVC[1] : placeholder.zerosMedium}
               </span>
             </div>
           </div>
