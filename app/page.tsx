@@ -93,7 +93,9 @@ const MyComponent = (
         onChange={(e) => {
           handleInputChange(e.target.value);
         }}
-        className={`flex w-full text-veryDarkViolet ${width} rounded-lg border border-solid px-4 py-2 text-[1.1rem] font-medium text-veryDarkViolet placeholder-[#C8C4C9] outline-0 focus:border-violet-900`}
+        className={`flex w-full text-veryDarkViolet ${width} rounded-lg border border-solid px-4 py-2 text-[1.1rem] font-medium text-veryDarkViolet placeholder-[#C8C4C9] outline-0 ${
+          warningMessage() != '' ? 'border-redInputErrors' : 'focus:border-violet-900'
+        }`}
         maxLength={maxInputLength}
         placeholder={placeholderText}
       />
