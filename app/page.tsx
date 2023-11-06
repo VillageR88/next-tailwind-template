@@ -109,7 +109,7 @@ const MyComponent = (
 };
 
 export default function Home() {
-  const outlineLayout = 'focus:border-violet-900';
+  const [outlineLayout, setOutlineLayout] = useState('focus:border-violet-900');
   const cardNumber = MyComponent(
     entity.cardNumber,
     true,
@@ -256,6 +256,7 @@ export default function Home() {
                 type="button"
                 onClick={() => {
                   setShowWarning(true);
+                  setOutlineLayout('border-redInputErrors');
                 }}
                 className="mt-4 rounded-lg bg-veryDarkViolet py-[0.75em] text-[1.1rem] text-white"
               >
