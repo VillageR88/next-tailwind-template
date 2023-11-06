@@ -4,7 +4,6 @@ import '@fontsource/space-grotesk';
 import '@fontsource/space-grotesk/400.css';
 import '@fontsource/space-grotesk/500.css';
 import '@fontsource/space-grotesk/600.css';
-
 import Image from 'next/image';
 
 enum isType {
@@ -20,6 +19,17 @@ enum entity {
   cardCVC = 'CVC',
 }
 
+enum placeholder {
+  JaneAppleseed = 'JANE APPLESEED',
+  MM = 'MM',
+  YY = 'YY',
+  eg123Short = 'e.g. 123',
+  eg123Long = '1234 5678 9123 0000',
+  zerosShort = '00',
+  zerosLong = '0000 0000 0000 0000',
+  exp = 'EXP. DATE (MM/YY)',
+}
+
 enum errorText {
   blank = `Can't be blank`,
   incomplete = `Incomplete`,
@@ -28,7 +38,7 @@ enum errorText {
 
 const MyComponent = (
   idText: string,
-  showLabel: boolean,
+  showStandardLabel: boolean,
   placeholderText: string,
   width: string,
   maxInputLength: number,
@@ -60,7 +70,7 @@ const MyComponent = (
         className="mb-2 block w-full text-[0.8rem] font-bold tracking-[0.1em] text-gray-700 placeholder-[#C8C4C9]"
         htmlFor={idText}
       >
-        {showLabel ? idText : ''}
+        {showStandardLabel ? idText : ''}
       </label>
       <input
         id={idText}
@@ -86,16 +96,24 @@ export default function Home() {
   const cardNumber = MyComponent(
     entity.cardNumber,
     true,
-    'e.g. 1234 5678 9123 0000',
+    placeholder.eg123Long,
     'md:w-full',
     19,
     true,
     isType.isNumber,
   );
-  const cardOwner = MyComponent(entity.cardOwner, true, 'JANE APPLESEED', 'md:w-full', 24, true, isType.isName);
-  const cardMM = MyComponent(entity.cardMM, false, 'MM', 'md:w-[4.5em]', 2, false, isType.isNumber);
-  const cardYY = MyComponent(entity.cardYY, false, 'YY', 'md:w-[4.5em]', 2, false, isType.isNumber);
-  const cardCVC = MyComponent(entity.cardCVC, true, 'e.g. 123', 'md:w-[10.5em]', 3, false, isType.isNumber);
+  const cardOwner = MyComponent(
+    entity.cardOwner,
+    true,
+    placeholder.JaneAppleseed,
+    'md:w-full',
+    24,
+    true,
+    isType.isName,
+  );
+  const cardMM = MyComponent(entity.cardMM, false, placeholder.MM, 'md:w-[4.5em]', 2, false, isType.isNumber);
+  const cardYY = MyComponent(entity.cardYY, false, placeholder.YY, 'md:w-[4.5em]', 2, false, isType.isNumber);
+  const cardCVC = MyComponent(entity.cardCVC, true, placeholder.eg123Short, 'md:w-[10.5em]', 3, false, isType.isNumber);
 
   const [labelForEXP, switchLabelForEXP] = useState(entity.cardYY);
   function SwitchLabelForEXP() {
@@ -124,19 +142,19 @@ export default function Home() {
                   className={`flex w-full justify-center gap-[2.5%] px-[1em] text-[1.75rem] text-white md:tracking-[0.12em]`}
                 >
                   <span className="md:whitespace-nowrap">
-                    {cardNumber[1] !== '' ? cardNumber[1] : '0000 0000 0000 0000'}
+                    {cardNumber[1] !== '' ? cardNumber[1] : placeholder.zerosLong}
                   </span>
                 </div>
                 <div className="flex w-full justify-between px-[1.5em] text-[0.9rem] tracking-[0.12em] text-white md:px-[2.5em]">
                   <span>
                     {typeof cardOwner[1] === 'string' && cardOwner[1] != ''
                       ? cardOwner[1].toUpperCase()
-                      : 'JANE APPLESEED'}
+                      : placeholder.JaneAppleseed}
                   </span>
                   <div>
-                    <span>{cardMM[1] !== '' ? cardMM[1] : '00'}</span>
+                    <span>{cardMM[1] !== '' ? cardMM[1] : placeholder.zerosShort}</span>
                     <span>/</span>
-                    <span>{cardYY[1] !== '' ? cardYY[1] : '00'}</span>
+                    <span>{cardYY[1] !== '' ? cardYY[1] : placeholder.zerosShort}</span>
                   </div>
                 </div>
               </div>
@@ -144,7 +162,7 @@ export default function Home() {
             {/* card2 */}
             <div className="flex h-[12em] w-full items-center justify-end rounded-[0.8em] bg-bgCardBack bg-[length:100%_100%] bg-no-repeat drop-shadow-2xl md:h-[15.5em] md:w-[27.9em] md:max-w-full xl:ml-[17em]">
               <span className="mb-1 mr-16 text-sm tracking-widest text-white">
-                {cardCVC[1] !== '' ? cardCVC[1] : '000'}
+                {cardCVC[1] !== '' ? cardCVC[1] : placeholder.zerosLong}
               </span>
             </div>
           </div>
@@ -162,7 +180,7 @@ export default function Home() {
                     htmlFor={labelForEXP}
                     className="mb-2 mt-[0.60em] w-full text-[0.8rem] font-bold leading-[4px] tracking-[0.1em] text-gray-700 placeholder-[#C8C4C9]"
                   >
-                    {'EXP. DATE (MM/YY)'}
+                    {placeholder.exp}
                   </label>
                   <div className="inline-flex space-x-3">
                     {cardMM[0]}
