@@ -107,9 +107,7 @@ const MyComponent = (
     </div>
   );
 
-  const labelElement = <span className="flex pt-2 text-xs font-medium text-redInputErrors"></span>;
-
-  return { inputElement, inputValue, labelElement };
+  return { inputElement, inputValue, warningMessage };
 };
 
 export default function Home() {
@@ -220,11 +218,11 @@ export default function Home() {
             <form className="max-h-auto flex flex-col gap-3">
               <div>
                 {cardOwner.inputElement}
-                {cardOwner.labelElement}
+                <span className="flex pt-2 text-xs font-medium text-redInputErrors">{cardOwner.warningMessage()}</span>
               </div>
               <div className="">
                 {cardNumber.inputElement}
-                {cardNumber.labelElement}
+                <span className="flex pt-2 text-xs font-medium text-redInputErrors">{cardNumber.warningMessage()}</span>
               </div>
               <div className="flex justify-between gap-5">
                 <div className="flex flex-col">
@@ -240,18 +238,24 @@ export default function Home() {
                   <div className="inline-flex space-x-3">
                     <div>
                       {cardMM.inputElement}
-                      {cardMM.labelElement}
+                      <span className="flex pt-2 text-xs font-medium text-redInputErrors">
+                        {cardMM.warningMessage()}
+                      </span>
                     </div>
                     <div>
                       {cardYY.inputElement}
-                      {cardYY.labelElement}
+                      <span className="flex pt-2 text-xs font-medium text-redInputErrors">
+                        {cardYY.warningMessage()}
+                      </span>
                     </div>
                   </div>
                 </div>
                 <div>
                   <div>
                     {cardCVC.inputElement}
-                    {cardCVC.labelElement}
+                    <span className="flex pt-2 text-xs font-medium text-redInputErrors">
+                      {cardCVC.warningMessage()}
+                    </span>
                   </div>
                 </div>
               </div>
