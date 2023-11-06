@@ -164,6 +164,11 @@ export default function Home() {
   );
 
   const [labelForEXP, switchLabelForEXP] = useState(entity.cardYY);
+  const [cardNumberWarning, setCardNumberWarning] = useState('');
+  const [cardOwnerWarning, setCardOwnerWarning] = useState('');
+  const [cardMMWarning, setCardMMWarning] = useState('');
+  const [cardYYWarning, setCardYYWarning] = useState('');
+  const [cardCVCWarning, setCardCVCWarning] = useState('');
 
   return (
     <main className="main flex min-h-screen max-w-full font-spaceGrotesk md:pb-[1.7em] md:pt-[1.72em]">
@@ -218,11 +223,11 @@ export default function Home() {
             <form className="max-h-auto flex flex-col gap-3">
               <div>
                 {cardOwner.inputElement}
-                <span className="flex pt-2 text-xs font-medium text-redInputErrors">{cardOwner.warningMessage()}</span>
+                <span className="flex pt-2 text-xs font-medium text-redInputErrors">{cardOwnerWarning}</span>
               </div>
               <div className="">
                 {cardNumber.inputElement}
-                <span className="flex pt-2 text-xs font-medium text-redInputErrors">{cardNumber.warningMessage()}</span>
+                <span className="flex pt-2 text-xs font-medium text-redInputErrors">{cardNumberWarning}</span>
               </div>
               <div className="flex justify-between gap-5">
                 <div className="flex flex-col">
@@ -238,31 +243,29 @@ export default function Home() {
                   <div className="inline-flex space-x-3">
                     <div>
                       {cardMM.inputElement}
-                      <span className="flex pt-2 text-xs font-medium text-redInputErrors">
-                        {cardMM.warningMessage()}
-                      </span>
+                      <span className="flex pt-2 text-xs font-medium text-redInputErrors">{cardMMWarning}</span>
                     </div>
                     <div>
                       {cardYY.inputElement}
-                      <span className="flex pt-2 text-xs font-medium text-redInputErrors">
-                        {cardYY.warningMessage()}
-                      </span>
+                      <span className="flex pt-2 text-xs font-medium text-redInputErrors">{cardYYWarning}</span>
                     </div>
                   </div>
                 </div>
                 <div>
                   <div>
                     {cardCVC.inputElement}
-                    <span className="flex pt-2 text-xs font-medium text-redInputErrors">
-                      {cardCVC.warningMessage()}
-                    </span>
+                    <span className="flex pt-2 text-xs font-medium text-redInputErrors">{cardCVCWarning}</span>
                   </div>
                 </div>
               </div>
               <button
                 type="button"
                 onClick={() => {
-                  null;
+                  setCardNumberWarning(cardNumber.warningMessage);
+                  setCardOwnerWarning(cardOwner.warningMessage);
+                  setCardMMWarning(cardMM.warningMessage);
+                  setCardYYWarning(cardMM.warningMessage);
+                  setCardCVCWarning(cardCVC.warningMessage);
                 }}
                 className="mt-4 rounded-lg bg-veryDarkViolet py-[0.75em] text-[1.1rem] text-white"
               >
