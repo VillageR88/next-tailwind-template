@@ -81,7 +81,7 @@ const MyComponent = (
   const inputElement = (
     <div className="flex flex-col">
       <label
-        className="mb-2 block w-full text-[0.8rem] font-bold tracking-[0.1em] text-gray-700 placeholder-[#C8C4C9]"
+        className="mb-2 block w-full pt-2 text-[0.8rem] font-bold tracking-[0.1em] text-gray-700 placeholder-[#C8C4C9]"
         htmlFor={idText}
       >
         {showStandardLabel ? idText : ''}
@@ -99,11 +99,12 @@ const MyComponent = (
         maxLength={maxInputLength}
         placeholder={placeholderText}
       />
-      <span className={`${'flex'} text-xs font-medium text-redInputErrors`}>{warningMessage()}</span>
     </div>
   );
 
-  const elementsArray = [inputElement, inputValue];
+  const labelElement = <span className="flex pt-2 text-xs font-medium text-redInputErrors">{warningMessage()}</span>;
+
+  const elementsArray = [inputElement, inputValue, labelElement];
 
   return elementsArray;
 };
@@ -194,25 +195,40 @@ export default function Home() {
         {/* second column */}
         <div className="max-h-auto flex w-full items-center justify-center bg-[#FFFFFF] md:mr-[5.5em] md:w-1/2">
           <div className="flex">
-            <form className="max-h-auto flex flex-col gap-[1.4em] ">
-              <div>{cardOwner[0]}</div>
-              <div className="">{cardNumber[0]}</div>
+            <form className="max-h-auto flex flex-col gap-3">
+              <div>
+                {cardOwner[0]}
+                {cardOwner[2]}
+              </div>
+              <div className="">
+                {cardNumber[0]}
+                {cardNumber[2]}
+              </div>
               <div className="flex justify-between gap-5">
                 <div className="flex flex-col">
                   <label
                     onClick={SwitchLabelForEXP}
                     htmlFor={labelForEXP}
-                    className="mb-2 mt-[0.60em] w-full text-[0.8rem] font-bold leading-[4px] tracking-[0.1em] text-gray-700 placeholder-[#C8C4C9]"
+                    className="mt-[0.56em] w-full pt-2 text-[0.8rem] font-bold leading-[4px] tracking-[0.1em] text-gray-700 placeholder-[#C8C4C9]"
                   >
                     {placeholder.exp}
                   </label>
                   <div className="inline-flex space-x-3">
-                    {cardMM[0]}
-                    {cardYY[0]}
+                    <div>
+                      {cardMM[0]}
+                      {cardMM[2]}
+                    </div>
+                    <div>
+                      {cardYY[0]}
+                      {cardYY[2]}
+                    </div>
                   </div>
                 </div>
                 <div>
-                  <div>{cardCVC[0]}</div>
+                  <div>
+                    {cardCVC[0]}
+                    {cardCVC[2]}
+                  </div>
                 </div>
               </div>
               <button className="mt-4 rounded-lg bg-veryDarkViolet py-[0.75em] text-[1.1rem] text-white">
