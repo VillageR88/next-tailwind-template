@@ -30,7 +30,13 @@ enum placeholder {
   exp = 'EXP. DATE (MM/YY)',
 }
 
-enum errorText {
+enum contractualMdLength {
+  _4n5 = 'md:w-[4.5em]',
+  _10 = 'md:w-[10em]',
+  full = 'md:w-full',
+}
+
+enum warning {
   blank = `Can't be blank`,
   incomplete = `Incomplete`,
   nameIncomplete = `Require First name (max 8 letters) and last name (max 11 letters)`,
@@ -97,7 +103,7 @@ export default function Home() {
     entity.cardNumber,
     true,
     placeholder.eg123Long,
-    'md:w-full',
+    contractualMdLength.full,
     19,
     true,
     isType.isNumber,
@@ -106,14 +112,22 @@ export default function Home() {
     entity.cardOwner,
     true,
     placeholder.JaneAppleseed,
-    'md:w-full',
+    contractualMdLength.full,
     24,
     true,
     isType.isName,
   );
-  const cardMM = MyComponent(entity.cardMM, false, placeholder.MM, 'md:w-[4.5em]', 2, false, isType.isNumber);
-  const cardYY = MyComponent(entity.cardYY, false, placeholder.YY, 'md:w-[4.5em]', 2, false, isType.isNumber);
-  const cardCVC = MyComponent(entity.cardCVC, true, placeholder.eg123Short, 'md:w-[10.5em]', 3, false, isType.isNumber);
+  const cardMM = MyComponent(entity.cardMM, false, placeholder.MM, contractualMdLength._4n5, 2, false, isType.isNumber);
+  const cardYY = MyComponent(entity.cardYY, false, placeholder.YY, contractualMdLength._4n5, 2, false, isType.isNumber);
+  const cardCVC = MyComponent(
+    entity.cardCVC,
+    true,
+    placeholder.eg123Short,
+    contractualMdLength._10,
+    3,
+    false,
+    isType.isNumber,
+  );
 
   const [labelForEXP, switchLabelForEXP] = useState(entity.cardYY);
   function SwitchLabelForEXP() {
@@ -201,3 +215,4 @@ export default function Home() {
     </main>
   );
 }
+('Swim away fugu fish! Swim awaaaayyyyy!');
