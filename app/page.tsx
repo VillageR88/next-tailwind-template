@@ -70,6 +70,13 @@ const MyComponent = (
     }
   };
 
+  function warningMessage() {
+    if (inputValue == '') return warning.blank;
+    else if (inputValue.length < maxInputLength && type === isType.isNumber) return warning.incomplete;
+    else if (inputValue.length < maxInputLength && !inputValue.match(/ ./)) return warning.nameIncomplete;
+    else return '';
+  }
+
   const inputElement = (
     <div className="flex flex-col">
       <label
@@ -89,7 +96,7 @@ const MyComponent = (
         maxLength={maxInputLength}
         placeholder={placeholderText}
       />
-      <span className={`${'flex'} text-xs font-medium text-redInputErrors`}>{}</span>
+      <span className={`${'flex'} text-xs font-medium text-redInputErrors`}>{warningMessage()}</span>
     </div>
   );
 
