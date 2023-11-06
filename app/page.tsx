@@ -48,6 +48,7 @@ const MyComponent = (
   showStandardLabel: boolean,
   placeholderText: string,
   width: string,
+  outlineLayout: string,
   maxInputLength: number,
   groupDigits: boolean,
   type: isType,
@@ -93,9 +94,7 @@ const MyComponent = (
         onChange={(e) => {
           handleInputChange(e.target.value);
         }}
-        className={`flex w-full text-veryDarkViolet ${width} rounded-lg border border-solid px-4 py-2 text-[1.1rem] font-medium text-veryDarkViolet placeholder-[#C8C4C9] outline-0 ${
-          warningMessage() != '' ? 'border-redInputErrors' : 'focus:border-violet-900'
-        }`}
+        className={`flex w-full ${width} ${outlineLayout} rounded-lg border border-solid px-4 py-2 text-[1.1rem] font-medium text-veryDarkViolet placeholder-[#C8C4C9] outline-0 `}
         maxLength={maxInputLength}
         placeholder={placeholderText}
       />
@@ -110,11 +109,13 @@ const MyComponent = (
 };
 
 export default function Home() {
+  const outlineLayout = 'focus:border-violet-900';
   const cardNumber = MyComponent(
     entity.cardNumber,
     true,
     placeholder.eg123Long,
     contractualMdLength.full,
+    outlineLayout,
     19,
     true,
     isType.isNumber,
@@ -124,26 +125,44 @@ export default function Home() {
     true,
     placeholder.JaneAppleseed,
     contractualMdLength.full,
+    outlineLayout,
     24,
     true,
     isType.isName,
   );
-  const cardMM = MyComponent(entity.cardMM, false, placeholder.MM, contractualMdLength._4n5, 2, false, isType.isNumber);
-  const cardYY = MyComponent(entity.cardYY, false, placeholder.YY, contractualMdLength._4n5, 2, false, isType.isNumber);
+  const cardMM = MyComponent(
+    entity.cardMM,
+    false,
+    placeholder.MM,
+    contractualMdLength._4n5,
+    outlineLayout,
+    2,
+    false,
+    isType.isNumber,
+  );
+  const cardYY = MyComponent(
+    entity.cardYY,
+    false,
+    placeholder.YY,
+    contractualMdLength._4n5,
+    outlineLayout,
+    2,
+    false,
+    isType.isNumber,
+  );
   const cardCVC = MyComponent(
     entity.cardCVC,
     true,
     placeholder.eg123Short,
     contractualMdLength._10,
+    outlineLayout,
     3,
     false,
     isType.isNumber,
   );
 
   const [labelForEXP, switchLabelForEXP] = useState(entity.cardYY);
-  function SwitchLabelForEXP() {
-    switchLabelForEXP(labelForEXP === entity.cardYY ? entity.cardMM : entity.cardYY);
-  }
+  const [showWarning, setShowWarning] = useState<boolean>(false);
 
   return (
     <main className="main flex min-h-screen max-w-full font-spaceGrotesk md:pb-[1.7em] md:pt-[1.72em]">
@@ -198,16 +217,18 @@ export default function Home() {
             <form className="max-h-auto flex flex-col gap-3">
               <div>
                 {cardOwner[0]}
-                {cardOwner[2]}
+                {showWarning && cardOwner[2]}
               </div>
               <div className="">
                 {cardNumber[0]}
-                {cardNumber[2]}
+                {showWarning && cardNumber[2]}
               </div>
               <div className="flex justify-between gap-5">
                 <div className="flex flex-col">
                   <label
-                    onClick={SwitchLabelForEXP}
+                    onClick={() => {
+                      switchLabelForEXP(labelForEXP === entity.cardYY ? entity.cardMM : entity.cardYY);
+                    }}
                     htmlFor={labelForEXP}
                     className="mt-[0.56em] w-full pt-2 text-[0.8rem] font-bold leading-[4px] tracking-[0.1em] text-gray-700 placeholder-[#C8C4C9]"
                   >
@@ -216,22 +237,28 @@ export default function Home() {
                   <div className="inline-flex space-x-3">
                     <div>
                       {cardMM[0]}
-                      {cardMM[2]}
+                      {showWarning && cardMM[2]}
                     </div>
                     <div>
                       {cardYY[0]}
-                      {cardYY[2]}
+                      {showWarning && cardYY[2]}
                     </div>
                   </div>
                 </div>
                 <div>
                   <div>
                     {cardCVC[0]}
-                    {cardCVC[2]}
+                    {showWarning && cardCVC[2]}
                   </div>
                 </div>
               </div>
-              <button className="mt-4 rounded-lg bg-veryDarkViolet py-[0.75em] text-[1.1rem] text-white">
+              <button
+                type="button"
+                onClick={() => {
+                  setShowWarning(true);
+                }}
+                className="mt-4 rounded-lg bg-veryDarkViolet py-[0.75em] text-[1.1rem] text-white"
+              >
                 Confirm
               </button>
             </form>
