@@ -12,6 +12,14 @@ enum isType {
   isNumber,
 }
 
+enum entity {
+  cardNumber = 'CARD NUMBER',
+  cardOwner = 'CARDHOLDER NAME',
+  cardMM = 'MM',
+  cardYY = 'YY',
+  cardCVC = 'CVC',
+}
+
 enum errorText {
   blank = `Can't be blank`,
   incomplete = `Incomplete`,
@@ -20,6 +28,7 @@ enum errorText {
 
 const MyComponent = (
   idText: string,
+  showLabel: boolean,
   placeholderText: string,
   width: string,
   maxInputLength: number,
@@ -51,7 +60,7 @@ const MyComponent = (
         className="mb-2 block w-full text-[0.8rem] font-bold tracking-[0.1em] text-gray-700 placeholder-[#C8C4C9]"
         htmlFor={idText}
       >
-        {idText}
+        {showLabel ? idText : ''}
       </label>
       <input
         id={idText}
@@ -74,11 +83,24 @@ const MyComponent = (
 };
 
 export default function Home() {
-  const cardNumber = MyComponent('CARD NUMBER', 'e.g. 1234 5678 9123 0000', 'md:w-full', 19, true, isType.isNumber);
-  const cardOwner = MyComponent('CARDHOLDER NAME', 'JANE APPLESEED', 'md:w-full', 24, true, isType.isName);
-  const cardMM = MyComponent('', 'MM', 'md:w-[4.5em]', 2, false, isType.isNumber);
-  const cardYY = MyComponent('', 'YY', 'md:w-[4.5em]', 2, false, isType.isNumber);
-  const cardCVC = MyComponent('CVC', 'e.g. 123', 'md:w-[10.5em]', 3, false, isType.isNumber);
+  const cardNumber = MyComponent(
+    entity.cardNumber,
+    true,
+    'e.g. 1234 5678 9123 0000',
+    'md:w-full',
+    19,
+    true,
+    isType.isNumber,
+  );
+  const cardOwner = MyComponent(entity.cardOwner, true, 'JANE APPLESEED', 'md:w-full', 24, true, isType.isName);
+  const cardMM = MyComponent(entity.cardMM, false, 'MM', 'md:w-[4.5em]', 2, false, isType.isNumber);
+  const cardYY = MyComponent(entity.cardYY, false, 'YY', 'md:w-[4.5em]', 2, false, isType.isNumber);
+  const cardCVC = MyComponent(entity.cardCVC, true, 'e.g. 123', 'md:w-[10.5em]', 3, false, isType.isNumber);
+
+  const [labelForEXP, switchLabelForEXP] = useState(entity.cardYY);
+  function SwitchLabelForEXP() {
+    switchLabelForEXP(labelForEXP === entity.cardYY ? entity.cardMM : entity.cardYY);
+  }
 
   return (
     <main className="main flex min-h-screen max-w-full font-spaceGrotesk md:pb-[1.7em] md:pt-[1.72em]">
@@ -135,7 +157,11 @@ export default function Home() {
               <div className="">{cardNumber[0]}</div>
               <div className="flex justify-between gap-5">
                 <div className="flex flex-col">
-                  <label className="mb-2 mt-[0.60em] w-full text-[0.8rem] font-bold leading-[4px] tracking-[0.1em] text-gray-700 placeholder-[#C8C4C9]">
+                  <label
+                    onClick={SwitchLabelForEXP}
+                    htmlFor={labelForEXP}
+                    className="mb-2 mt-[0.60em] w-full text-[0.8rem] font-bold leading-[4px] tracking-[0.1em] text-gray-700 placeholder-[#C8C4C9]"
+                  >
                     {'EXP. DATE (MM/YY)'}
                   </label>
                   <div className="inline-flex space-x-3">
