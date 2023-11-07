@@ -222,11 +222,19 @@ export default function Home() {
           <div className="flex">
             <form className="max-h-auto flex flex-col gap-3">
               <div>
-                {cardOwner.inputElement}
+                {React.cloneElement(cardOwner.inputElement, {
+                  onChange: () => {
+                    setCardOwnerWarning('');
+                  },
+                })}
                 <span className="flex pt-2 text-xs font-medium text-redInputErrors">{cardOwnerWarning}</span>
               </div>
               <div className="">
-                {cardNumber.inputElement}
+                {React.cloneElement(cardNumber.inputElement, {
+                  onChange: () => {
+                    setCardNumberWarning('');
+                  },
+                })}
                 <span className="flex pt-2 text-xs font-medium text-redInputErrors">{cardNumberWarning}</span>
               </div>
               <div className="flex justify-between gap-5">
@@ -242,18 +250,30 @@ export default function Home() {
                   </label>
                   <div className="inline-flex space-x-3">
                     <div>
-                      {cardMM.inputElement}
+                      {React.cloneElement(cardMM.inputElement, {
+                        onChange: () => {
+                          setCardMMWarning('');
+                        },
+                      })}
                       <span className="flex pt-2 text-xs font-medium text-redInputErrors">{cardMMWarning}</span>
                     </div>
                     <div>
-                      {cardYY.inputElement}
+                      {React.cloneElement(cardYY.inputElement, {
+                        onChange: () => {
+                          setCardYYWarning('');
+                        },
+                      })}
                       <span className="flex pt-2 text-xs font-medium text-redInputErrors">{cardYYWarning}</span>
                     </div>
                   </div>
                 </div>
                 <div>
                   <div>
-                    {cardCVC.inputElement}
+                    {React.cloneElement(cardCVC.inputElement, {
+                      onChange: () => {
+                        setCardCVCWarning('');
+                      },
+                    })}
                     <span className="flex pt-2 text-xs font-medium text-redInputErrors">{cardCVCWarning}</span>
                   </div>
                 </div>
@@ -264,7 +284,7 @@ export default function Home() {
                   setCardNumberWarning(cardNumber.warningMessage);
                   setCardOwnerWarning(cardOwner.warningMessage);
                   setCardMMWarning(cardMM.warningMessage);
-                  setCardYYWarning(cardMM.warningMessage);
+                  setCardYYWarning(cardYY.warningMessage);
                   setCardCVCWarning(cardCVC.warningMessage);
                 }}
                 className="mt-4 rounded-lg bg-veryDarkViolet py-[0.75em] text-[1.1rem] text-white"
