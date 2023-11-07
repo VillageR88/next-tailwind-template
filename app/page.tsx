@@ -49,7 +49,7 @@ enum borderStyleLayout {
   initial = 'border-current',
 }
 
-const MyComponent = (
+const InputComponent = (
   idText: string,
   showStandardLabel: boolean,
   placeholderText: string,
@@ -58,6 +58,7 @@ const MyComponent = (
   maxInputLength: number,
   groupDigits: boolean,
   type: isType,
+  showWarning: boolean,
 ) => {
   const [inputValue, setInputValue] = useState<string>('');
   const handleInputChange = (e: string) => {
@@ -107,68 +108,67 @@ const MyComponent = (
     </div>
   );
 
-  return { inputElement, inputValue, warningMessage };
+  return { inputElement, inputValue, warningMessage, showWarning };
 };
 
 export default function Home() {
-  const [borderStyle, setBorderStyle] = useState(borderStyleLayout.normal);
-  const cardNumber = MyComponent(
+  const cardNumber = InputComponent(
     entity.cardNumber,
     true,
     placeholder.eg123Long,
     contractualMdLength.full,
-    borderStyle,
+    borderStyleLayout.normal,
     19,
     true,
     isType.isNumber,
+    false,
   );
-  const cardOwner = MyComponent(
+  const cardOwner = InputComponent(
     entity.cardOwner,
     true,
     placeholder.JaneAppleseed,
     contractualMdLength.full,
-    borderStyle,
+    borderStyleLayout.normal,
     24,
     true,
     isType.isName,
+    false,
   );
-  const cardMM = MyComponent(
+  const cardMM = InputComponent(
     entity.cardMM,
     false,
     placeholder.MM,
     contractualMdLength._4n5,
-    borderStyle,
+    borderStyleLayout.normal,
     2,
     false,
     isType.isNumber,
+    false,
   );
-  const cardYY = MyComponent(
+  const cardYY = InputComponent(
     entity.cardYY,
     false,
     placeholder.YY,
     contractualMdLength._4n5,
-    borderStyle,
+    borderStyleLayout.normal,
     2,
     false,
     isType.isNumber,
+    false,
   );
-  const cardCVC = MyComponent(
+  const cardCVC = InputComponent(
     entity.cardCVC,
     true,
     placeholder.eg123Short,
     contractualMdLength._10,
-    borderStyle,
+    borderStyleLayout.normal,
     3,
     false,
     isType.isNumber,
+    false,
   );
 
   const [labelForEXP, switchLabelForEXP] = useState(entity.cardYY);
-  const [cardNumberWarning, setCardNumberWarning] = useState('');
-  const [cardOwnerWarning, setCardOwnerWarning] = useState('');
-  const [cardMMWarning, setCardMMWarning] = useState('');
-  const [cardYYWarning, setCardYYWarning] = useState('');
-  const [cardCVCWarning, setCardCVCWarning] = useState('');
 
   return (
     <main className="main flex min-h-screen max-w-full font-spaceGrotesk md:pb-[1.7em] md:pt-[1.72em]">
@@ -222,20 +222,12 @@ export default function Home() {
           <div className="flex">
             <form className="max-h-auto flex flex-col gap-3">
               <div>
-                {React.cloneElement(cardOwner.inputElement, {
-                  onChange: () => {
-                    setCardOwnerWarning('');
-                  },
-                })}
-                <span className="flex pt-2 text-xs font-medium text-redInputErrors">{cardOwnerWarning}</span>
+                {cardOwner.inputElement}
+                <span className="flex pt-2 text-xs font-medium text-redInputErrors">{}</span>
               </div>
               <div className="">
-                {React.cloneElement(cardNumber.inputElement, {
-                  onChange: () => {
-                    setCardNumberWarning('');
-                  },
-                })}
-                <span className="flex pt-2 text-xs font-medium text-redInputErrors">{cardNumberWarning}</span>
+                {cardNumber.inputElement}
+                <span className="flex pt-2 text-xs font-medium text-redInputErrors">{}</span>
               </div>
               <div className="flex justify-between gap-5">
                 <div className="flex flex-col">
@@ -250,42 +242,26 @@ export default function Home() {
                   </label>
                   <div className="inline-flex space-x-3">
                     <div>
-                      {React.cloneElement(cardMM.inputElement, {
-                        onChange: () => {
-                          setCardMMWarning('');
-                        },
-                      })}
-                      <span className="flex pt-2 text-xs font-medium text-redInputErrors">{cardMMWarning}</span>
+                      {cardMM.inputElement}
+                      <span className="flex pt-2 text-xs font-medium text-redInputErrors">{}</span>
                     </div>
                     <div>
-                      {React.cloneElement(cardYY.inputElement, {
-                        onChange: () => {
-                          setCardYYWarning('');
-                        },
-                      })}
-                      <span className="flex pt-2 text-xs font-medium text-redInputErrors">{cardYYWarning}</span>
+                      {cardYY.inputElement}
+                      <span className="flex pt-2 text-xs font-medium text-redInputErrors">{}</span>
                     </div>
                   </div>
                 </div>
                 <div>
                   <div>
-                    {React.cloneElement(cardCVC.inputElement, {
-                      onChange: () => {
-                        setCardCVCWarning('');
-                      },
-                    })}
-                    <span className="flex pt-2 text-xs font-medium text-redInputErrors">{cardCVCWarning}</span>
+                    {cardCVC.inputElement}
+                    <span className="flex pt-2 text-xs font-medium text-redInputErrors">{}</span>
                   </div>
                 </div>
               </div>
               <button
                 type="button"
                 onClick={() => {
-                  setCardNumberWarning(cardNumber.warningMessage);
-                  setCardOwnerWarning(cardOwner.warningMessage);
-                  setCardMMWarning(cardMM.warningMessage);
-                  setCardYYWarning(cardYY.warningMessage);
-                  setCardCVCWarning(cardCVC.warningMessage);
+                  null;
                 }}
                 className="mt-4 rounded-lg bg-veryDarkViolet py-[0.75em] text-[1.1rem] text-white"
               >
