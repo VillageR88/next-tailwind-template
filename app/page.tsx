@@ -49,21 +49,36 @@ enum borderStyleLayout {
   initial = 'border-current',
 }
 
-const InputComponent = (
-  idText: string,
-  showStandardLabel: boolean,
-  placeholderText: string,
-  width: string,
-  borderStyle: string,
-  maxInputLength: number,
-  groupDigits: boolean,
-  type: isType,
-  showWarning: boolean,
-) => {
+interface InputComponentProps {
+  idText: string;
+  showStandardLabel: boolean;
+  placeholderText: string;
+  width: string;
+  borderStyle: string;
+  maxInputLength: number;
+  groupDigits: boolean;
+  type: isType;
+  onValueChange: (value: string) => void;
+}
+
+const InputComponent = ({
+  idText,
+  showStandardLabel,
+  placeholderText,
+  width,
+  borderStyle,
+  maxInputLength,
+  groupDigits,
+  type,
+  onValueChange,
+}: InputComponentProps) => {
   const [inputValue, setInputValue] = useState<string>('');
+
   const handleInputChange = (e: string) => {
     const rawValue = type === isType.isNumber ? e.replace(/[^0-9]/g, '') : e;
-    setInputValue(groupDigits ? formatWithSpaces(rawValue) : rawValue);
+    const formattedValue = groupDigits ? formatWithSpaces(rawValue) : rawValue;
+    setInputValue(formattedValue);
+    onValueChange(formattedValue);
   };
 
   const formatWithSpaces = (value: string) => {
@@ -86,7 +101,7 @@ const InputComponent = (
     else return '';
   }
 
-  const inputElement = (
+  return (
     <div className="flex flex-col">
       <label
         className="mb-2 block w-full pt-2 text-[0.8rem] font-bold tracking-[0.1em] text-gray-700 placeholder-[#C8C4C9]"
@@ -107,65 +122,83 @@ const InputComponent = (
       />
     </div>
   );
-
-  return { inputElement, inputValue, warningMessage, showWarning };
 };
 
 export default function Home() {
-  const cardNumber = InputComponent(
-    entity.cardNumber,
-    true,
-    placeholder.eg123Long,
-    contractualMdLength.full,
-    borderStyleLayout.normal,
-    19,
-    true,
-    isType.isNumber,
-    false,
+  const [ownerValue, setOwnerValue] = useState('');
+  const [numberValue, setNumberValue] = useState('');
+  const [mmValue, setMMValue] = useState('');
+  const [yyValue, setYYValue] = useState('');
+  const [cvcValue, setCVCValue] = useState('');
+
+  const ComponentOwner = (
+    <InputComponent
+      idText={entity.cardOwner}
+      showStandardLabel={true}
+      placeholderText={placeholder.JaneAppleseed}
+      width={contractualMdLength.full}
+      borderStyle={borderStyleLayout.normal}
+      maxInputLength={24}
+      groupDigits={true}
+      type={isType.isName}
+      onValueChange={setOwnerValue}
+    />
   );
-  const cardOwner = InputComponent(
-    entity.cardOwner,
-    true,
-    placeholder.JaneAppleseed,
-    contractualMdLength.full,
-    borderStyleLayout.normal,
-    24,
-    true,
-    isType.isName,
-    false,
+
+  const ComponentNumber = (
+    <InputComponent
+      idText={entity.cardNumber}
+      showStandardLabel={true}
+      placeholderText={placeholder.eg123Long}
+      width={contractualMdLength.full}
+      borderStyle={borderStyleLayout.normal}
+      maxInputLength={19}
+      groupDigits={true}
+      type={isType.isNumber}
+      onValueChange={setNumberValue}
+    />
   );
-  const cardMM = InputComponent(
-    entity.cardMM,
-    false,
-    placeholder.MM,
-    contractualMdLength._4n5,
-    borderStyleLayout.normal,
-    2,
-    false,
-    isType.isNumber,
-    false,
+
+  const ComponentCardMM = (
+    <InputComponent
+      idText={entity.cardMM}
+      showStandardLabel={false}
+      placeholderText={placeholder.MM}
+      width={contractualMdLength._4n5}
+      borderStyle={borderStyleLayout.normal}
+      maxInputLength={2}
+      groupDigits={false}
+      type={isType.isNumber}
+      onValueChange={setMMValue}
+    />
   );
-  const cardYY = InputComponent(
-    entity.cardYY,
-    false,
-    placeholder.YY,
-    contractualMdLength._4n5,
-    borderStyleLayout.normal,
-    2,
-    false,
-    isType.isNumber,
-    false,
+
+  const ComponentCardYY = (
+    <InputComponent
+      idText={entity.cardYY}
+      showStandardLabel={false}
+      placeholderText={placeholder.YY}
+      width={contractualMdLength._4n5}
+      borderStyle={borderStyleLayout.normal}
+      maxInputLength={2}
+      groupDigits={false}
+      type={isType.isNumber}
+      onValueChange={setYYValue}
+    />
   );
-  const cardCVC = InputComponent(
-    entity.cardCVC,
-    true,
-    placeholder.eg123Short,
-    contractualMdLength._10,
-    borderStyleLayout.normal,
-    3,
-    false,
-    isType.isNumber,
-    false,
+
+  const ComponentCardCVC = (
+    <InputComponent
+      idText={entity.cardCVC}
+      showStandardLabel={true}
+      placeholderText={placeholder.eg123Short}
+      width={contractualMdLength._10}
+      borderStyle={borderStyleLayout.normal}
+      maxInputLength={3}
+      groupDigits={false}
+      type={isType.isNumber}
+      onValueChange={setCVCValue}
+    />
   );
 
   const [labelForEXP, switchLabelForEXP] = useState(entity.cardYY);
@@ -192,19 +225,15 @@ export default function Home() {
                   className={`flex w-full justify-center gap-[2.5%] px-[1em] text-[1.75rem] text-white md:tracking-[0.12em]`}
                 >
                   <span className="md:whitespace-nowrap">
-                    {cardNumber.inputValue !== '' ? cardNumber.inputValue : placeholder.zerosLong}
+                    {numberValue != '' ? numberValue : placeholder.zerosLong}
                   </span>
                 </div>
                 <div className="flex w-full justify-between px-[1.5em] text-[0.9rem] tracking-[0.12em] text-white md:px-[2.5em]">
-                  <span>
-                    {typeof cardOwner.inputValue === 'string' && cardOwner.inputValue != ''
-                      ? cardOwner.inputValue.toUpperCase()
-                      : placeholder.JaneAppleseed}
-                  </span>
+                  <span>{ownerValue != '' ? ownerValue.toUpperCase() : placeholder.JaneAppleseed}</span>
                   <div>
-                    <span>{cardMM.inputValue !== '' ? cardMM.inputValue : placeholder.zerosShort}</span>
+                    <span>{mmValue !== '' ? mmValue : placeholder.zerosShort}</span>
                     <span>/</span>
-                    <span>{cardYY.inputValue !== '' ? cardYY.inputValue : placeholder.zerosShort}</span>
+                    <span>{yyValue !== '' ? yyValue : placeholder.zerosShort}</span>
                   </div>
                 </div>
               </div>
@@ -212,7 +241,7 @@ export default function Home() {
             {/* card2 */}
             <div className="flex h-[12em] w-full items-center justify-end rounded-[0.8em] bg-bgCardBack bg-[length:100%_100%] bg-no-repeat drop-shadow-2xl md:h-[15.5em] md:w-[27.9em] md:max-w-full xl:ml-[17em]">
               <span className="mb-1 mr-16 text-sm tracking-widest text-white">
-                {cardCVC.inputValue !== '' ? cardCVC.inputValue : placeholder.zerosMedium}
+                {cvcValue !== '' ? cvcValue : placeholder.zerosMedium}
               </span>
             </div>
           </div>
@@ -222,11 +251,11 @@ export default function Home() {
           <div className="flex">
             <form className="max-h-auto flex flex-col gap-3">
               <div>
-                {cardOwner.inputElement}
+                {ComponentOwner}
                 <span className="flex pt-2 text-xs font-medium text-redInputErrors">{}</span>
               </div>
               <div className="">
-                {cardNumber.inputElement}
+                {ComponentNumber}
                 <span className="flex pt-2 text-xs font-medium text-redInputErrors">{}</span>
               </div>
               <div className="flex justify-between gap-5">
@@ -242,18 +271,18 @@ export default function Home() {
                   </label>
                   <div className="inline-flex space-x-3">
                     <div>
-                      {cardMM.inputElement}
+                      {ComponentCardMM}
                       <span className="flex pt-2 text-xs font-medium text-redInputErrors">{}</span>
                     </div>
                     <div>
-                      {cardYY.inputElement}
+                      {ComponentCardYY}
                       <span className="flex pt-2 text-xs font-medium text-redInputErrors">{}</span>
                     </div>
                   </div>
                 </div>
                 <div>
                   <div>
-                    {cardCVC.inputElement}
+                    {ComponentCardCVC}
                     <span className="flex pt-2 text-xs font-medium text-redInputErrors">{}</span>
                   </div>
                 </div>
@@ -274,4 +303,3 @@ export default function Home() {
     </main>
   );
 }
-('Swim away fugu fish! Swim awaaaayyyyy!');
