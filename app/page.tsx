@@ -152,23 +152,21 @@ export default function Home() {
       {/* main wrapper */}
       <div className="flex max-h-full w-full flex-col gap-4 bg-white md:flex-row md:pr-8">
         {/* first column */}
-        <div className="flex w-full justify-center bg-bgMainDesktop bg-cover md:w-1/2 md:bg-[length:30.2em_100%] md:bg-no-repeat">
+        <div className="flex h-[20em] w-full justify-center bg-bgMainDesktop bg-[length:100%_80%] bg-no-repeat md:h-full md:w-1/2 md:bg-[length:30.2em_100%] md:px-0">
           {/* first column wrapper */}
-          <div className="flex h-full w-full flex-col items-center justify-center md:max-w-full md:gap-[2.3em]">
+          <div className="mx-4 flex h-full w-full flex-col items-center justify-center md:mx-0 md:h-full md:max-w-full md:gap-[2.3em]">
             {/* card1 */}
-            <div className="flex h-[12em] w-full flex-col justify-around rounded-[0.8em] bg-bgCardFront bg-[length:100%_100%] bg-no-repeat drop-shadow-2xl md:h-[15.5em] md:w-[27.9em] md:max-w-full xl:ml-[6em]">
+            <div className="container absolute z-10 mb-7 mt-32 flex h-[10em] max-w-[19em] flex-col justify-around self-start rounded-[0.8em] bg-bgCardFront bg-[length:100%_100%] bg-no-repeat drop-shadow-2xl md:relative md:mb-0 md:mt-0 md:h-[15.5em] md:w-[27.9em] md:max-w-full md:self-auto xl:ml-[6em]">
               <Image
-                className=" ml-8 flex h-auto w-[5em]"
+                className=" ml-8 flex h-auto w-[3em] md:w-[5em]"
                 src={'./images/card-logo.svg' as string}
                 alt="card logo"
                 width={10}
                 height={10}
               />
-              <div className="space-y-[1.5em]">
-                <div
-                  className={`flex w-full justify-center gap-[2.5%] px-[1em] text-[1.75rem] text-white md:tracking-[0.12em]`}
-                >
-                  <span className="md:whitespace-nowrap">
+              <div className="space-y-[0.5em] md:space-y-[1.5em]">
+                <div className={`flex w-full justify-center gap-[2.5%] px-[1em] text-white md:tracking-[0.12em]`}>
+                  <span className="text-[1.4rem] md:whitespace-nowrap md:text-[1.75rem]">
                     {numberValue != '' ? numberValue : placeholder.zerosLong}
                   </span>
                 </div>
@@ -183,15 +181,15 @@ export default function Home() {
               </div>
             </div>
             {/* card2 */}
-            <div className="flex h-[12em] w-full items-center justify-end rounded-[0.8em] bg-bgCardBack bg-[length:100%_100%] bg-no-repeat drop-shadow-2xl md:h-[15.5em] md:w-[27.9em] md:max-w-full xl:ml-[17em]">
-              <span className="mb-1 mr-16 text-sm tracking-widest text-white">
+            <div className="absolute mb-20 flex h-[10em] w-9/12 max-w-[19em] items-center justify-end self-end  rounded-[0.8em] bg-bgCardBack bg-[length:100%_100%] bg-no-repeat drop-shadow-2xl md:relative md:mb-0 md:h-[15.5em] md:w-[27.9em] md:max-w-full md:self-auto xl:ml-[17em]">
+              <span className="mb-1 mt md:mr-16 mr-9 text-sm tracking-widest text-white">
                 {cvcValue !== '' ? cvcValue : placeholder.zerosMedium}
               </span>
             </div>
           </div>
         </div>
         {/* second column */}
-        <div className="max-h-auto flex w-full items-center justify-center bg-[#FFFFFF] md:mr-[5.5em] md:w-1/2">
+        <div className="max-h-auto flex w-full items-center justify-center bg-[#FFFFFF] px-6 md:mr-[5.5em] md:w-1/2">
           <div className="flex">
             <form className="max-h-auto flex flex-col gap-3">
               <div>
