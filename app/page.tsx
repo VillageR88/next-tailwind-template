@@ -149,7 +149,7 @@ export default function Home() {
   const [submitted, setSubmitted] = useState(false);
 
   return (
-    <main className="main flex min-h-screen max-w-full font-spaceGrotesk md:pb-[1.7em] md:pt-[1.72em]">
+    <main className="main flex h-full max-w-full font-spaceGrotesk md:min-h-screen md:pb-[1.7em] md:pt-[1.72em]">
       {/* main wrapper */}
       <div className="flex max-h-full w-full flex-col gap-4 bg-white md:flex-row md:pr-8">
         {/* first column */}
