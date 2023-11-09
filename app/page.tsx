@@ -20,11 +20,12 @@ enum entity {
 }
 
 enum placeholder {
-  JaneAppleseed = 'JANE APPLESEED',
+  JaneAppleseedShort = 'JANE APPLESEED',
+  JaneAppleseedLong = 'e.g. Jane Appleseed',
   MM = 'MM',
   YY = 'YY',
   eg123Short = 'e.g. 123',
-  eg123Long = '1234 5678 9123 0000',
+  eg123Long = 'e.g. 1234 5678 9123 0000',
   zerosShort = '00',
   zerosMedium = '000',
   zerosLong = '0000 0000 0000 0000',
@@ -54,7 +55,6 @@ interface InputComponentProps {
   showStandardLabel: boolean;
   placeholderText: string;
   width: string;
-  borderStyle: string;
   maxInputLength: number;
   groupDigits: boolean;
   type: isType;
@@ -68,7 +68,6 @@ const InputComponent = ({
   showStandardLabel,
   placeholderText,
   width,
-  borderStyle,
   maxInputLength,
   groupDigits,
   type,
@@ -123,7 +122,9 @@ const InputComponent = ({
           handleInputChange(e.target.value);
           warningMessage();
         }}
-        className={`flex w-full ${width} ${borderStyle} rounded-lg border border-solid px-4 py-2 text-[1.1rem] font-medium text-veryDarkViolet placeholder-[#C8C4C9] outline-0 `}
+        className={`flex w-full ${width} ${
+          showText && warningText !== '' ? borderStyleLayout.error : borderStyleLayout.normal
+        } rounded-lg border border-solid px-4 py-2 text-[1.1rem] font-medium text-veryDarkViolet placeholder-[#C8C4C9] outline-0 `}
         maxLength={maxInputLength}
         placeholder={placeholderText}
       />
@@ -135,14 +136,14 @@ const InputComponent = ({
 export default function Home() {
   const [ownerValue, setOwnerValue] = useState('');
   const [numberValue, setNumberValue] = useState('');
-  const [mmValue, setMMValue] = useState('');
-  const [yyValue, setYYValue] = useState('');
-  const [cvcValue, setCVCValue] = useState('');
-  const [showText1, setShowText1] = useState(false);
-  const [showText2, setShowText2] = useState(false);
-  const [showText3, setShowText3] = useState(false);
-  const [showText4, setShowText4] = useState(false);
-  const [showText5, setShowText5] = useState(false);
+  const [mmValue, setMmValue] = useState('');
+  const [yyValue, setYyValue] = useState('');
+  const [cvcValue, setCvcValue] = useState('');
+  const [ownerWarning, setOwnerWarning] = useState(false);
+  const [numberWarning, setNumberWarning] = useState(false);
+  const [mmWarning, setMmWarning] = useState(false);
+  const [yyWarning, setYyWarning] = useState(false);
+  const [cvcWarning, setCvcWarning] = useState(false);
 
   const [labelForEXP, switchLabelForEXP] = useState(entity.cardYY);
 
@@ -172,7 +173,7 @@ export default function Home() {
                   </span>
                 </div>
                 <div className="flex w-full justify-between px-[1.5em] text-[0.9rem] tracking-[0.12em] text-white md:px-[2.5em]">
-                  <span>{ownerValue != '' ? ownerValue.toUpperCase() : placeholder.JaneAppleseed}</span>
+                  <span>{ownerValue != '' ? ownerValue.toUpperCase() : placeholder.JaneAppleseedShort}</span>
                   <div>
                     <span>{mmValue !== '' ? mmValue : placeholder.zerosShort}</span>
                     <span>/</span>
@@ -197,17 +198,16 @@ export default function Home() {
                 <InputComponent
                   idText={entity.cardOwner}
                   showStandardLabel={true}
-                  placeholderText={placeholder.JaneAppleseed}
+                  placeholderText={placeholder.JaneAppleseedLong}
                   width={contractualMdLength.full}
-                  borderStyle={borderStyleLayout.normal}
                   maxInputLength={24}
                   groupDigits={true}
                   type={isType.isName}
                   onValueChange={setOwnerValue}
                   justOnChange={() => {
-                    setShowText1(false);
+                    setOwnerWarning(false);
                   }}
-                  showText={showText1}
+                  showText={ownerWarning}
                 />
               </div>
               <div className="">
@@ -216,15 +216,14 @@ export default function Home() {
                   showStandardLabel={true}
                   placeholderText={placeholder.eg123Long}
                   width={contractualMdLength.full}
-                  borderStyle={borderStyleLayout.normal}
                   maxInputLength={19}
                   groupDigits={true}
                   type={isType.isNumber}
                   onValueChange={setNumberValue}
                   justOnChange={() => {
-                    setShowText2(false);
+                    setNumberWarning(false);
                   }}
-                  showText={showText2}
+                  showText={numberWarning}
                 />
               </div>
               <div className="flex justify-between gap-5">
@@ -245,15 +244,14 @@ export default function Home() {
                         showStandardLabel={false}
                         placeholderText={placeholder.MM}
                         width={contractualMdLength._4n5}
-                        borderStyle={borderStyleLayout.normal}
                         maxInputLength={2}
                         groupDigits={false}
                         type={isType.isNumber}
-                        onValueChange={setMMValue}
+                        onValueChange={setMmValue}
                         justOnChange={() => {
-                          setShowText3(false);
+                          setMmWarning(false);
                         }}
-                        showText={showText3}
+                        showText={mmWarning}
                       />
                     </div>
                     <div>
@@ -262,15 +260,14 @@ export default function Home() {
                         showStandardLabel={false}
                         placeholderText={placeholder.YY}
                         width={contractualMdLength._4n5}
-                        borderStyle={borderStyleLayout.normal}
                         maxInputLength={2}
                         groupDigits={false}
                         type={isType.isNumber}
-                        onValueChange={setYYValue}
+                        onValueChange={setYyValue}
                         justOnChange={() => {
-                          setShowText4(false);
+                          setYyWarning(false);
                         }}
-                        showText={showText4}
+                        showText={yyWarning}
                       />
                     </div>
                   </div>
@@ -282,15 +279,14 @@ export default function Home() {
                       showStandardLabel={true}
                       placeholderText={placeholder.eg123Short}
                       width={contractualMdLength._10}
-                      borderStyle={borderStyleLayout.normal}
                       maxInputLength={3}
                       groupDigits={false}
                       type={isType.isNumber}
-                      onValueChange={setCVCValue}
+                      onValueChange={setCvcValue}
                       justOnChange={() => {
-                        setShowText5(false);
+                        setCvcWarning(false);
                       }}
-                      showText={showText5}
+                      showText={cvcWarning}
                     />
                   </div>
                 </div>
@@ -298,11 +294,11 @@ export default function Home() {
               <button
                 type="button"
                 onClick={() => {
-                  setShowText1(true);
-                  setShowText2(true);
-                  setShowText3(true);
-                  setShowText4(true);
-                  setShowText5(true);
+                  setOwnerWarning(true);
+                  setNumberWarning(true);
+                  setMmWarning(true);
+                  setYyWarning(true);
+                  setCvcWarning(true);
                 }}
                 className="mt-4 rounded-lg bg-veryDarkViolet py-[0.75em] text-[1.1rem] text-white"
               >
