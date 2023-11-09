@@ -146,6 +146,7 @@ export default function Home() {
   const [cvcWarning, setCvcWarning] = useState(false);
 
   const [labelForEXP, switchLabelForEXP] = useState(entity.cardYY);
+  const [submitted, setSubmitted] = useState(false);
 
   return (
     <main className="main flex min-h-screen max-w-full font-spaceGrotesk md:pb-[1.7em] md:pt-[1.72em]">
@@ -182,7 +183,7 @@ export default function Home() {
             </div>
             {/* card2 */}
             <div className="absolute mb-20 flex h-[10em] w-9/12 max-w-[19em] items-center justify-end self-end  rounded-[0.8em] bg-bgCardBack bg-[length:100%_100%] bg-no-repeat drop-shadow-2xl md:relative md:mb-0 md:h-[15.5em] md:w-[27.9em] md:max-w-full md:self-auto xl:ml-[17em]">
-              <span className="mb-1 mt md:mr-16 mr-9 text-sm tracking-widest text-white">
+              <span className="mt mb-1 mr-9 text-sm tracking-widest text-white md:mr-16">
                 {cvcValue !== '' ? cvcValue : placeholder.zerosMedium}
               </span>
             </div>
@@ -190,7 +191,7 @@ export default function Home() {
         </div>
         {/* second column */}
         <div className="max-h-auto flex w-full items-center justify-center bg-[#FFFFFF] px-6 md:mr-[5.5em] md:w-1/2">
-          <div className="flex">
+          {!submitted ? (
             <form className="max-h-auto flex flex-col gap-3">
               <div>
                 <InputComponent
@@ -297,13 +298,39 @@ export default function Home() {
                   setMmWarning(true);
                   setYyWarning(true);
                   setCvcWarning(true);
+                  setSubmitted(true);
                 }}
-                className="mt-4 rounded-lg bg-veryDarkViolet py-[0.75em] text-[1.1rem] text-white"
+                className="mt-4 rounded-lg bg-veryDarkViolet py-[0.75em] text-[1.1rem] text-white md:w-[21.6em]"
               >
                 Confirm
               </button>
             </form>
-          </div>
+          ) : (
+            <form className="max-h-auto flex items-center gap-3 text-center">
+              <div className="flex flex-col gap-y-2">
+                <Image
+                  className="flex h-auto w-[5em] self-center"
+                  src={'./images/icon-complete.svg' as string}
+                  alt="card logo"
+                  width={10}
+                  height={10}
+                />
+                <span className="mt-6 text-[1.8rem] font-medium  tracking-widest text-veryDarkViolet">THANK YOU!</span>
+                <span className="mb-6 text-[1.1rem] font-medium text-darkGrayishViolet">
+                  We&apos;ve added your card details
+                </span>
+                <button
+                  type="button"
+                  onClick={() => {
+                    setSubmitted(false);
+                  }}
+                  className="mt-4 rounded-lg bg-veryDarkViolet py-[0.75em] text-[1.1rem] text-white md:w-[21.6em]"
+                >
+                  Continue
+                </button>
+              </div>
+            </form>
+          )}
         </div>
       </div>
     </main>
