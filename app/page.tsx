@@ -59,6 +59,8 @@ interface InputComponentProps {
   groupDigits: boolean;
   type: isType;
   onValueChange: (value: string) => void;
+  justOnChange: () => void;
+  showText: boolean;
 }
 
 const InputComponent = ({
@@ -71,14 +73,18 @@ const InputComponent = ({
   groupDigits,
   type,
   onValueChange,
+  justOnChange,
+  showText,
 }: InputComponentProps) => {
   const [inputValue, setInputValue] = useState<string>('');
+  const warningText = warningMessage();
 
   const handleInputChange = (e: string) => {
     const rawValue = type === isType.isNumber ? e.replace(/[^0-9]/g, '') : e;
     const formattedValue = groupDigits ? formatWithSpaces(rawValue) : rawValue;
     setInputValue(formattedValue);
     onValueChange(formattedValue);
+    justOnChange();
   };
 
   const formatWithSpaces = (value: string) => {
@@ -115,11 +121,13 @@ const InputComponent = ({
         value={inputValue}
         onChange={(e) => {
           handleInputChange(e.target.value);
+          warningMessage();
         }}
         className={`flex w-full ${width} ${borderStyle} rounded-lg border border-solid px-4 py-2 text-[1.1rem] font-medium text-veryDarkViolet placeholder-[#C8C4C9] outline-0 `}
         maxLength={maxInputLength}
         placeholder={placeholderText}
       />
+      <span className="flex pt-2 text-xs font-medium text-redInputErrors">{showText ? warningText : ''}</span>
     </div>
   );
 };
@@ -130,76 +138,11 @@ export default function Home() {
   const [mmValue, setMMValue] = useState('');
   const [yyValue, setYYValue] = useState('');
   const [cvcValue, setCVCValue] = useState('');
-
-  const ComponentOwner = (
-    <InputComponent
-      idText={entity.cardOwner}
-      showStandardLabel={true}
-      placeholderText={placeholder.JaneAppleseed}
-      width={contractualMdLength.full}
-      borderStyle={borderStyleLayout.normal}
-      maxInputLength={24}
-      groupDigits={true}
-      type={isType.isName}
-      onValueChange={setOwnerValue}
-    />
-  );
-
-  const ComponentNumber = (
-    <InputComponent
-      idText={entity.cardNumber}
-      showStandardLabel={true}
-      placeholderText={placeholder.eg123Long}
-      width={contractualMdLength.full}
-      borderStyle={borderStyleLayout.normal}
-      maxInputLength={19}
-      groupDigits={true}
-      type={isType.isNumber}
-      onValueChange={setNumberValue}
-    />
-  );
-
-  const ComponentCardMM = (
-    <InputComponent
-      idText={entity.cardMM}
-      showStandardLabel={false}
-      placeholderText={placeholder.MM}
-      width={contractualMdLength._4n5}
-      borderStyle={borderStyleLayout.normal}
-      maxInputLength={2}
-      groupDigits={false}
-      type={isType.isNumber}
-      onValueChange={setMMValue}
-    />
-  );
-
-  const ComponentCardYY = (
-    <InputComponent
-      idText={entity.cardYY}
-      showStandardLabel={false}
-      placeholderText={placeholder.YY}
-      width={contractualMdLength._4n5}
-      borderStyle={borderStyleLayout.normal}
-      maxInputLength={2}
-      groupDigits={false}
-      type={isType.isNumber}
-      onValueChange={setYYValue}
-    />
-  );
-
-  const ComponentCardCVC = (
-    <InputComponent
-      idText={entity.cardCVC}
-      showStandardLabel={true}
-      placeholderText={placeholder.eg123Short}
-      width={contractualMdLength._10}
-      borderStyle={borderStyleLayout.normal}
-      maxInputLength={3}
-      groupDigits={false}
-      type={isType.isNumber}
-      onValueChange={setCVCValue}
-    />
-  );
+  const [showText1, setShowText1] = useState(false);
+  const [showText2, setShowText2] = useState(false);
+  const [showText3, setShowText3] = useState(false);
+  const [showText4, setShowText4] = useState(false);
+  const [showText5, setShowText5] = useState(false);
 
   const [labelForEXP, switchLabelForEXP] = useState(entity.cardYY);
 
@@ -251,12 +194,38 @@ export default function Home() {
           <div className="flex">
             <form className="max-h-auto flex flex-col gap-3">
               <div>
-                {ComponentOwner}
-                <span className="flex pt-2 text-xs font-medium text-redInputErrors">{}</span>
+                <InputComponent
+                  idText={entity.cardOwner}
+                  showStandardLabel={true}
+                  placeholderText={placeholder.JaneAppleseed}
+                  width={contractualMdLength.full}
+                  borderStyle={borderStyleLayout.normal}
+                  maxInputLength={24}
+                  groupDigits={true}
+                  type={isType.isName}
+                  onValueChange={setOwnerValue}
+                  justOnChange={() => {
+                    setShowText1(false);
+                  }}
+                  showText={showText1}
+                />
               </div>
               <div className="">
-                {ComponentNumber}
-                <span className="flex pt-2 text-xs font-medium text-redInputErrors">{}</span>
+                <InputComponent
+                  idText={entity.cardNumber}
+                  showStandardLabel={true}
+                  placeholderText={placeholder.eg123Long}
+                  width={contractualMdLength.full}
+                  borderStyle={borderStyleLayout.normal}
+                  maxInputLength={19}
+                  groupDigits={true}
+                  type={isType.isNumber}
+                  onValueChange={setNumberValue}
+                  justOnChange={() => {
+                    setShowText2(false);
+                  }}
+                  showText={showText2}
+                />
               </div>
               <div className="flex justify-between gap-5">
                 <div className="flex flex-col">
@@ -271,26 +240,69 @@ export default function Home() {
                   </label>
                   <div className="inline-flex space-x-3">
                     <div>
-                      {ComponentCardMM}
-                      <span className="flex pt-2 text-xs font-medium text-redInputErrors">{}</span>
+                      <InputComponent
+                        idText={entity.cardMM}
+                        showStandardLabel={false}
+                        placeholderText={placeholder.MM}
+                        width={contractualMdLength._4n5}
+                        borderStyle={borderStyleLayout.normal}
+                        maxInputLength={2}
+                        groupDigits={false}
+                        type={isType.isNumber}
+                        onValueChange={setMMValue}
+                        justOnChange={() => {
+                          setShowText3(false);
+                        }}
+                        showText={showText3}
+                      />
                     </div>
                     <div>
-                      {ComponentCardYY}
-                      <span className="flex pt-2 text-xs font-medium text-redInputErrors">{}</span>
+                      <InputComponent
+                        idText={entity.cardYY}
+                        showStandardLabel={false}
+                        placeholderText={placeholder.YY}
+                        width={contractualMdLength._4n5}
+                        borderStyle={borderStyleLayout.normal}
+                        maxInputLength={2}
+                        groupDigits={false}
+                        type={isType.isNumber}
+                        onValueChange={setYYValue}
+                        justOnChange={() => {
+                          setShowText4(false);
+                        }}
+                        showText={showText4}
+                      />
                     </div>
                   </div>
                 </div>
                 <div>
                   <div>
-                    {ComponentCardCVC}
-                    <span className="flex pt-2 text-xs font-medium text-redInputErrors">{}</span>
+                    <InputComponent
+                      idText={entity.cardCVC}
+                      showStandardLabel={true}
+                      placeholderText={placeholder.eg123Short}
+                      width={contractualMdLength._10}
+                      borderStyle={borderStyleLayout.normal}
+                      maxInputLength={3}
+                      groupDigits={false}
+                      type={isType.isNumber}
+                      onValueChange={setCVCValue}
+                      justOnChange={() => {
+                        setShowText5(false);
+                      }}
+                      showText={showText5}
+                    />
                   </div>
                 </div>
               </div>
               <button
                 type="button"
                 onClick={() => {
-                  null;
+                  setShowText1(true);
+                  setShowText2(true);
+                  setShowText3(true);
+                  setShowText4(true);
+                  setShowText5(true);
                 }}
                 className="mt-4 rounded-lg bg-veryDarkViolet py-[0.75em] text-[1.1rem] text-white"
               >
