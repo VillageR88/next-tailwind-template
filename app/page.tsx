@@ -61,6 +61,7 @@ interface InputComponentProps {
   onValueChange: (value: string) => void;
   justOnChange: () => void;
   showText: boolean;
+  onWarningTextChange: (text: string) => void;
 }
 
 const InputComponent = ({
@@ -74,9 +75,10 @@ const InputComponent = ({
   onValueChange,
   justOnChange,
   showText,
+  onWarningTextChange,
 }: InputComponentProps) => {
   const [inputValue, setInputValue] = useState<string>('');
-  const warningText = warningMessage();
+  const [warningText, setWarningText] = useState<string>(''); // Updated state variable name
 
   const handleInputChange = (e: string) => {
     const rawValue = type === isType.isNumber ? e.replace(/[^0-9]/g, '') : e;
@@ -84,6 +86,7 @@ const InputComponent = ({
     setInputValue(formattedValue);
     onValueChange(formattedValue);
     justOnChange();
+    onWarningTextChange(warningText);
   };
 
   const formatWithSpaces = (value: string) => {
@@ -100,10 +103,19 @@ const InputComponent = ({
   };
 
   function warningMessage() {
-    if (inputValue == '') return warning.blank;
-    else if (inputValue.length < maxInputLength && type === isType.isNumber) return warning.incomplete;
-    else if (inputValue.length < maxInputLength && !inputValue.match(/ ./)) return warning.nameIncomplete;
-    else return '';
+    if (inputValue == '') {
+      setWarningText(warning.blank);
+      return;
+    } else if (inputValue.length < maxInputLength && type === isType.isNumber) {
+      setWarningText(warning.incomplete);
+      return;
+    } else if (inputValue.length < maxInputLength && !inputValue.match(/ ./)) {
+      setWarningText(warning.nameIncomplete);
+      return;
+    } else {
+      setWarningText('');
+      return;
+    }
   }
 
   return (
@@ -144,10 +156,10 @@ export default function Home() {
   const [mmWarning, setMmWarning] = useState(false);
   const [yyWarning, setYyWarning] = useState(false);
   const [cvcWarning, setCvcWarning] = useState(false);
-
   const [labelForEXP, switchLabelForEXP] = useState(entity.cardYY);
   const [submitted, setSubmitted] = useState(false);
-
+  const [ownerWarningText, setOwnerWarningText] = useState(' ');
+  console.log(ownerWarningText);
   return (
     <main className="main flex h-full max-w-full font-spaceGrotesk md:min-h-screen md:pb-[1.7em] md:pt-[1.72em]">
       {/* main wrapper */}
@@ -207,6 +219,10 @@ export default function Home() {
                     setOwnerWarning(false);
                   }}
                   showText={ownerWarning}
+                  onWarningTextChange={(text) => {
+                    console.log('Owner Warning Text:', text);
+                    setOwnerWarningText(text);
+                  }}
                 />
               </div>
               <div className="">
@@ -298,7 +314,7 @@ export default function Home() {
                   setMmWarning(true);
                   setYyWarning(true);
                   setCvcWarning(true);
-                  setSubmitted(true);
+                  ownerWarningText === '' ? setSubmitted(true) : null;
                 }}
                 className="mt-4 rounded-lg bg-veryDarkViolet py-[0.75em] text-[1.1rem] text-white md:w-[21.6em]"
               >
