@@ -33,9 +33,9 @@ const config: Config = {
         // => @media (min-height: 800px) { ... }
       },
       backgroundImage: {
-        bgCardFront: "url('/src/images/bg-card-front.png')",
-        bgCardBack: "url('/src/images/bg-card-back.png')",
-        bgMainDesktop: "url('/src/images/bg-main-desktop.png')",
+        bgCardFront: "url('/Frontend_Mentor/interactive-card-details-form-main/src/images/bg-card-front.png')",
+        bgCardBack: "url('/Frontend_Mentor/interactive-card-details-form-main/src/images/bg-card-back.png')",
+        bgMainDesktop: "url('/Frontend_Mentor/interactive-card-details-form-main/src/images/bg-main-desktop.png')",
       },
     },
   },

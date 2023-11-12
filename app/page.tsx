@@ -88,7 +88,8 @@ const InputComponent = ({
       type === isType.isNumber || type === isType.isNumberMM || type === isType.isNumberYY
         ? e.replace(/[^0-9]/g, '')
         : e;
-    type === isType.isNumberMM && (Number(rawValue) > 12 && (rawValue = '12'), Number(rawValue) < 1 && (rawValue = ''));
+    type === isType.isNumberMM && (Number(rawValue) > 12 && (rawValue = '12'), rawValue === '00' && (rawValue = '01'));
+    console.log(rawValue);
     type === isType.isNumberYY &&
       (rawValue.startsWith('0') || rawValue.startsWith('1')
         ? (rawValue = '23')
