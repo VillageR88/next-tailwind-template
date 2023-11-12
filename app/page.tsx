@@ -357,6 +357,11 @@ export default function Home() {
                     setYyWarning(false);
                     setCvcWarning(false);
                     setSubmitted(false);
+                    setOwnerValue('');
+                    setNumberValue('');
+                    setMmValue('');
+                    setYyValue('');
+                    setCvcValue('');
                   }}
                   className="mt-4 rounded-lg bg-veryDarkViolet py-[0.75em] text-[1.1rem] text-white md:w-[21.6em]"
                 >
