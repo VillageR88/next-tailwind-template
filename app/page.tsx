@@ -61,7 +61,7 @@ interface InputComponentProps {
   onValueChange: (value: string) => void;
   justOnChange: () => void;
   showText: boolean;
-  onWarningTextChange: (text: string) => void;
+  onWarningTextChange: (warningText: string) => void;
 }
 
 const InputComponent = ({
@@ -78,15 +78,15 @@ const InputComponent = ({
   onWarningTextChange,
 }: InputComponentProps) => {
   const [inputValue, setInputValue] = useState<string>('');
-  const [warningText, setWarningText] = useState<string>(''); // Updated state variable name
+  const warningText = warningMessage();
 
   const handleInputChange = (e: string) => {
     const rawValue = type === isType.isNumber ? e.replace(/[^0-9]/g, '') : e;
     const formattedValue = groupDigits ? formatWithSpaces(rawValue) : rawValue;
     setInputValue(formattedValue);
     onValueChange(formattedValue);
+
     justOnChange();
-    onWarningTextChange(warningText);
   };
 
   const formatWithSpaces = (value: string) => {
@@ -103,19 +103,22 @@ const InputComponent = ({
   };
 
   function warningMessage() {
-    if (inputValue == '') {
-      setWarningText(warning.blank);
-      return;
-    } else if (inputValue.length < maxInputLength && type === isType.isNumber) {
-      setWarningText(warning.incomplete);
-      return;
-    } else if (inputValue.length < maxInputLength && !inputValue.match(/ ./)) {
-      setWarningText(warning.nameIncomplete);
-      return;
-    } else {
-      setWarningText('');
-      return;
+    const text =
+      inputValue === ''
+        ? warning.blank
+        : inputValue.length < maxInputLength && type === isType.isNumber
+        ? warning.incomplete
+        : inputValue.length < maxInputLength && !inputValue.match(/ ./)
+        ? warning.nameIncomplete
+        : '';
+
+    // (I leave this comment here Piotr because I would like to understand it later and the thing is I have no freakin' idea what is going on here...)
+    //Check if onWarningTextChange is a function before calling it
+    // (I have no idea why this 'if (typeof onWarningTextChange === 'function')' has to be added to make onWarningTextChange(text) actually be passed on)
+    if (typeof onWarningTextChange === 'function') {
+      onWarningTextChange(text);
     }
+    return text;
   }
 
   return (
@@ -158,8 +161,12 @@ export default function Home() {
   const [cvcWarning, setCvcWarning] = useState(false);
   const [labelForEXP, switchLabelForEXP] = useState(entity.cardYY);
   const [submitted, setSubmitted] = useState(false);
-  const [ownerWarningText, setOwnerWarningText] = useState(' ');
-  console.log(ownerWarningText);
+  const [ownerWarningText, setOwnerWarningText] = useState('');
+  const [numberWarningText, setNumberWarningText] = useState('');
+  const [mmWarningText, setMmWarningText] = useState('');
+  const [yyWarningText, setYyWarningText] = useState('');
+  const [cvcWarningText, setCvcWarningText] = useState('');
+
   return (
     <main className="main flex h-full max-w-full font-spaceGrotesk md:min-h-screen md:pb-[1.7em] md:pt-[1.72em]">
       {/* main wrapper */}
@@ -219,10 +226,7 @@ export default function Home() {
                     setOwnerWarning(false);
                   }}
                   showText={ownerWarning}
-                  onWarningTextChange={(text) => {
-                    console.log('Owner Warning Text:', text);
-                    setOwnerWarningText(text);
-                  }}
+                  onWarningTextChange={setOwnerWarningText}
                 />
               </div>
               <div className="">
@@ -239,6 +243,7 @@ export default function Home() {
                     setNumberWarning(false);
                   }}
                   showText={numberWarning}
+                  onWarningTextChange={setNumberWarningText}
                 />
               </div>
               <div className="flex justify-between gap-5">
@@ -267,6 +272,7 @@ export default function Home() {
                           setMmWarning(false);
                         }}
                         showText={mmWarning}
+                        onWarningTextChange={setMmWarningText}
                       />
                     </div>
                     <div>
@@ -283,6 +289,7 @@ export default function Home() {
                           setYyWarning(false);
                         }}
                         showText={yyWarning}
+                        onWarningTextChange={setYyWarningText}
                       />
                     </div>
                   </div>
@@ -302,6 +309,7 @@ export default function Home() {
                         setCvcWarning(false);
                       }}
                       showText={cvcWarning}
+                      onWarningTextChange={setCvcWarningText}
                     />
                   </div>
                 </div>
@@ -314,7 +322,12 @@ export default function Home() {
                   setMmWarning(true);
                   setYyWarning(true);
                   setCvcWarning(true);
-                  ownerWarningText === '' ? setSubmitted(true) : null;
+                  !ownerWarningText &&
+                    !numberWarningText &&
+                    !mmWarningText &&
+                    !yyWarningText &&
+                    !cvcWarningText &&
+                    setSubmitted(true);
                 }}
                 className="mt-4 rounded-lg bg-veryDarkViolet py-[0.75em] text-[1.1rem] text-white md:w-[21.6em]"
               >
@@ -338,6 +351,11 @@ export default function Home() {
                 <button
                   type="button"
                   onClick={() => {
+                    setOwnerWarning(false);
+                    setNumberWarning(false);
+                    setMmWarning(false);
+                    setYyWarning(false);
+                    setCvcWarning(false);
                     setSubmitted(false);
                   }}
                   className="mt-4 rounded-lg bg-veryDarkViolet py-[0.75em] text-[1.1rem] text-white md:w-[21.6em]"
