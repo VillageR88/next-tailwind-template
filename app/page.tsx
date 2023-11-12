@@ -9,6 +9,8 @@ import Image from 'next/image';
 enum isType {
   isName,
   isNumber,
+  isNumberMM,
+  isNumberYY,
 }
 
 enum entity {
@@ -79,13 +81,21 @@ const InputComponent = ({
 }: InputComponentProps) => {
   const [inputValue, setInputValue] = useState<string>('');
   const warningText = warningMessage();
+  const currentYear = new Date().getFullYear();
 
   const handleInputChange = (e: string) => {
-    const rawValue = type === isType.isNumber ? e.replace(/[^0-9]/g, '') : e;
+    let rawValue =
+      type === isType.isNumber || type === isType.isNumberMM || type === isType.isNumberYY
+        ? e.replace(/[^0-9]/g, '')
+        : e;
+    type === isType.isNumberMM && (Number(rawValue) > 12 && (rawValue = '12'), Number(rawValue) < 1 && (rawValue = ''));
+    type === isType.isNumberYY &&
+      (rawValue.startsWith('0') || rawValue.startsWith('1')
+        ? (rawValue = '23')
+        : Number(rawValue) > 9 && Number(rawValue) < Number(currentYear.toString().slice(-2)) && (rawValue = '23'));
     const formattedValue = groupDigits ? formatWithSpaces(rawValue) : rawValue;
     setInputValue(formattedValue);
     onValueChange(formattedValue);
-
     justOnChange();
   };
 
@@ -94,7 +104,7 @@ const InputComponent = ({
       type === isType.isNumber
         ? value.match(new RegExp(/.{0,4}/g))
         : value.match(new RegExp(/(?! )[A-Za-z\-.'"]{1,8}(?![A-Za-z\-.'"]) {0,1}[A-Za-z\-.'"]{0,11}/));
-    if (matches && type == isType.isNumber) {
+    if (matches && (type === isType.isNumber || type === isType.isNumberMM || type === isType.isNumberYY)) {
       return matches.join(' ').trim();
     } else if (matches && type == isType.isName) return matches.join(' ');
     else {
@@ -106,7 +116,8 @@ const InputComponent = ({
     const text =
       inputValue === ''
         ? warning.blank
-        : inputValue.length < maxInputLength && type === isType.isNumber
+        : inputValue.length < maxInputLength &&
+          (type === isType.isNumber || type === isType.isNumberMM || type === isType.isNumberYY)
         ? warning.incomplete
         : inputValue.length < maxInputLength && !inputValue.match(/ ./)
         ? warning.nameIncomplete
@@ -266,7 +277,7 @@ export default function Home() {
                         width={contractualMdLength._4n5}
                         maxInputLength={2}
                         groupDigits={false}
-                        type={isType.isNumber}
+                        type={isType.isNumberMM}
                         onValueChange={setMmValue}
                         justOnChange={() => {
                           setMmWarning(false);
@@ -283,7 +294,7 @@ export default function Home() {
                         width={contractualMdLength._4n5}
                         maxInputLength={2}
                         groupDigits={false}
-                        type={isType.isNumber}
+                        type={isType.isNumberYY}
                         onValueChange={setYyValue}
                         justOnChange={() => {
                           setYyWarning(false);
