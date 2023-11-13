@@ -72,7 +72,7 @@ const ChartComponent = () => {
 
 export default function Home() {
   return (
-    <main className="flex h-screen flex-col items-center justify-center font-dmSans">
+    <main className="flex min-h-screen flex-col items-center justify-center font-dmSans">
       {/* main wrapper */}
       <div className="md:f w-screen px-4 md:w-auto md:px-0">
         {/* first wrapper */}
@@ -88,9 +88,9 @@ export default function Home() {
         <div>
           <span>Spending - Last 7 days</span>
           <ChartComponent />
+          <BarChart />
         </div>
       </div>
-      <BarChart />
     </main>
   );
 }
