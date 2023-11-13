@@ -17,17 +17,43 @@ interface DataItem {
 }
 
 const BarChart = () => {
+  const [data1, setData] = useState<DataItem[]>([]);
+
+  useEffect(() => {
+    const dataJson = './data.json';
+    fetch(dataJson)
+      .then((response) => response.json())
+      .then((jsonData: DataItem[]) => {
+        setData(jsonData);
+      })
+      .catch((error) => {
+        console.error('Error loading JSON:', error);
+      });
+  }, []);
+
+  if (data1.length === 0) {
+    return null;
+  }
+
   const data = {
-    labels: ['January', 'February', 'March', 'April', 'May'],
+    labels: [data1[0].day, data1[1].day, data1[2].day, data1[3].day, data1[4].day, data1[5].day, data1[6].day],
     datasets: [
       {
         label: 'Monthly Sales',
         backgroundColor: 'rgba(75,192,192,0.2)',
         borderColor: 'rgba(75,192,192,1)',
-        borderWidth: 1,
-        hoverBackgroundColor: 'rgba(75,192,192,0.4)',
+        //borderWidth: 1,
+        //hoverBackgroundColor: 'rgba(75,192,192,0.4)',
         hoverBorderColor: 'rgba(75,192,192,1)',
-        data: [65, 59, 80, 81, 56],
+        data: [
+          data1[0].amount,
+          data1[1].amount,
+          data1[2].amount,
+          data1[3].amount,
+          data1[4].amount,
+          data1[5].amount,
+          data1[6].amount,
+        ],
       },
     ],
   };
@@ -41,33 +67,6 @@ const BarChart = () => {
   };
 
   return <Bar data={data} options={options} />;
-};
-
-const ChartComponent = () => {
-  const [data, setData] = useState<DataItem[]>([]);
-
-  useEffect(() => {
-    const dataJson = './data.json';
-
-    fetch(dataJson)
-      .then((response) => response.json())
-      .then((jsonData: DataItem[]) => {
-        setData(jsonData);
-      })
-      .catch((error) => {
-        console.error('Error loading JSON:', error);
-      });
-  }, []);
-  return (
-    <div className="flex justify-around">
-      {data.map((item) => (
-        <div key={item.day} className="flex flex-col">
-          <span>{item.amount}</span>
-          <span>{item.day}</span>
-        </div>
-      ))}
-    </div>
-  );
 };
 
 export default function Home() {
@@ -87,7 +86,6 @@ export default function Home() {
         {/* second wrapper */}
         <div>
           <span>Spending - Last 7 days</span>
-          <ChartComponent />
           <BarChart />
         </div>
       </div>
