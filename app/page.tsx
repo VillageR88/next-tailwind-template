@@ -62,12 +62,7 @@ const BarChart = () => {
 
   const options = {
     onHover: (event, chartElement) => {
-      if (chartElement.length == 1) {
-        event.native.target.style.cursor = 'pointer';
-      }
-      if (chartElement.length == 0) {
-        event.native.target.style.cursor = 'default';
-      }
+      event.native.target.style.cursor = chartElement[0] ? 'pointer' : 'default';
     },
     borderSkipped: false,
     borderLine: false,
