@@ -149,21 +149,21 @@ export default function Home() {
           ></Image>
         </div>
         {/* second wrapper */}
-        <div className="flex flex-col gap-y-2 rounded-[1.2em] bg-veryPaleOrange md:px-8 md:py-7">
+        <div className="flex flex-col gap-y-2 rounded-[1.2em] bg-veryPaleOrange md:px-8 md:pb-12 md:pt-7">
           <span className="ml-2 text-[2rem] font-semibold text-darkBrown">Spending - Last 7 days</span>
           <BarChart />
-          <hr className="w-full border-t border-gray-300" />
+          <hr className="my-4 w-full border-t-2 border-cream" />
           {/* bottom wrapper */}
           <div className="flex justify-between">
             {/* left */}
-            <div className="flex flex-col ">
-              <span>Total this month</span>
-              <span>$478.33</span>
+            <div className="just flex flex-col leading-[2.9em] ">
+              <span className="text-[1.12rem] text-mediumBrown">Total this month</span>
+              <span className="text-[3rem] font-[600] text-darkBrown">$478.33</span>
             </div>
             {/* right */}
-            <div className="flex flex-col text-end">
+            <div className="flex flex-col justify-end text-end">
               <span>+2.4%</span>
-              <span>from last month</span>
+              <span className="text-[1.12rem] text-mediumBrown">from last month</span>
             </div>
           </div>
         </div>
