@@ -55,25 +55,36 @@ const BarChart = () => {
       },
     ],
   };
+  const labelTooltip = () => '';
+  const titleTooltip = () => '';
+  const footer = (tooltipItems: any[]) => {
+    let sum = 0;
 
+    tooltipItems.forEach(function (tooltipItem: { parsed: { y: number } }) {
+      sum += tooltipItem.parsed.y;
+    });
+    return '$' + sum;
+  };
   const config = {
     type: 'bar',
     data: chartData,
     options: {
       responsive: true,
       plugins: {
-        legend: {
-          position: 'top',
-          display: true,
-          text: 'Chart.js Bar Chart',
+        tooltip: {
+          yAlign: 'bottom',
+          displayColors: false,
+          callbacks: {
+            title: titleTooltip,
+            label: labelTooltip,
+            footer: footer,
+          },
         },
       },
       onHover: (event: { native: { target: { style: { cursor: string } } } }, chartElement: unknown[]) => {
         event.native.target.style.cursor = chartElement[0] ? 'pointer' : 'default';
       },
-      tooltips: {
-        callbacks: {},
-      },
+
       borderSkipped: false,
       borderLine: false,
       scales: {
