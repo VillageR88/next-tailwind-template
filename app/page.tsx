@@ -53,7 +53,9 @@ const BarChart = () => {
       },
     ],
   };
-  const labelTooltip = () => '';
+  const labelTooltip = (tooltipItem) => {
+    return '$' + tooltipItem.parsed.y;
+  };
   const titleTooltip = () => '';
   const footer = (tooltipItems: any[]) => {
     let sum = 0;
@@ -63,6 +65,7 @@ const BarChart = () => {
     });
     return '$' + sum;
   };
+
   const config = {
     type: 'bar',
     data: chartData,
@@ -70,13 +73,20 @@ const BarChart = () => {
       responsive: true,
       plugins: {
         tooltip: {
+          padding: 10,
+          bodyFont: {
+            size: 16,
+            weight: 'bold',
+          },
+          caretPadding: 5,
+          caretSize: 0,
           yAlign: 'bottom',
           backgroundColor: 'hsl(25, 47%, 15%)',
           displayColors: false,
           callbacks: {
             title: titleTooltip,
             label: labelTooltip,
-            footer: footer,
+            //footer: footer,
           },
           position: 'nearest',
         },
