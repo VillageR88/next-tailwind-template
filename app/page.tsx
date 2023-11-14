@@ -152,7 +152,7 @@ export default function Home() {
         <div className="flex flex-col gap-y-2 rounded-[1.2em] bg-veryPaleOrange md:px-8 md:pb-12 md:pt-7">
           <span className="ml-2 text-[2rem] font-semibold text-darkBrown">Spending - Last 7 days</span>
           <BarChart />
-          <hr className="my-4 w-full border-t-2 border-cream" />
+          <hr className="mt-5 pb-3 w-[95%] self-center border-t-2 border-cream" />
           {/* bottom wrapper */}
           <div className="flex justify-between">
             {/* left */}
@@ -162,7 +162,7 @@ export default function Home() {
             </div>
             {/* right */}
             <div className="flex flex-col justify-end text-end">
-              <span>+2.4%</span>
+              <span className="text-[1.15rem] font-[700] text-darkBrown">+2.4%</span>
               <span className="text-[1.12rem] text-mediumBrown">from last month</span>
             </div>
           </div>
