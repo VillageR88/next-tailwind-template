@@ -1,14 +1,15 @@
 'use client';
 import React, { useEffect, useState } from 'react';
 import { Bar } from 'react-chartjs-2';
-import { Chart, Tooltip, BarElement, CategoryScale, LinearScale, Title } from 'chart.js';
+import { Chart, Tooltip, BarElement, CategoryScale, LinearScale, Title, Colors } from 'chart.js';
 
 import '@fontsource/dm-sans';
 import '@fontsource/dm-sans/400.css';
 import '@fontsource/dm-sans/500.css';
 import '@fontsource/dm-sans/700.css';
 import Image from 'next/image';
-Chart.register(BarElement, CategoryScale, LinearScale, Title, Tooltip);
+Chart.register(BarElement, CategoryScale, LinearScale, Colors, Title, Tooltip);
+Chart.defaults.color = 'hsl(28, 10%, 53%)';
 
 interface DataItem {
   day: string;
@@ -53,18 +54,10 @@ const BarChart = () => {
       },
     ],
   };
-  const labelTooltip = (tooltipItem) => {
+  const labelTooltip = (tooltipItem: { parsed: { y: string } }) => {
     return '$' + tooltipItem.parsed.y;
   };
   const titleTooltip = () => '';
-  const footer = (tooltipItems: any[]) => {
-    let sum = 0;
-
-    tooltipItems.forEach(function (tooltipItem: { parsed: { y: number } }) {
-      sum += tooltipItem.parsed.y;
-    });
-    return '$' + sum;
-  };
 
   const config = {
     type: 'bar',
@@ -73,12 +66,16 @@ const BarChart = () => {
       responsive: true,
       plugins: {
         tooltip: {
-          padding: 10,
-          bodyFont: {
-            size: 16,
-            weight: 'bold',
+          padding: {
+            x: 8,
+            top: 12,
+            bottom: 8,
           },
-          caretPadding: 5,
+          bodyFont: {
+            size: 18,
+            weight: '500',
+          },
+          caretPadding: 8,
           caretSize: 0,
           yAlign: 'bottom',
           backgroundColor: 'hsl(25, 47%, 15%)',
@@ -86,7 +83,6 @@ const BarChart = () => {
           callbacks: {
             title: titleTooltip,
             label: labelTooltip,
-            //footer: footer,
           },
           position: 'nearest',
         },
@@ -99,6 +95,11 @@ const BarChart = () => {
       borderLine: false,
       scales: {
         x: {
+          ticks: {
+            font: {
+              size: 14,
+            },
+          },
           display: true,
           border: {
             display: false,
@@ -129,9 +130,9 @@ export default function Home() {
   return (
     <main className="flex min-h-screen flex-col items-center justify-center font-dmSans">
       {/* main wrapper */}
-      <div className="md:f w-screen px-4 md:w-auto md:px-0">
+      <div className="md:f flex w-screen flex-col gap-y-6 px-4 md:w-auto">
         {/* first wrapper */}
-        <div className="flex justify-between bg-softRed md:w-[30em]">
+        <div className="flex justify-between bg-softRed md:w-[30em] md:px-8">
           {/* left */}
           <div className="flex flex-col text-white">
             <span>My balance</span>
@@ -140,9 +141,23 @@ export default function Home() {
           <Image className="h-auto w-[5em]" src="/images/logo.svg" alt="Logo" height={10} width={10} priority></Image>
         </div>
         {/* second wrapper */}
-        <div className="bg-veryPaleOrange">
+        <div className="bg-veryPaleOrange md:px-8">
           <span>Spending - Last 7 days</span>
           <BarChart />
+          <hr className="w-full border-t border-gray-300" />
+          {/* bottom wrapper */}
+          <div className="flex justify-between">
+            {/* left */}
+            <div className="flex flex-col">
+              <span>Total this month</span>
+              <span>$478.33</span>
+            </div>
+            {/* right */}
+            <div className="flex flex-col text-end">
+              <span>+2.4%</span>
+              <span>from last month</span>
+            </div>
+          </div>
         </div>
       </div>
     </main>
