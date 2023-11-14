@@ -34,6 +34,7 @@ const BarChart = () => {
   if (data1.length === 0) {
     return null;
   }
+  const maxAmount = Math.max(...data1.map((item) => item.amount));
 
   const data = {
     labels: [data1[0].day, data1[1].day, data1[2].day, data1[3].day, data1[4].day, data1[5].day, data1[6].day],
@@ -41,12 +42,11 @@ const BarChart = () => {
     datasets: [
       {
         label: 'Monthly Sales',
-        fill: false, // <-- Set `fill: false` here
-        backgroundColor: 'hsl(10, 79%, 65%)',
-        //borderColor: 'rgba(75,192,192,1)',
-        //borderWidth: 1,
-        hoverBackgroundColor: 'rgba(75,192,192,0.4)',
-        hoverBorderColor: 'rgba(75,192,192,1)',
+        backgroundColor: data1.map((item) => (item.amount === maxAmount ? 'hsl(186, 34%, 60%)' : 'hsl(10, 79%, 65%)')),
+        hoverBackgroundColor: data1.map((item) =>
+          item.amount === maxAmount ? 'hsl(186, 34%, 60%, 0.7)' : 'hsl(10, 79%, 65%, 0.7)',
+        ),
+
         data: [
           data1[0].amount,
           data1[1].amount,
@@ -56,12 +56,19 @@ const BarChart = () => {
           data1[5].amount,
           data1[6].amount,
         ],
-        borderRadius: 5, // Adjust the radius as needed
       },
     ],
   };
 
   const options = {
+    onHover: (event, chartElement) => {
+      if (chartElement.length == 1) {
+        event.native.target.style.cursor = 'pointer';
+      }
+      if (chartElement.length == 0) {
+        event.native.target.style.cursor = 'default';
+      }
+    },
     borderSkipped: false,
     borderLine: false,
     scales: {
