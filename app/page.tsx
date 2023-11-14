@@ -39,9 +39,7 @@ const BarChart = () => {
     datasets: [
       {
         backgroundColor: data1.map((item) => (item.amount === maxAmount ? 'hsl(186, 34%, 60%)' : 'hsl(10, 79%, 65%)')),
-        hoverBackgroundColor: data1.map((item) =>
-          item.amount === maxAmount ? 'hsl(186, 34%, 60%, 0.7)' : 'hsl(10, 79%, 65%, 0.7)',
-        ),
+        hoverBackgroundColor: data1.map((item) => (item.amount === maxAmount ? '#B4DFE5' : '#FF9B87')),
         data: [
           data1[0].amount,
           data1[1].amount,
