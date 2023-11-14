@@ -61,7 +61,7 @@ const BarChart = () => {
   };
 
   const options = {
-    onHover: (event, chartElement) => {
+    onHover: (event: { native: { target: { style: { cursor: string } } } }, chartElement: unknown[]) => {
       event.native.target.style.cursor = chartElement[0] ? 'pointer' : 'default';
     },
     borderSkipped: false,
