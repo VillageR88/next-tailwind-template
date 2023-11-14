@@ -1,5 +1,7 @@
 'use client';
 import React, { useEffect, useState } from 'react';
+import Loading from 'react-simple-loading';
+
 import { Bar } from 'react-chartjs-2';
 import { Chart, Tooltip, BarElement, CategoryScale, LinearScale, Title, Colors } from 'chart.js';
 
@@ -8,6 +10,7 @@ import '@fontsource/dm-sans/400.css';
 import '@fontsource/dm-sans/500.css';
 import '@fontsource/dm-sans/700.css';
 import Image from 'next/image';
+
 Chart.register(BarElement, CategoryScale, LinearScale, Colors, Title, Tooltip);
 Chart.defaults.color = 'hsl(28, 10%, 53%)';
 
@@ -18,7 +21,7 @@ interface DataItem {
 
 const BarChart = ({ data1 }: { data1: DataItem[] }) => {
   if (data1.length === 0) {
-    return <div>Loading...</div>; // Display a loading message while fetching data
+    return <div>Loading...</div>;
   }
   const maxAmount = Math.max(...data1.map((item) => item.amount));
   const labels = [data1[0].day, data1[1].day, data1[2].day, data1[3].day, data1[4].day, data1[5].day, data1[6].day];
@@ -116,6 +119,7 @@ const BarChart = ({ data1 }: { data1: DataItem[] }) => {
 
 export default function Home() {
   const [data1, setData1] = useState<DataItem[]>([]);
+  const [isLoading, setLoading] = useState(true);
 
   useEffect(() => {
     const dataJson = './data.json';
@@ -126,16 +130,21 @@ export default function Home() {
       })
       .catch((error) => {
         console.error('Error loading JSON:', error);
+      })
+      .finally(() => {
+        setLoading(false); // Set loading state to false when data fetching is complete
       });
   }, []);
   return (
     <main className="flex h-full flex-col items-center justify-center py-4 align-middle font-dmSans md:min-h-screen">
-      {data1.length === 0 ? (
-        <div>Loading...</div>
+      {isLoading ? (
+        <div className="container flex h-screen w-full justify-center">
+          <Loading color={'firebrick'} stroke={'10px'} size={'100px'} />
+        </div>
       ) : (
-        <div className="md:f flex w-screen flex-col gap-y-6 px-4 md:w-auto">
+        <div className="md:f flex w-screen flex-col gap-y-6 px-4 md:w-[33.5em]">
           {/* first wrapper */}
-          <div className="flex justify-between rounded-[1.2em] bg-softRed px-8 py-6 md:w-[33.5em]">
+          <div className="flex justify-between rounded-[1.2em] bg-softRed px-8 py-6 ">
             {/* left */}
             <div className="flex flex-col space-y-[0.08em] text-white">
               <span className="text-[1.1rem] font-[400] text-cream">My balance</span>
@@ -155,7 +164,8 @@ export default function Home() {
             <span className="text-[1.4rem] font-semibold text-darkBrown md:ml-2 md:text-[2rem]">
               Spending - Last 7 days
             </span>
-            <BarChart data1={data1} /> {/* Pass the data1 to BarChart component */}
+            {/* Pass the data1 to BarChart component */}
+            <BarChart data1={data1} />
             <hr className="mt-5 w-[95%] self-center border-t-2 border-cream pb-3" />
             {/* bottom wrapper */}
             <div className="flex justify-between">
