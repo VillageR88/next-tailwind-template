@@ -1,15 +1,14 @@
 'use client';
 import React, { useEffect, useState } from 'react';
 import { Bar } from 'react-chartjs-2';
-import { Chart } from 'chart.js';
-import { BarElement, CategoryScale, LinearScale, Title } from 'chart.js';
+import { Chart, Tooltip, BarElement, CategoryScale, LinearScale, Title } from 'chart.js';
 
 import '@fontsource/dm-sans';
 import '@fontsource/dm-sans/400.css';
 import '@fontsource/dm-sans/500.css';
 import '@fontsource/dm-sans/700.css';
 import Image from 'next/image';
-Chart.register(BarElement, CategoryScale, LinearScale, Title);
+Chart.register(BarElement, CategoryScale, LinearScale, Title, Tooltip);
 
 interface DataItem {
   day: string;
@@ -71,6 +70,9 @@ const BarChart = () => {
       },
       onHover: (event: { native: { target: { style: { cursor: string } } } }, chartElement: unknown[]) => {
         event.native.target.style.cursor = chartElement[0] ? 'pointer' : 'default';
+      },
+      tooltips: {
+        callbacks: {},
       },
       borderSkipped: false,
       borderLine: false,
