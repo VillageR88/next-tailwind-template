@@ -132,23 +132,30 @@ export default function Home() {
       {/* main wrapper */}
       <div className="md:f flex w-screen flex-col gap-y-6 px-4 md:w-auto">
         {/* first wrapper */}
-        <div className="flex justify-between bg-softRed md:w-[30em] md:px-8">
+        <div className="flex justify-between rounded-[1.2em] bg-softRed md:w-[33.5em] md:px-8 md:py-7">
           {/* left */}
-          <div className="flex flex-col text-white">
+          <div className="flex flex-col space-y-2 text-white">
             <span>My balance</span>
-            <span>$921.48</span>
+            <span className="text-3xl font-medium">$921.48</span>
           </div>
-          <Image className="h-auto w-[5em]" src="/images/logo.svg" alt="Logo" height={10} width={10} priority></Image>
+          <Image
+            className="h-auto w-[4.5em] md:mr-1"
+            src="/images/logo.svg"
+            alt="Logo"
+            height={10}
+            width={10}
+            priority
+          ></Image>
         </div>
         {/* second wrapper */}
-        <div className="bg-veryPaleOrange md:px-8">
-          <span>Spending - Last 7 days</span>
+        <div className="rounded-[1.2em] bg-veryPaleOrange md:px-8 md:py-6">
+          <span className="text-3xl font-semibold">Spending - Last 7 days</span>
           <BarChart />
           <hr className="w-full border-t border-gray-300" />
           {/* bottom wrapper */}
           <div className="flex justify-between">
             {/* left */}
-            <div className="flex flex-col">
+            <div className="flex flex-col ">
               <span>Total this month</span>
               <span>$478.33</span>
             </div>
