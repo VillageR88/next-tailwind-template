@@ -78,6 +78,7 @@ const BarChart = () => {
           caretPadding: 8,
           caretSize: 0,
           yAlign: 'bottom',
+          xAlign: 'center',
           backgroundColor: 'hsl(25, 47%, 15%)',
           displayColors: false,
           callbacks: {
@@ -111,7 +112,7 @@ const BarChart = () => {
         y: {
           display: false,
           beginAtZero: true,
-          max: 80,
+          max: 70,
           border: {
             display: false,
           },
@@ -132,14 +133,14 @@ export default function Home() {
       {/* main wrapper */}
       <div className="md:f flex w-screen flex-col gap-y-6 px-4 md:w-auto">
         {/* first wrapper */}
-        <div className="flex justify-between rounded-[1.2em] bg-softRed md:w-[33.5em] md:px-8 md:py-7">
+        <div className="flex justify-between rounded-[1.2em] bg-softRed md:w-[33.5em] md:px-8 md:py-6">
           {/* left */}
-          <div className="flex flex-col space-y-2 text-white">
-            <span>My balance</span>
-            <span className="text-3xl font-medium">$921.48</span>
+          <div className="flex flex-col space-y-[0.08em] text-white">
+            <span className="text-[1.1rem] font-[400] text-cream">My balance</span>
+            <span className="text-[2rem] font-medium text-veryPaleOrange">$921.48</span>
           </div>
           <Image
-            className="h-auto w-[4.5em] md:mr-1"
+            className="h-auto w-[4.5em] md:mr-1.5"
             src="/images/logo.svg"
             alt="Logo"
             height={10}
@@ -148,8 +149,8 @@ export default function Home() {
           ></Image>
         </div>
         {/* second wrapper */}
-        <div className="rounded-[1.2em] bg-veryPaleOrange md:px-8 md:py-6">
-          <span className="text-3xl font-semibold">Spending - Last 7 days</span>
+        <div className="flex flex-col gap-y-2 rounded-[1.2em] bg-veryPaleOrange md:px-8 md:py-7">
+          <span className="ml-2 text-[2rem] font-semibold text-darkBrown">Spending - Last 7 days</span>
           <BarChart />
           <hr className="w-full border-t border-gray-300" />
           {/* bottom wrapper */}
