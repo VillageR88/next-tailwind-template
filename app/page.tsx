@@ -16,20 +16,7 @@ interface DataItem {
   amount: number;
 }
 
-const BarChart = () => {
-  const [data1, setData] = useState<DataItem[]>([]);
-
-  useEffect(() => {
-    const dataJson = './data.json';
-    fetch(dataJson)
-      .then((response) => response.json())
-      .then((jsonData: DataItem[]) => {
-        setData(jsonData);
-      })
-      .catch((error) => {
-        console.error('Error loading JSON:', error);
-      });
-  }, []);
+const BarChart = ({ data1 }: { data1: DataItem[] }) => {
   if (data1.length === 0) {
     return <div>Loading...</div>; // Display a loading message while fetching data
   }
@@ -128,48 +115,64 @@ const BarChart = () => {
 };
 
 export default function Home() {
+  const [data1, setData1] = useState<DataItem[]>([]);
+
+  useEffect(() => {
+    const dataJson = './data.json';
+    fetch(dataJson)
+      .then((response) => response.json())
+      .then((jsonData: DataItem[]) => {
+        setData1(jsonData);
+      })
+      .catch((error) => {
+        console.error('Error loading JSON:', error);
+      });
+  }, []);
   return (
-    <main className="flex min-h-screen flex-col items-center justify-center py-4 font-dmSans">
-      {/* main wrapper */}
-      <div className="md:f flex w-screen flex-col gap-y-6 px-4 md:w-auto">
-        {/* first wrapper */}
-        <div className="flex justify-between rounded-[1.2em] bg-softRed px-8 py-6 md:w-[33.5em]">
-          {/* left */}
-          <div className="flex flex-col space-y-[0.08em] text-white">
-            <span className="text-[1.1rem] font-[400] text-cream">My balance</span>
-            <span className="text-[2rem] font-medium text-veryPaleOrange">$921.48</span>
-          </div>
-          <Image
-            className="h-auto w-[4.5em] md:mr-1.5"
-            src="/images/logo.svg"
-            alt="Logo"
-            height={10}
-            width={10}
-            priority
-          ></Image>
-        </div>
-        {/* second wrapper */}
-        <div className="flex flex-col gap-y-2 rounded-[1.2em] bg-veryPaleOrange px-8 pb-12 pt-7">
-          <span className="text-[1.4rem] font-semibold text-darkBrown md:ml-2 md:text-[2rem]">
-            Spending - Last 7 days
-          </span>
-          <BarChart />
-          <hr className="mt-5 w-[95%] self-center border-t-2 border-cream pb-3" />
-          {/* bottom wrapper */}
-          <div className="flex justify-between">
+    <main className="flex h-full flex-col items-center justify-center py-4 align-middle font-dmSans md:min-h-screen">
+      {data1.length === 0 ? (
+        <div>Loading...</div>
+      ) : (
+        <div className="md:f flex w-screen flex-col gap-y-6 px-4 md:w-auto">
+          {/* first wrapper */}
+          <div className="flex justify-between rounded-[1.2em] bg-softRed px-8 py-6 md:w-[33.5em]">
             {/* left */}
-            <div className="just flex flex-col leading-[2.9em] ">
-              <span className="text-mediumBrown md:text-[1.12rem]">Total this month</span>
-              <span className="text-[1.8rem] font-[600] text-darkBrown md:text-[3rem]">$478.33</span>
+            <div className="flex flex-col space-y-[0.08em] text-white">
+              <span className="text-[1.1rem] font-[400] text-cream">My balance</span>
+              <span className="text-[2rem] font-medium text-veryPaleOrange">$921.48</span>
             </div>
-            {/* right */}
-            <div className="flex flex-col justify-end text-end">
-              <span className="text-[1.15rem] font-[700] text-darkBrown">+2.4%</span>
-              <span className="text-mediumBrown md:text-[1.12rem]">from last month</span>
+            <Image
+              className="h-auto w-[4.5em] md:mr-1.5"
+              src="/images/logo.svg"
+              alt="Logo"
+              height={10}
+              width={10}
+              priority
+            ></Image>
+          </div>
+          {/* second wrapper */}
+          <div className="flex flex-col gap-y-2 rounded-[1.2em] bg-veryPaleOrange px-8 pb-12 pt-7">
+            <span className="text-[1.4rem] font-semibold text-darkBrown md:ml-2 md:text-[2rem]">
+              Spending - Last 7 days
+            </span>
+            <BarChart data1={data1} /> {/* Pass the data1 to BarChart component */}
+            <hr className="mt-5 w-[95%] self-center border-t-2 border-cream pb-3" />
+            {/* bottom wrapper */}
+            <div className="flex justify-between">
+              {/* left */}
+              <div className="just flex flex-col leading-[2.9em] ">
+                <span className="text-mediumBrown md:text-[1.12rem]">Total this month</span>
+                <span className="text-[1.8rem] font-[600] text-darkBrown md:text-[3rem]">$478.33</span>
+              </div>
+              {/* right */}
+              <div className="flex flex-col justify-end text-end">
+                <span className="text-[1.15rem] font-[700] text-darkBrown">+2.4%</span>
+                <span className="text-mediumBrown md:text-[1.12rem]">from last month</span>
+              </div>
             </div>
           </div>
         </div>
-      </div>
+      )}
     </main>
   );
 }
