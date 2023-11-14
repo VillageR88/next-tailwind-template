@@ -11,12 +11,12 @@ const config: Config = {
       fontFamily: {
         sans: ['var(--font-sans)'],
         mono: ['var(--font-mono)'],
+        epilogue: 'Epilogue',
       },
       colors: {
-        // Slate
-        // 'accent-brand-800': '#1e293b',
-        // 'accent-brand-700': '#334155',
-        // 'accent-brand-600': '#475569',
+        almostWhite: 'hsl(0, 0%, 98%)',
+        mediumGray: 'hsl(0, 0%, 41%)',
+        almostBlack: 'hsl(0, 0%, 8%)',
       },
     },
   },
