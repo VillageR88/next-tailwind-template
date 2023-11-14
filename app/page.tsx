@@ -30,23 +30,19 @@ const BarChart = () => {
         console.error('Error loading JSON:', error);
       });
   }, []);
-
   if (data1.length === 0) {
-    return null;
+    return <div>Loading...</div>; // Display a loading message while fetching data
   }
   const maxAmount = Math.max(...data1.map((item) => item.amount));
-
-  const data = {
-    labels: [data1[0].day, data1[1].day, data1[2].day, data1[3].day, data1[4].day, data1[5].day, data1[6].day],
-
+  const labels = [data1[0].day, data1[1].day, data1[2].day, data1[3].day, data1[4].day, data1[5].day, data1[6].day];
+  const chartData = {
+    labels: labels,
     datasets: [
       {
-        label: 'Monthly Sales',
         backgroundColor: data1.map((item) => (item.amount === maxAmount ? 'hsl(186, 34%, 60%)' : 'hsl(10, 79%, 65%)')),
         hoverBackgroundColor: data1.map((item) =>
           item.amount === maxAmount ? 'hsl(186, 34%, 60%, 0.7)' : 'hsl(10, 79%, 65%, 0.7)',
         ),
-
         data: [
           data1[0].amount,
           data1[1].amount,
@@ -56,41 +52,54 @@ const BarChart = () => {
           data1[5].amount,
           data1[6].amount,
         ],
+        borderRadius: 5,
       },
     ],
   };
 
-  const options = {
-    onHover: (event: { native: { target: { style: { cursor: string } } } }, chartElement: unknown[]) => {
-      event.native.target.style.cursor = chartElement[0] ? 'pointer' : 'default';
-    },
-    borderSkipped: false,
-    borderLine: false,
-    scales: {
-      x: {
-        display: true,
-        border: {
-          display: false,
-        },
-        grid: {
-          display: false,
+  const config = {
+    type: 'bar',
+    data: chartData,
+    options: {
+      responsive: true,
+      plugins: {
+        legend: {
+          position: 'top',
+          display: true,
+          text: 'Chart.js Bar Chart',
         },
       },
-      y: {
-        display: false,
-        beginAtZero: true,
-        max: 80,
-        border: {
-          display: false,
+      onHover: (event: { native: { target: { style: { cursor: string } } } }, chartElement: unknown[]) => {
+        event.native.target.style.cursor = chartElement[0] ? 'pointer' : 'default';
+      },
+      borderSkipped: false,
+      borderLine: false,
+      scales: {
+        x: {
+          display: true,
+          border: {
+            display: false,
+          },
+          grid: {
+            display: false,
+          },
         },
-        grid: {
+        y: {
           display: false,
+          beginAtZero: true,
+          max: 80,
+          border: {
+            display: false,
+          },
+          grid: {
+            display: false,
+          },
         },
       },
     },
   };
 
-  return <Bar data={data} options={options} />;
+  return <Bar data={chartData} options={config.options} />;
 };
 
 export default function Home() {

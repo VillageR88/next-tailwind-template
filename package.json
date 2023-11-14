@@ -12,6 +12,7 @@
   "dependencies": {
     "@fontsource/dm-sans": "^5.0.17",
     "chart.js": "^4.4.0",
+    "chartjs-plugin-datalabels": "^2.2.0",
     "next": "^14.0.3-canary.5",
     "react": "^18.2.0",
     "react-chartjs-2": "^5.2.0",
