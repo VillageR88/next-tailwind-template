@@ -73,12 +73,14 @@ const BarChart = () => {
       plugins: {
         tooltip: {
           yAlign: 'bottom',
+          backgroundColor: 'hsl(25, 47%, 15%)',
           displayColors: false,
           callbacks: {
             title: titleTooltip,
             label: labelTooltip,
             footer: footer,
           },
+          position: 'nearest',
         },
       },
       onHover: (event: { native: { target: { style: { cursor: string } } } }, chartElement: unknown[]) => {
