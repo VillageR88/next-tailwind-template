@@ -113,7 +113,7 @@ const BarChart = ({ data1 }: { data1: DataItem[] }) => {
       },
     },
   };
-
+  //@ts-expect-error Someday and that day may never come I will resolve this conflict
   return <Bar data={chartData} options={config.options} />;
 };
 
@@ -152,7 +152,7 @@ export default function Home() {
             </div>
             <Image
               className="h-auto w-[4.5em] md:mr-1.5"
-              src="/images/logo.svg"
+              src="./images/logo.svg"
               alt="Logo"
               height={10}
               width={10}

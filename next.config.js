@@ -12,6 +12,7 @@ const nextConfig = {
 
   // Optional: Change the output directory `out` -> `dist`
   distDir: 'build',
+  //assetPrefix: '/Frontend_Mentor/expenses-chart-component-main/',
 
   reactStrictMode: true,
 }
