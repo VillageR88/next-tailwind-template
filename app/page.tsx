@@ -37,13 +37,15 @@ const BarChart = () => {
 
   const data = {
     labels: [data1[0].day, data1[1].day, data1[2].day, data1[3].day, data1[4].day, data1[5].day, data1[6].day],
+
     datasets: [
       {
         label: 'Monthly Sales',
-        backgroundColor: 'rgba(75,192,192,0.2)',
-        borderColor: 'rgba(75,192,192,1)',
+        fill: false, // <-- Set `fill: false` here
+        backgroundColor: 'hsl(10, 79%, 65%)',
+        //borderColor: 'rgba(75,192,192,1)',
         //borderWidth: 1,
-        //hoverBackgroundColor: 'rgba(75,192,192,0.4)',
+        hoverBackgroundColor: 'rgba(75,192,192,0.4)',
         hoverBorderColor: 'rgba(75,192,192,1)',
         data: [
           data1[0].amount,
@@ -54,14 +56,24 @@ const BarChart = () => {
           data1[5].amount,
           data1[6].amount,
         ],
+        borderRadius: 5, // Adjust the radius as needed
       },
     ],
   };
 
   const options = {
+    borderSkipped: false,
+    borderLine: false,
     scales: {
+      x: {
+        grid: {},
+        gridLines: {},
+        borderWidth: 0,
+      },
       y: {
         beginAtZero: true,
+        max: 80,
+        display: false,
       },
     },
   };
@@ -84,7 +96,7 @@ export default function Home() {
           <Image className="h-auto w-[5em]" src="/images/logo.svg" alt="Logo" height={10} width={10} priority></Image>
         </div>
         {/* second wrapper */}
-        <div>
+        <div className="bg-veryPaleOrange">
           <span>Spending - Last 7 days</span>
           <BarChart />
         </div>
