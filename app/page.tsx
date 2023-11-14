@@ -66,14 +66,24 @@ const BarChart = () => {
     borderLine: false,
     scales: {
       x: {
-        grid: {},
-        gridLines: {},
-        borderWidth: 0,
+        display: true,
+        border: {
+          display: false,
+        },
+        grid: {
+          display: false,
+        },
       },
       y: {
+        display: false,
         beginAtZero: true,
         max: 80,
-        display: false,
+        border: {
+          display: false,
+        },
+        grid: {
+          display: false,
+        },
       },
     },
   };
