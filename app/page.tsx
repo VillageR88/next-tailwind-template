@@ -129,11 +129,11 @@ const BarChart = () => {
 
 export default function Home() {
   return (
-    <main className="flex min-h-screen flex-col items-center justify-center font-dmSans">
+    <main className="flex min-h-screen flex-col items-center justify-center py-4 font-dmSans">
       {/* main wrapper */}
       <div className="md:f flex w-screen flex-col gap-y-6 px-4 md:w-auto">
         {/* first wrapper */}
-        <div className="flex justify-between rounded-[1.2em] bg-softRed md:w-[33.5em] md:px-8 md:py-6">
+        <div className="flex justify-between rounded-[1.2em] bg-softRed px-8 py-6 md:w-[33.5em]">
           {/* left */}
           <div className="flex flex-col space-y-[0.08em] text-white">
             <span className="text-[1.1rem] font-[400] text-cream">My balance</span>
@@ -149,21 +149,23 @@ export default function Home() {
           ></Image>
         </div>
         {/* second wrapper */}
-        <div className="flex flex-col gap-y-2 rounded-[1.2em] bg-veryPaleOrange md:px-8 md:pb-12 md:pt-7">
-          <span className="ml-2 text-[2rem] font-semibold text-darkBrown">Spending - Last 7 days</span>
+        <div className="flex flex-col gap-y-2 rounded-[1.2em] bg-veryPaleOrange px-8 pb-12 pt-7">
+          <span className="text-[1.4rem] font-semibold text-darkBrown md:ml-2 md:text-[2rem]">
+            Spending - Last 7 days
+          </span>
           <BarChart />
-          <hr className="mt-5 pb-3 w-[95%] self-center border-t-2 border-cream" />
+          <hr className="mt-5 w-[95%] self-center border-t-2 border-cream pb-3" />
           {/* bottom wrapper */}
           <div className="flex justify-between">
             {/* left */}
             <div className="just flex flex-col leading-[2.9em] ">
-              <span className="text-[1.12rem] text-mediumBrown">Total this month</span>
-              <span className="text-[3rem] font-[600] text-darkBrown">$478.33</span>
+              <span className="text-mediumBrown md:text-[1.12rem]">Total this month</span>
+              <span className="text-[1.8rem] font-[600] text-darkBrown md:text-[3rem]">$478.33</span>
             </div>
             {/* right */}
             <div className="flex flex-col justify-end text-end">
               <span className="text-[1.15rem] font-[700] text-darkBrown">+2.4%</span>
-              <span className="text-[1.12rem] text-mediumBrown">from last month</span>
+              <span className="text-mediumBrown md:text-[1.12rem]">from last month</span>
             </div>
           </div>
         </div>
