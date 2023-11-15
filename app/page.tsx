@@ -13,7 +13,7 @@ export default function Home() {
     <Image className="h-[0.5em] w-[0.7em]" src="./images/icon-arrow-down.svg" alt="arrow down" height={1} width={10} />
   );
   return (
-    <div className="flex flex-col items-center gap-[2em] py-6 font-epilogue md:min-h-screen md:gap-14 md:px-4">
+    <div className="flex h-full flex-col items-center gap-[2em] py-4 md:py-6 font-epilogue md:min-h-screen md:gap-14 md:px-4">
       <nav className="flex w-full flex-row justify-between xl:pr-10">
         {/*navbar left wrapper*/}
         <div className="flex items-center px-4 md:gap-16 md:px-0">
@@ -62,7 +62,7 @@ export default function Home() {
           <span className="text-[2.2rem] font-[700] leading-[1em] text-almostBlack md:pt-[1em] md:text-[3.5rem] xl:text-[4.8rem]">
             {'Make\nremote work'}
           </span>
-          <span className="md:text[0.8rem] lg:text[1rem] max-w-[26em] pb-[3em] pt-[2em] font-[600] text-mediumGray xl:text-[1.1rem]">
+          <span className="md:text[0.8rem] lg:text[1rem] max-w-[26em] px-4 pb-[2em] pt-[2em] font-[600] text-mediumGray md:px-0 md:pb-[3em] xl:text-[1.1rem]">
             {
               'Get your team in sync, no matter your location.\nStreamline processes, create team rituals, and watch productivity soar.'
             }
@@ -70,30 +70,30 @@ export default function Home() {
           <button className="rounded-[1em] bg-almostBlack px-8 py-4  text-[1.1rem] font-[600] text-almostWhite md:self-start md:px-6">
             Learn more
           </button>
-          <div className="flex justify-start md:gap-1 md:pt-[3em] lg:pt-[7em] xl:gap-10">
+          <div className="flex w-full items-center justify-between px-4 pt-[2.5em] md:scale-100 md:justify-start md:gap-1 md:px-0 md:pt-[3em] lg:pt-[7em] xl:gap-10">
             <Image
-              className="h-[1.3em] w-[7em]"
+              className="h-[1em] w-[5em] md:h-[1.3em] md:w-[7em]"
               src="./images/client-databiz.svg"
               alt="databiz logo"
               height={10}
               width={10}
             />
             <Image
-              className="h-[2.2em] w-[4.4em]"
+              className="h-[2em] w-[4em]  md:h-[2.2em] md:w-[4.4em]"
               src="./images/client-audiophile.svg"
               alt="audiophile logo"
               height={10}
               width={10}
             />
             <Image
-              className="h-[1.3em] w-[6em]"
+              className="h-[1em] w-[4em]  md:h-[1.3em] md:w-[6em]"
               src="./images/client-meet.svg"
               alt="meet logo"
               height={10}
               width={10}
             />
             <Image
-              className="h-[1.4em] w-[5em]"
+              className="h-[1.4em] w-[5em]  md:h-[1.4em] md:w-[5em]"
               src="./images/client-maker.svg"
               alt="maker logo"
               height={10}
