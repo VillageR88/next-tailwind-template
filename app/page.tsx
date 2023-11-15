@@ -25,21 +25,13 @@ const ButtonArrow = ({ name }: { name: string }) => {
     >
       <span className={`${navButtonsLayout}`}>{name}</span>
       {arrow === 'down' ? (
-        <Image
-          className="h-[0.4em] w-[0.63em]"
-          src="./images/icon-arrow-down.svg"
-          alt="arrow down"
-          height={10}
-          width={10}
-        />
+        <svg width="10" height="6" xmlns="http://www.w3.org/2000/svg">
+          <path stroke="#686868" stroke-width="1.5" fill="none" d="m1 1 4 4 4-4" />
+        </svg>
       ) : (
-        <Image
-          className="h-[0.4em] w-[0.63em]"
-          src="./images/icon-arrow-up.svg"
-          alt="arrow down"
-          height={10}
-          width={10}
-        />
+        <svg width="10" height="6" xmlns="http://www.w3.org/2000/svg">
+          <path stroke="#000000" stroke-width="1.5" fill="none" d="m1 5 4-4 4 4" />
+        </svg>
       )}
     </div>
   );
