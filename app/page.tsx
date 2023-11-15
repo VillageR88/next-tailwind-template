@@ -6,11 +6,20 @@ import '@fontsource/epilogue/600.css';
 import '@fontsource/epilogue/700.css';
 
 export default function Home() {
-  const navButtonsLayout = 'text-[0.9rem] font-[600] text-mediumGray';
-  const navDoubleLayout = 'flex items-center gap-1.5 hover:cursor-pointer';
+  const navButtonsLayout = 'text-[0.9rem] font-[600] text-mediumGray hover:text-almostBlack';
+  const navDoubleLayout = 'flex items-center gap-1.5 hover:cursor-pointer ';
   const navSingleLayout = 'flex items-center hover:cursor-pointer';
   const arrowDown = (
-    <Image className="h-[0.5em] w-[0.7em]" src="./images/icon-arrow-down.svg" alt="arrow down" height={1} width={10} />
+    <Image
+      className="h-[0.4em] w-[0.63em]"
+      src="./images/icon-arrow-down.svg"
+      alt="arrow down"
+      height={10}
+      width={10}
+    />
+  );
+  const arrowUp = (
+    <Image className="h-[0.4em] w-[0.63em]" src="./images/icon-arrow-up.svg" alt="arrow down" height={10} width={10} />
   );
   return (
     <div className="flex h-full flex-col items-center gap-[2em] py-4 font-epilogue md:min-h-screen md:gap-14 md:px-4 md:py-6">
@@ -49,7 +58,7 @@ export default function Home() {
           </div>
           <div className={navSingleLayout}>
             <button
-              className={`${navButtonsLayout} rounded-[1em] border-2 border-mediumGray px-5 pb-1.5 pt-2 text-center`}
+              className={`${navButtonsLayout} rounded-[1em] border-2 border-mediumGray px-5 pb-1.5 pt-2 text-center hover:border-almostBlack`}
             >
               Register
             </button>
@@ -67,7 +76,11 @@ export default function Home() {
               'Get your team in sync, no matter your location.\nStreamline processes, create team rituals, and watch productivity soar.'
             }
           </span>
-          <button className="rounded-[1em] bg-almostBlack px-8 py-4 text-[1.1rem] font-[600] text-almostWhite md:self-start md:px-6">
+          <button
+            className={
+              'rounded-[1em] border-[1px]  bg-almostBlack px-8 py-3 text-[1.1rem] font-[600] text-almostWhite hover:border-almostBlack hover:bg-almostWhite hover:text-almostBlack md:self-start md:px-6'
+            }
+          >
             Learn more
           </button>
           <div className="flex w-full items-center justify-between px-4 pt-[2.5em] md:scale-100 md:justify-start md:gap-1 md:px-0 md:pt-[3em] lg:pt-[7em] xl:gap-10">
