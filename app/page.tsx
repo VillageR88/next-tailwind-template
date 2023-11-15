@@ -8,8 +8,6 @@ import '@fontsource/epilogue/600.css';
 import '@fontsource/epilogue/700.css';
 
 const navButtonsLayout = 'text-[0.9rem] font-[600] text-mediumGray hover:text-almostBlack';
-const navDoubleLayout = 'flex items-center gap-1.5 hover:cursor-pointer';
-const navSingleLayout = 'flex items-center hover:cursor-pointer';
 
 const ButtonArrow = ({ name }: { name: string }) => {
   const [arrow, setArrow] = useState<string>('down');
@@ -21,16 +19,16 @@ const ButtonArrow = ({ name }: { name: string }) => {
       onMouseLeave={() => {
         setArrow('down');
       }}
-      className={`${navDoubleLayout}`}
+      className="flex items-center gap-1.5 hover:cursor-pointer"
     >
       <span className={`${navButtonsLayout}`}>{name}</span>
       {arrow === 'down' ? (
         <svg width="10" height="6" xmlns="http://www.w3.org/2000/svg">
-          <path stroke="#686868" stroke-width="1.5" fill="none" d="m1 1 4 4 4-4" />
+          <path stroke="#686868" strokeWidth="1.5" fill="none" d="m1 1 4 4 4-4" />
         </svg>
       ) : (
         <svg width="10" height="6" xmlns="http://www.w3.org/2000/svg">
-          <path stroke="#000000" stroke-width="1.5" fill="none" d="m1 5 4-4 4 4" />
+          <path stroke="hsl(0, 0%, 8%)" strokeWidth="1.5" fill="none" d="m1 5 4-4 4 4" />
         </svg>
       )}
     </div>
@@ -38,7 +36,7 @@ const ButtonArrow = ({ name }: { name: string }) => {
 };
 
 export default function Home() {
-  //const [arrow, setArrow] = useState<string>('down');
+  const navSingleLayout = 'flex items-center hover:cursor-pointer';
 
   return (
     <div className="flex h-full flex-col items-center gap-[2em] py-4 font-epilogue md:min-h-screen md:gap-14 md:px-4 md:py-6">
@@ -135,6 +133,7 @@ export default function Home() {
             alt="logo"
             height={10}
             width={10}
+            priority
           />
           <Image
             className="flex h-full w-full md:hidden"
@@ -142,6 +141,7 @@ export default function Home() {
             alt="logo"
             height={10}
             width={10}
+            priority
           />
         </div>
       </main>
