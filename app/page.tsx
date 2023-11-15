@@ -1,13 +1,32 @@
+'use client';
 import Image from 'next/image';
+import { useState } from 'react';
 import '@fontsource/epilogue';
 import '@fontsource/epilogue/400.css';
 import '@fontsource/epilogue/500.css';
 import '@fontsource/epilogue/600.css';
 import '@fontsource/epilogue/700.css';
 
+const ButtonArrow = () => {
+  const [arrow, setArrow] = useState<string>('down');
+  if (arrow === 'down')
+    return (
+      <Image
+        className="h-[0.4em] w-[0.63em]"
+        src="./images/icon-arrow-down.svg"
+        alt="arrow down"
+        height={10}
+        width={10}
+      />
+    );
+  else
+    <Image className="h-[0.4em] w-[0.63em]" src="./images/icon-arrow-up.svg" alt="arrow down" height={10} width={10} />;
+};
+
 export default function Home() {
+  //const [arrow, setArrow] = useState<string>('down');
   const navButtonsLayout = 'text-[0.9rem] font-[600] text-mediumGray hover:text-almostBlack';
-  const navDoubleLayout = 'flex items-center gap-1.5 hover:cursor-pointer ';
+  const navDoubleLayout = 'flex items-center gap-1.5 hover:cursor-pointer';
   const navSingleLayout = 'flex items-center hover:cursor-pointer';
   const arrowDown = (
     <Image
@@ -18,9 +37,7 @@ export default function Home() {
       width={10}
     />
   );
-  const arrowUp = (
-    <Image className="h-[0.4em] w-[0.63em]" src="./images/icon-arrow-up.svg" alt="arrow down" height={10} width={10} />
-  );
+
   return (
     <div className="flex h-full flex-col items-center gap-[2em] py-4 font-epilogue md:min-h-screen md:gap-14 md:px-4 md:py-6">
       <nav className="flex w-full flex-row justify-between xl:pr-10">
