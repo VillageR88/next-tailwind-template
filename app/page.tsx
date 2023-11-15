@@ -7,13 +7,13 @@ import '@fontsource/epilogue/700.css';
 
 export default function Home() {
   const navButtonsLayout = 'text-[0.9rem] font-[600] text-mediumGray';
-  const navDoubleLayout = 'flex items-center gap-1.5';
-  const navSingleLayout = 'flex items-center';
+  const navDoubleLayout = 'flex items-center gap-1.5 hover:cursor-pointer';
+  const navSingleLayout = 'flex items-center hover:cursor-pointer';
   const arrowDown = (
     <Image className="h-[0.5em] w-[0.7em]" src="./images/icon-arrow-down.svg" alt="arrow down" height={1} width={10} />
   );
   return (
-    <div className="flex h-full flex-col items-center gap-[2em] py-4 md:py-6 font-epilogue md:min-h-screen md:gap-14 md:px-4">
+    <div className="flex h-full flex-col items-center gap-[2em] py-4 font-epilogue md:min-h-screen md:gap-14 md:px-4 md:py-6">
       <nav className="flex w-full flex-row justify-between xl:pr-10">
         {/*navbar left wrapper*/}
         <div className="flex items-center px-4 md:gap-16 md:px-0">
@@ -25,9 +25,9 @@ export default function Home() {
             width={10}
             priority
           />
-          <div className="hidden gap-8 md:flex">
+          <div className="hidden gap-8 md:flex ">
             <div className={navDoubleLayout}>
-              <span className={navButtonsLayout}>Feauters</span>
+              <span className={navButtonsLayout}>Features</span>
               {arrowDown}
             </div>
             <div className={navDoubleLayout}>
@@ -67,7 +67,7 @@ export default function Home() {
               'Get your team in sync, no matter your location.\nStreamline processes, create team rituals, and watch productivity soar.'
             }
           </span>
-          <button className="rounded-[1em] bg-almostBlack px-8 py-4  text-[1.1rem] font-[600] text-almostWhite md:self-start md:px-6">
+          <button className="rounded-[1em] bg-almostBlack px-8 py-4 text-[1.1rem] font-[600] text-almostWhite md:self-start md:px-6">
             Learn more
           </button>
           <div className="flex w-full items-center justify-between px-4 pt-[2.5em] md:scale-100 md:justify-start md:gap-1 md:px-0 md:pt-[3em] lg:pt-[7em] xl:gap-10">
