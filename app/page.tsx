@@ -13,7 +13,7 @@ export default function Home() {
     <Image className="h-[0.5em] w-[0.7em]" src="./images/icon-arrow-down.svg" alt="arrow down" height={1} width={10} />
   );
   return (
-    <div className="flex flex-col items-center py-6 font-epilogue md:min-h-screen">
+    <div className="flex flex-col items-center gap-10 py-6 font-epilogue md:min-h-screen">
       <nav className="flex w-full flex-row justify-between">
         {/*navbar left wrapper*/}
         <div className="flex items-center gap-16">
@@ -51,8 +51,13 @@ export default function Home() {
       </nav>
       <main className="flex w-full justify-center">
         {/*1st col wrapper*/}
-        <div className="flex h-full w-1/2 justify-center self-center whitespace-break-spaces text-[5rem] font-[700] leading-[1em] text-almostBlack">
-          <span>{'Make\nremote work'}</span>
+        <div className="flex w-1/2 flex-col justify-center self-center whitespace-break-spaces ">
+          <span className="text-[5rem] font-[700] leading-[1em] text-almostBlack">{'Make\nremote work'}</span>
+          <span className="max-w-[26em] text-[1.1rem] font-[600] text-mediumGray">
+            {
+              'Get your team in sync, no matter your location.\nStreamline processes, create team rituals, and watch productivity soar.'
+            }
+          </span>
         </div>
         {/*2nd col wrapper*/}
         <div className="w-[40%]">
