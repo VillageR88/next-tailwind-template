@@ -82,7 +82,7 @@ const Planing = () => {
   );
 };
 
-const NormalButton = ({ name }: { name: string }) => {
+const NormalButton = ({ name }: { name: Names }) => {
   return <span className="flex hover:text-almostBlack hover:underline">{name}</span>;
 };
 
@@ -135,11 +135,11 @@ const ButtonArrow = ({ name }: { name: Names }) => {
   );
 };
 
-const ButtonMobile = () => {
+const ButtonBurger = () => {
   const [dropdown, setDropdown] = useState(DropdownState.closed);
   {
     return dropdown === DropdownState.closed ? (
-      <div className="flex pr-4 md:hidden">
+      <div className="out flex pr-4 md:hidden">
         <button
           onClick={() => {
             setDropdown(DropdownState.open);
@@ -153,8 +153,9 @@ const ButtonMobile = () => {
         </button>
       </div>
     ) : (
-      <div className="flex pr-4 md:hidden">
+      <div className="fixed right-0 top-0 flex  h-full w-2/3 items-start justify-end bg-almostWhite pr-4 md:hidden">
         <button
+          className="pr-[0.2em] pt-[1.4em]"
           onClick={() => {
             setDropdown(DropdownState.closed);
           }}
@@ -212,7 +213,7 @@ export default function Home() {
           </div>
         </div>
         {/*navbar right wrapper(mobile)*/}
-        <ButtonMobile />
+        <ButtonBurger />
       </nav>
       <main className="flex w-full flex-col-reverse justify-around gap-[2em] md:flex-row xl:pl-[8em]">
         {/*1st col wrapper*/}
