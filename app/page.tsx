@@ -65,17 +65,24 @@ const Planing = () => {
   );
 };
 
+const NormalButton = ({ name }: { name: string }) => {
+  return <span className="flex hover:text-almostBlack hover:underline">{name}</span>;
+};
+
 enum DropdownState {
   open = 'open',
   closed = 'closed',
 }
 
-enum DropdownName {
+enum Names {
   features = 'Features',
   company = 'Company',
+  history = 'History',
+  outTeam = 'Out Team',
+  blog = 'Blog',
 }
 
-const ButtonArrow = ({ name }: { name: DropdownName }) => {
+const ButtonArrow = ({ name }: { name: Names }) => {
   const [arrow, setArrow] = useState(DropdownState.closed);
   return (
     <div
@@ -98,7 +105,7 @@ const ButtonArrow = ({ name }: { name: DropdownName }) => {
             <path stroke="hsl(0, 0%, 8%)" strokeWidth="1.5" fill="none" d="m1 5 4-4 4 4" />
           </svg>
           {/*dropdownList*/}
-          {name === DropdownName.features ? (
+          {name === Names.features ? (
             <div className="absolute">
               <canvas className="ml-[-9em] h-[1.3em] w-[10em] bg-transparent"></canvas>
               <div className=" ml-[-9.9em] flex flex-col gap-[0.8em] rounded-[1em] bg-white pb-4 pl-6 pr-6 pt-6 text-[0.9rem] font-[500] text-mediumGray drop-shadow-2xl ">
@@ -112,9 +119,9 @@ const ButtonArrow = ({ name }: { name: DropdownName }) => {
             <div className="absolute">
               <canvas className="ml-[-4.6em] h-[1.3em] w-[7.2em] bg-transparent"></canvas>
               <div className=" ml-[-5.1em] flex flex-col gap-[0.8em] rounded-[1em] bg-white pb-4 pl-6 pr-6 pt-6 text-[0.9rem] font-[500] text-mediumGray drop-shadow-2xl ">
-                <span className="flex hover:text-almostBlack hover:underline">History</span>
-                <span className="flex hover:text-almostBlack hover:underline">Out Team</span>
-                <span className="flex hover:text-almostBlack hover:underline">Blog</span>
+                <NormalButton name={Names.history} />
+                <NormalButton name={Names.outTeam} />
+                <NormalButton name={Names.blog} />
               </div>
             </div>
           )}
@@ -156,8 +163,8 @@ export default function Home() {
             priority
           />
           <div className="hidden gap-8 md:flex ">
-            <ButtonArrow name={DropdownName.features} />
-            <ButtonArrow name={DropdownName.company} />
+            <ButtonArrow name={Names.features} />
+            <ButtonArrow name={Names.company} />
             <div className={navSingleLayout}>
               <span className={navButtonsLayout}>Careers</span>
             </div>
