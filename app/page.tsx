@@ -142,27 +142,36 @@ const ButtonArrow = ({ name }: { name: Names }) => {
         )}
       </div>
       {/*mobile*/}
-      <div
-        className="flex items-center gap-3 pl-6 pt-16 hover:cursor-pointer md:hidden"
-        onClick={() => {
-          arrow === DropdownState.closed ? setArrow(DropdownState.open) : setArrow(DropdownState.closed);
-        }}
-      >
-        <span className={`${navButtonsLayout} text-[1.2rem]`}>{name}</span>
+      <div className="items-left flex flex-col gap-3 pl-6 pt-16 hover:cursor-pointer md:hidden">
         {arrow === DropdownState.closed ? (
-          <svg width="10" height="6" xmlns="http://www.w3.org/2000/svg">
-            <path stroke="#686868" strokeWidth="1.5" fill="none" d="m1 1 4 4 4-4" />
-          </svg>
+          <div
+            onClick={() => {
+              setArrow(DropdownState.open);
+            }}
+            className="flex items-center gap-3"
+          >
+            <span className={`${navButtonsLayout} text-[1.1rem]`}>{name}</span>
+            <svg width="10" height="6" xmlns="http://www.w3.org/2000/svg">
+              <path stroke="#686868" strokeWidth="1.5" fill="none" d="m1 1 4 4 4-4" />
+            </svg>
+          </div>
         ) : (
           <div>
-            <svg width="10" height="6" xmlns="http://www.w3.org/2000/svg">
-              <path stroke="hsl(0, 0%, 8%)" strokeWidth="1.5" fill="none" d="m1 5 4-4 4 4" />
-            </svg>
+            <div
+              onClick={() => {
+                setArrow(DropdownState.closed);
+              }}
+              className="flex items-center gap-3"
+            >
+              <span className={`${navButtonsLayout} text-[1.1rem]`}>{name}</span>
+              <svg width="10" height="6" xmlns="http://www.w3.org/2000/svg">
+                <path stroke="hsl(0, 0%, 8%)" strokeWidth="1.5" fill="none" d="m1 5 4-4 4 4" />
+              </svg>
+            </div>
             {/*dropdownList*/}
             {name === Names.features ? (
-              <div className="absolute">
-                <canvas className="ml-[-9em] h-[1.3em] w-[10em] bg-transparent"></canvas>
-                <div className=" ml-[-9.9em] flex flex-col gap-[0.8em] rounded-[1em] bg-white pb-4 pl-6 pr-6 pt-6 text-[0.9rem] font-[500] text-mediumGray drop-shadow-2xl ">
+              <div>
+                <div className="flex flex-col gap-[0.8em] rounded-[1em]  pb-4 pl-6 pr-6 pt-6 text-[1.1rem] font-[500] text-mediumGray drop-shadow-2xl ">
                   <TodoList />
                   <Calendar />
                   <Reminders />
