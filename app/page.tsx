@@ -218,10 +218,10 @@ const ButtonBurger = () => {
       </div>
     ) : (
       <div className="flex md:hidden">
-        <canvas className="fixed left-0 top-0 h-screen w-screen bg-almostBlack opacity-70" />
-        <div className="fixed right-0 top-0 flex h-full w-2/3 flex-col bg-almostWhite md:hidden">
+        <canvas className="fixed left-0 top-0 h-full  w-1/3 bg-almostBlack opacity-70" />
+        <div className="fixed right-0 top-0  overflow-y-auto h-screen w-2/3 flex-col bg-almostWhite md:hidden">
           <button
-            className="fixed right-5 pt-[1.4em]"
+            className="absolute right-5 pt-[1.4em]"
             onClick={() => {
               setDropdown(DropdownState.closed);
             }}
@@ -257,7 +257,7 @@ const ButtonBurger = () => {
 
 export default function Home() {
   return (
-    <div className="flex h-full flex-col items-center gap-[2em] py-4 font-epilogue md:min-h-screen md:gap-14 md:px-4 md:py-6">
+    <div className="flex h-full flex-col items-center gap-[2em] py-4 font-epilogue md:min-h-screen md:gap-14 md:px-4 md:py-6 ">
       <nav className="flex w-full flex-row justify-between xl:pr-10">
         {/*navbar left wrapper*/}
         <div className="flex items-center px-4 md:gap-16 md:px-0">
