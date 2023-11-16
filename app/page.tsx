@@ -219,7 +219,7 @@ const ButtonBurger = () => {
     ) : (
       <div className="flex md:hidden">
         <canvas className="fixed left-0 top-0 h-full  w-1/3 bg-almostBlack opacity-70" />
-        <div className="fixed right-0 top-0  overflow-y-auto h-screen w-2/3 flex-col bg-almostWhite md:hidden">
+        <div className="fixed right-0 top-0  h-screen w-2/3 flex-col overflow-y-auto bg-almostWhite md:hidden">
           <button
             className="absolute right-5 pt-[1.4em]"
             onClick={() => {
