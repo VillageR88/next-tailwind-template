@@ -7,6 +7,23 @@ import '@fontsource/epilogue/500.css';
 import '@fontsource/epilogue/600.css';
 import '@fontsource/epilogue/700.css';
 
+enum DropdownState {
+  open = 'open',
+  closed = 'closed',
+}
+
+enum Names {
+  features = 'Features',
+  company = 'Company',
+  careers = 'Careers',
+  about = 'About',
+  login = 'Login',
+  register = 'Register',
+  history = 'History',
+  outTeam = 'Out Team',
+  blog = 'Blog',
+}
+
 const navButtonsLayout = 'text-[0.9rem] font-[600] text-mediumGray hover:text-almostBlack';
 
 const TodoList = () => {
@@ -68,19 +85,6 @@ const Planing = () => {
 const NormalButton = ({ name }: { name: string }) => {
   return <span className="flex hover:text-almostBlack hover:underline">{name}</span>;
 };
-
-enum DropdownState {
-  open = 'open',
-  closed = 'closed',
-}
-
-enum Names {
-  features = 'Features',
-  company = 'Company',
-  history = 'History',
-  outTeam = 'Out Team',
-  blog = 'Blog',
-}
 
 const ButtonArrow = ({ name }: { name: Names }) => {
   const [arrow, setArrow] = useState(DropdownState.closed);
@@ -166,23 +170,23 @@ export default function Home() {
             <ButtonArrow name={Names.features} />
             <ButtonArrow name={Names.company} />
             <div className={navSingleLayout}>
-              <span className={navButtonsLayout}>Careers</span>
+              <span className={navButtonsLayout}>{Names.careers}</span>
             </div>
             <div className={navSingleLayout}>
-              <span className={navButtonsLayout}>About</span>
+              <span className={navButtonsLayout}>{Names.about}</span>
             </div>
           </div>
         </div>
         {/*navbar right wrapper(desktop)*/}
         <div className="hidden gap-8 md:flex">
           <div className={navSingleLayout}>
-            <span className={navButtonsLayout}>Login</span>
+            <span className={navButtonsLayout}>{Names.login}</span>
           </div>
           <div className={navSingleLayout}>
             <button
               className={`${navButtonsLayout} rounded-[1em] border-2 border-mediumGray px-5 pb-1.5 pt-2 text-center hover:border-almostBlack`}
             >
-              Register
+              {Names.register}
             </button>
           </div>
         </div>
