@@ -8,28 +8,28 @@ import '@fontsource/manrope/800.css';
 import { useState } from 'react';
 
 export default function Home() {
-  const [text, setText] = useState('');
+  const [text, setText] = useState<JSON>();
   const dataJson = 'https://api.adviceslip.com/advice';
   useState(() => {
     fetch(dataJson)
       .then((response) => response.json())
-      .then((data: string) => {
-        setText(data);
+      .then((data: JSON | undefined) => {
+        setText(data.slip);
       })
       .catch((error) => {
         console.error('Error fetching data:', error);
       });
   });
 
-  return (
+  return text ? (
     <main className="flex min-h-screen flex-col items-center justify-center font-manrope">
       <div className="flex h-[20.7em] max-w-[33.7em] flex-col items-center justify-center gap-6 rounded-[1em] bg-darkGrayishBlue text-center">
         <span className="text-[0.8rem] font-[600] tracking-[0.35em] text-neonGreen">
-          ADVICE #{''}
+          ADVICE #{text.id}
           {/*117*/}
         </span>
         <span className="px-14 text-[1.7rem] font-[700] leading-[1.4em] text-lightCyan">
-          {''}
+          {text.advice}
           {/*&ldquo;It is easy to sit up and take notice, what's difficult is getting up and taking action.&rdquo;*/}
         </span>
         <div className="flex pb-6 pt-4">
@@ -71,5 +71,7 @@ export default function Home() {
         </svg>
       </div>
     </main>
+  ) : (
+    <div className='w-screen text-white h-screen'>Loading...</div>
   );
 }
