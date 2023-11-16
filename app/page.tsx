@@ -94,50 +94,96 @@ const NormalButton = ({ name }: { name: Names }) => {
 const ButtonArrow = ({ name }: { name: Names }) => {
   const [arrow, setArrow] = useState(DropdownState.closed);
   return (
-    <div
-      onMouseEnter={() => {
-        setArrow(DropdownState.open);
-      }}
-      onMouseLeave={() => {
-        setArrow(DropdownState.closed);
-      }}
-      className="flex items-center gap-1.5 hover:cursor-pointer"
-    >
-      <span className={`${navButtonsLayout}`}>{name}</span>
-      {arrow === DropdownState.closed ? (
-        <svg width="10" height="6" xmlns="http://www.w3.org/2000/svg">
-          <path stroke="#686868" strokeWidth="1.5" fill="none" d="m1 1 4 4 4-4" />
-        </svg>
-      ) : (
-        <div>
+    <div>
+      {/*desktop*/}
+      <div
+        className="hidden items-center gap-1.5 hover:cursor-pointer md:flex"
+        onMouseEnter={() => {
+          setArrow(DropdownState.open);
+        }}
+        onMouseLeave={() => {
+          setArrow(DropdownState.closed);
+        }}
+      >
+        <span className={`${navButtonsLayout}`}>{name}</span>
+        {arrow === DropdownState.closed ? (
           <svg width="10" height="6" xmlns="http://www.w3.org/2000/svg">
-            <path stroke="hsl(0, 0%, 8%)" strokeWidth="1.5" fill="none" d="m1 5 4-4 4 4" />
+            <path stroke="#686868" strokeWidth="1.5" fill="none" d="m1 1 4 4 4-4" />
           </svg>
-          {/*dropdownList*/}
-          {name === Names.features ? (
-            <div className="absolute">
-              <canvas className="ml-[-9em] h-[1.3em] w-[10em] bg-transparent"></canvas>
-              <div className=" ml-[-9.9em] flex flex-col gap-[0.8em] rounded-[1em] bg-white pb-4 pl-6 pr-6 pt-6 text-[0.9rem] font-[500] text-mediumGray drop-shadow-2xl ">
-                <TodoList />
-                <Calendar />
-                <Reminders />
-                <Planing />
-              </div>
-            </div>
-          ) : (
-            <div>
+        ) : (
+          <div>
+            <svg width="10" height="6" xmlns="http://www.w3.org/2000/svg">
+              <path stroke="hsl(0, 0%, 8%)" strokeWidth="1.5" fill="none" d="m1 5 4-4 4 4" />
+            </svg>
+            {/*dropdownList*/}
+            {name === Names.features ? (
               <div className="absolute">
-                <canvas className="ml-[-4.6em] h-[1.3em] w-[7.2em] bg-transparent"></canvas>
-                <div className=" ml-[-5.1em] flex flex-col gap-[0.8em] rounded-[1em] bg-white pb-4 pl-6 pr-6 pt-6 text-[0.9rem] font-[500] text-mediumGray drop-shadow-2xl ">
-                  <NormalButton name={Names.history} />
-                  <NormalButton name={Names.outTeam} />
-                  <NormalButton name={Names.blog} />
+                <canvas className="ml-[-9em] h-[1.3em] w-[10em] bg-transparent"></canvas>
+                <div className=" ml-[-9.9em] flex flex-col gap-[0.8em] rounded-[1em] bg-white pb-4 pl-6 pr-6 pt-6 text-[0.9rem] font-[500] text-mediumGray drop-shadow-2xl ">
+                  <TodoList />
+                  <Calendar />
+                  <Reminders />
+                  <Planing />
                 </div>
               </div>
-            </div>
-          )}
-        </div>
-      )}
+            ) : (
+              <div>
+                <div className="absolute">
+                  <canvas className="ml-[-4.6em] h-[1.3em] w-[7.2em] bg-transparent"></canvas>
+                  <div className=" ml-[-5.1em] flex flex-col gap-[0.8em] rounded-[1em] bg-white pb-4 pl-6 pr-6 pt-6 text-[0.9rem] font-[500] text-mediumGray drop-shadow-2xl ">
+                    <NormalButton name={Names.history} />
+                    <NormalButton name={Names.outTeam} />
+                    <NormalButton name={Names.blog} />
+                  </div>
+                </div>
+              </div>
+            )}
+          </div>
+        )}
+      </div>
+      {/*mobile*/}
+      <div
+        className="flex items-center gap-3 pl-6 pt-16 hover:cursor-pointer md:hidden"
+        onClick={() => {
+          arrow === DropdownState.closed ? setArrow(DropdownState.open) : setArrow(DropdownState.closed);
+        }}
+      >
+        <span className={`${navButtonsLayout} text-[1.2rem]`}>{name}</span>
+        {arrow === DropdownState.closed ? (
+          <svg width="10" height="6" xmlns="http://www.w3.org/2000/svg">
+            <path stroke="#686868" strokeWidth="1.5" fill="none" d="m1 1 4 4 4-4" />
+          </svg>
+        ) : (
+          <div>
+            <svg width="10" height="6" xmlns="http://www.w3.org/2000/svg">
+              <path stroke="hsl(0, 0%, 8%)" strokeWidth="1.5" fill="none" d="m1 5 4-4 4 4" />
+            </svg>
+            {/*dropdownList*/}
+            {name === Names.features ? (
+              <div className="absolute">
+                <canvas className="ml-[-9em] h-[1.3em] w-[10em] bg-transparent"></canvas>
+                <div className=" ml-[-9.9em] flex flex-col gap-[0.8em] rounded-[1em] bg-white pb-4 pl-6 pr-6 pt-6 text-[0.9rem] font-[500] text-mediumGray drop-shadow-2xl ">
+                  <TodoList />
+                  <Calendar />
+                  <Reminders />
+                  <Planing />
+                </div>
+              </div>
+            ) : (
+              <div>
+                <div className="absolute">
+                  <canvas className="ml-[-4.6em] h-[1.3em] w-[7.2em] bg-transparent"></canvas>
+                  <div className=" ml-[-5.1em] flex flex-col gap-[0.8em] rounded-[1em] bg-white pb-4 pl-6 pr-6 pt-6 text-[0.9rem] font-[500] text-mediumGray drop-shadow-2xl ">
+                    <NormalButton name={Names.history} />
+                    <NormalButton name={Names.outTeam} />
+                    <NormalButton name={Names.blog} />
+                  </div>
+                </div>
+              </div>
+            )}
+          </div>
+        )}
+      </div>
     </div>
   );
 };
@@ -146,7 +192,7 @@ const ButtonBurger = () => {
   const [dropdown, setDropdown] = useState(DropdownState.closed);
   {
     return dropdown === DropdownState.closed ? (
-      <div className="out flex pr-4 md:hidden">
+      <div className="flex pr-4 md:hidden">
         <button
           onClick={() => {
             setDropdown(DropdownState.open);
@@ -160,12 +206,11 @@ const ButtonBurger = () => {
         </button>
       </div>
     ) : (
-      <div>
-        <canvas className="fixed left-0 top-0 h-screen w-full bg-almostBlack opacity-70" />
-
-        <div className="fixed right-0 top-0 flex  h-full w-2/3 items-start justify-end bg-almostWhite pr-4 md:hidden">
+      <div className="flex md:hidden">
+        <canvas className="fixed left-0 top-0 h-screen w-screen bg-almostBlack opacity-70" />
+        <div className="fixed right-0 top-0 flex h-full w-2/3 flex-col  bg-almostWhite pr-4 md:hidden">
           <button
-            className="pr-[0.2em] pt-[1.4em]"
+            className="fixed right-5 pt-[1.4em]"
             onClick={() => {
               setDropdown(DropdownState.closed);
             }}
@@ -177,6 +222,9 @@ const ButtonBurger = () => {
               </g>
             </svg>
           </button>
+          <div>
+            <ButtonArrow name={Names.features} />
+          </div>
         </div>
       </div>
     );
