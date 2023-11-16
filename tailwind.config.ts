@@ -13,6 +13,10 @@ const config: Config = {
         mono: ['var(--font-mono)'],
         manrope: 'Manrope',
       },
+      boxShadow: {
+        't-aura': '0 0 50px rgba(0, 0, 255, 0.5), 0 0 100px rgba(0, 0, 255, 0.5), 0 0 200px rgba(0, 0, 255, 0.5)',
+        't-aura2': '0 0 1em rgba(0, 0, 255, 1), 0 0 2em',
+      },
       colors: {
         lightCyan: 'hsl(193, 38%, 86%)',
         neonGreen: 'hsl(150, 100%, 66%)',
