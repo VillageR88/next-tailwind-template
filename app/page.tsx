@@ -19,9 +19,14 @@ enum Names {
   about = 'About',
   login = 'Login',
   register = 'Register',
+  todoList = 'Todo List',
+  calendar = 'Calendar',
+  reminders = 'Reminders',
+  planing = 'Planing',
   history = 'History',
   outTeam = 'Out Team',
   blog = 'Blog',
+  learnMore = 'Learn more',
 }
 
 const navButtonsLayout = 'text-[0.9rem] font-[600] text-mediumGray hover:text-almostBlack';
@@ -35,21 +40,21 @@ const TodoList = () => {
           fill="#726CEE"
         />
       </svg>
-      <span>Todo List</span>
+      <span className="ml-[-0.1em]">{Names.todoList}</span>
     </div>
   );
 };
 
 const Calendar = () => {
   return (
-    <div className="flex gap-4 hover:text-almostBlack hover:underline">
+    <div className="ml-[-0.1em] flex gap-4 hover:text-almostBlack hover:underline">
       <svg width="16" height="16" xmlns="http://www.w3.org/2000/svg">
         <path
           d="M12.667 8.667h-4v4h4v-4ZM11.334 0v1.333H4.667V0h-2v1.333h-1C.75 1.333 0 2.083 0 3v11.333C0 15.25.75 16 1.667 16h12.667C15.25 16 16 15.25 16 14.333V3c0-.917-.75-1.667-1.666-1.667h-1V0h-2Zm3 14.333H1.667V5.5h12.667v8.833Z"
           fill="#4BB1DA"
         />
       </svg>
-      <span>Calendar</span>
+      <span className="ml-[-0.1em]">{Names.calendar}</span>
     </div>
   );
 };
@@ -63,21 +68,21 @@ const Reminders = () => {
           fill="#EDD556"
         />
       </svg>
-      <span>Reminders</span>
+      <span>{Names.reminders}</span>
     </div>
   );
 };
 
 const Planing = () => {
   return (
-    <div className="flex gap-4 hover:text-almostBlack hover:underline">
+    <div className="ml-[-0.1em] flex gap-4 hover:text-almostBlack hover:underline">
       <svg width="16" height="16" xmlns="http://www.w3.org/2000/svg">
         <path
           d="M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0Zm0 2.133a5.867 5.867 0 1 0 0 11.734A5.867 5.867 0 0 0 8 2.133ZM8 3.2a4.8 4.8 0 1 1 0 9.6 4.8 4.8 0 0 1 0-9.6Zm-.533 2.667a.533.533 0 0 0-.534.533v2.133c0 .295.24.534.534.534h3.2a.533.533 0 0 0 0-1.067H8V6.4a.533.533 0 0 0-.533-.533Z"
           fill="#8E4CB6"
         />
       </svg>
-      <span>Planing</span>
+      <span className="ml-[-0.1em]">{Names.planing}</span>
     </div>
   );
 };
@@ -237,7 +242,7 @@ export default function Home() {
               'rounded-[1em] border-[1px]  bg-almostBlack px-8 py-3 text-[1.1rem] font-[600] text-almostWhite hover:border-almostBlack hover:bg-almostWhite hover:text-almostBlack md:self-start md:px-6'
             }
           >
-            Learn more
+            {Names.learnMore}
           </button>{' '}
           <div className="flex w-full items-center justify-between px-4 pt-[2.5em] md:scale-100 md:justify-start md:gap-1 md:px-0 md:pt-[3em] lg:pt-[7em] xl:gap-10">
             <Image
