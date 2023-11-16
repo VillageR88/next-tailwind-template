@@ -142,7 +142,7 @@ const ButtonArrow = ({ name }: { name: Names }) => {
         )}
       </div>
       {/*mobile*/}
-      <div className="items-left flex flex-col gap-3 pl-6 pt-16 hover:cursor-pointer md:hidden">
+      <div className="items-left flex flex-col gap-3 pl-6 hover:cursor-pointer md:hidden">
         {arrow === DropdownState.closed ? (
           <div
             onClick={() => {
@@ -170,24 +170,17 @@ const ButtonArrow = ({ name }: { name: Names }) => {
             </div>
             {/*dropdownList*/}
             {name === Names.features ? (
-              <div>
-                <div className="flex flex-col gap-[0.8em] rounded-[1em]  pb-4 pl-6 pr-6 pt-6 text-[1.1rem] font-[500] text-mediumGray drop-shadow-2xl ">
-                  <TodoList />
-                  <Calendar />
-                  <Reminders />
-                  <Planing />
-                </div>
+              <div className="flex flex-col gap-[0.8em] rounded-[1em] pb-4 pl-6 pr-6 pt-6 text-[1.1rem] font-[500] text-mediumGray drop-shadow-2xl ">
+                <TodoList />
+                <Calendar />
+                <Reminders />
+                <Planing />
               </div>
             ) : (
-              <div>
-                <div className="absolute">
-                  <canvas className="ml-[-4.6em] h-[1.3em] w-[7.2em] bg-transparent"></canvas>
-                  <div className=" ml-[-5.1em] flex flex-col gap-[0.8em] rounded-[1em] bg-white pb-4 pl-6 pr-6 pt-6 text-[0.9rem] font-[500] text-mediumGray drop-shadow-2xl ">
-                    <NormalButton name={Names.history} />
-                    <NormalButton name={Names.outTeam} />
-                    <NormalButton name={Names.blog} />
-                  </div>
-                </div>
+              <div className="flex flex-col gap-[0.8em] rounded-[1em] pb-4 pl-6 pr-6 pt-6 text-[1.1rem] font-[500] text-mediumGray drop-shadow-2xl ">
+                <NormalButton name={Names.history} />
+                <NormalButton name={Names.outTeam} />
+                <NormalButton name={Names.blog} />
               </div>
             )}
           </div>
@@ -231,8 +224,9 @@ const ButtonBurger = () => {
               </g>
             </svg>
           </button>
-          <div>
+          <div className="flex flex-col gap-4 pt-16">
             <ButtonArrow name={Names.features} />
+            <ButtonArrow name={Names.company} />
           </div>
         </div>
       </div>
