@@ -9,21 +9,30 @@ import '@fontsource/epilogue/700.css';
 
 const navButtonsLayout = 'text-[0.9rem] font-[600] text-mediumGray hover:text-almostBlack';
 
-const ButtonArrow = ({ name }: { name: string }) => {
-  console.log(name);
-  const [arrow, setArrow] = useState<string>('down');
+enum DropdownState {
+  open = 'open',
+  closed = 'closed',
+}
+
+enum DropdownName {
+  features = 'Features',
+  company = 'Company',
+}
+
+const ButtonArrow = ({ name }: { name: DropdownName }) => {
+  const [arrow, setArrow] = useState(DropdownState.closed);
   return (
     <div
       onMouseEnter={() => {
-        setArrow('up');
+        setArrow(DropdownState.open);
       }}
       onMouseLeave={() => {
-        setArrow('down');
+        setArrow(DropdownState.closed);
       }}
       className="flex items-center gap-1.5 hover:cursor-pointer"
     >
       <span className={`${navButtonsLayout}`}>{name}</span>
-      {arrow === 'down' ? (
+      {arrow === DropdownState.closed ? (
         <svg width="10" height="6" xmlns="http://www.w3.org/2000/svg">
           <path stroke="#686868" strokeWidth="1.5" fill="none" d="m1 1 4 4 4-4" />
         </svg>
@@ -32,9 +41,8 @@ const ButtonArrow = ({ name }: { name: string }) => {
           <svg width="10" height="6" xmlns="http://www.w3.org/2000/svg">
             <path stroke="hsl(0, 0%, 8%)" strokeWidth="1.5" fill="none" d="m1 5 4-4 4 4" />
           </svg>
-
           {/*dropdownList*/}
-          {name === 'Features' ? (
+          {name === DropdownName.features ? (
             <div className="absolute">
               <canvas className="ml-[-9em] h-[1.3em] w-[10em] bg-transparent"></canvas>
               <div className=" ml-[-9.9em] flex flex-col gap-[0.8em] rounded-[1em] bg-white pb-4 pl-6 pr-6 pt-6 text-[0.9rem] font-[500] text-mediumGray drop-shadow-2xl ">
@@ -92,6 +100,21 @@ const ButtonArrow = ({ name }: { name: string }) => {
   );
 };
 
+const ButtonMobile = () => {
+  const [dropdown, setDropdown] = useState(DropdownState.closed);
+  return (
+    <div className="flex pr-4 md:hidden">
+      <button>
+        <svg width="32" height="18" xmlns="http://www.w3.org/2000/svg">
+          <g fill="#151515" fill-rule="evenodd">
+            <path d="M0 0h32v2H0zM0 8h32v2H0zM0 16h32v2H0z" />
+          </g>
+        </svg>
+      </button>
+    </div>
+  );
+};
+
 export default function Home() {
   const navSingleLayout = 'flex items-center hover:cursor-pointer';
 
@@ -109,8 +132,8 @@ export default function Home() {
             priority
           />
           <div className="hidden gap-8 md:flex ">
-            <ButtonArrow name={'Features'} />
-            <ButtonArrow name={'Company'} />
+            <ButtonArrow name={DropdownName.features} />
+            <ButtonArrow name={DropdownName.company} />
             <div className={navSingleLayout}>
               <span className={navButtonsLayout}>Careers</span>
             </div>
@@ -132,6 +155,8 @@ export default function Home() {
             </button>
           </div>
         </div>
+        {/*navbar right wrapper(mobile)*/}
+        <ButtonMobile />
       </nav>
       <main className="flex w-full flex-col-reverse justify-around gap-[2em] md:flex-row xl:pl-[8em]">
         {/*1st col wrapper*/}
@@ -150,7 +175,7 @@ export default function Home() {
             }
           >
             Learn more
-          </button>
+          </button>{' '}
           <div className="flex w-full items-center justify-between px-4 pt-[2.5em] md:scale-100 md:justify-start md:gap-1 md:px-0 md:pt-[3em] lg:pt-[7em] xl:gap-10">
             <Image
               className="h-[1em] w-[5em] md:h-[1.3em] md:w-[7em]"
