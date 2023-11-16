@@ -11,12 +11,14 @@ const config: Config = {
       fontFamily: {
         sans: ['var(--font-sans)'],
         mono: ['var(--font-mono)'],
+        manrope: 'Manrope',
       },
       colors: {
-        // Slate
-        // 'accent-brand-800': '#1e293b',
-        // 'accent-brand-700': '#334155',
-        // 'accent-brand-600': '#475569',
+        lightCyan: 'hsl(193, 38%, 86%)',
+        neonGreen: 'hsl(150, 100%, 66%)',
+        grayishBlue: 'hsl(217, 19%, 38%)',
+        darkGrayishBlue: 'hsl(217, 19%, 24%)',
+        darkBlue: 'hsl(218, 23%, 16%)',
       },
     },
   },
