@@ -202,8 +202,9 @@ const ButtonBurger = () => {
   const [dropdown, setDropdown] = useState(DropdownState.closed);
   {
     return dropdown === DropdownState.closed ? (
-      <div className="flex pr-4 md:hidden">
+      <div className="flex md:hidden">
         <button
+          className="pr-4"
           onClick={() => {
             setDropdown(DropdownState.open);
           }}
@@ -218,7 +219,7 @@ const ButtonBurger = () => {
     ) : (
       <div className="flex md:hidden">
         <canvas className="fixed left-0 top-0 h-screen w-screen bg-almostBlack opacity-70" />
-        <div className="fixed right-0 top-0 flex h-full w-2/3 flex-col  bg-almostWhite pr-4 md:hidden">
+        <div className="fixed right-0 top-0 flex h-full w-2/3 flex-col bg-almostWhite md:hidden">
           <button
             className="fixed right-5 pt-[1.4em]"
             onClick={() => {
@@ -237,6 +238,16 @@ const ButtonBurger = () => {
             <ButtonArrow name={Names.company} />
             <NormalButton name={Names.careers} />
             <NormalButton name={Names.about} />
+            {/*navbar right wrapper(mobile)*/}
+            <div className="container flex flex-col items-center gap-4 px-6 pt-8">
+              <NormalButton name={Names.login} />
+
+              <button
+                className={`w-full rounded-[1em] border-2 border-mediumGray pb-1.5 pl-2 pt-2 text-center text-[1.1rem] font-[600] text-mediumGray hover:border-almostBlack hover:text-almostBlack`}
+              >
+                {Names.register}
+              </button>
+            </div>
           </div>
         </div>
       </div>
