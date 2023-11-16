@@ -120,12 +120,14 @@ const ButtonArrow = ({ name }: { name: Names }) => {
               </div>
             </div>
           ) : (
-            <div className="absolute">
-              <canvas className="ml-[-4.6em] h-[1.3em] w-[7.2em] bg-transparent"></canvas>
-              <div className=" ml-[-5.1em] flex flex-col gap-[0.8em] rounded-[1em] bg-white pb-4 pl-6 pr-6 pt-6 text-[0.9rem] font-[500] text-mediumGray drop-shadow-2xl ">
-                <NormalButton name={Names.history} />
-                <NormalButton name={Names.outTeam} />
-                <NormalButton name={Names.blog} />
+            <div>
+              <div className="absolute">
+                <canvas className="ml-[-4.6em] h-[1.3em] w-[7.2em] bg-transparent"></canvas>
+                <div className=" ml-[-5.1em] flex flex-col gap-[0.8em] rounded-[1em] bg-white pb-4 pl-6 pr-6 pt-6 text-[0.9rem] font-[500] text-mediumGray drop-shadow-2xl ">
+                  <NormalButton name={Names.history} />
+                  <NormalButton name={Names.outTeam} />
+                  <NormalButton name={Names.blog} />
+                </div>
               </div>
             </div>
           )}
@@ -153,20 +155,24 @@ const ButtonBurger = () => {
         </button>
       </div>
     ) : (
-      <div className="fixed right-0 top-0 flex  h-full w-2/3 items-start justify-end bg-almostWhite pr-4 md:hidden">
-        <button
-          className="pr-[0.2em] pt-[1.4em]"
-          onClick={() => {
-            setDropdown(DropdownState.closed);
-          }}
-        >
-          <svg width="26" height="26" xmlns="http://www.w3.org/2000/svg">
-            <g fill="#151515" fill-rule="evenodd">
-              <path d="m2.393.98 22.628 22.628-1.414 1.414L.979 2.395z" />
-              <path d="M.98 23.607 23.609.979l1.414 1.414L2.395 25.021z" />
-            </g>
-          </svg>
-        </button>
+      <div>
+        <canvas className="fixed left-0 top-0 h-screen w-full bg-almostBlack opacity-70" />
+
+        <div className="fixed right-0 top-0 flex  h-full w-2/3 items-start justify-end bg-almostWhite pr-4 md:hidden">
+          <button
+            className="pr-[0.2em] pt-[1.4em]"
+            onClick={() => {
+              setDropdown(DropdownState.closed);
+            }}
+          >
+            <svg width="26" height="26" xmlns="http://www.w3.org/2000/svg">
+              <g fill="#151515" fillRule="evenodd">
+                <path d="m2.393.98 22.628 22.628-1.414 1.414L.979 2.395z" />
+                <path d="M.98 23.607 23.609.979l1.414 1.414L2.395 25.021z" />
+              </g>
+            </svg>
+          </button>
+        </div>
       </div>
     );
   }
