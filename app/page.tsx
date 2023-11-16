@@ -92,7 +92,7 @@ const NormalButton = ({ name }: { name: Names }) => {
   return (
     <div>
       <span className="hidden hover:text-almostBlack hover:underline md:flex">{name}</span>
-      <button className="flex hover:text-almostBlack hover:underline flex-col gap-[0.8em] rounded-[1em] pl-6 pr-6 text-[1.1rem] font-[600] text-mediumGray drop-shadow-2xl">
+      <button className="flex flex-col gap-[0.8em] rounded-[1em] pl-6 pr-6 text-[1.1rem] font-[600] text-mediumGray drop-shadow-2xl hover:text-almostBlack hover:underline md:hidden">
         {name}
       </button>
     </div>
