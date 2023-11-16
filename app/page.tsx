@@ -29,6 +29,7 @@ enum Names {
   learnMore = 'Learn more',
 }
 
+const navSingleLayout = 'flex items-center hover:cursor-pointer';
 const navButtonsLayout = 'text-[0.9rem] font-[600] text-mediumGray hover:text-almostBlack';
 
 const TodoList = () => {
@@ -88,7 +89,14 @@ const Planing = () => {
 };
 
 const NormalButton = ({ name }: { name: Names }) => {
-  return <span className="flex hover:text-almostBlack hover:underline">{name}</span>;
+  return (
+    <div>
+      <span className="hidden hover:text-almostBlack hover:underline md:flex">{name}</span>
+      <button className="flex hover:text-almostBlack hover:underline flex-col gap-[0.8em] rounded-[1em] pl-6 pr-6 text-[1.1rem] font-[600] text-mediumGray drop-shadow-2xl">
+        {name}
+      </button>
+    </div>
+  );
 };
 
 const ButtonArrow = ({ name }: { name: Names }) => {
@@ -227,6 +235,8 @@ const ButtonBurger = () => {
           <div className="flex flex-col gap-4 pt-16">
             <ButtonArrow name={Names.features} />
             <ButtonArrow name={Names.company} />
+            <NormalButton name={Names.careers} />
+            <NormalButton name={Names.about} />
           </div>
         </div>
       </div>
@@ -235,8 +245,6 @@ const ButtonBurger = () => {
 };
 
 export default function Home() {
-  const navSingleLayout = 'flex items-center hover:cursor-pointer';
-
   return (
     <div className="flex h-full flex-col items-center gap-[2em] py-4 font-epilogue md:min-h-screen md:gap-14 md:px-4 md:py-6">
       <nav className="flex w-full flex-row justify-between xl:pr-10">
