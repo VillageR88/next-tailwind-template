@@ -6,7 +6,7 @@ import '@fontsource/manrope/600.css';
 import '@fontsource/manrope/700.css';
 import '@fontsource/manrope/800.css';
 import { useEffect, useState } from 'react';
-
+import Loading from 'react-simple-loading';
 export default function Home() {
   const [text, setText] = useState<AdviceSlip | null>(null);
   const [clicked, setClicked] = useState<boolean>(false);
@@ -92,6 +92,8 @@ export default function Home() {
       </div>
     </main>
   ) : (
-    <div className="h-screen w-screen text-white">Loading...</div>
+    <div className="h-screen w-screen text-white">
+      <Loading color={'firebrick'} stroke={'10px'} size={'100px'} />
+    </div>
   );
 }
