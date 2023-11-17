@@ -43,9 +43,11 @@ const ShortBox = () => {
                 fill={dotFiller}
                 fillRule="evenodd"
               />
-            </svg>{' '}
+            </svg>
           </button>
         </div>
+        <span className="text-[3.5rem] font-[300] text-white">32hrs</span>
+        <span className="text-paleBlue text-[0.9em] font-[300]">Last Week - 8hrs</span>
       </div>
     </div>
   );
