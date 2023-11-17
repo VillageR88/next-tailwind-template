@@ -39,7 +39,7 @@ const ShortBox = ({ title, timeframes }: { title: string; timeframes: string }) 
         />
       </div>
       <div
-        className={`bg-darkBlue flex h-[12.5em] w-[16em] flex-col justify-center rounded-[0.8em] pl-7 pr-6 ${
+        className={`hover:cursor-pointer bg-darkBlue flex h-[12.5em] w-[16em] flex-col justify-center rounded-[0.8em] pl-7 pr-6 ${
           dotFiller === '#BBC0FF' && 'hover:bg-[#34397B]'
         }`}
       >
