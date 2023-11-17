@@ -6,7 +6,7 @@ import '@fontsource/rubik/500.css';
 import Image from 'next/image';
 import { useState } from 'react';
 
-const ShortBox = ({ title }: { title: string }) => {
+const ShortBox = ({ title, timeframes }: { title: string; timeframes: string }) => {
   const [dotFiller, setDotFiller] = useState<string>('#BBC0FF');
   return (
     <div className="flex flex-col">
@@ -63,8 +63,8 @@ const ShortBox = ({ title }: { title: string }) => {
             </svg>
           </button>
         </div>
-        <span className="mt-4 text-[3.5rem] font-[300] text-white">32hrs</span>
-        <span className="text-paleBlue text-[0.9em] font-[300]">Last Week - 36hrs</span>
+        <span className="mt-4 text-[3.5rem] font-[300] text-white">{timeframes.current}hrs</span>
+        <span className="text-paleBlue text-[0.9em] font-[300]">Last Week - {timeframes.previous}hrs</span>
       </div>
     </div>
   );
@@ -87,9 +87,16 @@ export default function Home() {
 
   return (
     <main className="font-rubik flex min-h-screen flex-col items-center justify-center">
-      <div className="grid grid-cols-3 gap-7">
-        {dataJson?.map((item, index) => <ShortBox key={index} title={item.title} timeframes={item.timeframes} />)}
-      </div>{' '}
+      <div className="gri grid gap-[1.9em] md:grid-cols-4">
+        <div className="bg-darkBlue col-span-1 grid rounded-[0.8em]">
+          <div className="h-[68.2%] rounded-[0.8em] bg-[#5746EA]"></div>
+        </div>
+        <div className="col-span-3 grid gap-[1.9em] md:grid-cols-3">
+          {dataJson?.map((item, index) => (
+            <ShortBox key={index} title={item.title} timeframes={item.timeframes.weekly} />
+          ))}
+        </div>
+      </div>
     </main>
   );
 }
