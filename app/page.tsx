@@ -11,7 +11,6 @@ export default function Home() {
   const [text, setText] = useState<AdviceSlip | null>(null);
   const [clicked, setClicked] = useState<boolean>(false);
   const dataJson = 'https://api.adviceslip.com/advice';
-  // Define an interface representing the structure of your JSON data
   interface AdviceSlip {
     slip: {
       id: number;
@@ -35,11 +34,9 @@ export default function Home() {
       <div className="flex min-h-[20.7em] w-full flex-col items-center justify-center gap-6 rounded-[1em] bg-darkGrayishBlue text-center md:w-[33.7em] ">
         <span className="pt-6 text-[0.8rem] font-[600] tracking-[0.35em] text-neonGreen">
           ADVICE #{text.slip.id}
-          {/*117*/}
         </span>
         <span className="px-4 text-[1.7rem] font-[700] leading-[1.4em]  text-lightCyan md:px-14">
           {text.slip.advice}
-          {/*&ldquo;It is easy to sit up and take notice, what's difficult is getting up and taking action.&rdquo;*/}
         </span>
         <div className="hidden pb-8 pt-4 md:flex">
           <svg className="w-[4.8em]" width="295" height="16" xmlns="http://www.w3.org/2000/svg">
