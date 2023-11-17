@@ -88,8 +88,8 @@ export default function Home() {
   return (
     <main className="font-rubik flex min-h-screen flex-col items-center justify-center">
       <div className="gri grid gap-[1.9em] md:grid-cols-4">
-        <div className="bg-darkBlue col-span-1 grid rounded-[0.8em]">
-          <div className="flex h-[68.2%] flex-col justify-between rounded-[0.8em] bg-[#5746EA] px-8 pb-20 pt-9 leading-[3em]">
+        <div className="col-span-1 grid ">
+          <div className="z-10 flex h-[22.2em] flex-col justify-between rounded-[0.8em] bg-[#5746EA] px-8 pb-10 pt-9 leading-[3em]">
             <Image
               className="outline-3 rounded-full outline outline-white"
               src="./images/image-jeremy.png"
@@ -99,9 +99,15 @@ export default function Home() {
               priority
             />
             <div className="flex flex-col">
-              <span className="text-paleBlue leading-[1.6em] text-[0.9rem]">Report for</span>
+              <span className="text-paleBlue text-[0.9rem] leading-[1.6em]">Report for</span>
               <span className="whitespace-break-spaces text-[2.5rem] font-[300] text-white">{'Jeremy\nRobson'}</span>
             </div>
+            <span></span>
+          </div>
+          <div className="bg-darkBlue text-desaturatedBlue mt-[-2em] flex h-[11.3em] flex-col justify-center gap-4 rounded-[0.8em] px-8 pt-[2em] text-[1.1rem]">
+            <span>Daily</span>
+            <span>Weekly</span>
+            <span>Monthly</span>
           </div>
         </div>
         <div className="col-span-3 grid gap-[1.9em] md:grid-cols-3">
