@@ -4,15 +4,24 @@ import '@fontsource/rubik/300.css';
 import '@fontsource/rubik/400.css';
 import '@fontsource/rubik/500.css';
 import Image from 'next/image';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 const ShortBox = () => {
   const [dataJson, setDataJson] = useState<JSON>();
   const [dotFiller, setDotFiller] = useState<string>('#BBC0FF');
-  useEffect(() => {
-    fetch('./dataJson').then();
-  }, []);
-  console.log(dataJson);
+  const urlJson = './data.json';
+  useState(() => {
+    fetch(urlJson)
+      .then((response) => response.json())
+      .then((response) => {
+        setDataJson(response as JSON);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  });
+  console.log(dataJson?.['0' as keyof JSON]);
+
   return (
     <div className="flex flex-col">
       <div className="bg-lightRedStudy mb-[-1em] inline-grid h-[3.8em] w-[16em] justify-end  overflow-hidden rounded rounded-t-[0.8em]">
