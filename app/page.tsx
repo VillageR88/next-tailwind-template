@@ -25,7 +25,7 @@ const ShortBox = ({ title, timeframes }: { title: string; timeframes: string }) 
             : title === 'Self Care'
             ? 'bg-softOrangeSelfCare'
             : null
-        } mb-[-1em] inline-grid h-[3.8em] w-[16em] justify-end overflow-hidden rounded rounded-t-[0.8em]`}
+        } mb-[-1em] inline-grid h-[3.8em] md:w-[16em] justify-end overflow-hidden rounded rounded-t-[0.8em]`}
       >
         <Image
           className={`${
@@ -39,7 +39,7 @@ const ShortBox = ({ title, timeframes }: { title: string; timeframes: string }) 
         />
       </div>
       <div
-        className={`bg-darkBlue flex h-[12.5em] w-[16em] flex-col justify-center rounded-[0.8em] pl-7 pr-6 hover:cursor-pointer ${
+        className={`bg-darkBlue flex h-[12.5em] md:w-[16em] flex-col justify-center rounded-[0.8em] pl-7 pr-6 hover:cursor-pointer ${
           dotFiller === '#BBC0FF' && 'hover:bg-[#34397B]'
         }`}
       >
@@ -87,8 +87,8 @@ export default function Home() {
 
   return (
     <main className="font-rubik flex min-h-screen flex-col items-center justify-center">
-      <div className="gri grid gap-[1.9em] md:grid-cols-4">
-        <div className="col-span-1 grid ">
+      <div className="gri w-full w-auto grid gap-[1.9em] md:grid-cols-4">
+        <div className="md:col-span-1 grid ">
           <div className="z-10 flex h-[22.2em] flex-col justify-between rounded-[0.8em] bg-[#5746EA] px-8 pb-10 pt-9 leading-[3em]">
             <Image
               className="outline-3 rounded-full outline outline-white"
@@ -110,7 +110,7 @@ export default function Home() {
             <span>Monthly</span>
           </div>
         </div>
-        <div className="col-span-3 grid gap-[1.9em] md:grid-cols-3">
+        <div className="md:col-span-3 grid gap-[1.9em] md:grid-cols-3">
           {dataJson?.map((item, index) => (
             <ShortBox key={index} title={item.title} timeframes={item.timeframes.weekly} />
           ))}
