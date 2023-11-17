@@ -6,31 +6,17 @@ import '@fontsource/rubik/500.css';
 import Image from 'next/image';
 import { useState } from 'react';
 
-const ShortBox = () => {
-  const [dataJson, setDataJson] = useState<JSON>();
+const ShortBox = ({ title }: { title: string }) => {
   const [dotFiller, setDotFiller] = useState<string>('#BBC0FF');
-  const urlJson = './data.json';
-  useState(() => {
-    fetch(urlJson)
-      .then((response) => response.json())
-      .then((response) => {
-        setDataJson(response as JSON);
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-  });
-  console.log(dataJson?.['0' as keyof JSON]);
-
   return (
     <div className="flex flex-col">
-      <div className="bg-lightRedStudy mb-[-1em] inline-grid h-[3.8em] w-[16em] justify-end  overflow-hidden rounded rounded-t-[0.8em]">
+      <div className="bg-lightRedStudy mb-[-1em] inline-grid h-[3.8em] w-[16em] justify-end overflow-hidden rounded rounded-t-[0.8em]">
         <Image
           className="mr-[1em] mt-[-0.7em]"
-          src="./images/icon-work.svg"
+          src={`./images/icon-${title.replace(' ', '-')}.svg`}
           width="79"
           height="79"
-          alt="work icon"
+          alt={`${title} icon`}
           priority
         />
       </div>
@@ -40,7 +26,7 @@ const ShortBox = () => {
         }`}
       >
         <div className="flex items-center justify-between">
-          <span className="text-[1.1rem] font-[400] text-white">Work</span>
+          <span className="text-[1.1rem] font-[400] text-white">{title}</span>
           <button
             onMouseEnter={() => {
               setDotFiller('white');
@@ -67,9 +53,25 @@ const ShortBox = () => {
 };
 
 export default function Home() {
+  const [dataJson, setDataJson] = useState<JSON>();
+  const urlJson = './data.json';
+  useState(() => {
+    fetch(urlJson)
+      .then((response) => response.json())
+      .then((response) => {
+        setDataJson(response as JSON);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  });
+  console.log(dataJson?.['0' as keyof JSON]);
+
   return (
     <main className="font-rubik flex min-h-screen flex-col items-center justify-center">
-      <ShortBox />
+      <div className="grid grid-cols-3">
+        {dataJson?.map((item, index) => <ShortBox key={index} title={item.title} timeframes={item.timeframes} />)}
+      </div>{' '}
     </main>
   );
 }
