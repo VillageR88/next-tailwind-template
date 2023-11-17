@@ -28,7 +28,9 @@ const ShortBox = ({ title }: { title: string }) => {
         } mb-[-1em] inline-grid h-[3.8em] w-[16em] justify-end overflow-hidden rounded rounded-t-[0.8em]`}
       >
         <Image
-          className="mr-[1em] mt-[-0.7em]"
+          className={`${
+            title === 'Play' ? 'mt-[-0.4em]' : title === 'Exercise' ? 'mt-[0em]' : 'mt-[-0.7em]'
+          } mr-[1em] h-auto w-auto`}
           src={`./images/icon-${title.replace(' ', '-')}.svg`}
           width="79"
           height="79"
@@ -85,7 +87,7 @@ export default function Home() {
 
   return (
     <main className="font-rubik flex min-h-screen flex-col items-center justify-center">
-      <div className="grid grid-cols-3">
+      <div className="grid grid-cols-3 gap-7">
         {dataJson?.map((item, index) => <ShortBox key={index} title={item.title} timeframes={item.timeframes} />)}
       </div>{' '}
     </main>
