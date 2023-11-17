@@ -86,8 +86,8 @@ export default function Home() {
   console.log(dataJson?.['0' as keyof JSON]);
 
   return (
-    <main className="font-rubik flex min-h-screen flex-col items-center justify-center">
-      <div className="gri w-full w-auto grid gap-[1.9em] md:grid-cols-4">
+    <main className="font-rubik flex min-h-screen min-h-screen flex-col items-center justify-center">
+      <div className="gri w-full md:w-auto grid gap-[1.9em] md:grid-cols-4">
         <div className="md:col-span-1 grid ">
           <div className="z-10 flex h-[22.2em] flex-col justify-between rounded-[0.8em] bg-[#5746EA] px-8 pb-10 pt-9 leading-[3em]">
             <Image
