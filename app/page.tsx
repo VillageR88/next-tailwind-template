@@ -27,7 +27,7 @@ const ShortBox = () => {
       </div>
       <div
         className={`bg-darkBlue flex h-[12.5em] w-[16em] flex-col justify-center rounded-[0.8em] pl-7 pr-6 ${
-          dotFiller === '#BBC0FF' && 'hover:brightness-150'
+          dotFiller === '#BBC0FF' && 'hover:bg-[#34397B]'
         }`}
       >
         <div className="flex items-center justify-between">
