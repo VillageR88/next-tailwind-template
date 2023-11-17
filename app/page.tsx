@@ -10,7 +10,23 @@ const ShortBox = ({ title }: { title: string }) => {
   const [dotFiller, setDotFiller] = useState<string>('#BBC0FF');
   return (
     <div className="flex flex-col">
-      <div className="bg-lightRedStudy mb-[-1em] inline-grid h-[3.8em] w-[16em] justify-end overflow-hidden rounded rounded-t-[0.8em]">
+      <div
+        className={`${
+          title === 'Work'
+            ? 'bg-lightRedWork'
+            : title === 'Play'
+            ? 'bg-softBluePlay'
+            : title === 'Study'
+            ? 'bg-lightRedStudy'
+            : title === 'Exercise'
+            ? 'bg-limeGreenExercise'
+            : title === 'Social'
+            ? 'bg-violetSocial'
+            : title === 'Self Care'
+            ? 'bg-softOrangeSelfCare'
+            : null
+        } mb-[-1em] inline-grid h-[3.8em] w-[16em] justify-end overflow-hidden rounded rounded-t-[0.8em]`}
+      >
         <Image
           className="mr-[1em] mt-[-0.7em]"
           src={`./images/icon-${title.replace(' ', '-')}.svg`}
