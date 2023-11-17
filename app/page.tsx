@@ -25,7 +25,11 @@ const ShortBox = () => {
           priority
         />
       </div>
-      <div className="bg-darkBlue flex h-[12.5em] w-[16em] flex-col justify-center rounded-[0.8em] pl-7 pr-6">
+      <div
+        className={`bg-darkBlue flex h-[12.5em] w-[16em] flex-col justify-center rounded-[0.8em] pl-7 pr-6 ${
+          dotFiller === '#BBC0FF' && 'hover:brightness-150'
+        }`}
+      >
         <div className="flex items-center justify-between">
           <span className="text-[1.1rem] font-[400] text-white">Work</span>
           <button
@@ -47,7 +51,7 @@ const ShortBox = () => {
           </button>
         </div>
         <span className="mt-4 text-[3.5rem] font-[300] text-white">32hrs</span>
-        <span className="text-paleBlue text-[0.9em] font-[300]">Last Week - 32hrs</span>
+        <span className="text-paleBlue text-[0.9em] font-[300]">Last Week - 36hrs</span>
       </div>
     </div>
   );
