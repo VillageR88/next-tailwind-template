@@ -8,15 +8,22 @@ import '@fontsource/manrope/800.css';
 import { useEffect, useState } from 'react';
 
 export default function Home() {
-  const [text, setText] = useState<JSON>();
+  const [text, setText] = useState<AdviceSlip | null>(null);
   const [clicked, setClicked] = useState<boolean>(false);
   const dataJson = 'https://api.adviceslip.com/advice';
+  // Define an interface representing the structure of your JSON data
+  interface AdviceSlip {
+    slip: {
+      id: number;
+      advice: string;
+    };
+  }
 
   useEffect(() => {
     fetch(dataJson)
-      .then((response) => response.json())
-      .then((data: JSON | undefined) => {
-        setText(data ? data.slip : undefined);
+      .then((response) => response.json() as Promise<AdviceSlip>)
+      .then((data) => {
+        setText(data);
       })
       .catch((error) => {
         console.error('Error fetching data:', error);
@@ -27,11 +34,11 @@ export default function Home() {
     <main className="md:0 flex h-screen w-full flex-col items-center justify-center px-4 font-manrope md:min-h-screen">
       <div className="flex min-h-[20.7em] w-full flex-col items-center justify-center gap-6 rounded-[1em] bg-darkGrayishBlue text-center md:w-[33.7em] ">
         <span className="pt-6 text-[0.8rem] font-[600] tracking-[0.35em] text-neonGreen">
-          ADVICE #{text.id}
+          ADVICE #{text.slip.id}
           {/*117*/}
         </span>
         <span className="px-4 text-[1.7rem] font-[700] leading-[1.4em]  text-lightCyan md:px-14">
-          {text.advice}
+          {text.slip.advice}
           {/*&ldquo;It is easy to sit up and take notice, what's difficult is getting up and taking action.&rdquo;*/}
         </span>
         <div className="hidden pb-8 pt-4 md:flex">
