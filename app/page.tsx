@@ -150,7 +150,7 @@ export default function Home() {
             <Kit2 name="Number of People" picture={personSVG} />
           </div>
           {/*second column*/}
-          <div className="flex flex-col justify-between rounded-[0.8em] bg-veryDarkCyan px-8 pb-10 pt-10 text-white md:w-full">
+          <div className="flex flex-col justify-between gap-6 rounded-[0.8em] bg-veryDarkCyan px-8 pb-6 pt-10 text-white md:w-full md:gap-0 md:pb-10">
             <div className="space-y-[1.5em]">
               <Kit3 name="Tip Amount" />
               <Kit3 name="Total" />
