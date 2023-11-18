@@ -31,12 +31,12 @@ const Kit1 = ({ name, picture }: { name: string; picture: JSX.Element }) => (
 );
 
 const Kit2 = () => (
-  <div className="flex justify-between">
+  <div className="flex items-center justify-between">
     <div className="flex flex-col">
-      <span>Tip Amount</span>
-      <span>/ person</span>
+      <span className=" font-[600]">Tip Amount</span>
+      <span className="text-[0.9rem] font-[700] text-grayishCyan">/ person</span>
     </div>
-    $0.00
+    <span className="text-[2rem] font-[700] text-strongCyan">$0.00</span>
   </div>
 );
 
@@ -54,8 +54,8 @@ export default function Home() {
       <div className="flex flex-col place-items-center gap-16">
         {/*top wrapper*/}
         <div className="grid w-[6em] grid-cols-4 text-center">
-          {'SPLITTER'.split('').map((x) => (
-            <span className="text-[1.4rem] font-[700] text-[#3E6465]" key={x}>
+          {'SPLITTER'.split('').map((x, i) => (
+            <span className="text-[1.4rem] font-[700] text-[#3E6465]" key={i}>
               {x}
             </span>
           ))}
