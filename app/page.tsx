@@ -132,7 +132,7 @@ export default function Home() {
           ))}
         </div>
         {/*bottom wrapper*/}
-        <div className="grid w-full justify-center gap-[2.7em] rounded-[1.5em] bg-white py-[2em] pl-[3em] pr-[2em] md:w-auto md:grid-cols-2">
+        <div className="grid w-full justify-center gap-[2.7em] rounded-[1.5em] bg-white py-[2em] md:pl-[3em] px-[1em] md:pr-[2em] md:w-auto md:grid-cols-2">
           {/*first column*/}
           <div className="flex w-full flex-col gap-[2.5em] py-[1em]">
             <Kit1 name="Bill" picture={dollarSVG} />
