@@ -1,6 +1,8 @@
 import '@fontsource/space-mono';
 import '@fontsource/space-mono/400.css';
 import '@fontsource/space-mono/700.css';
+const textSettings1 = 'text-[1rem] font-[700] text-darkGrayishCyan';
+const textSettings2 = 'text-[1.2rem] font-[700] text-[#9EBBBD]';
 const dollarSVG = (
   <svg xmlns="http://www.w3.org/2000/svg" width="11" height="17">
     <path
@@ -17,9 +19,18 @@ const personSVG = (
     />
   </svg>
 );
+
+const Kit1 = () => (
+  <div>
+    <span className={textSettings1}>Bill</span>
+    <div className="flex flex-row items-center justify-between bg-veryLightGrayishCyan px-4 py-1">
+      <span>{dollarSVG}</span>
+      <span className={textSettings2}>0</span>
+    </div>
+  </div>
+);
+
 export default function Home() {
-  const textSettings1 = 'text-[0.8rem] font-[700] text-darkGrayishCyan';
-  const textSettings2 = 'text-[1rem] font-[700] text-darkGrayishCyan';
   return (
     <main className="flex min-h-screen flex-col items-center justify-center font-spaceMono">
       {/*main wrapper*/}
@@ -36,11 +47,7 @@ export default function Home() {
         <div className="flex justify-center gap-8 rounded-[0.8em] bg-white p-6">
           {/*first column*/}
           <div className="flex w-full flex-col">
-            <span className={textSettings1}>Bill</span>
-            <div className="flex flex-row justify-between">
-              <span>{dollarSVG}</span>
-              <span className={textSettings2}>142.55</span>
-            </div>
+            <Kit1 />
             <span className={textSettings1}>Select Tip %</span>
             <div className="grid grid-cols-3 gap-3">
               <button className="bg-sky-500">PHDR</button>
