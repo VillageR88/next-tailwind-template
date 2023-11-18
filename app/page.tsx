@@ -25,7 +25,11 @@ const Kit1 = ({ name, picture }: { name: string; picture: JSX.Element }) => (
     <span className={textSettings1}>{name}</span>
     <div className="flex flex-row items-center justify-between rounded-[0.3em] bg-veryLightGrayishCyan px-4 py-2.5">
       <span>{picture}</span>
-      <span className={textSettings2}>0</span>
+      <input
+        className="bg-transparent text-end text-[1.2rem] font-[700] text-veryDarkCyan"
+        placeholder={'0'}
+        type="number"
+      />
     </div>
   </div>
 );
