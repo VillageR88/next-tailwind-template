@@ -33,7 +33,7 @@ const Kit1 = ({ name, picture }: { name: string; picture: JSX.Element }) => (
 const Kit2 = ({ name }: { name: string }) => (
   <div className="flex items-center justify-between">
     <div className="flex flex-col">
-      <span className=" font-[600]">{name}</span>
+      <span className="font-[600]">{name}</span>
       <span className="text-[0.9rem] font-[700] text-grayishCyan">/ person</span>
     </div>
     <span className="text-[2rem] font-[700] text-strongCyan">$0.00</span>
@@ -74,7 +74,7 @@ export default function Home() {
               <ButtonType1 quantity={50} />
               <ButtonType2 />
             </div>{' '}
-            <Kit1 name="Number o People" picture={personSVG} />
+            <Kit1 name="Number of People" picture={personSVG} />
           </div>
           {/*second column*/}
           <div className="flex flex-col justify-between bg-veryDarkCyan px-8 py-6 text-white">
