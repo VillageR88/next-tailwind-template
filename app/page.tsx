@@ -3,6 +3,15 @@ import '@fontsource/space-mono';
 import '@fontsource/space-mono/400.css';
 import '@fontsource/space-mono/700.css';
 import { useState } from 'react';
+
+enum ButtonSelected {
+  button5 = 5,
+  button10 = 10,
+  button15 = 15,
+  button25 = 25,
+  button50 = 50,
+}
+
 const textSettings1 = 'text-[1rem] font-[700] text-darkGrayishCyan';
 const dollarSVG = (
   <svg xmlns="http://www.w3.org/2000/svg" width="11" height="17">
@@ -98,7 +107,7 @@ const Kit2 = ({ name, picture }: { name: string; picture: JSX.Element }) => {
 };
 
 const Kit3 = ({ name }: { name: string }) => (
-  <div className="flex items-center justify-between md:gap-[2em] md:gap-[5.5em] lg:gap-[5.5em]">
+  <div className="flex items-center justify-between md:gap-[2em]  lg:gap-[5.5em]">
     <div className="flex flex-col">
       <span className="font-[600]">{name}</span>
       <span className="text-[0.9rem] font-[700] text-grayishCyan">/ person</span>
