@@ -27,7 +27,7 @@ const Kit1 = ({ name, picture }: { name: string; picture: JSX.Element }) => {
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     let value = e.target.value;
 
-    const regex = /^(?!^\.)\d*(?:\.\d{0,2})?$/;
+    const regex = /^(?!^\.)\d{0,17}(?:\.\d{0,2})?$/;
 
     value = value.replace(',', '.');
 
@@ -61,7 +61,37 @@ const Kit1 = ({ name, picture }: { name: string; picture: JSX.Element }) => {
   );
 };
 
-const Kit2 = ({ name }: { name: string }) => (
+const Kit2 = ({ name, picture }: { name: string; picture: JSX.Element }) => {
+  const [numericValue, setNumericValue] = useState('');
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+
+    const regex = /^[0-9]{0,20}$/;
+
+    if (regex.test(value)) {
+      setNumericValue(value);
+    }
+  };
+
+  return (
+    <div className="space-y-[0.3em]">
+      <span>{name}</span>
+      <div className="flex flex-row items-center justify-between rounded-[0.3em] bg-veryLightGrayishCyan px-4 py-2.5">
+        <span>{picture}</span>
+        <input
+          className="appearance-none bg-transparent text-end text-[1.2rem] font-[700] text-veryDarkCyan outline-none"
+          type="text"
+          value={numericValue}
+          onChange={handleInputChange}
+          placeholder="0"
+        />
+      </div>
+    </div>
+  );
+};
+
+const Kit3 = ({ name }: { name: string }) => (
   <div className="flex items-center justify-between gap-[5.5em] md:gap-[2em] lg:gap-[5.5em]">
     <div className="flex flex-col">
       <span className="font-[600]">{name}</span>
@@ -111,13 +141,13 @@ export default function Home() {
                 <ButtonType2 />
               </div>
             </div>
-            <Kit1 name="Number of People" picture={personSVG} />
+            <Kit2 name="Number of People" picture={personSVG} />
           </div>
           {/*second column*/}
           <div className="flex flex-col justify-between rounded-[0.8em] bg-veryDarkCyan px-8 pb-10 pt-10 text-white">
             <div className="space-y-[1.5em]">
-              <Kit2 name="Tip Amount" />
-              <Kit2 name="Total" />
+              <Kit3 name="Tip Amount" />
+              <Kit3 name="Total" />
             </div>
             <button className="rounded-[0.3em] bg-[#0D686D] py-[0.6em] text-[1.1rem] font-[700] text-[#055D61]">
               RESET
