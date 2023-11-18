@@ -17,24 +17,29 @@ export default function Home() {
         </div>
         {/*bottom wrapper*/}
         <div className="flex justify-center gap-8 rounded-[0.8em] bg-white p-6">
-          <div>
+          {/*first column*/}
+          <div className="flex w-full flex-col">
             <span>Bill</span>
-            <div>
+            <div className="flex flex-row justify-between">
               <span>$</span>
               <span>142.55</span>
-              <span>Select Tip %</span>
-              <div className="grid grid-cols-3 gap-3">
-                <button className="bg-sky-500">PHDR</button>
-                <button className="bg-sky-500">PHDR</button>
-                <button className="bg-sky-500">PHDR</button>
-                <button className="bg-sky-500">PHDR</button>
-                <button className="bg-sky-500">PHDR</button>
-                <button className="bg-sky-500">PHDR</button>
-              </div>
-              <span>Number of People</span>
-              <div>IMAGE 5</div>
+            </div>
+            <span>Select Tip %</span>
+            <div className="grid grid-cols-3 gap-3">
+              <button className="bg-sky-500">PHDR</button>
+              <button className="bg-sky-500">PHDR</button>
+              <button className="bg-sky-500">PHDR</button>
+              <button className="bg-sky-500">PHDR</button>
+              <button className="bg-sky-500">PHDR</button>
+              <button className="bg-sky-500">PHDR</button>
+            </div>
+            <span>Number of People</span>
+            <div className="flex flex-row justify-between">
+              <span>@</span>
+              <span>5</span>
             </div>
           </div>
+          {/*second column*/}
           <div className="bg-veryDarkCyan text-white">Right wrapper</div>
         </div>
       </div>
