@@ -26,7 +26,7 @@ const Kit1 = ({ name, picture }: { name: string; picture: JSX.Element }) => (
     <div className="flex flex-row items-center justify-between rounded-[0.3em] bg-veryLightGrayishCyan px-4 py-2.5">
       <span>{picture}</span>
       <input
-        className="bg-transparent text-end text-[1.2rem] font-[700] text-veryDarkCyan"
+        className="bg-transparent text-end text-[1.2rem] font-[700] outline-none text-veryDarkCyan [appearance:textfield] [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none"
         placeholder={'0'}
         type="number"
       />
