@@ -76,7 +76,7 @@ const Kit2 = ({ name, picture }: { name: string; picture: JSX.Element }) => {
 
   return (
     <div className="space-y-[0.3em]">
-      <span>{name}</span>
+      <span className={textSettings1}>{name}</span>
       <div className="flex flex-row items-center justify-between rounded-[0.3em] bg-veryLightGrayishCyan px-4 py-2.5">
         <span>{picture}</span>
         <input
