@@ -45,7 +45,7 @@ const Kit1 = ({ name, picture }: { name: string; picture: JSX.Element }) => {
   };
 
   return (
-    <form className="space-y-[0.3em]">
+    <form autoComplete="off" className="space-y-[0.3em]">
       <label htmlFor={name} className={textSettings1}>
         {name}
       </label>
@@ -53,7 +53,7 @@ const Kit1 = ({ name, picture }: { name: string; picture: JSX.Element }) => {
         <span>{picture}</span>
         <input
           id={name}
-          className="w-full appearance-none bg-transparent text-end text-[1.2rem] font-[700] text-veryDarkCyan outline-none"
+          className="w-full appearance-none bg-transparent text-end text-[1.2rem] font-[700] text-veryDarkCyan outline-none hover:cursor-pointer"
           placeholder={'0'}
           type="text"
           value={numericValue}
@@ -78,7 +78,7 @@ const Kit2 = ({ name, picture }: { name: string; picture: JSX.Element }) => {
   };
 
   return (
-    <form className="space-y-[0.3em]">
+    <form autoComplete="off" className="space-y-[0.3em]">
       <label htmlFor={name} className={textSettings1}>
         {name}
       </label>
@@ -86,7 +86,7 @@ const Kit2 = ({ name, picture }: { name: string; picture: JSX.Element }) => {
         <span>{picture}</span>
         <input
           id={name}
-          className="w-full appearance-none bg-transparent text-end text-[1.2rem] font-[700] text-veryDarkCyan outline-none"
+          className="w-full appearance-none bg-transparent text-end text-[1.2rem] font-[700] text-veryDarkCyan outline-none hover:cursor-pointer"
           type="text"
           value={numericValue}
           onChange={handleInputChange}
@@ -119,6 +119,8 @@ const ButtonType2 = () => (
 );
 
 export default function Home() {
+  const [quantity, setQuantity] = useState<number>(0);
+
   return (
     <main className="flex min-h-screen flex-col justify-center font-spaceMono">
       {/*main wrapper*/}
@@ -132,7 +134,7 @@ export default function Home() {
           ))}
         </div>
         {/*bottom wrapper*/}
-        <div className="grid w-full justify-center gap-[2.7em] rounded-[1.5em] bg-white py-[2em] md:pl-[3em] px-[1em] md:pr-[2em] md:w-auto md:grid-cols-2">
+        <div className="grid w-full justify-center gap-[2.7em] rounded-[1.5em] bg-white px-[1em] py-[2em] md:w-auto md:grid-cols-2 md:pl-[3em] md:pr-[2em]">
           {/*first column*/}
           <div className="flex w-full flex-col gap-[2.5em] py-[1em]">
             <Kit1 name="Bill" picture={dollarSVG} />
