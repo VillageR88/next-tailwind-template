@@ -20,11 +20,11 @@ const personSVG = (
   </svg>
 );
 
-const Kit1 = () => (
+const Kit1 = ({ name, picture }: { name: string; picture: JSX.Element }) => (
   <div>
-    <span className={textSettings1}>Bill</span>
+    <span className={textSettings1}>{name}</span>
     <div className="flex flex-row items-center justify-between bg-veryLightGrayishCyan px-4 py-1">
-      <span>{dollarSVG}</span>
+      <span>{picture}</span>
       <span className={textSettings2}>0</span>
     </div>
   </div>
@@ -47,7 +47,7 @@ export default function Home() {
         <div className="flex justify-center gap-8 rounded-[0.8em] bg-white p-6">
           {/*first column*/}
           <div className="flex w-full flex-col">
-            <Kit1 />
+            <Kit1 name="Bill" picture={dollarSVG} />
             <span className={textSettings1}>Select Tip %</span>
             <div className="grid grid-cols-3 gap-3">
               <button className="bg-sky-500">PHDR</button>
@@ -56,12 +56,8 @@ export default function Home() {
               <button className="bg-sky-500">PHDR</button>
               <button className="bg-sky-500">PHDR</button>
               <button className="bg-sky-500">PHDR</button>
-            </div>
-            <span className={textSettings1}>Number of People</span>
-            <div className="flex flex-row justify-between">
-              {personSVG}
-              <span>5</span>
-            </div>
+            </div>{' '}
+            <Kit1 name="Number o People" picture={personSVG} />
           </div>
           {/*second column*/}
           <div className="bg-veryDarkCyan text-white">Right wrapper</div>
