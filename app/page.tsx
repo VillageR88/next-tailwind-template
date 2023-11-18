@@ -7,7 +7,7 @@ import Image from 'next/image';
 import { useState } from 'react';
 import { Hourglass } from 'react-loader-spinner';
 
-interface Construct {
+interface Items {
   title: string;
   timeframes: TimeFrames;
 }
@@ -15,7 +15,8 @@ interface TimeFrames {
   current: number;
   previous: number;
 }
-const ShortBox = ({ title, timeframes }: Construct) => {
+
+const ShortBox = ({ title, timeframes }: Items) => {
   const [dotFiller, setDotFiller] = useState<string>('#BBC0FF');
   return (
     <div className="flex flex-col">
@@ -86,19 +87,19 @@ export default function Home() {
     button3 = 'monthly',
   }
   const [buttonCol1, setButtonCol1] = useState<buttonsCol1Selection>(buttonsCol1Selection.button2);
-  const [dataJson, setDataJson] = useState<JSON>();
+  const [dataJson, setDataJson] = useState<Items[]>();
   const urlJson = './data.json';
   useState(() => {
     fetch(urlJson)
       .then((response) => response.json())
       .then((response) => {
-        setDataJson(response as JSON);
+        setDataJson(response as Items[]);
       })
       .catch((error) => {
         console.error(error);
       });
   });
-  console.log(dataJson?.['0' as keyof JSON]);
+  console.log(dataJson?.['0']);
 
   return (
     <main className="font-rubik flex min-h-screen flex-col items-center justify-center">
