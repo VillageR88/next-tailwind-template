@@ -104,9 +104,9 @@ export default function Home() {
   return (
     <main className="font-rubik flex min-h-screen flex-col items-center justify-center">
       {dataJson ? (
-        <div className="grid w-full gap-[1.9em] p-8 md:w-auto md:grid-cols-1 md:px-4 lg:grid-cols-4 lg:pr-8">
+        <div className="grid w-full gap-[1.9em] p-4 py-8 md:w-auto md:grid-cols-1 md:px-4 lg:grid-cols-4 lg:pr-8">
           <div className="grid md:col-span-1 ">
-            <div className="z-10 flex h-[22.2em] flex-col justify-between rounded-[0.8em] bg-[#5746EA] px-8 pb-10 pt-9 leading-[3em]">
+            <div className="z-10 flex flex-row items-center justify-evenly rounded-[0.8em] bg-[#5746EA] pb-10 pt-9 leading-[3em] md:h-[22.2em] md:flex-col md:items-start md:justify-between md:px-8">
               <Image
                 className="outline-3 rounded-full outline outline-white"
                 src="./images/image-jeremy.png"
@@ -117,7 +117,9 @@ export default function Home() {
               />
               <div className="flex flex-col">
                 <span className="text-paleBlue text-[0.9rem] leading-[1.6em]">Report for</span>
-                <span className="whitespace-break-spaces text-[2.5rem] font-[300] text-white">{'Jeremy\nRobson'}</span>
+                <span className="text-[1.8rem] font-[300] text-white md:whitespace-break-spaces md:text-[2.5rem]">
+                  {'Jeremy\nRobson'}
+                </span>
               </div>
               <span></span>
             </div>
