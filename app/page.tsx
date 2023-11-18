@@ -49,7 +49,7 @@ const ShortBox = ({ title, timeframes }: Items) => {
         />
       </div>
       <div
-        className={`bg-darkBlue flex h-[12.5em] flex-col justify-center rounded-[0.8em] pl-7 pr-6 hover:cursor-pointer md:w-[16em] ${
+        className={`flex h-[12.5em] flex-col justify-center rounded-[0.8em] bg-darkBlue pl-7 pr-6 hover:cursor-pointer md:w-[16em] ${
           dotFiller === '#BBC0FF' && 'hover:bg-[#34397B]'
         }`}
       >
@@ -75,7 +75,7 @@ const ShortBox = ({ title, timeframes }: Items) => {
         </div>
         <div className="flex items-center justify-between md:flex-col md:items-start">
           <span className="text-[3.5rem] font-[300] text-white md:mt-4">{timeframes.current}hrs</span>
-          <span className="text-paleBlue text-[0.9em] font-[300]">Last Week - {timeframes.previous}hrs</span>
+          <span className="text-[0.9em] font-[300] text-paleBlue">Last Week - {timeframes.previous}hrs</span>
         </div>
       </div>
     </div>
@@ -103,7 +103,7 @@ export default function Home() {
   });
 
   return (
-    <main className="font-rubik flex min-h-screen flex-col items-center justify-center">
+    <main className="flex min-h-screen flex-col items-center justify-center font-rubik">
       {dataJson ? (
         <div className="grid w-full gap-[1.9em] p-4 py-8 md:w-auto md:grid-cols-1 md:px-4 lg:grid-cols-4 lg:pr-8">
           <div className="grid md:col-span-1 ">
@@ -117,14 +117,14 @@ export default function Home() {
                 priority
               />
               <div className="flex flex-col">
-                <span className="text-paleBlue text-[0.9rem] leading-[1.6em]">Report for</span>
+                <span className="text-[0.9rem] leading-[1.6em] text-paleBlue">Report for</span>
                 <span className="text-[1.8rem] font-[300] text-white md:text-[2.5rem] lg:whitespace-break-spaces">
                   {'Jeremy\nRobson'}
                 </span>
               </div>
               <span></span>
             </div>
-            <div className="bg-darkBlue mt-[-2em] flex h-[6em] flex-row justify-evenly gap-4 rounded-[0.8em] px-8 pt-[2em] text-[1.1rem] lg:h-[11.3em] lg:flex-col lg:justify-center">
+            <div className="mt-[-2em] flex h-[6em] flex-row justify-evenly gap-4 rounded-[0.8em] bg-darkBlue px-8 pt-[2em] text-[1.1rem] lg:h-[11.3em] lg:flex-col lg:justify-center">
               <button
                 onClick={() => {
                   setButtonCol1(buttonsCol1Selection.button1);
