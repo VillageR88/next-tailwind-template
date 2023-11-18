@@ -9,9 +9,12 @@ import { Hourglass } from 'react-loader-spinner';
 
 interface Construct {
   title: string;
-  timeframes: string;
+  timeframes: TimeFrames;
 }
-
+interface TimeFrames {
+  current: number;
+  previous: number;
+}
 const ShortBox = ({ title, timeframes }: Construct) => {
   const [dotFiller, setDotFiller] = useState<string>('#BBC0FF');
   return (
