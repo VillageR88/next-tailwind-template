@@ -5,6 +5,7 @@ import '@fontsource/rubik/400.css';
 import '@fontsource/rubik/500.css';
 import Image from 'next/image';
 import { useState } from 'react';
+import { Hourglass } from 'react-loader-spinner';
 
 const ShortBox = ({ title, timeframes }: { title: string; timeframes: string }) => {
   const [dotFiller, setDotFiller] = useState<string>('#BBC0FF');
@@ -25,7 +26,7 @@ const ShortBox = ({ title, timeframes }: { title: string; timeframes: string }) 
             : title === 'Self Care'
             ? 'bg-softOrangeSelfCare'
             : null
-        } mb-[-1em] inline-grid h-[3.8em] md:w-[16em] justify-end overflow-hidden rounded rounded-t-[0.8em]`}
+        } mb-[-1em] inline-grid h-[3.8em] justify-end overflow-hidden rounded rounded-t-[0.8em] md:w-[16em]`}
       >
         <Image
           className={`${
@@ -39,7 +40,7 @@ const ShortBox = ({ title, timeframes }: { title: string; timeframes: string }) 
         />
       </div>
       <div
-        className={`bg-darkBlue flex h-[12.5em] md:w-[16em] flex-col justify-center rounded-[0.8em] pl-7 pr-6 hover:cursor-pointer ${
+        className={`bg-darkBlue flex h-[12.5em] flex-col justify-center rounded-[0.8em] pl-7 pr-6 hover:cursor-pointer md:w-[16em] ${
           dotFiller === '#BBC0FF' && 'hover:bg-[#34397B]'
         }`}
       >
@@ -86,36 +87,50 @@ export default function Home() {
   console.log(dataJson?.['0' as keyof JSON]);
 
   return (
-    <main className="font-rubik flex min-h-screen min-h-screen flex-col items-center justify-center">
-      <div className="gri w-full md:w-auto grid gap-[1.9em] md:grid-cols-4">
-        <div className="md:col-span-1 grid ">
-          <div className="z-10 flex h-[22.2em] flex-col justify-between rounded-[0.8em] bg-[#5746EA] px-8 pb-10 pt-9 leading-[3em]">
-            <Image
-              className="outline-3 rounded-full outline outline-white"
-              src="./images/image-jeremy.png"
-              width="78"
-              height="78"
-              alt={`Photo of user`}
-              priority
-            />
-            <div className="flex flex-col">
-              <span className="text-paleBlue text-[0.9rem] leading-[1.6em]">Report for</span>
-              <span className="whitespace-break-spaces text-[2.5rem] font-[300] text-white">{'Jeremy\nRobson'}</span>
+    <main className="font-rubik flex min-h-screen flex-col items-center justify-center">
+      {dataJson !== undefined ? (
+        <div className="gri grid w-full gap-[1.9em] md:w-auto md:grid-cols-4">
+          <div className="grid md:col-span-1 ">
+            <div className="z-10 flex h-[22.2em] flex-col justify-between rounded-[0.8em] bg-[#5746EA] px-8 pb-10 pt-9 leading-[3em]">
+              <Image
+                className="outline-3 rounded-full outline outline-white"
+                src="./images/image-jeremy.png"
+                width="78"
+                height="78"
+                alt={`Photo of user`}
+                priority
+              />
+              <div className="flex flex-col">
+                <span className="text-paleBlue text-[0.9rem] leading-[1.6em]">Report for</span>
+                <span className="whitespace-break-spaces text-[2.5rem] font-[300] text-white">{'Jeremy\nRobson'}</span>
+              </div>
+              <span></span>
             </div>
-            <span></span>
+            <div className="bg-darkBlue text-desaturatedBlue mt-[-2em] flex h-[11.3em] flex-col justify-center gap-4 rounded-[0.8em] px-8 pt-[2em] text-[1.1rem]">
+              <span>Daily</span>
+              <span>Weekly</span>
+              <span>Monthly</span>
+            </div>
           </div>
-          <div className="bg-darkBlue text-desaturatedBlue mt-[-2em] flex h-[11.3em] flex-col justify-center gap-4 rounded-[0.8em] px-8 pt-[2em] text-[1.1rem]">
-            <span>Daily</span>
-            <span>Weekly</span>
-            <span>Monthly</span>
+          <div className="grid gap-[1.9em] md:col-span-3 md:grid-cols-3">
+            {dataJson.map((item, index) => (
+              <ShortBox key={index} title={item.title} timeframes={item.timeframes.weekly} />
+            ))}
           </div>
         </div>
-        <div className="md:col-span-3 grid gap-[1.9em] md:grid-cols-3">
-          {dataJson?.map((item, index) => (
-            <ShortBox key={index} title={item.title} timeframes={item.timeframes.weekly} />
-          ))}
+      ) : (
+        <div>
+          <Hourglass
+            visible={true}
+            height="80"
+            width="80"
+            ariaLabel="hourglass-loading"
+            wrapperStyle={{}}
+            wrapperClass=""
+            colors={['#306cce', '#72a1ed']}
+          />
         </div>
-      </div>
+      )}
     </main>
   );
 }
