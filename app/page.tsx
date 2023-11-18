@@ -4,13 +4,13 @@ import '@fontsource/space-mono/700.css';
 
 export default function Home() {
   return (
-    <main className="font-spaceMono flex min-h-screen flex-col items-center justify-center">
+    <main className="flex min-h-screen flex-col items-center justify-center font-spaceMono">
       {/*main wrapper*/}
-      <div className="flex flex-col place-items-center">
+      <div className="flex flex-col place-items-center gap-16">
         {/*top wrapper*/}
-        <div className="grid w-[8em] grid-cols-4  text-center">
+        <div className="grid w-[6em] grid-cols-4 text-center">
           {'SPLITTER'.split('').map((x) => (
-            <span className="text-veryDarkCyan p-[0.2em] text-[1.4rem] font-[700]" key={x}>
+            <span className="text-[1.4rem] font-[700] text-veryDarkCyan" key={x}>
               {x}
             </span>
           ))}
@@ -22,6 +22,17 @@ export default function Home() {
             <div>
               <span>$</span>
               <span>142.55</span>
+              <span>Select Tip %</span>
+              <div className="grid grid-cols-3 gap-3">
+                <button className="bg-sky-500">PHDR</button>
+                <button className="bg-sky-500">PHDR</button>
+                <button className="bg-sky-500">PHDR</button>
+                <button className="bg-sky-500">PHDR</button>
+                <button className="bg-sky-500">PHDR</button>
+                <button className="bg-sky-500">PHDR</button>
+              </div>
+              <span>Number of People</span>
+              <div>IMAGE 5</div>
             </div>
           </div>
           <div className="bg-veryDarkCyan text-white">Right wrapper</div>
