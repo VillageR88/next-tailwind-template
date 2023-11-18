@@ -30,10 +30,10 @@ const Kit1 = ({ name, picture }: { name: string; picture: JSX.Element }) => (
   </div>
 );
 
-const Kit2 = () => (
+const Kit2 = ({ name }: { name: string }) => (
   <div className="flex items-center justify-between">
     <div className="flex flex-col">
-      <span className=" font-[600]">Tip Amount</span>
+      <span className=" font-[600]">{name}</span>
       <span className="text-[0.9rem] font-[700] text-grayishCyan">/ person</span>
     </div>
     <span className="text-[2rem] font-[700] text-strongCyan">$0.00</span>
@@ -77,8 +77,14 @@ export default function Home() {
             <Kit1 name="Number o People" picture={personSVG} />
           </div>
           {/*second column*/}
-          <div className="bg-veryDarkCyan px-4 py-6 text-white">
-            <Kit2 />
+          <div className="flex flex-col justify-between bg-veryDarkCyan px-8 py-6 text-white">
+            <div>
+              <Kit2 name="Tip Amount" />
+              <Kit2 name="Total" />
+            </div>
+            <button className="rounded-[0.4em] bg-[#0D686D] py-1.5 text-[1.1rem] font-[700] text-[#055D61]">
+              RESET
+            </button>
           </div>
         </div>
       </div>
