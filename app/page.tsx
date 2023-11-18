@@ -1,8 +1,9 @@
+'use client';
 import '@fontsource/space-mono';
 import '@fontsource/space-mono/400.css';
 import '@fontsource/space-mono/700.css';
+import { useState } from 'react';
 const textSettings1 = 'text-[1rem] font-[700] text-darkGrayishCyan';
-const textSettings2 = 'text-[1.2rem] font-[700] text-[#9EBBBD]';
 const dollarSVG = (
   <svg xmlns="http://www.w3.org/2000/svg" width="11" height="17">
     <path
@@ -20,19 +21,45 @@ const personSVG = (
   </svg>
 );
 
-const Kit1 = ({ name, picture }: { name: string; picture: JSX.Element }) => (
-  <div className="space-y-[0.3em]">
-    <span className={textSettings1}>{name}</span>
-    <div className="flex flex-row items-center justify-between rounded-[0.3em] bg-veryLightGrayishCyan px-4 py-2.5">
-      <span>{picture}</span>
-      <input
-        className="bg-transparent text-end text-[1.2rem] font-[700] outline-none text-veryDarkCyan [appearance:textfield] [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none"
-        placeholder={'0'}
-        type="number"
-      />
+const Kit1 = ({ name, picture }: { name: string; picture: JSX.Element }) => {
+  const [numericValue, setNumericValue] = useState('');
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    let value = e.target.value;
+
+    const regex = /^(?!^\.)\d*(?:\.\d{0,2})?$/;
+
+    value = value.replace(',', '.');
+
+    if (value === '0') {
+      value += '.';
+    }
+
+    if (value === '0.' && (e.nativeEvent as InputEvent).inputType === 'deleteContentBackward') {
+      value = '';
+    }
+
+    if (regex.test(value)) {
+      setNumericValue(value);
+    }
+  };
+
+  return (
+    <div className="space-y-[0.3em]">
+      <span className={textSettings1}>{name}</span>
+      <div className="flex flex-row items-center justify-between rounded-[0.3em] bg-veryLightGrayishCyan px-4 py-2.5">
+        <span>{picture}</span>
+        <input
+          className="appearance-none bg-transparent text-end text-[1.2rem] font-[700] text-veryDarkCyan outline-none"
+          placeholder={'0'}
+          type="text"
+          value={numericValue}
+          onChange={handleInputChange}
+        />
+      </div>
     </div>
-  </div>
-);
+  );
+};
 
 const Kit2 = ({ name }: { name: string }) => (
   <div className="flex items-center justify-between gap-[5.5em] md:gap-[2em] lg:gap-[5.5em]">
