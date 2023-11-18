@@ -31,7 +31,7 @@ const Kit1 = ({ name, picture }: { name: string; picture: JSX.Element }) => (
 );
 
 const Kit2 = ({ name }: { name: string }) => (
-  <div className="flex items-center justify-between gap-[5.5em]">
+  <div className="flex items-center justify-between gap-[5.5em] md:gap-[2em] lg:gap-[5.5em]">
     <div className="flex flex-col">
       <span className="font-[600]">{name}</span>
       <span className="text-[0.9rem] font-[700] text-grayishCyan">/ person</span>
