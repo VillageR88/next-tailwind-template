@@ -98,12 +98,12 @@ const Kit2 = ({ name, picture }: { name: string; picture: JSX.Element }) => {
 };
 
 const Kit3 = ({ name }: { name: string }) => (
-  <div className="flex items-center justify-between gap-[5.5em] md:gap-[2em] lg:gap-[5.5em]">
+  <div className="flex items-center justify-between md:gap-[2em] md:gap-[5.5em] lg:gap-[5.5em]">
     <div className="flex flex-col">
       <span className="font-[600]">{name}</span>
       <span className="text-[0.9rem] font-[700] text-grayishCyan">/ person</span>
     </div>
-    <span className="text-[3rem] font-[700] text-strongCyan">$0.00</span>
+    <span className="text-[2rem] font-[700] text-strongCyan md:text-[3rem]">$0.00</span>
   </div>
 );
 
@@ -119,8 +119,6 @@ const ButtonType2 = () => (
 );
 
 export default function Home() {
-  const [quantity, setQuantity] = useState<number>(0);
-
   return (
     <main className="flex min-h-screen flex-col justify-center font-spaceMono">
       {/*main wrapper*/}
@@ -134,13 +132,13 @@ export default function Home() {
           ))}
         </div>
         {/*bottom wrapper*/}
-        <div className="grid w-full justify-center gap-[2.7em] rounded-[1.5em] bg-white px-[1em] py-[2em] md:w-auto md:grid-cols-2 md:pl-[3em] md:pr-[2em]">
+        <div className="w-full justify-center gap-[2.7em] rounded-[1.5em] bg-white px-[1em] py-[2em] md:grid md:w-auto md:grid-cols-2 md:pl-[3em] md:pr-[2em]">
           {/*first column*/}
-          <div className="flex w-full flex-col gap-[2.5em] py-[1em]">
+          <div className="flex flex-col gap-[2.5em] px-4 py-[1em] md:w-full md:px-0">
             <Kit1 name="Bill" picture={dollarSVG} />
             <div className="space-y-4">
               <span className={textSettings1}>Select Tip %</span>
-              <div className="grid grid-cols-2 gap-3 md:grid-cols-3">
+              <div className="grid grid-cols-2 gap-4 md:grid-cols-3 md:gap-3">
                 <ButtonType1 quantity={5} />
                 <ButtonType1 quantity={10} />
                 <ButtonType1 quantity={15} />
@@ -152,7 +150,7 @@ export default function Home() {
             <Kit2 name="Number of People" picture={personSVG} />
           </div>
           {/*second column*/}
-          <div className="flex flex-col justify-between rounded-[0.8em] bg-veryDarkCyan px-8 pb-10 pt-10 text-white">
+          <div className="flex flex-col justify-between rounded-[0.8em] bg-veryDarkCyan px-8 pb-10 pt-10 text-white md:w-full">
             <div className="space-y-[1.5em]">
               <Kit3 name="Tip Amount" />
               <Kit3 name="Total" />
