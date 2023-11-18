@@ -3,13 +3,16 @@ import '@fontsource/rubik';
 import '@fontsource/rubik/300.css';
 import '@fontsource/rubik/400.css';
 import '@fontsource/rubik/500.css';
-import { parseUrl } from 'next/dist/shared/lib/router/utils/parse-url';
 import Image from 'next/image';
 import { useState } from 'react';
 import { Hourglass } from 'react-loader-spinner';
-import { parse } from 'url';
 
-const ShortBox = ({ title, timeframes }: { title: string; timeframes: string }) => {
+interface Construct {
+  title: string;
+  timeframes: string;
+}
+
+const ShortBox = ({ title, timeframes }: Construct) => {
   const [dotFiller, setDotFiller] = useState<string>('#BBC0FF');
   return (
     <div className="flex flex-col">
