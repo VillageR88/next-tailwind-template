@@ -23,7 +23,7 @@ const personSVG = (
 const Kit1 = ({ name, picture }: { name: string; picture: JSX.Element }) => (
   <div className="space-y-[0.3em]">
     <span className={textSettings1}>{name}</span>
-    <div className="flex flex-row items-center justify-between rounded-[0.3em] bg-veryLightGrayishCyan px-4 py-2">
+    <div className="flex flex-row items-center justify-between rounded-[0.3em] bg-veryLightGrayishCyan px-4 py-2.5">
       <span>{picture}</span>
       <span className={textSettings2}>0</span>
     </div>
@@ -31,7 +31,7 @@ const Kit1 = ({ name, picture }: { name: string; picture: JSX.Element }) => (
 );
 
 const Kit2 = ({ name }: { name: string }) => (
-  <div className="flex items-center justify-between gap-[5em]">
+  <div className="flex items-center justify-between gap-[5.5em]">
     <div className="flex flex-col">
       <span className="font-[600]">{name}</span>
       <span className="text-[0.9rem] font-[700] text-grayishCyan">/ person</span>
@@ -41,21 +41,21 @@ const Kit2 = ({ name }: { name: string }) => (
 );
 
 const ButtonType1 = ({ quantity }: { quantity: number }) => (
-  <button className="rounded-[0.3em] bg-veryDarkCyan py-2 text-[1.3rem] font-[700] text-veryLightGrayishCyan">
+  <button className="rounded-[0.3em] bg-veryDarkCyan py-2 text-[1.5rem] font-[700] text-veryLightGrayishCyan">
     {quantity}%
   </button>
 );
 const ButtonType2 = () => (
-  <button className="rounded-[0.3em] bg-veryLightGrayishCyan py-2 text-[1.3rem] font-[700] text-darkGrayishCyan">
+  <button className="rounded-[0.3em] bg-veryLightGrayishCyan py-2 text-[1.5rem] font-[700] text-darkGrayishCyan">
     Custom
   </button>
 );
 
 export default function Home() {
   return (
-    <main className="flex min-h-screen flex-col items-center justify-center font-spaceMono">
+    <main className="flex min-h-screen flex-col justify-center font-spaceMono">
       {/*main wrapper*/}
-      <div className="flex flex-col place-items-center gap-20">
+      <div className="mt-10 flex flex-col place-items-center gap-8 md:mt-0 md:gap-20">
         {/*top wrapper*/}
         <div className="grid w-[6em] grid-cols-4 text-center">
           {'SPLITTER'.split('').map((x, i) => (
@@ -65,13 +65,13 @@ export default function Home() {
           ))}
         </div>
         {/*bottom wrapper*/}
-        <div className="grid justify-center gap-[2.7em] rounded-[1.5em] bg-white py-[2em] pl-[3em] pr-[2em] md:grid-cols-2">
+        <div className="grid w-full justify-center gap-[2.7em] rounded-[1.5em] bg-white py-[2em] pl-[3em] pr-[2em] md:w-auto md:grid-cols-2">
           {/*first column*/}
           <div className="flex w-full flex-col gap-[2.5em] py-[1em]">
             <Kit1 name="Bill" picture={dollarSVG} />
             <div className="space-y-4">
               <span className={textSettings1}>Select Tip %</span>
-              <div className="grid grid-cols-3 gap-3">
+              <div className="grid grid-cols-2 gap-3 md:grid-cols-3">
                 <ButtonType1 quantity={5} />
                 <ButtonType1 quantity={10} />
                 <ButtonType1 quantity={15} />
@@ -84,11 +84,11 @@ export default function Home() {
           </div>
           {/*second column*/}
           <div className="flex flex-col justify-between rounded-[0.8em] bg-veryDarkCyan px-8 pb-10 pt-10 text-white">
-            <div className="space-y-[2em]">
+            <div className="space-y-[1.5em]">
               <Kit2 name="Tip Amount" />
               <Kit2 name="Total" />
             </div>
-            <button className="rounded-[0.4em] bg-[#0D686D] py-[0.6em] text-[1.1rem] font-[700] text-[#055D61]">
+            <button className="rounded-[0.3em] bg-[#0D686D] py-[0.6em] text-[1.1rem] font-[700] text-[#055D61]">
               RESET
             </button>
           </div>
