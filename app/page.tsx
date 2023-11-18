@@ -3,9 +3,11 @@ import '@fontsource/rubik';
 import '@fontsource/rubik/300.css';
 import '@fontsource/rubik/400.css';
 import '@fontsource/rubik/500.css';
+import { parseUrl } from 'next/dist/shared/lib/router/utils/parse-url';
 import Image from 'next/image';
 import { useState } from 'react';
 import { Hourglass } from 'react-loader-spinner';
+import { parse } from 'url';
 
 const ShortBox = ({ title, timeframes }: { title: string; timeframes: string }) => {
   const [dotFiller, setDotFiller] = useState<string>('#BBC0FF');
@@ -73,9 +75,9 @@ const ShortBox = ({ title, timeframes }: { title: string; timeframes: string }) 
 
 export default function Home() {
   enum buttonsCol1Selection {
-    button1 = 1,
-    button2 = 2,
-    button3 = 3,
+    button1 = 'daily',
+    button2 = 'weekly',
+    button3 = 'monthly',
   }
   const [buttonCol1, setButtonCol1] = useState<buttonsCol1Selection>(buttonsCol1Selection.button2);
   const [dataJson, setDataJson] = useState<JSON>();
@@ -147,7 +149,7 @@ export default function Home() {
           </div>
           <div className="grid gap-[1.9em] md:col-span-1 md:grid-cols-3 lg:col-span-3">
             {dataJson.map((item, index) => (
-              <ShortBox key={index} title={item.title} timeframes={item.timeframes.weekly} />
+              <ShortBox key={index} title={item.title} timeframes={eval(`item.timeframes.${buttonCol1}`)} />
             ))}
           </div>
         </div>
