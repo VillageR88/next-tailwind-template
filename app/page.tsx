@@ -88,8 +88,8 @@ export default function Home() {
 
   return (
     <main className="font-rubik flex min-h-screen flex-col items-center justify-center">
-      {dataJson !== undefined ? (
-        <div className="gri grid w-full gap-[1.9em] md:w-auto md:grid-cols-4">
+      {dataJson ? (
+        <div className="grid w-full gap-[1.9em] p-8 md:w-auto md:grid-cols-1 md:px-4 lg:grid-cols-4 lg:pr-8">
           <div className="grid md:col-span-1 ">
             <div className="z-10 flex h-[22.2em] flex-col justify-between rounded-[0.8em] bg-[#5746EA] px-8 pb-10 pt-9 leading-[3em]">
               <Image
@@ -107,12 +107,12 @@ export default function Home() {
               <span></span>
             </div>
             <div className="bg-darkBlue text-desaturatedBlue mt-[-2em] flex h-[11.3em] flex-col justify-center gap-4 rounded-[0.8em] px-8 pt-[2em] text-[1.1rem]">
-              <span>Daily</span>
-              <span>Weekly</span>
-              <span>Monthly</span>
+              <button className="w-fit hover:text-white">Daily</button>
+              <button className="w-fit hover:text-white">Weekly</button>
+              <button className="w-fit hover:text-white">Monthly</button>
             </div>
           </div>
-          <div className="grid gap-[1.9em] md:col-span-3 md:grid-cols-3">
+          <div className="grid gap-[1.9em] md:col-span-1 md:grid-cols-3 lg:col-span-3">
             {dataJson.map((item, index) => (
               <ShortBox key={index} title={item.title} timeframes={item.timeframes.weekly} />
             ))}
