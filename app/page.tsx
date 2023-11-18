@@ -30,6 +30,13 @@ const Kit1 = ({ name, picture }: { name: string; picture: JSX.Element }) => (
   </div>
 );
 
+const ButtonType1 = ({ quantity }: { quantity: number }) => (
+  <button className="bg-veryDarkCyan text-[1.3rem] font-[700] text-veryLightGrayishCyan">{quantity}%</button>
+);
+const ButtonType2 = () => (
+  <button className="bg-veryLightGrayishCyan text-[1.3rem] font-[700] text-darkGrayishCyan">Custom</button>
+);
+
 export default function Home() {
   return (
     <main className="flex min-h-screen flex-col items-center justify-center font-spaceMono">
@@ -38,7 +45,7 @@ export default function Home() {
         {/*top wrapper*/}
         <div className="grid w-[6em] grid-cols-4 text-center">
           {'SPLITTER'.split('').map((x) => (
-            <span className="text-[1.4rem] font-[700] text-veryDarkCyan" key={x}>
+            <span className="text-[1.4rem] font-[700] text-[#3E6465]" key={x}>
               {x}
             </span>
           ))}
@@ -50,12 +57,12 @@ export default function Home() {
             <Kit1 name="Bill" picture={dollarSVG} />
             <span className={textSettings1}>Select Tip %</span>
             <div className="grid grid-cols-3 gap-3">
-              <button className="bg-sky-500">PHDR</button>
-              <button className="bg-sky-500">PHDR</button>
-              <button className="bg-sky-500">PHDR</button>
-              <button className="bg-sky-500">PHDR</button>
-              <button className="bg-sky-500">PHDR</button>
-              <button className="bg-sky-500">PHDR</button>
+              <ButtonType1 quantity={5} />
+              <ButtonType1 quantity={10} />
+              <ButtonType1 quantity={15} />
+              <ButtonType1 quantity={25} />
+              <ButtonType1 quantity={50} />
+              <ButtonType2 />
             </div>{' '}
             <Kit1 name="Number o People" picture={personSVG} />
           </div>
