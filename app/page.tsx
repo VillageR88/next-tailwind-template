@@ -31,7 +31,7 @@ const Kit1 = ({ name, picture }: { name: string; picture: JSX.Element }) => (
 );
 
 const Kit2 = ({ name }: { name: string }) => (
-  <div className="flex items-center justify-between">
+  <div className="flex items-center justify-between gap-[5em]">
     <div className="flex flex-col">
       <span className="font-[600]">{name}</span>
       <span className="text-[0.9rem] font-[700] text-grayishCyan">/ person</span>
@@ -61,7 +61,7 @@ export default function Home() {
           ))}
         </div>
         {/*bottom wrapper*/}
-        <div className="grid grid-cols-2 justify-center gap-8 rounded-[0.8em] bg-white p-6">
+        <div className="grid justify-center gap-[2.7em] rounded-[0.8em] bg-white p-6 md:grid-cols-2">
           {/*first column*/}
           <div className="flex w-full flex-col">
             <Kit1 name="Bill" picture={dollarSVG} />
