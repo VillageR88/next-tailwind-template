@@ -30,6 +30,16 @@ const Kit1 = ({ name, picture }: { name: string; picture: JSX.Element }) => (
   </div>
 );
 
+const Kit2 = () => (
+  <div className="flex justify-between">
+    <div className="flex flex-col">
+      <span>Tip Amount</span>
+      <span>/ person</span>
+    </div>
+    $0.00
+  </div>
+);
+
 const ButtonType1 = ({ quantity }: { quantity: number }) => (
   <button className="bg-veryDarkCyan text-[1.3rem] font-[700] text-veryLightGrayishCyan">{quantity}%</button>
 );
@@ -67,7 +77,9 @@ export default function Home() {
             <Kit1 name="Number o People" picture={personSVG} />
           </div>
           {/*second column*/}
-          <div className="bg-veryDarkCyan text-white">Right wrapper</div>
+          <div className="bg-veryDarkCyan px-4 py-6 text-white">
+            <Kit2 />
+          </div>
         </div>
       </div>
     </main>
