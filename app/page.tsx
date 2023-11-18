@@ -152,7 +152,7 @@ export default function Home() {
           </div>
           <div className="grid gap-[1.9em] md:col-span-1 md:grid-cols-3 lg:col-span-3">
             {dataJson.map((item, index) => (
-              <ShortBox key={index} title={item.title} timeframes={eval(`item.timeframes.${buttonCol1}`)} />
+              <ShortBox key={index} title={item.title} timeframes={item.timeframes[buttonCol1]} />
             ))}
           </div>
         </div>
