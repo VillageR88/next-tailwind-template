@@ -12,8 +12,16 @@ const nextConfig = {
 
   // Optional: Change the output directory `out` -> `dist`
   distDir: 'build',
-  //assetPrefix: '/Frontend_Mentor/time-tracking-dashboard-main',
+  //assetPrefix: '/Frontend_Mentor/time-tracking-dashboard-main/',
   reactStrictMode: true,
+  module: {
+    rules: [
+      {
+        test: /\.svg$/,
+        use: ['@svgr/webpack'],
+      },
+    ],
+  },
 }
 
 module.exports = nextConfig

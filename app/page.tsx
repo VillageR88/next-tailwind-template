@@ -41,7 +41,7 @@ const ShortBox = ({ title, timeframes }: Items) => {
           className={`${
             title === 'Play' ? 'mt-[-0.4em]' : title === 'Exercise' ? 'mt-[0em]' : 'mt-[-0.7em]'
           } mr-[1em] h-auto w-auto`}
-          src={`./images/icon-${title.replace(' ', '-')}.svg`}
+          src={`./images/icon-${title.toLowerCase().replace(' ', '-')}.svg`}
           width="79"
           height="79"
           alt={`${title} icon`}
