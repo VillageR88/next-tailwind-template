@@ -27,7 +27,7 @@ const Kit1 = ({ name, picture }: { name: string; picture: JSX.Element }) => {
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     let value = e.target.value;
 
-    const regex = /^(?!^\.)\d{0,17}(?:\.\d{0,2})?$/;
+    const regex = /^(?!^\.)\d{0,22}(?:\.\d{0,2})?$/;
 
     value = value.replace(',', '.');
 
@@ -45,19 +45,22 @@ const Kit1 = ({ name, picture }: { name: string; picture: JSX.Element }) => {
   };
 
   return (
-    <div className="space-y-[0.3em]">
-      <span className={textSettings1}>{name}</span>
+    <form className="space-y-[0.3em]">
+      <label htmlFor={name} className={textSettings1}>
+        {name}
+      </label>
       <div className="flex flex-row items-center justify-between rounded-[0.3em] bg-veryLightGrayishCyan px-4 py-2.5">
         <span>{picture}</span>
         <input
-          className="appearance-none bg-transparent text-end text-[1.2rem] font-[700] text-veryDarkCyan outline-none"
+          id={name}
+          className="w-full appearance-none bg-transparent text-end text-[1.2rem] font-[700] text-veryDarkCyan outline-none"
           placeholder={'0'}
           type="text"
           value={numericValue}
           onChange={handleInputChange}
         />
       </div>
-    </div>
+    </form>
   );
 };
 
@@ -67,7 +70,7 @@ const Kit2 = ({ name, picture }: { name: string; picture: JSX.Element }) => {
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
 
-    const regex = /^[0-9]{0,20}$/;
+    const regex = /^[0-9]{0,22}$/;
 
     if (regex.test(value)) {
       setNumericValue(value);
@@ -75,19 +78,22 @@ const Kit2 = ({ name, picture }: { name: string; picture: JSX.Element }) => {
   };
 
   return (
-    <div className="space-y-[0.3em]">
-      <span className={textSettings1}>{name}</span>
+    <form className="space-y-[0.3em]">
+      <label htmlFor={name} className={textSettings1}>
+        {name}
+      </label>
       <div className="flex flex-row items-center justify-between rounded-[0.3em] bg-veryLightGrayishCyan px-4 py-2.5">
         <span>{picture}</span>
         <input
-          className="appearance-none bg-transparent text-end text-[1.2rem] font-[700] text-veryDarkCyan outline-none"
+          id={name}
+          className="w-full appearance-none bg-transparent text-end text-[1.2rem] font-[700] text-veryDarkCyan outline-none"
           type="text"
           value={numericValue}
           onChange={handleInputChange}
           placeholder="0"
         />
       </div>
-    </div>
+    </form>
   );
 };
 
