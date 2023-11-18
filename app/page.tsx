@@ -72,6 +72,12 @@ const ShortBox = ({ title, timeframes }: { title: string; timeframes: string }) 
 };
 
 export default function Home() {
+  enum buttonsCol1Selection {
+    button1 = 1,
+    button2 = 2,
+    button3 = 3,
+  }
+  const [buttonCol1, setButtonCol1] = useState<buttonsCol1Selection>(buttonsCol1Selection.button2);
   const [dataJson, setDataJson] = useState<JSON>();
   const urlJson = './data.json';
   useState(() => {
@@ -106,10 +112,37 @@ export default function Home() {
               </div>
               <span></span>
             </div>
-            <div className="bg-darkBlue text-desaturatedBlue mt-[-2em] flex h-[11.3em] flex-col justify-center gap-4 rounded-[0.8em] px-8 pt-[2em] text-[1.1rem]">
-              <button className="w-fit hover:text-white">Daily</button>
-              <button className="w-fit hover:text-white">Weekly</button>
-              <button className="w-fit hover:text-white">Monthly</button>
+            <div className="bg-darkBlue mt-[-2em] flex h-[11.3em] flex-col justify-center gap-4 rounded-[0.8em] px-8 pt-[2em] text-[1.1rem]">
+              <button
+                onClick={() => {
+                  setButtonCol1(buttonsCol1Selection.button1);
+                }}
+                className={`w-fit hover:text-white ${
+                  buttonCol1 === buttonsCol1Selection.button1 ? 'text-white' : 'text-desaturatedBlue'
+                }`}
+              >
+                Daily
+              </button>
+              <button
+                onClick={() => {
+                  setButtonCol1(buttonsCol1Selection.button2);
+                }}
+                className={`w-fit hover:text-white ${
+                  buttonCol1 === buttonsCol1Selection.button2 ? 'text-white' : 'text-desaturatedBlue'
+                }`}
+              >
+                Weekly
+              </button>
+              <button
+                onClick={() => {
+                  setButtonCol1(buttonsCol1Selection.button3);
+                }}
+                className={`w-fit hover:text-white ${
+                  buttonCol1 === buttonsCol1Selection.button3 ? 'text-white' : 'text-desaturatedBlue'
+                }`}
+              >
+                Monthly
+              </button>
             </div>
           </div>
           <div className="grid gap-[1.9em] md:col-span-1 md:grid-cols-3 lg:col-span-3">
