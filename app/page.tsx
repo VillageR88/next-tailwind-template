@@ -21,9 +21,9 @@ const personSVG = (
 );
 
 const Kit1 = ({ name, picture }: { name: string; picture: JSX.Element }) => (
-  <div>
+  <div className="space-y-[0.3em]">
     <span className={textSettings1}>{name}</span>
-    <div className="flex flex-row items-center justify-between bg-veryLightGrayishCyan px-4 py-1">
+    <div className="flex flex-row items-center justify-between rounded-[0.3em] bg-veryLightGrayishCyan px-4 py-1">
       <span>{picture}</span>
       <span className={textSettings2}>0</span>
     </div>
@@ -41,10 +41,14 @@ const Kit2 = ({ name }: { name: string }) => (
 );
 
 const ButtonType1 = ({ quantity }: { quantity: number }) => (
-  <button className="bg-veryDarkCyan text-[1.3rem] font-[700] text-veryLightGrayishCyan">{quantity}%</button>
+  <button className="rounded-[0.3em] bg-veryDarkCyan py-1.5 text-[1.3rem] font-[700] text-veryLightGrayishCyan">
+    {quantity}%
+  </button>
 );
 const ButtonType2 = () => (
-  <button className="bg-veryLightGrayishCyan text-[1.3rem] font-[700] text-darkGrayishCyan">Custom</button>
+  <button className="rounded-[0.3em] bg-veryLightGrayishCyan py-1.5 text-[1.3rem] font-[700] text-darkGrayishCyan">
+    Custom
+  </button>
 );
 
 export default function Home() {
@@ -61,9 +65,9 @@ export default function Home() {
           ))}
         </div>
         {/*bottom wrapper*/}
-        <div className="grid justify-center gap-[2.7em] rounded-[0.8em] bg-white p-6 md:grid-cols-2">
+        <div className="grid justify-center gap-[2.7em] rounded-[0.8em] bg-white p-[2em] md:grid-cols-2">
           {/*first column*/}
-          <div className="flex w-full flex-col">
+          <div className="flex w-full flex-col gap-[1.5em]">
             <Kit1 name="Bill" picture={dollarSVG} />
             <span className={textSettings1}>Select Tip %</span>
             <div className="grid grid-cols-3 gap-3">
@@ -77,8 +81,8 @@ export default function Home() {
             <Kit1 name="Number of People" picture={personSVG} />
           </div>
           {/*second column*/}
-          <div className="flex flex-col justify-between bg-veryDarkCyan px-8 py-6 text-white">
-            <div>
+          <div className="flex flex-col justify-between rounded-[0.8em] bg-veryDarkCyan px-8 pb-6 pt-10 text-white">
+            <div className="space-y-[2em]">
               <Kit2 name="Tip Amount" />
               <Kit2 name="Total" />
             </div>
