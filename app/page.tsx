@@ -51,7 +51,7 @@ export default function Home() {
           ))}
         </div>
         {/*bottom wrapper*/}
-        <div className="flex justify-center gap-8 rounded-[0.8em] bg-white p-6">
+        <div className="grid grid-cols-2 justify-center gap-8 rounded-[0.8em] bg-white p-6">
           {/*first column*/}
           <div className="flex w-full flex-col">
             <Kit1 name="Bill" picture={dollarSVG} />
