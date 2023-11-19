@@ -221,7 +221,7 @@ export default function Home() {
           <div className="flex flex-col justify-between gap-6 rounded-[0.8em] bg-veryDarkCyan px-8 pb-6 pt-10 text-white md:w-full md:gap-0 md:pb-10">
             <div className="space-y-[1.5em]">
               <FormType3 value={tipAmount} name="Tip Amount" />
-              <FormType3 name="Total" />
+              <FormType3 value={'0.00'} name="Total" />
             </div>
             <button className="rounded-[0.3em] bg-[#0D686D] py-[0.6em] text-[1.1rem] font-[700] text-[#055D61]">
               RESET
