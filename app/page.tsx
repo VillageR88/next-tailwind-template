@@ -31,7 +31,7 @@ const personSVG = (
   </svg>
 );
 
-const Kit1 = ({ name, picture }: { name: string; picture: JSX.Element }) => {
+const FormType1 = ({ name, picture }: { name: string; picture: JSX.Element }) => {
   const [numericValue, setNumericValue] = useState('');
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -74,7 +74,7 @@ const Kit1 = ({ name, picture }: { name: string; picture: JSX.Element }) => {
   );
 };
 
-const Kit2 = ({ name, picture }: { name: string; picture: JSX.Element }) => {
+const FormType2 = ({ name, picture }: { name: string; picture: JSX.Element }) => {
   const [numericValue, setNumericValue] = useState('');
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -107,7 +107,7 @@ const Kit2 = ({ name, picture }: { name: string; picture: JSX.Element }) => {
   );
 };
 
-const Kit3 = ({ name }: { name: string }) => (
+const FormType3 = ({ name }: { name: string }) => (
   <div className="flex items-center justify-between md:gap-[2em]  lg:gap-[5.5em]">
     <div className="flex flex-col">
       <span className="font-[600]">{name}</span>
@@ -156,7 +156,7 @@ export default function Home() {
         <div className="w-full justify-center gap-[2.7em] rounded-[1.5em] bg-white px-[1em] py-[2em] md:grid md:w-auto md:grid-cols-2 md:pl-[3em] md:pr-[2em]">
           {/*first column*/}
           <div className="flex flex-col gap-[2.5em] px-4 py-[1em] md:w-full md:px-0">
-            <Kit1 name="Bill" picture={dollarSVG} />
+            <FormType1 name="Bill" picture={dollarSVG} />
             <div className="space-y-4">
               <span className={textSettings1}>Select Tip %</span>
               <div className="grid grid-cols-2 gap-4 md:grid-cols-3 md:gap-3">
@@ -198,13 +198,13 @@ export default function Home() {
                 <ButtonType2 />
               </div>
             </div>
-            <Kit2 name="Number of People" picture={personSVG} />
+            <FormType2 name="Number of People" picture={personSVG} />
           </div>
           {/*second column*/}
           <div className="flex flex-col justify-between gap-6 rounded-[0.8em] bg-veryDarkCyan px-8 pb-6 pt-10 text-white md:w-full md:gap-0 md:pb-10">
             <div className="space-y-[1.5em]">
-              <Kit3 name="Tip Amount" />
-              <Kit3 name="Total" />
+              <FormType3 name="Tip Amount" />
+              <FormType3 name="Total" />
             </div>
             <button className="rounded-[0.3em] bg-[#0D686D] py-[0.6em] text-[1.1rem] font-[700] text-[#055D61]">
               RESET
