@@ -92,15 +92,13 @@ const FormType2 = ({
   picture: JSX.Element;
   action(value: string): unknown;
 }) => {
-  const [numericValue, setNumericValue] = useState('');
-  action(numericValue);
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
 
     const regex = /(?!0)^[0-9]{0,22}$/;
 
     if (regex.test(value)) {
-      setNumericValue(value);
+      action(value); // Update the parent component state directly
     }
   };
 
@@ -115,7 +113,6 @@ const FormType2 = ({
           id={name}
           className="w-full appearance-none bg-transparent text-end text-[1.2rem] font-[700] text-veryDarkCyan outline-none hover:cursor-pointer"
           type="text"
-          value={numericValue}
           onChange={handleInputChange}
           placeholder="0"
         />
@@ -164,9 +161,11 @@ const ButtonType2 = () => (
 );
 
 export default function Home() {
-  const [person, setPerson] = useState('0');
+  const [person, setPerson] = useState<string>('0');
   const [selectedButton, setSelectedButton] = useState<ButtonSelected>(ButtonSelected.none);
-  const [billAmount, setBillAmount] = useState('0.00');
+  const [billAmount, setBillAmount] = useState<string>('0.00');
+  //console.log(person, selectedButton, billAmount);
+
   return (
     <main className="flex min-h-screen flex-col justify-center font-spaceMono">
       {/*main wrapper*/}
@@ -262,7 +261,13 @@ export default function Home() {
                 name="Total"
               />
             </div>
-            <button className="rounded-[0.3em] bg-[#0D686D] py-[0.6em] text-[1.1rem] font-[700] text-[#055D61]">
+            <button
+              className={`rounded-[0.3em] ${
+                person === '0' && selectedButton === ButtonSelected.none && billAmount === '0.00'
+                  ? 'bg-[#0D686D]'
+                  : 'bg-strongCyan'
+              }  py-[0.6em] text-[1.1rem] font-[700] text-[#055D61]`}
+            >
               RESET
             </button>
           </div>
