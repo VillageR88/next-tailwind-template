@@ -116,15 +116,24 @@ const FormType2 = ({ name, picture }: { name: string; picture: JSX.Element }) =>
   );
 };
 
-const FormType3 = ({ name, value }: { name: string; value: string }) => (
-  <div className="flex items-center justify-between md:gap-[2em]  lg:gap-[5.5em]">
-    <div className="flex flex-col">
-      <span className="font-[600]">{name}</span>
-      <span className="text-[0.9rem] font-[700] text-grayishCyan">/ person</span>
+const FormType3 = ({ name, value }: { name: string; value: string }) => {
+  console.log('length', value.length);
+  return (
+    <div className="flex items-center justify-between md:gap-[2em]  lg:gap-[5.5em]">
+      <div className="flex flex-col">
+        <span className="font-[600]">{name}</span>
+        <span className="text-[0.9rem] font-[700] text-grayishCyan">/ person</span>
+      </div>
+      <span
+        className={`text-[2rem] font-[700] text-strongCyan ${
+          value.length <= 4 ? 'md:text-[3rem]' : value.length <= 8 ? 'md:text-[2rem]' : 'md:text-[1.5rem]'
+        }`}
+      >
+        ${value}
+      </span>
     </div>
-    <span className="text-[2rem] font-[700] text-strongCyan md:text-[3rem]">${value}</span>
-  </div>
-);
+  );
+};
 
 const ButtonType1 = ({ quantity, value, action }: { quantity: number; value: number; action(): unknown }) => {
   return (
@@ -164,7 +173,7 @@ export default function Home() {
           ))}
         </div>
         {/*bottom wrapper*/}
-        <div className="w-full justify-center gap-[2.7em] rounded-[1.5em] bg-white px-[1em] py-[2em] md:grid md:w-[57.3em] md:grid-cols-2 md:pl-[3em] md:pr-[2em]">
+        <div className="w-full justify-center gap-[2.7em] rounded-[1.5em] bg-white px-[1em] py-[2em] md:grid md:w-[47em] md:grid-cols-2 md:pl-[3em] md:pr-[2em] lg:w-[57.3em]">
           {/*first column*/}
           <div className="flex flex-col gap-[2.5em] px-4 py-[1em] md:w-full md:px-0">
             <FormType1
