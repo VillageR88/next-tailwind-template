@@ -83,9 +83,17 @@ const FormType1 = ({
   );
 };
 
-const FormType2 = ({ name, picture }: { name: string; picture: JSX.Element }) => {
+const FormType2 = ({
+  name,
+  picture,
+  action,
+}: {
+  name: string;
+  picture: JSX.Element;
+  action(value: string): unknown;
+}) => {
   const [numericValue, setNumericValue] = useState('');
-
+  action(numericValue);
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
 
@@ -117,9 +125,8 @@ const FormType2 = ({ name, picture }: { name: string; picture: JSX.Element }) =>
 };
 
 const FormType3 = ({ name, value }: { name: string; value: string }) => {
-  console.log('length', value.length);
   return (
-    <div className={`flex items-center justify-between ${value.length <= 4 && 'md:gap-[0.1em] lg:gap-[5.5em]'}`}>
+    <div className={`flex items-center justify-between ${value.length <= 3 && 'md:gap-[0.1em] lg:gap-[5.5em]'}`}>
       <div className="flex flex-col">
         <span className="font-[600]">{name}</span>
         <span className="text-[0.9rem] font-[700] text-grayishCyan">/ person</span>
@@ -157,9 +164,9 @@ const ButtonType2 = () => (
 );
 
 export default function Home() {
+  const [person, setPerson] = useState('0');
   const [selectedButton, setSelectedButton] = useState<ButtonSelected>(ButtonSelected.none);
   const [tipAmount, setTipAmount] = useState('0.00');
-  console.log(tipAmount);
   return (
     <main className="flex min-h-screen flex-col justify-center font-spaceMono">
       {/*main wrapper*/}
@@ -224,7 +231,13 @@ export default function Home() {
                 <ButtonType2 />
               </div>
             </div>
-            <FormType2 name="Number of People" picture={personSVG} />
+            <FormType2
+              action={(value) => {
+                setPerson(value);
+              }}
+              name="Number of People"
+              picture={personSVG}
+            />
           </div>
           {/*second column*/}
           <div className="flex flex-col justify-between gap-6 rounded-[0.8em] bg-veryDarkCyan px-8 pb-6 pt-10 text-white md:w-full md:gap-0 md:pb-10">
