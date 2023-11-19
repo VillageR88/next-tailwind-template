@@ -116,13 +116,13 @@ const FormType2 = ({ name, picture }: { name: string; picture: JSX.Element }) =>
   );
 };
 
-const FormType3 = ({ name }: { name: string }) => (
+const FormType3 = ({ name, value }: { name: string; value: string }) => (
   <div className="flex items-center justify-between md:gap-[2em]  lg:gap-[5.5em]">
     <div className="flex flex-col">
       <span className="font-[600]">{name}</span>
       <span className="text-[0.9rem] font-[700] text-grayishCyan">/ person</span>
     </div>
-    <span className="text-[2rem] font-[700] text-strongCyan md:text-[3rem]">$0.00</span>
+    <span className="text-[2rem] font-[700] text-strongCyan md:text-[3rem]">${value}</span>
   </div>
 );
 
@@ -149,6 +149,8 @@ const ButtonType2 = () => (
 
 export default function Home() {
   const [selectedButton, setSelectedButton] = useState<ButtonSelected>(ButtonSelected.none);
+  const [tipAmount, setTipAmount] = useState('0.00');
+  console.log(tipAmount);
   return (
     <main className="flex min-h-screen flex-col justify-center font-spaceMono">
       {/*main wrapper*/}
@@ -167,7 +169,7 @@ export default function Home() {
           <div className="flex flex-col gap-[2.5em] px-4 py-[1em] md:w-full md:px-0">
             <FormType1
               action={(value) => {
-                console.log(value);
+                setTipAmount(value || '0.00');
               }}
               name="Bill"
               picture={dollarSVG}
@@ -218,7 +220,7 @@ export default function Home() {
           {/*second column*/}
           <div className="flex flex-col justify-between gap-6 rounded-[0.8em] bg-veryDarkCyan px-8 pb-6 pt-10 text-white md:w-full md:gap-0 md:pb-10">
             <div className="space-y-[1.5em]">
-              <FormType3 name="Tip Amount" />
+              <FormType3 value={tipAmount} name="Tip Amount" />
               <FormType3 name="Total" />
             </div>
             <button className="rounded-[0.3em] bg-[#0D686D] py-[0.6em] text-[1.1rem] font-[700] text-[#055D61]">
