@@ -92,6 +92,7 @@ const FormType2 = ({
   picture: JSX.Element;
   action(value: string): unknown;
 }) => {
+  const [numericValue, setNumericValue] = useState('');
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
 
@@ -99,6 +100,7 @@ const FormType2 = ({
 
     if (regex.test(value)) {
       action(value);
+      setNumericValue(value);
     }
   };
 
@@ -115,6 +117,7 @@ const FormType2 = ({
           type="text"
           onChange={handleInputChange}
           placeholder="0"
+          value={numericValue}
         />
       </div>
     </form>
@@ -263,6 +266,11 @@ export default function Home() {
               />
             </div>
             <button
+              onClick={() => {
+                setPerson('0');
+                setSelectedButton(ButtonSelected.none);
+                setBillAmount('0.00');
+              }}
               className={`rounded-[0.3em] ${
                 person === '0' && selectedButton === ButtonSelected.none && billAmount === '0.00'
                   ? 'bg-[#0D686D]'
