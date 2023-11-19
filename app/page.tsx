@@ -59,7 +59,7 @@ const FormType1 = ({
 
     if (regex.test(value)) {
       setNumericValue(value);
-      action(value); // Update the parent component state with the new value
+      action(value);
     }
   };
 
