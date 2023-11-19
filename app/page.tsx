@@ -5,6 +5,7 @@ import '@fontsource/space-mono/700.css';
 import { useState } from 'react';
 
 enum ButtonSelected {
+  none = 0,
   button5 = 5,
   button10 = 10,
   button15 = 15,
@@ -116,11 +117,21 @@ const Kit3 = ({ name }: { name: string }) => (
   </div>
 );
 
-const ButtonType1 = ({ quantity }: { quantity: number }) => (
-  <button className="rounded-[0.3em] bg-veryDarkCyan py-2 text-[1.5rem] font-[700] text-veryLightGrayishCyan">
-    {quantity}%
-  </button>
-);
+const ButtonType1 = ({ quantity, value, action }: { quantity: number; value: number; action(): unknown }) => {
+  return (
+    <button
+      onClick={() => {
+        action();
+      }}
+      className={`rounded-[0.3em] ${
+        value !== quantity ? 'bg-veryDarkCyan text-veryLightGrayishCyan' : 'bg-strongCyan text-veryDarkCyan'
+      } py-2 text-[1.5rem] font-[700]`}
+    >
+      {quantity}%
+    </button>
+  );
+};
+
 const ButtonType2 = () => (
   <button className="rounded-[0.3em] bg-veryLightGrayishCyan py-2 text-[1.5rem] font-[700] text-darkGrayishCyan">
     Custom
@@ -128,6 +139,7 @@ const ButtonType2 = () => (
 );
 
 export default function Home() {
+  const [selectedButton, setSelectedButton] = useState<ButtonSelected>(ButtonSelected.none);
   return (
     <main className="flex min-h-screen flex-col justify-center font-spaceMono">
       {/*main wrapper*/}
@@ -148,11 +160,41 @@ export default function Home() {
             <div className="space-y-4">
               <span className={textSettings1}>Select Tip %</span>
               <div className="grid grid-cols-2 gap-4 md:grid-cols-3 md:gap-3">
-                <ButtonType1 quantity={5} />
-                <ButtonType1 quantity={10} />
-                <ButtonType1 quantity={15} />
-                <ButtonType1 quantity={25} />
-                <ButtonType1 quantity={50} />
+                <ButtonType1
+                  value={selectedButton}
+                  action={() => {
+                    setSelectedButton(ButtonSelected.button5);
+                  }}
+                  quantity={5}
+                />
+                <ButtonType1
+                  value={selectedButton}
+                  action={() => {
+                    setSelectedButton(ButtonSelected.button10);
+                  }}
+                  quantity={10}
+                />
+                <ButtonType1
+                  value={selectedButton}
+                  action={() => {
+                    setSelectedButton(ButtonSelected.button15);
+                  }}
+                  quantity={15}
+                />
+                <ButtonType1
+                  value={selectedButton}
+                  action={() => {
+                    setSelectedButton(ButtonSelected.button25);
+                  }}
+                  quantity={25}
+                />
+                <ButtonType1
+                  value={selectedButton}
+                  action={() => {
+                    setSelectedButton(ButtonSelected.button50);
+                  }}
+                  quantity={50}
+                />
                 <ButtonType2 />
               </div>
             </div>
