@@ -83,7 +83,6 @@ const FormType1 = ({
   );
 };
 
-
 const FormType2 = ({
   name,
   picture,
@@ -166,7 +165,11 @@ export default function Home() {
   const [person, setPerson] = useState<string>('0');
   const [selectedButton, setSelectedButton] = useState<ButtonSelected>(ButtonSelected.none);
   const [billAmount, setBillAmount] = useState<string>('0.00');
-
+  const evalued1 = (((parseFloat(billAmount) / parseFloat(person)) * Number(selectedButton)) / 100).toString();
+  const evalued2 = (
+    ((parseFloat(billAmount) / parseFloat(person)) * Number(selectedButton)) / 100 +
+    parseFloat(billAmount) / parseFloat(person)
+  ).toString();
   return (
     <main className="flex min-h-screen flex-col justify-center font-spaceMono">
       {/*main wrapper*/}
@@ -244,19 +247,16 @@ export default function Home() {
             <div className="space-y-[1.5em]">
               <FormType3
                 value={
-                  selectedButton !== ButtonSelected.none && parseFloat(billAmount) / parseFloat(person)
-                    ? (((parseFloat(billAmount) / parseFloat(person)) * Number(selectedButton)) / 100).toString()
+                  evalued1 !== 'NaN' && evalued1 !== 'Infinity' && selectedButton !== ButtonSelected.none
+                    ? evalued1
                     : '0.00'
                 }
                 name="Tip Amount"
               />
               <FormType3
                 value={
-                  selectedButton !== ButtonSelected.none && parseFloat(billAmount) / parseFloat(person)
-                    ? (
-                        ((parseFloat(billAmount) / parseFloat(person)) * Number(selectedButton)) / 100 +
-                        parseFloat(billAmount) / parseFloat(person)
-                      ).toString()
+                  evalued2 !== 'NaN' && evalued2 !== 'Infinity' && selectedButton !== ButtonSelected.none
+                    ? evalued2
                     : '0.00'
                 }
                 name="Total"
