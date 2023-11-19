@@ -41,7 +41,6 @@ const FormType1 = ({
   action(value: string): unknown;
 }) => {
   const [numericValue, setNumericValue] = useState('');
-  action(numericValue);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     let value = e.target.value;
@@ -60,6 +59,7 @@ const FormType1 = ({
 
     if (regex.test(value)) {
       setNumericValue(value);
+      action(value); // Update the parent component state with the new value
     }
   };
 
@@ -83,6 +83,7 @@ const FormType1 = ({
   );
 };
 
+
 const FormType2 = ({
   name,
   picture,
@@ -98,7 +99,7 @@ const FormType2 = ({
     const regex = /(?!0)^[0-9]{0,22}$/;
 
     if (regex.test(value)) {
-      action(value); // Update the parent component state directly
+      action(value);
     }
   };
 
@@ -122,6 +123,7 @@ const FormType2 = ({
 };
 
 const FormType3 = ({ name, value }: { name: string; value: string }) => {
+  console.log(value);
   return (
     <div className={`flex items-center justify-between `}>
       <div className="flex flex-col">
@@ -164,7 +166,6 @@ export default function Home() {
   const [person, setPerson] = useState<string>('0');
   const [selectedButton, setSelectedButton] = useState<ButtonSelected>(ButtonSelected.none);
   const [billAmount, setBillAmount] = useState<string>('0.00');
-  //console.log(person, selectedButton, billAmount);
 
   return (
     <main className="flex min-h-screen flex-col justify-center font-spaceMono">
