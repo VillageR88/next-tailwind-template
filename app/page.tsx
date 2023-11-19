@@ -126,17 +126,17 @@ const FormType2 = ({
 
 const FormType3 = ({ name, value }: { name: string; value: string }) => {
   return (
-    <div className={`flex items-center justify-between ${value.length <= 3 && 'md:gap-[0.1em] lg:gap-[5.5em]'}`}>
+    <div className={`flex items-center justify-between `}>
       <div className="flex flex-col">
         <span className="font-[600]">{name}</span>
         <span className="text-[0.9rem] font-[700] text-grayishCyan">/ person</span>
       </div>
       <span
         className={`break-all text-right text-[2rem] font-[700] text-strongCyan ${
-          value.length <= 4 ? 'md:text-[3rem]' : value.length <= 8 ? 'md:text-[2rem]' : 'md:text-[1.5rem]'
+          value.length <= 4 ? 'md:text-[2.9rem]' : value.length <= 8 ? 'md:text-[2rem]' : 'md:text-[1.5rem]'
         }`}
       >
-        ${Number(value) % 1 ? parseFloat(value).toFixed(2) : value}
+        ${parseFloat(value).toFixed(2)}
       </span>
     </div>
   );
@@ -242,7 +242,14 @@ export default function Home() {
           {/*second column*/}
           <div className="flex flex-col justify-between gap-6 rounded-[0.8em] bg-veryDarkCyan px-8 pb-6 pt-10 text-white md:w-full md:gap-0 md:pb-10">
             <div className="space-y-[1.5em]">
-              <FormType3 value={tipAmount} name="Tip Amount" />
+              <FormType3
+                value={
+                  parseFloat(tipAmount) / parseFloat(person)
+                    ? (parseFloat(tipAmount) / parseFloat(person)).toString()
+                    : '0.00'
+                }
+                name="Tip Amount"
+              />
               <FormType3 value={'0.00'} name="Total" />
             </div>
             <button className="rounded-[0.3em] bg-[#0D686D] py-[0.6em] text-[1.1rem] font-[700] text-[#055D61]">
