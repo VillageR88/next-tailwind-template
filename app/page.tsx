@@ -164,7 +164,7 @@ export default function Home() {
           ))}
         </div>
         {/*bottom wrapper*/}
-        <div className="w-full justify-center gap-[2.7em] rounded-[1.5em] bg-white px-[1em] py-[2em] md:grid md:w-auto md:grid-cols-2 md:pl-[3em] md:pr-[2em]">
+        <div className="w-full justify-center gap-[2.7em] rounded-[1.5em] bg-white px-[1em] py-[2em] md:grid md:w-[57.3em] md:grid-cols-2 md:pl-[3em] md:pr-[2em]">
           {/*first column*/}
           <div className="flex flex-col gap-[2.5em] px-4 py-[1em] md:w-full md:px-0">
             <FormType1
