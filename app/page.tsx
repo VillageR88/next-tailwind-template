@@ -97,7 +97,7 @@ const FormType2 = ({
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
 
-    const regex = /^[0-9]{0,22}$/;
+    const regex = /(?!0)^[0-9]{0,22}$/;
 
     if (regex.test(value)) {
       setNumericValue(value);
@@ -166,7 +166,7 @@ const ButtonType2 = () => (
 export default function Home() {
   const [person, setPerson] = useState('0');
   const [selectedButton, setSelectedButton] = useState<ButtonSelected>(ButtonSelected.none);
-  const [tipAmount, setTipAmount] = useState('0.00');
+  const [billAmount, setBillAmount] = useState('0.00');
   return (
     <main className="flex min-h-screen flex-col justify-center font-spaceMono">
       {/*main wrapper*/}
@@ -185,7 +185,7 @@ export default function Home() {
           <div className="flex flex-col gap-[2.5em] px-4 py-[1em] md:w-full md:px-0">
             <FormType1
               action={(value) => {
-                setTipAmount(value || '0.00');
+                setBillAmount(value || '0.00');
               }}
               name="Bill"
               picture={dollarSVG}
@@ -244,13 +244,23 @@ export default function Home() {
             <div className="space-y-[1.5em]">
               <FormType3
                 value={
-                  parseFloat(tipAmount) / parseFloat(person)
-                    ? (parseFloat(tipAmount) / parseFloat(person)).toString()
+                  selectedButton !== ButtonSelected.none && parseFloat(billAmount) / parseFloat(person)
+                    ? (((parseFloat(billAmount) / parseFloat(person)) * Number(selectedButton)) / 100).toString()
                     : '0.00'
                 }
                 name="Tip Amount"
               />
-              <FormType3 value={'0.00'} name="Total" />
+              <FormType3
+                value={
+                  selectedButton !== ButtonSelected.none && parseFloat(billAmount) / parseFloat(person)
+                    ? (
+                        ((parseFloat(billAmount) / parseFloat(person)) * Number(selectedButton)) / 100 +
+                        parseFloat(billAmount) / parseFloat(person)
+                      ).toString()
+                    : '0.00'
+                }
+                name="Total"
+              />
             </div>
             <button className="rounded-[0.3em] bg-[#0D686D] py-[0.6em] text-[1.1rem] font-[700] text-[#055D61]">
               RESET
