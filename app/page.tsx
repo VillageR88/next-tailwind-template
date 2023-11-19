@@ -31,8 +31,17 @@ const personSVG = (
   </svg>
 );
 
-const FormType1 = ({ name, picture }: { name: string; picture: JSX.Element }) => {
+const FormType1 = ({
+  name,
+  picture,
+  action,
+}: {
+  name: string;
+  picture: JSX.Element;
+  action(value: string): unknown;
+}) => {
   const [numericValue, setNumericValue] = useState('');
+  action(numericValue);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     let value = e.target.value;
@@ -156,7 +165,13 @@ export default function Home() {
         <div className="w-full justify-center gap-[2.7em] rounded-[1.5em] bg-white px-[1em] py-[2em] md:grid md:w-auto md:grid-cols-2 md:pl-[3em] md:pr-[2em]">
           {/*first column*/}
           <div className="flex flex-col gap-[2.5em] px-4 py-[1em] md:w-full md:px-0">
-            <FormType1 name="Bill" picture={dollarSVG} />
+            <FormType1
+              action={(value) => {
+                console.log(value);
+              }}
+              name="Bill"
+              picture={dollarSVG}
+            />
             <div className="space-y-4">
               <span className={textSettings1}>Select Tip %</span>
               <div className="grid grid-cols-2 gap-4 md:grid-cols-3 md:gap-3">
