@@ -185,7 +185,7 @@ const ButtonType1 = ({ quantity, value, action }: { quantity: number; value: num
   );
 };
 
-const ButtonType2 = () => (
+const ButtonType2 = ({ action }: { action(e: string): undefined }) => (
   <input
     placeholder="Custom"
     className="rounded-[0.3em] bg-veryLightGrayishCyan py-2 text-center text-[1.5rem] font-[700] text-veryDarkCyan placeholder-darkGrayishCyan hover:cursor-pointer focus:pr-3 focus:text-right focus:placeholder-transparent focus:outline-strongCyan"
@@ -194,6 +194,9 @@ const ButtonType2 = () => (
         e.preventDefault();
         document.querySelectorAll('input')[2].focus();
       }
+    }}
+    onChange={(e) => {
+      action(e.target.value);
     }}
   />
 );
@@ -283,7 +286,11 @@ export default function Home() {
                   }}
                   quantity={50}
                 />
-                <ButtonType2 />
+                <ButtonType2
+                  action={(e: string) => {
+                    setSelectedButton(Number(e));
+                  }}
+                />
               </div>
             </div>
             <FormType2
