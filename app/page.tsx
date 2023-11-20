@@ -88,19 +88,7 @@ const FormType1 = ({
           onKeyDown={(e) => {
             if (e.key === 'Enter') {
               e.preventDefault();
-
-              const focusableElements = document.querySelectorAll(
-                'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])',
-              );
-
-              const currentElement = e.target;
-              const currentIndex = Array.from(focusableElements).indexOf(currentElement);
-
-              if (currentIndex !== -1) {
-                const nextIndex = (currentIndex + 1) % focusableElements.length;
-                const nextElement = focusableElements[nextIndex];
-                nextElement.focus();
-              }
+              document.querySelectorAll('button')[0].focus();
             }
           }}
         />
@@ -150,6 +138,12 @@ const FormType2 = ({
           className="w-full appearance-none rounded-[0.3em] bg-transparent bg-veryLightGrayishCyan px-4 py-2.5 text-end text-[1.2rem] font-[700] text-veryDarkCyan outline-strongCyan  hover:cursor-pointer"
           type="text"
           onChange={handleInputChange}
+          onKeyDown={(e) => {
+            if (e.key === 'Enter') {
+              e.preventDefault();
+              document.querySelectorAll('input')[0].focus();
+            }
+          }}
           placeholder="0"
           value={numericValue}
         />
