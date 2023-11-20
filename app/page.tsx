@@ -95,10 +95,12 @@ const FormType2 = ({
   name,
   picture,
   action,
+  reset,
 }: {
   name: string;
   picture: JSX.Element;
   action(value: string): unknown;
+  reset: boolean;
 }) => {
   const [numericValue, setNumericValue] = useState('');
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -111,6 +113,12 @@ const FormType2 = ({
       setNumericValue(value);
     }
   };
+
+  useEffect(() => {
+    if (reset) {
+      setNumericValue('');
+    }
+  }, [reset]);
 
   return (
     <form autoComplete="off" className="space-y-[0.3em]">
@@ -177,6 +185,7 @@ export default function Home() {
   const [selectedButton, setSelectedButton] = useState<ButtonSelected>(ButtonSelected.none);
   const [billAmount, setBillAmount] = useState<string>('0.00');
   const [resetForm1, setResetForm1] = useState<boolean>(false);
+  const [resetForm2, setResetForm2] = useState<boolean>(false);
 
   const evalued1 = (((parseFloat(billAmount) / parseFloat(person)) * Number(selectedButton)) / 100).toString();
   const evalued2 = (
@@ -189,6 +198,7 @@ export default function Home() {
     setSelectedButton(ButtonSelected.none);
     setBillAmount('0.00');
     setResetForm1(true);
+    setResetForm2(true);
   };
   return (
     <main className="flex min-h-screen flex-col justify-center font-spaceMono">
@@ -209,6 +219,7 @@ export default function Home() {
             <FormType1
               action={(value) => {
                 setBillAmount(value || '0.00');
+                setResetForm1(false);
               }}
               name="Bill"
               picture={dollarSVG}
@@ -221,6 +232,7 @@ export default function Home() {
                   value={selectedButton}
                   action={() => {
                     setSelectedButton(ButtonSelected.button5);
+                    setResetForm2(false);
                   }}
                   quantity={5}
                 />
@@ -258,9 +270,11 @@ export default function Home() {
             <FormType2
               action={(value) => {
                 setPerson(value);
+                setResetForm2(false);
               }}
               name="Number of People"
               picture={personSVG}
+              reset={resetForm2}
             />
           </div>
           {/*second column*/}
