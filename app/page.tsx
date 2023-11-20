@@ -141,7 +141,7 @@ const FormType2 = ({
           onKeyDown={(e) => {
             if (e.key === 'Enter') {
               e.preventDefault();
-              document.querySelectorAll('input')[0].focus();
+              document.querySelectorAll('button')[5].focus();
             }
           }}
           placeholder="0"
@@ -153,7 +153,6 @@ const FormType2 = ({
 };
 
 const FormType3 = ({ name, value }: { name: string; value: string }) => {
-  console.log(value);
   return (
     <div className={`flex items-center justify-between `}>
       <div className="flex flex-col">
@@ -219,6 +218,7 @@ export default function Home() {
     setResetForm1(true);
     setResetForm2(true);
   };
+
   return (
     <main className="flex min-h-screen flex-col justify-center font-spaceMono">
       {/*main wrapper*/}
@@ -318,6 +318,13 @@ export default function Home() {
             </div>
             <button
               onClick={resetValues}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter') {
+                  e.preventDefault();
+                  document.querySelectorAll('input')[0].focus();
+                  document.querySelectorAll('button')[5].click();
+                }
+              }}
               className={`rounded-[0.3em] ${
                 person === '0' && selectedButton === ButtonSelected.none && billAmount === '0.00'
                   ? 'bg-[#0D686D]'
