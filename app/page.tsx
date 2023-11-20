@@ -31,7 +31,7 @@ const personSVG = (
   </svg>
 );
 
-const FormType1 = ({
+const BillForm = ({
   name,
   picture,
   action,
@@ -97,7 +97,7 @@ const FormType1 = ({
   );
 };
 
-const FormType2 = ({
+const NumberOfPeopleForm = ({
   name,
   picture,
   action,
@@ -152,7 +152,7 @@ const FormType2 = ({
   );
 };
 
-const FormType3 = ({ name, value }: { name: string; value: string }) => {
+const SecondColumnForm = ({ name, value }: { name: string; value: string }) => {
   return (
     <div className={`flex items-center justify-between `}>
       <div className="flex flex-col">
@@ -170,7 +170,7 @@ const FormType3 = ({ name, value }: { name: string; value: string }) => {
   );
 };
 
-const ButtonType1 = ({ quantity, value, action }: { quantity: number; value: number; action(): unknown }) => {
+const PercentageButton = ({ quantity, value, action }: { quantity: number; value: number; action(): unknown }) => {
   return (
     <button
       onClick={() => {
@@ -185,7 +185,7 @@ const ButtonType1 = ({ quantity, value, action }: { quantity: number; value: num
   );
 };
 
-const ButtonType2 = ({ action }: { action(e: string): undefined }) => (
+const CustomButton = ({ action }: { action(e: string): undefined }) => (
   <input
     placeholder="Custom"
     className="rounded-[0.3em] bg-veryLightGrayishCyan py-2 text-center text-[1.5rem] font-[700] text-veryDarkCyan placeholder-darkGrayishCyan hover:cursor-pointer focus:pr-3 focus:text-right focus:placeholder-transparent focus:outline-strongCyan"
@@ -238,7 +238,7 @@ export default function Home() {
         <div className="w-full justify-center gap-[2.7em] rounded-[1.5em] bg-white px-[1em] py-[2em] md:grid md:w-[47em] md:grid-cols-2 md:pl-[3em] md:pr-[2em] lg:w-[57.3em]">
           {/*first column*/}
           <div className="flex flex-col gap-[2.5em] px-4 py-[1em] md:w-full md:px-0">
-            <FormType1
+            <BillForm
               action={(value) => {
                 setBillAmount(value || '0.00');
                 setResetForm1(false);
@@ -250,7 +250,7 @@ export default function Home() {
             <div className="space-y-4">
               <span className={textSettings1}>Select Tip %</span>
               <div className="grid grid-cols-2 gap-4 md:grid-cols-3 md:gap-3">
-                <ButtonType1
+                <PercentageButton
                   value={selectedButton}
                   action={() => {
                     setSelectedButton(ButtonSelected.button5);
@@ -258,42 +258,42 @@ export default function Home() {
                   }}
                   quantity={5}
                 />
-                <ButtonType1
+                <PercentageButton
                   value={selectedButton}
                   action={() => {
                     setSelectedButton(ButtonSelected.button10);
                   }}
                   quantity={10}
                 />
-                <ButtonType1
+                <PercentageButton
                   value={selectedButton}
                   action={() => {
                     setSelectedButton(ButtonSelected.button15);
                   }}
                   quantity={15}
                 />
-                <ButtonType1
+                <PercentageButton
                   value={selectedButton}
                   action={() => {
                     setSelectedButton(ButtonSelected.button25);
                   }}
                   quantity={25}
                 />
-                <ButtonType1
+                <PercentageButton
                   value={selectedButton}
                   action={() => {
                     setSelectedButton(ButtonSelected.button50);
                   }}
                   quantity={50}
                 />
-                <ButtonType2
+                <CustomButton
                   action={(e: string) => {
                     setSelectedButton(Number(e));
                   }}
                 />
               </div>
             </div>
-            <FormType2
+            <NumberOfPeopleForm
               action={(value) => {
                 setPerson(value);
                 setResetForm2(false);
@@ -306,7 +306,7 @@ export default function Home() {
           {/*second column*/}
           <div className="flex flex-col justify-between gap-6 rounded-[0.8em] bg-veryDarkCyan px-8 pb-6 pt-10 text-white md:w-full md:gap-0 md:pb-10">
             <div className="space-y-[1.5em]">
-              <FormType3
+              <SecondColumnForm
                 value={
                   evalued1 !== 'NaN' && evalued1 !== 'Infinity' && selectedButton !== ButtonSelected.none
                     ? evalued1
@@ -314,7 +314,7 @@ export default function Home() {
                 }
                 name="Tip Amount"
               />
-              <FormType3
+              <SecondColumnForm
                 value={
                   evalued2 !== 'NaN' && evalued2 !== 'Infinity' && selectedButton !== ButtonSelected.none
                     ? evalued2
