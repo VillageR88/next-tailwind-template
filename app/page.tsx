@@ -2,7 +2,7 @@
 import '@fontsource/space-mono';
 import '@fontsource/space-mono/400.css';
 import '@fontsource/space-mono/700.css';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 enum ButtonSelected {
   none = 0,
@@ -35,10 +35,12 @@ const FormType1 = ({
   name,
   picture,
   action,
+  reset,
 }: {
   name: string;
   picture: JSX.Element;
   action(value: string): unknown;
+  reset: boolean;
 }) => {
   const [numericValue, setNumericValue] = useState('');
 
@@ -62,6 +64,12 @@ const FormType1 = ({
       action(value);
     }
   };
+
+  useEffect(() => {
+    if (reset) {
+      setNumericValue('');
+    }
+  }, [reset]);
 
   return (
     <form autoComplete="off" className="space-y-[0.3em]">
@@ -168,11 +176,20 @@ export default function Home() {
   const [person, setPerson] = useState<string>('0');
   const [selectedButton, setSelectedButton] = useState<ButtonSelected>(ButtonSelected.none);
   const [billAmount, setBillAmount] = useState<string>('0.00');
+  const [resetForm1, setResetForm1] = useState<boolean>(false);
+
   const evalued1 = (((parseFloat(billAmount) / parseFloat(person)) * Number(selectedButton)) / 100).toString();
   const evalued2 = (
     ((parseFloat(billAmount) / parseFloat(person)) * Number(selectedButton)) / 100 +
     parseFloat(billAmount) / parseFloat(person)
   ).toString();
+
+  const resetValues = () => {
+    setPerson('0');
+    setSelectedButton(ButtonSelected.none);
+    setBillAmount('0.00');
+    setResetForm1(true);
+  };
   return (
     <main className="flex min-h-screen flex-col justify-center font-spaceMono">
       {/*main wrapper*/}
@@ -195,6 +212,7 @@ export default function Home() {
               }}
               name="Bill"
               picture={dollarSVG}
+              reset={resetForm1}
             />
             <div className="space-y-4">
               <span className={textSettings1}>Select Tip %</span>
@@ -266,11 +284,7 @@ export default function Home() {
               />
             </div>
             <button
-              onClick={() => {
-                setPerson('0');
-                setSelectedButton(ButtonSelected.none);
-                setBillAmount('0.00');
-              }}
+              onClick={resetValues}
               className={`rounded-[0.3em] ${
                 person === '0' && selectedButton === ButtonSelected.none && billAmount === '0.00'
                   ? 'bg-[#0D686D]'
