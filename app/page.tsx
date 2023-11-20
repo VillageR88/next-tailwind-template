@@ -85,6 +85,24 @@ const FormType1 = ({
           type="text"
           value={numericValue}
           onChange={handleInputChange}
+          onKeyDown={(e) => {
+            if (e.key === 'Enter') {
+              e.preventDefault();
+
+              const focusableElements = document.querySelectorAll(
+                'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])',
+              );
+
+              const currentElement = e.target;
+              const currentIndex = Array.from(focusableElements).indexOf(currentElement);
+
+              if (currentIndex !== -1) {
+                const nextIndex = (currentIndex + 1) % focusableElements.length;
+                const nextElement = focusableElements[nextIndex];
+                nextElement.focus();
+              }
+            }
+          }}
         />
       </div>
     </form>
