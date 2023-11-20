@@ -76,11 +76,11 @@ const FormType1 = ({
       <label htmlFor={name} className={textSettings1}>
         {name}
       </label>
-      <div className="flex flex-row items-center justify-between rounded-[0.3em] bg-veryLightGrayishCyan px-4 py-2.5">
-        <span>{picture}</span>
+      <div className="flex flex-row items-center">
+        <span className="absolute z-10 ml-5">{picture}</span>
         <input
           id={name}
-          className="w-full appearance-none bg-transparent text-end text-[1.2rem] font-[700] text-veryDarkCyan outline-none hover:cursor-pointer"
+          className="w-full outline-strongCyan appearance-none rounded-[0.3em] bg-transparent bg-veryLightGrayishCyan px-4 py-2.5 text-end text-[1.2rem] font-[700] text-veryDarkCyan  hover:cursor-pointer"
           placeholder={'0'}
           type="text"
           value={numericValue}
