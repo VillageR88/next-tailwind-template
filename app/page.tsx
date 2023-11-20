@@ -185,21 +185,31 @@ const PercentageButton = ({ quantity, value, action }: { quantity: number; value
   );
 };
 
-const CustomButton = ({ action }: { action(e: string): undefined }) => (
-  <input
-    placeholder="Custom"
-    className="rounded-[0.3em] bg-veryLightGrayishCyan py-2 text-center text-[1.5rem] font-[700] text-veryDarkCyan placeholder-darkGrayishCyan hover:cursor-pointer focus:pr-3 focus:text-right focus:placeholder-transparent focus:outline-strongCyan"
-    onKeyDown={(e) => {
-      if (e.key === 'Enter') {
-        e.preventDefault();
-        document.querySelectorAll('input')[2].focus();
-      }
-    }}
-    onChange={(e) => {
-      action(e.target.value);
-    }}
-  />
-);
+const CustomButton = ({ action, reset }: { action(e: string): undefined; reset: boolean }) => {
+  const [value, setValue] = useState('');
+  useEffect(() => {
+    if (reset) {
+      setValue('');
+    }
+  }, [reset]);
+  return (
+    <input
+      placeholder="Custom"
+      className="rounded-[0.3em] bg-veryLightGrayishCyan py-2 text-center text-[1.5rem] font-[700] text-veryDarkCyan placeholder-darkGrayishCyan hover:cursor-pointer focus:pr-3 focus:text-right focus:placeholder-transparent focus:outline-strongCyan"
+      onKeyDown={(e) => {
+        if (e.key === 'Enter') {
+          e.preventDefault();
+          document.querySelectorAll('input')[2].focus();
+        }
+      }}
+      value={value}
+      onChange={(e) => {
+        action(e.target.value);
+        setValue(e.target.value);
+      }}
+    />
+  );
+};
 
 export default function Home() {
   const [person, setPerson] = useState<string>('0');
@@ -207,6 +217,7 @@ export default function Home() {
   const [billAmount, setBillAmount] = useState<string>('0.00');
   const [resetForm1, setResetForm1] = useState<boolean>(false);
   const [resetForm2, setResetForm2] = useState<boolean>(false);
+  const [resetCustomButton, setResetCustomButton] = useState<boolean>(false);
 
   const evalued1 = (((parseFloat(billAmount) / parseFloat(person)) * Number(selectedButton)) / 100).toString();
   const evalued2 = (
@@ -220,6 +231,7 @@ export default function Home() {
     setBillAmount('0.00');
     setResetForm1(true);
     setResetForm2(true);
+    setResetCustomButton(true);
   };
 
   return (
@@ -289,7 +301,9 @@ export default function Home() {
                 <CustomButton
                   action={(e: string) => {
                     setSelectedButton(Number(e));
+                    setResetCustomButton(false);
                   }}
+                  reset={resetCustomButton}
                 />
               </div>
             </div>
