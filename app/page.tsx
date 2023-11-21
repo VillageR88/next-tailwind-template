@@ -12,12 +12,12 @@ import { useState } from 'react';
 const buttonLayout1 = 'text-white text-[1.1rem] font-barlow font-[600]';
 const textArticleType1Header =
   'flex h-[35em] flex-col items-start justify-center gap-[2em] bg-[#FFFBF8] md:px-[5em] lg:pl-[10.5em] lg:pr-[7em]';
-const textArticleType1Main = 'font-barlow text-[1.1rem] font-[600] text-[#8D8C90]';
+const textArticleType1Main = 'font-barlow text-[1.1rem] leading-[1.7em] font-[600] text-[#8D8C90]';
 
 const ArticleType1Button = ({ bgNormal, bgHover }: { bgNormal: string; bgHover: string }) => {
   const [hoverOnButton, setHoverOnButton] = useState<boolean>(false);
   return (
-    <div>
+    <div className="pl-[0.45em] pt-[1em]">
       <button
         onMouseEnter={() => {
           setHoverOnButton(true);
@@ -70,8 +70,8 @@ const ArticleType2 = ({
   mainText: string;
 }) => {
   return (
-    <div className={`${background} flex h-[37em] items-end bg-center px-[10.5em] py-[4em]`}>
-      <div className={`${textColor} flex flex-col items-center gap-[1.5em] text-center`}>
+    <div className={`${background} flex h-[37em] items-end justify-center bg-center py-[4em] md:px-[5em] `}>
+      <div className={`${textColor} flex flex-col items-center gap-[1.5em] text-center lg:w-[22em]`}>
         <span className=" font-fraunces text-[1.7rem] font-[900]">{headerText}</span>
         <span className="font-barlow font-[600]">{mainText}</span>
       </div>
@@ -129,7 +129,12 @@ export default function Home() {
               mainText="Great design makes you memorable. We deliver artwork that underscores your brand message and captures
               potential clients&#8217; attention."
             />
-            <div className="bg-orange h-[37em] bg-center"></div>
+            <ArticleType2
+              background={'bg-orange'}
+              textColor={'text-darkBluePhotographyText'}
+              headerText="Photography"
+              mainText="Increase your credibility by getting the most stunning, high-quality photos that improve your business image."
+            />
           </div>
         </div>
       </main>
