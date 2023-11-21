@@ -24,7 +24,7 @@ const config: Config = {
       colors: {
         softRed: 'hsl(7, 99%, 70%)',
         yellow: 'hsl(51, 100%, 49%)',
-        darkDesaturatedCyanGgraphicDesignText: 'hsl(167, 40%, 24%)',
+        darkDesaturatedCyanGraphicDesignText: 'hsl(167, 40%, 24%)',
         darkBluePhotographyText: 'hsl(198, 62%, 26%)',
         darkModerateCyanFooter: 'hsl(168, 34%, 41%)',
         veryDarkDesaturatedBlue: 'hsl(212, 27%, 19%)',

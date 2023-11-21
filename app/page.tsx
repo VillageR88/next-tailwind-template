@@ -101,7 +101,15 @@ export default function Home() {
           </div>
           {/*row3*/}
           <div className="grid grid-cols-2">
-            <div className="bg-cherries h-[37em] bg-center"></div>
+            <div className="bg-cherries flex h-[37em] items-end bg-center px-[10.5em] py-[4em]">
+              <div className="text-darkDesaturatedCyanGraphicDesignText flex flex-col items-center gap-[1.5em] text-center">
+                <span className=" font-fraunces text-[1.7rem] font-[900]">Graphic Design</span>
+                <span className="font-barlow font-[600]">
+                  Great design makes you memorable. We deliver artwork that underscores your brand message and captures
+                  potential clients&#8217; attention.
+                </span>
+              </div>
+            </div>
             <div className="bg-orange h-[37em] bg-center"></div>
           </div>
         </div>
