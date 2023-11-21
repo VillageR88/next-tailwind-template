@@ -6,6 +6,7 @@ import '@fontsource/fraunces/700.css';
 import '@fontsource/fraunces/900.css';
 import logo from './images/logo.svg';
 import arrowDown from './images/icon-arrow-down.svg';
+import thomas from './images/image-thomas.jpg';
 import Image from 'next/image';
 import { useState } from 'react';
 
@@ -72,7 +73,7 @@ const ArticleType2 = ({
     <div className={`${background} flex h-[37em] items-end justify-center bg-center py-[4em] md:px-[5em] `}>
       <div className={`${textColor} flex flex-col items-center gap-[1.5em] text-center lg:w-[22em]`}>
         <span className=" font-fraunces text-[1.7rem] font-[900]">{headerText}</span>
-        <span className="font-barlow font-[600]">{mainText}</span>
+        <span className="font-barlow text-[1.01rem] font-[600] leading-[1.65em]">{mainText}</span>
       </div>
     </div>
   );
@@ -97,7 +98,6 @@ export default function Home() {
         </div>
       </nav>
       <main>
-        {/*six pack*/}
         <div>
           {/*row1*/}
           <div className="grid grid-cols-2">
@@ -134,6 +134,15 @@ export default function Home() {
               headerText="Photography"
               mainText="Increase your credibility by getting the most stunning, high-quality photos that improve your business image."
             />
+          </div>
+          {/*row4*/}
+          <div className="flex h-[48.4em] justify-center bg-[#FFFBF8]">
+            <div className=" flex flex-col items-center justify-center font-fraunces text-[1.3rem] font-[900] text-grayishBlue">
+              <span>CLIENT TESTIMONIALS</span>
+              <div className="flex flex-col">
+                <Image className="h-1/2 w-auto rounded-full" src={thomas} alt="Avatar of Thomas" />
+              </div>
+            </div>
           </div>
         </div>
       </main>
