@@ -7,6 +7,7 @@ import '@fontsource/fraunces/900.css';
 import logo from './images/logo.svg';
 import arrowDown from './images/icon-arrow-down.svg';
 import Image from 'next/image';
+import { useState } from 'react';
 //bg-[#FFD9D3]
 const buttonLayout1 = 'text-white text-[1.1rem] font-barlow font-[600]';
 const textArticleHeader =
@@ -14,12 +15,25 @@ const textArticleHeader =
 const textArticleMain = 'font-barlow text-[1.1rem] font-[600] text-[#8D8C90]';
 
 const HeaderButton = () => {
+  const [hoverOnButton, setHoverOnButton] = useState<boolean>(false);
   return (
     <div>
-      <button className="rounded-[2em] font-fraunces font-[900] text-veryDarkDesaturatedBlue">
+      <button
+        onMouseEnter={() => {
+          setHoverOnButton(true);
+        }}
+        onMouseLeave={() => {
+          setHoverOnButton(false);
+        }}
+        className="rounded-[2em] font-fraunces font-[900] text-veryDarkDesaturatedBlue"
+      >
         <span>LEARN MORE</span>
       </button>
-      <div className=" z-10 mx-[-0.3em] mt-[-0.58em] h-1/2 rounded-[1em] bg-[#FFF1BA] py-1 hover:bg-[#FDD406]"></div>
+      <div
+        className={`z-10 mx-[-0.3em] mt-[-0.58em] h-1/2 rounded-[1em] ${
+          !hoverOnButton ? 'bg-[#FFF1BA]' : 'bg-[#FDD406]'
+        } py-1`}
+      ></div>
     </div>
   );
 };
