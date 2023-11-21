@@ -168,13 +168,25 @@ export default function Home() {
               <span className="font-fraunces text-[1.3rem] font-[900] tracking-[0.22em] text-grayishBlue">
                 CLIENT TESTIMONIALS
               </span>
-              <div className='flex'>
+              <div className="flex gap-[2em]">
+                <Testimonial
+                  image={emily}
+                  text=" We put our trust in Sunnyside and they delivered, making sure our needs were met and deadlines were always hit."
+                  name="Emily R."
+                  position="Marketing Director"
+                />
                 <Testimonial
                   image={thomas}
                   text="Sunnyside&lsquo;s enthusiasm coupled with their keen interest in our brand&lsquo;s success made it a
         satisfying and enjoyable experience."
-                  name="Thomas S"
+                  name="Thomas S."
                   position="Chief Operating Officer"
+                />
+                <Testimonial
+                  image={jennie}
+                  text="Incredible end result! Our sales increased over 400% when we worked with Sunnyside. Highly recommended!"
+                  name="Jennie F."
+                  position="Business Owner"
                 />
               </div>
             </div>
