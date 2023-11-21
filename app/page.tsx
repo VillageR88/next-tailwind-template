@@ -9,6 +9,10 @@ import arrowDown from './images/icon-arrow-down.svg';
 import thomas from './images/image-thomas.jpg';
 import jennie from './images/image-jennie.jpg';
 import emily from './images/image-emily.jpg';
+import milkBottles from './images/desktop/image-gallery-milkbottles.jpg';
+import orange from './images/desktop/image-gallery-orange.jpg';
+import cone from './images/desktop/image-gallery-cone.jpg';
+import sugarCubes from './images/desktop/image-gallery-sugarcubes.jpg';
 import Image, { StaticImageData } from 'next/image';
 import { useState } from 'react';
 
@@ -190,6 +194,13 @@ export default function Home() {
                 />
               </div>
             </div>
+          </div>
+          {/*row5*/}
+          <div className="grid grid-cols-4">
+            <Image src={milkBottles} alt="Milk Bottles" />
+            <Image src={orange} alt="Milk Bottles" />
+            <Image src={cone} alt="Milk Bottles" />
+            <Image src={sugarCubes} alt="Milk Bottles" />
           </div>
         </div>
       </main>
