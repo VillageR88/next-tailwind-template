@@ -7,7 +7,9 @@ import '@fontsource/fraunces/900.css';
 import logo from './images/logo.svg';
 import arrowDown from './images/icon-arrow-down.svg';
 import thomas from './images/image-thomas.jpg';
-import Image from 'next/image';
+import jennie from './images/image-jennie.jpg';
+import emily from './images/image-emily.jpg';
+import Image, { StaticImageData } from 'next/image';
 import { useState } from 'react';
 
 const buttonLayout1 = 'text-white text-[1.1rem] font-barlow font-[600]';
@@ -79,17 +81,26 @@ const ArticleType2 = ({
   );
 };
 
-const Testimonial = () => {
+const Testimonial = ({
+  image,
+  text,
+  name,
+  position,
+}: {
+  image: StaticImageData;
+  text: string;
+  name: string;
+  position: string;
+}) => {
   return (
     <div className="flex w-[21.8em] flex-col items-center gap-[3.5em] text-center">
-      <Image className="h-[4.5em] w-[4.5em] rounded-full" src={thomas} alt="Avatar of Thomas" />
+      <Image className="h-[4.5em] w-[4.5em] rounded-full" src={image} alt="Avatar of person" />
       <span className="font-barlow text-[1.15rem] font-[600] leading-[1.7em] tracking-[-0.3px] text-veryDarkGrayishBlue">
-        Sunnyside&lsquo;s enthusiasm coupled with their keen interest in our brand’s success made it a satisfying and
-        enjoyable experience.
+        {text}
       </span>
-      <div className="ml-[-1em] mt-[0.8em] flex flex-col gap-[0.4em]">
-        <span className="font-fraunces text-[1.13rem] font-[900] text-veryDarkDesaturatedBlue">Thomas S.</span>
-        <span className="font-barlow text-[0.9rem] font-[600] text-grayishBlue">Chief Operating Officer</span>
+      <div className="ml-[-1em] mt-[0.8em] flex flex-col gap-[0.5em]">
+        <span className="font-fraunces text-[1.13rem] font-[900] text-veryDarkDesaturatedBlue">{name}</span>
+        <span className="font-barlow text-[0.87rem] font-[600] text-grayishBlue">{position}</span>
       </div>
     </div>
   );
@@ -157,7 +168,15 @@ export default function Home() {
               <span className="font-fraunces text-[1.3rem] font-[900] tracking-[0.22em] text-grayishBlue">
                 CLIENT TESTIMONIALS
               </span>
-              <Testimonial />
+              <div className='flex'>
+                <Testimonial
+                  image={thomas}
+                  text="Sunnyside&lsquo;s enthusiasm coupled with their keen interest in our brand&lsquo;s success made it a
+        satisfying and enjoyable experience."
+                  name="Thomas S"
+                  position="Chief Operating Officer"
+                />
+              </div>
             </div>
           </div>
         </div>
