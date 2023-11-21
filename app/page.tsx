@@ -137,10 +137,14 @@ export default function Home() {
           </div>
           {/*row4*/}
           <div className="flex h-[48.4em] justify-center bg-[#FFFBF8]">
-            <div className=" flex flex-col items-center justify-center font-fraunces text-[1.3rem] font-[900] text-grayishBlue">
-              <span>CLIENT TESTIMONIALS</span>
-              <div className="flex flex-col">
-                <Image className="h-1/2 w-auto rounded-full" src={thomas} alt="Avatar of Thomas" />
+            <div className=" flex flex-col items-center justify-center  text-grayishBlue">
+              <span className="font-fraunces text-[1.3rem] font-[900]">CLIENT TESTIMONIALS</span>
+              <div className="flex w-[22em] flex-col items-center text-center">
+                <Image className="h-[4.5em] w-[4.5em] rounded-full" src={thomas} alt="Avatar of Thomas" />
+                <span className="font-barlow text-[1.15rem] font-[600] text-veryDarkGrayishBlue">
+                  Sunnyside&lsquo;s enthusiasm coupled with their keen interest in our brand’s success made it a
+                  satisfying and enjoyable experience.
+                </span>
               </div>
             </div>
           </div>
