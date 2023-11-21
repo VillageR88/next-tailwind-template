@@ -8,7 +8,7 @@ import logo from './images/logo.svg';
 import arrowDown from './images/icon-arrow-down.svg';
 import Image from 'next/image';
 import { useState } from 'react';
-//bg-[#FFD9D3] ; #FFFBF8
+
 const buttonLayout1 = 'text-white text-[1.1rem] font-barlow font-[600]';
 const textArticleHeader =
   'flex h-[35em] flex-col items-start justify-center gap-[2em] bg-[#FFFBF8] md:px-[5em] lg:pl-[10.5em] lg:pr-[7em]';
@@ -89,6 +89,17 @@ export default function Home() {
               hoverButtonBg="bg-[#FDD406]"
             />
             <div className="bg-egg  bg-center"></div>
+          </div>
+          {/*row2*/}
+          <div className="grid grid-cols-2">
+            {/*row1-col1*/}
+            <div className="bg-glass  bg-center"></div>
+            <Article
+              headerText="Stand out to the right audience"
+              mainText="Using a collaborative formula of designers, researchers, photographers, videographers, and copywriters, we&#8217;ll build and extend your brand in digital places."
+              normalButtonBg="bg-[#FFD9D3]"
+              hoverButtonBg="bg-[#FF7160]"
+            />
           </div>
         </div>
       </main>
