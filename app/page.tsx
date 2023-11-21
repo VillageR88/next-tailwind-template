@@ -81,7 +81,6 @@ export default function Home() {
         <div>
           {/*row1*/}
           <div className="grid grid-cols-2">
-            {/*row1-col1*/}
             <Article
               headerText="Transform your brand"
               mainText="We are a full-service creative agency specializing in helping brands grow fast. Engage your clients through compelling visuals that do most of the marketing for you."
@@ -92,7 +91,6 @@ export default function Home() {
           </div>
           {/*row2*/}
           <div className="grid grid-cols-2">
-            {/*row1-col1*/}
             <div className="bg-glass  bg-center"></div>
             <Article
               headerText="Stand out to the right audience"
@@ -100,6 +98,11 @@ export default function Home() {
               normalButtonBg="bg-[#FFD9D3]"
               hoverButtonBg="bg-[#FF7160]"
             />
+          </div>
+          {/*row3*/}
+          <div className="grid grid-cols-2">
+            <div className="bg-cherries h-[37em] bg-center"></div>
+            <div className="bg-orange h-[37em] bg-center"></div>
           </div>
         </div>
       </main>
