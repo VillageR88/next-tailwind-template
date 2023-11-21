@@ -36,17 +36,24 @@ const HeaderButton = ({ bgNormal, bgHover }: { bgNormal: string; bgHover: string
   );
 };
 
-const Article = () => {
+const Article = ({
+  headerText,
+  mainText,
+  normalButtonBg,
+  hoverButtonBg,
+}: {
+  headerText: string;
+  mainText: string;
+  normalButtonBg: string;
+  hoverButtonBg: string;
+}) => {
   return (
     <div className={textArticleHeader}>
       <span className="font-fraunces text-[2.5rem] font-[900] leading-[1.2em] text-veryDarkDesaturatedBlue">
-        Transform your brand
+        {headerText}
       </span>
-      <span className={textArticleMain}>
-        We are a full-service creative agency specializing in helping brands grow fast. Engage your clients through
-        compelling visuals that do most of the marketing for you.
-      </span>
-      <HeaderButton bgNormal="bg-[#FFF1BA]" bgHover="bg-[#FDD406]" />
+      <span className={textArticleMain}>{mainText}</span>
+      <HeaderButton bgNormal={normalButtonBg} bgHover={hoverButtonBg} />
     </div>
   );
 };
@@ -75,7 +82,12 @@ export default function Home() {
           {/*row1*/}
           <div className="grid grid-cols-2">
             {/*row1-col1*/}
-            <Article />
+            <Article
+              headerText="Transform your brand"
+              mainText="We are a full-service creative agency specializing in helping brands grow fast. Engage your clients through compelling visuals that do most of the marketing for you."
+              normalButtonBg="bg-[#FFF1BA]"
+              hoverButtonBg="bg-[#FDD406]"
+            />
             <div className="bg-egg  bg-center"></div>
           </div>
         </div>
