@@ -9,6 +9,8 @@ import arrowDown from './images/icon-arrow-down.svg';
 import Image from 'next/image';
 
 const buttonLayout1 = 'text-white text-[1.1rem] font-barlow font-[600]';
+const textArticleHeader = 'flex h-[35em] flex-col items-start justify-center gap-[2em] bg-[#FFFBF8] md:px-[5em] lg:pl-[10.5em] lg:pr-[7em]';
+const textArticleMain = 'font-barlow text-[1.1rem] font-[600] text-[#8D8C90]';
 
 export default function Home() {
   return (
@@ -33,22 +35,18 @@ export default function Home() {
         <div>
           {/*row1*/}
           <div className="grid grid-cols-2">
-            <div className=" bg-[#FFFBF8]">
-              {/*row1-col1*/}
-              <div className="flex flex-col h-[35em] justify-center items-start gap-[2em] pl-[10.5em] pr-[7em]">
-                <span className="font-fraunces text-[2.5rem] font-[900] leading-[1.2em] text-veryDarkDesaturatedBlue">
-                  Transform your brand
-                </span>
-                <span className="font-barlow text-[1.1rem] font-[600] text-[#8D8C90]">
-                  We are a full-service creative agency specializing in helping brands grow fast. Engage your clients
-                  through compelling visuals that do most of the marketing for you.
-                </span>
-                <button className="font-fraunces font-[900] text-veryDarkDesaturatedBlue">LEARN MORE</button>
-              </div>
+            {/*row1-col1*/}
+            <div className={textArticleHeader}>
+              <span className="font-fraunces text-[2.5rem] font-[900] leading-[1.2em] text-veryDarkDesaturatedBlue">
+                Transform your brand
+              </span>
+              <span className={textArticleMain}>
+                We are a full-service creative agency specializing in helping brands grow fast. Engage your clients
+                through compelling visuals that do most of the marketing for you.
+              </span>
+              <button className="font-fraunces font-[900] text-veryDarkDesaturatedBlue">LEARN MORE</button>
             </div>
-            <div className="bg-yellow">
-              <span>TEST</span>
-            </div>
+            <div className="bg-egg bg-center"></div>
           </div>
         </div>
       </main>

@@ -16,6 +16,7 @@ const config: Config = {
       },
       backgroundImage: {
         header: "url('./images/desktop/image-header.jpg')",
+        egg: "url('./images/desktop/image-transform.jpg')",
       },
       colors: {
         softRed: 'hsl(7, 99%, 70%)',
