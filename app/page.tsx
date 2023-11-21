@@ -10,11 +10,11 @@ import Image from 'next/image';
 import { useState } from 'react';
 
 const buttonLayout1 = 'text-white text-[1.1rem] font-barlow font-[600]';
-const textArticleHeader =
+const textArticleType1Header =
   'flex h-[35em] flex-col items-start justify-center gap-[2em] bg-[#FFFBF8] md:px-[5em] lg:pl-[10.5em] lg:pr-[7em]';
-const textArticleMain = 'font-barlow text-[1.1rem] font-[600] text-[#8D8C90]';
+const textArticleType1Main = 'font-barlow text-[1.1rem] font-[600] text-[#8D8C90]';
 
-const ArticleButton = ({ bgNormal, bgHover }: { bgNormal: string; bgHover: string }) => {
+const ArticleType1Button = ({ bgNormal, bgHover }: { bgNormal: string; bgHover: string }) => {
   const [hoverOnButton, setHoverOnButton] = useState<boolean>(false);
   return (
     <div>
@@ -36,7 +36,7 @@ const ArticleButton = ({ bgNormal, bgHover }: { bgNormal: string; bgHover: strin
   );
 };
 
-const Article = ({
+const ArticleType1 = ({
   headerText,
   mainText,
   normalButtonBg,
@@ -48,12 +48,33 @@ const Article = ({
   hoverButtonBg: string;
 }) => {
   return (
-    <div className={textArticleHeader}>
+    <div className={textArticleType1Header}>
       <span className="font-fraunces text-[2.5rem] font-[900] leading-[1.2em] text-veryDarkDesaturatedBlue">
         {headerText}
       </span>
-      <span className={textArticleMain}>{mainText}</span>
-      <ArticleButton bgNormal={normalButtonBg} bgHover={hoverButtonBg} />
+      <span className={textArticleType1Main}>{mainText}</span>
+      <ArticleType1Button bgNormal={normalButtonBg} bgHover={hoverButtonBg} />
+    </div>
+  );
+};
+
+const ArticleType2 = ({
+  background,
+  textColor,
+  headerText,
+  mainText,
+}: {
+  background: string;
+  textColor: string;
+  headerText: string;
+  mainText: string;
+}) => {
+  return (
+    <div className={`${background} flex h-[37em] items-end bg-center px-[10.5em] py-[4em]`}>
+      <div className={`${textColor} flex flex-col items-center gap-[1.5em] text-center`}>
+        <span className=" font-fraunces text-[1.7rem] font-[900]">{headerText}</span>
+        <span className="font-barlow font-[600]">{mainText}</span>
+      </div>
     </div>
   );
 };
@@ -81,7 +102,7 @@ export default function Home() {
         <div>
           {/*row1*/}
           <div className="grid grid-cols-2">
-            <Article
+            <ArticleType1
               headerText="Transform your brand"
               mainText="We are a full-service creative agency specializing in helping brands grow fast. Engage your clients through compelling visuals that do most of the marketing for you."
               normalButtonBg="bg-[#FFF1BA]"
@@ -92,7 +113,7 @@ export default function Home() {
           {/*row2*/}
           <div className="grid grid-cols-2">
             <div className="bg-glass  bg-center"></div>
-            <Article
+            <ArticleType1
               headerText="Stand out to the right audience"
               mainText="Using a collaborative formula of designers, researchers, photographers, videographers, and copywriters, we&#8217;ll build and extend your brand in digital places."
               normalButtonBg="bg-[#FFD9D3]"
@@ -101,15 +122,13 @@ export default function Home() {
           </div>
           {/*row3*/}
           <div className="grid grid-cols-2">
-            <div className="bg-cherries flex h-[37em] items-end bg-center px-[10.5em] py-[4em]">
-              <div className="text-darkDesaturatedCyanGraphicDesignText flex flex-col items-center gap-[1.5em] text-center">
-                <span className=" font-fraunces text-[1.7rem] font-[900]">Graphic Design</span>
-                <span className="font-barlow font-[600]">
-                  Great design makes you memorable. We deliver artwork that underscores your brand message and captures
-                  potential clients&#8217; attention.
-                </span>
-              </div>
-            </div>
+            <ArticleType2
+              background={'bg-cherries'}
+              textColor={'text-darkDesaturatedCyanGraphicDesignText'}
+              headerText="Graphic Design"
+              mainText="Great design makes you memorable. We deliver artwork that underscores your brand message and captures
+              potential clients&#8217; attention."
+            />
             <div className="bg-orange h-[37em] bg-center"></div>
           </div>
         </div>
