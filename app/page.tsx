@@ -8,7 +8,7 @@ import logo from './images/logo.svg';
 import arrowDown from './images/icon-arrow-down.svg';
 import Image from 'next/image';
 import { useState } from 'react';
-//bg-[#FFD9D3]
+//bg-[#FFD9D3] ; #FFFBF8
 const buttonLayout1 = 'text-white text-[1.1rem] font-barlow font-[600]';
 const textArticleHeader =
   'flex h-[35em] flex-col items-start justify-center gap-[2em] bg-[#FFFBF8] md:px-[5em] lg:pl-[10.5em] lg:pr-[7em]';
@@ -32,6 +32,21 @@ const HeaderButton = ({ bgNormal, bgHover }: { bgNormal: string; bgHover: string
       <div
         className={`z-10 mx-[-0.3em] mt-[-0.58em] h-1/2 rounded-[1em] ${!hoverOnButton ? bgNormal : bgHover} py-1`}
       ></div>
+    </div>
+  );
+};
+
+const Article = () => {
+  return (
+    <div className={textArticleHeader}>
+      <span className="font-fraunces text-[2.5rem] font-[900] leading-[1.2em] text-veryDarkDesaturatedBlue">
+        Transform your brand
+      </span>
+      <span className={textArticleMain}>
+        We are a full-service creative agency specializing in helping brands grow fast. Engage your clients through
+        compelling visuals that do most of the marketing for you.
+      </span>
+      <HeaderButton bgNormal="bg-[#FFF1BA]" bgHover="bg-[#FDD406]" />
     </div>
   );
 };
@@ -60,16 +75,7 @@ export default function Home() {
           {/*row1*/}
           <div className="grid grid-cols-2">
             {/*row1-col1*/}
-            <div className={textArticleHeader}>
-              <span className="font-fraunces text-[2.5rem] font-[900] leading-[1.2em] text-veryDarkDesaturatedBlue">
-                Transform your brand
-              </span>
-              <span className={textArticleMain}>
-                We are a full-service creative agency specializing in helping brands grow fast. Engage your clients
-                through compelling visuals that do most of the marketing for you.
-              </span>
-              <HeaderButton bgNormal="bg-[#FFF1BA]" bgHover="bg-[#FDD406]" />
-            </div>
+            <Article />
             <div className="bg-egg  bg-center"></div>
           </div>
         </div>
