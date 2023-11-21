@@ -79,6 +79,22 @@ const ArticleType2 = ({
   );
 };
 
+const Testimonial = () => {
+  return (
+    <div className="flex w-[21.8em] flex-col items-center gap-[3.5em] text-center">
+      <Image className="h-[4.5em] w-[4.5em] rounded-full" src={thomas} alt="Avatar of Thomas" />
+      <span className="font-barlow text-[1.15rem] font-[600] leading-[1.7em] tracking-[-0.3px] text-veryDarkGrayishBlue">
+        Sunnyside&lsquo;s enthusiasm coupled with their keen interest in our brand’s success made it a satisfying and
+        enjoyable experience.
+      </span>
+      <div className="ml-[-1em] mt-[0.8em] flex flex-col gap-[0.4em]">
+        <span className="font-fraunces text-[1.13rem] font-[900] text-veryDarkDesaturatedBlue">Thomas S.</span>
+        <span className="font-barlow text-[0.9rem] font-[600] text-grayishBlue">Chief Operating Officer</span>
+      </div>
+    </div>
+  );
+};
+
 export default function Home() {
   return (
     <div className="min-h-screen">
@@ -137,15 +153,11 @@ export default function Home() {
           </div>
           {/*row4*/}
           <div className="flex h-[48.4em] justify-center bg-[#FFFBF8]">
-            <div className=" flex flex-col items-center justify-center  text-grayishBlue">
-              <span className="font-fraunces text-[1.3rem] font-[900]">CLIENT TESTIMONIALS</span>
-              <div className="flex w-[22em] flex-col items-center text-center">
-                <Image className="h-[4.5em] w-[4.5em] rounded-full" src={thomas} alt="Avatar of Thomas" />
-                <span className="font-barlow text-[1.15rem] font-[600] text-veryDarkGrayishBlue">
-                  Sunnyside&lsquo;s enthusiasm coupled with their keen interest in our brand’s success made it a
-                  satisfying and enjoyable experience.
-                </span>
-              </div>
+            <div className=" flex flex-col items-center justify-center gap-[5em] ">
+              <span className="font-fraunces text-[1.3rem] font-[900] tracking-[0.22em] text-grayishBlue">
+                CLIENT TESTIMONIALS
+              </span>
+              <Testimonial />
             </div>
           </div>
         </div>
