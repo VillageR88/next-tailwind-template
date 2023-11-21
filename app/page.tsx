@@ -14,7 +14,7 @@ const textArticleHeader =
   'flex h-[35em] flex-col items-start justify-center gap-[2em] bg-[#FFFBF8] md:px-[5em] lg:pl-[10.5em] lg:pr-[7em]';
 const textArticleMain = 'font-barlow text-[1.1rem] font-[600] text-[#8D8C90]';
 
-const HeaderButton = ({ bgNormal, bgHover }: { bgNormal: string; bgHover: string }) => {
+const ArticleButton = ({ bgNormal, bgHover }: { bgNormal: string; bgHover: string }) => {
   const [hoverOnButton, setHoverOnButton] = useState<boolean>(false);
   return (
     <div>
@@ -53,7 +53,7 @@ const Article = ({
         {headerText}
       </span>
       <span className={textArticleMain}>{mainText}</span>
-      <HeaderButton bgNormal={normalButtonBg} bgHover={hoverButtonBg} />
+      <ArticleButton bgNormal={normalButtonBg} bgHover={hoverButtonBg} />
     </div>
   );
 };
