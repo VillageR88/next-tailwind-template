@@ -202,6 +202,8 @@ export default function Home() {
             <Image src={cone} alt="Milk Bottles" />
             <Image src={sugarCubes} alt="Milk Bottles" />
           </div>
+          {/*row6*/}
+          <div className='flex h-[20em] justify-center bg-[#90D4C5]'></div>
         </div>
       </main>
     </div>
