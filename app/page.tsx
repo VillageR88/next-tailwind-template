@@ -54,8 +54,8 @@ const ArticleType1 = ({
   hoverButtonBg: string;
 }) => {
   return (
-    <div className="flex h-[37em] items-center justify-center gap-[2em] bg-[#FFFBF8]">
-      <div className="flex flex-col gap-[2em] text-left lg:ml-[3.5em] lg:w-[28em]">
+    <div className="flex h-[28em] items-center justify-center gap-[2em] bg-[#FFFBF8] md:h-[37em]">
+      <div className="flex flex-col items-center gap-[2em] px-6 text-center md:items-start md:text-left lg:ml-[3.5em] lg:w-[28em] lg:px-0">
         <span className="font-fraunces text-[2.5rem] font-[900] leading-[1.2em] text-veryDarkDesaturatedBlue">
           {headerText}
         </span>
