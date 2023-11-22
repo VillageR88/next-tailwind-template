@@ -103,12 +103,12 @@ const Testimonial = ({
   position: string;
 }) => {
   return (
-    <div className="flex w-[21.8em] flex-col items-center gap-[3.5em] text-center">
+    <div className="flex w-[21.8em] flex-col items-center gap-6 text-center lg:gap-[3.5em]">
       <Image className="h-[4.5em] w-[4.5em] rounded-full" src={image} alt="Avatar of person" />
       <span className="px-2 font-barlow text-[1.15rem] font-[600] leading-[1.7em] tracking-[-0.3px] text-veryDarkGrayishBlue md:px-0">
         {text}
       </span>
-      <div className="ml-[-1em] mt-[0.8em] flex flex-col gap-[0.5em]">
+      <div className="ml-[-1em] mt-[-0.1em] flex flex-col gap-[0.5em] lg:mt-[0.8em]">
         <span className="font-fraunces text-[1.13rem] font-[900] text-veryDarkDesaturatedBlue">{name}</span>
         <span className="font-barlow text-[0.87rem] font-[600] text-grayishBlue">{position}</span>
       </div>
@@ -185,7 +185,7 @@ export default function Home() {
               <span className="font-fraunces text-[1.3rem] font-[900] tracking-[0.22em] text-grayishBlue">
                 CLIENT TESTIMONIALS
               </span>
-              <div className="flex flex-col gap-[2em] lg:flex-row">
+              <div className="flex flex-col gap-[5em] lg:gap-[2em] lg:flex-row">
                 <Testimonial
                   image={emily}
                   text=" We put our trust in Sunnyside and they delivered, making sure our needs were met and deadlines were always hit."
