@@ -180,12 +180,12 @@ export default function Home() {
             />
           </div>
           {/*row4*/}
-          <div className="flex justify-center bg-[#FFFBF8] md:h-[48.4em]">
-            <div className=" flex flex-col items-center justify-center gap-[5em] px-4 pb-20 pt-16 md:px-0 md:pb-0 md:pt-0 ">
+          <div className="flex justify-center bg-[#FFFBF8] lg:h-[48.4em]">
+            <div className="flex flex-col items-center justify-center gap-[5em] px-4 pb-20 pt-16 lg:px-0 lg:pb-0 lg:pt-0 ">
               <span className="font-fraunces text-[1.3rem] font-[900] tracking-[0.22em] text-grayishBlue">
                 CLIENT TESTIMONIALS
               </span>
-              <div className="flex flex-col gap-[2em] md:flex-row">
+              <div className="flex flex-col gap-[2em] lg:flex-row">
                 <Testimonial
                   image={emily}
                   text=" We put our trust in Sunnyside and they delivered, making sure our needs were met and deadlines were always hit."
