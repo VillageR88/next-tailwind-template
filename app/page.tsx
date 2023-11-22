@@ -15,6 +15,10 @@ import milkBottles from './images/desktop/image-gallery-milkbottles.jpg';
 import orange from './images/desktop/image-gallery-orange.jpg';
 import cone from './images/desktop/image-gallery-cone.jpg';
 import sugarCubes from './images/desktop/image-gallery-sugarcubes.jpg';
+import milkBottlesMobile from './images/mobile/image-gallery-milkbottles.jpg';
+import orangeMobile from './images/mobile/image-gallery-orange.jpg';
+import coneMobile from './images/mobile/image-gallery-cone.jpg';
+import sugarCubesMobile from './images/mobile/image-gallery-sugar-cubes.jpg';
 import Image, { StaticImageData } from 'next/image';
 import { useState } from 'react';
 
@@ -205,11 +209,15 @@ export default function Home() {
             </div>
           </div>
           {/*row5*/}
-          <div className="grid grid-cols-4">
-            <Image src={milkBottles} alt="Milk Bottles" />
-            <Image src={orange} alt="Milk Bottles" />
-            <Image src={cone} alt="Milk Bottles" />
-            <Image src={sugarCubes} alt="Milk Bottles" />
+          <div className="grid grid-cols-2 md:grid-cols-4">
+            <Image className="hidden md:flex" src={milkBottles} alt="Milk Bottles" />
+            <Image className="hidden md:flex" src={orange} alt="Milk Bottles" />
+            <Image className="hidden md:flex" src={cone} alt="Milk Bottles" />
+            <Image className="hidden md:flex" src={sugarCubes} alt="Milk Bottles" />
+            <Image className="flex md:hidden" src={milkBottlesMobile} alt="Milk Bottles" />
+            <Image className="flex md:hidden" src={orangeMobile} alt="Milk Bottles" />
+            <Image className="flex md:hidden" src={coneMobile} alt="Milk Bottles" />
+            <Image className="flex md:hidden" src={sugarCubesMobile} alt="Milk Bottles" />
           </div>
           {/*row6*/}
           <div className="flex h-[23em] justify-center bg-[#90D4C5]">
