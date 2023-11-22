@@ -122,15 +122,25 @@ export default function Home() {
   const [instagramColor, setInstagramColor] = useState<string>('#2C7566');
   const [twitterColor, setTwitterColor] = useState<string>('#2C7566');
   const [pinterestColor, setPinterestColor] = useState<string>('#2C7566');
+  const [hamburgerOn, setHamburgerOn] = useState<boolean>(false);
   return (
-    <div className="min-h-screen">
+    <div className={`${!hamburgerOn ? 'min-h-screen' : 'h-screen overflow-y-hidden'}`}>
       <nav className="bg-headerMobile col-span-2 flex h-[40em] flex-col items-center gap-[6em] bg-cover bg-bottom bg-no-repeat px-4 md:h-[50em] md:bg-header md:bg-top md:px-0">
         <div className="flex w-full items-center justify-between px-2 pt-9 md:mx-0 md:pl-10 md:pr-12">
           <Image src={logo as string} alt="logo" className="h-auto w-[10.5em]" />
-          <button className="z-10">
+          <button
+            onClick={() => {
+              setHamburgerOn(!hamburgerOn);
+            }}
+            className={`${hamburgerOn && 'z-10'}`}
+          >
             <Image src={hamburger as string} alt="navigation button" className="flex md:hidden" />
           </button>
-          <div className="absolute right-0 top-9 flex w-screen flex-col items-end pr-6 md:hidden">
+          <div
+            className={`${
+              hamburgerOn ? 'flex' : 'hidden'
+            } absolute right-0 top-9 flex w-screen flex-col items-end pr-6 md:hidden`}
+          >
             <svg width="100" height="100">
               <polygon points="100,50 50,100 100,100" fill="white" />
             </svg>
