@@ -221,9 +221,9 @@ export default function Home() {
           </div>
           {/*row6*/}
           <div className="flex h-[23em] justify-center bg-[#90D4C5]">
-            <div className="mt-[4.6em] flex flex-col items-center justify-start">
+            <div className="mt-[4.6em] flex w-[20em] flex-col items-center justify-start md:w-[18em]">
               <Image className="h-auto w-[10.5em]" src={logo2 as string} alt="logo" />
-              <div className="mt-[2.6em] flex justify-around gap-[4em] font-[600] text-[#509586]">
+              <div className="mt-[2.6em] flex w-full justify-between text-[1.1rem] font-[600] text-[#509586] md:text-[1rem]">
                 <button className="hover:text-white">About</button>
                 <button className="hover:text-white">Services</button>
                 <button className="hover:text-white">Projects</button>
