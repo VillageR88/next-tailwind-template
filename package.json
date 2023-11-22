@@ -10,6 +10,8 @@
     "lint:fix": "next lint --fix"
   },
   "dependencies": {
+    "@fontsource/overpass": "^5.0.15",
+    "@fontsource/ubuntu": "^5.0.8",
     "next": "^14.0.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
