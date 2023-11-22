@@ -79,7 +79,7 @@ const ArticleType2 = ({
 }) => {
   return (
     <div className={`${background} flex h-[37em] items-end justify-center bg-center py-[4em] md:px-[5em] `}>
-      <div className={`${textColor} flex flex-col items-center gap-[1.5em] text-center lg:w-[22em]`}>
+      <div className={`${textColor} flex flex-col items-center gap-[1.5em] px-4 text-center md:px-0 lg:w-[22em]`}>
         <span className=" font-fraunces text-[1.7rem] font-[900]">{headerText}</span>
         <span className="font-barlow text-[1.01rem] font-[600] leading-[1.65em]">{mainText}</span>
       </div>
@@ -101,7 +101,7 @@ const Testimonial = ({
   return (
     <div className="flex w-[21.8em] flex-col items-center gap-[3.5em] text-center">
       <Image className="h-[4.5em] w-[4.5em] rounded-full" src={image} alt="Avatar of person" />
-      <span className="font-barlow text-[1.15rem] font-[600] leading-[1.7em] tracking-[-0.3px] text-veryDarkGrayishBlue">
+      <span className="px-2 font-barlow text-[1.15rem] font-[600] leading-[1.7em] tracking-[-0.3px] text-veryDarkGrayishBlue md:px-0">
         {text}
       </span>
       <div className="ml-[-1em] mt-[0.8em] flex flex-col gap-[0.5em]">
@@ -160,7 +160,7 @@ export default function Home() {
             />
           </div>
           {/*row3*/}
-          <div className="grid grid-cols-2">
+          <div className="md:grid md:grid-cols-2">
             <ArticleType2
               background={'bg-cherries'}
               textColor={'text-darkDesaturatedCyanGraphicDesignText'}
@@ -176,12 +176,12 @@ export default function Home() {
             />
           </div>
           {/*row4*/}
-          <div className="flex h-[48.4em] justify-center bg-[#FFFBF8]">
-            <div className=" flex flex-col items-center justify-center gap-[5em] ">
+          <div className="flex justify-center bg-[#FFFBF8] md:h-[48.4em]">
+            <div className=" flex flex-col items-center justify-center gap-[5em] px-4 pb-20 pt-16 md:px-0 md:pb-0 md:pt-0 ">
               <span className="font-fraunces text-[1.3rem] font-[900] tracking-[0.22em] text-grayishBlue">
                 CLIENT TESTIMONIALS
               </span>
-              <div className="flex gap-[2em]">
+              <div className="flex flex-col gap-[2em] md:flex-row">
                 <Testimonial
                   image={emily}
                   text=" We put our trust in Sunnyside and they delivered, making sure our needs were met and deadlines were always hit."
