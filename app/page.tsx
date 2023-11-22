@@ -140,18 +140,18 @@ export default function Home() {
       <main>
         <div>
           {/*row1*/}
-          <div className="flex flex-col-reverse divide-y-reverse md:grid md:grid-cols-2 md:grid-rows-1">
+          <div className="flex flex-col-reverse md:grid md:grid-cols-2 md:grid-rows-1">
             <ArticleType1
               headerText="Transform your brand"
               mainText="We are a full-service creative agency specializing in helping brands grow fast. Engage your clients through compelling visuals that do most of the marketing for you."
               normalButtonBg="bg-[#FFF1BA]"
               hoverButtonBg="bg-[#FDD406]"
             />
-            <div className="bg-eggMobile h-[30em] bg-cover bg-center md:h-auto md:bg-egg"></div>
+            <div className="bg-eggMobile h-[25em] bg-cover bg-center md:h-auto md:bg-egg"></div>
           </div>
           {/*row2*/}
-          <div className="grid grid-cols-2">
-            <div className="bg-glass  bg-center"></div>
+          <div className="flex flex-col md:grid md:grid-cols-2 md:grid-rows-1">
+            <div className="bg-glassMobile h-[25em] bg-cover bg-center md:h-auto md:bg-glass"></div>
             <ArticleType1
               headerText="Stand out to the right audience"
               mainText="Using a collaborative formula of designers, researchers, photographers, videographers, and copywriters, we&#8217;ll build and extend your brand in digital places."

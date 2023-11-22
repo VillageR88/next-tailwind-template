@@ -20,6 +20,7 @@ const config: Config = {
         egg: "url('./images/desktop/image-transform.jpg')",
         eggMobile: "url('./images/mobile/image-transform.jpg')",
         glass: "url('./images/desktop/image-stand-out.jpg')",
+        glassMobile: "url('./images/mobile/image-stand-out.jpg')",
         cherries: "url('./images/desktop/image-graphic-design.jpg')",
         orange: "url('./images/desktop/image-photography.jpg')",
       },
