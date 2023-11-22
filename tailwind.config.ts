@@ -16,6 +16,7 @@ const config: Config = {
       },
       backgroundImage: {
         header: "url('./images/desktop/image-header.jpg')",
+        headerMobile: "url('./images/mobile/image-header.jpg')",
         egg: "url('./images/desktop/image-transform.jpg')",
         glass: "url('./images/desktop/image-stand-out.jpg')",
         cherries: "url('./images/desktop/image-graphic-design.jpg')",
