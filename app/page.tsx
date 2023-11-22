@@ -23,6 +23,7 @@ import Image, { StaticImageData } from 'next/image';
 import { useState } from 'react';
 
 const buttonLayout1 = 'text-white text-[1.1rem] font-barlow font-[600]';
+const buttonLayout2 = 'font-barlow text-[1.3rem] font-[600] text-darkGrayishBlue';
 
 const ArticleType1Button = ({ bgNormal, bgHover }: { bgNormal: string; bgHover: string }) => {
   const [hoverOnButton, setHoverOnButton] = useState<boolean>(false);
@@ -126,7 +127,22 @@ export default function Home() {
       <nav className="bg-headerMobile col-span-2 flex h-[40em] flex-col items-center gap-[6em] bg-cover bg-bottom bg-no-repeat px-4 md:h-[50em] md:bg-header md:bg-top md:px-0">
         <div className="flex w-full items-center justify-between px-2 pt-9 md:mx-0 md:pl-10 md:pr-12">
           <Image src={logo as string} alt="logo" className="h-auto w-[10.5em]" />
-          <Image src={hamburger as string} alt="navigation button" className="flex md:hidden" />
+          <button className="z-10">
+            <Image src={hamburger as string} alt="navigation button" className="flex md:hidden" />
+          </button>
+          <div className="absolute right-0 top-9 flex w-screen flex-col items-end pr-6 md:hidden">
+            <svg width="100" height="100">
+              <polygon points="100,50 50,100 100,100" fill="white" />
+            </svg>
+            <div className="flex h-[20em] w-[92%] justify-center bg-white align-middle">
+              <div className="flex flex-col justify-center gap-6">
+                <button className={buttonLayout2}>About</button>
+                <button className={buttonLayout2}>Services</button>
+                <button className={buttonLayout2}>Projects</button>
+                <button className="rounded-[2em] bg-[#FBD600] px-8 py-4 font-fraunces font-[900]">CONTACT</button>
+              </div>
+            </div>
+          </div>
           <div className="hidden gap-2 md:flex md:gap-12 ">
             <button className={buttonLayout1}>About</button>
             <button className={buttonLayout1}>Services</button>
@@ -185,7 +201,7 @@ export default function Home() {
               <span className="font-fraunces text-[1.3rem] font-[900] tracking-[0.22em] text-grayishBlue">
                 CLIENT TESTIMONIALS
               </span>
-              <div className="flex flex-col gap-[5em] lg:flex-row lg:w-[60em] xl:w-full lg:gap-[2em]">
+              <div className="flex flex-col gap-[5em] lg:w-[60em] lg:flex-row lg:gap-[2em] xl:w-full">
                 <Testimonial
                   image={emily}
                   text=" We put our trust in Sunnyside and they delivered, making sure our needs were met and deadlines were always hit."
