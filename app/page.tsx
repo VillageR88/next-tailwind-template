@@ -119,8 +119,8 @@ export default function Home() {
   const [pinterestColor, setPinterestColor] = useState<string>('#2C7566');
   return (
     <div className="min-h-screen">
-      <nav className="bg-headerMobile col-span-2 flex h-[40em] flex-col items-center gap-[6em] bg-cover bg-bottom bg-no-repeat md:h-[50em] md:bg-header md:bg-top">
-        <div className="flex w-full items-center  justify-between px-2 pt-9 md:mx-0 md:pl-10 md:pr-12">
+      <nav className="bg-headerMobile col-span-2 flex h-[40em] flex-col items-center gap-[6em] bg-cover bg-bottom bg-no-repeat px-4 md:h-[50em] md:bg-header md:bg-top md:px-0">
+        <div className="flex w-full items-center justify-between px-2 pt-9 md:mx-0 md:pl-10 md:pr-12">
           <Image src={logo as string} alt="logo" className="h-auto w-[10.5em]" />
           <Image src={hamburger as string} alt="navigation button" className="flex md:hidden" />
           <div className="hidden gap-2 md:flex md:gap-12 ">
@@ -140,14 +140,14 @@ export default function Home() {
       <main>
         <div>
           {/*row1*/}
-          <div className="grid grid-rows-2 divide-y-reverse md:grid-cols-2 md:grid-rows-1">
+          <div className="flex flex-col-reverse divide-y-reverse md:grid md:grid-cols-2 md:grid-rows-1">
             <ArticleType1
               headerText="Transform your brand"
               mainText="We are a full-service creative agency specializing in helping brands grow fast. Engage your clients through compelling visuals that do most of the marketing for you."
               normalButtonBg="bg-[#FFF1BA]"
               hoverButtonBg="bg-[#FDD406]"
             />
-            <div className="bg-egg  bg-center"></div>
+            <div className="bg-eggMobile h-[30em] bg-cover bg-center md:h-auto md:bg-egg"></div>
           </div>
           {/*row2*/}
           <div className="grid grid-cols-2">
