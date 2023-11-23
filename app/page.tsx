@@ -15,14 +15,31 @@ const product = ['Overview', 'Pricing', 'Marketplace', 'Features', 'Integrations
 const ButtonWithArrow = () => {
   const [clicked, setClicked] = useState<boolean>(false);
   return (
-    <div
-      onClick={() => {
-        setClicked(!clicked);
-      }}
-      className="flex content-center items-center gap-2 decoration-white decoration-2 hover:cursor-pointer hover:underline"
-    >
-      <button className="font-ubuntu font-[500] text-white">Product</button>
-      <Image src={arrowLight as string} alt="arrow" className={`mt-1 ${clicked && 'rotate-180'}`} />
+    <div>
+      <div
+        onClick={() => {
+          setClicked(!clicked);
+        }}
+        className="flex content-center items-center gap-2 decoration-white decoration-2 hover:cursor-pointer hover:underline"
+      >
+        <button className="font-ubuntu font-[500] text-white">Product</button>
+        <Image
+          src={arrowLight as string}
+          alt="arrow"
+          className={`mt-1 transition-transform ${clicked && 'rotate-180'}`}
+        />
+      </div>
+      <div
+        className={`${
+          clicked ? 'flex' : 'hidden'
+        } absolute ml-[-2em] mt-8 w-[12em] flex-col items-start gap-4 rounded-[0.6em] bg-white py-8 pl-8`}
+      >
+        {product.map((x, i) => (
+          <button className="hover:font-[600]" key={i}>
+            {x}
+          </button>
+        ))}
+      </div>
     </div>
   );
 };
