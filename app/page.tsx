@@ -65,7 +65,11 @@ const ButtonWithArrow = ({
 };
 
 const ButtonTypeSignUp = ({ name }: { name: string }) => {
-  return <button className="w-32 rounded-[1.5em] bg-white py-2.5 font-ubuntu font-[500] text-inherit">{name}</button>;
+  return (
+    <button className="w-[8.5em] rounded-[1.5em] bg-white py-[0.75em] font-ubuntu font-[600] text-[#F44D74] hover:bg-opacity-25 decoration-white decoration-2 hover:text-white">
+      {name}
+    </button>
+  );
 };
 
 export default function Home() {
@@ -76,8 +80,8 @@ export default function Home() {
         <div className="flex h-full w-full justify-center bg-[url('./images/bg-pattern-intro-desktop.svg')] bg-[25.4%_52.1%] pl-[10.5em] pr-[11em]">
           {/*first row*/}
           <div className="mt-16 flex w-full place-items-start justify-between gap-4">
-            <div className="flex items-center justify-between">
-              <Image src={logo as string} alt="Logo" />
+            <div className="flex items-center justify-between gap-[4em]">
+              <Image src={logo as string} alt="Logo" priority />
               <div className="flex justify-between gap-8">
                 <ButtonWithArrow
                   action={(value) => {
@@ -105,8 +109,8 @@ export default function Home() {
                 />
               </div>
             </div>
-            <div className="flex">
-              <button className="font-ubuntu text-[#FFD9D5] decoration-white decoration-2 hover:text-white hover:underline">
+            <div className="flex gap-[2em]">
+              <button className="font-ubuntu font-[500] text-[#FFD9D5] decoration-white decoration-2 hover:text-white hover:underline">
                 Login
               </button>
               <ButtonTypeSignUp name="Sign Up" />
