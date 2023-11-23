@@ -9,7 +9,6 @@ import '@fontsource/ubuntu/700.css';
 import { useState } from 'react';
 import Image from 'next/image';
 import logo from './images/logo.svg';
-import circles from './images/bg-pattern-circles.svg';
 import arrowLight from './images/icon-arrow-light.svg';
 import arrowWhite from './images/icon-arrow-white.svg';
 const product = ['Overview', 'Pricing', 'Marketplace', 'Features', 'Integrations'];
@@ -77,7 +76,7 @@ export default function Home() {
   const [clickedOn, setClickedOn] = useState<string>('');
   return (
     <div className="flex min-h-screen flex-col items-center">
-      <nav className="bg flex h-[37.5em] w-full justify-center overflow-hidden rounded-bl-[6.5em] bg-gradient-to-r from-veryLightRed to-lightRed">
+      <nav className="bg flex h-[37.5em] w-full justify-center rounded-bl-[6.5em] bg-gradient-to-r from-veryLightRed to-lightRed">
         <div className="flex h-full w-full flex-col bg-[url('./images/bg-pattern-intro-desktop.svg')] bg-[25.4%_52.1%] text-center md:px-[3em] lg:px-[6em] xl:px-0 xl:pl-[10.5em] xl:pr-[11em]">
           {/*first row*/}
           <div className="mt-16 flex w-full place-items-start justify-between gap-4">
@@ -132,15 +131,15 @@ export default function Home() {
           </div>
         </div>
       </nav>
-      <main className="flex w-full">
+      <main className="flex h-[100em] w-full">
         <div className="h-full w-full bg-white">
           {/*first row*/}
-          <div className="flex justify-center">TITLE</div>
+          <div className="flex h-[5em] justify-center">TITLE</div>
           {/*second row*/}
           <div className="flex w-full justify-between">
             {/*left col*/}
             <div>LEFT COL</div>
-            <div>RIGHT COL</div>
+            <div className="h-[55em] w-[35em] justify-end bg-[url('./images/bg-pattern-circlesGray.svg')] bg-cover bg-no-repeat"></div>
           </div>
         </div>
       </main>
