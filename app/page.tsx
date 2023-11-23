@@ -132,14 +132,15 @@ export default function Home() {
         </div>
       </nav>
       <main className="flex h-[100em] w-full">
-        <div className="h-full w-full bg-white">
+        <div className="h-full w-full bg-[#FAFAFA]">
           {/*first row*/}
-          <div className="flex h-[5em] justify-center">TITLE</div>
+          <div className="flex h-[1em] justify-center">TITLE</div>
           {/*second row*/}
           <div className="flex w-full justify-between">
             {/*left col*/}
             <div>LEFT COL</div>
-            <div className="h-[55em] w-[35em] justify-end bg-[url('./images/bg-pattern-circlesGray.svg')] bg-cover bg-no-repeat"></div>
+            {/*right col*/}
+            <div className="h-[62em] w-[41em] justify-end bg-[url('./images/bg-pattern-circlesGray.svg')] bg-cover bg-no-repeat"></div>
           </div>
         </div>
       </main>
