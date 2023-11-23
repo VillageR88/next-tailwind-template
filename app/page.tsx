@@ -52,7 +52,7 @@ const ButtonWithArrow = ({
       <div
         className={`${
           clicked === name ? 'flex' : 'hidden'
-        } absolute ml-[-2em] mt-8 w-[12em] flex-col items-start gap-4 rounded-[0.6em] bg-white py-8 pl-8`}
+        } absolute ml-[-2em] mt-6 w-[12em] flex-col items-start gap-4 rounded-[0.6em] bg-white py-8 pl-8`}
       >
         {list.map((x, i) => (
           <button className="font-ubuntu font-[400] hover:font-[600]" key={i}>
@@ -77,10 +77,10 @@ export default function Home() {
   return (
     <div className="flex min-h-screen flex-col items-center">
       <nav className="bg flex h-[37.5em] w-full justify-center overflow-hidden rounded-bl-[6.5em] bg-gradient-to-r from-veryLightRed to-lightRed">
-        <div className="flex h-full w-full flex-col bg-[url('./images/bg-pattern-intro-desktop.svg')] bg-[25.4%_52.1%] pl-[10.5em] pr-[11em]">
+        <div className="flex h-full w-full flex-col bg-[url('./images/bg-pattern-intro-desktop.svg')] bg-[25.4%_52.1%] text-center md:px-[3em] lg:px-[6em] xl:px-0 xl:pl-[10.5em] xl:pr-[11em]">
           {/*first row*/}
           <div className="mt-16 flex w-full place-items-start justify-between gap-4">
-            <div className="flex items-center justify-between gap-[4em]">
+            <div className="flex items-center justify-between md:gap-[2rem] lg:gap-[4em]">
               <Image src={logo as string} alt="Logo" priority />
               <div className="flex justify-between gap-8">
                 <ButtonWithArrow
@@ -117,8 +117,14 @@ export default function Home() {
             </div>
           </div>
           {/*second row*/}
-          <div className="mt-[1.8em] flex w-full justify-center tracking-[-0.03em] font-overpass text-[4rem] font-[500] text-whiteText">
+          <span className="mt-[1.8em] flex w-full justify-center font-overpass font-[500] tracking-[-0.03em] text-whiteText md:text-[3rem] lg:text-[3.5rem] xl:text-[4rem]">
             A modern publishing platform
+          </span>
+          <span className="mt-1 flex justify-center font-overpass text-[1.25rem] font-[300] text-[#FFD9D5]">
+            Grow your audience and build your online brand
+          </span>
+          <div className="flex justify-center mt-[3em]">
+            <ButtonTypeSignUp name="Start for Free" />
           </div>
         </div>
       </nav>
