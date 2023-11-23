@@ -135,13 +135,15 @@ export default function Home() {
       <main className="flex h-[100em] w-full">
         <div className="h-full w-full bg-[#FAFAFA]">
           {/*first row*/}
-          <div className="flex h-[4em] justify-center">TITLE</div>
+          <div className="mb-[-3em] flex justify-center pt-[4em] font-overpass text-[2.5rem] font-[600] tracking-[-0.04em] text-veryDarkBlueHeadings">
+            Designed for the future
+          </div>
           {/*second row*/}
           <div className="flex w-full justify-between">
             {/*left col*/}
             <div>LEFT COL</div>
             {/*right col*/}
-            <Image className='mr-[-17.2em]' src={editorDesktop as string} alt="editor image" />
+            <Image className="mr-[-17.2em]" src={editorDesktop as string} alt="editor image" />
           </div>
         </div>
       </main>
