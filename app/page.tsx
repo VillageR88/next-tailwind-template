@@ -10,19 +10,18 @@ import { useState } from 'react';
 import Image from 'next/image';
 import logo from './images/logo.svg';
 import arrowLight from './images/icon-arrow-light.svg';
+const product = ['Overview', 'Pricing', 'Marketplace', 'Features', 'Integrations'];
 
 const ButtonWithArrow = () => {
   const [clicked, setClicked] = useState<boolean>(false);
   return (
-    <div className="flex content-center items-center gap-2">
-      <button
-        onClick={() => {
-          setClicked(!clicked);
-        }}
-        className="font-ubuntu font-[500] text-white"
-      >
-        Product
-      </button>
+    <div
+      onClick={() => {
+        setClicked(!clicked);
+      }}
+      className="flex content-center items-center gap-2 decoration-white decoration-2 hover:cursor-pointer hover:underline"
+    >
+      <button className="font-ubuntu font-[500] text-white">Product</button>
       <Image src={arrowLight as string} alt="arrow" className={`mt-1 ${clicked && 'rotate-180'}`} />
     </div>
   );
