@@ -9,6 +9,7 @@ import '@fontsource/ubuntu/700.css';
 import { useState } from 'react';
 import Image from 'next/image';
 import logo from './images/logo.svg';
+import editorDesktop from './images/illustration-editor-desktop.svg';
 import arrowLight from './images/icon-arrow-light.svg';
 import arrowWhite from './images/icon-arrow-white.svg';
 const product = ['Overview', 'Pricing', 'Marketplace', 'Features', 'Integrations'];
@@ -134,13 +135,13 @@ export default function Home() {
       <main className="flex h-[100em] w-full">
         <div className="h-full w-full bg-[#FAFAFA]">
           {/*first row*/}
-          <div className="flex h-[1em] justify-center">TITLE</div>
+          <div className="flex h-[4em] justify-center">TITLE</div>
           {/*second row*/}
           <div className="flex w-full justify-between">
             {/*left col*/}
             <div>LEFT COL</div>
             {/*right col*/}
-            <div className="h-[62em] w-[41em] justify-end bg-[url('./images/bg-pattern-circlesGray.svg')] bg-cover bg-no-repeat"></div>
+            <Image className='mr-[-17.2em]' src={editorDesktop as string} alt="editor image" />
           </div>
         </div>
       </main>
