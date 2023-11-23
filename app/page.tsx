@@ -7,9 +7,9 @@ import '@fontsource/ubuntu/500.css';
 import '@fontsource/ubuntu/700.css';
 export default function Home() {
   return (
-    <main className="flex h-screen flex-col items-center justify-center">
-      <p className="text-lg">Hello</p>
-      <p className="font-mono">World 🌍</p>
-    </main>
+    <div className="flex min-h-screen flex-col items-center">
+      <nav className="h-[37.5em] w-full bg-veryLightRed"></nav>
+      <main></main>
+    </div>
   );
 }
