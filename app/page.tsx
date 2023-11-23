@@ -9,6 +9,7 @@ import '@fontsource/ubuntu/700.css';
 import { useState } from 'react';
 import Image from 'next/image';
 import logo from './images/logo.svg';
+import circles from './images/bg-pattern-circles.svg';
 import arrowLight from './images/icon-arrow-light.svg';
 import arrowWhite from './images/icon-arrow-white.svg';
 const product = ['Overview', 'Pricing', 'Marketplace', 'Features', 'Integrations'];
@@ -131,7 +132,19 @@ export default function Home() {
           </div>
         </div>
       </nav>
-      <main></main>
+      <main className="flex w-full">
+        <div className="h-full w-full bg-white">
+          {/*first row*/}
+          <div className="flex justify-center">TITLE</div>
+          {/*second row*/}
+          <div className="flex w-full justify-between">
+            {/*left col*/}
+            <div>LEFT COL</div>
+            <div>RIGHT COL</div>
+          </div>
+        </div>
+      </main>
+      <footer></footer>
     </div>
   );
 }
