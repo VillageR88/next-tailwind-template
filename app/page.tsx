@@ -13,7 +13,7 @@ import arrowLight from './images/icon-arrow-light.svg';
 import arrowWhite from './images/icon-arrow-white.svg';
 const product = ['Overview', 'Pricing', 'Marketplace', 'Features', 'Integrations'];
 const company = ['About', 'Team', 'Blog', 'Careers'];
-const connect = ['Contact', 'Newsletter', 'Linkedin'];
+const connect = ['Contact', 'Newsletter', 'LinkedIn'];
 
 const ButtonWithArrow = ({
   action,
@@ -52,7 +52,7 @@ const ButtonWithArrow = ({
       <div
         className={`${
           clicked === name ? 'flex' : 'hidden'
-        } absolute ml-[-2em] mt-6 w-[12em] flex-col items-start gap-4 rounded-[0.6em] bg-white py-8 pl-8`}
+        } absolute ml-[-1.5em] mt-7 w-[10.5em] flex-col items-start gap-2 rounded-[0.3em] bg-white py-7 pl-6`}
       >
         {list.map((x, i) => (
           <button className="font-ubuntu font-[400] hover:font-[600]" key={i}>
@@ -123,8 +123,11 @@ export default function Home() {
           <span className="mt-1 flex justify-center font-overpass text-[1.25rem] font-[300] text-[#FFD9D5]">
             Grow your audience and build your online brand
           </span>
-          <div className="flex justify-center mt-[3em]">
+          <div className="mt-[3em] flex justify-center gap-[1em]">
             <ButtonTypeSignUp name="Start for Free" />
+            <button className="w-[8.5em] rounded-[1.5em] bg-white bg-opacity-0 py-[0.75em] font-ubuntu font-[600] text-white decoration-white decoration-2 outline-double outline-1 outline-white hover:bg-opacity-100 hover:text-veryLightRedCTAHoverBackground">
+              Learn More
+            </button>
           </div>
         </div>
       </nav>
