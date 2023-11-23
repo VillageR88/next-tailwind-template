@@ -66,7 +66,7 @@ const ButtonWithArrow = ({
 
 const ButtonTypeSignUp = ({ name }: { name: string }) => {
   return (
-    <button className="w-[8.5em] rounded-[1.5em] bg-white py-[0.75em] font-ubuntu font-[600] text-[#F44D74] hover:bg-opacity-25 decoration-white decoration-2 hover:text-white">
+    <button className="w-[8.5em] rounded-[1.5em] bg-white py-[0.75em] font-ubuntu font-[600] text-[#F44D74] decoration-white decoration-2 hover:bg-opacity-25 hover:text-white">
       {name}
     </button>
   );
@@ -77,7 +77,7 @@ export default function Home() {
   return (
     <div className="flex min-h-screen flex-col items-center">
       <nav className="bg flex h-[37.5em] w-full justify-center overflow-hidden rounded-bl-[6.5em] bg-gradient-to-r from-veryLightRed to-lightRed">
-        <div className="flex h-full w-full justify-center bg-[url('./images/bg-pattern-intro-desktop.svg')] bg-[25.4%_52.1%] pl-[10.5em] pr-[11em]">
+        <div className="flex h-full w-full flex-col bg-[url('./images/bg-pattern-intro-desktop.svg')] bg-[25.4%_52.1%] pl-[10.5em] pr-[11em]">
           {/*first row*/}
           <div className="mt-16 flex w-full place-items-start justify-between gap-4">
             <div className="flex items-center justify-between gap-[4em]">
@@ -109,12 +109,16 @@ export default function Home() {
                 />
               </div>
             </div>
-            <div className="flex gap-[2em]">
+            <div className="mt-[-0.3em] flex gap-[2em]">
               <button className="font-ubuntu font-[500] text-[#FFD9D5] decoration-white decoration-2 hover:text-white hover:underline">
                 Login
               </button>
               <ButtonTypeSignUp name="Sign Up" />
             </div>
+          </div>
+          {/*second row*/}
+          <div className="mt-[1.8em] flex w-full justify-center tracking-[-0.03em] font-overpass text-[4rem] font-[500] text-whiteText">
+            A modern publishing platform
           </div>
         </div>
       </nav>
