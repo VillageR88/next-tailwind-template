@@ -64,47 +64,52 @@ const ButtonWithArrow = ({
   );
 };
 
+const ButtonTypeSignUp = ({ name }: { name: string }) => {
+  return <button className="w-32 rounded-[1.5em] bg-white py-2.5 font-ubuntu font-[500] text-inherit">{name}</button>;
+};
+
 export default function Home() {
   const [clickedOn, setClickedOn] = useState<string>('');
   return (
     <div className="flex min-h-screen flex-col items-center">
       <nav className="bg flex h-[37.5em] w-full justify-center overflow-hidden rounded-bl-[6.5em] bg-gradient-to-r from-veryLightRed to-lightRed">
-        <div className="flex h-full w-full justify-center bg-[url('./images/bg-pattern-intro-desktop.svg')] bg-[25.4%_52.1%]">
-          <div>
-            {/*first row*/}
+        <div className="flex h-full w-full justify-center bg-[url('./images/bg-pattern-intro-desktop.svg')] bg-[25.4%_52.1%] pl-[10.5em] pr-[11em]">
+          {/*first row*/}
+          <div className="mt-16 flex w-full place-items-start justify-between gap-4">
+            <div className="flex items-center justify-between">
+              <Image src={logo as string} alt="Logo" />
+              <div className="flex justify-between gap-8">
+                <ButtonWithArrow
+                  action={(value) => {
+                    clickedOn !== value ? setClickedOn(value) : setClickedOn('');
+                  }}
+                  clicked={clickedOn}
+                  name="Product"
+                  list={product}
+                />
+                <ButtonWithArrow
+                  action={(value) => {
+                    clickedOn !== value ? setClickedOn(value) : setClickedOn('');
+                  }}
+                  clicked={clickedOn}
+                  name="Company"
+                  list={company}
+                />
+                <ButtonWithArrow
+                  action={(value) => {
+                    clickedOn !== value ? setClickedOn(value) : setClickedOn('');
+                  }}
+                  clicked={clickedOn}
+                  name="Connect"
+                  list={connect}
+                />
+              </div>
+            </div>
             <div className="flex">
-              <div className="flex w-[30em] items-center justify-between">
-                <Image src={logo as string} alt="Logo" />
-                <div className="flex w-[19em] justify-between">
-                  <ButtonWithArrow
-                    action={(value) => {
-                      clickedOn !== value ? setClickedOn(value) : setClickedOn('');
-                    }}
-                    clicked={clickedOn}
-                    name="Product"
-                    list={product}
-                  />
-                  <ButtonWithArrow
-                    action={(value) => {
-                      clickedOn !== value ? setClickedOn(value) : setClickedOn('');
-                    }}
-                    clicked={clickedOn}
-                    name="Company"
-                    list={company}
-                  />
-                  <ButtonWithArrow
-                    action={(value) => {
-                      clickedOn !== value ? setClickedOn(value) : setClickedOn('');
-                    }}
-                    clicked={clickedOn}
-                    name="Connect"
-                    list={connect}
-                  />
-                </div>
-              </div>
-              <div className="flex">
-                <button className="font-ubuntu">Login</button>
-              </div>
+              <button className="font-ubuntu text-[#FFD9D5] decoration-white decoration-2 hover:text-white hover:underline">
+                Login
+              </button>
+              <ButtonTypeSignUp name="Sign Up" />
             </div>
           </div>
         </div>
