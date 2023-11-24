@@ -152,7 +152,7 @@ export default function Home() {
           {/*second row*/}
           <div className="flex w-full justify-between xl:mt-[-8.8em]">
             {/*left col*/}
-            <div className="flex flex-col justify-center gap-[4em] pl-[2em] md:w-full lg:pl-[5em] xl:w-[44.6em] xl:pl-[10.5em] md:pr-[3em] xl:pr-[2em]">
+            <div className="lg-w-full flex flex-col justify-center gap-[4em] pl-[2em] md:w-2/3 md:pr-[3em] lg:pl-[5em] xl:w-[44.6em] xl:pl-[10.5em] xl:pr-[2em]">
               <Article
                 header="Introducing an extensible editor"
                 main="Blogr features an exceedingly intuitive interface which lets you focus on one thing: creating content. 
@@ -168,7 +168,7 @@ export default function Home() {
             </div>
             {/*right col*/}
             <Image
-              className="md:mr-[-11em] md:w-[60%] lg:mr-[-15em] lg:w-[70%] xl:mr-[-17.2em]  xl:w-auto "
+              className="bg- h-full md:mr-[-11em] md:w-[70%] lg:mr-[-15em] lg:w-[70%] xl:mr-[-17.2em] xl:w-auto "
               src={editorDesktop as string}
               alt="editor image"
             />
