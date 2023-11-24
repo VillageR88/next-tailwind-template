@@ -89,7 +89,7 @@ export default function Home() {
   const [clickedOn, setClickedOn] = useState<string>('');
   return (
     <div className="flex min-h-screen flex-col items-center">
-      <nav className="bg flex h-[37.5em] w-full justify-center overflow-hidden rounded-bl-[6.5em] bg-gradient-to-r from-veryLightRed to-lightRed">
+      <nav className="flex h-[37.5em] w-full justify-center overflow-hidden rounded-bl-[6.5em] bg-gradient-to-r from-veryLightRed to-lightRed">
         <div className="flex h-full w-full flex-col bg-[url('./images/bg-pattern-intro-mobile.svg')] bg-[40%_30%] px-[2em] text-center md:bg-[url('./images/bg-pattern-intro-desktop.svg')] md:bg-[20.5%_52.1%] lg:bg-[23%_52.1%] lg:px-[6em] xl:bg-[25.4%_52.1%] xl:px-0 xl:pl-[10.5em] xl:pr-[11em]">
           {/*first row*/}
           <div className="mt-16 flex w-full place-items-start justify-between gap-4">
@@ -175,7 +175,8 @@ export default function Home() {
             />
           </div>
           {/*third row*/}
-          <div><Image src={phones as string} alt='phones image'/></div>
+          <div className="mt-[3em] h-[25.5em] rounded-bl-[6em] rounded-tr-[6em] bg-gradient-to-r from-veryDarkGrayBlue to-veryDarkDesaturatedBlue"></div>
+          <Image className="ml-[8em] mt-[-30em]" src={phones as string} alt="phones image" />
         </div>
       </main>
       <footer></footer>
