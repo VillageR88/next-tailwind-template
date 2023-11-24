@@ -176,12 +176,16 @@ export default function Home() {
           </div>
           {/*third row*/}
           <div className="mt-[3em] h-[25.1em] w-full rounded-bl-[6em] rounded-tr-[6em] bg-gradient-to-r from-veryDarkGrayBlue to-veryDarkDesaturatedBlue">
-            <div className=" h-full w-full justify-end bg-[url('./images/bg-pattern-circles.svg')] bg-[-13.2em_82%] bg-no-repeat">
-              <div className="flex h-full w-full justify-between gap-[3em] ">
-                <div className="flex h-full w-full items-center justify-center">
-                  <Image className="mt-[2em] h-auto w-auto md:pl-[2em] lg:pl-[7em]" src={phones as string} alt="phones image" />
+            <div className=" h-full w-full justify-end bg-[url('./images/bg-pattern-circles.svg')] bg-no-repeat  md:bg-[-22em_82%] lg:bg-[-13.2em_82%]">
+              <div className="flex h-full w-full justify-between">
+                <div className="flex h-full w-full items-center justify-end">
+                  <Image
+                    className="mt-[2em] h-auto w-auto md:pl-[2em] lg:pl-[7em]"
+                    src={phones as string}
+                    alt="phones image"
+                  />
                 </div>
-                <div className="flex w-full flex-col justify-center gap-[0.8em] md:pr-[4em] xl:pr-[14em]">
+                <div className="lg: flex w-full flex-col justify-center gap-[0.8em] pl-[2em] pr-[3em] xl:pl-[4em] xl:pr-[10em] ">
                   <span className="font-overpass text-[2.5rem] tracking-[-0.02em] text-whiteText">
                     State of the Art Infrastructure
                   </span>
