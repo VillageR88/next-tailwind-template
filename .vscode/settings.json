@@ -12,6 +12,7 @@
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "cSpell.words": [
+    "Blogr",
     "Desaturated",
     "fontsource",
     "headlessui",
@@ -21,5 +22,6 @@
     "tailwindcss",
     "unoptimized",
     "webp"
-  ]
+  ],
+  "editor.inlineSuggest.showToolbar": "onHover"
 }

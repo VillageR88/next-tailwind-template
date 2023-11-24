@@ -80,7 +80,7 @@ const Article = ({ header, main }: { header: string; main: string }) => {
       <span className="font-overpass font-[600] tracking-[-0.02em] text-veryDarkBlueHeadings md:text-[1.4rem] lg:text-[1.6rem] xl:text-[1.8rem]">
         {header}
       </span>
-      <span className="font-overpass leading-[2em] text-veryDarkGrayishBlueBodyCopy">{main}</span>
+      <span className="font-overpass leading-[1.8em] text-veryDarkGrayishBlueBodyCopy">{main}</span>
     </div>
   );
 };
@@ -153,7 +153,7 @@ export default function Home() {
           {/*second row*/}
           <div className="flex w-full justify-between xl:mt-[-8.8em]">
             {/*left col*/}
-            <div className="lg-w-full flex flex-col justify-center gap-[4em] pl-[2em] md:w-2/3 md:pr-[3em] lg:pl-[5em] xl:w-[44.6em] xl:pl-[10.5em] xl:pr-[2em]">
+            <div className="lg-w-full flex flex-col justify-center gap-[4.5em] pl-[2em] tracking-[0.025em] md:w-2/3 md:pr-[3em] lg:pl-[5em] xl:w-[46em] xl:pl-[10.4em] xl:pr-[2em]">
               <Article
                 header="Introducing an extensible editor"
                 main="Blogr features an exceedingly intuitive interface which lets you focus on one thing: creating content. 
@@ -175,8 +175,25 @@ export default function Home() {
             />
           </div>
           {/*third row*/}
-          <div className="mt-[3em] h-[25.5em] rounded-bl-[6em] rounded-tr-[6em] bg-gradient-to-r from-veryDarkGrayBlue to-veryDarkDesaturatedBlue"></div>
-          <Image className="ml-[8em] mt-[-30em]" src={phones as string} alt="phones image" />
+          <div className="mt-[3em] h-[25.1em] w-full rounded-bl-[6em] rounded-tr-[6em] bg-gradient-to-r from-veryDarkGrayBlue to-veryDarkDesaturatedBlue">
+            <div className="flex h-full w-full justify-end bg-[url('./images/bg-pattern-circles.svg')] bg-[-13.2em_82%] bg-no-repeat">
+              <div className="flex w-[44em] flex-col justify-center pr-[10em]">
+                <span className="font-overpass text-[2.5rem] tracking-[-0.02em] text-whiteText">
+                  State of the Art Infrastructure
+                </span>
+                <span className="font-overpass font-[300] tracking-[0.03em] text-[#C3C5D7]">
+                  With reliability and speed in mind, worldwide data centers provide the backbone for ultra-fast
+                  connectivity. This ensures your site will load instantly, no matter where your readers are, keeping
+                  your site competitive.
+                </span>
+              </div>
+            </div>
+          </div>
+          <Image
+            className="mt-[-29.35em] scale-100 lg:scale-75 xl:ml-[7.765em] xl:scale-100"
+            src={phones as string}
+            alt="phones image"
+          />
         </div>
       </main>
       <footer></footer>
