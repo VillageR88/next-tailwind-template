@@ -34,9 +34,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           .map((font) => font.variable)
           .join(' ')
           .concat(' ')
-          .concat('bg-white')}
+          .concat('bg-black')}
       >
-        <div className="ml-auto mr-auto max-w-[91em] overflow-x-clip font-sans">{children}</div>
+        <div className="ml-auto mr-auto max-w-[91em] overflow-x-clip bg-[#FAFAFA] font-sans">{children}</div>
       </body>
     </html>
   );

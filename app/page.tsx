@@ -10,6 +10,7 @@ import { useState } from 'react';
 import Image from 'next/image';
 import logo from './images/logo.svg';
 import editorDesktop from './images/illustration-editor-desktop.svg';
+import phones from './images/illustration-phones.svg';
 import arrowLight from './images/icon-arrow-light.svg';
 import arrowWhite from './images/icon-arrow-white.svg';
 const product = ['Overview', 'Pricing', 'Marketplace', 'Features', 'Integrations'];
@@ -129,8 +130,8 @@ export default function Home() {
             </div>
           </div>
           {/*second row*/}
-          <span className="mt-[1.8em] flex w-full justify-center font-overpass text-[2.6rem] font-[500] tracking-[-0.03em] text-whiteText lg:text-[3.5rem] xl:text-[4rem]">
-            A modern publishing platform
+          <span className="mt-[1.8em] flex w-full justify-center whitespace-break-spaces font-overpass text-[2.6rem] font-[500] tracking-[-0.03em] text-whiteText md:whitespace-normal lg:text-[3.5rem] xl:text-[4rem]">
+            {'A modern\npublishing platform'}
           </span>
           <span className="mt-1 flex justify-center font-overpass text-[1.25rem] font-[300] text-[#FFD9D5]">
             Grow your audience and build your online brand
@@ -173,6 +174,8 @@ export default function Home() {
               alt="editor image"
             />
           </div>
+          {/*third row*/}
+          <div><Image src={phones as string} alt='phones image'/></div>
         </div>
       </main>
       <footer></footer>
