@@ -10,6 +10,7 @@ import { useState } from 'react';
 import Image from 'next/image';
 import logo from './images/logo.svg';
 import editorDesktop from './images/illustration-editor-desktop.svg';
+import laptopDesktop from './images/illustration-laptop-desktop.svg';
 import phones from './images/illustration-phones.svg';
 import arrowLight from './images/icon-arrow-light.svg';
 import arrowWhite from './images/icon-arrow-white.svg';
@@ -144,7 +145,7 @@ export default function Home() {
           </div>
         </div>
       </nav>
-      <main className="flex h-[100em] w-full">
+      <main className="flex h-[155em] w-full">
         <div className="h-full w-full justify-center bg-[#FAFAFA]">
           {/*first row*/}
           <div className="flex justify-center pb-[1.0em] pt-[3.74em] font-overpass text-[2.5rem] font-[600] tracking-[-0.04em] text-veryDarkBlueHeadings lg:mb-[-1em] xl:mb-[-3em] xl:justify-end xl:pr-[13.35em]">
@@ -196,6 +197,25 @@ export default function Home() {
                   </span>
                 </div>
               </div>
+            </div>
+          </div>
+          {/*fourth row*/}
+          <div className="mt-[7em] flex items-center justify-center">
+            <div className="ml-[-17em] h-auto w-full">
+              <Image src={laptopDesktop as string} alt="laptop image" />
+            </div>
+            <div className="flex w-[60%] flex-col items-center justify-center gap-[4em] md:pr-[2em] lg:pr-[6em] xl:pr-[10em]">
+              <Article
+                header="Free, open, simple"
+                main="Blogr is a free and open source application backed by a large community of helpful developers. It supports 
+  features such as code syntax highlighting, RSS feeds, social media integration, third-party commenting tools, 
+  and works seamlessly with Google Analytics. The architecture is clean and is relatively easy to learn."
+              />
+              <Article
+                header="Powerful tooling"
+                main="Batteries included. We built a simple and straightforward CLI tool that makes customization and deployment a breeze, but
+                capable of producing even the most complicated sites."
+              />
             </div>
           </div>
         </div>
