@@ -177,23 +177,23 @@ export default function Home() {
           {/*third row*/}
           <div className="mt-[3em] h-[25.1em] w-full rounded-bl-[6em] rounded-tr-[6em] bg-gradient-to-r from-veryDarkGrayBlue to-veryDarkDesaturatedBlue">
             <div className="flex h-full w-full justify-end bg-[url('./images/bg-pattern-circles.svg')] bg-[-13.2em_82%] bg-no-repeat">
-              <div className="flex w-[44em] flex-col justify-center pr-[10em]">
-                <span className="font-overpass text-[2.5rem] tracking-[-0.02em] text-whiteText">
-                  State of the Art Infrastructure
-                </span>
-                <span className="font-overpass font-[300] tracking-[0.03em] text-[#C3C5D7]">
-                  With reliability and speed in mind, worldwide data centers provide the backbone for ultra-fast
-                  connectivity. This ensures your site will load instantly, no matter where your readers are, keeping
-                  your site competitive.
-                </span>
+              <div className="flex h-full w-full justify-center gap-[1em] pr-[10em]">
+                <div className="h-full w-full flex justify-end items-center">
+                  <Image className=" w-auto h-auto" src={phones as string} alt="phones image" />
+                </div>
+                <div className="flex w-full flex-col justify-center">
+                  <span className="font-overpass text-[2.5rem] tracking-[-0.02em] text-whiteText">
+                    State of the Art Infrastructure
+                  </span>
+                  <span className="font-overpass font-[300] leading-[1.8em] tracking-[0.03em] text-[#C9C9D9]">
+                    With reliability and speed in mind, worldwide data centers provide the backbone for ultra-fast
+                    connectivity. This ensures your site will load instantly, no matter where your readers are, keeping
+                    your site competitive.
+                  </span>
+                </div>
               </div>
             </div>
           </div>
-          <Image
-            className="mt-[-29.35em] scale-100 lg:scale-75 xl:ml-[7.765em] xl:scale-100"
-            src={phones as string}
-            alt="phones image"
-          />
         </div>
       </main>
       <footer></footer>
