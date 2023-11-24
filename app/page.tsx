@@ -146,13 +146,13 @@ export default function Home() {
       <main className="flex h-[100em] w-full">
         <div className="h-full w-full justify-center bg-[#FAFAFA]">
           {/*first row*/}
-          <div className="flex justify-center pt-[3.74em] font-overpass text-[2.5rem] font-[600] tracking-[-0.04em] text-veryDarkBlueHeadings lg:mb-[-1em] xl:mb-[-3em] xl:justify-end xl:pr-[13.35em]">
+          <div className="flex justify-center pb-[1.0em] pt-[3.74em] font-overpass text-[2.5rem] font-[600] tracking-[-0.04em] text-veryDarkBlueHeadings lg:mb-[-1em] xl:mb-[-3em] xl:justify-end xl:pr-[13.35em]">
             Designed for the future
           </div>
           {/*second row*/}
           <div className="flex w-full justify-between xl:mt-[-8.8em]">
             {/*left col*/}
-            <div className="flex flex-col justify-center gap-[4em] pl-[2em] md:w-full lg:pl-[5em] xl:w-[42.5em] xl:pl-[10.5em] xl:pr-[2em]">
+            <div className="flex flex-col justify-center gap-[4em] pl-[2em] md:w-full lg:pl-[5em] xl:w-[44.6em] xl:pl-[10.5em] md:pr-[3em] xl:pr-[2em]">
               <Article
                 header="Introducing an extensible editor"
                 main="Blogr features an exceedingly intuitive interface which lets you focus on one thing: creating content. 
