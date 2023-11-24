@@ -73,6 +73,17 @@ const ButtonTypeSignUp = ({ name }: { name: string }) => {
   );
 };
 
+const Article = ({ header, main }: { header: string; main: string }) => {
+  return (
+    <div className="flex flex-col gap-5">
+      <span className="font-overpass font-[600] tracking-[-0.02em] text-veryDarkBlueHeadings md:text-[1.4rem] lg:text-[1.6rem] xl:text-[1.8rem]">
+        {header}
+      </span>
+      <span className="font-overpass leading-[2em] text-veryDarkGrayishBlueBodyCopy">{main}</span>
+    </div>
+  );
+};
+
 export default function Home() {
   const [clickedOn, setClickedOn] = useState<string>('');
   return (
@@ -80,7 +91,7 @@ export default function Home() {
       <nav className="bg flex h-[37.5em] w-full justify-center rounded-bl-[6.5em] bg-gradient-to-r from-veryLightRed to-lightRed">
         <div className="flex h-full w-full flex-col bg-[url('./images/bg-pattern-intro-desktop.svg')] bg-[25.4%_52.1%] text-center md:px-[3em] lg:px-[6em] xl:px-0 xl:pl-[10.5em] xl:pr-[11em]">
           {/*first row*/}
-          <div className="mt-16 flex w-full place-items-start justify-between gap-4">
+          <div className="flex w-full place-items-start justify-between gap-4 xl:mt-16">
             <div className="flex items-center justify-between md:gap-[2rem] lg:gap-[4em]">
               <Image src={logo as string} alt="Logo" priority />
               <div className="flex justify-between gap-8">
@@ -133,17 +144,34 @@ export default function Home() {
         </div>
       </nav>
       <main className="flex h-[100em] w-full">
-        <div className="h-full w-full bg-[#FAFAFA]">
+        <div className="h-full w-full justify-center bg-[#FAFAFA]">
           {/*first row*/}
-          <div className="mb-[-3em] flex justify-center pt-[4em] font-overpass text-[2.5rem] font-[600] tracking-[-0.04em] text-veryDarkBlueHeadings">
+          <div className="flex justify-center pt-[3.74em] font-overpass text-[2.5rem] font-[600] tracking-[-0.04em] text-veryDarkBlueHeadings lg:mb-[-1em] xl:mb-[-3em] xl:justify-end xl:pr-[13.35em]">
             Designed for the future
           </div>
           {/*second row*/}
-          <div className="flex w-full justify-between">
+          <div className="flex w-full justify-between xl:mt-[-8.8em]">
             {/*left col*/}
-            <div>LEFT COL</div>
+            <div className="flex flex-col justify-center gap-[4em] pl-[2em] md:w-full lg:pl-[5em] xl:w-[42.5em] xl:pl-[10.5em] xl:pr-[2em]">
+              <Article
+                header="Introducing an extensible editor"
+                main="Blogr features an exceedingly intuitive interface which lets you focus on one thing: creating content. 
+  The editor supports management of multiple blogs and allows easy manipulation of embeds such as images, 
+  videos, and Markdown. Extensibility with plugins and themes provide easy ways to add functionality or 
+  change the looks of a blog."
+              />
+              <Article
+                header="Robust content management"
+                main="Flexible content management enables users to easily move through posts. Increase the usability of your blog 
+                by adding customized categories, sections, format, or flow. With this functionality, you’re in full control."
+              />
+            </div>
             {/*right col*/}
-            <Image className="mr-[-17.2em]" src={editorDesktop as string} alt="editor image" />
+            <Image
+              className="md:mr-[-11em] md:w-[60%] lg:mr-[-15em] lg:w-[70%] xl:mr-[-17.2em]  xl:w-auto "
+              src={editorDesktop as string}
+              alt="editor image"
+            />
           </div>
         </div>
       </main>
