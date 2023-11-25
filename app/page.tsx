@@ -141,7 +141,7 @@ export default function Home() {
               </div>
             </div>
             {/*right nav desktop*/}
-            <div className="mt-[-0.3em] hidden gap-[2em] lg:flex">
+            <div className="mt-[-0.3em] hidden gap-[2em] md:flex">
               <button className="font-ubuntu font-[500] text-[#FFD9D5] decoration-white decoration-2 hover:text-white hover:underline">
                 Login
               </button>
@@ -155,7 +155,7 @@ export default function Home() {
             </div>
           </div>
           {/*second row*/}
-          <span className="mt-[1.8em] flex w-full justify-center whitespace-break-spaces font-overpass text-[2.4rem] font-[500] tracking-[-0.03em] text-whiteText md:whitespace-normal lg:text-[3.5rem] xl:text-[4rem]">
+          <span className="mt-[1.8em] flex w-full justify-center whitespace-break-spaces font-overpass text-[2.4rem] font-[500] tracking-[-0.03em] text-whiteText md:whitespace-normal md:text-[3rem] lg:text-[3.5rem] xl:text-[4rem]">
             {'A modern\npublishing platform'}
           </span>
           <span className="mt-1 flex justify-center font-overpass text-[1.25rem] font-[300] text-[#FFD9D5]">
