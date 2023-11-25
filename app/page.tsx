@@ -186,7 +186,7 @@ export default function Home() {
               </div>
             </div>
             {/*right nav desktop*/}
-            <div className="mt-[-0.3em] hidden md:flex gap-[2em]">
+            <div className="mt-[-0.3em] hidden gap-[2em] md:flex">
               <button className="font-ubuntu font-[500] text-[#FFD9D5] decoration-white decoration-2 hover:text-white hover:underline">
                 Login
               </button>
