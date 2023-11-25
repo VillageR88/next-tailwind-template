@@ -10,6 +10,7 @@ import { useState } from 'react';
 import Image from 'next/image';
 import logo from './images/logo.svg';
 import editorDesktop from './images/illustration-editor-desktop.svg';
+import editorMobile from './images/illustration-editor-mobile.svg';
 import laptopDesktop from './images/illustration-laptop-desktop.svg';
 import hamburger from './images/icon-hamburger.svg';
 import close from './images/icon-close.svg';
@@ -79,8 +80,8 @@ const ButtonTypeSignUp = ({ name }: { name: string }) => {
 
 const Article = ({ header, main }: { header: string; main: string }) => {
   return (
-    <div className="flex flex-col gap-5">
-      <span className="font-overpass font-[600] tracking-[-0.02em] text-veryDarkBlueHeadings md:text-[1.4rem] lg:text-[1.6rem] xl:text-[1.8rem]">
+    <div className="flex flex-col gap-5 text-center md:text-start">
+      <span className="font-overpass text-[2rem] font-[600] tracking-[-0.02em] text-veryDarkBlueHeadings md:text-[1.4rem] lg:text-[1.6rem] xl:text-[1.8rem]">
         {header}
       </span>
       <span className="font-overpass leading-[1.8em] text-veryDarkGrayishBlueBodyCopy">{main}</span>
@@ -170,15 +171,17 @@ export default function Home() {
         </div>
       </nav>
       <main className="flex h-[154em] w-full">
-        <div className="h-full w-full justify-center bg-[#FAFAFA]">
+        <div className="flex h-full w-full flex-col items-center bg-[#FAFAFA] md:block">
           {/*first row*/}
-          <div className="flex justify-center pb-[1.0em] pt-[3.74em] font-overpass text-[2.5rem] font-[600] tracking-[-0.04em] text-veryDarkBlueHeadings lg:mb-[-1em] xl:mb-[-3em] xl:justify-end xl:pr-[13.35em]">
+          <div className="flex justify-center pb-[1.0em] pt-[3em] font-overpass text-[2rem] font-[600] tracking-[-0.04em] text-veryDarkBlueHeadings md:pt-[3.74em] md:text-[2.5rem] lg:mb-[-1em] xl:mb-[-3em] xl:justify-end xl:pr-[13.35em]">
             Designed for the future
           </div>
+          {/*image for mobile*/}
+          <Image className="flex md:hidden" src={editorMobile as string} alt="image of editor" />
           {/*second row*/}
           <div className="flex w-full justify-between xl:mt-[-8.8em]">
             {/*left col*/}
-            <div className="lg-w-full flex flex-col justify-center gap-[4.5em] pl-[2em] tracking-[0.025em] md:w-2/3 md:pr-[3em] lg:pl-[5em] xl:w-[46em] xl:pl-[10.4em] xl:pr-[2em]">
+            <div className="lg-w-full flex flex-col justify-center gap-[4.5em] px-[3em] tracking-[0.025em] md:w-2/3 md:px-0 md:pl-[2em] md:pr-[3em] lg:pl-[5em] xl:w-[46em] xl:pl-[10.4em] xl:pr-[2em]">
               <Article
                 header="Introducing an extensible editor"
                 main="Blogr features an exceedingly intuitive interface which lets you focus on one thing: creating content. 
@@ -192,9 +195,9 @@ export default function Home() {
                 by adding customized categories, sections, format, or flow. With this functionality, you’re in full control."
               />
             </div>
-            {/*right col*/}
+            {/*right col desktop only*/}
             <Image
-              className="bg- h-full md:mr-[-11em] md:w-[70%] lg:mr-[-15em] lg:w-[70%] xl:mr-[-17.2em] xl:w-auto "
+              className="hidden h-full md:mr-[-11em] md:flex md:w-[70%] lg:mr-[-15em] lg:w-[70%] xl:mr-[-17.2em] xl:w-auto "
               src={editorDesktop as string}
               alt="editor image"
             />
