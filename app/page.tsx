@@ -82,14 +82,20 @@ const ButtonWithArrowDark = ({
   clicked: string;
 }) => {
   return (
-    <div>
+    <div className="flex w-full flex-col justify-center">
       <div
         onClick={() => {
           action(name);
         }}
-        className="flex  items-center gap-2 px-4"
+        className="flex items-center justify-center gap-2 px-4"
       >
-        <button className="font-overpass text-[1.1rem] font-[600]">{name}</button>
+        <button
+          className={`${
+            clicked === name ? 'text-veryDarkGrayishBlueBodyCopy' : 'text-veryDarkGrayBlue'
+          } font-overpass text-[1.1rem] font-[600]`}
+        >
+          {name}
+        </button>
         <Image
           src={arrowRed as string}
           alt="arrow"
@@ -99,7 +105,7 @@ const ButtonWithArrowDark = ({
       <div
         className={`${
           clicked === name ? 'flex' : 'hidden'
-        } mt-[1em] flex-col gap-[1em] rounded-[0.3em] bg-[#EFEFF1] py-[1em]`}
+        } mx-[1.5em] mt-[1em] flex-col gap-[1em] rounded-[0.3em] bg-[#EFEFF1] py-[1em]`}
       >
         {list.map((x, i) => (
           <button className="font-overpass font-[600] text-veryDarkGrayishBlueBodyCopy" key={i}>
@@ -111,7 +117,7 @@ const ButtonWithArrowDark = ({
   );
 };
 
-const ButtonTypeSignUp = ({ name }: { name: string }) => {
+const ButtonTypeSignUpDesktop = ({ name }: { name: string }) => {
   return (
     <button className="w-[8.5em] rounded-[1.5em] bg-white py-[0.75em] font-ubuntu font-[600] text-[#F44D74] decoration-white decoration-2 hover:bg-opacity-25 hover:text-white">
       {name}
@@ -190,7 +196,7 @@ export default function Home() {
               <button className="font-ubuntu font-[500] text-[#FFD9D5] decoration-white decoration-2 hover:text-white hover:underline">
                 Login
               </button>
-              <ButtonTypeSignUp name="Sign Up" />
+              <ButtonTypeSignUpDesktop name="Sign Up" />
             </div>
             {/*right nav mobile*/}
             <div className="absolute right-0 md:hidden">
@@ -235,7 +241,7 @@ export default function Home() {
             Grow your audience and build your online brand
           </span>
           <div className="mt-[3em] flex justify-center gap-[1em]">
-            <ButtonTypeSignUp name="Start for Free" />
+            <ButtonTypeSignUpDesktop name="Start for Free" />
             <button className="w-[8.5em] rounded-[1.5em] bg-white bg-opacity-0 py-[0.75em] font-ubuntu font-[600] text-white decoration-white decoration-2 outline-double outline-1 outline-white hover:bg-opacity-100 hover:text-veryLightRedCTAHoverBackground">
               Learn More
             </button>
