@@ -16,21 +16,22 @@ import hamburger from './images/icon-hamburger.svg';
 import close from './images/icon-close.svg';
 import phones from './images/illustration-phones.svg';
 import arrowLight from './images/icon-arrow-light.svg';
+import arrowRed from './images/icon-arrow-dark.svg';
 import arrowWhite from './images/icon-arrow-white.svg';
 const product = ['Overview', 'Pricing', 'Marketplace', 'Features', 'Integrations'];
 const company = ['About', 'Team', 'Blog', 'Careers'];
 const connect = ['Contact', 'Newsletter', 'LinkedIn'];
 
-const ButtonWithArrow = ({
+const ButtonWithArrowLight = ({
   action,
   name,
   list,
   clicked,
 }: {
+  action(value: string): undefined;
   name: string;
   list: string[];
   clicked: string;
-  action(value: string): undefined;
 }) => {
   const [arrowColor, setArrowColor] = useState<unknown>(arrowLight);
 
@@ -52,7 +53,47 @@ const ButtonWithArrow = ({
         <Image
           src={arrowColor as string}
           alt="arrow"
-          className={`mt-1 transition-transform ${clicked === name && 'blend rotate-180'}`}
+          className={`mt-1 transition-transform ${clicked === name && 'rotate-180'}`}
+        />
+      </div>
+      <div
+        className={`${
+          clicked === name ? 'flex' : 'hidden'
+        } absolute ml-[-1.5em] mt-7 w-[10.5em] flex-col items-start gap-2 rounded-[0.3em] bg-white py-7 pl-6`}
+      >
+        {list.map((x, i) => (
+          <button className="font-ubuntu font-[400] hover:font-[600]" key={i}>
+            {x}
+          </button>
+        ))}
+      </div>
+    </div>
+  );
+};
+const ButtonWithArrowDark = ({
+  action,
+  name,
+  list,
+  clicked,
+}: {
+  action(value: string): undefined;
+  name: string;
+  list: string[];
+  clicked: string;
+}) => {
+  return (
+    <div>
+      <div
+        onClick={() => {
+          action(name);
+        }}
+        className="flex content-center items-center gap-2"
+      >
+        <button className="text-[#FFD9D5]t font-ubuntu font-[500]">{name}</button>
+        <Image
+          src={arrowRed as string}
+          alt="arrow"
+          className={`mt-1 transition-transform ${clicked === name && 'rotate-180'}`}
         />
       </div>
       <div
@@ -92,10 +133,13 @@ const Article = ({ header, main }: { header: string; main: string }) => {
 const FooterBlock = ({ header, list }: { header: string; list: string[] }) => {
   return (
     <div className="mt-[0.6em] flex flex-col items-center gap-[1.8em] md:items-start">
-      <span className="font-overpass text-[1.1rem] md:text-[0.95rem] text-whiteText">{header}</span>
+      <span className="font-overpass text-[1.1rem] text-whiteText md:text-[0.95rem]">{header}</span>
       <div className="flex flex-col items-center gap-[0.6em] md:items-start">
         {list.map((x, i) => (
-          <button className="font-overpass text-[1.1rem] md:text-[0.95rem] text-[#C9C9D9] decoration-2 hover:underline" key={i}>
+          <button
+            className="font-overpass text-[1.1rem] text-[#C9C9D9] decoration-2 hover:underline md:text-[0.95rem]"
+            key={i}
+          >
             {x}
           </button>
         ))}
@@ -109,13 +153,13 @@ export default function Home() {
   return (
     <div className="flex min-h-screen flex-col items-center">
       <nav className="flex h-[37.5em] w-full justify-center overflow-hidden rounded-bl-[6.5em] bg-gradient-to-br from-veryLightRed to-lightRed md:bg-gradient-to-r">
-        <div className="flex h-full w-full flex-col bg-[url('./images/bg-pattern-intro-mobile.svg')] bg-[35%_35%] px-[2em] text-center md:bg-[url('./images/bg-pattern-intro-desktop.svg')] md:bg-[20.5%_52.1%] lg:bg-[23%_52.1%] lg:px-[6em] xl:bg-[25.4%_52.1%] xl:px-0 xl:pl-[10.5em] xl:pr-[11em]">
+        <div className="flex h-full w-full flex-col bg-[url('./images/bg-pattern-intro-mobile.svg')] bg-[35%_35%] text-center md:bg-[url('./images/bg-pattern-intro-desktop.svg')] md:bg-[20.5%_52.1%] md:px-[2em] lg:bg-[23%_52.1%] lg:px-[6em] xl:bg-[25.4%_52.1%] xl:px-0 xl:pl-[10.5em] xl:pr-[11em]">
           {/*first row*/}
-          <div className="mt-16 flex w-full justify-between md:place-items-start md:gap-4">
+          <div className="mt-16 flex w-full items-start justify-between pl-[2em] md:place-items-start md:gap-4 md:pl-0">
             <div className="flex items-center justify-between md:gap-[2rem] lg:gap-[4em]">
               <Image src={logo as string} alt="Logo" priority />
               <div className="hidden justify-between gap-8 md:flex">
-                <ButtonWithArrow
+                <ButtonWithArrowLight
                   action={(value) => {
                     clickedOn !== value ? setClickedOn(value) : setClickedOn('');
                   }}
@@ -123,7 +167,7 @@ export default function Home() {
                   name="Product"
                   list={product}
                 />
-                <ButtonWithArrow
+                <ButtonWithArrowLight
                   action={(value) => {
                     clickedOn !== value ? setClickedOn(value) : setClickedOn('');
                   }}
@@ -131,7 +175,7 @@ export default function Home() {
                   name="Company"
                   list={company}
                 />
-                <ButtonWithArrow
+                <ButtonWithArrowLight
                   action={(value) => {
                     clickedOn !== value ? setClickedOn(value) : setClickedOn('');
                   }}
@@ -149,10 +193,38 @@ export default function Home() {
               <ButtonTypeSignUp name="Sign Up" />
             </div>
             {/*right nav mobile*/}
-            <div className="flex md:hidden">
-              <button>
-                <Image src={hamburger as string} alt="mobile navigation right side" />
-              </button>
+            <div className="absolute right-0 md:hidden">
+              <div className="flex w-screen flex-col items-end gap-[3em]">
+                <button className="mr-[2em]">
+                  <Image src={hamburger as string} alt="mobile navigation right side" />
+                </button>
+                <div className="flex w-[85%] flex-col items-center self-center bg-white">
+                  <ButtonWithArrowDark
+                    clicked={clickedOn}
+                    action={(value) => {
+                      clickedOn !== value ? setClickedOn(value) : setClickedOn('');
+                    }}
+                    name="Product"
+                    list={product}
+                  />
+                  <ButtonWithArrowDark
+                    clicked={clickedOn}
+                    action={(value) => {
+                      clickedOn !== value ? setClickedOn(value) : setClickedOn('');
+                    }}
+                    name="Company"
+                    list={company}
+                  />
+                  <ButtonWithArrowDark
+                    clicked={clickedOn}
+                    action={(value) => {
+                      clickedOn !== value ? setClickedOn(value) : setClickedOn('');
+                    }}
+                    name="Connect"
+                    list={connect}
+                  />
+                </div>
+              </div>
             </div>
           </div>
           {/*second row*/}
@@ -173,7 +245,7 @@ export default function Home() {
       <main className="flex h-full w-full md:h-[154em]">
         <div className="flex h-full w-full flex-col items-center bg-[#FAFAFA] md:block">
           {/*first row*/}
-          <div className="flex justify-center pb-[1.0em] pt-[3em] font-overpass text-[2rem] font-[600] tracking-[-0.04em] text-veryDarkBlueHeadings md:pt-[3.74em] md:text-[2.5rem] lg:mb-[-1em] xl:mb-[-3em] xl:justify-end xl:pr-[13.35em]">
+          <div className="flex justify-center pb-[1.0em] pt-[4em] font-overpass text-[2rem] font-[600] tracking-[-0.04em] text-veryDarkBlueHeadings md:pt-[3.74em] md:text-[2.5rem] lg:mb-[-1em] xl:mb-[-3em] xl:justify-end xl:pr-[13.35em]">
             Designed for the future
           </div>
           {/*image for mobile*/}
