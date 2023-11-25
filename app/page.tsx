@@ -86,6 +86,19 @@ const Article = ({ header, main }: { header: string; main: string }) => {
   );
 };
 
+const FooterBlock = ({ header, list }: { header: string; list: any[] }) => {
+  return (
+    <div className="flex flex-col items-start gap-[2em]">
+      <button className="text-whiteText ">{header}</button>
+      <div className="flex flex-col items-start text-[#C9C9D9]">
+        {list.map((x, i) => (
+          <button key={i}>{x}</button>
+        ))}
+      </div>
+    </div>
+  );
+};
+
 export default function Home() {
   const [clickedOn, setClickedOn] = useState<string>('');
   return (
@@ -145,7 +158,7 @@ export default function Home() {
           </div>
         </div>
       </nav>
-      <main className="flex h-[155em] w-full">
+      <main className="flex h-[154em] w-full">
         <div className="h-full w-full justify-center bg-[#FAFAFA]">
           {/*first row*/}
           <div className="flex justify-center pb-[1.0em] pt-[3.74em] font-overpass text-[2.5rem] font-[600] tracking-[-0.04em] text-veryDarkBlueHeadings lg:mb-[-1em] xl:mb-[-3em] xl:justify-end xl:pr-[13.35em]">
@@ -220,7 +233,14 @@ export default function Home() {
           </div>
         </div>
       </main>
-      <footer></footer>
+      <footer className="h-[22.5em] w-full rounded-tr-[6.5em] bg-VeryDarkBlackBlueFooterBackground">
+        <div className="mt-[4.4em] flex justify-between pl-[10.3em] pr-[21em]">
+          <Image src={logo as string} className="h-fit" alt="logo" />
+          <FooterBlock header="Product" list={product} />
+          <FooterBlock header="Company" list={company} />
+          <FooterBlock header="Connect" list={connect} />
+        </div>
+      </footer>
     </div>
   );
 }
