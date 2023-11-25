@@ -88,11 +88,13 @@ const Article = ({ header, main }: { header: string; main: string }) => {
 
 const FooterBlock = ({ header, list }: { header: string; list: any[] }) => {
   return (
-    <div className="flex flex-col items-start gap-[2em]">
-      <button className="text-whiteText ">{header}</button>
-      <div className="flex flex-col items-start text-[#C9C9D9]">
+    <div className="mt-[0.6em] flex flex-col items-start gap-[1.8em]">
+      <button className="font-overpass text-[0.95rem] text-whiteText">{header}</button>
+      <div className="flex flex-col items-start gap-[0.6em]">
         {list.map((x, i) => (
-          <button key={i}>{x}</button>
+          <button className="font-overpass text-[0.95rem] text-[#C9C9D9]" key={i}>
+            {x}
+          </button>
         ))}
       </div>
     </div>
@@ -234,8 +236,9 @@ export default function Home() {
         </div>
       </main>
       <footer className="h-[22.5em] w-full rounded-tr-[6.5em] bg-VeryDarkBlackBlueFooterBackground">
-        <div className="mt-[4.4em] flex justify-between pl-[10.3em] pr-[21em]">
-          <Image src={logo as string} className="h-fit" alt="logo" />
+        <div className="ml-[-2em] mt-[4.4em] flex justify-evenly pr-[9em]">
+          <Image src={logo as string} className="mr-[-1em] h-fit" alt="logo" />
+
           <FooterBlock header="Product" list={product} />
           <FooterBlock header="Company" list={company} />
           <FooterBlock header="Connect" list={connect} />
