@@ -86,13 +86,13 @@ const Article = ({ header, main }: { header: string; main: string }) => {
   );
 };
 
-const FooterBlock = ({ header, list }: { header: string; list: any[] }) => {
+const FooterBlock = ({ header, list }: { header: string; list: string[] }) => {
   return (
     <div className="mt-[0.6em] flex flex-col items-start gap-[1.8em]">
-      <button className="font-overpass text-[0.95rem] text-whiteText">{header}</button>
+      <span className="font-overpass text-[0.95rem] text-whiteText">{header}</span>
       <div className="flex flex-col items-start gap-[0.6em]">
         {list.map((x, i) => (
-          <button className="font-overpass text-[0.95rem] text-[#C9C9D9]" key={i}>
+          <button className="font-overpass text-[0.95rem] text-[#C9C9D9] decoration-2 hover:underline" key={i}>
             {x}
           </button>
         ))}
