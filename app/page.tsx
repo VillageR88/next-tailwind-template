@@ -91,11 +91,11 @@ const Article = ({ header, main }: { header: string; main: string }) => {
 
 const FooterBlock = ({ header, list }: { header: string; list: string[] }) => {
   return (
-    <div className="mt-[0.6em] flex flex-col items-start gap-[1.8em]">
-      <span className="font-overpass text-[0.95rem] text-whiteText">{header}</span>
-      <div className="flex flex-col items-start gap-[0.6em]">
+    <div className="mt-[0.6em] flex flex-col items-center gap-[1.8em] md:items-start">
+      <span className="font-overpass text-[1.1rem] md:text-[0.95rem] text-whiteText">{header}</span>
+      <div className="flex flex-col items-center gap-[0.6em] md:items-start">
         {list.map((x, i) => (
-          <button className="font-overpass text-[0.95rem] text-[#C9C9D9] decoration-2 hover:underline" key={i}>
+          <button className="font-overpass text-[1.1rem] md:text-[0.95rem] text-[#C9C9D9] decoration-2 hover:underline" key={i}>
             {x}
           </button>
         ))}
@@ -232,11 +232,11 @@ export default function Home() {
             <Image className="mt-[-87em] h-auto w-auto px-1" src={phones as string} alt="phones image" />
           </div>
           {/*fourth row*/}
-          <div className="mt-[7em] flex md:pb-0 pb-[6em] items-center justify-center">
+          <div className="mt-[7em] flex items-center justify-center pb-[6em] md:pb-0">
             <div className="ml-[-17em] hidden h-auto w-full md:flex">
               <Image src={laptopDesktop as string} alt="laptop image" />
             </div>
-            <div className="flex w-[60%] flex-col items-center justify-center gap-[3em] md:gap-[4.5em] md:pr-[2em] lg:pr-[6em] xl:pr-[10em]">
+            <div className="flex w-[80%] flex-col items-center justify-center gap-[3em] md:w-[60%] md:gap-[4.5em] md:pr-[2em] lg:pr-[6em] xl:pr-[10em]">
               <Article
                 header="Free, open, simple"
                 main="Blogr is a free and open source application backed by a large community of helpful developers. It supports 
@@ -252,10 +252,9 @@ export default function Home() {
           </div>
         </div>
       </main>
-      <footer className="h-[22.5em] w-full rounded-tr-[6.5em] bg-VeryDarkBlackBlueFooterBackground">
-        <div className="ml-[-2em] mt-[4.4em] flex justify-evenly pr-[9em]">
+      <footer className="h-full w-full rounded-tr-[6.5em] bg-VeryDarkBlackBlueFooterBackground md:h-[22.5em]">
+        <div className="flex flex-col items-center justify-evenly gap-[4em] py-[5em] md:ml-[-2em] md:mt-[4.4em] md:flex-row md:items-start md:gap-0 md:pr-[9em] md:pt-0">
           <Image src={logo as string} className="mr-[-1em] h-fit" alt="logo" />
-
           <FooterBlock header="Product" list={product} />
           <FooterBlock header="Company" list={company} />
           <FooterBlock header="Connect" list={connect} />
