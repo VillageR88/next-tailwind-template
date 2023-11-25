@@ -11,6 +11,8 @@ import Image from 'next/image';
 import logo from './images/logo.svg';
 import editorDesktop from './images/illustration-editor-desktop.svg';
 import laptopDesktop from './images/illustration-laptop-desktop.svg';
+import hamburger from './images/icon-hamburger.svg';
+import close from './images/icon-close.svg';
 import phones from './images/illustration-phones.svg';
 import arrowLight from './images/icon-arrow-light.svg';
 import arrowWhite from './images/icon-arrow-white.svg';
@@ -105,10 +107,10 @@ export default function Home() {
   const [clickedOn, setClickedOn] = useState<string>('');
   return (
     <div className="flex min-h-screen flex-col items-center">
-      <nav className="flex h-[37.5em] w-full justify-center overflow-hidden rounded-bl-[6.5em] bg-gradient-to-r from-veryLightRed to-lightRed">
-        <div className="flex h-full w-full flex-col bg-[url('./images/bg-pattern-intro-mobile.svg')] bg-[40%_30%] px-[2em] text-center md:bg-[url('./images/bg-pattern-intro-desktop.svg')] md:bg-[20.5%_52.1%] lg:bg-[23%_52.1%] lg:px-[6em] xl:bg-[25.4%_52.1%] xl:px-0 xl:pl-[10.5em] xl:pr-[11em]">
+      <nav className="flex h-[37.5em] w-full justify-center overflow-hidden rounded-bl-[6.5em] bg-gradient-to-br from-veryLightRed to-lightRed md:bg-gradient-to-r">
+        <div className="flex h-full w-full flex-col bg-[url('./images/bg-pattern-intro-mobile.svg')] bg-[35%_35%] px-[2em] text-center md:bg-[url('./images/bg-pattern-intro-desktop.svg')] md:bg-[20.5%_52.1%] lg:bg-[23%_52.1%] lg:px-[6em] xl:bg-[25.4%_52.1%] xl:px-0 xl:pl-[10.5em] xl:pr-[11em]">
           {/*first row*/}
-          <div className="mt-16 flex w-full place-items-start justify-between gap-4">
+          <div className="mt-16 flex w-full justify-between md:place-items-start md:gap-4">
             <div className="flex items-center justify-between md:gap-[2rem] lg:gap-[4em]">
               <Image src={logo as string} alt="Logo" priority />
               <div className="hidden justify-between gap-8 md:flex">
@@ -138,15 +140,22 @@ export default function Home() {
                 />
               </div>
             </div>
-            <div className="mt-[-0.3em] flex gap-[2em]">
+            {/*right nav desktop*/}
+            <div className="mt-[-0.3em] hidden gap-[2em] lg:flex">
               <button className="font-ubuntu font-[500] text-[#FFD9D5] decoration-white decoration-2 hover:text-white hover:underline">
                 Login
               </button>
               <ButtonTypeSignUp name="Sign Up" />
             </div>
+            {/*right nav mobile*/}
+            <div className="flex md:hidden">
+              <button>
+                <Image src={hamburger as string} alt="mobile navigation right side" />
+              </button>
+            </div>
           </div>
           {/*second row*/}
-          <span className="mt-[1.8em] flex w-full justify-center whitespace-break-spaces font-overpass text-[2.6rem] font-[500] tracking-[-0.03em] text-whiteText md:whitespace-normal lg:text-[3.5rem] xl:text-[4rem]">
+          <span className="mt-[1.8em] flex w-full justify-center whitespace-break-spaces font-overpass text-[2.4rem] font-[500] tracking-[-0.03em] text-whiteText md:whitespace-normal lg:text-[3.5rem] xl:text-[4rem]">
             {'A modern\npublishing platform'}
           </span>
           <span className="mt-1 flex justify-center font-overpass text-[1.25rem] font-[300] text-[#FFD9D5]">
