@@ -87,9 +87,9 @@ const ButtonWithArrowDark = ({
         onClick={() => {
           action(name);
         }}
-        className="flex content-center items-center gap-2"
+        className="flex  items-center gap-2 px-4"
       >
-        <button className="text-[#FFD9D5]t font-ubuntu font-[500]">{name}</button>
+        <button className="font-overpass text-[1.1rem] font-[600]">{name}</button>
         <Image
           src={arrowRed as string}
           alt="arrow"
@@ -99,10 +99,10 @@ const ButtonWithArrowDark = ({
       <div
         className={`${
           clicked === name ? 'flex' : 'hidden'
-        } absolute ml-[-1.5em] mt-7 w-[10.5em] flex-col items-start gap-2 rounded-[0.3em] bg-white py-7 pl-6`}
+        } mt-[1em] flex-col gap-[1em] rounded-[0.3em] bg-[#EFEFF1] py-[1em]`}
       >
         {list.map((x, i) => (
-          <button className="font-ubuntu font-[400] hover:font-[600]" key={i}>
+          <button className="font-overpass font-[600] text-veryDarkGrayishBlueBodyCopy" key={i}>
             {x}
           </button>
         ))}
@@ -186,7 +186,7 @@ export default function Home() {
               </div>
             </div>
             {/*right nav desktop*/}
-            <div className="mt-[-0.3em] hidden gap-[2em] md:flex">
+            <div className="mt-[-0.3em] flex gap-[2em]">
               <button className="font-ubuntu font-[500] text-[#FFD9D5] decoration-white decoration-2 hover:text-white hover:underline">
                 Login
               </button>
@@ -198,7 +198,7 @@ export default function Home() {
                 <button className="mr-[2em]">
                   <Image src={hamburger as string} alt="mobile navigation right side" />
                 </button>
-                <div className="flex w-[85%] flex-col items-center self-center bg-white">
+                <div className="flex w-[85%] flex-col items-center gap-[1.3em] self-center rounded-[0.3em] bg-white">
                   <ButtonWithArrowDark
                     clicked={clickedOn}
                     action={(value) => {
