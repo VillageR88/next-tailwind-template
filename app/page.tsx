@@ -170,18 +170,18 @@ export default function Home() {
           </div>
         </div>
       </nav>
-      <main className="flex h-[154em] w-full">
+      <main className="flex h-full w-full md:h-[154em]">
         <div className="flex h-full w-full flex-col items-center bg-[#FAFAFA] md:block">
           {/*first row*/}
           <div className="flex justify-center pb-[1.0em] pt-[3em] font-overpass text-[2rem] font-[600] tracking-[-0.04em] text-veryDarkBlueHeadings md:pt-[3.74em] md:text-[2.5rem] lg:mb-[-1em] xl:mb-[-3em] xl:justify-end xl:pr-[13.35em]">
             Designed for the future
           </div>
           {/*image for mobile*/}
-          <Image className="flex md:hidden" src={editorMobile as string} alt="image of editor" />
+          <Image className="flex pb-10 md:hidden" src={editorMobile as string} alt="image of editor" />
           {/*second row*/}
-          <div className="flex w-full justify-between xl:mt-[-8.8em]">
+          <div className="flex w-full justify-center md:justify-between xl:mt-[-8.8em]">
             {/*left col*/}
-            <div className="lg-w-full flex flex-col justify-center gap-[4.5em] px-[3em] tracking-[0.025em] md:w-2/3 md:px-0 md:pl-[2em] md:pr-[3em] lg:pl-[5em] xl:w-[46em] xl:pl-[10.4em] xl:pr-[2em]">
+            <div className="lg-w-full flex w-[80%] flex-col justify-center gap-[3em] tracking-[0.025em] md:w-2/3 md:gap-[4.5em] md:px-0 md:pl-[2em] md:pr-[3em] lg:pl-[5em] xl:w-[46em] xl:pl-[10.4em] xl:pr-[2em]">
               <Article
                 header="Introducing an extensible editor"
                 main="Blogr features an exceedingly intuitive interface which lets you focus on one thing: creating content. 
@@ -203,17 +203,18 @@ export default function Home() {
             />
           </div>
           {/*third row*/}
-          <div className="mt-[3em] h-[25.1em] w-full rounded-bl-[6em] rounded-tr-[6em] bg-gradient-to-r from-veryDarkGrayBlue to-veryDarkDesaturatedBlue">
-            <div className=" h-full w-full justify-end bg-[url('./images/bg-pattern-circles.svg')] bg-no-repeat  md:bg-[-22em_82%] lg:bg-[-13.2em_82%]">
-              <div className="flex h-full w-full justify-between">
-                <div className="flex h-full w-full items-center justify-end">
+          <div className="mt-[20em] h-full w-full overflow-hidden rounded rounded-bl-[6em] rounded-tr-[6em] bg-gradient-to-b from-veryDarkGrayBlue to-veryDarkDesaturatedBlue md:mt-[3em] md:h-[25.1em] md:overflow-visible md:bg-gradient-to-r md:pb-0">
+            <div className="h-full w-full bg-[url('./images/bg-pattern-circles.svg')] bg-cover bg-[-9em_-16em] bg-no-repeat md:justify-end md:bg-auto md:bg-[-22em_82%] lg:bg-[-13.2em_82%]">
+              <div className="flex w-full flex-col justify-between pb-[10em] pt-[15em] md:h-full md:flex-row md:pb-0 md:pt-0">
+                <div className="hidden h-full w-full items-center justify-end md:flex">
+                  {/*phones image desktop*/}
                   <Image
-                    className="mt-[2em] h-auto w-auto md:pl-[2em] lg:pl-[7em]"
+                    className="mt-[-13em] h-auto w-auto md:mt-[2em] md:pl-[2em] lg:pl-[7em]"
                     src={phones as string}
                     alt="phones image"
                   />
                 </div>
-                <div className="lg: flex w-full flex-col justify-center gap-[0.8em] pl-[2em] pr-[3em] xl:pl-[4em] xl:pr-[10em] ">
+                <div className="flex h-full w-full flex-col content-center justify-center gap-[0.8em] px-[2em] text-center md:px-0 md:pl-[2em] md:pr-[3em] md:text-left xl:pl-[4em] xl:pr-[10em] ">
                   <span className="font-overpass text-[2.5rem] tracking-[-0.02em] text-whiteText">
                     State of the Art Infrastructure
                   </span>
@@ -226,12 +227,16 @@ export default function Home() {
               </div>
             </div>
           </div>
+          <div className="flex h-full w-full items-center justify-end md:hidden">
+            {/*phones image mobile*/}
+            <Image className="mt-[-87em] h-auto w-auto px-1" src={phones as string} alt="phones image" />
+          </div>
           {/*fourth row*/}
-          <div className="mt-[7em] flex items-center justify-center">
-            <div className="ml-[-17em] h-auto w-full">
+          <div className="mt-[7em] flex md:pb-0 pb-[6em] items-center justify-center">
+            <div className="ml-[-17em] hidden h-auto w-full md:flex">
               <Image src={laptopDesktop as string} alt="laptop image" />
             </div>
-            <div className="flex w-[60%] flex-col items-center justify-center gap-[4em] md:pr-[2em] lg:pr-[6em] xl:pr-[10em]">
+            <div className="flex w-[60%] flex-col items-center justify-center gap-[3em] md:gap-[4.5em] md:pr-[2em] lg:pr-[6em] xl:pr-[10em]">
               <Article
                 header="Free, open, simple"
                 main="Blogr is a free and open source application backed by a large community of helpful developers. It supports 
