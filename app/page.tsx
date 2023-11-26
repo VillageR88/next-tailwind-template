@@ -1,3 +1,4 @@
+'use client';
 import '@fontsource/commissioner';
 import '@fontsource/commissioner/400.css';
 import '@fontsource/commissioner/500.css';
@@ -6,8 +7,50 @@ import Image from 'next/image';
 import logo from './images/logo.svg';
 import bookmark from './images/icon-bookmark.svg';
 import mastercraft from './images/logo-mastercraft.svg';
+import Chart, { ChartConfiguration } from 'chart.js/auto';
+import { useEffect } from 'react';
 
 export default function Home() {
+  useEffect(() => {
+    const canvas = document.getElementById('myChart') as HTMLCanvasElement | null;
+    if (!canvas) return;
+
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return;
+
+    const config: ChartConfiguration = {
+      type: 'line',
+      data: {
+        labels: ['January', 'February', 'March', 'April', 'May'],
+        datasets: [
+          {
+            label: 'Sample Data',
+            data: [10, 20, 15, 25, 30],
+            borderColor: 'rgb(75, 192, 192)',
+            borderWidth: 1,
+            fill: false,
+          },
+        ],
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        scales: {
+          y: {
+            beginAtZero: true,
+          },
+        },
+      },
+    };
+
+    const myChart = new Chart(ctx, config);
+
+    // Cleanup chart on component unmount
+    return () => {
+      myChart.destroy();
+    };
+  }, []); // Ensure useEffect runs only once on component mount
+
   return (
     <div className="flex min-h-screen flex-col items-center justify-start font-commissioner">
       <nav className="h-full w-full">
@@ -70,7 +113,7 @@ export default function Home() {
                   </div>{' '}
                 </div>
               </div>
-              <span>LIVEBAR</span>
+              <canvas id="myChart" width="400" height="400"></canvas>
             </div>
           </div>
           <div className="border-1 h-[40em] w-[45.5em] rounded-[0.5em] bg-white outline outline-1 outline-gray-100"></div>
