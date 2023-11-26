@@ -161,8 +161,8 @@ export default function Home() {
       <nav className="flex h-[37.5em] w-full justify-center overflow-hidden rounded-bl-[6.5em] bg-gradient-to-br from-veryLightRed to-lightRed md:bg-gradient-to-r">
         <div className="flex h-full w-full flex-col bg-[url('./images/bg-pattern-intro-mobile.svg')] bg-[35%_35%] text-center md:bg-[url('./images/bg-pattern-intro-desktop.svg')] md:bg-[20.5%_52.1%] md:px-[2em] lg:bg-[23%_52.1%] lg:px-[6em] xl:bg-[25.4%_52.1%] xl:px-0 xl:pl-[10.5em] xl:pr-[11em]">
           {/*first row*/}
-          <div className="mt-16 flex w-full items-start justify-between pl-[2em] md:place-items-start md:gap-4 md:pl-0">
-            <div className="flex items-center justify-between md:gap-[2rem] lg:gap-[4em]">
+          <div className="mt-16 flex w-full items-start justify-between pl-[2em] md:gap-4 md:pl-0">
+            <div className="items-center flex justify-between md:gap-[2rem] lg:gap-[4em]">
               <Image src={logo as string} alt="Logo" priority />
               <div className="hidden justify-between gap-8 md:flex">
                 <ButtonWithArrowLight
@@ -199,12 +199,12 @@ export default function Home() {
               <ButtonTypeSignUpDesktop name="Sign Up" />
             </div>
             {/*right nav mobile*/}
-            <div className="absolute right-0 md:hidden">
+            <div className="absolute right-0 mt-[0.7em] md:mt-0 md:hidden ">
               <div className="flex w-screen flex-col items-end gap-[3em]">
                 <button className="mr-[2em]">
                   <Image src={hamburger as string} alt="mobile navigation right side" />
                 </button>
-                <div className="flex w-[85%] flex-col items-center gap-[1.3em] self-center rounded-[0.3em] bg-white">
+                <div className="flex w-[85%] flex-col items-center gap-[1.3em] self-center rounded-[0.3em] bg-white py-[3em] shadow-xl">
                   <ButtonWithArrowDark
                     clicked={clickedOn}
                     action={(value) => {
@@ -229,6 +229,11 @@ export default function Home() {
                     name="Connect"
                     list={connect}
                   />
+                  <hr className="mt-[0.2em] w-[85%]" />
+                  <button className="font-overpass text-[1.1rem] font-[600] text-veryDarkGrayBlue">Login</button>
+                  <button className="rounded-[2em] bg-gradient-to-r from-veryLightRed to-lightRed px-[2.5em] py-[0.7em] font-overpass text-[1.1rem] font-[600] text-whiteText">
+                    Sign Up
+                  </button>
                 </div>
               </div>
             </div>
@@ -281,6 +286,10 @@ export default function Home() {
             />
           </div>
           {/*third row*/}
+          <div className="flex h-0 items-center justify-center md:hidden">
+            {/*phones image mobile*/}
+            <Image className="mt-[41em] z-10 h-auto w-auto " src={phones as string} alt="phones image" />
+          </div>
           <div className="mt-[20em] h-full w-full overflow-hidden rounded rounded-bl-[6em] rounded-tr-[6em] bg-gradient-to-b from-veryDarkGrayBlue to-veryDarkDesaturatedBlue md:mt-[3em] md:h-[25.1em] md:overflow-visible md:bg-gradient-to-r md:pb-0">
             <div className="h-full w-full bg-[url('./images/bg-pattern-circles.svg')] bg-cover bg-[-9em_-16em] bg-no-repeat md:justify-end md:bg-auto md:bg-[-22em_82%] lg:bg-[-13.2em_82%]">
               <div className="flex w-full flex-col justify-between pb-[10em] pt-[15em] md:h-full md:flex-row md:pb-0 md:pt-0">
@@ -305,10 +314,7 @@ export default function Home() {
               </div>
             </div>
           </div>
-          <div className="flex h-full w-full items-center justify-end md:hidden">
-            {/*phones image mobile*/}
-            <Image className="mt-[-87em] h-auto w-auto px-1" src={phones as string} alt="phones image" />
-          </div>
+         
           {/*fourth row*/}
           <div className="mt-[7em] flex items-center justify-center pb-[6em] md:pb-0">
             <div className="ml-[-17em] hidden h-auto w-full md:flex">
