@@ -16,28 +16,38 @@ export default function Home() {
     if (!canvas) return;
 
     const ctx = canvas.getContext('2d');
+
     if (!ctx) return;
 
     const config: ChartConfiguration = {
-      type: 'line',
+      type: 'bar',
       data: {
-        labels: ['January', 'February', 'March', 'April', 'May'],
+        labels: [''],
         datasets: [
           {
-            label: 'Sample Data',
-            data: [10, 20, 15, 25, 30],
-            borderColor: 'rgb(75, 192, 192)',
-            borderWidth: 1,
-            fill: false,
+            label: '',
+            data: [10],
+            backgroundColor: 'rgb(75, 192, 192)',
           },
         ],
       },
       options: {
+        indexAxis: 'y',
+        elements: {},
         responsive: true,
         maintainAspectRatio: false,
+
         scales: {
+          x: {
+            display: false, // Hide x-axis labels
+          },
           y: {
-            beginAtZero: true,
+            display: false, // Hide y-axis labels
+          },
+        },
+        plugins: {
+          legend: {
+            display: false,
           },
         },
       },
@@ -92,7 +102,7 @@ export default function Home() {
           </div>
           {/*second block*/}
           <div className="border-1 flex h-[13.15em] w-full rounded-[0.5em] bg-white outline outline-1 outline-gray-100">
-            <div className="flex w-full flex-col justify-center">
+            <div className="flex w-full flex-col justify-center gap-[2em]">
               <div className="flex h-fit w-full items-center justify-start">
                 <div className="flex min-w-[14em] flex-col content-center pl-[3em]">
                   <span className="text-[2rem] font-[700]">$89,914</span>
@@ -110,10 +120,12 @@ export default function Home() {
                   <div className="flex min-w-[14em] flex-col content-center pl-[3em]">
                     <span className="text-[2rem] font-[700]">56</span>
                     <span className="text-darkGray">days left</span>
-                  </div>{' '}
+                  </div>
                 </div>
               </div>
-              <canvas id="myChart" width="400" height="400"></canvas>
+              <div className="px-[3em]" style={{ height: '17px' }}>
+                <canvas id="myChart" className="rounded-[4em]" width="400" height="200"></canvas>
+              </div>
             </div>
           </div>
           <div className="border-1 h-[40em] w-[45.5em] rounded-[0.5em] bg-white outline outline-1 outline-gray-100"></div>
