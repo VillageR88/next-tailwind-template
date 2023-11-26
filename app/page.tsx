@@ -5,6 +5,7 @@ import '@fontsource/commissioner/700.css';
 import Image from 'next/image';
 import logo from './images/logo.svg';
 import bookmark from './images/icon-bookmark.svg';
+import mastercraft from './images/logo-mastercraft.svg';
 
 export default function Home() {
   return (
@@ -25,6 +26,9 @@ export default function Home() {
         <div className="flex flex-col gap-[1.6em]">
           {/*first block*/}
           <div className="border-1 mt-[-5.67em] flex h-[16.7em] w-[45.5em] flex-col items-center rounded-[0.5em] bg-white outline outline-1 outline-gray-100">
+            <div className="z-10 mt-[-1.8em] h-0 pb-[1.8em]">
+              <Image src={mastercraft as string} alt="mastercraft logo" />
+            </div>
             <span className="mt-[1.88em] text-[1.72rem] font-[700] tracking-[0.010em]">
               Mastercraft Bamboo Monitor Riser
             </span>
@@ -43,6 +47,8 @@ export default function Home() {
               </button>
             </div>
           </div>
+          {/*second block*/}
+          <div className="border-1 h-[13.15em] w-[45.5em] rounded-[0.5em] bg-white outline outline-1 outline-gray-100"></div>
           <div className="border-1 h-[60em] w-[45.5em] rounded-[0.5em] bg-white outline outline-1 outline-gray-100"></div>
         </div>
       </main>
