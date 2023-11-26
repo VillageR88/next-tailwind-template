@@ -20,6 +20,7 @@ const config: Config = {
         //### Neutral
         black: 'hsl(0, 0%, 0%)',
         darkGray: 'hsl(0, 0%, 48%)',
+        customDark: 'hsla(0, 0%, 0%, 0.58)',
       },
     },
   },
