@@ -11,12 +11,15 @@ const config: Config = {
       fontFamily: {
         sans: ['var(--font-sans)'],
         mono: ['var(--font-mono)'],
+        commissioner: 'Commissioner',
       },
       colors: {
-        // Slate
-        // 'accent-brand-800': '#1e293b',
-        // 'accent-brand-700': '#334155',
-        // 'accent-brand-600': '#475569',
+        //### Primary
+        moderateCyan: 'hsl(176, 50%, 47%)',
+        darkCyan: 'hsl(176, 72%, 28%)',
+        //### Neutral
+        black: 'hsl(0, 0%, 0%)',
+        darkGray: 'hsl(0, 0%, 48%)',
       },
     },
   },
