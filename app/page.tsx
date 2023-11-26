@@ -6,7 +6,7 @@ import '@fontsource/ubuntu';
 import '@fontsource/ubuntu/400.css';
 import '@fontsource/ubuntu/500.css';
 import '@fontsource/ubuntu/700.css';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import logo from './images/logo.svg';
 import editorDesktop from './images/illustration-editor-desktop.svg';
@@ -155,15 +155,26 @@ const FooterBlock = ({ header, list }: { header: string; list: string[] }) => {
 };
 
 export default function Home() {
+  useEffect(() => {
+    const handleResize = () => {
+      window.innerWidth >= 768 && setBurgerOpen(false);
+    };
+    window.addEventListener('resize', handleResize);
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
   const [clickedOn, setClickedOn] = useState<string>('');
   const [burgerOpen, setBurgerOpen] = useState<boolean>(false);
+
   return (
     <div className={`flex ${burgerOpen ? 'h-screen overflow-hidden' : 'min-h-screen'} flex-col items-center`}>
       <nav className="flex h-[37.5em] w-full justify-center rounded-bl-[6.5em] bg-gradient-to-br from-veryLightRed to-lightRed md:bg-gradient-to-r">
         <div
           className={`flex ${
             burgerOpen ? ' h-[37.5em]' : 'h-full'
-          }  w-screen flex-col rounded-bl-[6.5em] bg-[url('./images/bg-pattern-intro-mobile.svg')]  bg-[35%_45%] text-center md:bg-[url('./images/bg-pattern-intro-desktop.svg')] md:bg-[20.5%_52.1%] md:px-[2em] lg:bg-[23%_52.1%] lg:px-[6em] xl:bg-[25.4%_52.1%] xl:px-0 xl:pl-[10.5em] xl:pr-[11em]`}
+          } w-screen flex-col rounded-bl-[6.5em] bg-[url('./images/bg-pattern-intro-mobile.svg')] bg-[35%_45%]  text-center md:h-full md:bg-[url('./images/bg-pattern-intro-desktop.svg')] md:bg-[20.5%_52.1%] md:px-[2em] lg:bg-[23%_52.1%] lg:px-[6em] xl:bg-[25.4%_52.1%] xl:px-0 xl:pl-[10.5em] xl:pr-[11em]`}
         >
           {/*first row*/}
           <div className="mt-16 flex w-full items-start justify-between pl-[2em] md:gap-4 md:pl-0">
@@ -349,7 +360,7 @@ export default function Home() {
           </div>
         </div>
       </main>
-      <footer className="h-full w-full rounded-tr-[6.5em] bg-VeryDarkBlackBlueFooterBackground md:h-[22.5em]">
+      <footer className="h-full w-full rounded-tr-[6.5em] bg-VeryDarkBlackBlueFooterBackground">
         <div className="flex flex-col items-center justify-evenly gap-[4em] py-[5em] md:ml-[-2em] md:mt-[4.4em] md:flex-row md:items-start md:gap-0 md:pr-[9em] md:pt-0">
           <Image src={logo as string} className="mr-[-1em] h-fit" alt="logo" />
           <FooterBlock header="Product" list={product} />
