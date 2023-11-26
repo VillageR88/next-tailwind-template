@@ -23,7 +23,18 @@ export default function Home() {
       <main>
         <div className="flex flex-col gap-[1.6em]">
           {/*first block*/}
-          <div className="border-1 mt-[-5.67em] h-[16.7em] w-[45.5em] rounded-[0.5em] bg-white outline outline-1 outline-gray-100"></div>
+          <div className="border-1 mt-[-5.67em] flex h-[16.7em] w-[45.5em] flex-col items-center rounded-[0.5em] bg-white outline outline-1 outline-gray-100">
+            <span className="mt-[1.88em] text-[1.72rem] font-[700] tracking-[0.010em]">
+              Mastercraft Bamboo Monitor Riser
+            </span>
+            <span className="mt-[0.6em] font-[400] text-darkGray">
+              A beautiful & handcrafted monitor stand to reduce neck and eye strain.
+            </span>
+            <div className="flex w-full justify-between">
+              <button>Back this project</button>
+              <button>Bookmark</button>
+            </div>
+          </div>
           <div className="border-1 h-[60em] w-[45.5em] rounded-[0.5em] bg-white outline outline-1 outline-gray-100"></div>
         </div>
       </main>
