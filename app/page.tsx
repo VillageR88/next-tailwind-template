@@ -4,6 +4,7 @@ import '@fontsource/commissioner/500.css';
 import '@fontsource/commissioner/700.css';
 import Image from 'next/image';
 import logo from './images/logo.svg';
+import bookmark from './images/icon-bookmark.svg';
 
 export default function Home() {
   return (
@@ -34,7 +35,12 @@ export default function Home() {
               <button className="rounded-[1.8em] bg-moderateCyan px-[2.5em] py-[1em] text-[1rem] font-[500] text-white">
                 Back this project
               </button>
-              <button className="font-[700] text-darkGray">Bookmark</button>
+              <button>
+                <div className="flex items-center gap-[1em] rounded-[3em] bg-[#F4F4F4] pr-[1.5em]">
+                  <Image src={bookmark as string} alt="bookmark image" />
+                  <span className="font-[700] text-darkGray">Bookmark</span>
+                </div>
+              </button>
             </div>
           </div>
           <div className="border-1 h-[60em] w-[45.5em] rounded-[0.5em] bg-white outline outline-1 outline-gray-100"></div>
