@@ -30,9 +30,11 @@ export default function Home() {
             <span className="mt-[0.6em] font-[400] text-darkGray">
               A beautiful & handcrafted monitor stand to reduce neck and eye strain.
             </span>
-            <div className="flex w-full justify-between">
-              <button>Back this project</button>
-              <button>Bookmark</button>
+            <div className="mt-[2.38em] flex w-full justify-between pl-[3em] pr-[3em]">
+              <button className="rounded-[1.8em] bg-moderateCyan px-[2.5em] py-[1em] text-[1rem] font-[500] text-white">
+                Back this project
+              </button>
+              <button className="font-[700] text-darkGray">Bookmark</button>
             </div>
           </div>
           <div className="border-1 h-[60em] w-[45.5em] rounded-[0.5em] bg-white outline outline-1 outline-gray-100"></div>
