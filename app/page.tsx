@@ -305,7 +305,7 @@ export default function Home() {
             </div>
             {/*right col desktop only*/}
             <Image
-              className="hidden h-full md:mr-[-11em] md:flex md:w-[70%] lg:mr-[-15em] lg:w-[70%] xl:mr-[-17.2em] xl:w-auto "
+              className="hidden h-full md:mr-[-11em] md:flex md:w-[70%] lg:mr-[-15em] lg:w-[70%] xl:mr-[-17.2em] xl:w-[65%]"
               src={editorDesktop as string}
               alt="editor image"
             />
