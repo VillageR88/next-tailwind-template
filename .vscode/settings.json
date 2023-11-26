@@ -20,5 +20,6 @@
     "tailwindcss",
     "unoptimized",
     "webp"
-  ]
+  ],
+  "editor.inlineSuggest.showToolbar": "onHover"
 }
