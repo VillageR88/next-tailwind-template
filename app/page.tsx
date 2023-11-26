@@ -156,13 +156,18 @@ const FooterBlock = ({ header, list }: { header: string; list: string[] }) => {
 
 export default function Home() {
   const [clickedOn, setClickedOn] = useState<string>('');
+  const [burgerOpen, setBurgerOpen] = useState<boolean>(false);
   return (
-    <div className="flex min-h-screen flex-col items-center">
-      <nav className="flex h-[37.5em] w-full justify-center overflow-hidden rounded-bl-[6.5em] bg-gradient-to-br from-veryLightRed to-lightRed md:bg-gradient-to-r">
-        <div className="flex h-full w-full flex-col bg-[url('./images/bg-pattern-intro-mobile.svg')] bg-[35%_35%] text-center md:bg-[url('./images/bg-pattern-intro-desktop.svg')] md:bg-[20.5%_52.1%] md:px-[2em] lg:bg-[23%_52.1%] lg:px-[6em] xl:bg-[25.4%_52.1%] xl:px-0 xl:pl-[10.5em] xl:pr-[11em]">
+    <div className={`flex ${burgerOpen ? 'h-screen overflow-hidden' : 'min-h-screen'} flex-col items-center`}>
+      <nav className="flex h-[37.5em] w-full justify-center rounded-bl-[6.5em] bg-gradient-to-br from-veryLightRed to-lightRed md:bg-gradient-to-r">
+        <div
+          className={`flex ${
+            burgerOpen ? ' h-[37.5em]' : 'h-full'
+          }  w-screen flex-col rounded-bl-[6.5em] bg-[url('./images/bg-pattern-intro-mobile.svg')]  bg-[35%_45%] text-center md:bg-[url('./images/bg-pattern-intro-desktop.svg')] md:bg-[20.5%_52.1%] md:px-[2em] lg:bg-[23%_52.1%] lg:px-[6em] xl:bg-[25.4%_52.1%] xl:px-0 xl:pl-[10.5em] xl:pr-[11em]`}
+        >
           {/*first row*/}
           <div className="mt-16 flex w-full items-start justify-between pl-[2em] md:gap-4 md:pl-0">
-            <div className="items-center flex justify-between md:gap-[2rem] lg:gap-[4em]">
+            <div className="flex items-center justify-between md:gap-[2rem] lg:gap-[4em]">
               <Image src={logo as string} alt="Logo" priority />
               <div className="hidden justify-between gap-8 md:flex">
                 <ButtonWithArrowLight
@@ -199,12 +204,21 @@ export default function Home() {
               <ButtonTypeSignUpDesktop name="Sign Up" />
             </div>
             {/*right nav mobile*/}
-            <div className="absolute right-0 mt-[0.7em] md:mt-0 md:hidden ">
+            <div className={`absolute right-0 ${burgerOpen ? 'mt-[0.4em]' : 'mt-[0.7em]'} md:mt-0 md:hidden`}>
               <div className="flex w-screen flex-col items-end gap-[3em]">
-                <button className="mr-[2em]">
-                  <Image src={hamburger as string} alt="mobile navigation right side" />
+                <button
+                  onClick={() => {
+                    setBurgerOpen(!burgerOpen);
+                  }}
+                  className="mr-[2em]"
+                >
+                  <Image src={(!burgerOpen ? hamburger : close) as string} alt="mobile navigation right side" />
                 </button>
-                <div className="flex w-[85%] flex-col items-center gap-[1.3em] self-center rounded-[0.3em] bg-white py-[3em] shadow-xl">
+                <div
+                  className={`${
+                    burgerOpen ? 'flex' : 'hidden'
+                  } w-[85%] flex-col items-center gap-[1.3em] self-center rounded-[0.3em] bg-white py-[2em] shadow-xl`}
+                >
                   <ButtonWithArrowDark
                     clicked={clickedOn}
                     action={(value) => {
@@ -288,7 +302,7 @@ export default function Home() {
           {/*third row*/}
           <div className="flex h-0 items-center justify-center md:hidden">
             {/*phones image mobile*/}
-            <Image className="mt-[41em] z-10 h-auto w-auto " src={phones as string} alt="phones image" />
+            <Image className="z-10 mt-[41em] h-auto w-auto " src={phones as string} alt="phones image" />
           </div>
           <div className="mt-[20em] h-full w-full overflow-hidden rounded rounded-bl-[6em] rounded-tr-[6em] bg-gradient-to-b from-veryDarkGrayBlue to-veryDarkDesaturatedBlue md:mt-[3em] md:h-[25.1em] md:overflow-visible md:bg-gradient-to-r md:pb-0">
             <div className="h-full w-full bg-[url('./images/bg-pattern-circles.svg')] bg-cover bg-[-9em_-16em] bg-no-repeat md:justify-end md:bg-auto md:bg-[-22em_82%] lg:bg-[-13.2em_82%]">
@@ -314,10 +328,9 @@ export default function Home() {
               </div>
             </div>
           </div>
-         
           {/*fourth row*/}
           <div className="mt-[7em] flex items-center justify-center pb-[6em] md:pb-0">
-            <div className="ml-[-17em] hidden h-auto w-full md:flex">
+            <div className="ml-[-17.4em] hidden h-auto w-full md:flex">
               <Image src={laptopDesktop as string} alt="laptop image" />
             </div>
             <div className="flex w-[80%] flex-col items-center justify-center gap-[3em] md:w-[60%] md:gap-[4.5em] md:pr-[2em] lg:pr-[6em] xl:pr-[10em]">
