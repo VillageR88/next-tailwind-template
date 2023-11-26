@@ -48,8 +48,32 @@ export default function Home() {
             </div>
           </div>
           {/*second block*/}
-          <div className="border-1 h-[13.15em] w-[45.5em] rounded-[0.5em] bg-white outline outline-1 outline-gray-100"></div>
-          <div className="border-1 h-[60em] w-[45.5em] rounded-[0.5em] bg-white outline outline-1 outline-gray-100"></div>
+          <div className="border-1 flex h-[13.15em] w-full rounded-[0.5em] bg-white outline outline-1 outline-gray-100">
+            <div className="flex w-full flex-col justify-center">
+              <div className="flex h-fit w-full items-center justify-start">
+                <div className="flex min-w-[14em] flex-col content-center pl-[3em]">
+                  <span className="text-[2rem] font-[700]">$89,914</span>
+                  <span className="text-darkGray">of $100,000 backed</span>
+                </div>
+                <div className="flex items-center">
+                  <span className="h-[4em] w-[1px] bg-slate-300"></span>
+                  <div className="flex min-w-[14em] flex-col content-center pl-[3em]">
+                    <span className="text-[2rem] font-[700]">5,007</span>
+                    <span className="text-darkGray">total backers</span>
+                  </div>
+                </div>
+                <div className="flex items-center">
+                  <span className="h-[4em] w-[1px] bg-slate-300"></span>
+                  <div className="flex min-w-[14em] flex-col content-center pl-[3em]">
+                    <span className="text-[2rem] font-[700]">56</span>
+                    <span className="text-darkGray">days left</span>
+                  </div>{' '}
+                </div>
+              </div>
+              <span>LIVEBAR</span>
+            </div>
+          </div>
+          <div className="border-1 h-[40em] w-[45.5em] rounded-[0.5em] bg-white outline outline-1 outline-gray-100"></div>
         </div>
       </main>
     </div>
