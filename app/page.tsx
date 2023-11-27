@@ -12,12 +12,14 @@ import mastercraft from './images/logo-mastercraft.svg';
 
 const SingleBar = ({ value, target }: { value: number; target: number }) => {
   const progress = () => {
-    return (value / target) * 100;
+    return {
+      width: `${(value / target) * 100}%`,
+    };
   };
   return (
     <div className="h-full w-full px-[3em]">
       <div className="h-[0.8em] w-full rounded-full bg-[#F4F4F4]">
-        <div className={`h-full duration-500 ease-in-out w-[${progress()}%] rounded-full bg-moderateCyan`}></div>
+        <div className={`h-full rounded-full bg-moderateCyan  duration-500 ease-in-out`} style={progress()}></div>
       </div>
     </div>
   );
