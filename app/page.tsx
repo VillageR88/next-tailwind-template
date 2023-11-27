@@ -42,7 +42,7 @@ export default function Home() {
     backed: number;
     backers: number;
   }
-  const [backed, setBacked] = useState<number>();
+  const [backed, setBacked] = useState<number | undefined>();
   const [backers, setBackers] = useState<number>();
   const formattedNumber = (value: number) =>
     value.toLocaleString('en-US', {
@@ -124,7 +124,7 @@ export default function Home() {
                 </div>
               </div>
               <div className="flex justify-center">
-                <SingleBar value={backed} target={100000} />
+                <SingleBar value={backed ?? 0} target={100000} />
               </div>
             </div>
           </div>
