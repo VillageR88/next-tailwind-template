@@ -8,6 +8,7 @@ import { ThreeDots } from 'react-loader-spinner';
 import Image from 'next/image';
 import logo from './images/logo.svg';
 import bookmark from './images/icon-bookmark.svg';
+import bookmarkClicked from './images/icon-bookmarked.svg';
 import mastercraft from './images/logo-mastercraft.svg';
 
 const SingleBar = ({ value, target }: { value: number; target: number }) => {
@@ -70,7 +71,7 @@ const Pledge = ({
           {value !== undefined ? (
             <button
               className={`${
-                value > 0 ? 'bg-moderateCyan' : 'bg-darkGray'
+                value > 0 ? 'bg-moderateCyan hover:bg-darkCyan' : 'bg-darkGray'
               } w-[11.5em] rounded-[2em] py-[0.9em] text-[0.85em] font-[500] tracking-[0.035em] text-white`}
             >
               {value > 0 ? 'Select Reward' : 'Out of stock'}
@@ -99,6 +100,7 @@ export default function Home() {
   const [bamboo, setBamboo] = useState<number>();
   const [blackEdition, setBlackEdition] = useState<number>();
   const [mahogany, setMahogany] = useState<number>();
+  const [bookmarked, setBookmarked] = useState<boolean>(false);
   const formattedNumber = (value: number) =>
     value.toLocaleString('en-US', {
       style: 'decimal',
@@ -127,9 +129,9 @@ export default function Home() {
           <div className="flex h-[8.05em] items-end justify-between bg-gradient-to-b from-customDark from-5% to-transparent to-100% pb-[3.8em] pl-[10.4em] pr-[10.3em]">
             <Image className="h-fit" src={logo as string} alt="logo image" />
             <div className="flex gap-[2.44em] text-[0.83rem] text-gray-50">
-              <button>About</button>
-              <button>Discover</button>
-              <button>Get Started</button>
+              <button className="decoration-darkGray decoration-1 hover:underline">About</button>
+              <button className="decoration-darkGray decoration-1 hover:underline">Discover</button>
+              <button className="decoration-darkGray decoration-1 hover:underline">Get Started</button>
             </div>
           </div>
         </div>
@@ -148,13 +150,20 @@ export default function Home() {
               A beautiful & handcrafted monitor stand to reduce neck and eye strain.
             </span>
             <div className="mt-[2.38em] flex w-full justify-between pl-[3em] pr-[3em]">
-              <button className="rounded-[1.8em] bg-moderateCyan px-[2.5em] py-[1em] text-[1rem] font-[500] text-white">
+              <button className="rounded-[1.8em] bg-moderateCyan px-[2.5em] py-[1em] text-[1rem] font-[500] text-white hover:bg-darkCyan">
                 Back this project
               </button>
-              <button>
+              <button
+                onClick={() => {
+                  setBookmarked(!bookmarked);
+                }}
+                className="hover:opacity-80"
+              >
                 <div className="flex items-center gap-[1em] rounded-[3em] bg-[#F4F4F4] pr-[1.5em]">
-                  <Image src={bookmark as string} alt="bookmark image" />
-                  <span className="font-[700] text-darkGray">Bookmark</span>
+                  <Image src={(!bookmarked ? bookmark : bookmarkClicked) as string} alt="bookmark image" />
+                  <span className={`font-[700] ${!bookmarked ? 'text-darkGray' : 'text-darkCyan'}`}>
+                    {!bookmarked ? 'Bookmark' : 'Bookmarked'}
+                  </span>
                 </div>
               </button>
             </div>
