@@ -7,12 +7,12 @@ import Image from 'next/image';
 import logo from './images/logo.svg';
 import bookmark from './images/icon-bookmark.svg';
 import mastercraft from './images/logo-mastercraft.svg';
+import { useState } from 'react';
 
 const SingleBar = ({ value, target }: { value: number; target: number }) => {
   const progress = () => {
     return (value / target) * 100;
   };
-  console.log(progress());
   return (
     <div className="h-full w-full px-[3em]">
       <div className="h-[0.8em] w-full rounded-full bg-[#F4F4F4]">
@@ -23,10 +23,18 @@ const SingleBar = ({ value, target }: { value: number; target: number }) => {
 };
 
 export default function Home() {
+  const [backed, setBacket] = useState<number>(89914);
+  const [backers, setBackers] = useState<number>(5007);
+  const formattedNumber = (value: number) =>
+    value.toLocaleString('en-US', {
+      style: 'decimal',
+      maximumFractionDigits: 0,
+    });
+
   return (
     <div className="flex min-h-screen flex-col items-center justify-start font-commissioner">
       <nav className="h-full w-full">
-        <div className="h-[25em] w-full  bg-[url('./images/image-hero-desktop.jpg')]">
+        <div className="h-[25em] w-full bg-[url('./images/image-hero-desktop.jpg')]">
           <div className="flex h-[8.05em] items-end justify-between bg-gradient-to-b from-customDark from-5% to-transparent to-100% pb-[3.8em] pl-[10.4em] pr-[10.3em]">
             <Image className="h-fit" src={logo as string} alt="logo image" />
             <div className="flex gap-[2.44em] text-[0.83rem] text-gray-50">
@@ -67,20 +75,20 @@ export default function Home() {
             <div className="flex w-full flex-col justify-center gap-[2em]">
               <div className="flex h-fit w-full items-center justify-start">
                 <div className="flex min-w-[14em] flex-col content-center pl-[3em]">
-                  <span className="text-[2rem] font-[700]">$89,914</span>
+                  <span className="text-[2rem] font-[700]">${formattedNumber(backed)}</span>
                   <span className="text-darkGray">of $100,000 backed</span>
                 </div>
                 <div className="flex items-center">
                   <span className="h-[4em] w-[1px] bg-slate-300"></span>
                   <div className="flex min-w-[14em] flex-col content-center pl-[3em]">
-                    <span className="text-[2rem] font-[700]">5,007</span>
+                    <span className="text-[2rem] font-[700]">{formattedNumber(backers)}</span>
                     <span className="text-darkGray">total backers</span>
                   </div>
                 </div>
                 <div className="flex items-center">
                   <span className="h-[4em] w-[1px] bg-slate-300"></span>
                   <div className="flex min-w-[14em] flex-col content-center pl-[3em]">
-                    <span className="text-[2rem] font-[700]">56</span>
+                    <span className="text-[2rem] font-[700]">{56}</span>
                     <span className="text-darkGray">days left</span>
                   </div>
                 </div>
