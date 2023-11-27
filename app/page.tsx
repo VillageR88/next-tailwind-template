@@ -7,7 +7,7 @@ import Image from 'next/image';
 import logo from './images/logo.svg';
 import bookmark from './images/icon-bookmark.svg';
 import mastercraft from './images/logo-mastercraft.svg';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 const SingleBar = ({ value, target }: { value: number; target: number }) => {
   const progress = () => {
@@ -16,20 +16,33 @@ const SingleBar = ({ value, target }: { value: number; target: number }) => {
   return (
     <div className="h-full w-full px-[3em]">
       <div className="h-[0.8em] w-full rounded-full bg-[#F4F4F4]">
-        <div className={`h-full w-[${progress()}%] rounded-full bg-moderateCyan`}></div>
+        <div className={`h-full duration-500 ease-in-out w-[${progress()}%] rounded-full bg-moderateCyan`}></div>
       </div>
     </div>
   );
 };
 
 export default function Home() {
-  const [backed, setBacket] = useState<number>(89914);
-  const [backers, setBackers] = useState<number>(5007);
+  const [data, setData] = useState<JSON>();
+  const [backed, setBacked] = useState<number>(0);
+  const [backers, setBackers] = useState<number>(0);
   const formattedNumber = (value: number) =>
     value.toLocaleString('en-US', {
       style: 'decimal',
       maximumFractionDigits: 0,
     });
+  useEffect(() => {
+    fetch('./data.json')
+      .then((response) => response.json())
+      .then((data) => {
+        setData(data as JSON);
+        setBacked(data.backed);
+        setBackers(data.backers);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }, []);
 
   return (
     <div className="flex min-h-screen flex-col items-center justify-start font-commissioner">
@@ -94,7 +107,7 @@ export default function Home() {
                 </div>
               </div>
               <div className="flex justify-center">
-                <SingleBar value={89000} target={100000} />
+                <SingleBar value={backed} target={100000} />
               </div>
             </div>
           </div>
