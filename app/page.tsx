@@ -23,7 +23,10 @@ const SingleBar = ({ value, target }: { value: number; target: number }) => {
 };
 
 export default function Home() {
-  const [data, setData] = useState<JSON>();
+  interface DataJSON {
+    backed: number;
+    backers: number;
+  }
   const [backed, setBacked] = useState<number>(0);
   const [backers, setBackers] = useState<number>(0);
   const formattedNumber = (value: number) =>
@@ -34,10 +37,9 @@ export default function Home() {
   useEffect(() => {
     fetch('./data.json')
       .then((response) => response.json())
-      .then((data) => {
-        setData(data as JSON);
-        setBacked(data.backed);
-        setBackers(data.backers);
+      .then((fetchedData: DataJSON) => {
+        setBacked(fetchedData.backed);
+        setBackers(fetchedData.backers);
       })
       .catch((error) => {
         console.error(error);
