@@ -51,8 +51,12 @@ const Pledge = ({ header, main, value, pledge }: { header: string; main: string;
             <span className="text-[2rem] font-[700]">{value}</span>
             <span className="text-darkGray">left</span>
           </div>
-          <button className="rounded-[2em] bg-moderateCyan px-[2.25em] py-[0.9em] text-[0.85em] font-[500] tracking-[0.035em] text-white">
-            Select Reward
+          <button
+            className={`${
+              value > 0 ? 'bg-moderateCyan' : 'bg-darkGray'
+            } rounded-[2em] bg-moderateCyan px-[2.25em] py-[0.9em] text-[0.85em] font-[500] tracking-[0.035em] text-white`}
+          >
+            {value > 0 ? 'Select Reward' : 'Out of stock'}
           </button>
         </div>
       </div>
@@ -85,7 +89,7 @@ export default function Home() {
   }, []);
 
   return (
-    <div className="flex min-h-screen flex-col items-center justify-start font-commissioner">
+    <div className="flex min-h-screen flex-col items-center justify-start pb-[8em] font-commissioner">
       <nav className="h-full w-full">
         <div className="h-[25em] w-full bg-[url('./images/image-hero-desktop.jpg')]">
           <div className="flex h-[8.05em] items-end justify-between bg-gradient-to-b from-customDark from-5% to-transparent to-100% pb-[3.8em] pl-[10.4em] pr-[10.3em]">
@@ -151,7 +155,7 @@ export default function Home() {
               </div>
             </div>
           </div>
-          <div className="border-1 h-[60em] w-[45.5em] rounded-[0.5em] bg-white px-[3em] pt-[2.8em] outline outline-1 outline-gray-100">
+          <div className="border-1 h-full w-[45.5em] rounded-[0.5em] bg-white px-[3em] pb-[3em] pt-[2.8em] outline outline-1 outline-gray-100">
             <div className="flex flex-col gap-[1.98em]">
               <span className="text-[1.25rem] font-[700]">About this project</span>
               <span className="leading-[1.85em] text-darkGray">
@@ -177,6 +181,13 @@ export default function Home() {
                   member list. Shipping is included."
                   value={64}
                   pledge={75}
+                />
+                <Pledge
+                  header="Mahogany Special Edition"
+                  main="You get two Special Edition Mahogany stands, a Backer T-Shirt, and a personal thank you. You’ll be added 
+                  to our Backer member list. Shipping is included."
+                  value={0}
+                  pledge={200}
                 />
               </div>
             </div>
