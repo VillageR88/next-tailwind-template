@@ -7,6 +7,7 @@ import Image from 'next/image';
 import logo from './images/logo.svg';
 import bookmark from './images/icon-bookmark.svg';
 import mastercraft from './images/logo-mastercraft.svg';
+import { ThreeDots } from 'react-loader-spinner';
 import { useEffect, useState } from 'react';
 
 const SingleBar = ({ value, target }: { value: number; target: number }) => {
@@ -22,13 +23,27 @@ const SingleBar = ({ value, target }: { value: number; target: number }) => {
   );
 };
 
+const Loader = () => (
+  <div className="flex justify-center">
+    <ThreeDots
+      height="40"
+      width="40"
+      radius="9"
+      color="#3CB4AC"
+      ariaLabel="three-dots-loading"
+      wrapperStyle={{}}
+      visible={true}
+    />
+  </div>
+);
+
 export default function Home() {
   interface DataJSON {
     backed: number;
     backers: number;
   }
-  const [backed, setBacked] = useState<number>(0);
-  const [backers, setBackers] = useState<number>(0);
+  const [backed, setBacked] = useState<number>();
+  const [backers, setBackers] = useState<number>();
   const formattedNumber = (value: number) =>
     value.toLocaleString('en-US', {
       style: 'decimal',
@@ -90,13 +105,13 @@ export default function Home() {
             <div className="flex w-full flex-col justify-center gap-[2em]">
               <div className="flex h-fit w-full items-center justify-start">
                 <div className="flex min-w-[14em] flex-col content-center pl-[3em]">
-                  <span className="text-[2rem] font-[700]">${formattedNumber(backed)}</span>
+                  {backed ? <span className="text-[2rem] font-[700]">${formattedNumber(backed)}</span> : <Loader />}
                   <span className="text-darkGray">of $100,000 backed</span>
                 </div>
                 <div className="flex items-center">
                   <span className="h-[4em] w-[1px] bg-slate-300"></span>
                   <div className="flex min-w-[14em] flex-col content-center pl-[3em]">
-                    <span className="text-[2rem] font-[700]">{formattedNumber(backers)}</span>
+                    {backers ? <span className="text-[2rem] font-[700]">${formattedNumber(backers)}</span> : <Loader />}
                     <span className="text-darkGray">total backers</span>
                   </div>
                 </div>
