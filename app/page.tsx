@@ -37,24 +37,21 @@ const Loader = () => {
   );
 };
 
-const Pledge = () => {
+const Pledge = ({ header, main, value, pledge }: { header: string; main: string; value: number; pledge: number }) => {
   return (
     <div className="h-[15.35em] w-full rounded-[0.5em] outline outline-1 outline-slate-300">
       <div className="flex h-full flex-col justify-between px-[2em] pb-[2em]  pt-[2em]">
         <div className="flex justify-between">
-          <span className="text-[1.14rem] font-[700]">Bamboo Stand</span>
-          <span className="text-[0.95em] font-[500] text-moderateCyan">Pledge $25 or more</span>
+          <span className="text-[1.14rem] font-[700]">{header}</span>
+          <span className="mt-[0.3em] text-[0.95em] font-[500] text-moderateCyan">Pledge ${pledge} or more</span>
         </div>
-        <span className="leading-[1.8em] text-darkGray">
-          You get an ergonomic stand made of natural bamboo. You've helped us launch our promotional campaign, and
-          you’ll be added to a special Backer member list.
-        </span>
+        <span className="leading-[1.85em] text-darkGray">{main}</span>
         <div className="flex justify-between">
-          <div>
-            <span className="text-[2rem] font-[700]">101</span>
+          <div className="flex items-center gap-[0.6em] text-[0.95rem] font-[400]">
+            <span className="text-[2rem] font-[700]">{value}</span>
             <span className="text-darkGray">left</span>
           </div>
-          <button className="rounded-[2em] bg-moderateCyan px-[2.2em] py-[0.9em] text-[0.9em] text-white">
+          <button className="rounded-[2em] bg-moderateCyan px-[2.25em] py-[0.9em] text-[0.85em] font-[500] tracking-[0.035em] text-white">
             Select Reward
           </button>
         </div>
@@ -167,7 +164,13 @@ export default function Home() {
                 to allow notepads, pens, and USB sticks to be stored under the stand.
               </span>
               <div className="mt-[0.75em]">
-                <Pledge />
+                <Pledge
+                  header="Bamboo Stand"
+                  main="You get an ergonomic stand made of natural bamboo. You've helped us launch our promotional campaign, and
+          you’ll be added to a special Backer member list."
+                  value={101}
+                  pledge={25}
+                />
               </div>
             </div>
           </div>
