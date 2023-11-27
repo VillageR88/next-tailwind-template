@@ -7,65 +7,27 @@ import Image from 'next/image';
 import logo from './images/logo.svg';
 import bookmark from './images/icon-bookmark.svg';
 import mastercraft from './images/logo-mastercraft.svg';
-import Chart, { ChartConfiguration } from 'chart.js/auto';
-import { useEffect } from 'react';
+
+const SingleBar = ({ value, target }: { value: number; target: number }) => {
+  const progress = () => {
+    return (value / target) * 100;
+  };
+  console.log(progress());
+  return (
+    <div className="h-full w-full px-[3em]">
+      <div className="h-[0.8em] w-full rounded-full bg-[#F4F4F4]">
+        <div className={`h-full w-[${progress()}%] rounded-full bg-moderateCyan`}></div>
+      </div>
+    </div>
+  );
+};
 
 export default function Home() {
-  useEffect(() => {
-    const canvas = document.getElementById('myChart') as HTMLCanvasElement | null;
-    if (!canvas) return;
-
-    const ctx = canvas.getContext('2d');
-
-    if (!ctx) return;
-
-    const config: ChartConfiguration = {
-      type: 'bar',
-      data: {
-        labels: [''],
-        datasets: [
-          {
-            label: '',
-            data: [10],
-            backgroundColor: 'rgb(75, 192, 192)',
-          },
-        ],
-      },
-      options: {
-        indexAxis: 'y',
-        elements: {},
-        responsive: true,
-        maintainAspectRatio: false,
-
-        scales: {
-          x: {
-            display: false, // Hide x-axis labels
-          },
-          y: {
-            display: false, // Hide y-axis labels
-          },
-        },
-        plugins: {
-          legend: {
-            display: false,
-          },
-        },
-      },
-    };
-
-    const myChart = new Chart(ctx, config);
-
-    // Cleanup chart on component unmount
-    return () => {
-      myChart.destroy();
-    };
-  }, []); // Ensure useEffect runs only once on component mount
-
   return (
     <div className="flex min-h-screen flex-col items-center justify-start font-commissioner">
       <nav className="h-full w-full">
         <div className="h-[25em] w-full  bg-[url('./images/image-hero-desktop.jpg')]">
-          <div className="from-customDark flex h-[8.05em] items-end justify-between bg-gradient-to-b from-5% to-transparent to-100% pb-[3.8em] pl-[10.4em] pr-[10.3em]">
+          <div className="flex h-[8.05em] items-end justify-between bg-gradient-to-b from-customDark from-5% to-transparent to-100% pb-[3.8em] pl-[10.4em] pr-[10.3em]">
             <Image className="h-fit" src={logo as string} alt="logo image" />
             <div className="flex gap-[2.44em] text-[0.83rem] text-gray-50">
               <button>About</button>
@@ -123,8 +85,8 @@ export default function Home() {
                   </div>
                 </div>
               </div>
-              <div className="px-[3em]" style={{ height: '17px' }}>
-                <canvas id="myChart" className="rounded-[4em]" width="400" height="200"></canvas>
+              <div className="flex justify-center">
+                <SingleBar value={89000} target={100000} />
               </div>
             </div>
           </div>
