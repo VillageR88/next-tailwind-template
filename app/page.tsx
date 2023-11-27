@@ -72,9 +72,11 @@ export default function Home() {
   interface DataJSON {
     backed: number;
     backers: number;
+    daysLeft: number;
   }
-  const [backed, setBacked] = useState<number | undefined>();
+  const [backed, setBacked] = useState<number>();
   const [backers, setBackers] = useState<number>();
+  const [days, setDays] = useState<number>();
   const formattedNumber = (value: number) =>
     value.toLocaleString('en-US', {
       style: 'decimal',
@@ -86,6 +88,7 @@ export default function Home() {
       .then((fetchedData: DataJSON) => {
         setBacked(fetchedData.backed);
         setBackers(fetchedData.backers);
+        setDays(fetchedData.daysLeft);
       })
       .catch((error) => {
         console.error(error);
@@ -149,7 +152,7 @@ export default function Home() {
                 <div className="flex items-center">
                   <span className="h-[4em] w-[1px] bg-slate-300"></span>
                   <div className="flex min-w-[14em] flex-col content-center pl-[3em]">
-                    <span className="text-[2rem] font-[700]">{56}</span>
+                    {days ? <span className="text-[2rem] font-[700]">{days}</span> : <Loader />}
                     <span className="text-darkGray">days left</span>
                   </div>
                 </div>
