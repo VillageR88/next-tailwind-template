@@ -37,7 +37,17 @@ const Loader = () => {
   );
 };
 
-const Pledge = ({ header, main, value, pledge }: { header: string; main: string; value: number; pledge: number }) => {
+const Pledge = ({
+  header,
+  main,
+  value,
+  pledge,
+}: {
+  header: string;
+  main: string;
+  value: number | undefined;
+  pledge: number;
+}) => {
   return (
     <div
       className={`${
@@ -52,16 +62,20 @@ const Pledge = ({ header, main, value, pledge }: { header: string; main: string;
         <span className="leading-[1.85em] text-darkGray">{main}</span>
         <div className="flex justify-between">
           <div className="flex items-center gap-[0.6em] text-[0.95rem] font-[400]">
-            <span className="text-[2rem] font-[700]">{value}</span>
+            {value !== undefined ? <span className="text-[2rem] font-[700]">{value}</span> : <Loader />}
             <span className="text-darkGray">left</span>
           </div>
-          <button
-            className={`${
-              value > 0 ? 'bg-moderateCyan' : 'bg-darkGray'
-            } w-[11.5em] rounded-[2em] bg-moderateCyan py-[0.9em] text-[0.85em] font-[500] tracking-[0.035em] text-white`}
-          >
-            {value > 0 ? 'Select Reward' : 'Out of stock'}
-          </button>
+          {value !== undefined ? (
+            <button
+              className={`${
+                value > 0 ? 'bg-moderateCyan' : 'bg-darkGray'
+              } w-[11.5em] rounded-[2em] bg-moderateCyan py-[0.9em] text-[0.85em] font-[500] tracking-[0.035em] text-white`}
+            >
+              {value > 0 ? 'Select Reward' : 'Out of stock'}
+            </button>
+          ) : (
+            <Loader />
+          )}
         </div>
       </div>
     </div>
