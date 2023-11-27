@@ -163,13 +163,20 @@ export default function Home() {
                 Featuring artisan craftsmanship, the simplicity of design creates extra desk space below your computer
                 to allow notepads, pens, and USB sticks to be stored under the stand.
               </span>
-              <div className="mt-[0.75em]">
+              <div className="mt-[0.75em] flex flex-col gap-[1.6em]">
                 <Pledge
                   header="Bamboo Stand"
                   main="You get an ergonomic stand made of natural bamboo. You've helped us launch our promotional campaign, and
           you’ll be added to a special Backer member list."
                   value={101}
                   pledge={25}
+                />
+                <Pledge
+                  header="Black Edition Stand"
+                  main="You get a Black Special Edition computer stand and a personal thank you. You’ll be added to our Backer 
+                  member list. Shipping is included."
+                  value={64}
+                  pledge={75}
                 />
               </div>
             </div>
