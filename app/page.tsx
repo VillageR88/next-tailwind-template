@@ -19,7 +19,7 @@ const SingleBar = ({ value, target }: { value: number; target: number }) => {
   return (
     <div className="h-full w-full px-[3em]">
       <div className="h-[0.8em] w-full rounded-full bg-[#F4F4F4]">
-        <div className={`h-full rounded-full bg-moderateCyan  duration-500 ease-in-out`} style={progress()}></div>
+        <div className={`h-full rounded-full bg-moderateCyan duration-500 ease-in-out`} style={progress()}></div>
       </div>
     </div>
   );
@@ -71,7 +71,7 @@ const Pledge = ({
             <button
               className={`${
                 value > 0 ? 'bg-moderateCyan' : 'bg-darkGray'
-              } w-[11.5em] rounded-[2em] bg-moderateCyan py-[0.9em] text-[0.85em] font-[500] tracking-[0.035em] text-white`}
+              } w-[11.5em] rounded-[2em] py-[0.9em] text-[0.85em] font-[500] tracking-[0.035em] text-white`}
             >
               {value > 0 ? 'Select Reward' : 'Out of stock'}
             </button>
