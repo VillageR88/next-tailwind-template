@@ -73,10 +73,16 @@ export default function Home() {
     backed: number;
     backers: number;
     daysLeft: number;
+    bamboo: number;
+    blackEdition: number;
+    mahogany: number;
   }
   const [backed, setBacked] = useState<number>();
   const [backers, setBackers] = useState<number>();
-  const [days, setDays] = useState<number>();
+  const [daysLeft, setDaysLeft] = useState<number>();
+  const [bamboo, setBamboo] = useState<number>();
+  const [blackEdition, setBlackEdition] = useState<number>();
+  const [mahogany, setMahogany] = useState<number>();
   const formattedNumber = (value: number) =>
     value.toLocaleString('en-US', {
       style: 'decimal',
@@ -88,7 +94,10 @@ export default function Home() {
       .then((fetchedData: DataJSON) => {
         setBacked(fetchedData.backed);
         setBackers(fetchedData.backers);
-        setDays(fetchedData.daysLeft);
+        setDaysLeft(fetchedData.daysLeft);
+        setBamboo(fetchedData.bamboo);
+        setBlackEdition(fetchedData.blackEdition);
+        setMahogany(fetchedData.mahogany);
       })
       .catch((error) => {
         console.error(error);
@@ -152,7 +161,7 @@ export default function Home() {
                 <div className="flex items-center">
                   <span className="h-[4em] w-[1px] bg-slate-300"></span>
                   <div className="flex min-w-[14em] flex-col content-center pl-[3em]">
-                    {days ? <span className="text-[2rem] font-[700]">{days}</span> : <Loader />}
+                    {daysLeft ? <span className="text-[2rem] font-[700]">{daysLeft}</span> : <Loader />}
                     <span className="text-darkGray">days left</span>
                   </div>
                 </div>
@@ -179,21 +188,21 @@ export default function Home() {
                   header="Bamboo Stand"
                   main="You get an ergonomic stand made of natural bamboo. You've helped us launch our promotional campaign, and
           you’ll be added to a special Backer member list."
-                  value={101}
+                  value={bamboo}
                   pledge={25}
                 />
                 <Pledge
                   header="Black Edition Stand"
                   main="You get a Black Special Edition computer stand and a personal thank you. You’ll be added to our Backer 
                   member list. Shipping is included."
-                  value={64}
+                  value={blackEdition}
                   pledge={75}
                 />
                 <Pledge
                   header="Mahogany Special Edition"
                   main="You get two Special Edition Mahogany stands, a Backer T-Shirt, and a personal thank you. You’ll be added 
                   to our Backer member list. Shipping is included."
-                  value={0}
+                  value={mahogany}
                   pledge={200}
                 />
               </div>
