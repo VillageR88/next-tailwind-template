@@ -56,11 +56,13 @@ const Pledge = ({
   main,
   value,
   pledge,
+  action,
 }: {
   header: string;
   main: string;
   value: number | undefined;
   pledge: number;
+  action(): undefined;
 }) => {
   return (
     <div
@@ -81,6 +83,9 @@ const Pledge = ({
           </div>
           {value !== undefined ? (
             <button
+              onClick={() => {
+                value !== 0 && action();
+              }}
               className={`${
                 value > 0 ? 'bg-moderateCyan hover:bg-darkCyan' : 'bg-darkGray'
               } w-[11.5em] rounded-[2em] py-[0.9em] text-[0.85em] font-[500] tracking-[0.035em] text-white`}
@@ -383,6 +388,9 @@ export default function Home() {
           you’ll be added to a special Backer member list."
                   value={bamboo}
                   pledge={25}
+                  action={() => {
+                    setModal(BookmarkStates.bambooStand);
+                  }}
                 />
                 <Pledge
                   header="Black Edition Stand"
@@ -390,6 +398,9 @@ export default function Home() {
                   member list. Shipping is included."
                   value={blackEdition}
                   pledge={75}
+                  action={() => {
+                    setModal(BookmarkStates.blackEditionStand);
+                  }}
                 />
                 <Pledge
                   header="Mahogany Special Edition"
@@ -397,6 +408,9 @@ export default function Home() {
                   to our Backer member list. Shipping is included."
                   value={mahogany}
                   pledge={200}
+                  action={() => {
+                    setModal(BookmarkStates.mahoganySpecialEdition);
+                  }}
                 />
               </div>
             </div>
