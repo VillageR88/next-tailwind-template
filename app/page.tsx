@@ -122,9 +122,9 @@ const PledgeModal = ({
   const [hover, setHover] = useState<boolean>(false);
   return (
     <div
-      className={`${amount === 0 && 'opacity-50'} flex h-[9.82em] justify-start gap-[1.4em] rounded-[0.5em] ${
+      className={`${amount === 0 && 'opacity-50'} flex h-full justify-start gap-[1.4em] rounded-[0.5em] ${
         clicked ? 'border-2 border-moderateCyan' : ' border border-y-2 border-[#ECECEC] border-x-gray-300'
-      } pb-[1.9em] pl-[1.65em] pr-[1.63em] pt-[1.7em] tracking-[-0.004em]`}
+      } pb-[1.83em] pl-[1.65em] pr-[1.63em] pt-[1.83em] tracking-[-0.004em]`}
     >
       <button
         onMouseEnter={() => {
@@ -142,7 +142,7 @@ const PledgeModal = ({
       >
         {clicked && <div className="absolute h-3 w-3 rounded-full bg-moderateCyan"></div>}
       </button>
-      <div className="flex h-full w-full flex-col items-start justify-between">
+      <div className="flex h-full w-full flex-col items-start justify-between gap-[0.95em]">
         <div className="flex w-full items-center justify-between">
           <div className="flex gap-[1.1em]">
             <button
@@ -203,7 +203,6 @@ export default function Home() {
   }
   const [modal, setModal] = useState<BookmarkStates>(BookmarkStates.none);
   const [hoverModalExitButton, setHoverModalExitButton] = useState<boolean>(false);
-  console.log(modal);
   const [backed, setBacked] = useState<number>();
   const [backers, setBackers] = useState<number>();
   const [daysLeft, setDaysLeft] = useState<number>();
@@ -262,7 +261,7 @@ export default function Home() {
         <span className="mb-[2.1em] mt-[1em] text-darkGray">
           Want to support us in bringing Mastercraft Bamboo Monitor Riser out in the world?
         </span>
-        <div className="flex flex-col gap-[1.5em]">
+        <div className="flex flex-col gap-[1.34em]">
           <PledgeModal
             header="Pledge with no reward"
             main="Choose to support us without a reward if you simply believe in our project. As a backer, you will be signed up
