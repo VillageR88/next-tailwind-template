@@ -197,7 +197,7 @@ export default function Home() {
       <div
         className={`${
           modal === BookmarkStates.none ? 'hidden' : 'flex'
-        } absolute z-30 mt-[11.5em] flex h-[56.55em] w-[45.6em] flex-col rounded-[0.5em] bg-white px-[3em] pt-[2.9em]`}
+        } absolute z-30 mt-[11.5em] flex h-fit w-[45.6em] flex-col rounded-[0.5em] bg-white px-[3em] pb-[3em] pt-[2.9em]`}
       >
         <button
           onClick={() => {
