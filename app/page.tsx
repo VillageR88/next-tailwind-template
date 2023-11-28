@@ -175,8 +175,17 @@ const PledgeModal = ({
 };
 
 function topFunction(value: number) {
-  document.body.scrollTop = value; // For Safari
-  document.documentElement.scrollTop = value; // For Chrome, Firefox, IE and Opera
+  // For modern browsers (Chrome, Firefox, Safari, Edge)
+  if ('scrollBehavior' in document.documentElement.style) {
+    window.scrollTo({
+      top: value,
+      behavior: 'smooth',
+    });
+  } else {
+    // For older browsers that don't support smooth scrolling
+    document.body.scrollTop = value;
+    document.documentElement.scrollTop = value;
+  }
 }
 
 export default function Home() {
