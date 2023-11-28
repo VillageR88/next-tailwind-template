@@ -122,9 +122,9 @@ const PledgeModal = ({
   const [hover, setHover] = useState<boolean>(false);
   return (
     <div
-      className={`${
-        amount === 0 && 'opacity-50'
-      } flex h-[9.82em] justify-start gap-[1.4em] rounded-[0.5em] border border-y-2 border-[#ECECEC] border-x-gray-300 pb-[1.9em] pl-[1.65em] pr-[1.63em] pt-[1.7em] tracking-[-0.004em]`}
+      className={`${amount === 0 && 'opacity-50'} flex h-[9.82em] justify-start gap-[1.4em] rounded-[0.5em] ${
+        clicked ? 'border-2 border-moderateCyan' : ' border border-y-2 border-[#ECECEC] border-x-gray-300'
+      } pb-[1.9em] pl-[1.65em] pr-[1.63em] pt-[1.7em] tracking-[-0.004em]`}
     >
       <button
         onMouseEnter={() => {
@@ -159,7 +159,11 @@ const PledgeModal = ({
             >
               {header}
             </button>
-            {pledge && <span className="font-[500] text-moderateCyan">Pledge ${pledge} or more</span>}
+            {pledge && (
+              <span className={`${clicked ? 'font-[700]' : 'font-[500]'} text-moderateCyan`}>
+                Pledge ${pledge} or more
+              </span>
+            )}
           </div>
           {amount !== undefined && (
             <div className="flex items-center gap-[0.5em]">
