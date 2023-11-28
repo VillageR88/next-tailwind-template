@@ -102,12 +102,14 @@ const PledgeModal = ({
   pledge,
   amount,
   action,
+  clicked,
 }: {
   header: string;
   main: string;
   pledge?: number;
   amount?: number;
   action(): undefined;
+  clicked: boolean;
 }) => {
   const [hover, setHover] = useState<boolean>(false);
   return (
@@ -128,8 +130,10 @@ const PledgeModal = ({
         }}
         className={`${
           amount !== 0 && hover ? 'border-moderateCyan' : 'border-[#ECECEC]'
-        } mt-[0.2em] h-fit w-fit rounded-full border-[0.13em]  p-[0.65em]`}
-      ></button>
+        } mt-[0.2em] flex h-fit w-fit items-center justify-center rounded-full border-[0.13em] px-[0.62em] py-[0.62em]`}
+      >
+        {clicked && <div className="absolute h-3 w-3 rounded-full bg-moderateCyan"></div>}
+      </button>
       <div className="flex h-full w-full flex-col items-start justify-between">
         <div className="flex w-full items-center justify-between">
           <div className="flex gap-[1.1em]">
@@ -240,6 +244,7 @@ export default function Home() {
             action={() => {
               setModal(BookmarkStates.pledgeWithNoReward);
             }}
+            clicked={modal === BookmarkStates.pledgeWithNoReward ? true : false}
           />
           <PledgeModal
             header="Bamboo Stand"
@@ -250,6 +255,7 @@ export default function Home() {
             action={() => {
               setModal(BookmarkStates.bambooStand);
             }}
+            clicked={modal === BookmarkStates.bambooStand ? true : false}
           />
           <PledgeModal
             header="Black Edition Stand"
@@ -261,6 +267,7 @@ export default function Home() {
             action={() => {
               setModal(BookmarkStates.blackEditionStand);
             }}
+            clicked={modal === BookmarkStates.blackEditionStand ? true : false}
           />
           <PledgeModal
             header="Mahogany Special Edition"
@@ -271,6 +278,7 @@ export default function Home() {
             action={() => {
               setModal(BookmarkStates.mahoganySpecialEdition);
             }}
+            clicked={modal === BookmarkStates.mahoganySpecialEdition ? true : false}
           />
         </div>
       </div>
