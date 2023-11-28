@@ -11,6 +11,15 @@ import bookmark from './images/icon-bookmark.svg';
 import bookmarkClicked from './images/icon-bookmarked.svg';
 import mastercraft from './images/logo-mastercraft.svg';
 
+enum BookmarkStates {
+  none,
+  initialBookmark,
+  pledgeWithNoReward,
+  bambooStand,
+  blackEditionStand,
+  mahoganySpecialEdition,
+}
+
 const SingleBar = ({ value, target }: { value: number; target: number }) => {
   const progress = () => {
     return {
@@ -94,6 +103,7 @@ export default function Home() {
     blackEdition: number;
     mahogany: number;
   }
+  const [modal, setModal] = useState<BookmarkStates>(BookmarkStates.none);
   const [backed, setBacked] = useState<number>();
   const [backers, setBackers] = useState<number>();
   const [daysLeft, setDaysLeft] = useState<number>();
@@ -124,6 +134,11 @@ export default function Home() {
 
   return (
     <div className="flex min-h-screen flex-col items-center justify-start pb-[8em] font-commissioner">
+      <mask
+        className={`${
+          modal === BookmarkStates.none ? 'hidden' : 'flex'
+        } absolute z-20 h-full w-full bg-black opacity-[48%]`}
+      ></mask>
       <nav className="h-full w-full">
         <div className="h-[25em] w-full bg-[url('./images/image-hero-desktop.jpg')]">
           <div className="flex h-[8.05em] items-end justify-between bg-gradient-to-b from-customDark from-5% to-transparent to-100% pb-[3.8em] pl-[10.4em] pr-[10.3em]">
@@ -150,7 +165,12 @@ export default function Home() {
               A beautiful & handcrafted monitor stand to reduce neck and eye strain.
             </span>
             <div className="mt-[2.38em] flex w-full justify-between pl-[3em] pr-[3em]">
-              <button className="rounded-[1.8em] bg-moderateCyan px-[2.5em] py-[1em] text-[1rem] font-[500] text-white hover:bg-darkCyan">
+              <button
+                onClick={() => {
+                  setModal(BookmarkStates.initialBookmark);
+                }}
+                className="rounded-[1.8em] bg-moderateCyan px-[2.5em] py-[1em] text-[1rem] font-[500] text-white hover:bg-darkCyan"
+              >
                 Back this project
               </button>
               <button
