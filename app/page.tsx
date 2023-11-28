@@ -95,16 +95,44 @@ const Pledge = ({
   );
 };
 
-const PledgeModal = () => {
+const PledgeModal = ({
+  header,
+  main,
+  pledge,
+  amount,
+}: {
+  header: string;
+  main: string;
+  pledge?: string;
+  amount: number;
+}) => {
+  const [hover, setHover] = useState<boolean>(false);
   return (
-    <div className="top flex h-[9.82em] justify-start gap-[1.5em] rounded-[0.5em] border border-y-2 border-[#ECECEC] border-x-gray-300 pb-[1.9em] pl-[1.65em] pr-[1.65em] pt-[1.8em] tracking-[-0.004em]">
-      <button className="h-fit w-fit rounded-full border-[0.13em] mt-[0.2em] border-[#ECECEC] p-[0.65em]"></button>
-      <div className="flex h-full w-full flex-col justify-between">
-        <span className="font-[700]">Pledge with no reward</span>
-        <span className="text-[0.95rem] leading-[1.8em] text-darkGray">
-          Choose to support us without a reward if you simply believe in our project. As a backer, you will be signed up
-          to receive product updates via email.
-        </span>
+    <div className="flex h-[9.82em] justify-start gap-[1.5em] rounded-[0.5em] border border-y-2 border-[#ECECEC] border-x-gray-300 pb-[1.9em] pl-[1.65em] pr-[1.65em] pt-[1.8em] tracking-[-0.004em]">
+      <button
+        onMouseEnter={() => {
+          setHover(true);
+        }}
+        onMouseLeave={() => {
+          setHover(false);
+        }}
+        className={`${
+          !hover ? 'border-[#ECECEC]' : 'border-moderateCyan'
+        } mt-[0.2em] h-fit w-fit rounded-full border-[0.13em]  p-[0.65em]`}
+      ></button>
+      <div className="flex h-full w-full flex-col items-start justify-between">
+        <button
+          onMouseEnter={() => {
+            setHover(true);
+          }}
+          onMouseLeave={() => {
+            setHover(false);
+          }}
+          className={`${hover && 'text-moderateCyan'} font-[700]`}
+        >
+          {header}
+        </button>
+        <span className="text-[0.95rem] leading-[1.8em] text-darkGray">{main}</span>
       </div>
     </div>
   );
@@ -172,7 +200,11 @@ export default function Home() {
         <span className="mb-[2.1em] mt-[1em] text-darkGray">
           Want to support us in bringing Mastercraft Bamboo Monitor Riser out in the world?
         </span>
-        <PledgeModal />
+        <PledgeModal
+          header="Pledge with no reward"
+          main="Choose to support us without a reward if you simply believe in our project. As a backer, you will be signed up
+          to receive product updates via email."
+        />
       </div>
 
       <nav className="h-full w-full">
