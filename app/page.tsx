@@ -10,6 +10,7 @@ import logo from './images/logo.svg';
 import bookmark from './images/icon-bookmark.svg';
 import bookmarkClicked from './images/icon-bookmarked.svg';
 import closeModal from './images/icon-close-modal.svg';
+import closeModalBlack from './images/icon-close-modalBlack.svg';
 import mastercraft from './images/logo-mastercraft.svg';
 
 enum BookmarkStates {
@@ -123,7 +124,7 @@ const PledgeModal = ({
           setHover(false);
         }}
         onClick={() => {
-          action();
+          amount !== 0 && action();
         }}
         className={`${
           amount !== 0 && hover ? 'border-moderateCyan' : 'border-[#ECECEC]'
@@ -140,7 +141,7 @@ const PledgeModal = ({
                 setHover(false);
               }}
               onClick={() => {
-                action();
+                amount !== 0 && action();
               }}
               className={`${amount !== 0 && hover && 'text-moderateCyan'} font-[700]`}
             >
@@ -171,6 +172,7 @@ export default function Home() {
     mahogany: number;
   }
   const [modal, setModal] = useState<BookmarkStates>(BookmarkStates.none);
+  const [hoverModalExitButton, setHoverModalExitButton] = useState<boolean>(false);
   console.log(modal);
   const [backed, setBacked] = useState<number>();
   const [backers, setBackers] = useState<number>();
@@ -213,12 +215,18 @@ export default function Home() {
         } absolute z-30 mt-[11.5em] flex h-fit w-[45.6em] flex-col rounded-[0.5em] bg-white px-[3em] pb-[3em] pt-[2.9em]`}
       >
         <button
+          onMouseEnter={() => {
+            setHoverModalExitButton(true);
+          }}
+          onMouseLeave={() => {
+            setHoverModalExitButton(false);
+          }}
           onClick={() => {
             setModal(BookmarkStates.none);
           }}
           className="absolute right-[1.9em] top-8"
         >
-          <Image src={closeModal as string} alt="close button" />
+          <Image src={(hoverModalExitButton ? closeModalBlack : closeModal) as string} alt="close button" />
         </button>
         <span className="text-[1.5rem] font-[700]">Back this project</span>
         <span className="mb-[2.1em] mt-[1em] text-darkGray">
