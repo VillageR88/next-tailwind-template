@@ -9,6 +9,7 @@ import Image from 'next/image';
 import logo from './images/logo.svg';
 import bookmark from './images/icon-bookmark.svg';
 import bookmarkClicked from './images/icon-bookmarked.svg';
+import closeModal from './images/icon-close-modal.svg';
 import mastercraft from './images/logo-mastercraft.svg';
 
 enum BookmarkStates {
@@ -142,9 +143,20 @@ export default function Home() {
       <div
         className={`${
           modal === BookmarkStates.none ? 'hidden' : 'flex'
-        } absolute z-30 mt-[11.5em] h-[56.55em] w-[45.6em] rounded-[0.5em] bg-white px-[3em] pt-[2.9em]`}
+        } absolute z-30 mt-[11.5em] flex h-[56.55em] w-[45.6em] flex-col rounded-[0.5em] bg-white px-[3em] pt-[2.9em]`}
       >
+        <button
+          onClick={() => {
+            setModal(BookmarkStates.none);
+          }}
+          className="absolute right-[1.9em] top-8"
+        >
+          <Image src={closeModal as string} alt="close button" />
+        </button>
         <span className="text-[1.5rem] font-[700]">Back this project</span>
+        <span className="mt-[1em] text-darkGray">
+          Want to support us in bringing Mastercraft Bamboo Monitor Riser out in the world?
+        </span>
       </div>
 
       <nav className="h-full w-full">
