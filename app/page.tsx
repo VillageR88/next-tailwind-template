@@ -108,7 +108,11 @@ const PledgeModal = ({
 }) => {
   const [hover, setHover] = useState<boolean>(false);
   return (
-    <div className="flex h-[9.82em] justify-start gap-[1.4em] rounded-[0.5em] border border-y-2 border-[#ECECEC] border-x-gray-300 pb-[1.9em] pl-[1.65em] pr-[1.63em] pt-[1.7em] tracking-[-0.004em]">
+    <div
+      className={`${
+        amount === 0 && 'opacity-50'
+      } flex h-[9.82em] justify-start gap-[1.4em] rounded-[0.5em] border border-y-2 border-[#ECECEC] border-x-gray-300 pb-[1.9em] pl-[1.65em] pr-[1.63em] pt-[1.7em] tracking-[-0.004em]`}
+    >
       <button
         onMouseEnter={() => {
           setHover(true);
@@ -117,7 +121,7 @@ const PledgeModal = ({
           setHover(false);
         }}
         className={`${
-          !hover ? 'border-[#ECECEC]' : 'border-moderateCyan'
+          amount !== 0 && hover ? 'border-moderateCyan' : 'border-[#ECECEC]'
         } mt-[0.2em] h-fit w-fit rounded-full border-[0.13em]  p-[0.65em]`}
       ></button>
       <div className="flex h-full w-full flex-col items-start justify-between">
@@ -130,7 +134,7 @@ const PledgeModal = ({
               onMouseLeave={() => {
                 setHover(false);
               }}
-              className={`${hover && 'text-moderateCyan'} font-[700]`}
+              className={`${amount !== 0 && hover && 'text-moderateCyan'} font-[700]`}
             >
               {header}
             </button>
