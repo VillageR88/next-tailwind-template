@@ -122,57 +122,61 @@ const PledgeModal = ({
   const [hover, setHover] = useState<boolean>(false);
   return (
     <div
-      className={`${amount === 0 && 'opacity-50'} flex h-full justify-start gap-[1.4em] rounded-[0.5em] ${
+      className={`${amount === 0 && 'opacity-50'} ${
         clicked ? 'border-2 border-moderateCyan' : ' border border-y-2 border-[#ECECEC] border-x-gray-300'
-      } pb-[1.83em] pl-[1.65em] pr-[1.63em] pt-[1.83em] tracking-[-0.004em]`}
+      } rounded-[0.5em]`}
     >
-      <button
-        onMouseEnter={() => {
-          setHover(true);
-        }}
-        onMouseLeave={() => {
-          setHover(false);
-        }}
-        onClick={() => {
-          amount !== 0 && action();
-        }}
-        className={`${
-          amount !== 0 && hover ? 'border-moderateCyan' : 'border-[#ECECEC]'
-        } mt-[0.2em] flex h-fit w-fit items-center justify-center rounded-full border-[0.13em] px-[0.62em] py-[0.62em]`}
+      <div
+        className={`flex h-full justify-start gap-[1.4em] pb-[1.83em] pl-[1.65em] pr-[1.63em] pt-[1.83em] tracking-[-0.004em]`}
       >
-        {clicked && <div className="absolute h-3 w-3 rounded-full bg-moderateCyan"></div>}
-      </button>
-      <div className="flex h-full w-full flex-col items-start justify-between gap-[0.95em]">
-        <div className="flex w-full items-center justify-between">
-          <div className="flex gap-[1.1em]">
-            <button
-              onMouseEnter={() => {
-                setHover(true);
-              }}
-              onMouseLeave={() => {
-                setHover(false);
-              }}
-              onClick={() => {
-                amount !== 0 && action();
-              }}
-              className={`${amount !== 0 && hover && 'text-moderateCyan'} font-[700]`}
-            >
-              {header}
-            </button>
-            {pledge && (
-              <span className={`${clicked ? 'font-[700]' : 'font-[500]'} text-moderateCyan`}>
-                Pledge ${pledge} or more
-              </span>
+        <button
+          onMouseEnter={() => {
+            setHover(true);
+          }}
+          onMouseLeave={() => {
+            setHover(false);
+          }}
+          onClick={() => {
+            amount !== 0 && action();
+          }}
+          className={`${
+            amount !== 0 && hover ? 'border-moderateCyan' : 'border-[#ECECEC]'
+          } mt-[0.2em] flex h-fit w-fit items-center justify-center rounded-full border-[0.13em] px-[0.62em] py-[0.62em]`}
+        >
+          {clicked && <div className="absolute h-3 w-3 rounded-full bg-moderateCyan"></div>}
+        </button>
+        <div className="flex h-full w-full flex-col items-start justify-between gap-[0.95em]">
+          <div className="flex w-full items-center justify-between">
+            <div className="flex gap-[1.1em]">
+              <button
+                onMouseEnter={() => {
+                  setHover(true);
+                }}
+                onMouseLeave={() => {
+                  setHover(false);
+                }}
+                onClick={() => {
+                  amount !== 0 && action();
+                }}
+                className={`${amount !== 0 && hover && 'text-moderateCyan'} font-[700]`}
+              >
+                {header}
+              </button>
+              {pledge && (
+                <span className={`${clicked ? 'font-[700]' : 'font-[500]'} text-moderateCyan`}>
+                  Pledge ${pledge} or more
+                </span>
+              )}
+            </div>
+            {amount !== undefined && (
+              <div className="flex items-center gap-[0.5em]">
+                <span className="text-[1.15rem] font-[700]">{amount}</span>
+                <span className="text-[0.95rem] text-darkGray">left</span>
+              </div>
             )}
           </div>
-          {amount !== undefined && (
-            <div className="flex items-center gap-[0.5em]">
-              <span className="text-[1.15rem] font-[700]">{amount}</span>
-              <span className="text-[0.95rem] text-darkGray">left</span>
-            </div>
-          )}
+          <span className="whitespace-pre-line text-[0.95rem] leading-[1.8em] text-darkGray">{main}</span>
         </div>
-        <span className="whitespace-pre-line text-[0.95rem] leading-[1.8em] text-darkGray">{main}</span>
       </div>
     </div>
   );
