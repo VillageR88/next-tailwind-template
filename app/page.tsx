@@ -84,7 +84,10 @@ const Pledge = ({
           {value !== undefined ? (
             <button
               onClick={() => {
-                value !== 0 && action();
+                if (value !== 0) {
+                  action();
+                  topFunction(165);
+                }
               }}
               className={`${
                 value > 0 ? 'bg-moderateCyan hover:bg-darkCyan' : 'bg-darkGray'
@@ -170,6 +173,11 @@ const PledgeModal = ({
     </div>
   );
 };
+
+function topFunction(value: number) {
+  document.body.scrollTop = value; // For Safari
+  document.documentElement.scrollTop = value; // For Chrome, Firefox, IE and Opera
+}
 
 export default function Home() {
   interface DataJSON {
