@@ -137,8 +137,12 @@ export default function Home() {
       <mask
         className={`${
           modal === BookmarkStates.none ? 'hidden' : 'flex'
-        } absolute z-20 h-full w-full bg-black opacity-[48%]`}
+        } fixed z-20 h-full w-full bg-black opacity-[48%]`}
       ></mask>
+      <div className={`${modal === BookmarkStates.none ? 'hidden' : 'flex'} absolute z-30 h-[100em] w-[30em] bg-white`}>
+        INITIAL+
+      </div>
+
       <nav className="h-full w-full">
         <div className="h-[25em] w-full bg-[url('./images/image-hero-desktop.jpg')]">
           <div className="flex h-[8.05em] items-end justify-between bg-gradient-to-b from-customDark from-5% to-transparent to-100% pb-[3.8em] pl-[10.4em] pr-[10.3em]">
