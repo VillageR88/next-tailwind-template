@@ -100,11 +100,13 @@ const PledgeModal = ({
   main,
   pledge,
   amount,
+  action,
 }: {
   header: string;
   main: string;
   pledge?: number;
   amount?: number;
+  action(): undefined;
 }) => {
   const [hover, setHover] = useState<boolean>(false);
   return (
@@ -120,6 +122,9 @@ const PledgeModal = ({
         onMouseLeave={() => {
           setHover(false);
         }}
+        onClick={() => {
+          action();
+        }}
         className={`${
           amount !== 0 && hover ? 'border-moderateCyan' : 'border-[#ECECEC]'
         } mt-[0.2em] h-fit w-fit rounded-full border-[0.13em]  p-[0.65em]`}
@@ -133,6 +138,9 @@ const PledgeModal = ({
               }}
               onMouseLeave={() => {
                 setHover(false);
+              }}
+              onClick={() => {
+                action();
               }}
               className={`${amount !== 0 && hover && 'text-moderateCyan'} font-[700]`}
             >
@@ -163,6 +171,7 @@ export default function Home() {
     mahogany: number;
   }
   const [modal, setModal] = useState<BookmarkStates>(BookmarkStates.none);
+  console.log(modal);
   const [backed, setBacked] = useState<number>();
   const [backers, setBackers] = useState<number>();
   const [daysLeft, setDaysLeft] = useState<number>();
@@ -220,6 +229,9 @@ export default function Home() {
             header="Pledge with no reward"
             main="Choose to support us without a reward if you simply believe in our project. As a backer, you will be signed up
           to receive product updates via email."
+            action={() => {
+              setModal(BookmarkStates.pledgeWithNoReward);
+            }}
           />
           <PledgeModal
             header="Bamboo Stand"
@@ -227,6 +239,9 @@ export default function Home() {
             you’ll be added to a special Backer member list."
             pledge={25}
             amount={bamboo}
+            action={() => {
+              setModal(BookmarkStates.bambooStand);
+            }}
           />
           <PledgeModal
             header="Black Edition Stand"
@@ -235,6 +250,9 @@ export default function Home() {
             }
             pledge={75}
             amount={blackEdition}
+            action={() => {
+              setModal(BookmarkStates.blackEditionStand);
+            }}
           />
           <PledgeModal
             header="Mahogany Special Edition"
@@ -242,6 +260,9 @@ export default function Home() {
             to our Backer member list. Shipping is included."
             pledge={200}
             amount={mahogany}
+            action={() => {
+              setModal(BookmarkStates.mahoganySpecialEdition);
+            }}
           />
         </div>
       </div>
