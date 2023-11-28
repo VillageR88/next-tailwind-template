@@ -95,6 +95,10 @@ const Pledge = ({
   );
 };
 
+const PledgeModal = () => {
+  return <div className="h-[8em] rounded-[0.5em] border border-y-2 border-[#ECECEC] border-x-gray-300"></div>;
+};
+
 export default function Home() {
   interface DataJSON {
     backed: number;
@@ -154,9 +158,10 @@ export default function Home() {
           <Image src={closeModal as string} alt="close button" />
         </button>
         <span className="text-[1.5rem] font-[700]">Back this project</span>
-        <span className="mt-[1em] text-darkGray">
+        <span className="mb-[2.1em] mt-[1em] text-darkGray">
           Want to support us in bringing Mastercraft Bamboo Monitor Riser out in the world?
         </span>
+        <PledgeModal />
       </div>
 
       <nav className="h-full w-full">
