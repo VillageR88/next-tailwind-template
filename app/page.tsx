@@ -143,7 +143,7 @@ const PledgeModal = ({
             </div>
           )}
         </div>
-        <span className="text-[0.95rem] leading-[1.8em] text-darkGray">{main}</span>
+        <span className="whitespace-pre-line text-[0.95rem] leading-[1.8em] text-darkGray">{main}</span>
       </div>
     </div>
   );
@@ -223,6 +223,14 @@ export default function Home() {
             you’ll be added to a special Backer member list."
             pledge={25}
             amount={bamboo}
+          />
+          <PledgeModal
+            header="Black Edition Stand"
+            main={
+              'You get a Black Special Edition computer stand and a personal thank you.\nYou’ll be added to our Backer member list. Shipping is included.'
+            }
+            pledge={75}
+            amount={blackEdition}
           />
         </div>
       </div>
