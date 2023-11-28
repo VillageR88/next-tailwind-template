@@ -103,12 +103,12 @@ const PledgeModal = ({
 }: {
   header: string;
   main: string;
-  pledge?: string;
-  amount: number;
+  pledge?: number;
+  amount?: number;
 }) => {
   const [hover, setHover] = useState<boolean>(false);
   return (
-    <div className="flex h-[9.82em] justify-start gap-[1.5em] rounded-[0.5em] border border-y-2 border-[#ECECEC] border-x-gray-300 pb-[1.9em] pl-[1.65em] pr-[1.65em] pt-[1.8em] tracking-[-0.004em]">
+    <div className="flex h-[9.82em] justify-start gap-[1.4em] rounded-[0.5em] border border-y-2 border-[#ECECEC] border-x-gray-300 pb-[1.9em] pl-[1.65em] pr-[1.63em] pt-[1.7em] tracking-[-0.004em]">
       <button
         onMouseEnter={() => {
           setHover(true);
@@ -121,17 +121,28 @@ const PledgeModal = ({
         } mt-[0.2em] h-fit w-fit rounded-full border-[0.13em]  p-[0.65em]`}
       ></button>
       <div className="flex h-full w-full flex-col items-start justify-between">
-        <button
-          onMouseEnter={() => {
-            setHover(true);
-          }}
-          onMouseLeave={() => {
-            setHover(false);
-          }}
-          className={`${hover && 'text-moderateCyan'} font-[700]`}
-        >
-          {header}
-        </button>
+        <div className="flex w-full items-center justify-between">
+          <div className="flex gap-[1.1em]">
+            <button
+              onMouseEnter={() => {
+                setHover(true);
+              }}
+              onMouseLeave={() => {
+                setHover(false);
+              }}
+              className={`${hover && 'text-moderateCyan'} font-[700]`}
+            >
+              {header}
+            </button>
+            {pledge && <span className="font-[500] text-moderateCyan">Pledge ${pledge} or more</span>}
+          </div>
+          {amount && (
+            <div className="flex items-center gap-[0.5em]">
+              <span className="text-[1.15rem] font-[700]">{amount}</span>
+              <span className="text-[0.95rem] text-darkGray">left</span>
+            </div>
+          )}
+        </div>
         <span className="text-[0.95rem] leading-[1.8em] text-darkGray">{main}</span>
       </div>
     </div>
@@ -200,11 +211,20 @@ export default function Home() {
         <span className="mb-[2.1em] mt-[1em] text-darkGray">
           Want to support us in bringing Mastercraft Bamboo Monitor Riser out in the world?
         </span>
-        <PledgeModal
-          header="Pledge with no reward"
-          main="Choose to support us without a reward if you simply believe in our project. As a backer, you will be signed up
+        <div className="flex flex-col gap-[1.5em]">
+          <PledgeModal
+            header="Pledge with no reward"
+            main="Choose to support us without a reward if you simply believe in our project. As a backer, you will be signed up
           to receive product updates via email."
-        />
+          />
+          <PledgeModal
+            header="Bamboo Stand"
+            main="You get an ergonomic stand made of natural bamboo. You've helped us launch our promotional campaign, and 
+            you’ll be added to a special Backer member list."
+            pledge={25}
+            amount={bamboo}
+          />
+        </div>
       </div>
 
       <nav className="h-full w-full">
