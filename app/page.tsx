@@ -161,7 +161,11 @@ export default function Home() {
               >
                 <div className="flex items-center gap-[1em] rounded-[3em] bg-[#F4F4F4] pr-[1.5em]">
                   <Image src={(!bookmarked ? bookmark : bookmarkClicked) as string} alt="bookmark image" />
-                  <span className={`font-[700] ${!bookmarked ? 'text-darkGray' : 'text-darkCyan'}`}>
+                  <span
+                    className={`font-[700] duration-300 ease-in-out ${
+                      !bookmarked ? 'w-[5em] text-darkGray' : 'w-[5.8em] text-darkCyan'
+                    }`}
+                  >
                     {!bookmarked ? 'Bookmark' : 'Bookmarked'}
                   </span>
                 </div>
