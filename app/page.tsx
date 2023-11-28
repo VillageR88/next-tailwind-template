@@ -136,7 +136,7 @@ const PledgeModal = ({
             </button>
             {pledge && <span className="font-[500] text-moderateCyan">Pledge ${pledge} or more</span>}
           </div>
-          {amount && (
+          {amount !== undefined && (
             <div className="flex items-center gap-[0.5em]">
               <span className="text-[1.15rem] font-[700]">{amount}</span>
               <span className="text-[0.95rem] text-darkGray">left</span>
@@ -231,6 +231,13 @@ export default function Home() {
             }
             pledge={75}
             amount={blackEdition}
+          />
+          <PledgeModal
+            header="Mahogany Special Edition"
+            main="You get two Special Edition Mahogany stands, a Backer T-Shirt, and a personal thank you. You’ll be added 
+            to our Backer member list. Shipping is included."
+            pledge={200}
+            amount={mahogany}
           />
         </div>
       </div>
