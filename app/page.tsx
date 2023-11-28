@@ -97,8 +97,8 @@ const Pledge = ({
 
 const PledgeModal = () => {
   return (
-    <div className="top flex h-[9.82em] justify-start gap-[1.5em] rounded-[0.5em] border border-y-2 border-[#ECECEC] border-x-gray-300 pb-[1.9em] pl-[1.65em] pr-[1.65em] pt-[1.8em] tracking-[-0.003em]">
-      <button className="h-fit w-fit rounded-full border-[0.14em] border-[#ECECEC] p-[0.6em]"></button>
+    <div className="top flex h-[9.82em] justify-start gap-[1.5em] rounded-[0.5em] border border-y-2 border-[#ECECEC] border-x-gray-300 pb-[1.9em] pl-[1.65em] pr-[1.65em] pt-[1.8em] tracking-[-0.004em]">
+      <button className="h-fit w-fit rounded-full border-[0.13em] mt-[0.2em] border-[#ECECEC] p-[0.65em]"></button>
       <div className="flex h-full w-full flex-col justify-between">
         <span className="font-[700]">Pledge with no reward</span>
         <span className="text-[0.95rem] leading-[1.8em] text-darkGray">
