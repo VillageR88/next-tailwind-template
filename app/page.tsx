@@ -137,10 +137,14 @@ export default function Home() {
       <mask
         className={`${
           modal === BookmarkStates.none ? 'hidden' : 'flex'
-        } fixed z-20 h-full w-full bg-black opacity-[48%]`}
+        } fixed z-20 h-full w-full bg-black opacity-[50%]`}
       ></mask>
-      <div className={`${modal === BookmarkStates.none ? 'hidden' : 'flex'} absolute z-30 h-[100em] w-[30em] bg-white`}>
-        INITIAL+
+      <div
+        className={`${
+          modal === BookmarkStates.none ? 'hidden' : 'flex'
+        } absolute z-30 mt-[11.5em] h-[56.55em] w-[45.6em] rounded-[0.5em] bg-white px-[3em] pt-[2.9em]`}
+      >
+        <span className="text-[1.5rem] font-[700]">Back this project</span>
       </div>
 
       <nav className="h-full w-full">
