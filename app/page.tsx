@@ -178,6 +178,18 @@ const PledgeModal = ({
           <span className="whitespace-pre-line text-[0.95rem] leading-[1.8em] text-darkGray">{main}</span>
         </div>
       </div>
+      {clicked && <hr className="h-[2px] w-full bg-[#ECECEC]"></hr>}
+      {clicked && (
+        <div className="flex justify-between">
+          <span className="text-[0.95rem] text-darkGray">Enter your pledge</span>
+          <div>
+            <input type="number" />
+            <button className="rounded-[2em] bg-moderateCyan px-[1.8em] py-[0.9em] text-[0.9rem] font-[500] text-white">
+              Continue
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
