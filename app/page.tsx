@@ -334,6 +334,7 @@ export default function Home() {
               <button
                 onClick={() => {
                   setModal(BookmarkStates.initialBookmark);
+                  topFunction(165);
                 }}
                 className="rounded-[1.8em] bg-moderateCyan px-[2.5em] py-[1em] text-[1rem] font-[500] text-white hover:bg-darkCyan"
               >
