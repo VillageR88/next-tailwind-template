@@ -317,7 +317,7 @@ export default function Home() {
   }, []);
 
   return (
-    <div className="flex min-h-screen w-full flex-col items-center justify-start pb-[8em] font-commissioner">
+    <div className="flex min-h-screen w-full flex-col items-center justify-start pb-[2em] md:pb-[8em] font-commissioner">
       {modal !== BookmarkStates.none && <div className={'fixed z-20 h-full w-full bg-black opacity-[50%]'}></div>}
       {modal !== BookmarkStates.none && modal !== BookmarkStates.completed && (
         <div
