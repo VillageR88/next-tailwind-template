@@ -210,6 +210,8 @@ const PledgeModal = ({
                   setFieldLength(80 + e.target.value.length * 8);
                   +e.target.value >= 1000000 && (e.target.value = '1000000');
                   +e.target.value < 0 && (e.target.value = '0');
+                  e.target.value = e.target.value.replace(/^0+/, '');
+                  e.target.value = e.target.value.replace(/^-+/, '');
                   updateCurrentValue(+e.target.value);
                   valueFeedback(+e.target.value);
                 }}
