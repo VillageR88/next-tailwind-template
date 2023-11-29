@@ -448,7 +448,7 @@ export default function Home() {
       <main className="w-full md:w-auto">
         <div className="flex flex-col gap-[1.6em]">
           {/*first block*/}
-          <div className="border-1 mt-[-5.67em] flex h-[16.7em] w-full flex-col items-center rounded-[0.5em] bg-white outline outline-1 outline-gray-100 md:w-[45.5em]">
+          <div className="border-1 mt-[-5.67em] flex h-full w-full flex-col items-center rounded-[0.5em] bg-white pb-[2.5em] outline outline-1 outline-gray-100 md:h-[16.7em] md:w-[45.5em] md:pb-0">
             <div className="z-10 mt-[-1.8em] h-0 pb-[1.8em]">
               <Image src={mastercraft as string} alt="mastercraft logo" />
             </div>
