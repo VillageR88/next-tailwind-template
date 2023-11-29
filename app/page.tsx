@@ -249,6 +249,7 @@ const PledgeModal = ({
             <button
               onClick={() => {
                 currentValue >= (pledge ?? 1) && completed();
+                topFunction(300);
               }}
               className="rounded-[2em] bg-moderateCyan px-[1.7em] py-[0.9em] text-[0.88rem] font-[500] text-white hover:bg-darkCyan"
             >
@@ -424,7 +425,7 @@ export default function Home() {
         </div>
       )}
       {modal === BookmarkStates.completed && (
-        <div className="absolute z-30 mt-[28.75em] flex h-[28.05em] w-full flex-col items-center rounded-[0.5em] bg-white px-[3em] pt-[3em] text-center md:w-[33.7em]">
+        <div className="absolute z-30 mt-[28.75em] flex h-fit w-[92%] flex-col items-center rounded-[0.5em] bg-white px-[1.5em] pb-[4em] pt-[3em] text-center md:h-[28.05em] md:w-[33.7em] md:px-[3em] md:pb-0">
           <Image className="h-[5.6em] w-fit" src={check as string} alt="check image" />
           <span className="mt-[1.9em] text-[1.5rem] font-[700]">Thanks for your support!</span>
           <span className="mt-[0.8em] text-[1rem] leading-[1.85em] text-darkGray">
