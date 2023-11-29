@@ -165,7 +165,7 @@ const PledgeModal = ({
           {clicked && <div className="absolute h-3 w-3 rounded-full bg-moderateCyan"></div>}
         </button>
         <div className="flex h-full w-full flex-col items-start justify-between gap-[0.95em]">
-          <div className="flex w-full items-center justify-start gap-[1em]">
+          <div className="flex w-full items-center justify-start gap-[1em] md:justify-between">
             {/*button for mobile*/}
             <button
               onMouseEnter={() => {
@@ -217,7 +217,7 @@ const PledgeModal = ({
           <span className="text-[0.95rem] leading-[1.8em] text-darkGray md:whitespace-pre-line">{main}</span>
           {/*left for mobile*/}
           {amount !== undefined && (
-            <div className="flex items-center gap-[0.5em] pb-[1.5em] md:hidden md:pb-0">
+            <div className="flex items-center gap-[0.5em] md:hidden pb-[1em]">
               <span className="text-[1.15rem] font-[700]">{amount}</span>
               <span className="text-[0.95rem] text-darkGray">left</span>
             </div>
@@ -226,7 +226,7 @@ const PledgeModal = ({
       </div>
       {clicked && <hr className="h-[2px] w-full justify-center bg-[#ECECEC]"></hr>}
       {clicked && (
-        <div className="flex flex-col items-center justify-between gap-[1.5em] px-[1.5em] pt-[1.5em] md:flex-row md:gap-0 md:py-[1.4em] md:pt-0">
+        <div className="flex flex-col items-center justify-between gap-[1.5em] px-[1.5em] pt-[1.5em] md:flex-row md:gap-0 md:py-[1.4em] md:pt-[1.5]">
           <span className="text-[0.95rem] text-darkGray">Enter your pledge</span>
           <div className="flex gap-[1.1em]">
             <div className="flex items-center">

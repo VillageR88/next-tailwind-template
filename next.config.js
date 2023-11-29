@@ -12,7 +12,7 @@ const nextConfig = {
 
   // Optional: Change the output directory `out` -> `dist`
   distDir: 'build',
-
+  //assetPrefix: '/Frontend_Mentor/crowdfunding-product-page-main/',
   reactStrictMode: true,
 }
 
