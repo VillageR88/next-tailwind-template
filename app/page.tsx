@@ -342,6 +342,7 @@ export default function Home() {
               completed={() => {
                 backers && setBackers(backers + 1);
                 backed && valueFeedback && setBacked(backed + valueFeedback);
+                bamboo && setBamboo(bamboo - 1);
                 setModal(BookmarkStates.completed);
               }}
               valueFeedback={(value) => {
@@ -362,6 +363,7 @@ export default function Home() {
               completed={() => {
                 backers && setBackers(backers + 1);
                 backed && valueFeedback && setBacked(backed + valueFeedback);
+                blackEdition && setBlackEdition(blackEdition - 1);
                 setModal(BookmarkStates.completed);
               }}
               valueFeedback={(value) => {
@@ -375,12 +377,13 @@ export default function Home() {
               pledge={200}
               amount={mahogany}
               action={() => {
-                backers && setBackers(backers + 1);
-                backed && valueFeedback && setBacked(backed + valueFeedback);
                 setModal(BookmarkStates.mahoganySpecialEdition);
               }}
               clicked={modal === BookmarkStates.mahoganySpecialEdition ? true : false}
               completed={() => {
+                backers && setBackers(backers + 1);
+                backed && valueFeedback && setBacked(backed + valueFeedback);
+                mahogany && setMahogany(mahogany - 1);
                 setModal(BookmarkStates.completed);
               }}
               valueFeedback={(value) => {
