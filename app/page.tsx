@@ -13,6 +13,7 @@ import closeModal from './images/icon-close-modal.svg';
 import closeModalBlack from './images/icon-close-modalBlack.svg';
 import check from './images/icon-check.svg';
 import mastercraft from './images/logo-mastercraft.svg';
+import hamburger from './images/icon-hamburger.svg';
 
 enum BookmarkStates {
   none,
@@ -285,6 +286,7 @@ export default function Home() {
     blackEdition: number;
     mahogany: number;
   }
+  const [mobileNav, setMobileNav] = useState<boolean>(false);
   const [modal, setModal] = useState<BookmarkStates>(BookmarkStates.none);
   const [hoverModalExitButton, setHoverModalExitButton] = useState<boolean>(false);
   const [backed, setBacked] = useState<number>();
@@ -317,7 +319,11 @@ export default function Home() {
   }, []);
 
   return (
-    <div className="flex min-h-screen w-full flex-col items-center justify-start pb-[2em] md:pb-[8em] font-commissioner">
+    <div
+      className={`${
+        mobileNav ? 'h-screen overflow-y-hidden' : 'min-h-screen'
+      } flex w-full flex-col items-center justify-start pb-[2em] font-commissioner md:pb-[8em]`}
+    >
       {modal !== BookmarkStates.none && <div className={'fixed z-20 h-full w-full bg-black opacity-[50%]'}></div>}
       {modal !== BookmarkStates.none && modal !== BookmarkStates.completed && (
         <div
@@ -445,7 +451,7 @@ export default function Home() {
       )}
       <nav className="h-full w-full">
         <div className="h-[25em] w-full bg-[url('./images/image-hero-mobile.jpg')] bg-cover md:h-[25em] md:bg-[url('./images/image-hero-desktop.jpg')]">
-          <div className="flex h-[8.05em] items-end justify-between bg-gradient-to-b from-customDark from-5% to-transparent to-100% px-[1em] pb-[3.8em] md:px-[6em] lg:px-0 lg:pl-[10.4em] lg:pr-[10.3em]">
+          <div className="flex h-[8.05em] items-center justify-between bg-gradient-to-b from-customDark from-5% to-transparent to-100% px-[1.5em] pb-[3.8em] pt-[1em] md:items-end md:px-[6em] md:pt-0 lg:px-0 lg:pl-[10.4em] lg:pr-[10.3em]">
             <Image className="h-fit" src={logo as string} alt="logo image" />
             {/*right nav desktop*/}
             <div className="hidden gap-[2.44em] text-[0.83rem] text-gray-50 md:flex">
@@ -468,6 +474,27 @@ export default function Home() {
               >
                 Get Started
               </button>
+            </div>
+            {/*right nav mobile*/}
+            <div className="flex md:hidden">
+              <button
+                onClick={() => {
+                  setMobileNav(!mobileNav);
+                }}
+              >
+                <Image src={hamburger as string} alt="mobile navigation button" />
+              </button>
+              <div className="absolute right-0 top-[6em] flex h-fit w-full justify-center ">
+                {mobileNav && (
+                  <div className="flex h-full w-[90%] flex-col items-start justify-around gap-[1em] rounded-[0.5em] bg-white py-[1em] text-[1.1rem] font-[500]">
+                    <button className="pl-[1.5em]">About</button>
+                    <hr className="h-[1px] w-full bg-black" />
+                    <button className="pl-[1.5em]">Discover</button>
+                    <hr className="h-[1px] w-full bg-black" />
+                    <button className="pl-[1.5em]">Get Started</button>
+                  </div>
+                )}
+              </div>
             </div>
           </div>
         </div>
