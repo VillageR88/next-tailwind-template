@@ -357,15 +357,18 @@ export default function Home() {
         </div>
       )}
       {modal === BookmarkStates.completed && (
-        <div className="absolute z-30 mt-[28.75em] flex h-[28.05em] w-[33.7em] flex-col items-center rounded-[0.5em] bg-white">
-          <Image className="h-fit w-fit" src={check as string} alt="check image" />
-          <span>HEADER</span>
-          <span>MAIN</span>
+        <div className="absolute z-30 mt-[28.75em] flex h-[28.05em] w-[33.7em] flex-col items-center rounded-[0.5em] bg-white px-[3em] pt-[3em] text-center">
+          <Image className="h-[5.6em] w-fit" src={check as string} alt="check image" />
+          <span className="mt-[1.9em] text-[1.5rem] font-[700]">Thanks for your support!</span>
+          <span className="leading-[1.85em] mt-[0.8em] text-[1rem] text-darkGray">
+            Your pledge brings us one step closer to sharing Mastercraft Bamboo Monitor Riser worldwide. You will get an
+            email once our campaign is completed.
+          </span>
           <button
             onClick={() => {
               setModal(BookmarkStates.none);
             }}
-            className="bg-moderateCyan hover:bg-darkCyan"
+            className="bg-moderateCyan text-white py-[1em] px-[2.5em] rounded-[2em] text-[0.85rem] font-[500] hover:bg-darkCyan mt-[2.4em]"
           >
             Got it!
           </button>
