@@ -20,6 +20,7 @@ enum BookmarkStates {
   bambooStand,
   blackEditionStand,
   mahoganySpecialEdition,
+  completed,
 }
 
 const SingleBar = ({ value, target }: { value: number; target: number }) => {
@@ -110,6 +111,7 @@ const PledgeModal = ({
   pledge,
   amount,
   action,
+  completed,
   clicked,
 }: {
   header: string;
@@ -117,6 +119,7 @@ const PledgeModal = ({
   pledge?: number;
   amount?: number;
   action(): undefined;
+  completed(): undefined;
   clicked: boolean;
 }) => {
   const [hover, setHover] = useState<boolean>(false);
@@ -198,7 +201,12 @@ const PledgeModal = ({
                 }}
               />
             </div>
-            <button className="rounded-[2em] bg-moderateCyan px-[1.7em] py-[0.9em] text-[0.88rem] font-[500] text-white">
+            <button
+              onClick={() => {
+                completed();
+              }}
+              className="rounded-[2em] bg-moderateCyan px-[1.7em] py-[0.9em] text-[0.88rem] font-[500] text-white hover:bg-darkCyan"
+            >
               Continue
             </button>
           </div>
@@ -263,81 +271,93 @@ export default function Home() {
 
   return (
     <div className="flex min-h-screen flex-col items-center justify-start pb-[8em] font-commissioner">
-      <mask
-        className={`${
-          modal === BookmarkStates.none ? 'hidden' : 'flex'
-        } fixed z-20 h-full w-full bg-black opacity-[50%]`}
-      ></mask>
-      <div
-        className={`${
-          modal === BookmarkStates.none ? 'hidden' : 'flex'
-        } absolute z-30 mt-[11.5em] flex h-fit w-[45.6em] flex-col rounded-[0.5em] bg-white px-[3em] pb-[3em] pt-[2.9em]`}
-      >
-        <button
-          onMouseEnter={() => {
-            setHoverModalExitButton(true);
-          }}
-          onMouseLeave={() => {
-            setHoverModalExitButton(false);
-          }}
-          onClick={() => {
-            setModal(BookmarkStates.none);
-          }}
-          className="absolute right-[1.9em] top-8"
+      {modal !== BookmarkStates.none && <mask className={'fixed z-20 h-full w-full bg-black opacity-[50%]'}></mask>}
+      {modal !== BookmarkStates.none && modal !== BookmarkStates.completed && (
+        <div
+          className={
+            'absolute z-30 mt-[11.5em] flex h-fit w-[45.6em] flex-col rounded-[0.5em] bg-white px-[3em] pb-[3em] pt-[2.9em]'
+          }
         >
-          <Image src={(hoverModalExitButton ? closeModalBlack : closeModal) as string} alt="close button" />
-        </button>
-        <span className="text-[1.5rem] font-[700]">Back this project</span>
-        <span className="mb-[2.1em] mt-[1em] text-darkGray">
-          Want to support us in bringing Mastercraft Bamboo Monitor Riser out in the world?
-        </span>
-        <div className="flex flex-col gap-[1.34em]">
-          <PledgeModal
-            header="Pledge with no reward"
-            main="Choose to support us without a reward if you simply believe in our project. As a backer, you will be signed up
+          <button
+            onMouseEnter={() => {
+              setHoverModalExitButton(true);
+            }}
+            onMouseLeave={() => {
+              setHoverModalExitButton(false);
+            }}
+            onClick={() => {
+              setModal(BookmarkStates.none);
+            }}
+            className="absolute right-[1.9em] top-8"
+          >
+            <Image src={(hoverModalExitButton ? closeModalBlack : closeModal) as string} alt="close button" />
+          </button>
+          <span className="text-[1.5rem] font-[700]">Back this project</span>
+          <span className="mb-[2.1em] mt-[1em] text-darkGray">
+            Want to support us in bringing Mastercraft Bamboo Monitor Riser out in the world?
+          </span>
+          <div className="flex flex-col gap-[1.34em]">
+            <PledgeModal
+              header="Pledge with no reward"
+              main="Choose to support us without a reward if you simply believe in our project. As a backer, you will be signed up
           to receive product updates via email."
-            action={() => {
-              setModal(BookmarkStates.pledgeWithNoReward);
-            }}
-            clicked={modal === BookmarkStates.pledgeWithNoReward ? true : false}
-          />
-          <PledgeModal
-            header="Bamboo Stand"
-            main="You get an ergonomic stand made of natural bamboo. You've helped us launch our promotional campaign, and 
+              action={() => {
+                setModal(BookmarkStates.pledgeWithNoReward);
+              }}
+              clicked={modal === BookmarkStates.pledgeWithNoReward ? true : false}
+              completed={() => {
+                setModal(BookmarkStates.completed);
+              }}
+            />
+            <PledgeModal
+              header="Bamboo Stand"
+              main="You get an ergonomic stand made of natural bamboo. You've helped us launch our promotional campaign, and 
             you’ll be added to a special Backer member list."
-            pledge={25}
-            amount={bamboo}
-            action={() => {
-              setModal(BookmarkStates.bambooStand);
-            }}
-            clicked={modal === BookmarkStates.bambooStand ? true : false}
-          />
-          <PledgeModal
-            header="Black Edition Stand"
-            main={
-              'You get a Black Special Edition computer stand and a personal thank you.\nYou’ll be added to our Backer member list. Shipping is included.'
-            }
-            pledge={75}
-            amount={blackEdition}
-            action={() => {
-              setModal(BookmarkStates.blackEditionStand);
-            }}
-            clicked={modal === BookmarkStates.blackEditionStand ? true : false}
-          />
-          <PledgeModal
-            header="Mahogany Special Edition"
-            main="You get two Special Edition Mahogany stands, a Backer T-Shirt, and a personal thank you. You’ll be added 
+              pledge={25}
+              amount={bamboo}
+              action={() => {
+                setModal(BookmarkStates.bambooStand);
+              }}
+              clicked={modal === BookmarkStates.bambooStand ? true : false}
+              completed={() => {
+                setModal(BookmarkStates.completed);
+              }}
+            />
+            <PledgeModal
+              header="Black Edition Stand"
+              main={
+                'You get a Black Special Edition computer stand and a personal thank you.\nYou’ll be added to our Backer member list. Shipping is included.'
+              }
+              pledge={75}
+              amount={blackEdition}
+              action={() => {
+                setModal(BookmarkStates.blackEditionStand);
+              }}
+              clicked={modal === BookmarkStates.blackEditionStand ? true : false}
+              completed={() => {
+                setModal(BookmarkStates.completed);
+              }}
+            />
+            <PledgeModal
+              header="Mahogany Special Edition"
+              main="You get two Special Edition Mahogany stands, a Backer T-Shirt, and a personal thank you. You’ll be added 
             to our Backer member list. Shipping is included."
-            pledge={200}
-            amount={mahogany}
-            action={() => {
-              setModal(BookmarkStates.mahoganySpecialEdition);
-            }}
-            clicked={modal === BookmarkStates.mahoganySpecialEdition ? true : false}
-          />
+              pledge={200}
+              amount={mahogany}
+              action={() => {
+                setModal(BookmarkStates.mahoganySpecialEdition);
+              }}
+              clicked={modal === BookmarkStates.mahoganySpecialEdition ? true : false}
+              completed={() => {
+                setModal(BookmarkStates.completed);
+              }}
+            />
+          </div>
         </div>
-      </div>
-
+      )}
+      {modal === BookmarkStates.completed && (
+        <div className="absolute z-30 mt-[31.5em] h-[21em] w-[33.6em] rounded bg-white"></div>
+      )}
       <nav className="h-full w-full">
         <div className="h-[25em] w-full bg-[url('./images/image-hero-desktop.jpg')]">
           <div className="flex h-[8.05em] items-end justify-between bg-gradient-to-b from-customDark from-5% to-transparent to-100% pb-[3.8em] pl-[10.4em] pr-[10.3em]">
