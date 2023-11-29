@@ -141,11 +141,12 @@ const PledgeModal = ({
     <div
       className={`${amount === 0 && 'opacity-50'} ${
         clicked ? 'border-2 border-moderateCyan' : ' border border-y-2 border-[#ECECEC] border-x-gray-300'
-      } rounded-[0.5em]`}
+      } rounded-[0.5em] px-[1.5em] py-[2em] md:px-0 md:py-0`}
     >
       <div
         className={`flex h-full justify-start gap-[1.4em] tracking-[-0.004em] md:pb-[1.83em] md:pl-[1.65em] md:pr-[1.63em] md:pt-[1.83em]`}
       >
+        {/*button for desktop*/}
         <button
           onMouseEnter={() => {
             setHover(true);
@@ -158,13 +159,30 @@ const PledgeModal = ({
           }}
           className={`${
             amount !== 0 && hover ? 'border-moderateCyan' : 'border-[#ECECEC]'
-          } mt-[0.2em] flex h-fit w-fit items-center justify-center rounded-full border-[0.13em] px-[0.62em] py-[0.62em]`}
+          } mt-[0.2em] hidden h-fit w-fit items-center justify-center rounded-full border-[0.13em] px-[0.62em] py-[0.62em] md:flex`}
         >
           {clicked && <div className="absolute h-3 w-3 rounded-full bg-moderateCyan"></div>}
         </button>
         <div className="flex h-full w-full flex-col items-start justify-between gap-[0.95em]">
-          <div className="flex w-full items-center justify-between">
-            <div className="flex gap-[1.1em]">
+          <div className="flex w-full items-center justify-start gap-[1em]">
+            {/*button for mobile*/}
+            <button
+              onMouseEnter={() => {
+                setHover(true);
+              }}
+              onMouseLeave={() => {
+                setHover(false);
+              }}
+              onClick={() => {
+                amount !== 0 && action();
+              }}
+              className={`${
+                amount !== 0 && hover ? 'border-moderateCyan' : 'border-[#ECECEC]'
+              } mt-[0.2em] flex h-fit w-fit items-center justify-center rounded-full border-[0.13em] px-[0.62em] py-[0.62em] md:hidden`}
+            >
+              {clicked && <div className="absolute h-3 w-3 rounded-full bg-moderateCyan"></div>}
+            </button>
+            <div className="flex flex-col items-start gap-[0.3em] md:flex-row md:gap-[1.1em]">
               <button
                 onMouseEnter={() => {
                   setHover(true);
@@ -186,14 +204,22 @@ const PledgeModal = ({
                 </span>
               )}
             </div>
+            {/*left for desktop*/}
             {amount !== undefined && (
-              <div className="flex items-center gap-[0.5em]">
+              <div className="hidden items-center gap-[0.5em] md:flex">
                 <span className="text-[1.15rem] font-[700]">{amount}</span>
                 <span className="text-[0.95rem] text-darkGray">left</span>
               </div>
             )}
           </div>
-          <span className="whitespace-pre-line text-[0.95rem] leading-[1.8em] text-darkGray">{main}</span>
+          <span className="md:whitespace-pre-line text-[0.95rem] leading-[1.8em] text-darkGray">{main}</span>
+          {/*left for mobile*/}
+          {amount !== undefined && (
+            <div className="flex items-center gap-[0.5em] md:hidden">
+              <span className="text-[1.15rem] font-[700]">{amount}</span>
+              <span className="text-[0.95rem] text-darkGray">left</span>
+            </div>
+          )}
         </div>
       </div>
       {clicked && <hr className="h-[2px] w-full justify-center bg-[#ECECEC]"></hr>}
@@ -294,7 +320,7 @@ export default function Home() {
       {modal !== BookmarkStates.none && modal !== BookmarkStates.completed && (
         <div
           className={
-            'absolute z-30 mt-[11.5em] flex h-fit w-full flex-col rounded-[0.5em] bg-white md:w-[45.6em] md:px-[3em] md:pb-[3em] md:pt-[2.9em]'
+            'absolute z-30 mt-[11.5em] flex h-fit w-[92%] flex-col rounded-[0.5em] bg-white px-[1.5em] py-[2em] md:w-[45.6em] md:px-[3em] md:py-0 md:pb-[3em] md:pt-[2.9em]'
           }
         >
           <button
