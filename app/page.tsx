@@ -418,9 +418,10 @@ export default function Home() {
       )}
       <nav className="h-full w-full">
         <div className="h-[25em] w-full bg-[url('./images/image-hero-desktop.jpg')]">
-          <div className="flex h-[8.05em] items-end justify-between bg-gradient-to-b from-customDark from-5% to-transparent to-100% pb-[3.8em] pl-[10.4em] pr-[10.3em]">
+          <div className="flex h-[8.05em] items-end justify-between bg-gradient-to-b from-customDark from-5% to-transparent to-100% pb-[3.8em] md:px-[6em] lg:px-0 lg:pl-[10.4em] lg:pr-[10.3em]">
             <Image className="h-fit" src={logo as string} alt="logo image" />
-            <div className="flex gap-[2.44em] text-[0.83rem] text-gray-50">
+            {/*right nav desktop*/}
+            <div className="hidden md:flex gap-[2.44em] text-[0.83rem] text-gray-50">
               <button
                 disabled={modal !== BookmarkStates.none}
                 className="decoration-darkGray decoration-1 hover:underline"
