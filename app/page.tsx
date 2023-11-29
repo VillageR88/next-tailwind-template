@@ -113,6 +113,7 @@ const PledgeModal = ({
   amount,
   action,
   completed,
+  valueFeedback,
   clicked,
 }: {
   header: string;
@@ -121,6 +122,7 @@ const PledgeModal = ({
   amount?: number;
   action(): undefined;
   completed(): undefined;
+  valueFeedback(value: number): undefined;
   clicked: boolean;
 }) => {
   const [hover, setHover] = useState<boolean>(false);
@@ -129,7 +131,6 @@ const PledgeModal = ({
   const updateCurrentValue = (value: number) => {
     setCurrentValue(value);
   };
-  console.log(currentValue);
 
   return (
     <div
@@ -168,6 +169,7 @@ const PledgeModal = ({
                 }}
                 onClick={() => {
                   amount !== 0 && action();
+                  valueFeedback(currentValue);
                 }}
                 className={`${amount !== 0 && hover && 'text-moderateCyan'} font-[700]`}
               >
@@ -207,6 +209,7 @@ const PledgeModal = ({
                   +e.target.value >= 1000000 && (e.target.value = '1000000');
                   +e.target.value < 0 && (e.target.value = '0');
                   updateCurrentValue(+e.target.value);
+                  valueFeedback(+e.target.value);
                 }}
               />
             </div>
@@ -251,6 +254,7 @@ export default function Home() {
   const [modal, setModal] = useState<BookmarkStates>(BookmarkStates.none);
   const [hoverModalExitButton, setHoverModalExitButton] = useState<boolean>(false);
   const [backed, setBacked] = useState<number>();
+  const [valueFeedback, setValueFeedback] = useState<number>();
   const [backers, setBackers] = useState<number>();
   const [daysLeft, setDaysLeft] = useState<number>();
   const [bamboo, setBamboo] = useState<number>();
@@ -316,7 +320,11 @@ export default function Home() {
               clicked={modal === BookmarkStates.pledgeWithNoReward ? true : false}
               completed={() => {
                 backers && setBackers(backers + 1);
+                backed && valueFeedback && setBacked(backed + valueFeedback);
                 setModal(BookmarkStates.completed);
+              }}
+              valueFeedback={(value) => {
+                setValueFeedback(value);
               }}
             />
             <PledgeModal
@@ -331,7 +339,11 @@ export default function Home() {
               clicked={modal === BookmarkStates.bambooStand ? true : false}
               completed={() => {
                 backers && setBackers(backers + 1);
+                backed && valueFeedback && setBacked(backed + valueFeedback);
                 setModal(BookmarkStates.completed);
+              }}
+              valueFeedback={(value) => {
+                setValueFeedback(value);
               }}
             />
             <PledgeModal
@@ -343,11 +355,15 @@ export default function Home() {
               amount={blackEdition}
               action={() => {
                 backers && setBackers(backers + 1);
+                backed && valueFeedback && setBacked(backed + valueFeedback);
                 setModal(BookmarkStates.blackEditionStand);
               }}
               clicked={modal === BookmarkStates.blackEditionStand ? true : false}
               completed={() => {
                 setModal(BookmarkStates.completed);
+              }}
+              valueFeedback={(value) => {
+                setValueFeedback(value);
               }}
             />
             <PledgeModal
@@ -357,11 +373,16 @@ export default function Home() {
               pledge={200}
               amount={mahogany}
               action={() => {
+                backers && setBackers(backers + 1);
+                backed && valueFeedback && setBacked(backed + valueFeedback);
                 setModal(BookmarkStates.mahoganySpecialEdition);
               }}
               clicked={modal === BookmarkStates.mahoganySpecialEdition ? true : false}
               completed={() => {
                 setModal(BookmarkStates.completed);
+              }}
+              valueFeedback={(value) => {
+                setValueFeedback(value);
               }}
             />
           </div>
