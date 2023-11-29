@@ -25,9 +25,11 @@ enum BookmarkStates {
 }
 
 const SingleBar = ({ value, target }: { value: number; target: number }) => {
+  const result = (value / target) * 100;
+  console.log(result);
   const progress = () => {
     return {
-      width: `${(value / target) * 100}%`,
+      width: `${result < 100 ? result : 100}%`,
     };
   };
   return (
@@ -354,12 +356,12 @@ export default function Home() {
               pledge={75}
               amount={blackEdition}
               action={() => {
-                backers && setBackers(backers + 1);
-                backed && valueFeedback && setBacked(backed + valueFeedback);
                 setModal(BookmarkStates.blackEditionStand);
               }}
               clicked={modal === BookmarkStates.blackEditionStand ? true : false}
               completed={() => {
+                backers && setBackers(backers + 1);
+                backed && valueFeedback && setBacked(backed + valueFeedback);
                 setModal(BookmarkStates.completed);
               }}
               valueFeedback={(value) => {
