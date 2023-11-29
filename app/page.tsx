@@ -120,6 +120,7 @@ const PledgeModal = ({
   clicked: boolean;
 }) => {
   const [hover, setHover] = useState<boolean>(false);
+  const [fieldLength, setFieldLength] = useState<number>(96);
   return (
     <div
       className={`${amount === 0 && 'opacity-50'} ${
@@ -183,15 +184,20 @@ const PledgeModal = ({
         <div className="flex items-center justify-between px-[1.5em] py-[1.4em]">
           <span className="text-[0.95rem] text-darkGray">Enter your pledge</span>
           <div className="flex gap-[1.1em]">
-            <input
-              defaultValue={pledge ?? 1}
-              className="rounded-[2em] px-[1.7em] text-[0.88rem] font-[700] outline outline-2 outline-[#ECECEC]"
-              type="number"
-              min={pledge ?? 1}
-              onChange={(e) => {
-                pledge && +e.target.value < pledge && (e.target.value = '' + pledge);
-              }}
-            />
+            <div className="flex items-center">
+              <span className="absolute ml-[1.5em] font-mono font-[700] text-darkGray opacity-60">$</span>
+              <input
+                style={{ width: fieldLength }}
+                defaultValue={pledge ?? 1}
+                className="flex rounded-[2em] px-[1.7em] py-[0.8em] text-center text-[0.88rem] font-[700] outline outline-2 outline-[#ECECEC] [appearance:textfield] [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none"
+                type="number"
+                min={pledge ?? 1}
+                onChange={(e) => {
+                  setFieldLength(80 + e.target.value.length * 8);
+                  +e.target.value >= 1000000 && (e.target.value = '1000000');
+                }}
+              />
+            </div>
             <button className="rounded-[2em] bg-moderateCyan px-[1.7em] py-[0.9em] text-[0.88rem] font-[500] text-white">
               Continue
             </button>
