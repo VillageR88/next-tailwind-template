@@ -417,8 +417,8 @@ export default function Home() {
         </div>
       )}
       <nav className="h-full w-full">
-        <div className="h-[25em] w-full bg-[url('./images/image-hero-desktop.jpg')]">
-          <div className="flex h-[8.05em] items-end justify-between bg-gradient-to-b from-customDark from-5% to-transparent to-100% pb-[3.8em] md:px-[6em] lg:px-0 lg:pl-[10.4em] lg:pr-[10.3em]">
+        <div className="h-[25em] w-full bg-[url('./images/image-hero-mobile.jpg')] bg-cover md:h-[25em] md:bg-[url('./images/image-hero-desktop.jpg')]">
+          <div className="flex h-[8.05em] items-end justify-between bg-gradient-to-b from-customDark from-5% to-transparent to-100% px-[1em] pb-[3.8em] md:px-[6em] lg:px-0 lg:pl-[10.4em] lg:pr-[10.3em]">
             <Image className="h-fit" src={logo as string} alt="logo image" />
             {/*right nav desktop*/}
             <div className="hidden gap-[2.44em] text-[0.83rem] text-gray-50 md:flex">
@@ -445,7 +445,7 @@ export default function Home() {
           </div>
         </div>
       </nav>
-      <main className="w-full md:w-auto">
+      <main className="w-full px-[1em] md:w-auto md:px-0">
         <div className="flex flex-col gap-[1.6em]">
           {/*first block*/}
           <div className="border-1 mt-[-5.67em] flex h-full w-full flex-col items-center rounded-[0.5em] bg-white pb-[2.5em] outline outline-1 outline-gray-100 md:h-[16.7em] md:w-[45.5em] md:pb-0">
@@ -490,23 +490,23 @@ export default function Home() {
             </div>
           </div>
           {/*second block*/}
-          <div className="border-1 flex h-full w-full rounded-[0.5em] bg-white outline outline-1 outline-gray-100 md:h-[13.15em]">
+          <div className="border-1 flex h-full w-full rounded-[0.5em] bg-white pb-[3em] outline outline-1 outline-gray-100 md:h-[13.15em] md:pb-0">
             <div className="flex w-full flex-col justify-center gap-[2em]">
-              <div className="flex h-fit w-full flex-col items-center justify-start md:flex-row">
-                <div className="flex min-w-[14em] flex-col content-center pl-[3em]">
+              <div className="flex h-fit w-full flex-col items-center gap-[2em] md:flex-row md:gap-0">
+                <div className="flex w-full flex-col items-center pt-[2em] text-center md:w-[14em] md:items-start md:pl-[3em] md:pt-0">
                   {backed ? <span className="text-[2rem] font-[700]">${formattedNumber(backed)}</span> : <Loader />}
                   <span className="text-darkGray">of $100,000 backed</span>
                 </div>
                 <div className="flex flex-col items-center md:flex-row">
-                  <span className="h-[1px] w-[5em] bg-slate-300 md:h-[4em] md:w-[1px]"></span>
-                  <div className="flex min-w-[14em] flex-col content-center pl-[3em]">
+                  <div className="mb-[2em] h-[1px] w-[5em] bg-slate-300 md:mb-0 md:h-[4em] md:w-[1px]"></div>
+                  <div className="flex w-full flex-col content-center text-center md:w-[14em] md:pl-[3em] md:text-left">
                     {backers ? <span className="text-[2rem] font-[700]">{formattedNumber(backers)}</span> : <Loader />}
                     <span className="text-darkGray">total backers</span>
                   </div>
                 </div>
                 <div className="flex flex-col items-center md:flex-row">
-                  <span className="h-[1px] w-[5em] bg-slate-300 md:h-[4em] md:w-[1px]"></span>
-                  <div className="flex min-w-[14em] flex-col content-center pl-[3em]">
+                  <div className="mb-[1em] h-[1px] w-[5em] bg-slate-300 md:mb-0 md:h-[4em] md:w-[1px]"></div>
+                  <div className="flex w-full flex-col content-center text-center md:w-[14em] md:pl-[3em] md:text-left">
                     {daysLeft ? <span className="text-[2rem] font-[700]">{daysLeft}</span> : <Loader />}
                     <span className="text-darkGray">days left</span>
                   </div>
