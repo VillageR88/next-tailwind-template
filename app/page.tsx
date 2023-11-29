@@ -76,13 +76,13 @@ const Pledge = ({
         value === 0 && 'opacity-[0.45]'
       } h-full w-full rounded-[0.5em] outline outline-1 outline-slate-300 md:h-[15.35em]`}
     >
-      <div className="flex h-full flex-col justify-between md:px-[2em] md:pb-[2em] md:pt-[2em]">
+      <div className="flex h-full flex-col justify-between gap-[1.5em] p-[1.5em] md:gap-0 md:p-0 md:px-[2em] md:pb-[2em] md:pt-[2em]">
         <div className="flex flex-col justify-between md:flex-row">
           <span className="text-[1.14rem] font-[700]">{header}</span>
-          <span className="mt-[0.3em] text-[0.95em] font-[500] text-moderateCyan">Pledge ${pledge} or more</span>
+          <span className="mt-[0.3em] font-[500] text-moderateCyan md:text-[0.95em]">Pledge ${pledge} or more</span>
         </div>
         <span className="leading-[1.85em] text-darkGray">{main}</span>
-        <div className="flex flex-col justify-between md:flex-row">
+        <div className="flex flex-col justify-between gap-[1.5em] md:flex-row md:gap-0">
           <div className="flex items-center gap-[0.6em] text-[0.95rem] font-[400]">
             {value !== undefined ? <span className="text-[2rem] font-[700]">{value}</span> : <Loader />}
             <span className="text-darkGray">left</span>
@@ -518,7 +518,7 @@ export default function Home() {
             </div>
           </div>
           {/*third block*/}
-          <div className="border-1 h-full w-full rounded-[0.5em] bg-white px-[3em] pb-[3em] pt-[2.8em] outline outline-1 outline-gray-100 md:w-[45.5em]">
+          <div className="border-1 h-full w-full rounded-[0.5em] bg-white px-[1.5em] pb-[3em] pt-[2.8em] outline outline-1 outline-gray-100 md:w-[45.5em] md:px-[3em]">
             <div className="flex flex-col gap-[1.98em]">
               <span className="text-[1.25rem] font-[700]">About this project</span>
               <span className="leading-[1.85em] text-darkGray">
