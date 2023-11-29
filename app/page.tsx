@@ -317,6 +317,16 @@ export default function Home() {
         console.error(error);
       });
   }, []);
+  useEffect(() => {
+    const handleResize = () => {
+      window.innerWidth >= 768 && setMobileNav(false);
+    };
+    window.addEventListener('resize', handleResize);
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
 
   return (
     <div
