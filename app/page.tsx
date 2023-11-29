@@ -290,7 +290,7 @@ export default function Home() {
   }, []);
 
   return (
-    <div className="flex min-h-screen flex-col items-center justify-start pb-[8em] font-commissioner">
+    <div className="flex min-h-screen w-full flex-col items-center justify-start pb-[8em] font-commissioner">
       {modal !== BookmarkStates.none && <div className={'fixed z-20 h-full w-full bg-black opacity-[50%]'}></div>}
       {modal !== BookmarkStates.none && modal !== BookmarkStates.completed && (
         <div
@@ -421,7 +421,7 @@ export default function Home() {
           <div className="flex h-[8.05em] items-end justify-between bg-gradient-to-b from-customDark from-5% to-transparent to-100% pb-[3.8em] md:px-[6em] lg:px-0 lg:pl-[10.4em] lg:pr-[10.3em]">
             <Image className="h-fit" src={logo as string} alt="logo image" />
             {/*right nav desktop*/}
-            <div className="hidden md:flex gap-[2.44em] text-[0.83rem] text-gray-50">
+            <div className="hidden gap-[2.44em] text-[0.83rem] text-gray-50 md:flex">
               <button
                 disabled={modal !== BookmarkStates.none}
                 className="decoration-darkGray decoration-1 hover:underline"
@@ -445,20 +445,20 @@ export default function Home() {
           </div>
         </div>
       </nav>
-      <main>
+      <main className="w-full md:w-auto">
         <div className="flex flex-col gap-[1.6em]">
           {/*first block*/}
-          <div className="border-1 mt-[-5.67em] flex h-[16.7em] w-[45.5em] flex-col items-center rounded-[0.5em] bg-white outline outline-1 outline-gray-100">
+          <div className="border-1 mt-[-5.67em] flex h-[16.7em] w-full flex-col items-center rounded-[0.5em] bg-white outline outline-1 outline-gray-100 md:w-[45.5em]">
             <div className="z-10 mt-[-1.8em] h-0 pb-[1.8em]">
               <Image src={mastercraft as string} alt="mastercraft logo" />
             </div>
-            <span className="mt-[1.88em] text-[1.72rem] font-[700] tracking-[0.010em]">
+            <span className="mt-[1.88em] text-center text-[1.72rem] font-[700] tracking-[0.010em]">
               Mastercraft Bamboo Monitor Riser
             </span>
-            <span className="mt-[0.6em] font-[400] text-darkGray">
+            <span className="mt-[0.6em] text-center font-[400] text-darkGray">
               A beautiful & handcrafted monitor stand to reduce neck and eye strain.
             </span>
-            <div className="mt-[2.38em] flex w-full justify-between pl-[3em] pr-[3em]">
+            <div className="mt-[2.38em] flex w-full justify-around md:justify-between md:pl-[3em] md:pr-[3em]">
               <button
                 disabled={modal !== BookmarkStates.none}
                 onClick={() => {
@@ -476,10 +476,10 @@ export default function Home() {
                 }}
                 className="hover:opacity-80"
               >
-                <div className="flex items-center gap-[1em] rounded-[3em] bg-[#F4F4F4] pr-[1.5em]">
+                <div className="flex items-center gap-[1em] rounded-[3em] bg-[#F4F4F4] md:pr-[1.5em]">
                   <Image src={(!bookmarked ? bookmark : bookmarkClicked) as string} alt="bookmark image" />
                   <span
-                    className={`font-[700] duration-300 ease-in-out ${
+                    className={`hidden font-[700] duration-300 ease-in-out md:block ${
                       !bookmarked ? 'w-[5em] text-darkGray' : 'w-[5.8em] text-darkCyan'
                     }`}
                   >
