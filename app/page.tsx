@@ -236,17 +236,16 @@ const PledgeModal = ({
 };
 
 function topFunction(value: number) {
-  // For modern browsers (Chrome, Firefox, Safari, Edge)
-  if ('scrollBehavior' in document.documentElement.style) {
-    window.scrollTo({
-      top: value,
-      behavior: 'smooth',
-    });
-  } else {
-    // For older browsers that don't support smooth scrolling
-    document.body.scrollTop = value;
-    document.documentElement.scrollTop = value;
-  }
+  const scrollDuration = 300;
+  const scrollStep = (value - window.scrollY) / (scrollDuration / 15);
+  const scrollInterval = setInterval(() => {
+    if (Math.abs(window.scrollY - value) > Math.abs(scrollStep)) {
+      window.scrollBy(0, scrollStep);
+    } else {
+      window.scrollTo(0, value);
+      clearInterval(scrollInterval);
+    }
+  }, 15);
 }
 
 export default function Home() {
