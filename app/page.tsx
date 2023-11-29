@@ -182,10 +182,15 @@ const PledgeModal = ({
       {clicked && (
         <div className="flex items-center justify-between px-[1.5em] py-[1.4em]">
           <span className="text-[0.95rem] text-darkGray">Enter your pledge</span>
-          <div>
+          <div className="flex gap-[1.1em]">
             <input
-              className="rounded-[2em] px-[1.7em] py-[0.9em] text-[0.88rem] font-[500] outline outline-2 outline-[#ECECEC]"
+              defaultValue={pledge ?? 1}
+              className="rounded-[2em] px-[1.7em] text-[0.88rem] font-[700] outline outline-2 outline-[#ECECEC]"
               type="number"
+              min={pledge ?? 1}
+              onChange={(e) => {
+                pledge && +e.target.value < pledge && (e.target.value = '' + pledge);
+              }}
             />
             <button className="rounded-[2em] bg-moderateCyan px-[1.7em] py-[0.9em] text-[0.88rem] font-[500] text-white">
               Continue
