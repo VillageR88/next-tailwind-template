@@ -205,6 +205,7 @@ const PledgeModal = ({
                 onChange={(e) => {
                   setFieldLength(80 + e.target.value.length * 8);
                   +e.target.value >= 1000000 && (e.target.value = '1000000');
+                  +e.target.value < 0 && (e.target.value = '0');
                   updateCurrentValue(+e.target.value);
                 }}
               />
