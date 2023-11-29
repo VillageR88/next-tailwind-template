@@ -74,15 +74,15 @@ const Pledge = ({
     <div
       className={`${
         value === 0 && 'opacity-[0.45]'
-      } h-[15.35em] w-full rounded-[0.5em] outline outline-1 outline-slate-300`}
+      } h-full w-full rounded-[0.5em] outline outline-1 outline-slate-300 md:h-[15.35em]`}
     >
-      <div className="flex h-full flex-col justify-between px-[2em] pb-[2em]  pt-[2em]">
-        <div className="flex justify-between">
+      <div className="flex h-full flex-col justify-between md:px-[2em] md:pb-[2em] md:pt-[2em]">
+        <div className="flex md:flex-row flex-col justify-between">
           <span className="text-[1.14rem] font-[700]">{header}</span>
           <span className="mt-[0.3em] text-[0.95em] font-[500] text-moderateCyan">Pledge ${pledge} or more</span>
         </div>
         <span className="leading-[1.85em] text-darkGray">{main}</span>
-        <div className="flex justify-between">
+        <div className="flex flex-col justify-between md:flex-row">
           <div className="flex items-center gap-[0.6em] text-[0.95rem] font-[400]">
             {value !== undefined ? <span className="text-[2rem] font-[700]">{value}</span> : <Loader />}
             <span className="text-darkGray">left</span>
@@ -144,7 +144,7 @@ const PledgeModal = ({
       } rounded-[0.5em]`}
     >
       <div
-        className={`flex h-full justify-start gap-[1.4em] pb-[1.83em] pl-[1.65em] pr-[1.63em] pt-[1.83em] tracking-[-0.004em]`}
+        className={`flex h-full justify-start gap-[1.4em] tracking-[-0.004em] md:pb-[1.83em] md:pl-[1.65em] md:pr-[1.63em] md:pt-[1.83em]`}
       >
         <button
           onMouseEnter={() => {
@@ -490,22 +490,22 @@ export default function Home() {
             </div>
           </div>
           {/*second block*/}
-          <div className="border-1 flex h-[13.15em] w-full rounded-[0.5em] bg-white outline outline-1 outline-gray-100">
+          <div className="border-1 flex h-full w-full rounded-[0.5em] bg-white outline outline-1 outline-gray-100 md:h-[13.15em]">
             <div className="flex w-full flex-col justify-center gap-[2em]">
-              <div className="flex h-fit w-full items-center justify-start">
+              <div className="flex h-fit w-full flex-col items-center justify-start md:flex-row">
                 <div className="flex min-w-[14em] flex-col content-center pl-[3em]">
                   {backed ? <span className="text-[2rem] font-[700]">${formattedNumber(backed)}</span> : <Loader />}
                   <span className="text-darkGray">of $100,000 backed</span>
                 </div>
-                <div className="flex items-center">
-                  <span className="h-[4em] w-[1px] bg-slate-300"></span>
+                <div className="flex flex-col items-center md:flex-row">
+                  <span className="h-[1px] w-[5em] bg-slate-300 md:h-[4em] md:w-[1px]"></span>
                   <div className="flex min-w-[14em] flex-col content-center pl-[3em]">
                     {backers ? <span className="text-[2rem] font-[700]">{formattedNumber(backers)}</span> : <Loader />}
                     <span className="text-darkGray">total backers</span>
                   </div>
                 </div>
-                <div className="flex items-center">
-                  <span className="h-[4em] w-[1px] bg-slate-300"></span>
+                <div className="flex flex-col items-center md:flex-row">
+                  <span className="h-[1px] w-[5em] bg-slate-300 md:h-[4em] md:w-[1px]"></span>
                   <div className="flex min-w-[14em] flex-col content-center pl-[3em]">
                     {daysLeft ? <span className="text-[2rem] font-[700]">{daysLeft}</span> : <Loader />}
                     <span className="text-darkGray">days left</span>
@@ -517,7 +517,8 @@ export default function Home() {
               </div>
             </div>
           </div>
-          <div className="border-1 h-full w-[45.5em] rounded-[0.5em] bg-white px-[3em] pb-[3em] pt-[2.8em] outline outline-1 outline-gray-100">
+          {/*third block*/}
+          <div className="border-1 h-full w-full rounded-[0.5em] bg-white px-[3em] pb-[3em] pt-[2.8em] outline outline-1 outline-gray-100 md:w-[45.5em]">
             <div className="flex flex-col gap-[1.98em]">
               <span className="text-[1.25rem] font-[700]">About this project</span>
               <span className="leading-[1.85em] text-darkGray">
