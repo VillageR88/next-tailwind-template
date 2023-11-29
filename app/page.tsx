@@ -77,7 +77,7 @@ const Pledge = ({
       } h-full w-full rounded-[0.5em] outline outline-1 outline-slate-300 md:h-[15.35em]`}
     >
       <div className="flex h-full flex-col justify-between md:px-[2em] md:pb-[2em] md:pt-[2em]">
-        <div className="flex md:flex-row flex-col justify-between">
+        <div className="flex flex-col justify-between md:flex-row">
           <span className="text-[1.14rem] font-[700]">{header}</span>
           <span className="mt-[0.3em] text-[0.95em] font-[500] text-moderateCyan">Pledge ${pledge} or more</span>
         </div>
@@ -295,7 +295,7 @@ export default function Home() {
       {modal !== BookmarkStates.none && modal !== BookmarkStates.completed && (
         <div
           className={
-            'absolute z-30 mt-[11.5em] flex h-fit w-[45.6em] flex-col rounded-[0.5em] bg-white px-[3em] pb-[3em] pt-[2.9em]'
+            'absolute z-30 mt-[11.5em] flex h-fit w-full flex-col rounded-[0.5em] bg-white md:w-[45.6em] md:px-[3em] md:pb-[3em] md:pt-[2.9em]'
           }
         >
           <button
@@ -399,7 +399,7 @@ export default function Home() {
         </div>
       )}
       {modal === BookmarkStates.completed && (
-        <div className="absolute z-30 mt-[28.75em] flex h-[28.05em] w-[33.7em] flex-col items-center rounded-[0.5em] bg-white px-[3em] pt-[3em] text-center">
+        <div className="absolute z-30 mt-[28.75em] flex h-[28.05em] w-full flex-col items-center rounded-[0.5em] bg-white px-[3em] pt-[3em] text-center md:w-[33.7em]">
           <Image className="h-[5.6em] w-fit" src={check as string} alt="check image" />
           <span className="mt-[1.9em] text-[1.5rem] font-[700]">Thanks for your support!</span>
           <span className="mt-[0.8em] text-[1rem] leading-[1.85em] text-darkGray">
