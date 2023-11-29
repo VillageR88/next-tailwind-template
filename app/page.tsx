@@ -11,6 +11,7 @@ import bookmark from './images/icon-bookmark.svg';
 import bookmarkClicked from './images/icon-bookmarked.svg';
 import closeModal from './images/icon-close-modal.svg';
 import closeModalBlack from './images/icon-close-modalBlack.svg';
+import check from './images/icon-check.svg';
 import mastercraft from './images/logo-mastercraft.svg';
 
 enum BookmarkStates {
@@ -356,7 +357,19 @@ export default function Home() {
         </div>
       )}
       {modal === BookmarkStates.completed && (
-        <div className="absolute z-30 mt-[31.5em] h-[21em] w-[33.6em] rounded bg-white"></div>
+        <div className="absolute z-30 mt-[28.75em] flex h-[28.05em] w-[33.7em] flex-col items-center rounded-[0.5em] bg-white">
+          <Image className="h-fit w-fit" src={check as string} alt="check image" />
+          <span>HEADER</span>
+          <span>MAIN</span>
+          <button
+            onClick={() => {
+              setModal(BookmarkStates.none);
+            }}
+            className="bg-moderateCyan hover:bg-darkCyan"
+          >
+            Got it!
+          </button>
+        </div>
       )}
       <nav className="h-full w-full">
         <div className="h-[25em] w-full bg-[url('./images/image-hero-desktop.jpg')]">
