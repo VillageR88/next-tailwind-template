@@ -125,6 +125,11 @@ const PledgeModal = ({
 }) => {
   const [hover, setHover] = useState<boolean>(false);
   const [fieldLength, setFieldLength] = useState<number>(96);
+  const [currentValue, setCurrentValue] = useState<number>(pledge ?? 1);
+  const updateCurrentValue = (value: number) => {
+    setCurrentValue(value);
+  };
+
   return (
     <div
       className={`${amount === 0 && 'opacity-50'} ${
@@ -199,12 +204,13 @@ const PledgeModal = ({
                 onChange={(e) => {
                   setFieldLength(80 + e.target.value.length * 8);
                   +e.target.value >= 1000000 && (e.target.value = '1000000');
+                  updateCurrentValue(+e.target.value);
                 }}
               />
             </div>
             <button
               onClick={() => {
-                completed();
+                currentValue >= (pledge ?? 1) && completed();
               }}
               className="rounded-[2em] bg-moderateCyan px-[1.7em] py-[0.9em] text-[0.88rem] font-[500] text-white hover:bg-darkCyan"
             >
@@ -272,7 +278,7 @@ export default function Home() {
 
   return (
     <div className="flex min-h-screen flex-col items-center justify-start pb-[8em] font-commissioner">
-      {modal !== BookmarkStates.none && <mask className={'fixed z-20 h-full w-full bg-black opacity-[50%]'}></mask>}
+      {modal !== BookmarkStates.none && <div className={'fixed z-20 h-full w-full bg-black opacity-[50%]'}></div>}
       {modal !== BookmarkStates.none && modal !== BookmarkStates.completed && (
         <div
           className={
@@ -360,7 +366,7 @@ export default function Home() {
         <div className="absolute z-30 mt-[28.75em] flex h-[28.05em] w-[33.7em] flex-col items-center rounded-[0.5em] bg-white px-[3em] pt-[3em] text-center">
           <Image className="h-[5.6em] w-fit" src={check as string} alt="check image" />
           <span className="mt-[1.9em] text-[1.5rem] font-[700]">Thanks for your support!</span>
-          <span className="leading-[1.85em] mt-[0.8em] text-[1rem] text-darkGray">
+          <span className="mt-[0.8em] text-[1rem] leading-[1.85em] text-darkGray">
             Your pledge brings us one step closer to sharing Mastercraft Bamboo Monitor Riser worldwide. You will get an
             email once our campaign is completed.
           </span>
@@ -368,7 +374,7 @@ export default function Home() {
             onClick={() => {
               setModal(BookmarkStates.none);
             }}
-            className="bg-moderateCyan text-white py-[1em] px-[2.5em] rounded-[2em] text-[0.85rem] font-[500] hover:bg-darkCyan mt-[2.4em]"
+            className="mt-[2.4em] rounded-[2em] bg-moderateCyan px-[2.5em] py-[1em] text-[0.85rem] font-[500] text-white hover:bg-darkCyan"
           >
             Got it!
           </button>
