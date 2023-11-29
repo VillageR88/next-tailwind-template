@@ -26,7 +26,6 @@ enum BookmarkStates {
 
 const SingleBar = ({ value, target }: { value: number; target: number }) => {
   const result = (value / target) * 100;
-  console.log(result);
   const progress = () => {
     return {
       width: `${result < 100 ? result : 100}%`,
@@ -156,6 +155,7 @@ const PledgeModal = ({
           }}
           onClick={() => {
             amount !== 0 && action();
+            valueFeedback(currentValue);
           }}
           className={`${
             amount !== 0 && hover ? 'border-moderateCyan' : 'border-[#ECECEC]'
@@ -175,6 +175,7 @@ const PledgeModal = ({
               }}
               onClick={() => {
                 amount !== 0 && action();
+                valueFeedback(currentValue);
               }}
               className={`${
                 amount !== 0 && hover ? 'border-moderateCyan' : 'border-[#ECECEC]'
@@ -353,7 +354,7 @@ export default function Home() {
               clicked={modal === BookmarkStates.pledgeWithNoReward ? true : false}
               completed={() => {
                 backers && setBackers(backers + 1);
-                backed && valueFeedback && setBacked(backed + valueFeedback);
+                setBacked((backed ?? 0) + (valueFeedback ?? 0));
                 setModal(BookmarkStates.completed);
               }}
               valueFeedback={(value) => {
@@ -372,7 +373,7 @@ export default function Home() {
               clicked={modal === BookmarkStates.bambooStand ? true : false}
               completed={() => {
                 backers && setBackers(backers + 1);
-                backed && valueFeedback && setBacked(backed + valueFeedback);
+                setBacked((backed ?? 0) + (valueFeedback ?? 0));
                 bamboo && setBamboo(bamboo - 1);
                 setModal(BookmarkStates.completed);
               }}
@@ -393,7 +394,7 @@ export default function Home() {
               clicked={modal === BookmarkStates.blackEditionStand ? true : false}
               completed={() => {
                 backers && setBackers(backers + 1);
-                backed && valueFeedback && setBacked(backed + valueFeedback);
+                setBacked((backed ?? 0) + (valueFeedback ?? 0));
                 blackEdition && setBlackEdition(blackEdition - 1);
                 setModal(BookmarkStates.completed);
               }}
