@@ -129,6 +129,7 @@ const PledgeModal = ({
   const updateCurrentValue = (value: number) => {
     setCurrentValue(value);
   };
+  console.log(currentValue);
 
   return (
     <div
@@ -313,6 +314,7 @@ export default function Home() {
               }}
               clicked={modal === BookmarkStates.pledgeWithNoReward ? true : false}
               completed={() => {
+                backers && setBackers(backers + 1);
                 setModal(BookmarkStates.completed);
               }}
             />
@@ -327,6 +329,7 @@ export default function Home() {
               }}
               clicked={modal === BookmarkStates.bambooStand ? true : false}
               completed={() => {
+                backers && setBackers(backers + 1);
                 setModal(BookmarkStates.completed);
               }}
             />
@@ -338,6 +341,7 @@ export default function Home() {
               pledge={75}
               amount={blackEdition}
               action={() => {
+                backers && setBackers(backers + 1);
                 setModal(BookmarkStates.blackEditionStand);
               }}
               clicked={modal === BookmarkStates.blackEditionStand ? true : false}
