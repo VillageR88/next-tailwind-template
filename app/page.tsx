@@ -61,12 +61,14 @@ const Pledge = ({
   value,
   pledge,
   action,
+  stage,
 }: {
   header: string;
   main: string;
   value: number | undefined;
   pledge: number;
   action(): undefined;
+  stage: BookmarkStates;
 }) => {
   return (
     <div
@@ -87,6 +89,7 @@ const Pledge = ({
           </div>
           {value !== undefined ? (
             <button
+              disabled={stage !== BookmarkStates.none}
               onClick={() => {
                 if (value !== 0) {
                   action();
@@ -418,9 +421,25 @@ export default function Home() {
           <div className="flex h-[8.05em] items-end justify-between bg-gradient-to-b from-customDark from-5% to-transparent to-100% pb-[3.8em] pl-[10.4em] pr-[10.3em]">
             <Image className="h-fit" src={logo as string} alt="logo image" />
             <div className="flex gap-[2.44em] text-[0.83rem] text-gray-50">
-              <button className="decoration-darkGray decoration-1 hover:underline">About</button>
-              <button className="decoration-darkGray decoration-1 hover:underline">Discover</button>
-              <button className="decoration-darkGray decoration-1 hover:underline">Get Started</button>
+              <button
+                disabled={modal !== BookmarkStates.none}
+                className="decoration-darkGray decoration-1 hover:underline"
+              >
+                About
+              </button>
+
+              <button
+                disabled={modal !== BookmarkStates.none}
+                className="decoration-darkGray decoration-1 hover:underline"
+              >
+                Discover
+              </button>
+              <button
+                disabled={modal !== BookmarkStates.none}
+                className="decoration-darkGray decoration-1 hover:underline"
+              >
+                Get Started
+              </button>
             </div>
           </div>
         </div>
@@ -440,6 +459,7 @@ export default function Home() {
             </span>
             <div className="mt-[2.38em] flex w-full justify-between pl-[3em] pr-[3em]">
               <button
+                disabled={modal !== BookmarkStates.none}
                 onClick={() => {
                   setModal(BookmarkStates.initialBookmark);
                   topFunction(165);
@@ -449,6 +469,7 @@ export default function Home() {
                 Back this project
               </button>
               <button
+                disabled={modal !== BookmarkStates.none}
                 onClick={() => {
                   setBookmarked(!bookmarked);
                 }}
@@ -517,6 +538,7 @@ export default function Home() {
                   action={() => {
                     setModal(BookmarkStates.bambooStand);
                   }}
+                  stage={modal}
                 />
                 <Pledge
                   header="Black Edition Stand"
@@ -527,6 +549,7 @@ export default function Home() {
                   action={() => {
                     setModal(BookmarkStates.blackEditionStand);
                   }}
+                  stage={modal}
                 />
                 <Pledge
                   header="Mahogany Special Edition"
@@ -537,6 +560,7 @@ export default function Home() {
                   action={() => {
                     setModal(BookmarkStates.mahoganySpecialEdition);
                   }}
+                  stage={modal}
                 />
               </div>
             </div>
