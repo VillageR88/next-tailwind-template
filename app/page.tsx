@@ -5,8 +5,6 @@ import '@fontsource/manrope/600.css';
 import '@fontsource/manrope/800.css';
 import React from 'react';
 import Slider from '@mui/material/Slider';
-import Image from 'next/image';
-import thumbImage from './images/icon-slider.svg';
 
 export default function Home() {
   return (
@@ -23,15 +21,17 @@ export default function Home() {
         </div>
         {/*main wrapper*/}
         <div className="mt-[2.9em] flex h-[24.8em] w-[33.8em] flex-col rounded-[0.5em] bg-white shadow-xl shadow-slate-200">
-          <div className="mt-[3.6em] flex justify-between px-[2.8em]">
-            <span className="text-[0.9rem] font-[800]">100K PAGEVIEWS</span>
-            <div>
-              <span>$16.00</span>
-              <span>/ month</span>
+          <div className="mt-[2.4em] flex items-center justify-between pl-[2.8em] pr-[3.05em]">
+            <span className="mt-[-0.1em] text-[0.89rem] font-[800] tracking-[0.13em] text-grayishBlue_Text">
+              100K PAGEVIEWS
+            </span>
+            <div className="flex items-center gap-[0.5em] text-darkDesaturatedBlue_TextCTABackground">
+              <span className="text-[2.5rem] font-[800] tracking-[-0.02em]">$16.00</span>
+              <span className="font-[600] text-grayishBlue_Text">/ month</span>
             </div>
           </div>
           <Slider
-            className="h-[0.5em] w-[82%] self-center"
+            className="h-[0.5em] mt-[1.5em] w-[82%] self-center"
             max={4}
             min={0}
             sx={{
