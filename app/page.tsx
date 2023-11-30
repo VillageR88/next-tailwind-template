@@ -15,6 +15,7 @@ interface CustomEventTarget extends EventTarget {
 const pageViews = ['10K', '50K', '100K', '500K', '1M'];
 const perMonth = [8, 12, 16, 24, 36];
 export default function Home() {
+  const [hoverOnMonthly, setHoverOnMonthly] = useState<boolean>(false);
   const [selection, setSelection] = useState<number>(2);
   return (
     <main className="flex min-h-screen flex-col items-center justify-center font-manrope">
@@ -60,6 +61,10 @@ export default function Home() {
                 '&:focus, &:hover, &.Mui-active, &.Mui-focusVisible, &:before': {
                   boxShadow: '2px 10px 12px 12px rgba(15, 253, 248, 0.1)', // Add a consistent shadow in rgba(15, 253, 248, 0.3) color to the thumb for all states
                 },
+                '&:hover': {
+                  backgroundColor: '#7CEADF',
+                },
+                '&.Mui-active': { backgroundColor: '#22AEA1' },
               },
 
               '& .MuiSlider-track': {
@@ -76,6 +81,12 @@ export default function Home() {
           <div className="mr-[4em] mt-[2.6em] flex items-center justify-end">
             <span className="mr-[0.3em] text-[0.76rem] font-[600] text-grayishBlue_Text">Monthly Billing</span>
             <Switch
+              onMouseEnter={() => {
+                setHoverOnMonthly(true);
+              }}
+              onMouseLeave={() => {
+                setHoverOnMonthly(false);
+              }}
               color="default"
               className="mx-[0.8em] bg-blue-100"
               size="small"
@@ -89,9 +100,10 @@ export default function Home() {
                   height: 15,
                 },
                 '& .MuiSwitch-track': {
-                  backgroundColor: 'hsl(223, 50%, 87%)', // Set the track's background color to red for both checked and unchecked states
+                  backgroundColor: !hoverOnMonthly ? 'hsl(223, 50%, 87%)' : '#7EE9D9', // Set the track's background color to red for both checked and unchecked states
                   boxShadow: 'none',
                   boxSizing: 'border-box',
+                  opacity: 1,
                 },
                 height: 22,
                 width: 43,
@@ -123,7 +135,7 @@ export default function Home() {
                 <span className="mr-[0.6em] text-[0.76rem] font-[600] text-grayishBlue_Text">Email reports</span>
               </div>
             </div>
-            <button className="flex h-[3.3em] w-[22.2em] items-center justify-center rounded-[2em] bg-darkDesaturatedBlue_TextCTABackground  text-[0.77rem] font-[600] text-paleBlue_CTA_Text">
+            <button className="flex h-[3.3em] w-[22.2em] items-center justify-center rounded-[2em] bg-darkDesaturatedBlue_TextCTABackground text-[0.77rem]  font-[600] text-paleBlue_CTA_Text hover:text-white">
               Start my trial
             </button>
           </div>
