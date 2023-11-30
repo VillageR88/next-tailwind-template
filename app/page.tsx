@@ -6,6 +6,8 @@ import '@fontsource/manrope/800.css';
 import React from 'react';
 import Slider from '@mui/material/Slider';
 import Switch from '@mui/material/Switch';
+import Image from 'next/image';
+import check from './images/icon-check.svg';
 
 export default function Home() {
   return (
@@ -59,9 +61,59 @@ export default function Home() {
               },
             }}
           />
-          <div className="mt-[2em] flex justify-center">
-            <span>Monthly Biling</span>
-            <Switch defaultChecked color="default" />
+          <div className="mr-[4em] mt-[2.6em] flex items-center justify-end">
+            <span className="mr-[0.3em] text-[0.76rem] font-[600] text-grayishBlue_Text">Monthly Billing</span>
+            <Switch
+              color="default"
+              className="mx-[0.8em] bg-blue-100"
+              size="small"
+              sx={{
+                '& .MuiSwitch-switchBase.Mui-checked': {
+                  transform: 'translateX(20px)',
+                },
+                '& .MuiSwitch-thumb': {
+                  boxSizing: 'border-box',
+                  width: 15,
+                  height: 15,
+                },
+                '& .MuiSwitch-track': {
+                  backgroundColor: 'hsl(223, 50%, 87%)', // Set the track's background color to red for both checked and unchecked states
+                  boxShadow: 'none',
+                  boxSizing: 'border-box',
+                },
+                height: 22,
+                width: 43,
+                display: 'flex',
+                padding: 0,
+                borderRadius: '20px',
+              }}
+            />
+            <span className="ml-[0.3em] mr-[0.6em] text-[0.76rem] font-[600] text-grayishBlue_Text">
+              Yearly Billing
+            </span>
+            <span className="h-fit rounded-[1em] bg-lightGrayishRed_DiscountBackground px-[0.6em] pt-[0.1em] text-[0.65rem] font-[800] text-lightRed_Discount_Text">
+              25% discount
+            </span>
+          </div>
+          <hr className="mt-[2.6em] opacity-70" />
+          <div className=" mt-[1em] flex h-[6.4em] w-full items-center px-[2.95em]">
+            <div className="flex h-full w-full flex-col justify-center gap-[0.54em] ">
+              <div className="flex items-center gap-[0.9em]">
+                <Image className="h-fit" src={check as string} alt="check icon" />
+                <span className="mr-[0.6em] text-[0.76rem] font-[600] text-grayishBlue_Text">Unlimited websites</span>
+              </div>
+              <div className="flex items-center gap-[0.9em]">
+                <Image className="h-fit" src={check as string} alt="check icon" />
+                <span className="mr-[0.6em] text-[0.76rem] font-[600] text-grayishBlue_Text">100% data ownership</span>
+              </div>
+              <div className="flex items-center gap-[0.9em]">
+                <Image className="h-fit" src={check as string} alt="check icon" />
+                <span className="mr-[0.6em] text-[0.76rem] font-[600] text-grayishBlue_Text">Email reports</span>
+              </div>
+            </div>
+            <button className="flex h-[3.3em] w-[22em] items-center justify-center rounded-[2em] bg-darkDesaturatedBlue_TextCTABackground  text-[0.77rem] font-[600] text-paleBlue_CTA_Text">
+              Start my trial
+            </button>
           </div>
         </div>
       </div>
