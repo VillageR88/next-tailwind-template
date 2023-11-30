@@ -34,7 +34,7 @@ export default function Home() {
             </div>
           </div>
           <Slider
-            className="mt-[1.5em] h-[0.5em] w-[82%] self-center"
+            className="mt-[1.5em] h-[0.5em] self-center"
             max={4}
             min={0}
             sx={{
@@ -59,6 +59,7 @@ export default function Home() {
                 border: 0,
                 backgroundColor: '#E0E0E0', // Light gray background for rail
               },
+              width: 444,
             }}
           />
           <div className="mr-[4em] mt-[2.6em] flex items-center justify-end">
@@ -96,7 +97,7 @@ export default function Home() {
             </span>
           </div>
           <hr className="mt-[2.6em] opacity-70" />
-          <div className=" mt-[1em] flex h-[6.4em] w-full items-center px-[2.95em]">
+          <div className=" mt-[1em] flex h-[6.4em] w-full items-center pl-[2.95em] pr-[2.8em]">
             <div className="flex h-full w-full flex-col justify-center gap-[0.54em] ">
               <div className="flex items-center gap-[0.9em]">
                 <Image className="h-fit" src={check as string} alt="check icon" />
@@ -111,7 +112,7 @@ export default function Home() {
                 <span className="mr-[0.6em] text-[0.76rem] font-[600] text-grayishBlue_Text">Email reports</span>
               </div>
             </div>
-            <button className="flex h-[3.3em] w-[22em] items-center justify-center rounded-[2em] bg-darkDesaturatedBlue_TextCTABackground  text-[0.77rem] font-[600] text-paleBlue_CTA_Text">
+            <button className="flex h-[3.3em] w-[22.2em] items-center justify-center rounded-[2em] bg-darkDesaturatedBlue_TextCTABackground  text-[0.77rem] font-[600] text-paleBlue_CTA_Text">
               Start my trial
             </button>
           </div>
