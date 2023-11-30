@@ -22,15 +22,15 @@ export default function Home() {
       <div className="flex h-[50em] w-full flex-col items-center bg-[#F9FAFF] bg-[url('./images/bg-pattern.svg')] bg-top bg-no-repeat ">
         {/*top wrapper*/}
         <div className="mt-[3.75em] flex h-[10em] w-fit flex-col items-center justify-center gap-[0.62em] bg-[url('./images/pattern-circles.svg')] bg-center  bg-no-repeat">
-          <span className="text-[1.75rem] font-[800] text-darkDesaturatedBlue_TextCTABackground">
+          <span className="text-[1.5rem]  font-[800] text-darkDesaturatedBlue_TextCTABackground md:text-[1.75rem]">
             Simple, traffic-based pricing
           </span>
-          <span className="text-[0.94rem] font-[600] text-grayishBlue_Text">
-            Sign-up for our 30-day trial. No credit card required.
+          <span className="whitespace-pre-line px-[2em] text-center text-[0.94rem] font-[600] text-grayishBlue_Text md:whitespace-normal md:px-0 ">
+            {'Sign-up for our 30-day trial.\nNo credit card required.'}
           </span>
         </div>
         {/*main wrapper*/}
-        <div className="mt-[2.9em] flex h-[24.8em] w-[33.8em] flex-col rounded-[0.5em] bg-white shadow-xl shadow-slate-200">
+        <div className="mt-[2.9em] flex h-[24.8em] flex-col rounded-[0.5em] bg-white shadow-xl shadow-slate-200 md:w-[33.8em]">
           <div className="mt-[2.4em] flex items-center justify-between pl-[2.8em] pr-[3.05em]">
             <span className="mt-[-0.1em] text-[0.89rem] font-[800] tracking-[0.13em] text-grayishBlue_Text">
               {pageViews[selection]} PAGEVIEWS
@@ -41,6 +41,7 @@ export default function Home() {
             </div>
           </div>
           <Slider
+            inputMode="none"
             onChange={(e) => {
               const target = e.target as CustomEventTarget;
               setSelection(target.value);
