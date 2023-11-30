@@ -3,13 +3,20 @@ import '@fontsource/manrope';
 import '@fontsource/manrope/400.css';
 import '@fontsource/manrope/600.css';
 import '@fontsource/manrope/800.css';
-import React from 'react';
+import React, { useState } from 'react';
 import Slider from '@mui/material/Slider';
 import Switch from '@mui/material/Switch';
 import Image from 'next/image';
 import check from './images/icon-check.svg';
 
+interface CustomEventTarget extends EventTarget {
+  value: number;
+}
+
 export default function Home() {
+  const pageViews = ['10K', '50K', '100K', '500K', '1M'];
+  const perMonth = [8, 12, 16, 24, 36];
+  const [selection, setSelection] = useState<number>(2);
   return (
     <main className="flex min-h-screen flex-col items-center justify-center font-manrope">
       <div className="flex h-[50em] w-full flex-col items-center bg-[#F9FAFF] bg-[url('./images/bg-pattern.svg')] bg-top bg-no-repeat ">
@@ -26,15 +33,20 @@ export default function Home() {
         <div className="mt-[2.9em] flex h-[24.8em] w-[33.8em] flex-col rounded-[0.5em] bg-white shadow-xl shadow-slate-200">
           <div className="mt-[2.4em] flex items-center justify-between pl-[2.8em] pr-[3.05em]">
             <span className="mt-[-0.1em] text-[0.89rem] font-[800] tracking-[0.13em] text-grayishBlue_Text">
-              100K PAGEVIEWS
+              {pageViews[selection]} PAGEVIEWS
             </span>
             <div className="flex items-center gap-[0.5em] text-darkDesaturatedBlue_TextCTABackground">
-              <span className="text-[2.5rem] font-[800] tracking-[-0.02em]">$16.00</span>
+              <span className="text-[2.5rem] font-[800] tracking-[-0.02em]">${perMonth[selection]}.00</span>
               <span className="font-[600] text-grayishBlue_Text">/ month</span>
             </div>
           </div>
           <Slider
+            onChange={(e) => {
+              const target = e.target as CustomEventTarget;
+              setSelection(target.value);
+            }}
             className="mt-[1.5em] h-[0.5em] self-center"
+            defaultValue={selection}
             max={4}
             min={0}
             sx={{
