@@ -36,15 +36,18 @@ export default function Home() {
             min={0}
             sx={{
               '& .MuiSlider-thumb': {
-                outline: 'none', // Remove the outline when focused
-                boxShadow: 'none', // Remove the box shadow when focused or active
+                boxShadow: '2px 10px 12px 12px rgba(15, 253, 248, 0.1)', // Add a consistent shadow in rgba(15, 253, 248, 0.3) color to the thumb for all states
                 color: '#14D5C8', // Change the color of the thumb
                 width: 40, // Set the width of the thumb
                 height: 40, // Set the height of the thumb
                 backgroundImage: 'url(./images/icon-slider.svg)', // Set the background image of the thumb
                 backgroundPosition: 'center', // Position the background image at the center
                 backgroundRepeat: 'no-repeat', // Do not repeat the background image
+                '&:focus, &:hover, &.Mui-active, &.Mui-focusVisible, &:before': {
+                  boxShadow: '2px 10px 12px 12px rgba(15, 253, 248, 0.1)', // Add a consistent shadow in rgba(15, 253, 248, 0.3) color to the thumb for all states
+                },
               },
+
               '& .MuiSlider-track': {
                 backgroundColor: '#A2F3EB', // Light gray background for track
                 border: 0,
