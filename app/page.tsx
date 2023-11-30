@@ -5,6 +5,7 @@ import '@fontsource/manrope/600.css';
 import '@fontsource/manrope/800.css';
 import React from 'react';
 import Slider from '@mui/material/Slider';
+import Image from 'next/image';
 import thumbImage from './images/icon-slider.svg';
 
 export default function Home() {
@@ -34,6 +35,7 @@ export default function Home() {
             max={4}
             min={0}
             sx={{
+              '& .MuiSlider-thumb': { color: '#14D5C8', width: 40, height: 40 },
               '& .MuiSlider-track': {
                 backgroundColor: '#A2F3EB', // Light gray background for track
                 border: 0,
