@@ -36,6 +36,8 @@ export default function Home() {
             min={0}
             sx={{
               '& .MuiSlider-thumb': {
+                outline: 'none', // Remove the outline when focused
+                boxShadow: 'none', // Remove the box shadow when focused or active
                 color: '#14D5C8', // Change the color of the thumb
                 width: 40, // Set the width of the thumb
                 height: 40, // Set the height of the thumb
