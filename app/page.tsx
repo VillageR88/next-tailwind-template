@@ -5,6 +5,7 @@ import '@fontsource/manrope/600.css';
 import '@fontsource/manrope/800.css';
 import React from 'react';
 import Slider from '@mui/material/Slider';
+import Switch from '@mui/material/Switch';
 
 export default function Home() {
   return (
@@ -31,7 +32,7 @@ export default function Home() {
             </div>
           </div>
           <Slider
-            className="h-[0.5em] mt-[1.5em] w-[82%] self-center"
+            className="mt-[1.5em] h-[0.5em] w-[82%] self-center"
             max={4}
             min={0}
             sx={{
@@ -58,6 +59,10 @@ export default function Home() {
               },
             }}
           />
+          <div className="mt-[2em] flex justify-center">
+            <span>Monthly Biling</span>
+            <Switch defaultChecked color="default" />
+          </div>
         </div>
       </div>
     </main>
