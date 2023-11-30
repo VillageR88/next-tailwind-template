@@ -35,7 +35,14 @@ export default function Home() {
             max={4}
             min={0}
             sx={{
-              '& .MuiSlider-thumb': { color: '#14D5C8', width: 40, height: 40 },
+              '& .MuiSlider-thumb': {
+                color: '#14D5C8', // Change the color of the thumb
+                width: 40, // Set the width of the thumb
+                height: 40, // Set the height of the thumb
+                backgroundImage: 'url(./images/icon-slider.svg)', // Set the background image of the thumb
+                backgroundPosition: 'center', // Position the background image at the center
+                backgroundRepeat: 'no-repeat', // Do not repeat the background image
+              },
               '& .MuiSlider-track': {
                 backgroundColor: '#A2F3EB', // Light gray background for track
                 border: 0,
