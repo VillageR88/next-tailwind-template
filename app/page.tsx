@@ -12,10 +12,9 @@ import check from './images/icon-check.svg';
 interface CustomEventTarget extends EventTarget {
   value: number;
 }
-
+const pageViews = ['10K', '50K', '100K', '500K', '1M'];
+const perMonth = [8, 12, 16, 24, 36];
 export default function Home() {
-  const pageViews = ['10K', '50K', '100K', '500K', '1M'];
-  const perMonth = [8, 12, 16, 24, 36];
   const [selection, setSelection] = useState<number>(2);
   return (
     <main className="flex min-h-screen flex-col items-center justify-center font-manrope">
@@ -46,7 +45,7 @@ export default function Home() {
               setSelection(target.value);
             }}
             className="mt-[1.5em] h-[0.5em] self-center"
-            defaultValue={selection}
+            defaultValue={2}
             max={4}
             min={0}
             sx={{
