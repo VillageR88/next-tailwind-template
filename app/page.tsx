@@ -7,7 +7,13 @@ import interactive from './images/desktop/image-interactive.jpg';
 const deepEarth = "bg-[url('./images/desktop/blocks/image-deep-earth.jpg')]";
 const nightArcade = "bg-[url('./images/desktop/blocks/image-night-arcade.jpg')]";
 const soccerTeam = "bg-[url('./images/desktop/blocks/image-soccer-team.jpg')]";
-const BlockFeed = [deepEarth, nightArcade, soccerTeam];
+const theGrid = "bg-[url('./images/desktop/blocks/image-grid.jpg')]";
+const fromAbove = "bg-[url('./images/desktop/blocks/image-from-above.jpg')]";
+const pocketBorealis = "bg-[url('./images/desktop/blocks/image-pocket-borealis.jpg')]";
+const curiosity = "bg-[url('./images/desktop/blocks/image-curiosity.jpg')]";
+const fisheye = "bg-[url('./images/desktop/blocks/image-fisheye.jpg')]";
+
+const blockFeed = [deepEarth, nightArcade, soccerTeam, theGrid, fromAbove, pocketBorealis, curiosity, fisheye];
 
 const Block = ({ image }: { image: string }) => {
   return <div className={`h-[28.1em] w-[16em] ${image} bg-cover`}></div>;
@@ -81,7 +87,7 @@ export default function Home() {
           {/*3rd row*/}
           <div className="ml-[0.1em] flex w-full justify-center">
             <div className="grid w-fit grid-cols-3 gap-x-[1.89em] gap-y-[1.9em] pt-[4.25em] xl:grid-cols-4 ">
-              {BlockFeed.map((x, i) => (
+              {blockFeed.map((x, i) => (
                 <Block image={x} key={i} />
               ))}
             </div>
