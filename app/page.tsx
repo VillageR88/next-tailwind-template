@@ -41,7 +41,7 @@ export default function Home() {
         </div>
       </nav>
       <main className="h-full w-full">
-        <div className="h-[120em] w-full bg-white">
+        <div className="h-full w-full bg-white">
           {/*1st row*/}
           <div className="flex w-full justify-center pt-[10em] xl:pl-[10.3em]">
             <Image
@@ -70,11 +70,23 @@ export default function Home() {
             </button>
           </div>
           {/*3rd row*/}
-          <div className="h-full w-full px-[10.3em] pt-[4.25em]">
-            <div className="h-[28.1em] w-[16em] bg-[url('./images/desktop/image-deep-earth.jpg')] bg-cover"></div>
+          <div className="ml-[0.1em] flex w-full justify-center">
+            <div className="grid w-fit grid-cols-3 gap-x-[1.89em] gap-y-[1.9em] pt-[4.25em] xl:grid-cols-4 ">
+              <div className="h-[28.1em] w-[16em] bg-[url('./images/desktop/image-deep-earth.jpg')] bg-cover"></div>
+              <div className="h-[28.1em] w-[16em] bg-[url('./images/desktop/image-deep-earth.jpg')] bg-cover"></div>
+              <div className="h-[28.1em] w-[16em] bg-[url('./images/desktop/image-deep-earth.jpg')] bg-cover"></div>
+              <div className="h-[28.1em] w-[16em] bg-[url('./images/desktop/image-deep-earth.jpg')] bg-cover"></div>
+              <div className="h-[28.1em] w-[16em] bg-[url('./images/desktop/image-deep-earth.jpg')] bg-cover"></div>
+              <div className="h-[28.1em] w-[16em] bg-[url('./images/desktop/image-deep-earth.jpg')] bg-cover"></div>
+              <div className="h-[28.1em] w-[16em] bg-[url('./images/desktop/image-deep-earth.jpg')] bg-cover"></div>
+              <div className="h-[28.1em] w-[16em] bg-[url('./images/desktop/image-deep-earth.jpg')] bg-cover"></div>
+            </div>
           </div>
         </div>
       </main>
     </div>
   );
+}
+{
+  /*<div className="grid w-fit grid-cols-3 gap-x-[2.1em] gap-y-[1.9em] pt-[4.25em] lg:pl-[6.3em] lg:pr-[3em] xl:grid-cols-4 xl:pl-[10.3em] xl:pr-[3em]">}*/
 }
