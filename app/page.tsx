@@ -43,10 +43,10 @@ export default function Home() {
       <main className="h-full w-full">
         <div className="h-[120em] w-full bg-white">
           {/*row1*/}
-          <div className="flex bg-fuchsia-300 pl-[10.3em] pt-[10em]">
+          <div className="flex w-full justify-center bg-fuchsia-300 pl-[10.3em] pt-[10em]">
             <Image className="mr-[-10.1em]" src={interactive} alt="photo of a person wearing VR googles" />
-            <div className="flex flex-col justify-end">
-              <div className="flex w-[34.1em] flex-col gap-[1.63em] bg-white pl-[6em] pt-[6em] leading-[1.55em] tracking-[-0.006em]">
+            <div className="flex w-full flex-col justify-end">
+              <div className="hidden w-[40.1em] flex-col gap-[1.63em] bg-white pl-[6em] pr-[6em] pt-[6em] leading-[1.55em] tracking-[-0.006em] xl:flex">
                 <span className="whitespace-pre-line font-josefinSans text-[3rem] leading-[1em]">
                   {'The leader in\ninteractive VR'.toUpperCase()}
                 </span>
