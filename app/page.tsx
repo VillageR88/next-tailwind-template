@@ -5,6 +5,8 @@ import logo from './images/logo.svg';
 
 export default function Home() {
   const rightNavTracking = 'tracking-[0.02em]';
+  const navSecondRowTextSize =
+    'text-[4.4rem] h-fit pt-2 flex flex-col justify-center tracking-[0.02em] leading-[0.87em]';
 
   return (
     <div className="flex min-h-screen flex-col items-center justify-center">
@@ -26,7 +28,13 @@ export default function Home() {
                 </div>
               </div>
               {/*second row*/}
-              <div className="ml-[10.4em] mr-[10.35em] h-[17.25em] w-[40.5em] outline outline-2 outline-white"></div>
+              <div className="md:ml-[2em] lg:ml-[10.4em] lg:mr-[10.35em] hidden md:flex h-[17.25em] w-[40.5em] flex-col justify-center pl-[2.5em] pt-1 font-josefinSans  text-white outline outline-2 outline-white">
+                <div className="flex flex-col justify-center">
+                  <span className={navSecondRowTextSize}>IMMERSIVE</span>
+                  <span className={navSecondRowTextSize}>EXPERIENCES</span>
+                  <span className={navSecondRowTextSize}>THAT DELIVER</span>
+                </div>
+              </div>
             </div>
           </div>
         </div>
