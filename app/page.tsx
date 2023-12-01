@@ -3,11 +3,11 @@ import '@fontsource/josefin-sans/300.css';
 
 export default function Home() {
   return (
-    <main className="flex h-screen flex-col items-center justify-center bg-white">
-      <p className="font-josefinSans text-lg">Hello</p>
-      <p className="font-alata text-lg">Hello</p>
-      <p className="text-lg">Hello</p>
-      <p className="font-mono">World 🌍</p>
-    </main>
+    <div className="flex min-h-screen flex-col items-center justify-center">
+      <nav className="h-full w-full">
+        <div className="h-[40.6em] w-full bg-[url('./images/desktop/image-hero.jpg')] bg-center"></div>
+      </nav>
+      <div className="h-[120em] w-full bg-white"></div>
+    </div>
   );
 }
