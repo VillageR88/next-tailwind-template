@@ -2,6 +2,7 @@ import '@fontsource/alata/400.css';
 import '@fontsource/josefin-sans/300.css';
 import Image from 'next/image';
 import logo from './images/logo.svg';
+import interactive from './images/desktop/image-interactive.jpg';
 
 export default function Home() {
   const rightNavTracking = 'tracking-[0.02em]';
@@ -28,7 +29,7 @@ export default function Home() {
                 </div>
               </div>
               {/*second row*/}
-              <div className="md:ml-[2em] lg:ml-[10.4em] lg:mr-[10.35em] hidden md:flex h-[17.25em] w-[40.5em] flex-col justify-center pl-[2.5em] pt-1 font-josefinSans  text-white outline outline-2 outline-white">
+              <div className="hidden h-[17.25em] w-[40.5em] flex-col justify-center pl-[2.5em] pt-1 font-josefinSans text-white outline outline-2 outline-white  md:ml-[2em] md:flex lg:ml-[10.4em] lg:mr-[10.35em]">
                 <div className="flex flex-col justify-center">
                   <span className={navSecondRowTextSize}>IMMERSIVE</span>
                   <span className={navSecondRowTextSize}>EXPERIENCES</span>
@@ -39,7 +40,26 @@ export default function Home() {
           </div>
         </div>
       </nav>
-      <div className="h-[120em] w-full bg-white"></div>
+      <main className="h-full w-full">
+        <div className="h-[120em] w-full bg-white">
+          {/*row1*/}
+          <div className="flex pl-[10.3em] pt-[10em] bg-fuchsia-300">
+            <Image className="mr-[-10.1em]" src={interactive} alt="photo of a person wearing VR googles" />
+            <div className="flex flex-col justify-end">
+              <div className="flex flex-col gap-[2em] pl-[6em] bg-white">
+                <span className="whitespace-pre-line font-josefinSans text-[3rem] leading-[1em]">
+                  {'The leader in\ninteractive VR'.toUpperCase()}
+                </span>
+                <span className="font-alata text-[0.9rem] text-barkGray">
+                  Founded in 2011, Loopstudios has been producing world-class virtual reality projects for some of the
+                  best companies around the globe. Our award-winning creations have transformed businesses through
+                  digital experiences that bind to their brand.
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
     </div>
   );
 }
