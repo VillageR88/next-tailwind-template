@@ -15,7 +15,7 @@ export default function Home() {
         <div className="h-[40.6em] w-full bg-[url('./images/desktop/image-hero.jpg')] bg-center">
           <div className="h-full w-full bg-black bg-opacity-40">
             <div className="flex h-full w-full flex-col gap-[8.2em]">
-              {/*first row*/}
+              {/*1st row*/}
               <div className="flex h-fit w-full flex-row items-center justify-between pl-[10.35em] pr-[10.35em] pt-[4em]">
                 {/*left*/}
                 <Image className="h-fit" src={logo as string} alt="logo image" />
@@ -28,7 +28,7 @@ export default function Home() {
                   <button className={rightNavTracking}>Support</button>
                 </div>
               </div>
-              {/*second row*/}
+              {/*2nd row*/}
               <div className="hidden h-[17.25em] w-[40.5em] flex-col justify-center pl-[2.5em] pt-1 font-josefinSans text-white outline outline-2 outline-white  md:ml-[2em] md:flex lg:ml-[10.4em] lg:mr-[10.35em]">
                 <div className="flex flex-col justify-center">
                   <span className={navSecondRowTextSize}>IMMERSIVE</span>
@@ -42,7 +42,7 @@ export default function Home() {
       </nav>
       <main className="h-full w-full">
         <div className="h-[120em] w-full bg-white">
-          {/*row1*/}
+          {/*1st row*/}
           <div className="flex w-full justify-center pt-[10em] xl:pl-[10.3em]">
             <Image
               className="md:mr-[-25em] lg:mr-[-10.1em]"
@@ -61,6 +61,13 @@ export default function Home() {
                 </span>
               </div>
             </div>
+          </div>
+          {/*2nd row*/}
+          <div className="flex items-center justify-between px-[10.25em] pt-[10.8em]">
+            <span className="font-josefinSans text-[3rem]">OUR CREATIONS</span>
+            <button className="h-full rounded-[0.05em] px-[2.57em] py-[0.535em] font-alata text-[0.92rem] tracking-[0.3em] outline outline-[2px] outline-veryDarkGray">
+              SEE ALL
+            </button>
           </div>
         </div>
       </main>
