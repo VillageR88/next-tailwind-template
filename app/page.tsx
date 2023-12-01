@@ -16,7 +16,13 @@ const fisheye = "bg-[url('./images/desktop/blocks/image-fisheye.jpg')]";
 const blockFeed = [deepEarth, nightArcade, soccerTeam, theGrid, fromAbove, pocketBorealis, curiosity, fisheye];
 
 const Block = ({ image }: { image: string }) => {
-  return <div className={`h-[28.1em] w-[16em] ${image} bg-cover`}></div>;
+  return (
+    <div className={`h-[28.1em] w-[16em] ${image} bg-cover`}>
+      <div className="flex h-full w-full flex-col justify-end whitespace-pre-line pb-[1em] pl-[1.25em] font-josefinSans text-[2rem] leading-[1em] text-white">
+        <span>{'DEEP\nEARTH'}</span>
+      </div>
+    </div>
+  );
 };
 
 export default function Home() {
