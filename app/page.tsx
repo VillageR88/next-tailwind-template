@@ -43,14 +43,14 @@ export default function Home() {
       <main className="h-full w-full">
         <div className="h-[120em] w-full bg-white">
           {/*row1*/}
-          <div className="flex pl-[10.3em] pt-[10em] bg-fuchsia-300">
+          <div className="flex bg-fuchsia-300 pl-[10.3em] pt-[10em]">
             <Image className="mr-[-10.1em]" src={interactive} alt="photo of a person wearing VR googles" />
             <div className="flex flex-col justify-end">
-              <div className="flex flex-col gap-[2em] pl-[6em] bg-white">
+              <div className="flex w-[34.1em] flex-col gap-[1.63em] bg-white pl-[6em] pt-[6em] leading-[1.55em] tracking-[-0.006em]">
                 <span className="whitespace-pre-line font-josefinSans text-[3rem] leading-[1em]">
                   {'The leader in\ninteractive VR'.toUpperCase()}
                 </span>
-                <span className="font-alata text-[0.9rem] text-barkGray">
+                <span className="font-alata text-[0.95rem] text-barkGray">
                   Founded in 2011, Loopstudios has been producing world-class virtual reality projects for some of the
                   best companies around the globe. Our award-winning creations have transformed businesses through
                   digital experiences that bind to their brand.
