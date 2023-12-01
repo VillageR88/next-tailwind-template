@@ -11,12 +11,14 @@ const config: Config = {
       fontFamily: {
         sans: ['var(--font-sans)'],
         mono: ['var(--font-mono)'],
+        josefinSans: 'Josefin Sans',
+        alata: 'Alata',
       },
       colors: {
-        // Slate
-        // 'accent-brand-800': '#1e293b',
-        // 'accent-brand-700': '#334155',
-        // 'accent-brand-600': '#475569',
+        white: 'hsl(0, 0%, 100%)',
+        black: 'hsl(0, 0%, 0%)',
+        barkGray: 'hsl(0, 0%, 55%)',
+        veryDarkGray: 'hsl(0, 0%, 41%)',
       },
     },
   },

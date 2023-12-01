@@ -11,5 +11,16 @@
   "[typescript]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
-  "cSpell.words": ["headlessui", "heroicons", "lato", "tabler", "tailwindcss", "unoptimized", "webp"]
+  "cSpell.words": [
+    "alata",
+    "fontsource",
+    "headlessui",
+    "heroicons",
+    "lato",
+    "tabler",
+    "tailwindcss",
+    "unoptimized",
+    "webp"
+  ],
+  "editor.inlineSuggest.showToolbar": "onHover"
 }
