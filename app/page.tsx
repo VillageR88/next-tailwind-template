@@ -4,22 +4,22 @@ import Image from 'next/image';
 import logo from './images/logo.svg';
 import interactive from './images/desktop/image-interactive.jpg';
 
-const deepEarth = "bg-[url('./images/desktop/blocks/image-deep-earth.jpg')]";
-const nightArcade = "bg-[url('./images/desktop/blocks/image-night-arcade.jpg')]";
-const soccerTeam = "bg-[url('./images/desktop/blocks/image-soccer-team.jpg')]";
-const theGrid = "bg-[url('./images/desktop/blocks/image-grid.jpg')]";
-const fromAbove = "bg-[url('./images/desktop/blocks/image-from-above.jpg')]";
-const pocketBorealis = "bg-[url('./images/desktop/blocks/image-pocket-borealis.jpg')]";
-const curiosity = "bg-[url('./images/desktop/blocks/image-curiosity.jpg')]";
-const fisheye = "bg-[url('./images/desktop/blocks/image-fisheye.jpg')]";
+const deepEarth = ['DEEP\nEARTH', "bg-[url('./images/desktop/blocks/image-deep-earth.jpg')]"];
+const nightArcade = ['NIGHT\nARCADE', "bg-[url('./images/desktop/blocks/image-night-arcade.jpg')]"];
+const soccerTeam = ['SOCCER\nTEAM VR', "bg-[url('./images/desktop/blocks/image-soccer-team.jpg')]"];
+const theGrid = ['THE\nGRID', "bg-[url('./images/desktop/blocks/image-grid.jpg')]"];
+const fromAbove = ['FROM UP\nABOVE VR', "bg-[url('./images/desktop/blocks/image-from-above.jpg')]"];
+const pocketBorealis = ['POCKET\nBOREALIS', "bg-[url('./images/desktop/blocks/image-pocket-borealis.jpg')]"];
+const curiosity = ['THE\nCURIOSITY', "bg-[url('./images/desktop/blocks/image-curiosity.jpg')]"];
+const fisheye = ['MAKE IT\nFISHEYE', "bg-[url('./images/desktop/blocks/image-fisheye.jpg')]"];
 
 const blockFeed = [deepEarth, nightArcade, soccerTeam, theGrid, fromAbove, pocketBorealis, curiosity, fisheye];
 
-const Block = ({ image }: { image: string }) => {
+const Block = ({ value }: { value: string[] }) => {
   return (
-    <div className={`h-[28.1em] w-[16em] ${image} bg-cover`}>
-      <div className="flex h-full w-full flex-col justify-end whitespace-pre-line pb-[1em] pl-[1.25em] font-josefinSans text-[2rem] leading-[1em] text-white">
-        <span>{'DEEP\nEARTH'}</span>
+    <div className={`h-[28.1em] w-[16em] ${value[1]} bg-cover`}>
+      <div className="to-transparentDark flex h-full w-full flex-col justify-end whitespace-pre-line bg-gradient-to-b from-transparent from-30% pb-[1em] pl-[1.25em] font-josefinSans text-[2rem] leading-[1em] text-white text-opacity-90">
+        <span>{value[0]}</span>
       </div>
     </div>
   );
@@ -94,7 +94,7 @@ export default function Home() {
           <div className="ml-[0.1em] flex w-full justify-center">
             <div className="grid w-fit grid-cols-3 gap-x-[1.89em] gap-y-[1.9em] pt-[4.25em] xl:grid-cols-4 ">
               {blockFeed.map((x, i) => (
-                <Block image={x} key={i} />
+                <Block value={x} key={i} />
               ))}
             </div>
           </div>
