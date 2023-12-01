@@ -69,6 +69,10 @@ export default function Home() {
               SEE ALL
             </button>
           </div>
+          {/*3rd row*/}
+          <div className="h-full w-full px-[10.3em] pt-[4.25em]">
+            <div className="h-[28.1em] w-[16em] bg-[url('./images/desktop/image-deep-earth.jpg')] bg-cover"></div>
+          </div>
         </div>
       </main>
     </div>
