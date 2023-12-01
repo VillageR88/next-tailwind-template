@@ -43,11 +43,15 @@ export default function Home() {
       <main className="h-full w-full">
         <div className="h-[120em] w-full bg-white">
           {/*row1*/}
-          <div className="flex w-full justify-center bg-fuchsia-300 pl-[10.3em] pt-[10em]">
-            <Image className="mr-[-10.1em]" src={interactive} alt="photo of a person wearing VR googles" />
-            <div className="flex w-full flex-col justify-end">
-              <div className="hidden w-[40.1em] flex-col gap-[1.63em] bg-white pl-[6em] pr-[6em] pt-[6em] leading-[1.55em] tracking-[-0.006em] xl:flex">
-                <span className="whitespace-pre-line font-josefinSans text-[3rem] leading-[1em]">
+          <div className="flex w-full justify-center pt-[10em] xl:pl-[10.3em]">
+            <Image
+              className="md:mr-[-25em] lg:mr-[-10.1em]"
+              src={interactive}
+              alt="photo of a person wearing VR googles"
+            />
+            <div className="flex w-full flex-col items-center justify-end lg:items-start">
+              <div className=" flex flex-col gap-[1.63em] bg-white pt-[6em] leading-[1.55em] tracking-[-0.006em] md:w-[27em] md:pl-[3em] md:pr-[3em] lg:w-[40.1em] lg:pl-[6em] lg:pr-[6em]">
+                <span className="whitespace-pre-line font-josefinSans leading-[1em] md:text-[2.4rem] lg:text-[3rem]">
                   {'The leader in\ninteractive VR'.toUpperCase()}
                 </span>
                 <span className="font-alata text-[0.95rem] text-barkGray">
