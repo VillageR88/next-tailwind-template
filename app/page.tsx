@@ -80,11 +80,15 @@ const Block = ({ value }: { value: string[] }) => {
   );
 };
 
-const RightNavButtons = () => {
+const RightNavButtons = ({ visibleOnMobile }: { visibleOnMobile: boolean }) => {
   const [hoverButtonRightNav, setHoverButton] = useState<number | null>(null);
 
   return (
-    <div className="mt-1 flex h-fit flex-col gap-[2.27em] font-alata text-[0.9rem] text-white opacity-90 md:flex-row">
+    <div
+      className={`${
+        visibleOnMobile ? 'flex' : 'hidden'
+      } mt-1 h-fit flex-col gap-[2.27em] font-alata text-[0.9rem] text-white opacity-90 md:flex md:flex-row`}
+    >
       {rightNavFeed.map((x, i) => (
         <button
           onMouseEnter={() => {
@@ -123,7 +127,7 @@ export default function Home() {
                 {/*left*/}
                 <Image className="h-fit" src={logo as string} alt="logo of loopstudios" />
                 {/*right desktop*/}
-                <RightNavButtons />
+                <RightNavButtons visibleOnMobile={false} />
               </div>
               {/*2nd row*/}
               <div className="hidden h-[17.25em] w-[40.5em] flex-col justify-center pl-[2.45em] pt-1 font-josefinSans text-white outline outline-2 outline-white  md:ml-[2em] md:flex lg:ml-[10.4em] lg:mr-[10.35em]">
@@ -189,11 +193,11 @@ export default function Home() {
         </div>
       </main>
       <footer className="h-full w-full">
-        <div className="flex h-full w-full flex-col items-center justify-between bg-black pb-[4em] pt-[4em] md:h-[10em] md:flex-row md:pb-0 px-0 md:px-[2em] lg:pl-[10.35em] lg:pr-[10.3em] md:pt-0">
+        <div className="flex h-full w-full flex-col items-center justify-between bg-black px-0 pb-[4em] pt-[4em] md:h-[10em] md:flex-row md:px-[2em] md:pb-0 md:pt-0 lg:pl-[10.35em] lg:pr-[10.3em]">
           {/*1st wrapper*/}
           <div className="flex flex-col gap-[1.45em]">
             <Image className="h-fit w-[10em] md:h-[1.5em] md:w-fit" src={logo as string} alt="logo of loopstudios" />
-            <RightNavButtons />
+            <RightNavButtons visibleOnMobile={true} />
           </div>
           {/*2nd wrapper*/}
           <div className="flex flex-col items-end gap-[1.7em] pt-[3.5em] md:pt-0">
