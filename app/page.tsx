@@ -101,12 +101,12 @@ export default function Home() {
                 <RightNavButtons />
               </div>
               {/*2nd row*/}
-              <div className="hidden h-[17.25em] w-[40.5em] flex-col justify-center pl-[2.5em] pt-1 font-josefinSans text-white outline outline-2 outline-white  md:ml-[2em] md:flex lg:ml-[10.4em] lg:mr-[10.35em]">
+              <div className="hidden h-[17.25em] w-[40.5em] flex-col justify-center pl-[2.45em] pt-1 font-josefinSans text-white outline outline-2 outline-white  md:ml-[2em] md:flex lg:ml-[10.4em] lg:mr-[10.35em]">
                 <div className="flex flex-col justify-center">
                   {['IMMERSIVE', 'EXPERIENCES', 'THAT DELIVER'].map((x, i) => (
                     <span
                       key={i}
-                      className="flex h-fit flex-col justify-center pt-2 text-[4.4rem] leading-[0.87em] tracking-[0.02em]"
+                      className="flex h-fit flex-col justify-center pt-2 text-[4.45rem] leading-[0.87em] tracking-[0.009em]"
                     >
                       {x}
                     </span>
