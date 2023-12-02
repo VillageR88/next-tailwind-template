@@ -34,13 +34,21 @@ const Block = ({ value }: { value: string[] }) => {
         setHoverButton(false);
       }}
     >
-      <div
-        className={`${!hoverButton ? 'opacity-100' : 'opacity-25'} h-[28.1em] w-[16em] text-start ${value[1]} bg-cover`}
-      >
-        <div
-          className={` to-transparentDark flex h-full w-full flex-col justify-end whitespace-pre-line bg-gradient-to-b from-transparent from-30% pb-[1em] pl-[1.25em] font-josefinSans text-[2rem] leading-[1em] text-white`}
-        >
-          <span className="text-opacity-90">{value[0]}</span>
+      <div className={`${value[1]} h-[28.1em] w-[16em] bg-cover text-start`}>
+        <div className={`h-full w-full ${hoverButton && 'bg-white bg-opacity-75'}`}>
+          <div
+            className={`${
+              !hoverButton ? 'to-transparentDark' : 'to-transparentLight'
+            } flex h-full w-full flex-col justify-end bg-gradient-to-b from-transparent from-30%`}
+          >
+            <span
+              className={`${
+                !hoverButton ? 'text-white text-opacity-90' : 'text-black'
+              } whitespace-pre-line pb-[1em] pl-[1.25em] font-josefinSans text-[2rem] leading-[1em]`}
+            >
+              {value[0]}
+            </span>
+          </div>
         </div>
       </div>
     </button>

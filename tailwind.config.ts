@@ -20,6 +20,7 @@ const config: Config = {
         barkGray: 'hsl(0, 0%, 55%)',
         veryDarkGray: 'hsl(0, 0%, 41%)',
         transparentDark: 'hsla(0, 0%, 0%, 0.6)',
+        transparentLight: 'hsla(0, 0%, 100%, 0.2)',
       },
     },
   },
