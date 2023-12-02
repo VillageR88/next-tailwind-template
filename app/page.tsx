@@ -62,7 +62,7 @@ export default function Home() {
         </div>
       </nav>
       <main className="h-full w-full">
-        <div className="h-full w-full bg-white">
+        <div className="h-full w-full bg-white pb-[11.5em]">
           {/*1st row*/}
           <div className="flex w-full justify-center pt-[10em] xl:pl-[10.3em]">
             <Image
@@ -100,9 +100,9 @@ export default function Home() {
           </div>
         </div>
       </main>
+      <footer className="h-full w-full">
+        <div className="h-[10em] w-full bg-black"></div>
+      </footer>
     </div>
   );
-}
-{
-  /*<div className="grid w-fit grid-cols-3 gap-x-[2.1em] gap-y-[1.9em] pt-[4.25em] lg:pl-[6.3em] lg:pr-[3em] xl:grid-cols-4 xl:pl-[10.3em] xl:pr-[3em]">}*/
 }
