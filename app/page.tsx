@@ -143,7 +143,7 @@ export default function Home() {
         </div>
       </nav>
       <main className="h-full w-full">
-        <div className="h-full w-full bg-white pb-[11.5em]">
+        <div className="h-full w-full bg-white pb-[6em] md:pb-[11.5em]">
           {/*1st row*/}
           <div className="flex w-full justify-center pt-[10em] xl:pl-[10.3em]">
             <Image
@@ -165,9 +165,10 @@ export default function Home() {
             </div>
           </div>
           {/*2nd row*/}
-          <div className="flex items-center justify-between px-[10.25em] pt-[10.8em]">
-            <span className="font-josefinSans text-[3rem]">OUR CREATIONS</span>
-            <button className="h-full rounded-[0.05em] px-[2.57em] py-[0.535em] font-alata text-[0.92rem] tracking-[0.3em] outline outline-[2px] outline-veryDarkGray hover:bg-black hover:text-white hover:outline-1">
+          <div className="flex items-center justify-center pt-[10.8em] text-center md:justify-between md:px-[10.25em] md:text-left">
+            <span className="font-josefinSans text-[2rem] md:text-[3rem]">OUR CREATIONS</span>
+            {/*button desktop*/}
+            <button className="hidden h-full rounded-[0.05em] px-[2.57em] py-[0.535em] font-alata text-[0.92rem] tracking-[0.3em] outline outline-[2px] outline-veryDarkGray hover:bg-black hover:text-white hover:outline-1 md:block">
               SEE ALL
             </button>
           </div>
@@ -178,6 +179,11 @@ export default function Home() {
                 <Block key={i} value={x} />
               ))}
             </div>
+          </div>
+          <div className="flex h-full w-full pt-10 justify-center">
+            <button className="flex h-full rounded-[0.05em] px-[2.57em] py-[0.535em] font-alata text-[0.92rem] tracking-[0.3em] outline outline-[2px] outline-veryDarkGray hover:bg-black hover:text-white hover:outline-1 md:hidden">
+              SEE ALL
+            </button>
           </div>
         </div>
       </main>
