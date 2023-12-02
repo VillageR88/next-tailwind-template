@@ -123,19 +123,19 @@ export default function Home() {
           <div className="h-full w-full bg-black bg-opacity-40">
             <div className="flex h-full w-full flex-col gap-[8.2em]">
               {/*1st row*/}
-              <div className="flex h-fit w-full flex-row items-center justify-between pl-[10.35em] pr-[10.335em] pt-[4em]">
+              <div className="flex h-fit w-full flex-row items-center justify-between px-[2em] pt-[4em] lg:pl-[10.35em] lg:pr-[10.335em]">
                 {/*left*/}
                 <Image className="h-fit" src={logo as string} alt="logo of loopstudios" />
                 {/*right desktop*/}
                 <RightNavButtons visibleOnMobile={false} />
               </div>
               {/*2nd row*/}
-              <div className="hidden h-[17.25em] w-[40.5em] flex-col justify-center pl-[2.45em] pt-1 font-josefinSans text-white outline outline-2 outline-white  md:ml-[2em] md:flex lg:ml-[10.4em] lg:mr-[10.35em]">
-                <div className="flex flex-col justify-center">
-                  {['IMMERSIVE', 'EXPERIENCES', 'THAT DELIVER'].map((x, i) => (
+              <div className="flex h-fit w-fit flex-col justify-center self-center pt-1 font-josefinSans text-white outline outline-2 outline-white md:ml-[2em] md:h-[17.25em] md:w-[40.5em] md:self-start md:pl-[2.45em] lg:ml-[10.4em] lg:mr-[10.35em]">
+                <div className="flex flex-col justify-center whitespace-pre-line p-6 leading-[5em] md:whitespace-normal  md:p-0">
+                  {['IMMERSIVE', 'EXPERIENCES', 'THAT\nDELIVER'].map((x, i) => (
                     <span
                       key={i}
-                      className="flex h-fit flex-col justify-center pt-2 text-[4.45rem] leading-[0.87em] tracking-[0.009em]"
+                      className="flex h-fit flex-col justify-center pt-2 text-[2.4rem] leading-[1.1em] tracking-[0.009em] md:text-[4.45rem] md:leading-[0.87em]"
                     >
                       {x}
                     </span>
