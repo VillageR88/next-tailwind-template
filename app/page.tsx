@@ -105,7 +105,11 @@ const RightNavButtons = ({ visibleOnMobile }: { visibleOnMobile: boolean }) => {
         >
           <div className="flex flex-col">
             {x}
-            {hoverButtonRightNav === i && <div className="flex h-0 w-full justify-center bg-white"></div>}
+            {hoverButtonRightNav === i && (
+              <div className="flex h-0 w-full justify-center bg-white">
+                <div className="mt-2 h-[2px] w-[1.7em] bg-white"></div>
+              </div>
+            )}
           </div>
         </button>
       ))}
