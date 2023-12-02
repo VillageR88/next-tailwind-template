@@ -4,6 +4,7 @@ import '@fontsource/josefin-sans/300.css';
 import Image from 'next/image';
 import logo from './images/logo.svg';
 import interactive from './images/desktop/image-interactive.jpg';
+import interactiveMobile from './images/mobile/image-interactive.jpg';
 import facebookIcon from './images/icon-facebook.svg';
 import twitterIcon from './images/icon-twitter.svg';
 import pinterestIcon from './images/icon-pinterest.svg';
@@ -147,20 +148,27 @@ export default function Home() {
         </div>
       </nav>
       <main className="h-full w-full">
-        <div className="h-full w-full bg-white pb-[6em] md:pb-[11.5em]">
+        <div className="h-full w-full bg-white px-[2em] pb-[6em] md:px-0 md:pb-[11.5em]">
           {/*1st row*/}
-          <div className="flex w-full justify-center pt-[10em] xl:pl-[10.3em]">
+          <div className="flex w-full flex-col justify-center pt-[10em] md:flex-row md:xl:pl-[10.3em]">
+            {/*image desktop */}
             <Image
-              className="md:mr-[-25em] lg:mr-[-10.1em]"
+              className="hidden h-fit md:mr-[-25em] md:block lg:mr-[-10.1em]"
               src={interactive}
               alt="photo of a person wearing VR googles"
             />
+            {/*image mobile */}
+            <Image
+              className="block h-fit md:mr-[-25em] md:hidden lg:mr-[-10.1em]"
+              src={interactiveMobile}
+              alt="photo of a person wearing VR googles"
+            />
             <div className="flex w-full flex-col items-center justify-end lg:items-start">
-              <div className=" flex flex-col gap-[1.63em] bg-white pt-[6em] leading-[1.55em] tracking-[-0.006em] md:w-[27em] md:pl-[3em] md:pr-[3em] lg:w-[40.1em] lg:pl-[6em] lg:pr-[6em]">
-                <span className="whitespace-pre-line font-josefinSans leading-[1em] md:text-[2.4rem] lg:text-[3rem]">
+              <div className="flex flex-col gap-[1.63em] bg-white pt-[6em] text-center leading-[1.55em] tracking-[-0.006em] md:w-[27em] md:pl-[3em] md:pr-[3em] md:text-left lg:w-[40.1em] lg:pl-[6em] lg:pr-[6em]">
+                <span className="whitespace-pre-line font-josefinSans text-[2rem] leading-[1em] md:text-[2.4rem] lg:text-[3rem]">
                   {'The leader in\ninteractive VR'.toUpperCase()}
                 </span>
-                <span className="font-alata text-[0.95rem] text-barkGray">
+                <span className="font-alata text-[1rem] text-barkGray md:text-[0.95rem]">
                   Founded in 2011, Loopstudios has been producing world-class virtual reality projects for some of the
                   best companies around the globe. Our award-winning creations have transformed businesses through
                   digital experiences that bind to their brand.
@@ -169,7 +177,7 @@ export default function Home() {
             </div>
           </div>
           {/*2nd row*/}
-          <div className="flex items-center justify-center pt-[10.8em] text-center md:justify-between md:px-[10.25em] md:text-left">
+          <div className="flex items-center justify-center pt-[6em] text-center md:justify-between md:px-[4em] md:pt-[10.8em] md:text-left lg:px-[10.25em]">
             <span className="font-josefinSans text-[2rem] md:text-[3rem]">OUR CREATIONS</span>
             {/*button desktop*/}
             <button className="hidden h-full rounded-[0.05em] px-[2.57em] py-[0.535em] font-alata text-[0.92rem] tracking-[0.3em] outline outline-[2px] outline-veryDarkGray hover:bg-black hover:text-white hover:outline-1 md:block">
@@ -178,7 +186,7 @@ export default function Home() {
           </div>
           {/*3rd row*/}
           <div className="ml-[0.1em] flex w-full justify-center">
-            <div className="flex h-full w-full flex-col gap-y-[1.9em]  pt-[4.25em] md:grid md:h-fit md:w-fit md:grid-cols-3 md:gap-x-[1.89em] xl:grid-cols-4 ">
+            <div className="flex h-full w-full flex-col gap-y-[1.9em] pt-[2em] md:grid md:h-fit md:w-fit md:grid-cols-3 md:gap-x-[1.89em] md:pt-[4.25em] xl:grid-cols-4 ">
               {blockFeed.map((x, i) => (
                 <Block key={i} value={x} />
               ))}
