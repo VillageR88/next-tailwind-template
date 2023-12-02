@@ -124,12 +124,14 @@ export default function Home() {
           </div>
           {/*right wrapper*/}
           <div className="flex flex-col items-end gap-[1.7em]">
-            <div className="flex flex-row gap-[1em]">
+            <div className="flex flex-row gap-[1em] items-center">
               {iconsFeed.map((x, i) => (
-                <Image key={i} src={x as string} alt={'' + x} />
+                <Image className="h-fit" key={i} src={x as string} alt={'' + x} />
               ))}
             </div>
-            <span className="font-alata tracking-[0.02em] text-[0.9rem] text-barkGray">© 2021 Loopstudios. All rights reserved.</span>
+            <span className="font-alata text-[0.9rem] tracking-[0.02em] text-barkGray">
+              © 2021 Loopstudios. All rights reserved.
+            </span>
           </div>
         </div>
       </footer>
