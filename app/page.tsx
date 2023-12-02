@@ -150,7 +150,9 @@ export default function Home() {
           <div className="flex flex-col items-end gap-[1.7em]">
             <div className="flex flex-row items-center gap-[1em]">
               {iconsFeed.map((x, i) => (
-                <Image className="h-fit" key={i} src={x as string} alt={'' + x} />
+                <button key={i}>
+                  <Image className="h-fit" src={x as string} alt={'' + x} />
+                </button>
               ))}
             </div>
             <span className="font-alata text-[0.9rem] tracking-[0.02em] text-barkGray">
