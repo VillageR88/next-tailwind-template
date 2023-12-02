@@ -10,14 +10,38 @@ import pinterestIcon from './images/icon-pinterest.svg';
 import instagramIcon from './images/icon-instagram.svg';
 import { useState } from 'react';
 
-const deepEarth = ['DEEP\nEARTH', "bg-[url('./images/desktop/blocks/image-deep-earth.jpg')]"];
-const nightArcade = ['NIGHT\nARCADE', "bg-[url('./images/desktop/blocks/image-night-arcade.jpg')]"];
-const soccerTeam = ['SOCCER\nTEAM VR', "bg-[url('./images/desktop/blocks/image-soccer-team.jpg')]"];
-const theGrid = ['THE\nGRID', "bg-[url('./images/desktop/blocks/image-grid.jpg')]"];
-const fromAbove = ['FROM UP\nABOVE VR', "bg-[url('./images/desktop/blocks/image-from-above.jpg')]"];
-const pocketBorealis = ['POCKET\nBOREALIS', "bg-[url('./images/desktop/blocks/image-pocket-borealis.jpg')]"];
-const curiosity = ['THE\nCURIOSITY', "bg-[url('./images/desktop/blocks/image-curiosity.jpg')]"];
-const fisheye = ['MAKE IT\nFISHEYE', "bg-[url('./images/desktop/blocks/image-fisheye.jpg')]"];
+const deepEarth = [
+  'DEEP\nEARTH',
+  "bg-[url('./images/mobile/blocks/image-deep-earth.jpg')] md:bg-[url('./images/desktop/blocks/image-deep-earth.jpg')]",
+];
+const nightArcade = [
+  'NIGHT\nARCADE',
+  "bg-[url('./images/mobile/blocks/image-night-arcade.jpg')] md:bg-[url('./images/desktop/blocks/image-night-arcade.jpg')]",
+];
+const soccerTeam = [
+  'SOCCER\nTEAM VR',
+  "bg-[url('./images/mobile/blocks/image-soccer-team.jpg')] md:bg-[url('./images/desktop/blocks/image-soccer-team.jpg')]",
+];
+const theGrid = [
+  'THE\nGRID',
+  "bg-[url('./images/mobile/blocks/image-grid.jpg')] md:bg-[url('./images/desktop/blocks/image-grid.jpg')]",
+];
+const fromAbove = [
+  'FROM UP\nABOVE VR',
+  "bg-[url('./images/mobile/blocks/image-from-above.jpg')] md:bg-[url('./images/desktop/blocks/image-from-above.jpg')]",
+];
+const pocketBorealis = [
+  'POCKET\nBOREALIS',
+  "bg-[url('./images/mobile/blocks/image-pocket-borealis.jpg md:bg-[url('./images/desktop/blocks/image-pocket-borealis.jpg')]",
+];
+const curiosity = [
+  'THE\nCURIOSITY',
+  "bg-[url('./images/mobile/blocks/image-curiosity.jpg')] md:bg-[url('./images/desktop/blocks/image-curiosity.jpg')]",
+];
+const fisheye = [
+  'MAKE IT\nFISHEYE',
+  "md:bg-[url('./images/mobile/blocks/image-fisheye.jpg')] md:bg-[url('./images/desktop/blocks/image-fisheye.jpg')]",
+];
 
 const blockFeed = [deepEarth, nightArcade, soccerTeam, theGrid, fromAbove, pocketBorealis, curiosity, fisheye];
 const rightNavFeed = ['About', 'Careers', 'Events', 'Products', 'Support'];
@@ -27,6 +51,7 @@ const Block = ({ value }: { value: string[] }) => {
   const [hoverButton, setHoverButton] = useState<boolean>(false);
   return (
     <button
+      className="md-px-0 h-[15em] w-full self-center md:px-0 px-[3em] md:h-full md:w-fit"
       onMouseEnter={() => {
         setHoverButton(true);
       }}
@@ -34,7 +59,7 @@ const Block = ({ value }: { value: string[] }) => {
         setHoverButton(false);
       }}
     >
-      <div className={`${value[1]} h-[28.1em] w-[16em] bg-cover text-start`}>
+      <div className={`${value[1]} flex h-full w-full bg-cover text-start md:h-[28.1em] md:w-[16em]`}>
         <div className={`h-full w-full ${hoverButton && 'bg-white bg-opacity-75'}`}>
           <div
             className={`${
@@ -148,7 +173,7 @@ export default function Home() {
           </div>
           {/*3rd row*/}
           <div className="ml-[0.1em] flex w-full justify-center">
-            <div className="grid w-fit grid-cols-3 gap-x-[1.89em] gap-y-[1.9em] pt-[4.25em] xl:grid-cols-4 ">
+            <div className="flex h-full w-full flex-col gap-y-[1.9em]  pt-[4.25em] md:grid md:h-fit md:w-fit md:grid-cols-3 md:gap-x-[1.89em] xl:grid-cols-4 ">
               {blockFeed.map((x, i) => (
                 <Block key={i} value={x} />
               ))}
