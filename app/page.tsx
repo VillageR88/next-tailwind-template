@@ -119,18 +119,18 @@ export default function Home() {
   return (
     <div className="flex min-h-screen flex-col items-center justify-center">
       <nav className="h-full w-full">
-        <div className="h-[40.6em] w-full bg-[url('./images/desktop/image-hero.jpg')] ">
-          <div className="h-full w-full bg-black bg-opacity-40">
-            <div className="flex h-full w-full flex-col gap-[8.2em]">
+        <div className="h-screen w-full bg-[url('./images/mobile/image-hero.jpg')] bg-top md:h-[40.6em] md:bg-[url('./images/desktop/image-hero.jpg')]">
+          <div className="flex h-full w-full items-center bg-black bg-opacity-40">
+            <div className="flex h-full w-full flex-col md:gap-[8.2em]">
               {/*1st row*/}
-              <div className="flex h-fit w-full flex-row items-center justify-between px-[2em] pt-[4em] lg:pl-[10.35em] lg:pr-[10.335em]">
+              <div className="flex h-1/2 w-full flex-row items-baseline justify-between px-[2em] pt-[2em] md:h-fit md:items-center md:pt-[4em] lg:pl-[10.35em] lg:pr-[10.335em]">
                 {/*left*/}
                 <Image className="h-fit" src={logo as string} alt="logo of loopstudios" />
                 {/*right desktop*/}
                 <RightNavButtons visibleOnMobile={false} />
               </div>
               {/*2nd row*/}
-              <div className="flex h-fit w-fit flex-col justify-center self-center pt-1 font-josefinSans text-white outline outline-2 outline-white md:ml-[2em] md:h-[17.25em] md:w-[40.5em] md:self-start md:pl-[2.45em] lg:ml-[10.4em] lg:mr-[10.35em]">
+              <div className="flex h-fit w-fit flex-col justify-center self-center pt-1 font-josefinSans text-white outline outline-2 outline-white md:ml-[2em] md:mt-0 md:h-[17.25em] md:w-[40.5em] md:self-start md:pl-[2.45em] lg:ml-[10.4em] lg:mr-[10.35em]">
                 <div className="flex flex-col justify-center whitespace-pre-line p-6 leading-[5em] md:whitespace-normal  md:p-0">
                   {['IMMERSIVE', 'EXPERIENCES', 'THAT\nDELIVER'].map((x, i) => (
                     <span
