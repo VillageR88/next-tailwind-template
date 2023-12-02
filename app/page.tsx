@@ -1,3 +1,4 @@
+'use client';
 import '@fontsource/alata/400.css';
 import '@fontsource/josefin-sans/300.css';
 import Image from 'next/image';
@@ -7,6 +8,7 @@ import facebookIcon from './images/icon-facebook.svg';
 import twitterIcon from './images/icon-twitter.svg';
 import pinterestIcon from './images/icon-pinterest.svg';
 import instagramIcon from './images/icon-instagram.svg';
+import { useState } from 'react';
 
 const deepEarth = ['DEEP\nEARTH', "bg-[url('./images/desktop/blocks/image-deep-earth.jpg')]"];
 const nightArcade = ['NIGHT\nARCADE', "bg-[url('./images/desktop/blocks/image-night-arcade.jpg')]"];
@@ -22,11 +24,23 @@ const rightNavFeed = ['About', 'Careers', 'Events', 'Products', 'Support'];
 const iconsFeed = [facebookIcon, twitterIcon, pinterestIcon, instagramIcon];
 
 const Block = ({ value }: { value: string[] }) => {
+  const [hoverButton, setHoverButton] = useState<boolean>(false);
   return (
-    <button>
-      <div className={`h-[28.1em] w-[16em] text-start ${value[1]} bg-cover`}>
-        <div className="to-transparentDark flex h-full w-full flex-col justify-end whitespace-pre-line bg-gradient-to-b from-transparent from-30% pb-[1em] pl-[1.25em] font-josefinSans text-[2rem] leading-[1em] text-white text-opacity-90">
-          <span>{value[0]}</span>
+    <button
+      onMouseEnter={() => {
+        setHoverButton(true);
+      }}
+      onMouseLeave={() => {
+        setHoverButton(false);
+      }}
+    >
+      <div
+        className={`${!hoverButton ? 'opacity-100' : 'opacity-25'} h-[28.1em] w-[16em] text-start ${value[1]} bg-cover`}
+      >
+        <div
+          className={` to-transparentDark flex h-full w-full flex-col justify-end whitespace-pre-line bg-gradient-to-b from-transparent from-30% pb-[1em] pl-[1.25em] font-josefinSans text-[2rem] leading-[1em] text-white`}
+        >
+          <span className="text-opacity-90">{value[0]}</span>
         </div>
       </div>
     </button>
