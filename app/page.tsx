@@ -32,7 +32,7 @@ const fromAbove = [
 ];
 const pocketBorealis = [
   'POCKET\nBOREALIS',
-  "bg-[url('./images/mobile/blocks/image-pocket-borealis.jpg md:bg-[url('./images/desktop/blocks/image-pocket-borealis.jpg')]",
+  "bg-[url('./images/mobile/blocks/image-pocket-borealis.jpg')] md:bg-[url('./images/desktop/blocks/image-pocket-borealis.jpg')]",
 ];
 const curiosity = [
   'THE\nCURIOSITY',
@@ -40,7 +40,7 @@ const curiosity = [
 ];
 const fisheye = [
   'MAKE IT\nFISHEYE',
-  "md:bg-[url('./images/mobile/blocks/image-fisheye.jpg')] md:bg-[url('./images/desktop/blocks/image-fisheye.jpg')]",
+  "bg-[url('./images/mobile/blocks/image-fisheye.jpg')] md:bg-[url('./images/desktop/blocks/image-fisheye.jpg')]",
 ];
 
 const blockFeed = [deepEarth, nightArcade, soccerTeam, theGrid, fromAbove, pocketBorealis, curiosity, fisheye];
@@ -51,7 +51,7 @@ const Block = ({ value }: { value: string[] }) => {
   const [hoverButton, setHoverButton] = useState<boolean>(false);
   return (
     <button
-      className="md-px-0 h-[15em] w-full self-center md:px-0 px-[3em] md:h-full md:w-fit"
+      className="md-px-0 h-[15em] w-full self-center px-[1em] md:h-full md:w-fit md:px-0"
       onMouseEnter={() => {
         setHoverButton(true);
       }}
@@ -59,7 +59,7 @@ const Block = ({ value }: { value: string[] }) => {
         setHoverButton(false);
       }}
     >
-      <div className={`${value[1]} flex h-full w-full bg-cover text-start md:h-[28.1em] md:w-[16em]`}>
+      <div className={`${value[1]} flex h-full w-full bg-center text-start md:h-[28.1em] md:w-[16em] md:bg-cover`}>
         <div className={`h-full w-full ${hoverButton && 'bg-white bg-opacity-75'}`}>
           <div
             className={`${
@@ -69,7 +69,7 @@ const Block = ({ value }: { value: string[] }) => {
             <span
               className={`${
                 !hoverButton ? 'text-white text-opacity-90' : 'text-black'
-              } whitespace-pre-line pb-[1em] pl-[1.25em] font-josefinSans text-[2rem] leading-[1em]`}
+              } whitespace-pre-line pb-[0.5em] pl-[0.5em] font-josefinSans text-[3rem] leading-[1em] md:pb-[1em] md:pl-[1.25em] md:text-[2rem]`}
             >
               {value[0]}
             </span>
