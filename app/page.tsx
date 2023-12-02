@@ -38,7 +38,7 @@ export default function Home() {
               {/*1st row*/}
               <div className="flex h-fit w-full flex-row items-center justify-between pl-[10.35em] pr-[10.35em] pt-[4em]">
                 {/*left*/}
-                <Image className="h-fit" src={logo as string} alt="logo image" />
+                <Image className="h-fit" src={logo as string} alt="logo of loopstudios" />
                 {/*right desktop*/}
                 <div className="mt-1 flex h-fit gap-[2.26em] font-alata text-[0.9rem] tracking-tighter text-white opacity-90">
                   {rightNavFeed.map((x, i) => (
@@ -105,7 +105,20 @@ export default function Home() {
         </div>
       </main>
       <footer className="h-full w-full">
-        <div className="h-[10em] w-full bg-black"></div>
+        <div className="flex h-[10em] w-full items-center bg-black pl-[10.3em]">
+          {/*left wrapper*/}
+          <div className="flex flex-col gap-[1.6em]">
+            <Image className="h-[1.5em] w-fit" src={logo as string} alt="logo of loopstudios" />
+            <div className="flex gap-[2.2em]">
+              {rightNavFeed.map((x, i) => (
+                <button className="font-alata text-[0.9rem] text-white" key={i}>
+                  {x}
+                </button>
+              ))}
+            </div>
+          </div>
+          {/*right wrapper*/}
+        </div>
       </footer>
     </div>
   );
