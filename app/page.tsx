@@ -110,7 +110,7 @@ export default function Home() {
         </div>
       </main>
       <footer className="h-full w-full">
-        <div className="flex h-[10em] w-full items-center bg-black pl-[10.3em]">
+        <div className="flex h-[10em] w-full items-center justify-between bg-black pl-[10.3em] pr-[10.3em]">
           {/*left wrapper*/}
           <div className="flex flex-col gap-[1.6em]">
             <Image className="h-[1.5em] w-fit" src={logo as string} alt="logo of loopstudios" />
@@ -123,10 +123,13 @@ export default function Home() {
             </div>
           </div>
           {/*right wrapper*/}
-          <div className="flex">
-            {iconsFeed.map((x, i) => (
-              <Image key={i} src={x as string} alt={'' + x} />
-            ))}
+          <div className="flex flex-col items-end gap-[1.7em]">
+            <div className="flex flex-row gap-[1em]">
+              {iconsFeed.map((x, i) => (
+                <Image key={i} src={x as string} alt={'' + x} />
+              ))}
+            </div>
+            <span className="font-alata tracking-[0.02em] text-[0.9rem] text-barkGray">© 2021 Loopstudios. All rights reserved.</span>
           </div>
         </div>
       </footer>
