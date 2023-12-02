@@ -55,9 +55,37 @@ const Block = ({ value }: { value: string[] }) => {
   );
 };
 
-export default function Home() {
+const RightNavButtons = () => {
   const [hoverButtonRightNav, setHoverButton] = useState<number | null>(null);
 
+  return (
+    <div className="mt-1 flex h-fit gap-[2.27em] font-alata text-[0.9rem] text-white opacity-90">
+      {rightNavFeed.map((x, i) => (
+        <button
+          onMouseEnter={() => {
+            setHoverButton(i);
+          }}
+          onMouseLeave={() => {
+            setHoverButton(null);
+          }}
+          key={i}
+          className={'bg-center tracking-[0.02em]'}
+        >
+          <div className="flex flex-col">
+            {x}
+            {hoverButtonRightNav === i && (
+              <div className="flex h-0 w-full justify-center bg-white">
+                <div className="mt-2 h-[2px] w-[1.7em] bg-white"></div>
+              </div>
+            )}
+          </div>
+        </button>
+      ))}
+    </div>
+  );
+};
+
+export default function Home() {
   return (
     <div className="flex min-h-screen flex-col items-center justify-center">
       <nav className="h-full w-full">
@@ -65,33 +93,11 @@ export default function Home() {
           <div className="h-full w-full bg-black bg-opacity-40">
             <div className="flex h-full w-full flex-col gap-[8.2em]">
               {/*1st row*/}
-              <div className="flex h-fit w-full flex-row items-center justify-between pl-[10.35em] pr-[10.35em] pt-[4em]">
+              <div className="flex h-fit w-full flex-row items-center justify-between pl-[10.35em] pr-[10.335em] pt-[4em]">
                 {/*left*/}
                 <Image className="h-fit" src={logo as string} alt="logo of loopstudios" />
                 {/*right desktop*/}
-                <div className="mt-1 flex h-fit gap-[2.26em] font-alata text-[0.9rem] tracking-tighter text-white opacity-90">
-                  {rightNavFeed.map((x, i) => (
-                    <button
-                      onMouseEnter={() => {
-                        setHoverButton(i);
-                      }}
-                      onMouseLeave={() => {
-                        setHoverButton(null);
-                      }}
-                      key={i}
-                      className={'bg-center tracking-[0.02em]'}
-                    >
-                      <div className="flex flex-col">
-                        {x}
-                        {hoverButtonRightNav === i && (
-                          <div className="flex h-0 w-full justify-center bg-white">
-                            <div className="mt-2 h-[2px] w-[1.7em] bg-white"></div>
-                          </div>
-                        )}
-                      </div>
-                    </button>
-                  ))}
-                </div>
+                <RightNavButtons />
               </div>
               {/*2nd row*/}
               <div className="hidden h-[17.25em] w-[40.5em] flex-col justify-center pl-[2.5em] pt-1 font-josefinSans text-white outline outline-2 outline-white  md:ml-[2em] md:flex lg:ml-[10.4em] lg:mr-[10.35em]">
@@ -150,17 +156,11 @@ export default function Home() {
         </div>
       </main>
       <footer className="h-full w-full">
-        <div className="flex h-[10em] w-full items-center justify-between bg-black pl-[10.3em] pr-[10.3em]">
+        <div className="flex h-[10em] w-full items-center justify-between bg-black pl-[10.35em] pr-[10.3em]">
           {/*left wrapper*/}
-          <div className="flex flex-col gap-[1.6em]">
+          <div className="flex flex-col gap-[1.45em]">
             <Image className="h-[1.5em] w-fit" src={logo as string} alt="logo of loopstudios" />
-            <div className="flex gap-[2.2em]">
-              {rightNavFeed.map((x, i) => (
-                <button className="font-alata text-[0.9rem] text-white" key={i}>
-                  {x}
-                </button>
-              ))}
-            </div>
+            <RightNavButtons />
           </div>
           {/*right wrapper*/}
           <div className="flex flex-col items-end gap-[1.7em]">
