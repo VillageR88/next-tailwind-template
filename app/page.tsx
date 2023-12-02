@@ -3,6 +3,10 @@ import '@fontsource/josefin-sans/300.css';
 import Image from 'next/image';
 import logo from './images/logo.svg';
 import interactive from './images/desktop/image-interactive.jpg';
+import facebookIcon from './images/icon-facebook.svg';
+import twitterIcon from './images/icon-twitter.svg';
+import pinterestIcon from './images/icon-pinterest.svg';
+import instagramIcon from './images/icon-instagram.svg';
 
 const deepEarth = ['DEEP\nEARTH', "bg-[url('./images/desktop/blocks/image-deep-earth.jpg')]"];
 const nightArcade = ['NIGHT\nARCADE', "bg-[url('./images/desktop/blocks/image-night-arcade.jpg')]"];
@@ -15,6 +19,7 @@ const fisheye = ['MAKE IT\nFISHEYE', "bg-[url('./images/desktop/blocks/image-fis
 
 const blockFeed = [deepEarth, nightArcade, soccerTeam, theGrid, fromAbove, pocketBorealis, curiosity, fisheye];
 const rightNavFeed = ['About', 'Careers', 'Events', 'Products', 'Support'];
+const iconsFeed = [facebookIcon, twitterIcon, pinterestIcon, instagramIcon];
 
 const Block = ({ value }: { value: string[] }) => {
   return (
@@ -118,6 +123,11 @@ export default function Home() {
             </div>
           </div>
           {/*right wrapper*/}
+          <div className="flex">
+            {iconsFeed.map((x, i) => (
+              <Image key={i} src={x as string} alt={'' + x} />
+            ))}
+          </div>
         </div>
       </footer>
     </div>
