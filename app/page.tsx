@@ -23,11 +23,13 @@ const iconsFeed = [facebookIcon, twitterIcon, pinterestIcon, instagramIcon];
 
 const Block = ({ value }: { value: string[] }) => {
   return (
-    <div className={`h-[28.1em] w-[16em] ${value[1]} bg-cover`}>
-      <div className="to-transparentDark flex h-full w-full flex-col justify-end whitespace-pre-line bg-gradient-to-b from-transparent from-30% pb-[1em] pl-[1.25em] font-josefinSans text-[2rem] leading-[1em] text-white text-opacity-90">
-        <span>{value[0]}</span>
+    <button>
+      <div className={`h-[28.1em] w-[16em] text-start ${value[1]} bg-cover`}>
+        <div className="to-transparentDark flex h-full w-full flex-col justify-end whitespace-pre-line bg-gradient-to-b from-transparent from-30% pb-[1em] pl-[1.25em] font-josefinSans text-[2rem] leading-[1em] text-white text-opacity-90">
+          <span>{value[0]}</span>
+        </div>
       </div>
-    </div>
+    </button>
   );
 };
 
@@ -95,7 +97,7 @@ export default function Home() {
           {/*2nd row*/}
           <div className="flex items-center justify-between px-[10.25em] pt-[10.8em]">
             <span className="font-josefinSans text-[3rem]">OUR CREATIONS</span>
-            <button className="h-full rounded-[0.05em] px-[2.57em] py-[0.535em] font-alata text-[0.92rem] tracking-[0.3em] outline outline-[2px] outline-veryDarkGray">
+            <button className="h-full rounded-[0.05em] px-[2.57em] py-[0.535em] font-alata text-[0.92rem] tracking-[0.3em] outline outline-[2px] outline-veryDarkGray hover:bg-black hover:text-white hover:outline-1">
               SEE ALL
             </button>
           </div>
@@ -103,7 +105,7 @@ export default function Home() {
           <div className="ml-[0.1em] flex w-full justify-center">
             <div className="grid w-fit grid-cols-3 gap-x-[1.89em] gap-y-[1.9em] pt-[4.25em] xl:grid-cols-4 ">
               {blockFeed.map((x, i) => (
-                <Block value={x} key={i} />
+                <Block key={i} value={x} />
               ))}
             </div>
           </div>
@@ -124,7 +126,7 @@ export default function Home() {
           </div>
           {/*right wrapper*/}
           <div className="flex flex-col items-end gap-[1.7em]">
-            <div className="flex flex-row gap-[1em] items-center">
+            <div className="flex flex-row items-center gap-[1em]">
               {iconsFeed.map((x, i) => (
                 <Image className="h-fit" key={i} src={x as string} alt={'' + x} />
               ))}
