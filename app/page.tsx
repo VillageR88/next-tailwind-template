@@ -86,6 +86,7 @@ const RightNavButtons = () => {
 };
 
 export default function Home() {
+  const [hoverOn, setHoverOn] = useState<number | null>(null);
   return (
     <div className="flex min-h-screen flex-col items-center justify-center">
       <nav className="h-full w-full">
@@ -166,8 +167,25 @@ export default function Home() {
           <div className="flex flex-col items-end gap-[1.7em]">
             <div className="flex flex-row items-center gap-[1em]">
               {iconsFeed.map((x, i) => (
-                <button key={i}>
-                  <Image className="h-fit" src={x as string} alt={'' + x} />
+                <button
+                  onMouseEnter={() => {
+                    setHoverOn(i);
+                  }}
+                  onMouseLeave={() => {
+                    setHoverOn(null);
+                  }}
+                  key={i}
+                >
+                  <div className="flex flex-col justify-center">
+                    <Image className="h-fit w-full" src={x as string} alt={'' + x} />
+                    {hoverOn === i && (
+                      <div className="h-0 w-full">
+                        <div
+                          className={`${i !== 1 ? 'mt-[0.5em]' : 'mt-[0.65em]'} h-[2px] w-full items-center bg-white`}
+                        ></div>
+                      </div>
+                    )}
+                  </div>
                 </button>
               ))}
             </div>
