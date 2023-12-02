@@ -84,7 +84,7 @@ const RightNavButtons = () => {
   const [hoverButtonRightNav, setHoverButton] = useState<number | null>(null);
 
   return (
-    <div className="mt-1 flex h-fit gap-[2.27em] font-alata text-[0.9rem] text-white opacity-90">
+    <div className="mt-1 flex h-fit flex-col gap-[2.27em] font-alata text-[0.9rem] text-white opacity-90 md:flex-row">
       {rightNavFeed.map((x, i) => (
         <button
           onMouseEnter={() => {
@@ -180,7 +180,8 @@ export default function Home() {
               ))}
             </div>
           </div>
-          <div className="flex h-full w-full pt-10 justify-center">
+          <div className="flex h-full w-full justify-center pt-10">
+            {/*button mobile*/}
             <button className="flex h-full rounded-[0.05em] px-[2.57em] py-[0.535em] font-alata text-[0.92rem] tracking-[0.3em] outline outline-[2px] outline-veryDarkGray hover:bg-black hover:text-white hover:outline-1 md:hidden">
               SEE ALL
             </button>
@@ -188,15 +189,15 @@ export default function Home() {
         </div>
       </main>
       <footer className="h-full w-full">
-        <div className="flex h-[10em] w-full items-center justify-between bg-black pl-[10.35em] pr-[10.3em]">
-          {/*left wrapper*/}
+        <div className="flex h-full w-full flex-col items-center justify-between bg-black pb-[4em] pt-[4em] md:h-[10em] md:flex-row md:pb-0 px-0 md:px-[2em] lg:pl-[10.35em] lg:pr-[10.3em] md:pt-0">
+          {/*1st wrapper*/}
           <div className="flex flex-col gap-[1.45em]">
-            <Image className="h-[1.5em] w-fit" src={logo as string} alt="logo of loopstudios" />
+            <Image className="h-fit w-[10em] md:h-[1.5em] md:w-fit" src={logo as string} alt="logo of loopstudios" />
             <RightNavButtons />
           </div>
-          {/*right wrapper*/}
-          <div className="flex flex-col items-end gap-[1.7em]">
-            <div className="flex flex-row items-center gap-[1em]">
+          {/*2nd wrapper*/}
+          <div className="flex flex-col items-end gap-[1.7em] pt-[3.5em] md:pt-0">
+            <div className="flex w-full flex-row items-center justify-center gap-[1em] md:justify-end">
               {iconsFeed.map((x, i) => (
                 <button
                   onMouseEnter={() => {
