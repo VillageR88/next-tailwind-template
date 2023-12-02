@@ -3,6 +3,8 @@ import '@fontsource/alata/400.css';
 import '@fontsource/josefin-sans/300.css';
 import Image from 'next/image';
 import logo from './images/logo.svg';
+import hamburger from './images/icon-hamburger.svg';
+import close from './images/icon-close.svg';
 import interactive from './images/desktop/image-interactive.jpg';
 import interactiveMobile from './images/mobile/image-interactive.jpg';
 import facebookIcon from './images/icon-facebook.svg';
@@ -117,8 +119,38 @@ const RightNavButtons = ({ visibleOnMobile }: { visibleOnMobile: boolean }) => {
 
 export default function Home() {
   const [hoverOn, setHoverOn] = useState<number | null>(null);
+  const [mobileNavOpen, setMobileNavOpen] = useState<boolean>(false);
   return (
-    <div className="flex min-h-screen flex-col items-center justify-center">
+    <div
+      className={`flex ${
+        !mobileNavOpen ? 'min-h-screen' : 'h-screen overflow-hidden'
+      } flex-col items-center justify-center`}
+    >
+      {/*nav mobile open */}
+      {mobileNavOpen && (
+        <div className="absolute top-0 z-10 h-screen w-screen bg-black pl-[2em] pt-[2em]">
+          {/*first row*/}
+          <div className="flex">
+            <Image className="z-20 h-fit" src={logo as string} alt="logo of loopstudios" />
+            <button
+              onClick={() => {
+                setMobileNavOpen(false);
+              }}
+              className="absolute right-8 top-[2.5em] flex md:hidden"
+            >
+              <Image className="h-fit w-fit" src={close as string} alt="mobile navigation" />
+            </button>
+          </div>
+          <div className="flex h-full w-full flex-col items-start gap-[1em] pt-[10em] text-white">
+            {rightNavFeed.map((x, i) => (
+              <button className="font-josefinSans text-[2rem]" key={i}>
+                {x.toUpperCase()}
+              </button>
+            ))}
+          </div>
+        </div>
+      )}
+      {/**/}
       <nav className="h-full w-full">
         <div className="h-screen w-full bg-[url('./images/mobile/image-hero.jpg')] bg-top md:h-[40.6em] md:bg-[url('./images/desktop/image-hero.jpg')]">
           <div className="flex h-full w-full items-center bg-black bg-opacity-40">
@@ -126,9 +158,20 @@ export default function Home() {
               {/*1st row*/}
               <div className="flex h-1/2 w-full flex-row items-baseline justify-between px-[2em] pt-[2em] md:h-fit md:items-center md:pt-[4em] lg:pl-[10.35em] lg:pr-[10.335em]">
                 {/*left*/}
-                <Image className="h-fit" src={logo as string} alt="logo of loopstudios" />
-                {/*right desktop*/}
+                <Image className="z-20 h-fit" src={logo as string} alt="logo of loopstudios" />
+                {/*nav desktop*/}
                 <RightNavButtons visibleOnMobile={false} />
+                <div>
+                  {/*nav mobile*/}
+                  <button
+                    onClick={() => {
+                      setMobileNavOpen(true);
+                    }}
+                    className="absolute right-8 top-[2.6em] flex md:hidden"
+                  >
+                    <Image className="h-fit w-fit" src={hamburger as string} alt="mobile navigation" />
+                  </button>
+                </div>
               </div>
               {/*2nd row*/}
               <div className="flex h-fit w-fit flex-col justify-center self-center pt-1 font-josefinSans text-white outline outline-2 outline-white md:ml-[2em] md:mt-0 md:h-[17.25em] md:w-[40.5em] md:self-start md:pl-[2.45em] lg:ml-[10.4em] lg:mr-[10.35em]">
