@@ -11,7 +11,7 @@ import facebookIcon from './images/icon-facebook.svg';
 import twitterIcon from './images/icon-twitter.svg';
 import pinterestIcon from './images/icon-pinterest.svg';
 import instagramIcon from './images/icon-instagram.svg';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 const deepEarth = [
   'DEEP\nEARTH',
@@ -105,11 +105,7 @@ const RightNavButtons = ({ visibleOnMobile }: { visibleOnMobile: boolean }) => {
         >
           <div className="flex flex-col">
             {x}
-            {hoverButtonRightNav === i && (
-              <div className="flex h-0 w-full justify-center bg-white">
-                <div className="mt-2 h-[2px] w-[1.7em] bg-white"></div>
-              </div>
-            )}
+            {hoverButtonRightNav === i && <div className="flex h-0 w-full justify-center bg-white"></div>}
           </div>
         </button>
       ))}
@@ -120,6 +116,16 @@ const RightNavButtons = ({ visibleOnMobile }: { visibleOnMobile: boolean }) => {
 export default function Home() {
   const [hoverOn, setHoverOn] = useState<number | null>(null);
   const [mobileNavOpen, setMobileNavOpen] = useState<boolean>(false);
+  useEffect(() => {
+    const handleResize = () => {
+      window.innerWidth >= 768 && setMobileNavOpen(false);
+    };
+    window.addEventListener('resize', handleResize);
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
   return (
     <div
       className={`flex ${
@@ -161,7 +167,7 @@ export default function Home() {
                 <Image className="z-20 h-fit" src={logo as string} alt="logo of loopstudios" />
                 {/*nav desktop*/}
                 <RightNavButtons visibleOnMobile={false} />
-                <div>
+                <div className="flex md:hidden">
                   {/*nav mobile*/}
                   <button
                     onClick={() => {
@@ -229,7 +235,7 @@ export default function Home() {
           </div>
           {/*3rd row*/}
           <div className="ml-[0.1em] flex w-full justify-center">
-            <div className="flex h-full w-full flex-col gap-y-[1.9em] pt-[2em] md:grid md:h-fit md:w-fit md:grid-cols-3 md:gap-x-[1.89em] md:pt-[4.25em] xl:grid-cols-4 ">
+            <div className="md_lg:grid-cols-3 flex h-full w-full flex-col gap-y-[1.9em] pt-[2em] md:grid md:h-fit md:w-fit md:grid-cols-2 md:gap-x-[1.89em] md:pt-[4.25em] lg:pr-0 xl:grid-cols-4 ">
               {blockFeed.map((x, i) => (
                 <Block key={i} value={x} />
               ))}
