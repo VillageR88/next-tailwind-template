@@ -56,12 +56,12 @@ const Block = ({ value }: { value: string[] }) => {
 };
 
 export default function Home() {
-  const rightNavTracking = 'tracking-[0.02em]';
+  const [hoverButtonRightNav, setHoverButton] = useState<number | null>(null);
 
   return (
     <div className="flex min-h-screen flex-col items-center justify-center">
       <nav className="h-full w-full">
-        <div className="h-[40.6em] w-full bg-[url('./images/desktop/image-hero.jpg')] bg-center">
+        <div className="h-[40.6em] w-full bg-[url('./images/desktop/image-hero.jpg')] ">
           <div className="h-full w-full bg-black bg-opacity-40">
             <div className="flex h-full w-full flex-col gap-[8.2em]">
               {/*1st row*/}
@@ -71,8 +71,24 @@ export default function Home() {
                 {/*right desktop*/}
                 <div className="mt-1 flex h-fit gap-[2.26em] font-alata text-[0.9rem] tracking-tighter text-white opacity-90">
                   {rightNavFeed.map((x, i) => (
-                    <button key={i} className={rightNavTracking}>
-                      {x}
+                    <button
+                      onMouseEnter={() => {
+                        setHoverButton(i);
+                      }}
+                      onMouseLeave={() => {
+                        setHoverButton(null);
+                      }}
+                      key={i}
+                      className={'bg-center tracking-[0.02em]'}
+                    >
+                      <div className="flex flex-col">
+                        {x}
+                        {hoverButtonRightNav === i && (
+                          <div className="flex h-0 w-full justify-center bg-white">
+                            <div className="mt-2 h-[2px] w-[1.7em] bg-white"></div>
+                          </div>
+                        )}
+                      </div>
                     </button>
                   ))}
                 </div>
