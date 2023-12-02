@@ -52,7 +52,7 @@ const Block = ({ value }: { value: string[] }) => {
   const [hoverButton, setHoverButton] = useState<boolean>(false);
   return (
     <button
-      className="md-px-0 h-[15em] w-full self-center px-[1em] md:h-full md:w-fit md:px-0"
+      className="h-[15em] w-full self-center md:h-full md:w-fit md:px-0"
       onMouseEnter={() => {
         setHoverButton(true);
       }}
@@ -148,7 +148,7 @@ export default function Home() {
         </div>
       </nav>
       <main className="h-full w-full">
-        <div className="h-full w-full bg-white px-[2em] pb-[6em] md:px-0 md:pb-[11.5em]">
+        <div className="h-full w-full bg-white px-[1em] pb-[6em] md:px-0 md:pb-[9em]">
           {/*1st row*/}
           <div className="flex w-full flex-col justify-center pt-[10em] md:flex-row md:xl:pl-[10.3em]">
             {/*image desktop */}
@@ -164,7 +164,7 @@ export default function Home() {
               alt="photo of a person wearing VR googles"
             />
             <div className="flex w-full flex-col items-center justify-end lg:items-start">
-              <div className="flex flex-col gap-[1.63em] bg-white pt-[6em] text-center leading-[1.55em] tracking-[-0.006em] md:w-[27em] md:pl-[3em] md:pr-[3em] md:text-left lg:w-[40.1em] lg:pl-[6em] lg:pr-[6em]">
+              <div className="flex flex-col gap-[1.63em] bg-white px-[1em] pt-[6em] text-center leading-[1.55em] tracking-[-0.006em] md:w-[27em] md:px-0 md:pl-[3em] md:pr-[3em] md:text-left lg:w-[40.1em] lg:pl-[6em] lg:pr-[6em]">
                 <span className="whitespace-pre-line font-josefinSans text-[2rem] leading-[1em] md:text-[2.4rem] lg:text-[3rem]">
                   {'The leader in\ninteractive VR'.toUpperCase()}
                 </span>
