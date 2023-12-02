@@ -14,6 +14,7 @@ const curiosity = ['THE\nCURIOSITY', "bg-[url('./images/desktop/blocks/image-cur
 const fisheye = ['MAKE IT\nFISHEYE', "bg-[url('./images/desktop/blocks/image-fisheye.jpg')]"];
 
 const blockFeed = [deepEarth, nightArcade, soccerTeam, theGrid, fromAbove, pocketBorealis, curiosity, fisheye];
+const rightNavFeed = ['About', 'Careers', 'Events', 'Products', 'Support'];
 
 const Block = ({ value }: { value: string[] }) => {
   return (
@@ -27,8 +28,6 @@ const Block = ({ value }: { value: string[] }) => {
 
 export default function Home() {
   const rightNavTracking = 'tracking-[0.02em]';
-  const navSecondRowTextSize =
-    'text-[4.4rem] h-fit pt-2 flex flex-col justify-center tracking-[0.02em] leading-[0.87em]';
 
   return (
     <div className="flex min-h-screen flex-col items-center justify-center">
@@ -42,19 +41,24 @@ export default function Home() {
                 <Image className="h-fit" src={logo as string} alt="logo image" />
                 {/*right desktop*/}
                 <div className="mt-1 flex h-fit gap-[2.26em] font-alata text-[0.9rem] tracking-tighter text-white opacity-90">
-                  <button className={rightNavTracking}>About</button>
-                  <button className={rightNavTracking}>Careers</button>
-                  <button className={rightNavTracking}>Events</button>
-                  <button className={rightNavTracking}>Products</button>
-                  <button className={rightNavTracking}>Support</button>
+                  {rightNavFeed.map((x, i) => (
+                    <button key={i} className={rightNavTracking}>
+                      {x}
+                    </button>
+                  ))}
                 </div>
               </div>
               {/*2nd row*/}
               <div className="hidden h-[17.25em] w-[40.5em] flex-col justify-center pl-[2.5em] pt-1 font-josefinSans text-white outline outline-2 outline-white  md:ml-[2em] md:flex lg:ml-[10.4em] lg:mr-[10.35em]">
                 <div className="flex flex-col justify-center">
-                  <span className={navSecondRowTextSize}>IMMERSIVE</span>
-                  <span className={navSecondRowTextSize}>EXPERIENCES</span>
-                  <span className={navSecondRowTextSize}>THAT DELIVER</span>
+                  {['IMMERSIVE', 'EXPERIENCES', 'THAT DELIVER'].map((x, i) => (
+                    <span
+                      key={i}
+                      className="flex h-fit flex-col justify-center pt-2 text-[4.4rem] leading-[0.87em] tracking-[0.02em]"
+                    >
+                      {x}
+                    </span>
+                  ))}
                 </div>
               </div>
             </div>
