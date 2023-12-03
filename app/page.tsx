@@ -13,17 +13,19 @@ const SingleBar = ({ value, target }: { value: number; target: number }) => {
   const result = (value / target) * 100;
   const progress = () => {
     return {
-      width: `${result < 100 ? result : 100}%`,
+      width: `${100 - (result < 100 ? result : 100)}%`,
     };
   };
   return (
     <div className="h-fit w-full pb-[0.35em] pt-[0.75em]">
       <div className="h-[1.2em] w-full rounded-full bg-[#151E49] p-[0.17em]">
-        <div
-          className={`from-gradientStart to-gradientEnd flex h-full items-center justify-end rounded-full bg-gradient-to-r pr-[0.15em] duration-500 ease-in-out`}
-          style={progress()}
-        >
-          <div className="h-[0.6em] w-[0.6em] rounded-full bg-white"></div>
+        <div className="from-gradientStart to-gradientEnd flex h-full w-full justify-end rounded-full bg-gradient-to-r">
+          <div
+            className={`flex h-full w-full items-center justify-start rounded-full bg-[#151E49]  duration-500 ease-in-out`}
+            style={progress()}
+          >
+            <div className="h-[0.6em] w-[0.6em] rounded-full bg-white"></div>
+          </div>
         </div>
       </div>
     </div>
