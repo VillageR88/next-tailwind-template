@@ -60,22 +60,30 @@ const Block = ({
       <div
         className={`${
           style === Style.punk && "bg-[url('./images/bg-pattern-quotation.svg')] bg-[81.7%_top] bg-no-repeat"
-        } flex h-full w-full flex-col justify-between gap-4 pb-[1.5em] pl-[2em] pr-[2.01em] pt-[1.5em] screen850:gap-3`}
-      >
+        } screen850:gap-3 flex h-full w-full flex-col justify-between gap-4 pb-[1.5em] pl-[2em] pr-[2.01em] pt-[1.5em]`}
+      >          <div className="flex flex-col gap-[0.8em]">
+
         <div className="flex flex-row items-center gap-[1em]">
-          <Image
-            className="h-fit rounded-full"
-            width={28}
-            height={28}
-            src={PeopleImages[person]}
-            alt="image of a person"
-          />
-          <div className="flex flex-col">
-            <span className={`${StylePalette[style][1]} text-[0.8rem] leading-[1.4em]`}>{person}</span>
-            <span className={`${StylePalette[style][1]} text-[0.7rem] opacity-50`}>Verified Graduate</span>
+            <Image
+              className={`${
+                style === Style.dark
+                  ? 'outline outline-2 outline-moderateViolet'
+                  : style === Style.punk && 'outline outline-2 outline-[#A07AD2]'
+              } h-fit rounded-full`}
+              width={28}
+              height={28}
+              src={PeopleImages[person]}
+              alt="image of a person"
+            />
+            <div className="flex flex-col">
+              <span className={`${StylePalette[style][1]} text-[0.8rem] leading-[1.4em] opacity-80`}>{person}</span>
+              <span className={`${StylePalette[style][1]} text-[0.7rem] opacity-50`}>Verified Graduate</span>
+            </div>
           </div>
+          <span className={`${StylePalette[style][1]} text-[1.25rem] leading-[1.25em] tracking-[0.008em]`}>
+            {header}
+          </span>
         </div>
-        <span className={`${StylePalette[style][1]} text-[1.25rem] leading-[1.25em] tracking-[0.008em]`}>{header}</span>
         <span className={`${StylePalette[style][1]} text-[0.8rem] leading-[1.4em] tracking-[0.008em] opacity-70`}>
           {main}
         </span>
@@ -87,7 +95,7 @@ const Block = ({
 export default function Home() {
   return (
     <main className="flex min-h-screen flex-col items-center justify-center font-barlowSemiCondensed">
-      <div className="screen850:grid-cols-3 screen850:grid screen850:px-0 screen850:py-0 flex h-[35.7em] flex-col gap-x-[1.9em] gap-y-[1.5em] px-4 screen850:w-[50em] lg:grid-cols-3 xl:w-[69.4em] xl:grid-cols-4 xl:grid-rows-[17.6em]">
+      <div className="screen850:grid-cols-3 screen850:grid screen850:px-0 screen850:py-0 screen850:w-[50em] flex h-[35.7em] flex-col gap-x-[1.9em] gap-y-[1.5em] px-4 lg:grid-cols-3 xl:w-[69.4em] xl:grid-cols-4 xl:grid-rows-[17.6em]">
         <Block
           style={Style.punk}
           size={BlockSize.twoOnOne}
