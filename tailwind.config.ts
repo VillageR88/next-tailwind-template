@@ -21,6 +21,9 @@ const config: Config = {
         grayishBlue: 'hsl(229, 7%, 55%)',
         darkBlue: 'hsl(228, 56%, 26%)',
         veryDarkBlue: 'hsl(229, 57%, 11%)',
+        //gradient
+        gradientStart: 'hsl(6, 100%, 80%)',
+        gradientEnd: 'hsl(335, 100%, 65%)',
       },
     },
   },
