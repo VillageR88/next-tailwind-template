@@ -30,7 +30,7 @@ const Block_1_1 = ({ image, name, header, main }: { image: unknown; name: string
           <Image className="h-fit rounded-full" width={28} height={28} src={image as string} alt="image of a person" />
           <div className="flex flex-col">
             <span className="text-[0.8rem] leading-[1.4em] text-veryDarkBlackishBlue">{name}</span>
-            <span className="text-[0.7rem] text-veryDarkGrayishBlue">Verified Graduate</span>
+            <span className="text-[0.7rem] text-veryDarkBlackishBlue opacity-50">Verified Graduate</span>
           </div>
         </div>
         <span className="text-[1.2rem] leading-[1.25em] text-veryDarkBlackishBlue">{header}</span>
