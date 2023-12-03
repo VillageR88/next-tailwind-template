@@ -36,26 +36,20 @@ const PeopleImages = {
   [People.patrick]: PatrickImage,
 };
 
-const Block_1_1 = ({
-  style,
-  image,
-  name,
-  header,
-  main,
-}: {
-  style: Style;
-  image: unknown;
-  name: string;
-  header: string;
-  main: string;
-}) => {
+const Block_1_1 = ({ style, person, header, main }: { style: Style; person: People; header: string; main: string }) => {
   return (
     <div className={`${StylePalette[style][0]} col-span-1 rounded-lg shadow-2xl`}>
       <div className="flex h-full w-full flex-col justify-between pb-[1.5em] pl-[2em] pr-[2.5em] pt-[1.5em]">
         <div className="flex flex-row items-center gap-[1em]">
-          <Image className="h-fit rounded-full" width={28} height={28} src={image as string} alt="image of a person" />
+          <Image
+            className="h-fit rounded-full"
+            width={28}
+            height={28}
+            src={PeopleImages[person]}
+            alt="image of a person"
+          />
           <div className="flex flex-col">
-            <span className={`${StylePalette[style][1]} text-[0.8rem] leading-[1.4em]`}>{name}</span>
+            <span className={`${StylePalette[style][1]} text-[0.8rem] leading-[1.4em]`}>{person}</span>
             <span className="text-[0.7rem] text-veryDarkBlackishBlue opacity-50">Verified Graduate</span>
           </div>
         </div>
@@ -77,8 +71,7 @@ export default function Home() {
         <div className="row-span-2 rounded-lg bg-white shadow-2xl"></div>
         <Block_1_1
           style={Style.light}
-          image={PeopleImages[People.jeanette]}
-          name={People.jeanette}
+          person={People.jeanette}
           header="An overall wonderful and rewarding experience"
           main="“ Thank you for the wonderful experience! I now have a job I really enjoy, and make a good living while doing
           something I love. ”"
