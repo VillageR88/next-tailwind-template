@@ -38,7 +38,7 @@ const PeopleImages = {
 
 enum BlockSize {
   oneOnOne = 'col-span-1',
-  oneOnTwo = 'col-span-2',
+  oneOnTwo = 'row-span-2',
 }
 
 const Block = ({
@@ -56,7 +56,7 @@ const Block = ({
 }) => {
   return (
     <div className={`${StylePalette[style][0] + ' ' + size} rounded-lg shadow-2xl`}>
-      <div className="flex h-full w-full flex-col justify-between pb-[1.5em] pl-[2em] pr-[2.1em] pt-[1.5em]">
+      <div className="flex h-full w-full flex-col justify-between pb-[1.5em] pl-[2em] pr-[2em] pt-[1.5em]">
         <div className="flex flex-row items-center gap-[1em]">
           <Image
             className="h-fit rounded-full"
@@ -92,8 +92,21 @@ export default function Home() {
           header="The team was very supportive and kept me motivated"
           main="“ I started as a total newbie with virtually no coding skills. I now work as a mobile engineer 
           for a big company. This was one of the best investments I’ve made in myself. ”"
+        />
+        <Block
+          style={Style.light}
+          size={BlockSize.oneOnTwo}
+          person={People.kira}
+          header="Such a life-changing experience. Highly recommended!"
+          main="“ Before joining the bootcamp, I’ve never written a line of code. I needed some structure from 
+          professionals who can help me learn programming step by step. I was encouraged to enroll by a former 
+          student of theirs who can only say wonderful things about the program. The entire curriculum and staff 
+          did not disappoint. They were very hands-on and I never had to wait long for assistance. The agile team 
+          project, in particular, was outstanding. It took my learning to the next level in a way that no tutorial 
+          could ever have. In fact, I’ve often referred to it during interviews as an example of my developent 
+          experience. It certainly helped me land a job as a full-stack developer after receiving multiple offers. 
+          100% recommend! ”"
         />{' '}
-        <div className="row-span-2 rounded-lg bg-white shadow-2xl"></div>
         <Block
           style={Style.light}
           person={People.jeanette}
