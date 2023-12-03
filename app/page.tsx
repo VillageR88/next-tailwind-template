@@ -37,7 +37,6 @@ const PeopleImages = {
 };
 
 enum BlockSize {
-  oneOnOne = 'col-span-1',
   twoOnOne = 'col-span-2',
   oneOnTwo = 'md:col-span-2 xl:row-span-2 xl:col-span-1',
 }
@@ -48,22 +47,26 @@ const Block = ({
   person,
   header,
   main,
+  optionalPadding,
 }: {
   style: Style;
   size?: BlockSize;
   person: People;
   header: string;
   main: string;
+  optionalPadding?: boolean;
 }) => {
   return (
-    <div className={`${StylePalette[style][0] + ' ' + size} rounded-lg shadow-2xl`}>
+    <div
+      className={`${StylePalette[style][0] + ' ' + size} ${optionalPadding && 'screen850:pb-2'} rounded-lg shadow-2xl`}
+    >
       <div
         className={`${
           style === Style.punk && "bg-[url('./images/bg-pattern-quotation.svg')] bg-[81.7%_top] bg-no-repeat"
-        } screen850:gap-3 flex h-full w-full flex-col justify-between gap-4 pb-[1.5em] pl-[2em] pr-[2.01em] pt-[1.5em]`}
-      >          <div className="flex flex-col gap-[0.8em]">
-
-        <div className="flex flex-row items-center gap-[1em]">
+        } screen850:gap-3 flex h-full w-full flex-col justify-start gap-4 pb-[1.5em] pl-[2em] pr-[2.01em] pt-[1.5em] xl:justify-between`}
+      >
+        <div className="flex flex-col gap-[0.8em]">
+          <div className="flex flex-row items-center gap-[1em]">
             <Image
               className={`${
                 style === Style.dark
@@ -80,11 +83,13 @@ const Block = ({
               <span className={`${StylePalette[style][1]} text-[0.7rem] opacity-50`}>Verified Graduate</span>
             </div>
           </div>
-          <span className={`${StylePalette[style][1]} text-[1.25rem] leading-[1.25em] tracking-[0.008em]`}>
+          <span className={`${StylePalette[style][1]} text-[1.25rem] leading-[1.25em] tracking-[0.006em] opacity-95`}>
             {header}
           </span>
         </div>
-        <span className={`${StylePalette[style][1]} text-[0.8rem] leading-[1.4em] tracking-[0.008em] opacity-70`}>
+        <span
+          className={`${StylePalette[style][1]} text-[0.8rem] font-[500] leading-[1.4em] tracking-[0.008em] opacity-70`}
+        >
           {main}
         </span>
       </div>
@@ -94,8 +99,8 @@ const Block = ({
 
 export default function Home() {
   return (
-    <main className="flex min-h-screen flex-col items-center justify-center font-barlowSemiCondensed">
-      <div className="screen850:grid-cols-3 screen850:grid screen850:px-0 screen850:py-0 screen850:w-[50em] flex h-[35.7em] flex-col gap-x-[1.9em] gap-y-[1.5em] px-4 lg:grid-cols-3 xl:w-[69.4em] xl:grid-cols-4 xl:grid-rows-[17.6em]">
+    <main className="screen850:pt-0 screen850:pb-0 flex min-h-screen flex-col items-center justify-center pb-[2em] pt-[2em] font-barlowSemiCondensed">
+      <div className="screen850:grid-cols-3 screen850:grid screen850:px-0 screen850:py-[6em] screen850:w-[50em] flex h-full flex-col gap-x-[1.9em] gap-y-[1.5em] px-4 lg:grid-cols-3 xl:h-[35.7em] xl:w-[69.4em] xl:grid-cols-4 xl:grid-rows-[17.6em] xl:py-0">
         <Block
           style={Style.punk}
           size={BlockSize.twoOnOne}
@@ -107,6 +112,7 @@ export default function Home() {
           for the free intro course and found it incredibly fun! I enrolled shortly thereafter. 
           The next 12 weeks was the best - and most grueling - time of my life. Since completing 
           the course, I’ve successfully switched careers, working as a Software Engineer at a VR startup. ”"
+          optionalPadding={true}
         />
         <Block
           style={Style.medium}
@@ -114,6 +120,7 @@ export default function Home() {
           header="The team was very supportive and kept me motivated"
           main="“ I started as a total newbie with virtually no coding skills. I now work as a mobile engineer 
           for a big company. This was one of the best investments I’ve made in myself. ”"
+          optionalPadding={true}
         />
         <Block
           style={Style.light}
