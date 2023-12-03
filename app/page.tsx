@@ -12,24 +12,28 @@ export default function Home() {
         <div className="col-span-1 h-[17.6em] rounded-lg bg-veryDarkGrayishBlue shadow-2xl"></div>
         <div className="row-span-2 rounded-lg bg-white shadow-2xl"></div>
         <div className="col-span-1 rounded-lg bg-white shadow-2xl">
-          <div className="flex">
-            <Image
-              className="h-fit rounded-full"
-              width={30}
-              height={30}
-              src={'./images/image-jeanette.jpg'}
-              alt="image of a person"
-            />
-            <div className="flex flex-col">
-              <span>Jeanette Harmon</span>
-              <span>Verified Graduate</span>
+          <div className="flex flex-col">
+            <div className="flex flex-row">
+              <Image
+                className="h-fit rounded-full"
+                width={28}
+                height={28}
+                src={'./images/image-jeanette.jpg'}
+                alt="image of a person"
+              />
+              <div className="flex flex-col">
+                <span className="text-[0.8rem] text-veryDarkBlackishBlue">Jeanette Harmon</span>
+                <span className="text-[0.7rem] text-veryDarkGrayishBlue">Verified Graduate</span>
+              </div>
             </div>
+            <span className="text-[1.2rem] text-veryDarkBlackishBlue">
+              An overall wonderful and rewarding experience
+            </span>
+            <span className="text-[0.8rem] text-veryDarkGrayishBlue">
+              “ Thank you for the wonderful experience! I now have a job I really enjoy, and make a good living while
+              doing something I love. ”
+            </span>
           </div>
-          <span>An overall wonderful and rewarding experience</span>
-          <span>
-            “ Thank you for the wonderful experience! I now have a job I really enjoy, and make a good living while
-            doing something I love. ”
-          </span>
         </div>
         <div className="col-span-2 rounded-lg bg-veryDarkBlackishBlue shadow-2xl"></div>
       </div>
