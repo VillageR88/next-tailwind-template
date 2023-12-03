@@ -16,9 +16,9 @@ enum Style {
 
 const StylePalette: Record<Style, string[]> = {
   [Style.light]: ['bg-white', 'text-veryDarkBlackishBlue'],
-  [Style.punk]: [],
+  [Style.punk]: ['bg-moderateViolet', 'text-white'],
   [Style.medium]: ['bg-veryDarkGrayishBlue', 'text-white'],
-  [Style.dark]: [],
+  [Style.dark]: ['bg-veryDarkBlackishBlue', 'text-white'],
 };
 
 enum People {
@@ -38,6 +38,7 @@ const PeopleImages = {
 
 enum BlockSize {
   oneOnOne = 'col-span-1',
+  twoOnOne = 'col-span-2',
   oneOnTwo = 'row-span-2',
 }
 
@@ -56,7 +57,11 @@ const Block = ({
 }) => {
   return (
     <div className={`${StylePalette[style][0] + ' ' + size} rounded-lg shadow-2xl`}>
-      <div className="flex h-full w-full flex-col justify-between pb-[1.5em] pl-[2em] pr-[2em] pt-[1.5em]">
+      <div
+        className={`${
+          style === Style.punk && "bg-[url('./images/bg-pattern-quotation.svg')] bg-[81.7%_top] bg-no-repeat"
+        } flex h-full  w-full flex-col justify-between pb-[1.5em] pl-[2em] pr-[2.01em] pt-[1.5em]`}
+      >
         <div className="flex flex-row items-center gap-[1em]">
           <Image
             className="h-fit rounded-full"
@@ -83,9 +88,18 @@ export default function Home() {
   return (
     <main className="flex min-h-screen flex-col items-center justify-center font-barlowSemiCondensed">
       <div className="grid h-[35.7em] w-[69.4em] grid-cols-4 grid-rows-[17.6em] gap-x-[1.9em] gap-y-[1.5em]">
-        <div className="col-span-2 w-full rounded-lg bg-moderateViolet">
-          <div className="h-full w-full bg-[url('./images/bg-pattern-quotation.svg')] bg-[81.7%_top] bg-no-repeat"></div>
-        </div>
+        <Block
+          style={Style.punk}
+          size={BlockSize.twoOnOne}
+          person={People.daniel}
+          header="I received a job offer mid-course, and the subjects I learned were current, if not more so, 
+          in the company I joined. I honestly feel I got every penny’s worth."
+          main="“ I was an EMT for many years before I joined the bootcamp. I’ve been looking to make a 
+          transition and have heard some people who had an amazing experience here. I signed up 
+          for the free intro course and found it incredibly fun! I enrolled shortly thereafter. 
+          The next 12 weeks was the best - and most grueling - time of my life. Since completing 
+          the course, I’ve successfully switched careers, working as a Software Engineer at a VR startup. ”"
+        />
         <Block
           style={Style.medium}
           person={People.jonathan}
@@ -106,7 +120,7 @@ export default function Home() {
           could ever have. In fact, I’ve often referred to it during interviews as an example of my developent 
           experience. It certainly helped me land a job as a full-stack developer after receiving multiple offers. 
           100% recommend! ”"
-        />{' '}
+        />
         <Block
           style={Style.light}
           person={People.jeanette}
@@ -114,7 +128,17 @@ export default function Home() {
           main="“ Thank you for the wonderful experience! I now have a job I really enjoy, and make a good living while doing
           something I love. ”"
         />
-        <div className="col-span-2 rounded-lg bg-veryDarkBlackishBlue shadow-2xl"></div>
+        <Block
+          style={Style.dark}
+          size={BlockSize.twoOnOne}
+          person={People.patrick}
+          header="Awesome teaching support from TAs who did the bootcamp themselves. Getting guidance from them and 
+          learning from their experiences was easy."
+          main="“ The staff seem genuinely concerned about my progress which I find really refreshing. The program 
+          gave me the confidence necessary to be able to go out in the world and present myself as a capable 
+          junior developer. The standard is above the rest. You will get the personal attention you need from 
+          an incredible community of smart and amazing people. ”"
+        />
       </div>
     </main>
   );
