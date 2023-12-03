@@ -15,9 +15,9 @@ enum Style {
 }
 
 const StylePalette: Record<Style, string[]> = {
-  [Style.light]: ['bg-white', 'text-veryDarkBlackishBlue', 'text-veryDarkGrayishBlue'],
+  [Style.light]: ['bg-white', 'text-veryDarkBlackishBlue'],
   [Style.punk]: [],
-  [Style.medium]: ['bg-veryDarkGrayishBlue', 'text-veryDarkBlackishBlue', 'text-veryDarkGrayishBlue'],
+  [Style.medium]: ['bg-veryDarkGrayishBlue', 'text-white'],
   [Style.dark]: [],
 };
 
@@ -36,10 +36,14 @@ const PeopleImages = {
   [People.patrick]: PatrickImage,
 };
 
-const Block_1_1 = ({ style, person, header, main }: { style: Style; person: People; header: string; main: string }) => {
+enum BlockSize {
+  oneOnOne = 'col-span-1',
+}
+
+const Block = ({ style, person, header, main }: { style: Style; person: People; header: string; main: string }) => {
   return (
-    <div className={`${StylePalette[style][0]} col-span-1 rounded-lg shadow-2xl`}>
-      <div className="flex h-full w-full flex-col justify-between pb-[1.5em] pl-[2em] pr-[2.5em] pt-[1.5em]">
+    <div className={`${StylePalette[style][0] + ' ' + BlockSize.oneOnOne} rounded-lg shadow-2xl`}>
+      <div className="flex h-full w-full flex-col justify-between pb-[1.5em] pl-[2em] pr-[2.1em] pt-[1.5em]">
         <div className="flex flex-row items-center gap-[1em]">
           <Image
             className="h-fit rounded-full"
@@ -50,11 +54,13 @@ const Block_1_1 = ({ style, person, header, main }: { style: Style; person: Peop
           />
           <div className="flex flex-col">
             <span className={`${StylePalette[style][1]} text-[0.8rem] leading-[1.4em]`}>{person}</span>
-            <span className="text-[0.7rem] text-veryDarkBlackishBlue opacity-50">Verified Graduate</span>
+            <span className={`${StylePalette[style][1]} text-[0.7rem] opacity-50`}>Verified Graduate</span>
           </div>
         </div>
-        <span className={`${StylePalette[style][1]} text-[1.2rem] leading-[1.25em]`}>{header}</span>
-        <span className={`${StylePalette[style][2]} text-[0.8rem]`}>{main}</span>
+        <span className={`${StylePalette[style][1]} text-[1.25rem] leading-[1.25em] tracking-[0.008em]`}>{header}</span>
+        <span className={`${StylePalette[style][1]} text-[0.8rem] leading-[1.4em] tracking-[0.008em] opacity-70`}>
+          {main}
+        </span>
       </div>
     </div>
   );
@@ -67,9 +73,15 @@ export default function Home() {
         <div className="col-span-2 w-full rounded-lg bg-moderateViolet">
           <div className="h-full w-full bg-[url('./images/bg-pattern-quotation.svg')] bg-[81.7%_top] bg-no-repeat"></div>
         </div>
-        <div className="col-span-1 rounded-lg bg-veryDarkGrayishBlue shadow-2xl"></div>
+        <Block
+          style={Style.medium}
+          person={People.jonathan}
+          header="The team was very supportive and kept me motivated"
+          main="“ I started as a total newbie with virtually no coding skills. I now work as a mobile engineer 
+          for a big company. This was one of the best investments I’ve made in myself. ”"
+        />{' '}
         <div className="row-span-2 rounded-lg bg-white shadow-2xl"></div>
-        <Block_1_1
+        <Block
           style={Style.light}
           person={People.jeanette}
           header="An overall wonderful and rewarding experience"
