@@ -39,7 +39,7 @@ const PeopleImages = {
 enum BlockSize {
   oneOnOne = 'col-span-1',
   twoOnOne = 'col-span-2',
-  oneOnTwo = 'row-span-2',
+  oneOnTwo = 'md:col-span-2 xl:row-span-2 xl:col-span-1',
 }
 
 const Block = ({
@@ -60,7 +60,7 @@ const Block = ({
       <div
         className={`${
           style === Style.punk && "bg-[url('./images/bg-pattern-quotation.svg')] bg-[81.7%_top] bg-no-repeat"
-        } flex h-full  w-full flex-col justify-between pb-[1.5em] pl-[2em] pr-[2.01em] pt-[1.5em]`}
+        } flex h-full w-full flex-col justify-between gap-4 pb-[1.5em] pl-[2em] pr-[2.01em] pt-[1.5em] screen850:gap-3`}
       >
         <div className="flex flex-row items-center gap-[1em]">
           <Image
@@ -87,7 +87,7 @@ const Block = ({
 export default function Home() {
   return (
     <main className="flex min-h-screen flex-col items-center justify-center font-barlowSemiCondensed">
-      <div className="grid h-[35.7em] w-[69.4em] grid-cols-4 grid-rows-[17.6em] gap-x-[1.9em] gap-y-[1.5em]">
+      <div className="screen850:grid-cols-3 screen850:grid screen850:px-0 screen850:py-0 flex h-[35.7em] flex-col gap-x-[1.9em] gap-y-[1.5em] px-4 screen850:w-[50em] lg:grid-cols-3 xl:w-[69.4em] xl:grid-cols-4 xl:grid-rows-[17.6em]">
         <Block
           style={Style.punk}
           size={BlockSize.twoOnOne}
