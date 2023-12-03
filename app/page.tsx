@@ -16,8 +16,11 @@ const SingleBar = ({ value, target }: { value: number; target: number }) => {
   };
   return (
     <div className="h-fit w-full">
-      <div className="from-gradientStart to-gradientEnd h-[0.8em] w-full rounded-full bg-gradient-to-r">
-        <div className={`bg-moderateCyan h-full rounded-full duration-500 ease-in-out`} style={progress()}></div>
+      <div className=" h-[0.8em] w-full rounded-full ">
+        <div
+          className={`from-gradientStart to-gradientEnd h-full rounded-full bg-gradient-to-r duration-500 ease-in-out`}
+          style={progress()}
+        ></div>
       </div>
     </div>
   );
@@ -49,10 +52,10 @@ export default function Home() {
               <div className="flex h-[9.65em] w-[33.8em] flex-col items-center justify-center rounded-[0.6em] bg-darkBlue shadow-2xl">
                 <div className="w-[28.5em]">
                   <span className="self-start text-white">You’ve used 815 GB of your storage</span>
-                  <SingleBar />
+                  <SingleBar value={815} target={1000} />
                   <div className="flex w-full justify-between text-white">
-                    <span>0</span>
-                    <span>100</span>
+                    <span>0 GB</span>
+                    <span>1000 GB</span>
                   </div>
                 </div>
               </div>
