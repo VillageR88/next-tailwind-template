@@ -11,12 +11,16 @@ const config: Config = {
       fontFamily: {
         sans: ['var(--font-sans)'],
         mono: ['var(--font-mono)'],
+        raleway: 'Raleway',
       },
       colors: {
-        // Slate
-        // 'accent-brand-800': '#1e293b',
-        // 'accent-brand-700': '#334155',
-        // 'accent-brand-600': '#475569',
+        //### Primary
+        gradient: 'hsl(6, 100%, 80%) to hsl(335, 100%, 65%)',
+        //### Neutral
+        paleBlue: 'hsl(243, 100%, 93%)',
+        grayishBlue: 'hsl(229, 7%, 55%)',
+        darkBlue: 'hsl(228, 56%, 26%)',
+        veryDarkBlue: 'hsl(229, 57%, 11%)',
       },
     },
   },
