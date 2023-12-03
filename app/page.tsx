@@ -7,6 +7,22 @@ import documentIcon from './images/icon-document.svg';
 import folderIcon from './images/icon-folder.svg';
 import uploadIcon from './images/icon-upload.svg';
 
+const SingleBar = ({ value, target }: { value: number; target: number }) => {
+  const result = (value / target) * 100;
+  const progress = () => {
+    return {
+      width: `${result < 100 ? result : 100}%`,
+    };
+  };
+  return (
+    <div className="h-fit w-full">
+      <div className="h-[0.8em] w-full rounded-full bg-[#F4F4F4]">
+        <div className={`bg-moderateCyan h-full rounded-full duration-500 ease-in-out`} style={progress()}></div>
+      </div>
+    </div>
+  );
+};
+
 export default function Home() {
   return (
     <main className="font-raleway flex min-h-screen flex-col items-center justify-center">
@@ -30,7 +46,16 @@ export default function Home() {
                 </div>
               </div>
               {/*right wrapper*/}
-              <div className="flex h-[9.65em] w-[33.8em] rounded-[0.6em] bg-darkBlue shadow-2xl"></div>
+              <div className="flex h-[9.65em] w-[33.8em] flex-col items-center justify-center rounded-[0.6em] bg-darkBlue shadow-2xl">
+                <div className="w-[28.5em]">
+                  <span className="self-start text-white">You’ve used 815 GB of your storage</span>
+                  <SingleBar />
+                  <div className="flex w-full justify-between text-white">
+                    <span>0</span>
+                    <span>100</span>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
