@@ -16,7 +16,7 @@ const SingleBar = ({ value, target }: { value: number; target: number }) => {
   };
   return (
     <div className="h-fit w-full">
-      <div className=" h-[0.8em] w-full rounded-full ">
+      <div className="h-[1.2em] w-full rounded-full bg-[#151E49] p-[3px]">
         <div
           className={`from-gradientStart to-gradientEnd h-full rounded-full bg-gradient-to-r duration-500 ease-in-out`}
           style={progress()}
