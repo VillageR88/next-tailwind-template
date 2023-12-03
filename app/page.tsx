@@ -10,7 +10,7 @@ export default function Home() {
           <div className="flex h-full w-full items-center justify-center">
             <div className="mb-[1.22em] flex items-end gap-[1.88em]">
               <div className="h-[12.58em] w-[21.88em] rounded-l-[0.6em] rounded-br-[0.6em] rounded-tr-[6.2em] bg-darkBlue"></div>
-              <div className="h-[9.7em] w-[33.8em] rounded-[0.6em] bg-darkBlue"></div>
+              <div className="h-[9.65em] w-[33.8em] rounded-[0.6em] bg-darkBlue"></div>
             </div>
           </div>
         </div>
