@@ -38,11 +38,24 @@ const PeopleImages = {
 
 enum BlockSize {
   oneOnOne = 'col-span-1',
+  oneOnTwo = 'col-span-2',
 }
 
-const Block = ({ style, person, header, main }: { style: Style; person: People; header: string; main: string }) => {
+const Block = ({
+  style,
+  size,
+  person,
+  header,
+  main,
+}: {
+  style: Style;
+  size?: BlockSize;
+  person: People;
+  header: string;
+  main: string;
+}) => {
   return (
-    <div className={`${StylePalette[style][0] + ' ' + BlockSize.oneOnOne} rounded-lg shadow-2xl`}>
+    <div className={`${StylePalette[style][0] + ' ' + size} rounded-lg shadow-2xl`}>
       <div className="flex h-full w-full flex-col justify-between pb-[1.5em] pl-[2em] pr-[2.1em] pt-[1.5em]">
         <div className="flex flex-row items-center gap-[1em]">
           <Image
