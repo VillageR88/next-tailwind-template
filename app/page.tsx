@@ -7,6 +7,20 @@ import JonathanImage from './images/image-jonathan.jpg';
 import KiraImage from './images/image-kira.jpg';
 import PatrickImage from './images/image-patrick.jpg';
 
+enum Style {
+  light,
+  punk,
+  medium,
+  dark,
+}
+
+const StylePalette: Record<Style, string[]> = {
+  [Style.light]: ['bg-white', 'text-veryDarkBlackishBlue', 'text-veryDarkGrayishBlue'],
+  [Style.punk]: [],
+  [Style.medium]: [],
+  [Style.dark]: [],
+};
+
 enum People {
   daniel = 'Daniel Clifford',
   jeanette = 'Jeanette Harmon',
@@ -22,19 +36,31 @@ const PeopleImages = {
   [People.patrick]: PatrickImage,
 };
 
-const Block_1_1 = ({ image, name, header, main }: { image: unknown; name: string; header: string; main: string }) => {
+const Block_1_1 = ({
+  style,
+  image,
+  name,
+  header,
+  main,
+}: {
+  style: Style;
+  image: unknown;
+  name: string;
+  header: string;
+  main: string;
+}) => {
   return (
-    <div className="col-span-1 rounded-lg bg-white shadow-2xl">
+    <div className={`${StylePalette[style][0]} col-span-1 rounded-lg shadow-2xl`}>
       <div className="flex h-full w-full flex-col justify-between pb-[1.5em] pl-[2em] pr-[2.5em] pt-[1.5em]">
         <div className="flex flex-row items-center gap-[1em]">
           <Image className="h-fit rounded-full" width={28} height={28} src={image as string} alt="image of a person" />
           <div className="flex flex-col">
-            <span className="text-[0.8rem] leading-[1.4em] text-veryDarkBlackishBlue">{name}</span>
+            <span className={`${StylePalette[style][1]} text-[0.8rem] leading-[1.4em]`}>{name}</span>
             <span className="text-[0.7rem] text-veryDarkBlackishBlue opacity-50">Verified Graduate</span>
           </div>
         </div>
-        <span className="text-[1.2rem] leading-[1.25em] text-veryDarkBlackishBlue">{header}</span>
-        <span className="text-[0.8rem] text-veryDarkGrayishBlue">{main}</span>
+        <span className={`${StylePalette[style][1]} text-[1.2rem] leading-[1.25em]`}>{header}</span>
+        <span className={`${StylePalette[style][2]} text-[0.8rem]`}>{main}</span>
       </div>
     </div>
   );
@@ -50,6 +76,7 @@ export default function Home() {
         <div className="col-span-1 h-[17.6em] rounded-lg bg-veryDarkGrayishBlue shadow-2xl"></div>
         <div className="row-span-2 rounded-lg bg-white shadow-2xl"></div>
         <Block_1_1
+          style={Style.light}
           image={PeopleImages[People.jeanette]}
           name={People.jeanette}
           header="An overall wonderful and rewarding experience"
