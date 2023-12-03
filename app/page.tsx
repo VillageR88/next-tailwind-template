@@ -1,5 +1,7 @@
 import '@fontsource/raleway';
 import '@fontsource/raleway/400.css';
+import '@fontsource/raleway/500.css';
+import '@fontsource/raleway/600.css';
 import '@fontsource/raleway/700.css';
 import Image from 'next/image';
 import logo from './images/logo.svg';
@@ -15,8 +17,8 @@ const SingleBar = ({ value, target }: { value: number; target: number }) => {
     };
   };
   return (
-    <div className="h-fit w-full">
-      <div className="h-[1.2em] w-full rounded-full bg-[#151E49] p-[0.2em]">
+    <div className="h-fit w-full pb-[0.35em] pt-[0.75em]">
+      <div className="h-[1.2em] w-full rounded-full bg-[#151E49] p-[0.17em]">
         <div
           className={`from-gradientStart to-gradientEnd flex h-full items-center justify-end rounded-full bg-gradient-to-r pr-[0.15em] duration-500 ease-in-out`}
           style={progress()}
@@ -52,10 +54,12 @@ export default function Home() {
               </div>
               {/*right wrapper*/}
               <div className="flex h-[9.65em] w-[33.8em] flex-col items-center justify-center rounded-[0.6em] bg-darkBlue shadow-2xl">
-                <div className="w-[28.5em]">
-                  <span className="self-start text-[0.9rem] text-paleBlue">You’ve used <span className='font-[700]'>815 GB</span> of your storage</span>
+                <div className="w-[28.7em]">
+                  <span className="self-start text-[0.85rem] tracking-[0.017em] text-paleBlue">
+                    You’ve used <span className="font-[600]">815 GB</span> of your storage
+                  </span>
                   <SingleBar value={815} target={1000} />
-                  <div className="flex w-full justify-between text-[0.8rem] font-[700] text-paleBlue">
+                  <div className="flex w-full justify-between text-[0.8rem] font-[600] tracking-[-0.05em] text-paleBlue">
                     <span>0 GB</span>
                     <span>1000 GB</span>
                   </div>
