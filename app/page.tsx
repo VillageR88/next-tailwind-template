@@ -29,8 +29,6 @@ const SingleBar = ({ value, target }: { value: number; target: number }) => {
             background: `linear-gradient(to right, hsl(6, 100%, 80%) ${
               100 - Math.pow(result, 2) / 100
             }%, hsl(335, 100%, 65%) 100%)`,
-            backgroundRepeat: 'no-repeat',
-            backgroundSize: '100% 100%',
             borderRadius: '9999px',
           }}
           className="flex h-full items-center justify-end rounded-full duration-[2000ms]"
@@ -63,7 +61,7 @@ export default function Home() {
       <div className="h-full w-full bg-veryDarkBlue">
         <div className="h-[50em] w-full bg-[url('./images/bg-desktop.png')] bg-bottom bg-no-repeat">
           <div className="flex h-full w-full items-center justify-center">
-            <div className="mb-[1.22em] flex items-end gap-[1.88em]">
+            <div className="mb-[1.22em] flex flex-col items-center gap-[1.88em] lg:flex-row lg:items-end">
               {/*left wrapper*/}
               <div
                 style={{ boxShadow: '10px 60px 100px 20px rgba(0, 0, 0, 0.15)' }}
@@ -96,7 +94,7 @@ export default function Home() {
                       </span>
                     </div>
                     <svg
-                      className="absolute ml-[9.3em] pt-[4em]"
+                      className="absolute ml-[9.31em] pt-[4em]"
                       width="200"
                       height="200"
                       xmlns="http://www.w3.org/2000/svg"
