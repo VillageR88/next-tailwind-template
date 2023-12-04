@@ -33,8 +33,10 @@ const SingleBar = ({ value, target }: { value: number; target: number }) => {
             backgroundSize: '100% 100%',
             borderRadius: '9999px',
           }}
-          className="flex h-full justify-end items-center rounded-full duration-[2000ms]"
-        ><div className='bg-white w-[0.6em] rounded-full mr-0.5 h-[0.6em]'></div></div>
+          className="flex h-full items-center justify-end rounded-full duration-[2000ms]"
+        >
+          <div className="mr-0.5 h-[0.6em] w-[0.6em] rounded-full bg-white"></div>
+        </div>
       </div>
     </div>
   );
@@ -87,8 +89,8 @@ export default function Home() {
               >
                 <div className="h-0 w-0">
                   <div className="relative z-10  ml-[3.2em] mt-[-5.3em] flex h-[4.5em] w-[11.2em] rounded-l-[0.6em] rounded-tr-[0.6em] bg-white">
-                    <div className="relative flex h-full w-full items-center justify-between pl-[1.5em] pr-[1.55em] ">
-                      <span className="text-[2.5rem] font-[700] text-veryDarkBlue">185</span>
+                    <div className="relative flex h-full w-full items-center justify-center gap-[0.6em]">
+                      <span className="text-[2.5rem] font-[700] text-veryDarkBlue">{1000 - space}</span>
                       <span className="pt-[0.3em] text-[0.75rem] font-[700] tracking-[0.08em] text-grayishBlue">
                         GB LEFT
                       </span>
