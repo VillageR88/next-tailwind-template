@@ -13,22 +13,32 @@ import { useEffect, useState } from 'react';
 
 const SingleBar = ({ value, target }: { value: number; target: number }) => {
   const result = (value / target) * 100;
+
   const progress = () => {
     return {
-      width: `${100 - (result < 100 ? result : 100)}%`,
+      width: `${result < 100 ? result : 100}%`,
     };
   };
+
+  function mapPercentageToHue1(percentage: number) {
+    const startHue = 6;
+    const endHue = 335;
+    let hue = startHue - ((startHue - endHue + 360) % 360) * (percentage / 100);
+    hue = (hue + 360) % 360;
+    console.log(Math.round(hue));
+    return Math.round(hue);
+  }
+
   return (
     <div className="h-fit w-full pb-[0.35em] pt-[0.85em]">
       <div className="h-[1.2em] w-full rounded-full bg-[#151E49] p-[0.17em]">
-        <div className="from-gradientStart to-gradientEnd flex h-full w-full justify-end rounded-full bg-gradient-to-r">
-          <div
-            className={`flex h-full w-full items-center justify-start rounded-full bg-[#151E49] duration-500 ease-in-out`}
-            style={progress()}
-          >
-            <div className="h-[0.6em] w-[0.6em] rounded-full bg-white"></div>
-          </div>
-        </div>
+        <div
+          style={{
+            ...progress(),
+            background: `linear-gradient(to right, hsl(6, 100%, 80%), hsl(${mapPercentageToHue1(result)}, 100%, 65%))`,
+          }}
+          className="flex h-full justify-end rounded-full"
+        ></div>
       </div>
     </div>
   );
@@ -51,7 +61,7 @@ export default function Home() {
   }, []);
 
   return (
-    <main className="font-raleway flex min-h-screen flex-col items-center justify-center">
+    <main className="flex min-h-screen flex-col items-center justify-center font-raleway">
       <div className="h-full w-full bg-veryDarkBlue">
         <div className="h-[50em] w-full bg-[url('./images/bg-desktop.png')] bg-bottom bg-no-repeat">
           <div className="flex h-full w-full items-center justify-center">
@@ -80,7 +90,7 @@ export default function Home() {
                     <span className="font-[600]">GB</span>
                     <span>of your storage</span>
                   </div>
-                  <SingleBar value={space} target={1000} />
+                  <SingleBar value={600} target={1000} />
                   <div className="flex w-full justify-between text-[0.8rem] font-[600] tracking-[-0.05em] text-paleBlue">
                     <span>0 GB</span>
                     <span>1000 GB</span>
