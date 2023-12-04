@@ -21,7 +21,10 @@ const SingleBar = ({ value, target }: { value: number; target: number }) => {
   return (
     <div className="h-fit w-full pb-[0.35em] pt-[0.85em]">
       <div className="h-[1.2em] w-full rounded-full bg-[#151E49] p-[0.17em]">
-        <div className="flex h-full w-full justify-end rounded-full bg-gradient-to-r from-gradientStart to-gradientEnd"></div>
+        <div
+          style={{ backgroundRepeat: 'no-repeat' }}
+          className="flex h-full  justify-end rounded-full bg-gradient-to-r  from-gradientStart to-gradientEnd"
+        ></div>
       </div>
     </div>
   );
