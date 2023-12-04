@@ -85,6 +85,9 @@ export default function Home() {
                 style={{ boxShadow: '40px 60px 100px 20px rgba(0, 0, 0, 0.15)' }}
                 className="flex h-[9.65em] w-[33.8em] flex-col items-center justify-center rounded-[0.6em] bg-darkBlue "
               >
+                <div className="h-0 w-0">
+                  <div className="relative z-10 ml-[3.2em] mt-[-5.3em] rounded-l-[0.6em] rounded-tr-[0.6em] h-[4.5em] w-[11.2em] bg-white"></div>
+                </div>
                 <div className="w-[28.7em]">
                   <div className="flex gap-1 self-start text-[0.85rem] tracking-[0.017em] text-paleBlue">
                     <span>You’ve used</span>
