@@ -19,11 +19,11 @@ const SingleBar = ({ value, target }: { value: number; target: number }) => {
     };
   };
   return (
-    <div className="h-fit w-full pb-[0.35em] pt-[0.75em]">
+    <div className="h-fit w-full pb-[0.35em] pt-[0.85em]">
       <div className="h-[1.2em] w-full rounded-full bg-[#151E49] p-[0.17em]">
         <div className="from-gradientStart to-gradientEnd flex h-full w-full justify-end rounded-full bg-gradient-to-r">
           <div
-            className={`flex h-full w-full items-center justify-start rounded-full bg-[#151E49]  duration-500 ease-in-out`}
+            className={`flex h-full w-full items-center justify-start rounded-full bg-[#151E49] duration-500 ease-in-out`}
             style={progress()}
           >
             <div className="h-[0.6em] w-[0.6em] rounded-full bg-white"></div>
@@ -74,9 +74,12 @@ export default function Home() {
               {/*right wrapper*/}
               <div className="flex h-[9.65em] w-[33.8em] flex-col items-center justify-center rounded-[0.6em] bg-darkBlue shadow-2xl">
                 <div className="w-[28.7em]">
-                  <span className="self-start text-[0.85rem] tracking-[0.017em] text-paleBlue">
-                    You’ve used <span className="font-[600]">815 GB</span> of your storage
-                  </span>
+                  <div className="flex gap-1 self-start text-[0.85rem] tracking-[0.017em] text-paleBlue">
+                    <span>You’ve used</span>
+                    <span className="font-[600]">{space}</span>
+                    <span className="font-[600]">GB</span>
+                    <span>of your storage</span>
+                  </div>
                   <SingleBar value={space} target={1000} />
                   <div className="flex w-full justify-between text-[0.8rem] font-[600] tracking-[-0.05em] text-paleBlue">
                     <span>0 GB</span>
