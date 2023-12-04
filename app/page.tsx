@@ -86,7 +86,20 @@ export default function Home() {
                 className="flex h-[9.65em] w-[33.8em] flex-col items-center justify-center rounded-[0.6em] bg-darkBlue "
               >
                 <div className="h-0 w-0">
-                  <div className="relative z-10 ml-[3.2em] mt-[-5.3em] rounded-l-[0.6em] rounded-tr-[0.6em] h-[4.5em] w-[11.2em] bg-white"></div>
+                  <div className="relative z-10  ml-[3.2em] mt-[-5.3em] flex h-[4.5em] w-[11.2em] rounded-l-[0.6em] rounded-tr-[0.6em] bg-white">
+                    <div className="relative flex h-full w-full items-center justify-center">
+                      <span className="text-[2.5rem] font-[700] text-veryDarkBlue">185</span>
+                      <span>GB LEFT</span>
+                    </div>
+                    <svg
+                      className="absolute ml-[9.3em] pt-[4em]"
+                      width="200"
+                      height="200"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <polygon points="30,0 0,0 30,30" fill="white" />
+                    </svg>
+                  </div>
                 </div>
                 <div className="w-[28.7em]">
                   <div className="flex gap-1 self-start text-[0.85rem] tracking-[0.017em] text-paleBlue">
