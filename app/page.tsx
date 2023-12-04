@@ -13,32 +13,15 @@ import { useEffect, useState } from 'react';
 
 const SingleBar = ({ value, target }: { value: number; target: number }) => {
   const result = (value / target) * 100;
-
   const progress = () => {
     return {
-      width: `${result < 100 ? result : 100}%`,
+      width: `${100 - (result < 100 ? result : 100)}%`,
     };
   };
-
-  function mapPercentageToHue1(percentage: number) {
-    const startHue = 6;
-    const endHue = 335;
-    let hue = startHue - ((startHue - endHue + 360) % 360) * (percentage / 100);
-    hue = (hue + 360) % 360;
-    console.log(Math.round(hue));
-    return Math.round(hue);
-  }
-
   return (
     <div className="h-fit w-full pb-[0.35em] pt-[0.85em]">
       <div className="h-[1.2em] w-full rounded-full bg-[#151E49] p-[0.17em]">
-        <div
-          style={{
-            ...progress(),
-            background: `linear-gradient(to right, hsl(6, 100%, 80%), hsl(${mapPercentageToHue1(result)}, 100%, 65%))`,
-          }}
-          className="flex h-full justify-end rounded-full"
-        ></div>
+        <div className="flex h-full w-full justify-end rounded-full bg-gradient-to-r from-gradientStart to-gradientEnd"></div>
       </div>
     </div>
   );
@@ -90,7 +73,7 @@ export default function Home() {
                     <span className="font-[600]">GB</span>
                     <span>of your storage</span>
                   </div>
-                  <SingleBar value={600} target={1000} />
+                  <SingleBar value={space} target={1000} />
                   <div className="flex w-full justify-between text-[0.8rem] font-[600] tracking-[-0.05em] text-paleBlue">
                     <span>0 GB</span>
                     <span>1000 GB</span>
