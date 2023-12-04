@@ -13,17 +13,27 @@ import { useEffect, useState } from 'react';
 
 const SingleBar = ({ value, target }: { value: number; target: number }) => {
   const result = (value / target) * 100;
+
   const progress = () => {
     return {
-      width: `${100 - (result < 100 ? result : 100)}%`,
+      width: `${result < 100 ? result : 100}%`,
     };
   };
   return (
     <div className="h-fit w-full pb-[0.35em] pt-[0.85em]">
       <div className="h-[1.2em] w-full rounded-full bg-[#151E49] p-[0.17em]">
         <div
-          style={{ backgroundRepeat: 'no-repeat' }}
-          className="flex h-full  justify-end rounded-full bg-gradient-to-r  from-gradientStart to-gradientEnd"
+          style={{
+            ...progress(),
+
+            background: `linear-gradient(to right, hsl(6, 100%, 80%) ${
+              100 - Math.pow(result, 2) / 100
+            }%, hsl(335, 100%, 65%) 100%)`,
+            backgroundRepeat: 'no-repeat',
+            backgroundSize: '100% 100%',
+            borderRadius: '9999px',
+          }}
+          className="flex h-full justify-end rounded-full duration-[3000ms]"
         ></div>
       </div>
     </div>
@@ -77,7 +87,7 @@ export default function Home() {
                     <span>of your storage</span>
                   </div>
                   <SingleBar value={space} target={1000} />
-                  <div className="flex w-full justify-between text-[0.8rem] font-[600] tracking-[-0.05em] text-paleBlue">
+                  <div className="flex w-full justify-between text-[0.8rem] font-[600] tracking-[-0.05em] text-paleBlue ">
                     <span>0 GB</span>
                     <span>1000 GB</span>
                   </div>
