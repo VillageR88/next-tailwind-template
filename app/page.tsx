@@ -1,3 +1,4 @@
+'use client';
 import '@fontsource/raleway';
 import '@fontsource/raleway/400.css';
 import '@fontsource/raleway/500.css';
@@ -8,6 +9,7 @@ import logo from './images/logo.svg';
 import documentIcon from './images/icon-document.svg';
 import folderIcon from './images/icon-folder.svg';
 import uploadIcon from './images/icon-upload.svg';
+import { useEffect, useState } from 'react';
 
 const SingleBar = ({ value, target }: { value: number; target: number }) => {
   const result = (value / target) * 100;
@@ -33,6 +35,21 @@ const SingleBar = ({ value, target }: { value: number; target: number }) => {
 };
 
 export default function Home() {
+  interface dataJSON {
+    storage: number;
+  }
+  const [space, setSpace] = useState<number>(0);
+  useEffect(() => {
+    fetch('./data.json')
+      .then((response) => response.json())
+      .then((response: dataJSON) => {
+        setSpace(response.storage);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }, []);
+
   return (
     <main className="font-raleway flex min-h-screen flex-col items-center justify-center">
       <div className="h-full w-full bg-veryDarkBlue">
@@ -60,7 +77,7 @@ export default function Home() {
                   <span className="self-start text-[0.85rem] tracking-[0.017em] text-paleBlue">
                     You’ve used <span className="font-[600]">815 GB</span> of your storage
                   </span>
-                  <SingleBar value={815} target={1000} />
+                  <SingleBar value={space} target={1000} />
                   <div className="flex w-full justify-between text-[0.8rem] font-[600] tracking-[-0.05em] text-paleBlue">
                     <span>0 GB</span>
                     <span>1000 GB</span>
