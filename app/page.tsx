@@ -87,9 +87,9 @@ export default function Home() {
               >
                 <div className="h-0 w-0">
                   <div className="relative z-10  ml-[3.2em] mt-[-5.3em] flex h-[4.5em] w-[11.2em] rounded-l-[0.6em] rounded-tr-[0.6em] bg-white">
-                    <div className="relative flex h-full w-full items-center justify-center">
+                    <div className="relative justify-between pl-[1.5em] pr-[1.55em] flex h-full w-full items-center ">
                       <span className="text-[2.5rem] font-[700] text-veryDarkBlue">185</span>
-                      <span>GB LEFT</span>
+                      <span className='text-[0.75rem] tracking-[0.08em] pt-[0.3em] text-grayishBlue font-[700]'>GB LEFT</span>
                     </div>
                     <svg
                       className="absolute ml-[9.3em] pt-[4em]"
