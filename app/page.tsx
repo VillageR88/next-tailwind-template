@@ -33,7 +33,7 @@ const SingleBar = ({ value, target }: { value: number; target: number }) => {
             backgroundSize: '100% 100%',
             borderRadius: '9999px',
           }}
-          className="flex h-full justify-end rounded-full duration-[3000ms]"
+          className="flex h-full justify-end rounded-full duration-[2000ms]"
         ></div>
       </div>
     </div>
@@ -63,7 +63,10 @@ export default function Home() {
           <div className="flex h-full w-full items-center justify-center">
             <div className="mb-[1.22em] flex items-end gap-[1.88em]">
               {/*left wrapper*/}
-              <div className="flex h-[12.58em] w-[21.88em] flex-col justify-center gap-[2.08em] rounded-l-[0.6em] rounded-br-[0.6em] rounded-tr-[6.2em] bg-darkBlue pl-[2.6em] shadow-2xl">
+              <div
+                style={{ boxShadow: '10px 60px 100px 20px rgba(0, 0, 0, 0.15)' }}
+                className="flex h-[12.58em] w-[21.88em] flex-col justify-center gap-[2.08em] rounded-l-[0.6em] rounded-br-[0.6em] rounded-tr-[6.2em] bg-darkBlue pl-[2.6em] "
+              >
                 <Image className="h-fit" src={logo as string} alt="logo" />
                 <div className="flex flex-row items-center gap-[1em]">
                   <button className="rounded-[0.6em] bg-veryDarkBlue py-[0.75em] pl-[0.85em] pr-[0.87em]">
@@ -78,7 +81,10 @@ export default function Home() {
                 </div>
               </div>
               {/*right wrapper*/}
-              <div className="flex h-[9.65em] w-[33.8em] flex-col items-center justify-center rounded-[0.6em] bg-darkBlue shadow-2xl">
+              <div
+                style={{ boxShadow: '40px 60px 100px 20px rgba(0, 0, 0, 0.15)' }}
+                className="flex h-[9.65em] w-[33.8em] flex-col items-center justify-center rounded-[0.6em] bg-darkBlue "
+              >
                 <div className="w-[28.7em]">
                   <div className="flex gap-1 self-start text-[0.85rem] tracking-[0.017em] text-paleBlue">
                     <span>You’ve used</span>
