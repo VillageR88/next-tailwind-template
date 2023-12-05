@@ -9,7 +9,7 @@ import logo from './images/logo.svg';
 import documentIcon from './images/icon-document.svg';
 import folderIcon from './images/icon-folder.svg';
 import uploadIcon from './images/icon-upload.svg';
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 
 const SingleBar = ({ value, target }: { value: number; target: number }) => {
   const result = (value / target) * 100;
@@ -19,13 +19,13 @@ const SingleBar = ({ value, target }: { value: number; target: number }) => {
       width: `${result < 100 ? result : 100}%`,
     };
   };
+
   return (
     <div className="h-fit w-full pb-[0.35em] pt-[0.85em]">
       <div className="h-[1.2em] w-full rounded-full bg-[#151E49] p-[0.17em]">
         <div
           style={{
             ...progress(),
-
             background: `linear-gradient(to right, hsl(6, 100%, 80%) ${
               100 - Math.pow(result, 2) / 100
             }%, hsl(335, 100%, 65%) 100%)`,
@@ -45,6 +45,7 @@ export default function Home() {
     storage: number;
   }
   const [space, setSpace] = useState<number>(0);
+  const prevSpace = useRef<number>(0);
 
   useEffect(() => {
     fetch('./data.json')
@@ -56,21 +57,20 @@ export default function Home() {
 
         const updateSpace = (current: number, target: number) => {
           if (current < target) {
-            setSpace(current);
             setTimeout(() => {
-              updateSpace(current + step, target);
+              const newSpace = Math.min(current + step, target);
+              setSpace(newSpace);
+              updateSpace(newSpace, target);
             }, delay);
-          } else {
-            setSpace(target);
           }
         };
 
-        updateSpace(space, targetSpace);
+        updateSpace(prevSpace.current, targetSpace);
       })
       .catch((error) => {
         console.error(error);
       });
-  }, [space]);
+  }, []);
 
   return (
     <main className="flex h-full flex-col items-center justify-center font-raleway md:min-h-screen">
