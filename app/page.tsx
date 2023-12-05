@@ -40,21 +40,21 @@ const Testimony = ({
 }) => {
   return (
     <div className="flex h-full w-full items-center justify-between px-[10.3em]">
-      <div className="z-10 mb-[1em] mr-[-17em] flex w-[40em] flex-col gap-[2.2em] bg-[url('./images/pattern-quotes.svg')] bg-[18.4%_0%] bg-no-repeat pt-[4em]">
-        <span className="text-[2em] font-[300] leading-[1.38em] text-darkBlue">{testimony[data][0]}</span>
+      <div className="z-10 mb-[1em] mr-[-17em] flex w-[39.5em] flex-col gap-[2.2em] bg-[url('./images/pattern-quotes.svg')] bg-[18.4%_0%] bg-no-repeat pb-1 pt-[4em]">
+        <span className="text-[2em] font-[300] leading-[1.38em]  text-darkBlue">{testimony[data][0]}</span>
         <div className="flex gap-[0.5em]">
           <span className="text-[1.25rem] font-[700] text-darkBlue"> {testimony[data][1]}</span>
           <span className="text-[1.25rem] font-[500] text-grayishBlue"> {testimony[data][2]}</span>
         </div>
       </div>
-      <div>
+      <div className="pb-[0.3em]">
         <Image className="shadow-xl" src={testimony[data][3]} alt="Image of person" />
-        <div className="ml-[3.8em] mt-[-1.8em] w-fit rounded-full shadow-xl">
+        <div className="ml-[3.85em] mt-[-1.8em] w-fit rounded-full shadow-xl">
           <button
             onClick={() => {
               buttonPrevious();
             }}
-            className="w-fit rounded-l-full bg-white px-[1.4em] py-[1.2em] "
+            className="w-fit rounded-l-full bg-white py-[1.2em] pl-[1.34em] pr-[1.38em] "
           >
             <Image className="h-fit" src={arrowPrev as string} alt="previous" />
           </button>
@@ -62,7 +62,7 @@ const Testimony = ({
             onClick={() => {
               buttonNext();
             }}
-            className="h-fit  w-fit rounded-r-full bg-white px-[1.4em] py-[1.2em] "
+            className="h-fit  w-fit rounded-r-full bg-white py-[1.2em] pl-[1.4em] pr-[1.3em] "
           >
             <Image className="h-fit " src={arrowNext as string} alt="previous" />
           </button>
