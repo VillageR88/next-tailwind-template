@@ -13,11 +13,15 @@ export default function Home() {
         <div className="h-full w-full bg-[url('./images/pattern-curve.svg')] bg-left-bottom bg-no-repeat">
           <div className="h-full w-full bg-[url('./images/pattern-bg.svg')] bg-[90.2%_35%] bg-no-repeat">
             <div className="flex h-full w-full items-center justify-between px-[10.3em]">
-              <div className="w-[50em]">
-                <span className="text-[2em] font-[300]">
+              <div className="z-10 mb-[1em] mr-[-17em] flex w-[40em] flex-col gap-[2.2em] bg-[url('./images/pattern-quotes.svg')] bg-[18.4%_0%] bg-no-repeat pt-[4em]">
+                <span className="text-[2em] font-[300] leading-[1.38em] text-darkBlue">
                   “ I’ve been interested in coding for a while but never taken the jump, until now. I couldn’t recommend
                   this course enough. I’m now in the job of my dreams and so excited about the future. ”
                 </span>
+                <div className='flex gap-[0.5em]'>
+                  <span className="text-[1.25rem] font-[700] text-darkBlue">Tanya Sinclair</span>
+                  <span className='text-[1.25rem] font-[500] text-grayishBlue'>UX Engineer</span>
+                </div>
               </div>
               <div>
                 <Image src={image1} alt="Image of person" />
