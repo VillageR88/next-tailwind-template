@@ -31,7 +31,7 @@ const SingleBar = ({ value, target }: { value: number; target: number }) => {
             }%, hsl(335, 100%, 65%) 100%)`,
             borderRadius: '9999px',
           }}
-          className="flex h-full items-center justify-end rounded-full duration-[2000ms]"
+          className="flex h-full items-center justify-end rounded-full duration-100"
         >
           <div className="mr-0.5 h-[0.6em] w-[0.6em] rounded-full bg-white"></div>
         </div>
@@ -45,23 +45,39 @@ export default function Home() {
     storage: number;
   }
   const [space, setSpace] = useState<number>(0);
+
   useEffect(() => {
     fetch('./data.json')
       .then((response) => response.json())
       .then((response: dataJSON) => {
-        setSpace(response.storage);
+        const targetSpace = response.storage;
+        const delay = 50; // Opóźnienie w milisekundach
+        const step = 10; // Krok zwiększania wartości
+
+        const updateSpace = (current: number, target: number) => {
+          if (current < target) {
+            setSpace(current);
+            setTimeout(() => {
+              updateSpace(current + step, target);
+            }, delay);
+          } else {
+            setSpace(target);
+          }
+        };
+
+        updateSpace(space, targetSpace);
       })
       .catch((error) => {
         console.error(error);
       });
-  }, []);
+  }, [space]);
 
   return (
     <main className="flex h-full flex-col items-center justify-center font-raleway md:min-h-screen">
       <div className="h-full w-full bg-veryDarkBlue">
         <div className="h-screen w-full bg-[url('./images/bg-mobile.png')] bg-cover bg-center bg-no-repeat md:h-[50em] md:bg-[url('./images/bg-desktop.png')] md:bg-auto md:bg-bottom">
           <div className="flex h-full w-full items-center justify-center">
-            <div className="mb-[2em] md:mb-[1.22em] flex w-full flex-col items-center gap-[1.88em] px-6 md:w-fit md:px-0 lg:flex-row lg:items-end">
+            <div className="mb-[2em] flex w-full flex-col items-center gap-[1.88em] px-6 md:mb-[1.22em] md:w-fit md:px-0 lg:flex-row lg:items-end">
               {/*left wrapper*/}
               <div
                 style={{ boxShadow: '10px 60px 100px 20px rgba(0, 0, 0, 0.15)' }}
