@@ -1,12 +1,34 @@
+'use client';
 import '@fontsource/inter';
 import '@fontsource/inter/300.css';
 import '@fontsource/inter/500.css';
 import '@fontsource/inter/700.css';
 import Image from 'next/image';
-import image1 from './images/image-tanya.jpg';
-import image2 from './images/image-john.jpg';
+import tanya from './images/image-tanya.jpg';
+import john from './images/image-john.jpg';
+import arrowPrev from './images/icon-prev.svg';
+import arrowNext from './images/icon-next.svg';
+import { useState } from 'react';
+
+enum Stage {
+  stage1,
+  stage2,
+}
+const Testimony = {
+  [Stage.stage1]: [
+    '“ I’ve been interested in coding for a while but never taken the jump, until now. I couldn’t recommend this course enough. I’m now in the job of my dreams and so excited about the future. ”',
+    'Tanya Sinclair',
+    'UX Engineer',
+  ],
+  [Stage.stage2]: [
+    '“ If you want to lay the best foundation possible I’d recommend taking this course. The depth the instructors go into is incredible. I now feel so confident about starting up as a professional developer. ”',
+    'John Tarkpor',
+    'Junior Front-end Developer',
+  ],
+};
 
 export default function Home() {
+  const [stage, setStage] = useState<Stage>(Stage.stage1);
   return (
     <main className="flex min-h-screen flex-col items-center justify-center font-inter">
       <div className="h-[50em] w-full bg-white">
@@ -18,13 +40,21 @@ export default function Home() {
                   “ I’ve been interested in coding for a while but never taken the jump, until now. I couldn’t recommend
                   this course enough. I’m now in the job of my dreams and so excited about the future. ”
                 </span>
-                <div className='flex gap-[0.5em]'>
+                <div className="flex gap-[0.5em]">
                   <span className="text-[1.25rem] font-[700] text-darkBlue">Tanya Sinclair</span>
-                  <span className='text-[1.25rem] font-[500] text-grayishBlue'>UX Engineer</span>
+                  <span className="text-[1.25rem] font-[500] text-grayishBlue">UX Engineer</span>
                 </div>
               </div>
               <div>
-                <Image src={image1} alt="Image of person" />
+                <Image className="shadow-xl" src={tanya} alt="Image of person" />
+                <div className="ml-[3.8em] mt-[-1.8em] w-fit rounded-full shadow-xl">
+                  <button className="w-fit rounded-l-full bg-white px-[1.4em] py-[1.2em] ">
+                    <Image className="h-fit" src={arrowPrev as string} alt="previous" />
+                  </button>
+                  <button className="h-fit  w-fit rounded-r-full bg-white px-[1.4em] py-[1.2em] ">
+                    <Image className="h-fit " src={arrowNext as string} alt="previous" />
+                  </button>
+                </div>
               </div>
             </div>
           </div>
