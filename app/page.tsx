@@ -34,17 +34,17 @@ const Testimony = ({
   buttonPrevious,
   buttonNext,
 }: {
-  data: keyof undefined;
+  data: keyof typeof testimony;
   buttonPrevious(): undefined;
   buttonNext(): undefined;
 }) => {
   return (
     <div className="flex h-full w-full items-center justify-between px-[10.3em]">
       <div className="z-10 mb-[1em] mr-[-17em] flex w-[39.5em] flex-col gap-[2.2em] bg-[url('./images/pattern-quotes.svg')] bg-[18.4%_0%] bg-no-repeat pb-1 pt-[4em]">
-        <span className="text-[2em] font-[300] leading-[1.38em]  text-darkBlue">{testimony[data][0]}</span>
+        <span className="text-[2em] font-[300] leading-[1.38em]  text-darkBlue">{testimony[data][0] as string}</span>
         <div className="flex gap-[0.5em]">
-          <span className="text-[1.25rem] font-[700] text-darkBlue"> {testimony[data][1]}</span>
-          <span className="text-[1.25rem] font-[500] text-grayishBlue"> {testimony[data][2]}</span>
+          <span className="text-[1.25rem] font-[700] text-darkBlue"> {testimony[data][1] as string}</span>
+          <span className="text-[1.25rem] font-[500] text-grayishBlue"> {testimony[data][2] as string}</span>
         </div>
       </div>
       <div className="pb-[0.3em]">
