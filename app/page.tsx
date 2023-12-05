@@ -27,7 +27,7 @@ const SingleBar = ({ value, target }: { value: number; target: number }) => {
           style={{
             ...progress(),
             background: `linear-gradient(to right, hsl(6, 100%, 80%) ${
-              100 - Math.pow(result, 2) / 100
+              100 - Math.pow(result, 2) / 60
             }%, hsl(335, 100%, 65%) 100%)`,
             borderRadius: '9999px',
           }}
@@ -52,8 +52,8 @@ export default function Home() {
       .then((response) => response.json())
       .then((response: dataJSON) => {
         const targetSpace = response.storage;
-        const delay = 50;
-        const step = 10;
+        const delay = 5;
+        const step = 1;
 
         const updateSpace = (current: number, target: number) => {
           if (current < target) {
@@ -75,7 +75,7 @@ export default function Home() {
   return (
     <main className="flex h-full flex-col items-center justify-center font-raleway md:min-h-screen">
       <div className="h-full w-full bg-veryDarkBlue">
-        <div className="h-screen w-full bg-[url('./images/bg-mobile.png')] bg-cover bg-center bg-no-repeat md:h-[50em] md:bg-[url('./images/bg-desktop.png')] md:bg-auto md:bg-bottom">
+        <div className="h-[100vh] w-full bg-[url('./images/bg-mobile.png')] bg-cover bg-center bg-no-repeat md:h-[50em] md:bg-[url('./images/bg-desktop.png')] md:bg-auto md:bg-bottom">
           <div className="flex h-full w-full items-center justify-center">
             <div className="mb-[2em] flex w-full flex-col items-center gap-[1.88em] px-6 md:mb-[1.22em] md:w-fit md:px-0 lg:flex-row lg:items-end">
               {/*left wrapper*/}
