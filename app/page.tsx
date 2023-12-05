@@ -81,10 +81,10 @@ export default function Home() {
           <div className="h-full w-full bg-[url('./images/pattern-bg.svg')] bg-[90.2%_35%] bg-no-repeat">
             <Testimony
               buttonNext={() => {
-                setStage(Stage.stage2);
+                setStage(stage !== Stage.stage2 ? stage + 1 : Stage.stage1);
               }}
               buttonPrevious={() => {
-                setStage(Stage.stage1);
+                setStage(stage !== Stage.stage1 ? stage - 1 : Stage.stage2);
               }}
               data={stage}
             />
