@@ -61,11 +61,11 @@ export default function Home() {
       <div className="h-full w-full bg-veryDarkBlue">
         <div className="h-[50em] w-full bg-[url('./images/bg-desktop.png')] bg-bottom bg-no-repeat">
           <div className="flex h-full w-full items-center justify-center">
-            <div className="mb-[1.22em] flex flex-col items-center gap-[1.88em] lg:flex-row lg:items-end">
+            <div className="mb-[1.22em] flex w-full flex-col items-center gap-[1.88em] px-4 md:w-fit md:px-0 lg:flex-row lg:items-end">
               {/*left wrapper*/}
               <div
                 style={{ boxShadow: '10px 60px 100px 20px rgba(0, 0, 0, 0.15)' }}
-                className="flex h-[12.58em] w-[21.88em] flex-col justify-center gap-[2.08em] rounded-l-[0.6em] rounded-br-[0.6em] rounded-tr-[6.2em] bg-darkBlue pl-[2.6em] "
+                className="flex h-[12.58em] w-full flex-col justify-center gap-[2.08em] rounded-l-[0.6em] rounded-br-[0.6em] rounded-tr-[6.2em] bg-darkBlue pl-[2.6em] md:w-[20em] lg:w-[21.88em] "
               >
                 <Image className="h-fit" src={logo as string} alt="logo" />
                 <div className="flex flex-row items-center gap-[1em]">
@@ -83,10 +83,10 @@ export default function Home() {
               {/*right wrapper*/}
               <div
                 style={{ boxShadow: '40px 60px 100px 20px rgba(0, 0, 0, 0.15)' }}
-                className="flex h-[9.65em] w-[33.8em] flex-col items-center justify-center rounded-[0.6em] bg-darkBlue "
+                className="flex h-[9.65em] w-full flex-col items-center justify-center rounded-[0.6em] bg-darkBlue lg:w-[33.8em] "
               >
                 <div className="h-0 w-0">
-                  <div className="relative z-10  ml-[3.2em] mt-[-5.3em] flex h-[4.5em] w-[11.2em] rounded-l-[0.6em] rounded-tr-[0.6em] bg-white">
+                  <div className="relative z-10 ml-[3.2em] mt-[-5.3em] flex h-[4.5em] w-[11.2em] rounded-l-[0.6em] rounded-tr-[0.6em] bg-white">
                     <div className="relative flex h-full w-full items-center justify-center gap-[0.6em]">
                       <span className="text-[2.5rem] font-[700] text-veryDarkBlue">{1000 - space}</span>
                       <span className="pt-[0.3em] text-[0.75rem] font-[700] tracking-[0.08em] text-grayishBlue">
@@ -94,7 +94,7 @@ export default function Home() {
                       </span>
                     </div>
                     <svg
-                      className="absolute ml-[9.31em] pt-[4em]"
+                      className="absolute ml-[9.31em] hidden pt-[4em] lg:block"
                       width="200"
                       height="200"
                       xmlns="http://www.w3.org/2000/svg"
@@ -103,7 +103,7 @@ export default function Home() {
                     </svg>
                   </div>
                 </div>
-                <div className="w-[28.7em]">
+                <div className="w-full px-[2em] md:w-[37em] md:px-8 lg:w-[28.7em] lg:px-0">
                   <div className="flex gap-1 self-start text-[0.85rem] tracking-[0.017em] text-paleBlue">
                     <span>You’ve used</span>
                     <span className="font-[600]">{space}</span>
