@@ -14,17 +14,62 @@ enum Stage {
   stage1,
   stage2,
 }
-const Testimony = {
+const testimony = {
   [Stage.stage1]: [
     '“ I’ve been interested in coding for a while but never taken the jump, until now. I couldn’t recommend this course enough. I’m now in the job of my dreams and so excited about the future. ”',
     'Tanya Sinclair',
     'UX Engineer',
+    tanya,
   ],
   [Stage.stage2]: [
     '“ If you want to lay the best foundation possible I’d recommend taking this course. The depth the instructors go into is incredible. I now feel so confident about starting up as a professional developer. ”',
     'John Tarkpor',
     'Junior Front-end Developer',
+    john,
   ],
+};
+
+const Testimony = ({
+  data,
+  buttonPrevious,
+  buttonNext,
+}: {
+  data: typeof testimony;
+  buttonPrevious();
+  buttonNext();
+}) => {
+  return (
+    <div className="flex h-full w-full items-center justify-between px-[10.3em]">
+      <div className="z-10 mb-[1em] mr-[-17em] flex w-[40em] flex-col gap-[2.2em] bg-[url('./images/pattern-quotes.svg')] bg-[18.4%_0%] bg-no-repeat pt-[4em]">
+        <span className="text-[2em] font-[300] leading-[1.38em] text-darkBlue">{testimony[data][0]}</span>
+        <div className="flex gap-[0.5em]">
+          <span className="text-[1.25rem] font-[700] text-darkBlue"> {testimony[data][1]}</span>
+          <span className="text-[1.25rem] font-[500] text-grayishBlue"> {testimony[data][2]}</span>
+        </div>
+      </div>
+      <div>
+        <Image className="shadow-xl" src={testimony[data][3]} alt="Image of person" />
+        <div className="ml-[3.8em] mt-[-1.8em] w-fit rounded-full shadow-xl">
+          <button
+            onClick={() => {
+              buttonPrevious();
+            }}
+            className="w-fit rounded-l-full bg-white px-[1.4em] py-[1.2em] "
+          >
+            <Image className="h-fit" src={arrowPrev as string} alt="previous" />
+          </button>
+          <button
+            onClick={() => {
+              buttonNext();
+            }}
+            className="h-fit  w-fit rounded-r-full bg-white px-[1.4em] py-[1.2em] "
+          >
+            <Image className="h-fit " src={arrowNext as string} alt="previous" />
+          </button>
+        </div>
+      </div>
+    </div>
+  );
 };
 
 export default function Home() {
@@ -34,29 +79,15 @@ export default function Home() {
       <div className="h-[50em] w-full bg-white">
         <div className="h-full w-full bg-[url('./images/pattern-curve.svg')] bg-left-bottom bg-no-repeat">
           <div className="h-full w-full bg-[url('./images/pattern-bg.svg')] bg-[90.2%_35%] bg-no-repeat">
-            <div className="flex h-full w-full items-center justify-between px-[10.3em]">
-              <div className="z-10 mb-[1em] mr-[-17em] flex w-[40em] flex-col gap-[2.2em] bg-[url('./images/pattern-quotes.svg')] bg-[18.4%_0%] bg-no-repeat pt-[4em]">
-                <span className="text-[2em] font-[300] leading-[1.38em] text-darkBlue">
-                  “ I’ve been interested in coding for a while but never taken the jump, until now. I couldn’t recommend
-                  this course enough. I’m now in the job of my dreams and so excited about the future. ”
-                </span>
-                <div className="flex gap-[0.5em]">
-                  <span className="text-[1.25rem] font-[700] text-darkBlue">Tanya Sinclair</span>
-                  <span className="text-[1.25rem] font-[500] text-grayishBlue">UX Engineer</span>
-                </div>
-              </div>
-              <div>
-                <Image className="shadow-xl" src={tanya} alt="Image of person" />
-                <div className="ml-[3.8em] mt-[-1.8em] w-fit rounded-full shadow-xl">
-                  <button className="w-fit rounded-l-full bg-white px-[1.4em] py-[1.2em] ">
-                    <Image className="h-fit" src={arrowPrev as string} alt="previous" />
-                  </button>
-                  <button className="h-fit  w-fit rounded-r-full bg-white px-[1.4em] py-[1.2em] ">
-                    <Image className="h-fit " src={arrowNext as string} alt="previous" />
-                  </button>
-                </div>
-              </div>
-            </div>
+            <Testimony
+              buttonNext={() => {
+                setStage(Stage.stage2);
+              }}
+              buttonPrevious={() => {
+                setStage(Stage.stage1);
+              }}
+              data={stage}
+            />
           </div>
         </div>
       </div>
