@@ -51,8 +51,8 @@ export default function Home() {
       .then((response) => response.json())
       .then((response: dataJSON) => {
         const targetSpace = response.storage;
-        const delay = 50; // Opóźnienie w milisekundach
-        const step = 10; // Krok zwiększania wartości
+        const delay = 50;
+        const step = 10;
 
         const updateSpace = (current: number, target: number) => {
           if (current < target) {
