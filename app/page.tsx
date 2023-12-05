@@ -34,9 +34,9 @@ const Testimony = ({
   buttonPrevious,
   buttonNext,
 }: {
-  data: typeof testimony;
-  buttonPrevious();
-  buttonNext();
+  data: keyof undefined;
+  buttonPrevious(): undefined;
+  buttonNext(): undefined;
 }) => {
   return (
     <div className="flex h-full w-full items-center justify-between px-[10.3em]">
