@@ -8,7 +8,7 @@ import tanya from './images/image-tanya.jpg';
 import john from './images/image-john.jpg';
 import arrowPrev from './images/icon-prev.svg';
 import arrowNext from './images/icon-next.svg';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 enum Stage {
   stage1,
@@ -74,6 +74,24 @@ const Testimony = ({
 
 export default function Home() {
   const [stage, setStage] = useState<Stage>(Stage.stage1);
+  const goPrevious = () => {
+    setStage(stage !== Stage.stage1 ? stage - 1 : Stage.stage2);
+  };
+  const goNext = () => {
+    setStage(stage !== Stage.stage2 ? stage + 1 : Stage.stage1);
+  };
+  useEffect(() => {
+    const handleKeyPress = (event: KeyboardEvent) => {
+      if (event.key === 'ArrowLeft') goPrevious();
+      else if (event.key === 'ArrowRight') goNext();
+    };
+
+    document.addEventListener('keydown', handleKeyPress);
+
+    return () => {
+      document.removeEventListener('keydown', handleKeyPress);
+    };
+  });
   return (
     <main className="flex min-h-screen flex-col items-center justify-center font-inter">
       <div className="h-[50em] w-full bg-white">
@@ -81,10 +99,10 @@ export default function Home() {
           <div className="h-full w-full bg-[url('./images/pattern-bg.svg')] bg-[90.2%_35%] bg-no-repeat">
             <Testimony
               buttonNext={() => {
-                setStage(stage !== Stage.stage2 ? stage + 1 : Stage.stage1);
+                goPrevious();
               }}
               buttonPrevious={() => {
-                setStage(stage !== Stage.stage1 ? stage - 1 : Stage.stage2);
+                goNext();
               }}
               data={stage}
             />
