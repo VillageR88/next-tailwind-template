@@ -41,7 +41,7 @@ const Testimony = ({
 }) => {
   return (
     <div className="flex h-screen w-full flex-col-reverse items-center justify-center gap-[2rem] overflow-clip md_lg:flex-row md_lg:justify-between md_lg:gap-8 md_lg:px-[10.3em] xl:gap-0">
-      <div className="z-10 mb-[1em] flex h-fit w-full flex-col justify-center gap-[2.2em] bg-[url('./images/pattern-quotes.svg')] bg-[length:4em] bg-[50%_0%] bg-no-repeat pb-1 md:w-[34em] md_lg:h-fit md_lg:w-[30em] md_lg:bg-[length:7.5em] md_lg:bg-[18.4%_0%] md_lg:pt-[4em] xl:mr-[-17em] xl:w-[39.5em]">
+      <div className="z-10 mb-[1em] flex h-fit w-full flex-col justify-center gap-[2.2em] bg-[url('./images/pattern-quotes.svg')] bg-[length:4em] bg-[50%_0%] bg-no-repeat pb-1 md:w-[34em] md_lg:h-fit md_lg:w-[30em] md_lg:bg-[length:19%] md_lg:bg-[18.4%_0%] md_lg:pt-[4em] xl:mr-[-17em] xl:w-[39.5em]">
         <span className="w-[18em] self-center pt-[1.5em] text-center text-[1.1rem] font-[300] leading-[1.38em] text-darkBlue md_lg:w-fit md_lg:pt-0 md_lg:text-left md_lg:text-[1.2rem] md_lg_lg:text-[1.4rem] lg:text-[1.75rem] xl:text-[2rem]">
           {testimony[data][0] as string}
         </span>
@@ -109,7 +109,7 @@ export default function Home() {
     <main className="flex h-full flex-col items-center justify-center overflow-hidden font-inter md_lg:min-h-screen">
       <div className="h-full w-full bg-white md_lg:h-[50em] md_lg:pt-0">
         <div className="h-full w-full bg-[url('./images/pattern-curve.svg')] bg-75% bg-left-bottom bg-no-repeat md_lg:bg-[size:42.3%]">
-          <div className="h-full w-full bg-no-repeat md_lg:bg-[url('./images/pattern-bg.svg')] md_lg:bg-[90.2%_35%]">
+          <div className="h-full w-full bg-[length:48.5%] bg-no-repeat md_lg:bg-[url('./images/pattern-bg.svg')] md_lg:bg-[90.2%_35%]">
             {transitions((style, item) => (
               <animated.div
                 style={style}
