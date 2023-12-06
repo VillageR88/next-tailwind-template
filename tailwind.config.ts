@@ -14,6 +14,10 @@ const config: Config = {
       '16': '4rem',
     },
     extend: {
+      screens: {
+        sm_md: '550px',
+        md_lg: '850px',
+      },
       fontFamily: {
         sans: ['var(--font-sans)'],
         mono: ['var(--font-mono)'],
