@@ -9,6 +9,7 @@ import john from './images/image-john.jpg';
 import arrowPrev from './images/icon-prev.svg';
 import arrowNext from './images/icon-next.svg';
 import { useEffect, useState } from 'react';
+import { animated, useTransition } from 'react-spring';
 
 enum Stage {
   stage1,
@@ -38,44 +39,54 @@ const Testimony = ({
   buttonPrevious(): undefined;
   buttonNext(): undefined;
 }) => {
+  const transitions = useTransition(data, {
+    from: { opacity: 0, transform: 'translateX(100%)' },
+    enter: { opacity: 1, transform: 'translateX(0%)' },
+    leave: { opacity: 0, transform: 'translateX(-100%)' },
+  });
   return (
-    <div className="flex h-full w-full flex-col-reverse items-center justify-center md_lg:flex-row md_lg:justify-between md_lg:gap-8 md_lg:px-[10.3em] xl:gap-0">
-      <div className="z-10 mb-[1em] flex h-fit w-full flex-col justify-center gap-[2.2em] bg-[url('./images/pattern-quotes.svg')] bg-[length:4em] bg-[50%_0%] bg-no-repeat pb-1 md:w-[34em] md_lg:h-fit md_lg:w-[30em] md_lg:bg-[length:7.5em] md_lg:bg-[18.4%_0%] md_lg:pt-[4em] xl:mr-[-17em] xl:w-[39.5em]">
-        <span className="md_lg_lg:text-[1.4rem] w-[18em] self-center text-center text-[1.1rem] font-[300] leading-[1.38em] text-darkBlue md_lg:w-fit md_lg:text-left md_lg:text-[1.2rem] lg:text-[1.75rem] xl:text-[2rem]">
-          {testimony[data][0] as string}
-        </span>
-        <div className="flex flex-col items-center text-[1rem] md_lg:flex-row md_lg:gap-[0.5em] md_lg:text-[1.25rem]">
-          <span className="font-[700] text-darkBlue"> {testimony[data][1] as string}</span>
-          <span className="font-[500] text-grayishBlue"> {testimony[data][2] as string}</span>
-        </div>
-      </div>
-      <div className="flex h-fit w-full flex-col bg-[url('./images/pattern-bg.svg')] bg-[length:20em] bg-center bg-no-repeat pb-[0.3em] pt-[3em] md_lg:h-fit md_lg:w-fit md_lg:bg-none md_lg:pt-0 xl:pl-[13.25em]">
-        <Image
-          className="w-[15em] self-center shadow-xl md_lg:w-[35em] xl:w-fit"
-          src={testimony[data][3]}
-          alt="Image of person"
-          priority
-        />
-        <div className="mt-[-1.8em] w-fit self-center rounded-full shadow-xl md_lg:ml-[3.85em] md_lg:self-start">
-          <button
-            onClick={() => {
-              buttonPrevious();
-            }}
-            className="w-fit rounded-l-full bg-white py-[1.2em] pl-[1.34em] pr-[1.38em] "
+    <>
+      {transitions((style, item) =>
+        item === data ? (
+          <animated.div
+            style={style}
+            className="flex h-full w-full flex-col-reverse items-center justify-center md_lg:flex-row md_lg:justify-between md_lg:gap-8 md_lg:px-[10.3em] xl:gap-0"
           >
-            <Image className="h-fit" src={arrowPrev as string} alt="previous" />
-          </button>
-          <button
-            onClick={() => {
-              buttonNext();
-            }}
-            className="h-fit  w-fit rounded-r-full bg-white py-[1.2em] pl-[1.4em] pr-[1.3em] "
-          >
-            <Image className="h-fit" src={arrowNext as string} alt="previous" />
-          </button>
-        </div>
-      </div>
-    </div>
+            <div className="z-10 mb-[1em] flex h-fit w-full flex-col justify-center gap-[2.2em] bg-[url('./images/pattern-quotes.svg')] bg-[length:4em] bg-[50%_0%] bg-no-repeat pb-1 md:w-[34em] md_lg:h-fit md_lg:w-[30em] md_lg:bg-[length:7.5em] md_lg:bg-[18.4%_0%] md_lg:pt-[4em] xl:mr-[-17em] xl:w-[39.5em]">
+              <span className="md_lg_lg:text-[1.4rem] w-[18em] self-center text-center text-[1.1rem] font-[300] leading-[1.38em] text-darkBlue md_lg:w-fit md_lg:text-left md_lg:text-[1.2rem] lg:text-[1.75rem] xl:text-[2rem]">
+                {testimony[data][0] as string}
+              </span>
+              <div className="flex flex-col items-center text-[1rem] md_lg:flex-row md_lg:gap-[0.5em] md_lg:text-[1.25rem]">
+                <span className="font-[700] text-darkBlue"> {testimony[data][1] as string}</span>
+                <span className="font-[500] text-grayishBlue"> {testimony[data][2] as string}</span>
+              </div>
+            </div>
+            <div className="flex h-fit w-full flex-col bg-[url('./images/pattern-bg.svg')] bg-[length:20em] bg-center bg-no-repeat pb-[0.3em] pt-[3em] md_lg:h-fit md_lg:w-fit md_lg:bg-none md_lg:pt-0 xl:pl-[13.25em]">
+              <Image
+                className="w-[15em] self-center shadow-xl md_lg:w-[35em] xl:w-fit"
+                src={testimony[data][3]}
+                alt="Image of person"
+                priority
+              />
+              <div className="mt-[-1.8em] w-fit self-center rounded-full shadow-xl md_lg:ml-[3.85em] md_lg:self-start">
+                <button
+                  onClick={buttonPrevious}
+                  className="w-fit rounded-l-full bg-white py-[1.2em] pl-[1.34em] pr-[1.38em]"
+                >
+                  <Image className="h-fit" src={arrowPrev as string} alt="previous" />
+                </button>
+                <button
+                  onClick={buttonNext}
+                  className="h-fit w-fit rounded-r-full bg-white py-[1.2em] pl-[1.4em] pr-[1.3em]"
+                >
+                  <Image className="h-fit" src={arrowNext as string} alt="previous" />
+                </button>
+              </div>
+            </div>
+          </animated.div>
+        ) : null,
+      )}
+    </>
   );
 };
 
