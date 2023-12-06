@@ -7,6 +7,12 @@ const config: Config = {
     './app/**/*.{js,ts,jsx,tsx,mdx}',
   ],
   theme: {
+    backgroundSize: {
+      '100%': '100%',
+      '75%': '75%',
+      '50%': '50%',
+      '16': '4rem',
+    },
     extend: {
       fontFamily: {
         sans: ['var(--font-sans)'],

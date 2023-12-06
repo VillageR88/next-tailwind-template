@@ -39,9 +39,9 @@ const Testimony = ({
   buttonNext(): undefined;
 }) => {
   return (
-    <div className="flex h-full w-full flex-col-reverse items-center justify-center px-[3em] lg:flex-row lg:justify-between lg:gap-8 lg:px-[10.3em] xl:gap-0">
-      <div className="z-10 mb-[1em] flex h-full w-full flex-col justify-center gap-[2.2em]  bg-[18.4%_0%] bg-no-repeat pb-1 lg:pt-[4em] md:w-[34em] lg:h-fit lg:w-[30em] lg:bg-[url('./images/pattern-quotes.svg')] xl:mr-[-17em] xl:w-[39.5em]">
-        <span className="w-[18em] self-center text-center text-[1.2rem] font-[300] leading-[1.38em] text-darkBlue lg:w-fit lg:text-left lg:text-[1.75rem] xl:text-[2rem]">
+    <div className="flex h-full w-full flex-col-reverse items-center justify-center lg:flex-row lg:justify-between lg:gap-8 lg:px-[10.3em] xl:gap-0">
+      <div className="z-10 mb-[1em] flex h-full w-full flex-col justify-center gap-[2.2em] bg-[url('./images/pattern-quotes.svg')] bg-[18.4%_0%] bg-no-repeat pb-1 md:w-[34em] lg:h-fit lg:w-[30em] lg:pt-[4em] xl:mr-[-17em] xl:w-[39.5em]">
+        <span className="w-[18em] self-center text-center text-[1.1rem] font-[300] leading-[1.38em] text-darkBlue lg:w-fit lg:text-left lg:text-[1.75rem] xl:text-[2rem]">
           {testimony[data][0] as string}
         </span>
         <div className="flex flex-col items-center gap-[0.5em] lg:flex-row">
@@ -49,14 +49,14 @@ const Testimony = ({
           <span className="text-[1.25rem] font-[500] text-grayishBlue"> {testimony[data][2] as string}</span>
         </div>
       </div>
-      <div className="h-fit w-[15em] pb-[0.3em] pt-[3em] lg:h-fit lg:w-fit lg:pt-0 xl:pl-[13.25em]">
+      <div className="flex h-fit w-full flex-col bg-[url('./images/pattern-bg.svg')] bg-[length:20em] bg-center bg-no-repeat pb-[0.3em] pt-[3em] lg:h-fit lg:w-fit lg:bg-none lg:pt-0 xl:pl-[13.25em]">
         <Image
-          className="w-full shadow-xl lg:w-[35em] xl:w-fit"
+          className=" w-[15em] self-center shadow-xl lg:w-[35em] xl:w-fit"
           src={testimony[data][3]}
           alt="Image of person"
           priority
         />
-        <div className="ml-[3.85em] mt-[-1.8em] w-fit rounded-full shadow-xl">
+        <div className="mt-[-1.8em] w-fit self-center rounded-full shadow-xl lg:ml-[3.85em] lg:self-start">
           <button
             onClick={() => {
               buttonPrevious();
@@ -101,8 +101,8 @@ export default function Home() {
   });
   return (
     <main className="flex min-h-screen flex-col items-center justify-center font-inter">
-      <div className="h-[50em] w-full bg-white">
-        <div className="h-full w-full bg-[url('./images/pattern-curve.svg')] bg-left-bottom bg-no-repeat">
+      <div className="h-screen w-full bg-white lg:h-[50em]">
+        <div className="bg-75% h-full w-full bg-[url('./images/pattern-curve.svg')] bg-left-bottom bg-no-repeat lg:bg-[size:42.3%]">
           <div className="h-full w-full bg-no-repeat lg:bg-[url('./images/pattern-bg.svg')] lg:bg-[90.2%_35%]">
             <Testimony
               buttonNext={() => {
