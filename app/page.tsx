@@ -42,7 +42,7 @@ const Testimony = ({
   return (
     <div className="flex h-full w-full flex-col-reverse items-center justify-center md_lg:flex-row md_lg:justify-between md_lg:gap-8 md_lg:px-[10.3em] xl:gap-0">
       <div className="z-10 mb-[1em] flex h-fit w-full flex-col justify-center gap-[2.2em] bg-[url('./images/pattern-quotes.svg')] bg-[length:4em] bg-[50%_0%] bg-no-repeat pb-1 md:w-[34em] md_lg:h-fit md_lg:w-[30em] md_lg:bg-[length:7.5em] md_lg:bg-[18.4%_0%] md_lg:pt-[4em] xl:mr-[-17em] xl:w-[39.5em]">
-        <span className="md_lg_lg:text-[1.4rem] w-[18em] self-center text-center text-[1.1rem] font-[300] leading-[1.38em] text-darkBlue md_lg:w-fit md_lg:text-left md_lg:text-[1.2rem] lg:text-[1.75rem] xl:text-[2rem]">
+        <span className="w-[18em] self-center text-center text-[1.1rem] font-[300] leading-[1.38em] text-darkBlue md_lg:w-fit md_lg:text-left md_lg:text-[1.2rem] md_lg_lg:text-[1.4rem] lg:text-[1.75rem] xl:text-[2rem]">
           {testimony[data][0] as string}
         </span>
         <div className="flex flex-col items-center text-[1rem] md_lg:flex-row md_lg:gap-[0.5em] md_lg:text-[1.25rem]">
@@ -73,6 +73,7 @@ const Testimony = ({
 export default function Home() {
   const [stage, setStage] = useState<Stage>(Stage.stage1);
   const [direction, setDirection] = useState<string>('right');
+
   const goPrevious = () => {
     setDirection('right');
     setStage(stage !== Stage.stage1 ? stage - 1 : Stage.stage2);
@@ -96,7 +97,7 @@ export default function Home() {
   const transitions = useTransition(stage, {
     from: { opacity: 1, transform: direction === 'right' ? 'translateX(100%)' : 'translateX(-100%)', immediate: true },
     enter: { opacity: 1, transform: 'translateX(0%)' },
-    leave: { opacity: 0, transform: direction === 'right' ? 'translateX(-100%)' : 'translateX(100%)' },
+    to: { opacity: 0, transform: direction === 'right' ? 'translateX(-100%)' : 'translateX(100%)' },
   });
   return (
     <main className="flex min-h-screen flex-col items-center justify-center overflow-hidden font-inter">
@@ -106,7 +107,7 @@ export default function Home() {
             {transitions((style, item) => (
               <animated.div
                 style={style}
-                className="flex h-full w-full flex-col-reverse items-center justify-center md_lg:flex-row md_lg:justify-between md_lg:gap-8 md_lg:px-[10.3em] xl:gap-0"
+                className="flex h-full w-[full] flex-col-reverse items-center justify-center md_lg:flex-row md_lg:justify-between md_lg:gap-8  xl:gap-0"
                 key={item}
               >
                 <Testimony
