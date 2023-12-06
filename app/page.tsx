@@ -39,16 +39,23 @@ const Testimony = ({
   buttonNext(): undefined;
 }) => {
   return (
-    <div className="flex h-full w-full items-center justify-between px-[10.3em]">
-      <div className="z-10 mb-[1em] mr-[-17em] flex w-[39.5em] flex-col gap-[2.2em] bg-[url('./images/pattern-quotes.svg')] bg-[18.4%_0%] bg-no-repeat pb-1 pt-[4em]">
-        <span className="text-[2em] font-[300] leading-[1.38em]  text-darkBlue">{testimony[data][0] as string}</span>
-        <div className="flex gap-[0.5em]">
+    <div className="flex h-full w-full flex-col-reverse items-center justify-center px-[3em] lg:flex-row lg:justify-between lg:gap-8 lg:px-[10.3em] xl:gap-0">
+      <div className="z-10 mb-[1em] flex h-full w-full flex-col justify-center gap-[2.2em]  bg-[18.4%_0%] bg-no-repeat pb-1 lg:pt-[4em] md:w-[34em] lg:h-fit lg:w-[30em] lg:bg-[url('./images/pattern-quotes.svg')] xl:mr-[-17em] xl:w-[39.5em]">
+        <span className="w-[18em] self-center text-center text-[1.2rem] font-[300] leading-[1.38em] text-darkBlue lg:w-fit lg:text-left lg:text-[1.75rem] xl:text-[2rem]">
+          {testimony[data][0] as string}
+        </span>
+        <div className="flex flex-col items-center gap-[0.5em] lg:flex-row">
           <span className="text-[1.25rem] font-[700] text-darkBlue"> {testimony[data][1] as string}</span>
           <span className="text-[1.25rem] font-[500] text-grayishBlue"> {testimony[data][2] as string}</span>
         </div>
       </div>
-      <div className="pb-[0.3em]">
-        <Image className="shadow-xl" src={testimony[data][3]} alt="Image of person" />
+      <div className="h-fit w-[15em] pb-[0.3em] pt-[3em] lg:h-fit lg:w-fit lg:pt-0 xl:pl-[13.25em]">
+        <Image
+          className="w-full shadow-xl lg:w-[35em] xl:w-fit"
+          src={testimony[data][3]}
+          alt="Image of person"
+          priority
+        />
         <div className="ml-[3.85em] mt-[-1.8em] w-fit rounded-full shadow-xl">
           <button
             onClick={() => {
@@ -64,7 +71,7 @@ const Testimony = ({
             }}
             className="h-fit  w-fit rounded-r-full bg-white py-[1.2em] pl-[1.4em] pr-[1.3em] "
           >
-            <Image className="h-fit " src={arrowNext as string} alt="previous" />
+            <Image className="h-fit" src={arrowNext as string} alt="previous" />
           </button>
         </div>
       </div>
@@ -96,7 +103,7 @@ export default function Home() {
     <main className="flex min-h-screen flex-col items-center justify-center font-inter">
       <div className="h-[50em] w-full bg-white">
         <div className="h-full w-full bg-[url('./images/pattern-curve.svg')] bg-left-bottom bg-no-repeat">
-          <div className="h-full w-full bg-[url('./images/pattern-bg.svg')] bg-[90.2%_35%] bg-no-repeat">
+          <div className="h-full w-full bg-no-repeat lg:bg-[url('./images/pattern-bg.svg')] lg:bg-[90.2%_35%]">
             <Testimony
               buttonNext={() => {
                 goPrevious();
