@@ -16,8 +16,8 @@ const config: Config = {
     extend: {
       screens: {
         sm_md: '550px',
-        md_md_lg: '800px',
         md_lg: '850px',
+        md_lg_lg: '880px',
       },
       fontFamily: {
         sans: ['var(--font-sans)'],
