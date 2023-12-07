@@ -164,7 +164,11 @@ const SmallBox = ({ social, isSecond, header }: { social: Social; isSecond?: boo
           </span>
           <div className="flex items-center ">
             <Image className="h-fit" src={iconUp as string} alt="more" />
-            <span>3%</span>
+            <span>
+              {isSecond
+                ? data?.[Social[social] as keyof dataJSON].dailyLikesChange
+                : data?.[Social[social] as keyof dataJSON].dailyViewsChange}
+            </span>
           </div>
         </div>
       </div>
