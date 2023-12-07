@@ -136,7 +136,7 @@ const BigBox = ({
   );
 };
 
-const SmallBox = ({ isSecond, header }: { isSecond?: boolean; header: string }) => {
+const SmallBox = ({ social, isSecond, header }: { social: Social; isSecond?: boolean; header?: string }) => {
   const [data, setData] = useState<dataJSON>();
   useEffect(() => {
     fetch('./data.json')
@@ -154,7 +154,7 @@ const SmallBox = ({ isSecond, header }: { isSecond?: boolean; header: string }) 
       <div className="flex h-[5em] w-full flex-col justify-between px-[1.5em]">
         <div className="flex justify-between">
           <span>{isSecond ? 'Likes' : header}</span>
-          <Image className="h-fit" src={iconFacebook as string} alt={`logo`} />
+          <Image className="h-fit" src={feed[social][0] as string} alt={`logo`} />
         </div>
         <div className="flex justify-between">
           <span>87</span>
@@ -201,14 +201,14 @@ export default function Home() {
               Overview - Today
             </span>
             <div className="grid grid-cols-4 gap-x-[1.9em] gap-y-[1.5em]">
-              <SmallBox header="Page Views" />
-              <SmallBox isSecond={true} />
-              <SmallBox isSecond={true} />
-              <SmallBox header="Profile Views" />
-              <SmallBox header="Retweets" />
-              <SmallBox isSecond={true} />
-              <SmallBox isSecond={true} />
-              <SmallBox header="Total Views" />
+              <SmallBox social={Social.facebook} header="Page Views" />
+              <SmallBox social={Social.facebook} isSecond={true} />
+              <SmallBox social={Social.instagram} isSecond={true} />
+              <SmallBox social={Social.instagram} header="Profile Views" />
+              <SmallBox social={Social.twitter} header="Retweets" />
+              <SmallBox social={Social.twitter} isSecond={true} />
+              <SmallBox social={Social.youtube} isSecond={true} />
+              <SmallBox social={Social.youtube} header="Total Views" />
             </div>
           </div>
         </main>
