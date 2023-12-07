@@ -2,13 +2,13 @@ import '@fontsource/inter';
 import '@fontsource/inter/400.css';
 import '@fontsource/inter/700.css';
 
-const BigBox = () => {
+const BigBox = ({ top }: { top: string }) => {
   return (
     <div className="flex h-[13.5em] w-[15.95em] flex-col items-center">
       <div
         style={{
           width: '99.2%',
-          borderBottom: '2px solid hsl(208 92% 53%)',
+          borderBottom: `2px ${top}`,
           borderLeft: '3px solid transparent',
           borderRight: '3px solid transparent',
         }}
@@ -16,7 +16,7 @@ const BigBox = () => {
       <div
         style={{
           width: '100%',
-          borderBottom: '2px solid hsl(208 92% 53%)',
+          borderBottom: `2px ${top}`,
           borderLeft: '1px solid transparent',
           borderRight: '1px solid transparent',
         }}
@@ -46,10 +46,10 @@ export default function Home() {
         </nav>
         <main className="h-fit">
           <div className="mt-[-6.8em] flex h-full w-full flex-row gap-[1.9em] px-[10.3em]">
-            <BigBox />
-            <BigBox />
-            <BigBox />
-            <BigBox />
+            <BigBox top="solid hsl(208 92% 53%)" />
+            <BigBox top="solid hsl(203, 89%, 53%)" />
+            <BigBox top="solid hsl(208 92% 53%)" />
+            <BigBox top="solid hsl(208 92% 53%)" />
           </div>
         </main>
       </div>
