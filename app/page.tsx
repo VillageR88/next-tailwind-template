@@ -59,7 +59,15 @@ const feed = {
   [Social.youtube]: [iconYoutube, 'youtube', 'Nathan F.'],
 };
 
-const BigBox = ({ top, social }: { top: string; social: keyof typeof feed }) => {
+const BigBox = ({
+  top,
+  social,
+  textSubscribers,
+}: {
+  top: string;
+  social: keyof typeof feed;
+  textSubscribers?: boolean;
+}) => {
   const [data, setData] = useState<dataJSON>();
   useEffect(() => {
     fetch('./data.json')
@@ -100,7 +108,9 @@ const BigBox = ({ top, social }: { top: string; social: keyof typeof feed }) => 
           <span className="text-[3.5rem] font-[700] leading-[1.12em] tracking-[-0.04em]">
             {data?.[Social[social] as keyof dataJSON].sumFollowers}
           </span>
-          <span className="text-[0.75rem] tracking-[0.42em] text-darkGrayishBlue_Text">FOLLOWERS</span>
+          <span className="text-[0.75rem] tracking-[0.42em] text-darkGrayishBlue_Text">
+            {textSubscribers ? 'SUBSCRIBERS' : 'FOLLOWERS'}
+          </span>
         </div>
         <div className="flex items-center gap-[0.23em]">
           {data?.[Social[social] as keyof dataJSON].dailyFollowersChange > 0 ? (
@@ -149,7 +159,7 @@ export default function Home() {
             <BigBox social={Social.facebook} top="hsl(208 92% 53%)" />
             <BigBox social={Social.twitter} top="hsl(203, 89%, 53%)" />
             <BigBox social={Social.instagram} top="linear-gradient(to right, hsl(37, 97%, 70%), hsl(329, 70%, 58%))" />
-            <BigBox social={Social.youtube} top="hsl(348, 97%, 39%)" />
+            <BigBox social={Social.youtube} top="hsl(348, 97%, 39%)" textSubscribers={true} />
           </div>
         </main>
       </div>
