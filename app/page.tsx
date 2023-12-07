@@ -113,22 +113,22 @@ const BigBox = ({
           </span>
         </div>
         <div className="flex items-center gap-[0.23em]">
-          {data?.[Social[social] as keyof dataJSON].dailyFollowersChange > 0 ? (
+          {(data?.[Social[social] as keyof dataJSON].dailyFollowersChange ?? 0) > 0 ? (
             <Image className="h-fit" src={iconUp as string} alt="more" />
           ) : (
-            data?.[Social[social] as keyof dataJSON].dailyFollowersChange < 0 && (
+            (data?.[Social[social] as keyof dataJSON].dailyFollowersChange ?? 0) < 0 && (
               <Image className="h-fit" src={iconDown as string} alt="less" />
             )
           )}
 
           <span
             className={`${
-              data?.[Social[social] as keyof dataJSON].dailyFollowersChange > 0
+              (data?.[Social[social] as keyof dataJSON].dailyFollowersChange ?? 0) > 0
                 ? 'text-limeGreen'
-                : data?.[Social[social] as keyof dataJSON].dailyFollowersChange < 0 && 'text-brightRed'
+                : (data?.[Social[social] as keyof dataJSON].dailyFollowersChange ?? 0) < 0 && 'text-brightRed'
             } text-[0.77rem] font-[700]`}
           >
-            {Math.abs(data?.[Social[social] as keyof dataJSON].dailyFollowersChange)} Today
+            {Math.abs(data?.[Social[social] as keyof dataJSON].dailyFollowersChange ?? 0)} Today
           </span>
         </div>
       </div>
@@ -151,7 +151,7 @@ const SmallBox = () => {
 
   return (
     <div className="flex h-[7.8em] max-w-[15.95em] items-center justify-center rounded-[0.3em] bg-[#F0F3FA]">
-      <div className="h-[5em] w-full px-[1.5em] justify-between flex flex-col">
+      <div className="flex h-[5em] w-full flex-col justify-between px-[1.5em]">
         <div className="flex justify-between">
           <span>Page Views</span>
           <Image className="h-fit" src={iconFacebook as string} alt={`logo`} />
