@@ -136,7 +136,7 @@ const BigBox = ({
   );
 };
 
-const SmallBox = () => {
+const SmallBox = ({ isSecond, header }: { isSecond?: boolean; header: string }) => {
   const [data, setData] = useState<dataJSON>();
   useEffect(() => {
     fetch('./data.json')
@@ -153,7 +153,7 @@ const SmallBox = () => {
     <div className="flex h-[7.8em] max-w-[15.95em] items-center justify-center rounded-[0.3em] bg-[#F0F3FA]">
       <div className="flex h-[5em] w-full flex-col justify-between px-[1.5em]">
         <div className="flex justify-between">
-          <span>Page Views</span>
+          <span>{isSecond ? 'Likes' : header}</span>
           <Image className="h-fit" src={iconFacebook as string} alt={`logo`} />
         </div>
         <div className="flex justify-between">
@@ -201,14 +201,14 @@ export default function Home() {
               Overview - Today
             </span>
             <div className="grid grid-cols-4 gap-x-[1.9em] gap-y-[1.5em]">
-              <SmallBox />
-              <SmallBox />
-              <SmallBox />
-              <SmallBox />
-              <SmallBox />
-              <SmallBox />
-              <SmallBox />
-              <SmallBox />
+              <SmallBox header="Page Views" />
+              <SmallBox isSecond={true} />
+              <SmallBox isSecond={true} />
+              <SmallBox header="Profile Views" />
+              <SmallBox header="Retweets" />
+              <SmallBox isSecond={true} />
+              <SmallBox isSecond={true} />
+              <SmallBox header="Total Views" />
             </div>
           </div>
         </main>
