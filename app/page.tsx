@@ -4,12 +4,21 @@ import '@fontsource/inter/700.css';
 
 const BigBox = () => {
   return (
-    <div className="flex h-[13.5em] w-[15.95em] flex-col">
+    <div className="flex h-[13.5em] w-[15.95em] flex-col items-center">
       <div
         style={{
-          borderBottom: '4px solid hsl(208 92% 53%)',
-          borderLeft: '4px solid transparent',
-          borderRight: '4px solid transparent',
+          width: '99.2%',
+          borderBottom: '2px solid hsl(208 92% 53%)',
+          borderLeft: '3px solid transparent',
+          borderRight: '3px solid transparent',
+        }}
+      ></div>
+      <div
+        style={{
+          width: '100%',
+          borderBottom: '2px solid hsl(208 92% 53%)',
+          borderLeft: '1px solid transparent',
+          borderRight: '1px solid transparent',
         }}
       ></div>
       <div className="h-full w-full rounded-b-[0.3em] bg-[#F0F3FA]"></div>
