@@ -7,8 +7,9 @@ const BigBox = ({ top }: { top: string }) => {
     <div className="flex h-[13.5em] w-[15.95em] flex-col items-center">
       <div
         style={{
-          height: '2.5px',
-          width: '99%',
+          marginBottom: '-1%',
+          height: '4.5px',
+          width: '99.5%',
           background: `${top}`,
           clipPath: 'polygon(1% 0, 99% 0, 100% 100%, 0 100%)',
         }}
@@ -48,8 +49,8 @@ export default function Home() {
           <div className="mt-[-6.8em] flex h-full w-full flex-row gap-[1.9em] px-[10.3em]">
             <BigBox top="hsl(208 92% 53%)" />
             <BigBox top="hsl(203, 89%, 53%)" />
-            <BigBox top="hsl(203, 89%, 53%)" />
-            <BigBox top="hsl(203, 89%, 53%)" />
+            <BigBox top="linear-gradient(to right, hsl(37, 97%, 70%), hsl(329, 70%, 58%))" />
+            <BigBox top="hsl(348, 97%, 39%)" />
           </div>
         </main>
       </div>
