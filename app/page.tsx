@@ -22,7 +22,7 @@ interface dataJSON {
     sumFollowers: number;
     dailyFollowersChange: number;
     dailyViews: number;
-    dailyViewsChang: number;
+    dailyViewsChange: number;
     dailyLikes: number;
     dailyLikesChange: number;
   };
@@ -30,7 +30,7 @@ interface dataJSON {
     sumFollowers: number;
     dailyFollowersChange: number;
     dailyViews: number;
-    dailyViewsChang: number;
+    dailyViewsChange: number;
     dailyLikes: number;
     dailyLikesChange: number;
   };
@@ -38,7 +38,7 @@ interface dataJSON {
     sumFollowers: number;
     dailyFollowersChange: number;
     dailyViews: number;
-    dailyViewsChang: number;
+    dailyViewsChange: number;
     dailyLikes: number;
     dailyLikesChange: number;
   };
@@ -46,7 +46,7 @@ interface dataJSON {
     sumFollowers: string;
     dailyFollowersChange: number;
     dailyViews: string;
-    dailyViewsChang: number;
+    dailyViewsChange: number;
     dailyLikes: number;
     dailyLikesChange: number;
   };
@@ -157,7 +157,7 @@ const SmallBox = ({ social, isSecond, header }: { social: Social; isSecond?: boo
           <Image className="h-fit" src={feed[social][0] as string} alt={`logo`} />
         </div>
         <div className="flex justify-between">
-          <span>87</span>
+          <span>{isSecond ? data?.[Social[social]].dailyLikes : data?.[Social[social]].dailyViews}</span>
           <div className="flex items-center ">
             <Image className="h-fit" src={iconUp as string} alt="more" />
             <span>3%</span>
