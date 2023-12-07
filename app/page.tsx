@@ -154,7 +154,7 @@ const SmallBox = ({ social, isSecond, header }: { social: Social; isSecond?: boo
       <div className="flex h-[5em] w-full flex-col justify-between px-[1.5em]">
         <div className="flex justify-between">
           <span>{isSecond ? 'Likes' : header}</span>
-          <Image className="h-fit" src={feed[social][0] as string} alt={`logo`} />
+          <Image className="h-fit" src={feed[social][0] as string} alt={`${feed[social][1]} logo`} />
         </div>
         <div className="flex justify-between">
           <span>
@@ -164,10 +164,17 @@ const SmallBox = ({ social, isSecond, header }: { social: Social; isSecond?: boo
           </span>
           <div className="flex items-center ">
             <Image className="h-fit" src={iconUp as string} alt="more" />
-            <span>
+            <span
+              className={`${
+                (data?.[Social[social] as keyof dataJSON][isSecond ? 'dailyLikesChange' : 'dailyViewsChange'] ?? 0) > 0
+                  ? 'text-limeGreen'
+                  : (data?.[Social[social] as keyof dataJSON].dailyLikesChange ?? 0) < 0 && 'text-brightRed'
+              } text-[0.77rem] font-[700]`}
+            >
               {isSecond
-                ? data?.[Social[social] as keyof dataJSON].dailyLikesChange
-                : data?.[Social[social] as keyof dataJSON].dailyViewsChange}
+                ? Math.abs(data?.[Social[social] as keyof dataJSON].dailyLikesChange ?? 0)
+                : Math.abs(data?.[Social[social] as keyof dataJSON].dailyViewsChange ?? 0)}
+              %
             </span>
           </div>
         </div>

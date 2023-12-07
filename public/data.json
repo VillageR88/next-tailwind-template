@@ -5,7 +5,7 @@
         "dailyViews": 87,
         "dailyViewsChange": 3,
         "dailyLikes": 52,
-        "dailyLikesChange": 2
+        "dailyLikesChange": -2
     },
     "twitter": {
         "sumFollowers": 1044,
@@ -27,8 +27,8 @@
         "sumFollowers": 8239,
         "dailyFollowersChange": -144,
         "dailyViews": 1407,
-        "dailyViewsChange": 12,
+        "dailyViewsChange": -12,
         "dailyLikes": 107,
-        "dailyLikesChange": 19
+        "dailyLikesChange": -19
     }
 }
