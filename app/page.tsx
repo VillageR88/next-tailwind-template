@@ -43,14 +43,17 @@ interface dataJSON {
     dailyLikesChange: number;
   };
   youtube: {
-    sumFollowers: string;
+    sumFollowers: number;
     dailyFollowersChange: number;
-    dailyViews: string;
+    dailyViews: number;
     dailyViewsChange: number;
     dailyLikes: number;
     dailyLikesChange: number;
   };
 }
+
+const numberControl = (value: number): number | string =>
+  value > 10000 && value < 99999 ? ('' + value).slice(0, -3).concat('k') : value;
 
 const feed = {
   [Social.facebook]: [iconFacebook, 'facebook', '@nathanf'],
@@ -106,7 +109,7 @@ const BigBox = ({
         </div>
         <div className="flex flex-col items-center">
           <span className="text-[3.5rem] font-[700] leading-[1.12em] tracking-[-0.04em]">
-            {data?.[Social[social] as keyof dataJSON].sumFollowers}
+            {numberControl(data?.[Social[social] as keyof dataJSON].sumFollowers ?? 0)}
           </span>
           <span className="text-[0.75rem] tracking-[0.42em] text-darkGrayishBlue_Text">
             {textSubscribers ? 'SUBSCRIBERS' : 'FOLLOWERS'}
@@ -158,9 +161,11 @@ const SmallBox = ({ social, isSecond, header }: { social: Social; isSecond?: boo
         </div>
         <div className="flex justify-between">
           <span>
-            {isSecond
-              ? data?.[Social[social] as keyof dataJSON].dailyLikes
-              : data?.[Social[social] as keyof dataJSON].dailyViews}
+            {numberControl(
+              (isSecond
+                ? data?.[Social[social] as keyof dataJSON].dailyLikes
+                : data?.[Social[social] as keyof dataJSON].dailyViews) ?? 0,
+            )}
           </span>
           <div className="flex items-center ">
             {(data?.[Social[social] as keyof dataJSON][isSecond ? 'dailyLikesChange' : 'dailyViewsChange'] ?? 0) > 0 ? (
