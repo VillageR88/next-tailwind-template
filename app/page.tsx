@@ -4,9 +4,25 @@ import '@fontsource/inter/700.css';
 import Image from 'next/image';
 import iconFacebook from './images/icon-facebook.svg';
 import iconTwitter from './images/icon-twitter.svg';
+import iconInstagram from './images/icon-instagram.svg';
+import iconYoutube from './images/icon-youtube.svg';
 import iconUp from './images/icon-up.svg';
 
-const BigBox = ({ top }: { top: string }) => {
+enum Social {
+  facebook,
+  twitter,
+  instagram,
+  youtube,
+}
+
+const feed = {
+  [Social.facebook]: [iconFacebook, 'facebook'],
+  [Social.twitter]: [iconTwitter, 'twitter'],
+  [Social.instagram]: [iconInstagram, 'instagram'],
+  [Social.youtube]: [iconYoutube, 'youtube'],
+};
+
+const BigBox = ({ top, social }: { top: string; social: keyof typeof feed }) => {
   return (
     <div className="flex h-[13.5em] w-[15.95em] flex-col items-center">
       <div
@@ -28,7 +44,7 @@ const BigBox = ({ top }: { top: string }) => {
       ></div>
       <div className="flex h-full w-full flex-col items-center justify-between rounded-b-[0.3em] bg-[#F0F3FA] pb-[1.3em] pt-[1.8em]">
         <div className="flex items-center gap-[0.47em] text-darkGrayishBlue_Text">
-          <Image className="h-fit" src={iconFacebook as string} alt="facebook logo" />
+          <Image className="h-fit" src={feed[social][0] as string} alt={`${feed[social][1]} logo`} />
           <span className="text-[0.75rem] font-[700]">@nathanf</span>
         </div>
         <div className="flex flex-col items-center">
@@ -64,10 +80,10 @@ export default function Home() {
         </nav>
         <main className="h-fit w-full">
           <div className="mt-[-6.8em] flex h-full w-full flex-row gap-[1.9em] px-[10.3em]">
-            <BigBox top="hsl(208 92% 53%)" />
-            <BigBox top="hsl(203, 89%, 53%)" />
-            <BigBox top="linear-gradient(to right, hsl(37, 97%, 70%), hsl(329, 70%, 58%))" />
-            <BigBox top="hsl(348, 97%, 39%)" />
+            <BigBox social={Social.facebook} top="hsl(208 92% 53%)" />
+            <BigBox social={Social.twitter} top="hsl(203, 89%, 53%)" />
+            <BigBox social={Social.instagram} top="linear-gradient(to right, hsl(37, 97%, 70%), hsl(329, 70%, 58%))" />
+            <BigBox social={Social.youtube} top="hsl(348, 97%, 39%)" />
           </div>
         </main>
       </div>
