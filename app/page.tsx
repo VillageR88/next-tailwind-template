@@ -163,7 +163,12 @@ const SmallBox = ({ social, isSecond, header }: { social: Social; isSecond?: boo
               : data?.[Social[social] as keyof dataJSON].dailyViews}
           </span>
           <div className="flex items-center ">
-            <Image className="h-fit" src={iconUp as string} alt="more" />
+            {(data?.[Social[social] as keyof dataJSON][isSecond ? 'dailyLikesChange' : 'dailyViewsChange'] ?? 0) > 0 ? (
+              <Image className="h-fit" src={iconUp as string} alt="more" />
+            ) : (
+              (data?.[Social[social] as keyof dataJSON][isSecond ? 'dailyLikesChange' : 'dailyViewsChange'] ?? 0) <
+                0 && <Image className="h-fit" src={iconDown as string} alt="less" />
+            )}
             <span
               className={`${
                 (data?.[Social[social] as keyof dataJSON][isSecond ? 'dailyLikesChange' : 'dailyViewsChange'] ?? 0) > 0
