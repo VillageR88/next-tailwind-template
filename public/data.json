@@ -1,0 +1,34 @@
+{
+    "facebook": {
+        "sumFollowers": 1987,
+        "dailyFollowersChange": 12,
+        "dailyViews": 87,
+        "dailyViewsChange": 3,
+        "dailyLikes": 52,
+        "dailyLikesChange": 2
+    },
+    "twitter": {
+        "sumFollowers": 1044,
+        "dailyFollowersChange": 99,
+        "dailyViews": 117,
+        "dailyViewsChange": 303,
+        "dailyLikes": 507,
+        "dailyLikesChange": 553
+    },
+    "instagram": {
+        "followers": "11k",
+        "dailyFollowersChange": 1099,
+        "dailyViews": "52k",
+        "dailyViewsChange": 1375,
+        "dailyLikes": 5462,
+        "dailyLikesChange": 2257
+    },
+    "youtube": {
+        "followers": 8239,
+        "dailyFollowersChange": 144,
+        "dailyViews": 1407,
+        "dailyViewsChange": 12,
+        "dailyLikes": 107,
+        "dailyLikesChange": 19
+    }
+}

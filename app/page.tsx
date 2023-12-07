@@ -1,3 +1,4 @@
+'use client';
 import '@fontsource/inter';
 import '@fontsource/inter/400.css';
 import '@fontsource/inter/700.css';
@@ -7,6 +8,42 @@ import iconTwitter from './images/icon-twitter.svg';
 import iconInstagram from './images/icon-instagram.svg';
 import iconYoutube from './images/icon-youtube.svg';
 import iconUp from './images/icon-up.svg';
+import { useEffect, useState } from 'react';
+
+interface dataJSON {
+  facebook: {
+    sumFollowers: number;
+    dailyFollowersChange: number;
+    dailyViews: number;
+    dailyViewsChang: number;
+    dailyLikes: number;
+    dailyLikesChange: number;
+  };
+  twitter: {
+    sumFollowers: number;
+    dailyFollowersChange: number;
+    dailyViews: number;
+    dailyViewsChang: number;
+    dailyLikes: number;
+    dailyLikesChange: number;
+  };
+  instagram: {
+    sumFollowers: number;
+    dailyFollowersChange: number;
+    dailyViews: number;
+    dailyViewsChang: number;
+    dailyLikes: number;
+    dailyLikesChange: number;
+  };
+  youtube: {
+    sumFollowers: string;
+    dailyFollowersChange: number;
+    dailyViews: string;
+    dailyViewsChang: number;
+    dailyLikes: number;
+    dailyLikesChange: number;
+  };
+}
 
 enum Social {
   facebook,
@@ -59,8 +96,21 @@ const BigBox = ({ top, social }: { top: string; social: keyof typeof feed }) => 
     </div>
   );
 };
-
+fetch;
 export default function Home() {
+  const [data, setData] = useState<dataJSON>();
+  useEffect(() => {
+    fetch('./data.json')
+      .then((response) => response.json())
+      .then((response: dataJSON) => {
+        setData(response);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }, []);
+  data && console.log(data.facebook.sumFollowers);
+
   return (
     <div className="flex min-h-screen w-full items-center font-inter">
       <div className="h-[50em] w-full bg-white">
