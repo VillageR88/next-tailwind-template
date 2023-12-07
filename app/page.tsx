@@ -149,7 +149,23 @@ const SmallBox = () => {
       });
   }, []);
 
-  return <div className="h-[7.8em] max-w-[15.95em] rounded-[0.3em] bg-[#F0F3FA]"></div>;
+  return (
+    <div className="flex h-[7.8em] max-w-[15.95em] items-center justify-center rounded-[0.3em] bg-[#F0F3FA]">
+      <div className="h-[5em] w-full px-[1.5em] justify-between flex flex-col">
+        <div className="flex justify-between">
+          <span>Page Views</span>
+          <Image className="h-fit" src={iconFacebook as string} alt={`logo`} />
+        </div>
+        <div className="flex justify-between">
+          <span>87</span>
+          <div className="flex items-center ">
+            <Image className="h-fit" src={iconUp as string} alt="more" />
+            <span>3%</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
 };
 
 export default function Home() {
