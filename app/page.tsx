@@ -81,7 +81,7 @@ const BigBox = ({
   }, []);
 
   return (
-    <div className="flex h-[13.5em] w-[15.95em] flex-col items-center">
+    <div className="flex h-[13.5em] max-w-[15.95em] flex-col items-center">
       <div
         style={{
           marginBottom: '-1%',
@@ -141,7 +141,7 @@ export default function Home() {
     <div className="flex min-h-screen w-full items-center font-inter">
       <div className="h-[50em] w-full bg-white">
         <nav className="h-[15.3em] w-full rounded-b-[1.3em] bg-veryPaleBlue_Top_BG_Pattern">
-          <div className="flex flex-row items-center justify-between px-[10.1em] pt-[2.3em]">
+          <div className="flex flex-row items-center justify-between lg:px-[5em] xl:px-[10.1em] pt-[2.3em]">
             <div className="flex flex-col">
               <span className="text-[1.75rem] font-[700] leading-[1.25em]">Social Media Dashboard</span>
               <span className="text-[0.9rem] font-[700] text-darkGrayishBlue_Text">Total Followers: 23,004</span>
@@ -155,11 +155,16 @@ export default function Home() {
           </div>
         </nav>
         <main className="h-fit w-full">
-          <div className="mt-[-6.8em] flex h-full w-full flex-row gap-[1.9em] px-[10.3em]">
-            <BigBox social={Social.facebook} top="hsl(208 92% 53%)" />
-            <BigBox social={Social.twitter} top="hsl(203, 89%, 53%)" />
-            <BigBox social={Social.instagram} top="linear-gradient(to right, hsl(37, 97%, 70%), hsl(329, 70%, 58%))" />
-            <BigBox social={Social.youtube} top="hsl(348, 97%, 39%)" textSubscribers={true} />
+          <div className="mt-[-6.8em] flex h-full w-full flex-row lg:px-[5em] xl:px-[10.3em]">
+            <div className="grid w-full gap-[1.9em] md:grid-cols-2 lg:grid-cols-4">
+              <BigBox social={Social.facebook} top="hsl(208 92% 53%)" />
+              <BigBox social={Social.twitter} top="hsl(203, 89%, 53%)" />
+              <BigBox
+                social={Social.instagram}
+                top="linear-gradient(to right, hsl(37, 97%, 70%), hsl(329, 70%, 58%))"
+              />
+              <BigBox social={Social.youtube} top="hsl(348, 97%, 39%)" textSubscribers={true} />
+            </div>
           </div>
         </main>
       </div>
