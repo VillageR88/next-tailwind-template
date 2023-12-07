@@ -7,18 +7,18 @@ const BigBox = ({ top }: { top: string }) => {
     <div className="flex h-[13.5em] w-[15.95em] flex-col items-center">
       <div
         style={{
-          width: '99.2%',
-          borderBottom: `2px ${top}`,
-          borderLeft: '3px solid transparent',
-          borderRight: '3px solid transparent',
+          height: '2.5px',
+          width: '99%',
+          background: `${top}`,
+          clipPath: 'polygon(1% 0, 99% 0, 100% 100%, 0 100%)',
         }}
       ></div>
       <div
         style={{
+          height: '2.5px',
           width: '100%',
-          borderBottom: `2px ${top}`,
-          borderLeft: '1px solid transparent',
-          borderRight: '1px solid transparent',
+          background: `${top}`,
+          clipPath: 'polygon(0.5% 0, 99.5% 0, 100% 100%, 0 100%)',
         }}
       ></div>
       <div className="h-full w-full rounded-b-[0.3em] bg-[#F0F3FA]"></div>
@@ -44,23 +44,15 @@ export default function Home() {
             </div>
           </div>
         </nav>
-        <main className="h-fit">
+        <main className="h-fit w-full">
           <div className="mt-[-6.8em] flex h-full w-full flex-row gap-[1.9em] px-[10.3em]">
-            <BigBox top="solid hsl(208 92% 53%)" />
-            <BigBox top="solid hsl(203, 89%, 53%)" />
-            <BigBox top="solid hsl(208 92% 53%)" />
-            <BigBox top="solid hsl(208 92% 53%)" />
+            <BigBox top="hsl(208 92% 53%)" />
+            <BigBox top="hsl(203, 89%, 53%)" />
+            <BigBox top="hsl(203, 89%, 53%)" />
+            <BigBox top="hsl(203, 89%, 53%)" />
           </div>
         </main>
       </div>
     </div>
   );
 }
-/*
-      <div
-                style={{
-                  borderBottom: '4px solid',
-                  borderLeft: '4px solid transparent',
-                  borderRight: '4px solid transparent',
-                }}
-              ></div>*/
