@@ -1,6 +1,10 @@
 import '@fontsource/inter';
 import '@fontsource/inter/400.css';
 import '@fontsource/inter/700.css';
+import Image from 'next/image';
+import iconFacebook from './images/icon-facebook.svg';
+import iconTwitter from './images/icon-twitter.svg';
+import iconUp from './images/icon-up.svg';
 
 const BigBox = ({ top }: { top: string }) => {
   return (
@@ -22,7 +26,18 @@ const BigBox = ({ top }: { top: string }) => {
           clipPath: 'polygon(0.5% 0, 99.5% 0, 100% 100%, 0 100%)',
         }}
       ></div>
-      <div className="h-full w-full rounded-b-[0.3em] bg-[#F0F3FA]"></div>
+      <div className="flex h-full w-full flex-col items-center justify-between pt-[1.8em] rounded-b-[0.3em] bg-[#F0F3FA]">
+        <div className="flex items-center gap-[0.47em] text-darkGrayishBlue_Text">
+          <Image className="h-fit" src={iconFacebook as string} alt="facebook logo" />
+          <span className="text-[0.75rem] font-[700]">@nathanf</span>
+        </div>
+        <span className="text-[3.5rem] font-[700]">1987</span>
+        <span className="text-[0.8rem]">FOLLOWERS</span>
+        <div className="flex items-center gap-[0.3em]">
+          <Image className="h-fit" src={iconUp as string} alt="more" />
+          <span className="text-[0.75rem] font-[700] text-limeGreen">12 Today</span>
+        </div>
+      </div>
     </div>
   );
 };
