@@ -16,7 +16,7 @@
         "dailyLikesChange": 553
     },
     "instagram": {
-        "followers": "11k",
+        "sumFollowers": "11k",
         "dailyFollowersChange": 1099,
         "dailyViews": "52k",
         "dailyViewsChange": 1375,
@@ -24,7 +24,7 @@
         "dailyLikesChange": 2257
     },
     "youtube": {
-        "followers": 8239,
+        "sumFollowers": 8239,
         "dailyFollowersChange": 144,
         "dailyViews": 1407,
         "dailyViewsChange": 12,

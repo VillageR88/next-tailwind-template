@@ -10,6 +10,12 @@ import iconYoutube from './images/icon-youtube.svg';
 import iconUp from './images/icon-up.svg';
 import { useEffect, useState } from 'react';
 
+enum Social {
+  facebook,
+  twitter,
+  instagram,
+  youtube,
+}
 interface dataJSON {
   facebook: {
     sumFollowers: number;
@@ -45,13 +51,6 @@ interface dataJSON {
   };
 }
 
-enum Social {
-  facebook,
-  twitter,
-  instagram,
-  youtube,
-}
-
 const feed = {
   [Social.facebook]: [iconFacebook, 'facebook', '@nathanf'],
   [Social.twitter]: [iconTwitter, 'twitter', '@nathanf'],
@@ -71,6 +70,7 @@ const BigBox = ({ top, social }: { top: string; social: keyof typeof feed }) => 
         console.error(error);
       });
   }, []);
+
   return (
     <div className="flex h-[13.5em] w-[15.95em] flex-col items-center">
       <div
@@ -97,7 +97,7 @@ const BigBox = ({ top, social }: { top: string; social: keyof typeof feed }) => 
         </div>
         <div className="flex flex-col items-center">
           <span className="text-[3.5rem] font-[700] leading-[1.12em] tracking-[-0.04em]">
-            {data?.facebook.sumFollowers}
+            {data?.[Social[social] as keyof dataJSON].sumFollowers}
           </span>
           <span className="text-[0.75rem] tracking-[0.42em] text-darkGrayishBlue_Text">FOLLOWERS</span>
         </div>
