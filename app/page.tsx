@@ -8,6 +8,7 @@ import iconTwitter from './images/icon-twitter.svg';
 import iconInstagram from './images/icon-instagram.svg';
 import iconYoutube from './images/icon-youtube.svg';
 import iconUp from './images/icon-up.svg';
+import iconDown from './images/icon-down.svg';
 import { useEffect, useState } from 'react';
 
 enum Social {
@@ -102,8 +103,23 @@ const BigBox = ({ top, social }: { top: string; social: keyof typeof feed }) => 
           <span className="text-[0.75rem] tracking-[0.42em] text-darkGrayishBlue_Text">FOLLOWERS</span>
         </div>
         <div className="flex items-center gap-[0.23em]">
-          <Image className="h-fit" src={iconUp as string} alt="more" />
-          <span className="text-[0.77rem] font-[700] text-limeGreen">12 Today</span>
+          {data?.[Social[social] as keyof dataJSON].dailyFollowersChange > 0 ? (
+            <Image className="h-fit" src={iconUp as string} alt="more" />
+          ) : (
+            data?.[Social[social] as keyof dataJSON].dailyFollowersChange < 0 && (
+              <Image className="h-fit" src={iconDown as string} alt="less" />
+            )
+          )}
+
+          <span
+            className={`${
+              data?.[Social[social] as keyof dataJSON].dailyFollowersChange > 0
+                ? 'text-limeGreen'
+                : data?.[Social[social] as keyof dataJSON].dailyFollowersChange < 0 && 'text-brightRed'
+            } text-[0.77rem] font-[700]`}
+          >
+            {Math.abs(data?.[Social[social] as keyof dataJSON].dailyFollowersChange)} Today
+          </span>
         </div>
       </div>
     </div>
