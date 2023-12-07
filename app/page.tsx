@@ -36,7 +36,10 @@ export default function Home() {
           </div>
         </nav>
         <main className="h-fit">
-          <div className="mt-[-6.8em] h-full w-full gap-[2em] px-[10.3em]">
+          <div className="mt-[-6.8em] flex h-full w-full flex-row gap-[1.9em] px-[10.3em]">
+            <BigBox />
+            <BigBox />
+            <BigBox />
             <BigBox />
           </div>
         </main>
