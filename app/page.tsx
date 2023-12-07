@@ -60,6 +60,17 @@ const feed = {
 };
 
 const BigBox = ({ top, social }: { top: string; social: keyof typeof feed }) => {
+  const [data, setData] = useState<dataJSON>();
+  useEffect(() => {
+    fetch('./data.json')
+      .then((response) => response.json())
+      .then((response: dataJSON) => {
+        setData(response);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }, []);
   return (
     <div className="flex h-[13.5em] w-[15.95em] flex-col items-center">
       <div
@@ -85,7 +96,9 @@ const BigBox = ({ top, social }: { top: string; social: keyof typeof feed }) => 
           <span className="text-[0.75rem] font-[700]">{feed[social][2]}</span>
         </div>
         <div className="flex flex-col items-center">
-          <span className="text-[3.5rem] font-[700] leading-[1.12em] tracking-[-0.04em]">1987</span>
+          <span className="text-[3.5rem] font-[700] leading-[1.12em] tracking-[-0.04em]">
+            {data?.facebook.sumFollowers}
+          </span>
           <span className="text-[0.75rem] tracking-[0.42em] text-darkGrayishBlue_Text">FOLLOWERS</span>
         </div>
         <div className="flex items-center gap-[0.23em]">
@@ -98,19 +111,6 @@ const BigBox = ({ top, social }: { top: string; social: keyof typeof feed }) => 
 };
 fetch;
 export default function Home() {
-  const [data, setData] = useState<dataJSON>();
-  useEffect(() => {
-    fetch('./data.json')
-      .then((response) => response.json())
-      .then((response: dataJSON) => {
-        setData(response);
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-  }, []);
-  data && console.log(data.facebook.sumFollowers);
-
   return (
     <div className="flex min-h-screen w-full items-center font-inter">
       <div className="h-[50em] w-full bg-white">
