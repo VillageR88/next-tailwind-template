@@ -16,10 +16,10 @@ enum Social {
 }
 
 const feed = {
-  [Social.facebook]: [iconFacebook, 'facebook'],
-  [Social.twitter]: [iconTwitter, 'twitter'],
-  [Social.instagram]: [iconInstagram, 'instagram'],
-  [Social.youtube]: [iconYoutube, 'youtube'],
+  [Social.facebook]: [iconFacebook, 'facebook', '@nathanf'],
+  [Social.twitter]: [iconTwitter, 'twitter', '@nathanf'],
+  [Social.instagram]: [iconInstagram, 'instagram', '@realnathanf'],
+  [Social.youtube]: [iconYoutube, 'youtube', 'Nathan F.'],
 };
 
 const BigBox = ({ top, social }: { top: string; social: keyof typeof feed }) => {
@@ -45,7 +45,7 @@ const BigBox = ({ top, social }: { top: string; social: keyof typeof feed }) => 
       <div className="flex h-full w-full flex-col items-center justify-between rounded-b-[0.3em] bg-[#F0F3FA] pb-[1.3em] pt-[1.8em]">
         <div className="flex items-center gap-[0.47em] text-darkGrayishBlue_Text">
           <Image className="h-fit" src={feed[social][0] as string} alt={`${feed[social][1]} logo`} />
-          <span className="text-[0.75rem] font-[700]">@nathanf</span>
+          <span className="text-[0.75rem] font-[700]">{feed[social][2]}</span>
         </div>
         <div className="flex flex-col items-center">
           <span className="text-[3.5rem] font-[700] leading-[1.12em] tracking-[-0.04em]">1987</span>
