@@ -25,6 +25,7 @@ const palette = {
     'text-darkGrayishBlue_Text',
     'text-[#8F93AD]',
     'text-darkGrayishBlue_Text',
+    'bg-[#F0F3FA]',
   ],
   [Theme.dark]: [
     'bg-[#1D2029]',
@@ -33,6 +34,7 @@ const palette = {
     'text-[#919BBF]',
     'text-[#919BBF]',
     'text-[#FEFFFF]',
+    'bg-[#252B43]',
   ],
 };
 
@@ -96,10 +98,12 @@ const feed = {
 };
 
 const BigBox = ({
+  theme,
   top,
   social,
   textSubscribers,
 }: {
+  theme: Theme;
   top: string;
   social: keyof typeof feed;
   textSubscribers?: boolean;
@@ -123,7 +127,9 @@ const BigBox = ({
           clipPath: 'polygon(1% 0, 99% 0, 100% 100%, 0 100%)',
         }}
       ></div>
-      <div className="flex h-full w-full flex-col items-center justify-between rounded-b-[0.3em] bg-[#F0F3FA] pb-[1.3em] pt-[1.8em]">
+      <div
+        className={`${palette[theme][6]} flex h-full w-full flex-col items-center justify-between rounded-b-[0.3em]  pb-[1.3em] pt-[1.8em]`}
+      >
         <div className="flex items-center gap-[0.47em] text-darkGrayishBlue_Text">
           <Image className="h-fit" src={feed[social][0] as string} alt={`${feed[social][1]} logo`} />
           <span className="text-[0.75rem] font-[700]">{feed[social][2]}</span>
@@ -300,13 +306,14 @@ export default function Home() {
         <main className="h-fit w-full">
           <div className="mt-[-6.8em] flex h-full w-full flex-col md:px-[3em] lg:px-[5em] xl:px-[10.3em]">
             <div className="grid w-full gap-[1.9em] md:grid-cols-2 lg:grid-cols-4">
-              <BigBox social={Social.facebook} top="hsl(208 92% 53%)" />
-              <BigBox social={Social.twitter} top="hsl(203, 89%, 53%)" />
+              <BigBox theme={theme} social={Social.facebook} top="hsl(208 92% 53%)" />
+              <BigBox theme={theme} social={Social.twitter} top="hsl(203, 89%, 53%)" />
               <BigBox
+                theme={theme}
                 social={Social.instagram}
                 top="linear-gradient(to right, hsl(37, 97%, 70%), hsl(329, 70%, 58%))"
               />
-              <BigBox social={Social.youtube} top="hsl(348, 97%, 39%)" textSubscribers={true} />
+              <BigBox theme={theme} social={Social.youtube} top="hsl(348, 97%, 39%)" textSubscribers={true} />
             </div>
             <span className={`${palette[theme][5]} mt-[1.8em] flex items-center pb-[0.85em] text-[1.5rem] font-[700]`}>
               Overview <span className="px-[0.22em]">-</span>
