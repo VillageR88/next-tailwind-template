@@ -12,12 +12,23 @@ import iconDown from './images/icon-down.svg';
 import { useEffect, useState } from 'react';
 import { PuffLoader, PulseLoader, BarLoader, ClipLoader } from 'react-spinners';
 
+enum Theme {
+  light,
+  dark,
+}
+
 enum Social {
   facebook,
   twitter,
   instagram,
   youtube,
 }
+
+enum SmallBoxVisibility {
+  onlyOnAverageScreen,
+  exceptAverageScreen,
+}
+
 interface dataJSON {
   facebook: {
     sumFollowers: number;
@@ -139,7 +150,17 @@ const BigBox = ({
   );
 };
 
-const SmallBox = ({ social, isSecond, header }: { social: Social; isSecond?: boolean; header?: string }) => {
+const SmallBox = ({
+  social,
+  isSecond,
+  header,
+  visibilityRule,
+}: {
+  social: Social;
+  isSecond?: boolean;
+  header?: string;
+  visibilityRule?: SmallBoxVisibility;
+}) => {
   const [data, setData] = useState<dataJSON>();
   useEffect(() => {
     const getData = async () => {
@@ -150,7 +171,15 @@ const SmallBox = ({ social, isSecond, header }: { social: Social; isSecond?: boo
   }, []);
 
   return (
-    <div className="flex h-[7.8em] w-full items-center justify-center rounded-[0.3em] bg-[#F0F3FA]">
+    <div
+      className={`${
+        visibilityRule === SmallBoxVisibility.onlyOnAverageScreen
+          ? 'hidden md:flex lg:hidden'
+          : visibilityRule === SmallBoxVisibility.exceptAverageScreen
+          ? 'flex md:hidden lg:flex'
+          : 'flex'
+      } h-[7.8em] w-full items-center justify-center rounded-[0.3em] bg-[#F0F3FA]`}
+    >
       <div className="mt-[0.66em] flex h-[5.37em] w-full flex-col justify-between pl-[1.5em] pr-[1.92em]">
         <div className="flex items-center justify-between">
           <span className="text-[0.88rem] font-[700] text-darkGrayishBlue_Text">{isSecond ? 'Likes' : header}</span>
@@ -200,6 +229,7 @@ const SmallBox = ({ social, isSecond, header }: { social: Social; isSecond?: boo
 };
 
 export default function Home() {
+  const [theme, setTheme] = useState<Theme>(Theme.light);
   const [data, setData] = useState<dataJSON>();
   useEffect(() => {
     const getData = async () => {
@@ -231,7 +261,12 @@ export default function Home() {
             </div>
             <div className="flex flex-row gap-[0.88em] pb-[0.5em] pr-[0.2em]">
               <span className="pt-[0.2em] text-[0.87rem] font-[700] text-[#8F93AD]">Dark Mode</span>
-              <button className="flex w-[3em] items-center justify-end rounded-[2em] bg-toggleLight px-[0.2em] py-[0.75em]">
+              <button
+                onClick={() => {
+                  theme === Theme.light ? setTheme(Theme.dark) : setTheme(Theme.light);
+                }}
+                className="flex w-[3em] items-center justify-end rounded-[2em] bg-toggleLight px-[0.2em] py-[0.75em]"
+              >
                 <div className="absolute h-[1.12em] w-[1.12em] rounded-full bg-[#F2F3F8]"></div>
               </button>
             </div>
@@ -255,12 +290,30 @@ export default function Home() {
             <div className="gri grid gap-x-[1.9em] gap-y-[1.5em] md:grid-cols-2 lg:grid-cols-4">
               <SmallBox social={Social.facebook} header="Page Views" />
               <SmallBox social={Social.facebook} isSecond={true} />
-              <SmallBox social={Social.instagram} isSecond={true} />
+              <SmallBox
+                visibilityRule={SmallBoxVisibility.exceptAverageScreen}
+                social={Social.instagram}
+                isSecond={true}
+              />
               <SmallBox social={Social.instagram} header="Profile Views" />
+              <SmallBox
+                visibilityRule={SmallBoxVisibility.onlyOnAverageScreen}
+                social={Social.instagram}
+                isSecond={true}
+              />
               <SmallBox social={Social.twitter} header="Retweets" />
               <SmallBox social={Social.twitter} isSecond={true} />
-              <SmallBox social={Social.youtube} isSecond={true} />
+              <SmallBox
+                visibilityRule={SmallBoxVisibility.exceptAverageScreen}
+                social={Social.youtube}
+                isSecond={true}
+              />
               <SmallBox social={Social.youtube} header="Total Views" />
+              <SmallBox
+                visibilityRule={SmallBoxVisibility.onlyOnAverageScreen}
+                social={Social.youtube}
+                isSecond={true}
+              />
             </div>
           </div>
         </main>
