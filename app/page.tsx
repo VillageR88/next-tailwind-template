@@ -265,9 +265,13 @@ export default function Home() {
                 onClick={() => {
                   theme === Theme.light ? setTheme(Theme.dark) : setTheme(Theme.light);
                 }}
-                className="flex w-[3em] items-center justify-end rounded-[2em] bg-toggleLight px-[0.2em] py-[0.75em]"
+                className={'flex w-[3em] items-center justify-end rounded-[2em] bg-toggleLight px-[0.2em] py-[0.75em]'}
               >
-                <div className="absolute h-[1.12em] w-[1.12em] rounded-full bg-[#F2F3F8]"></div>
+                <div
+                  className={`${
+                    theme === Theme.dark && '-translate-x-6'
+                  } absolute h-[1.12em] w-[1.12em] rounded-full bg-[#F2F3F8] duration-200`}
+                ></div>
               </button>
             </div>
           </div>
