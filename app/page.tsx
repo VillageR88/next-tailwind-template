@@ -17,6 +17,11 @@ enum Theme {
   dark,
 }
 
+const palette = {
+  [Theme.light]: ['bg-white'],
+  [Theme.dark]: ['bg-[#1D2029]'],
+};
+
 enum Social {
   facebook,
   twitter,
@@ -240,7 +245,7 @@ export default function Home() {
   }, []);
   return (
     <div className="flex min-h-screen w-full items-center font-inter">
-      <div className="h-full w-full bg-white pb-[4.68em]">
+      <div className={`${palette[theme][0]} h-full w-full pb-[4.68em]`}>
         <nav className="h-[15.3em] w-full rounded-b-[1.3em] bg-veryPaleBlue_Top_BG_Pattern">
           <div className="flex flex-row items-center justify-between pt-[2.3em] md:px-[3em] lg:px-[5em] xl:px-[10.1em]">
             <div className="flex flex-col">
