@@ -180,11 +180,13 @@ const BigBox = ({
 };
 
 const SmallBox = ({
+  theme,
   social,
   isSecond,
   header,
   visibilityRule,
 }: {
+  theme: Theme;
   social: Social;
   isSecond?: boolean;
   header?: string;
@@ -207,15 +209,15 @@ const SmallBox = ({
           : visibilityRule === SmallBoxVisibility.exceptAverageScreen
           ? 'flex md:hidden lg:flex'
           : 'flex'
-      } h-[7.8em] w-full items-center justify-center rounded-[0.3em] bg-[#F0F3FA]`}
+      } h-[7.8em] w-full items-center justify-center rounded-[0.3em] ${palette[theme][6]}`}
     >
       <div className="mt-[0.66em] flex h-[5.37em] w-full flex-col justify-between pl-[1.5em] pr-[1.92em]">
         <div className="flex items-center justify-between">
-          <span className="text-[0.88rem] font-[700] text-darkGrayishBlue_Text">{isSecond ? 'Likes' : header}</span>
+          <span className={`${palette[theme][7]} text-[0.88rem] font-[700]`}>{isSecond ? 'Likes' : header}</span>
           <Image className="mt-[0.1em] h-fit" src={feed[social][0] as string} alt={`${feed[social][1]} logo`} />
         </div>
         <div className="flex justify-between">
-          <span className="text-[2rem] font-[700]">
+          <span className={`${palette[theme][8]} text-[2rem] font-[700]`}>
             {data ? (
               numberControl(
                 isSecond
@@ -324,28 +326,32 @@ export default function Home() {
               <span>T</span>oday
             </span>
             <div className="gri grid gap-x-[1.9em] gap-y-[1.5em] md:grid-cols-2 lg:grid-cols-4">
-              <SmallBox social={Social.facebook} header="Page Views" />
-              <SmallBox social={Social.facebook} isSecond={true} />
+              <SmallBox theme={theme} social={Social.facebook} header="Page Views" />
+              <SmallBox theme={theme} social={Social.facebook} isSecond={true} />
               <SmallBox
+                theme={theme}
                 visibilityRule={SmallBoxVisibility.exceptAverageScreen}
                 social={Social.instagram}
                 isSecond={true}
               />
-              <SmallBox social={Social.instagram} header="Profile Views" />
+              <SmallBox theme={theme} social={Social.instagram} header="Profile Views" />
               <SmallBox
+                theme={theme}
                 visibilityRule={SmallBoxVisibility.onlyOnAverageScreen}
                 social={Social.instagram}
                 isSecond={true}
               />
-              <SmallBox social={Social.twitter} header="Retweets" />
-              <SmallBox social={Social.twitter} isSecond={true} />
+              <SmallBox theme={theme} social={Social.twitter} header="Retweets" />
+              <SmallBox theme={theme} social={Social.twitter} isSecond={true} />
               <SmallBox
+                theme={theme}
                 visibilityRule={SmallBoxVisibility.exceptAverageScreen}
                 social={Social.youtube}
                 isSecond={true}
               />
-              <SmallBox social={Social.youtube} header="Total Views" />
+              <SmallBox theme={theme} social={Social.youtube} header="Total Views" />
               <SmallBox
+                theme={theme}
                 visibilityRule={SmallBoxVisibility.onlyOnAverageScreen}
                 social={Social.youtube}
                 isSecond={true}
