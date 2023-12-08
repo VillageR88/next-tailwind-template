@@ -24,8 +24,16 @@ const palette = {
     'text-black',
     'text-darkGrayishBlue_Text',
     'text-[#8F93AD]',
+    'text-darkGrayishBlue_Text',
   ],
-  [Theme.dark]: ['bg-[#1D2029]', 'bg-[#20222F]', 'text-[#FEFFFF]', 'text-[#919BBF]', 'text-[#919BBF]'],
+  [Theme.dark]: [
+    'bg-[#1D2029]',
+    'bg-[#20222F]',
+    'text-[#FEFFFF]',
+    'text-[#919BBF]',
+    'text-[#919BBF]',
+    'text-[#FEFFFF]',
+  ],
 };
 
 enum Social {
@@ -300,7 +308,7 @@ export default function Home() {
               />
               <BigBox social={Social.youtube} top="hsl(348, 97%, 39%)" textSubscribers={true} />
             </div>
-            <span className="mt-[1.8em] flex items-center pb-[0.85em] text-[1.5rem] font-[700] text-darkGrayishBlue_Text">
+            <span className={`${palette[theme][5]} mt-[1.8em] flex items-center pb-[0.85em] text-[1.5rem] font-[700]`}>
               Overview <span className="px-[0.22em]">-</span>
               <span>T</span>oday
             </span>
