@@ -302,6 +302,16 @@ export default function Home() {
 
     void getData();
   }, []);
+
+  useEffect(() => {
+    theme === Theme.dark && localStorage.setItem('preferredTheme', 'dark');
+    theme === Theme.light && localStorage.setItem('preferredTheme', 'light');
+  }, [theme]);
+  useEffect(() => {
+    localStorage.getItem('preferredTheme') === Theme.dark.toString() && setTheme(Theme.dark);
+    localStorage.getItem('preferredTheme') === Theme.light.toString() && setTheme(Theme.light);
+  }, []);
+
   return (
     <div className="flex min-h-screen w-full items-center font-inter">
       <div className={`${palette[theme][0]} h-full w-full pb-[4.68em] transition-colors duration-300`}>
@@ -329,7 +339,7 @@ export default function Home() {
                 )}
               </span>
             </div>
-            <div className="flex h-[1px] w-full bg-darkGrayishBlue_Text my-4 md:hidden"></div>
+            <div className="my-4 flex h-[1px] w-full bg-darkGrayishBlue_Text md:hidden"></div>
             <div className="flex w-full flex-row justify-between gap-[0.88em] pb-[0.5em] pr-[0.2em] md:w-fit">
               <span
                 className={`${palette[theme][4]} ${
@@ -362,7 +372,7 @@ export default function Home() {
           </div>
         </nav>
         <main className="h-fit w-full px-6 md:px-0">
-          <div className="md:mt-[-6.8em] mt-[-3em] flex h-full w-full flex-col md:px-[3em] lg:px-[5em] xl:px-[10.3em]">
+          <div className="mt-[-3em] flex h-full w-full flex-col md:mt-[-6.8em] md:px-[3em] lg:px-[5em] xl:px-[10.3em]">
             <div className="grid w-full gap-[1.9em] md:grid-cols-2 lg:grid-cols-4">
               <BigBox theme={theme} social={Social.facebook} top="hsl(208 92% 53%)" />
               <BigBox theme={theme} social={Social.twitter} top="hsl(203, 89%, 53%)" />
