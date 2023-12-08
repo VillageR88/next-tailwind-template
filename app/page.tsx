@@ -10,6 +10,7 @@ import iconYoutube from './images/icon-youtube.svg';
 import iconUp from './images/icon-up.svg';
 import iconDown from './images/icon-down.svg';
 import { useEffect, useState } from 'react';
+import { PuffLoader, PulseLoader, BarLoader } from 'react-spinners';
 
 enum Social {
   facebook,
@@ -88,15 +89,15 @@ const BigBox = ({
       <div
         style={{
           marginBottom: '-1%',
-          height: '4.5px',
-          width: '99.5%',
+          height: '4.2px',
+          width: '100%',
           background: `${top}`,
           clipPath: 'polygon(1% 0, 99% 0, 100% 100%, 0 100%)',
         }}
       ></div>
       <div
         style={{
-          height: '2.5px',
+          height: '2px',
           width: '100%',
           background: `${top}`,
           clipPath: 'polygon(0.5% 0, 99.5% 0, 100% 100%, 0 100%)',
@@ -109,30 +110,39 @@ const BigBox = ({
         </div>
         <div className="flex flex-col items-center">
           <span className="text-[3.5rem] font-[700] leading-[1.12em] tracking-[-0.04em]">
-            {numberControl(data?.[Social[social] as keyof dataJSON].sumFollowers ?? 0)}
+            {data ? (
+              numberControl(data[Social[social] as keyof dataJSON].sumFollowers)
+            ) : (
+              <PuffLoader className="mb-[0.1em]" size={50} color="#36d7b7" />
+            )}
           </span>
           <span className="text-[0.75rem] tracking-[0.42em] text-darkGrayishBlue_Text">
             {textSubscribers ? 'SUBSCRIBERS' : 'FOLLOWERS'}
           </span>
         </div>
         <div className="flex items-center gap-[0.23em]">
-          {(data?.[Social[social] as keyof dataJSON].dailyFollowersChange ?? 0) > 0 ? (
-            <Image className="h-fit" src={iconUp as string} alt="more" />
-          ) : (
-            (data?.[Social[social] as keyof dataJSON].dailyFollowersChange ?? 0) < 0 && (
-              <Image className="h-fit" src={iconDown as string} alt="less" />
-            )
-          )}
+          {data &&
+            (data[Social[social] as keyof dataJSON].dailyFollowersChange > 0 ? (
+              <Image className="h-fit" src={iconUp as string} alt="more" />
+            ) : (
+              data[Social[social] as keyof dataJSON].dailyFollowersChange < 0 && (
+                <Image className="h-fit" src={iconDown as string} alt="less" />
+              )
+            ))}
 
-          <span
-            className={`${
-              (data?.[Social[social] as keyof dataJSON].dailyFollowersChange ?? 0) > 0
-                ? 'text-limeGreen'
-                : (data?.[Social[social] as keyof dataJSON].dailyFollowersChange ?? 0) < 0 && 'text-brightRed'
-            } text-[0.77rem] font-[700]`}
-          >
-            {Math.abs(data?.[Social[social] as keyof dataJSON].dailyFollowersChange ?? 0)} Today
-          </span>
+          {data ? (
+            <span
+              className={`${
+                data[Social[social] as keyof dataJSON].dailyFollowersChange > 0
+                  ? 'text-limeGreen'
+                  : data[Social[social] as keyof dataJSON].dailyFollowersChange < 0 && 'text-brightRed'
+              } text-[0.77rem] font-[700]`}
+            >
+              {Math.abs(data[Social[social] as keyof dataJSON].dailyFollowersChange) + ' Today'}
+            </span>
+          ) : (
+            <PulseLoader size={5} color="#36d7b7" />
+          )}
         </div>
       </div>
     </div>
@@ -207,20 +217,23 @@ export default function Home() {
   }, []);
   return (
     <div className="flex min-h-screen w-full items-center font-inter">
-      <div className="h-full pb-[4.68em] w-full bg-white">
+      <div className="h-full w-full bg-white pb-[4.68em]">
         <nav className="h-[15.3em] w-full rounded-b-[1.3em] bg-veryPaleBlue_Top_BG_Pattern">
           <div className="flex flex-row items-center justify-between pt-[2.3em] md:px-[3em] lg:px-[5em] xl:px-[10.1em]">
             <div className="flex flex-col">
               <span className="text-[1.75rem] font-[700] leading-[1.25em]">Social Media Dashboard</span>
               <span className="text-[0.9rem] font-[700] text-darkGrayishBlue_Text">
-                {`Total Followers: 
-                  ${(
-                    (data?.facebook.sumFollowers ?? 0) +
-                    (data?.instagram.sumFollowers ?? 0) +
-                    (data?.twitter.sumFollowers ?? 0) +
-                    (data?.youtube.sumFollowers ?? 0)
-                  ).toLocaleString('en-US')}
-                `}
+                {data ? (
+                  'Total Followers: ' +
+                  (
+                    data.facebook.sumFollowers +
+                    data.instagram.sumFollowers +
+                    data.twitter.sumFollowers +
+                    data.youtube.sumFollowers
+                  ).toLocaleString('en-US')
+                ) : (
+                  <BarLoader className="mt-[0.7em]" height={4} color="#36d7b7" />
+                )}
               </span>
             </div>
             <div className="flex flex-row gap-[0.88em] pb-[0.5em] pr-[0.2em]">
