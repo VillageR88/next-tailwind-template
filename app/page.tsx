@@ -305,9 +305,11 @@ export default function Home() {
   return (
     <div className="flex min-h-screen w-full items-center font-inter">
       <div className={`${palette[theme][0]} h-full w-full pb-[4.68em] transition-colors duration-300`}>
-        <nav className={`${palette[theme][1]} h-[15.3em] w-full rounded-b-[1.3em] transition-colors duration-300`}>
-          <div className="flex flex-row items-center justify-between pt-[2.3em] md:px-[3em] lg:px-[5em] xl:px-[10.1em]">
-            <div className="flex flex-col">
+        <nav
+          className={`${palette[theme][1]} h-[15.3em] w-full rounded-b-[1.3em] px-6 transition-colors duration-300 md:px-0`}
+        >
+          <div className="flex flex-col items-center justify-between pt-[2.3em] md:flex-row md:px-[3em] lg:px-[5em] xl:px-[10.1em]">
+            <div className="flex w-full flex-col justify-start md:w-fit">
               <span
                 className={`${palette[theme][2]} text-[1.75rem] font-[700] leading-[1.25em] transition-colors duration-300`}
               >
@@ -327,7 +329,8 @@ export default function Home() {
                 )}
               </span>
             </div>
-            <div className="flex flex-row gap-[0.88em] pb-[0.5em] pr-[0.2em]">
+            <div className="flex h-[1px] w-full bg-darkGrayishBlue_Text my-4 md:hidden"></div>
+            <div className="flex w-full flex-row justify-between gap-[0.88em] pb-[0.5em] pr-[0.2em] md:w-fit">
               <span
                 className={`${palette[theme][4]} ${
                   theme === Theme.dark && hoverOn && 'text-[#FEFFFF] duration-300'
@@ -358,8 +361,8 @@ export default function Home() {
             </div>
           </div>
         </nav>
-        <main className="h-fit w-full">
-          <div className="mt-[-6.8em] flex h-full w-full flex-col md:px-[3em] lg:px-[5em] xl:px-[10.3em]">
+        <main className="h-fit w-full px-6 md:px-0">
+          <div className="md:mt-[-6.8em] mt-[-3em] flex h-full w-full flex-col md:px-[3em] lg:px-[5em] xl:px-[10.3em]">
             <div className="grid w-full gap-[1.9em] md:grid-cols-2 lg:grid-cols-4">
               <BigBox theme={theme} social={Social.facebook} top="hsl(208 92% 53%)" />
               <BigBox theme={theme} social={Social.twitter} top="hsl(203, 89%, 53%)" />
