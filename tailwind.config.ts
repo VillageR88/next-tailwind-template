@@ -11,12 +11,17 @@ const config: Config = {
       fontFamily: {
         sans: ['var(--font-sans)'],
         mono: ['var(--font-mono)'],
+        karla: 'Karla',
+        dMSerifDisplay: 'DM Serif Display',
       },
       colors: {
-        // Slate
-        // 'accent-brand-800': '#1e293b',
-        // 'accent-brand-700': '#334155',
-        // 'accent-brand-600': '#475569',
+        //### Primary
+        darkViolet: 'hsl(256, 26%, 20%)',
+        grayishBlue: 'hsl(216, 30%, 68%)',
+        //### Neutral
+        veryDarkViolet: 'hsl(270, 9%, 17%)',
+        darkGrayishViolet: 'hsl(273, 4%, 51%)',
+        veryLightGray: 'hsl(0, 0%, 98%)',
       },
     },
   },
