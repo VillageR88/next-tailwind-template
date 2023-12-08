@@ -24,6 +24,8 @@ const config: Config = {
         youTube: 'hsl(348, 97%, 39%)',
         //#### Dark Theme
         toggleDark: 'linear gradient hsl(210, 78%, 56%) to hsl(146, 68%, 55%)',
+        toggleDarkColor1: 'hsl(210, 78%, 56%)',
+        toggleDarkColor2: 'hsl(146, 68%, 55%)',
         //#### Light Theme
         toggleLight: 'hsl(230, 22%, 74%)',
         //### Neutral

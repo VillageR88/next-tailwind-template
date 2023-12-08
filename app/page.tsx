@@ -28,6 +28,7 @@ const palette = {
     'bg-[#F0F3FA]',
     'text-darkGrayishBlue_Text',
     'text-black',
+    'bg-toggleLight',
   ],
   [Theme.dark]: [
     'bg-[#1D2029]',
@@ -39,6 +40,7 @@ const palette = {
     'bg-[#252B43]',
     'text-[#919BBF]',
     'text-white',
+    'bg-gradient-to-r from-toggleDarkColor1 to-toggleDarkColor2',
   ],
 };
 
@@ -132,7 +134,7 @@ const BigBox = ({
         }}
       ></div>
       <div
-        className={`${palette[theme][6]} flex h-full w-full flex-col items-center justify-between rounded-b-[0.3em]  pb-[1.3em] pt-[1.8em]`}
+        className={`${palette[theme][6]} flex h-full w-full flex-col items-center justify-between rounded-b-[0.3em] pb-[1.3em] pt-[1.8em]`}
       >
         <div className={` flex items-center gap-[0.47em] `}>
           <Image className="h-fit" src={feed[social][0] as string} alt={`${feed[social][1]} logo`} />
@@ -298,7 +300,7 @@ export default function Home() {
                 onClick={() => {
                   theme === Theme.light ? setTheme(Theme.dark) : setTheme(Theme.light);
                 }}
-                className={'flex w-[3em] items-center justify-end rounded-[2em] bg-toggleLight px-[0.2em] py-[0.75em]'}
+                className={`${palette[theme][9]} flex w-[3em] items-center justify-end rounded-[2em] px-[0.2em] py-[0.75em]`}
               >
                 <div
                   className={`${
