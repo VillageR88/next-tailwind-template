@@ -292,6 +292,7 @@ const SmallBox = ({
 };
 
 export default function Home() {
+  const [hoverOn, setHoverOn] = useState<boolean>(false);
   const [theme, setTheme] = useState<Theme>(Theme.light);
   const [data, setData] = useState<dataJSON>();
   useEffect(() => {
@@ -327,17 +328,31 @@ export default function Home() {
               </span>
             </div>
             <div className="flex flex-row gap-[0.88em] pb-[0.5em] pr-[0.2em]">
-              <span className={`${palette[theme][4]} pt-[0.2em] text-[0.87rem] font-[700]`}>Dark Mode</span>
+              <span
+                className={`${palette[theme][4]} ${
+                  theme === Theme.dark && hoverOn && 'text-[#FEFFFF] duration-300'
+                } pt-[0.2em] text-[0.87rem] font-[700]`}
+              >
+                Dark Mode
+              </span>
               <button
+                onMouseEnter={() => {
+                  setHoverOn(true);
+                }}
+                onMouseLeave={() => {
+                  setHoverOn(false);
+                }}
                 onClick={() => {
                   theme === Theme.light ? setTheme(Theme.dark) : setTheme(Theme.light);
                 }}
-                className={`${palette[theme][9]} flex w-[3em] items-center justify-end rounded-[2em] px-[0.2em] py-[0.75em] transition-colors duration-300`}
+                className={`${palette[theme][9]} from-toggleDarkColor1 to-toggleDarkColor2 flex w-[3em] items-center justify-end rounded-[2em] px-[0.2em] py-[0.75em] transition-colors duration-300 hover:bg-gradient-to-r`}
               >
                 <div
                   className={`${theme === Theme.dark && '-translate-x-6'} ${
                     palette[theme][10]
-                  } absolute h-[1.12em] w-[1.12em] rounded-full transition-transform duration-300`}
+                  } absolute h-[1.12em] w-[1.12em] rounded-full duration-300 ${
+                    theme === Theme.dark && hoverOn && 'bg-[#353853]'
+                  }`}
                 ></div>
               </button>
             </div>
@@ -355,7 +370,9 @@ export default function Home() {
               />
               <BigBox theme={theme} social={Social.youtube} top="hsl(348, 97%, 39%)" textSubscribers={true} />
             </div>
-            <span className={`${palette[theme][5]} mt-[1.8em] flex items-center pb-[0.85em] text-[1.5rem] font-[700]`}>
+            <span
+              className={`${palette[theme][5]} mt-[1.8em] flex items-center pb-[0.85em] text-[1.5rem] font-[700] duration-300`}
+            >
               Overview <span className="px-[0.22em]">-</span>
               <span>T</span>oday
             </span>
