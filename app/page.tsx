@@ -10,7 +10,7 @@ import iconYoutube from './images/icon-youtube.svg';
 import iconUp from './images/icon-up.svg';
 import iconDown from './images/icon-down.svg';
 import { useEffect, useState } from 'react';
-import { PuffLoader, PulseLoader, BarLoader } from 'react-spinners';
+import { PuffLoader, PulseLoader, BarLoader, ClipLoader } from 'react-spinners';
 
 enum Social {
   facebook,
@@ -171,32 +171,41 @@ const SmallBox = ({ social, isSecond, header }: { social: Social; isSecond?: boo
         </div>
         <div className="flex justify-between">
           <span className="text-[2rem] font-[700]">
-            {numberControl(
-              (isSecond
-                ? data?.[Social[social] as keyof dataJSON].dailyLikes
-                : data?.[Social[social] as keyof dataJSON].dailyViews) ?? 0,
+            {data ? (
+              numberControl(
+                isSecond
+                  ? data[Social[social] as keyof dataJSON].dailyLikes
+                  : data[Social[social] as keyof dataJSON].dailyViews,
+              )
+            ) : (
+              <ClipLoader color="rgba(54, 215, 183, 1)" />
             )}
           </span>
-          <div className="mb-[0.4em] flex items-center gap-[0.2em] self-end">
-            {(data?.[Social[social] as keyof dataJSON][isSecond ? 'dailyLikesChange' : 'dailyViewsChange'] ?? 0) > 0 ? (
-              <Image className="h-fit" src={iconUp as string} alt="more" />
-            ) : (
-              (data?.[Social[social] as keyof dataJSON][isSecond ? 'dailyLikesChange' : 'dailyViewsChange'] ?? 0) <
-                0 && <Image className="h-fit" src={iconDown as string} alt="less" />
-            )}
-            <span
-              className={`${
-                (data?.[Social[social] as keyof dataJSON][isSecond ? 'dailyLikesChange' : 'dailyViewsChange'] ?? 0) > 0
-                  ? 'text-limeGreen'
-                  : (data?.[Social[social] as keyof dataJSON].dailyLikesChange ?? 0) < 0 && 'text-brightRed'
-              } text-[0.77rem] font-[700]`}
-            >
-              {isSecond
-                ? Math.abs(data?.[Social[social] as keyof dataJSON].dailyLikesChange ?? 0)
-                : Math.abs(data?.[Social[social] as keyof dataJSON].dailyViewsChange ?? 0)}
-              %
-            </span>
-          </div>
+          {data ? (
+            <div className="mb-[0.4em] flex items-center gap-[0.2em] self-end">
+              {data[Social[social] as keyof dataJSON][isSecond ? 'dailyLikesChange' : 'dailyViewsChange'] > 0 ? (
+                <Image className="h-fit" src={iconUp as string} alt="more" />
+              ) : (
+                data[Social[social] as keyof dataJSON][isSecond ? 'dailyLikesChange' : 'dailyViewsChange'] < 0 && (
+                  <Image className="h-fit" src={iconDown as string} alt="less" />
+                )
+              )}
+              <span
+                className={`${
+                  data[Social[social] as keyof dataJSON][isSecond ? 'dailyLikesChange' : 'dailyViewsChange'] > 0
+                    ? 'text-limeGreen'
+                    : data[Social[social] as keyof dataJSON].dailyLikesChange < 0 && 'text-brightRed'
+                } text-[0.77rem] font-[700]`}
+              >
+                {isSecond
+                  ? Math.abs(data[Social[social] as keyof dataJSON].dailyLikesChange)
+                  : Math.abs(data[Social[social] as keyof dataJSON].dailyViewsChange)}
+                %
+              </span>
+            </div>
+          ) : (
+            <ClipLoader color="rgba(54, 215, 183, 1)" />
+          )}
         </div>
       </div>
     </div>
