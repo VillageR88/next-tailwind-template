@@ -29,6 +29,7 @@ const palette = {
     'text-darkGrayishBlue_Text',
     'text-black',
     'bg-toggleLight',
+    'bg-[#F2F3F8]',
   ],
   [Theme.dark]: [
     'bg-[#1D2029]',
@@ -41,6 +42,7 @@ const palette = {
     'text-[#919BBF]',
     'text-white',
     'bg-gradient-to-r from-toggleDarkColor1 to-toggleDarkColor2',
+    'bg-[#262A46]',
   ],
 };
 
@@ -134,21 +136,25 @@ const BigBox = ({
         }}
       ></div>
       <div
-        className={`${palette[theme][6]} flex h-full w-full flex-col items-center justify-between rounded-b-[0.3em] pb-[1.3em] pt-[1.8em]`}
+        className={`${palette[theme][6]} flex h-full w-full flex-col items-center justify-between rounded-b-[0.3em] pb-[1.3em] pt-[1.8em] transition-colors duration-300`}
       >
         <div className={` flex items-center gap-[0.47em] `}>
           <Image className="h-fit" src={feed[social][0] as string} alt={`${feed[social][1]} logo`} />
-          <span className={`${palette[theme][7]} text-[0.75rem] font-[700]`}>{feed[social][2]}</span>
+          <span className={`${palette[theme][7]} text-[0.75rem] font-[700] transition-colors duration-300`}>
+            {feed[social][2]}
+          </span>
         </div>
         <div className="flex flex-col items-center">
-          <span className={`${palette[theme][8]} text-[3.5rem] font-[700] leading-[1.12em] tracking-[-0.04em]`}>
+          <span
+            className={`${palette[theme][8]} text-[3.5rem] font-[700] leading-[1.12em] tracking-[-0.04em] transition-colors duration-300`}
+          >
             {data ? (
               numberControl(data[Social[social] as keyof dataJSON].sumFollowers)
             ) : (
               <PuffLoader className="mb-[0.1em]" size={50} color="#36d7b7" />
             )}
           </span>
-          <span className={`${palette[theme][7]} text-[0.75rem] tracking-[0.42em]`}>
+          <span className={`${palette[theme][7]} text-[0.75rem] tracking-[0.42em] transition-colors duration-300`}>
             {textSubscribers ? 'SUBSCRIBERS' : 'FOLLOWERS'}
           </span>
         </div>
@@ -211,15 +217,19 @@ const SmallBox = ({
           : visibilityRule === SmallBoxVisibility.exceptAverageScreen
           ? 'flex md:hidden lg:flex'
           : 'flex'
-      } h-[7.8em] w-full items-center justify-center rounded-[0.3em] ${palette[theme][6]}`}
+      } h-[7.8em] w-full items-center justify-center rounded-[0.3em] ${
+        palette[theme][6]
+      } transition-colors duration-300`}
     >
       <div className="mt-[0.66em] flex h-[5.37em] w-full flex-col justify-between pl-[1.5em] pr-[1.92em]">
         <div className="flex items-center justify-between">
-          <span className={`${palette[theme][7]} text-[0.88rem] font-[700]`}>{isSecond ? 'Likes' : header}</span>
+          <span className={`${palette[theme][7]} text-[0.88rem] font-[700] transition-colors duration-300`}>
+            {isSecond ? 'Likes' : header}
+          </span>
           <Image className="mt-[0.1em] h-fit" src={feed[social][0] as string} alt={`${feed[social][1]} logo`} />
         </div>
         <div className="flex justify-between">
-          <span className={`${palette[theme][8]} text-[2rem] font-[700]`}>
+          <span className={`${palette[theme][8]} text-[2rem] font-[700] transition-colors duration-300`}>
             {data ? (
               numberControl(
                 isSecond
@@ -273,14 +283,16 @@ export default function Home() {
   }, []);
   return (
     <div className="flex min-h-screen w-full items-center font-inter">
-      <div className={`${palette[theme][0]} h-full w-full pb-[4.68em]`}>
-        <nav className={`${palette[theme][1]} h-[15.3em] w-full rounded-b-[1.3em]`}>
+      <div className={`${palette[theme][0]} h-full w-full pb-[4.68em] transition-colors duration-300`}>
+        <nav className={`${palette[theme][1]} h-[15.3em] w-full rounded-b-[1.3em] transition-colors duration-300`}>
           <div className="flex flex-row items-center justify-between pt-[2.3em] md:px-[3em] lg:px-[5em] xl:px-[10.1em]">
             <div className="flex flex-col">
-              <span className={`${palette[theme][2]} text-[1.75rem] font-[700] leading-[1.25em]`}>
+              <span
+                className={`${palette[theme][2]} text-[1.75rem] font-[700] leading-[1.25em] transition-colors duration-300`}
+              >
                 Social Media Dashboard
               </span>
-              <span className={`${palette[theme][3]} text-[0.9rem] font-[700]`}>
+              <span className={`${palette[theme][3]} text-[0.9rem] font-[700] transition-colors duration-300`}>
                 {data ? (
                   'Total Followers: ' +
                   (
@@ -300,12 +312,12 @@ export default function Home() {
                 onClick={() => {
                   theme === Theme.light ? setTheme(Theme.dark) : setTheme(Theme.light);
                 }}
-                className={`${palette[theme][9]} flex w-[3em] items-center justify-end rounded-[2em] px-[0.2em] py-[0.75em]`}
+                className={`${palette[theme][9]} flex w-[3em] items-center justify-end rounded-[2em] px-[0.2em] py-[0.75em] transition-colors duration-300`}
               >
                 <div
-                  className={`${
-                    theme === Theme.dark && '-translate-x-6'
-                  } absolute h-[1.12em] w-[1.12em] rounded-full bg-[#F2F3F8] duration-200`}
+                  className={`${theme === Theme.dark && '-translate-x-6'} ${
+                    palette[theme][10]
+                  } absolute h-[1.12em] w-[1.12em] rounded-full transition-transform duration-300`}
                 ></div>
               </button>
             </div>
