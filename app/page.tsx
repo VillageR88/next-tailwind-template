@@ -154,20 +154,20 @@ const SmallBox = ({ social, isSecond, header }: { social: Social; isSecond?: boo
 
   return (
     <div className="flex h-[7.8em] max-w-[15.95em] items-center justify-center rounded-[0.3em] bg-[#F0F3FA]">
-      <div className="flex h-[5em] w-full flex-col justify-between px-[1.5em]">
-        <div className="flex justify-between">
-          <span>{isSecond ? 'Likes' : header}</span>
-          <Image className="h-fit" src={feed[social][0] as string} alt={`${feed[social][1]} logo`} />
+      <div className="mt-[0.66em] flex h-[5.37em] w-full flex-col justify-between pl-[1.5em] pr-[1.92em]">
+        <div className="flex items-center justify-between">
+          <span className="text-[0.88rem] font-[700] text-darkGrayishBlue_Text">{isSecond ? 'Likes' : header}</span>
+          <Image className="mt-[0.1em] h-fit" src={feed[social][0] as string} alt={`${feed[social][1]} logo`} />
         </div>
         <div className="flex justify-between">
-          <span>
+          <span className="text-[2rem] font-[700]">
             {numberControl(
               (isSecond
                 ? data?.[Social[social] as keyof dataJSON].dailyLikes
                 : data?.[Social[social] as keyof dataJSON].dailyViews) ?? 0,
             )}
           </span>
-          <div className="flex items-center ">
+          <div className="mb-[0.4em] flex items-center gap-[0.2em] self-end">
             {(data?.[Social[social] as keyof dataJSON][isSecond ? 'dailyLikesChange' : 'dailyViewsChange'] ?? 0) > 0 ? (
               <Image className="h-fit" src={iconUp as string} alt="more" />
             ) : (
@@ -194,14 +194,34 @@ const SmallBox = ({ social, isSecond, header }: { social: Social; isSecond?: boo
 };
 
 export default function Home() {
+  const [data, setData] = useState<dataJSON>();
+  useEffect(() => {
+    fetch('./data.json')
+      .then((response) => response.json())
+      .then((response: dataJSON) => {
+        setData(response);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }, []);
   return (
     <div className="flex min-h-screen w-full items-center font-inter">
-      <div className="h-[50em] w-full bg-white">
+      <div className="h-full pb-[4.68em] w-full bg-white">
         <nav className="h-[15.3em] w-full rounded-b-[1.3em] bg-veryPaleBlue_Top_BG_Pattern">
           <div className="flex flex-row items-center justify-between pt-[2.3em] md:px-[3em] lg:px-[5em] xl:px-[10.1em]">
             <div className="flex flex-col">
               <span className="text-[1.75rem] font-[700] leading-[1.25em]">Social Media Dashboard</span>
-              <span className="text-[0.9rem] font-[700] text-darkGrayishBlue_Text">Total Followers: 23,004</span>
+              <span className="text-[0.9rem] font-[700] text-darkGrayishBlue_Text">
+                {`Total Followers: 
+                  ${(
+                    (data?.facebook.sumFollowers ?? 0) +
+                    (data?.instagram.sumFollowers ?? 0) +
+                    (data?.twitter.sumFollowers ?? 0) +
+                    (data?.youtube.sumFollowers ?? 0)
+                  ).toLocaleString('en-US')}
+                `}
+              </span>
             </div>
             <div className="flex flex-row gap-[0.88em] pb-[0.5em] pr-[0.2em]">
               <span className="pt-[0.2em] text-[0.87rem] font-[700] text-[#8F93AD]">Dark Mode</span>
@@ -222,8 +242,9 @@ export default function Home() {
               />
               <BigBox social={Social.youtube} top="hsl(348, 97%, 39%)" textSubscribers={true} />
             </div>
-            <span className="mt-[1.8em] pb-[0.85em] text-[1.5rem] font-[700] text-darkGrayishBlue_Text">
-              Overview - Today
+            <span className="mt-[1.8em] flex items-center pb-[0.85em] text-[1.5rem] font-[700] text-darkGrayishBlue_Text">
+              Overview <span className="px-[0.22em]">-</span>
+              <span>T</span>oday
             </span>
             <div className="grid grid-cols-4 gap-x-[1.9em] gap-y-[1.5em]">
               <SmallBox social={Social.facebook} header="Page Views" />
