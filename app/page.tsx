@@ -53,16 +53,7 @@ interface dataJSON {
   };
 }
 
-const fetchData = async () => {
-  try {
-    const response = await fetch('./data.json');
-    const data = (await response.json()) as dataJSON;
-    return data;
-  } catch (error) {
-    console.error(error);
-    return null;
-  }
-};
+const fetchData = () => fetch('./data.json').then((response) => response.json());
 
 const numberControl = (value: number): number | string =>
   value > 10000 && value < 99999 ? ('' + value).slice(0, -3).concat('k') : value;
@@ -86,10 +77,7 @@ const BigBox = ({
   const [data, setData] = useState<dataJSON>();
   useEffect(() => {
     const getData = async () => {
-      const fetchedData = await fetchData();
-      if (fetchedData) {
-        setData(fetchedData);
-      }
+      setData((await fetchData()) as dataJSON);
     };
 
     void getData();
@@ -155,10 +143,7 @@ const SmallBox = ({ social, isSecond, header }: { social: Social; isSecond?: boo
   const [data, setData] = useState<dataJSON>();
   useEffect(() => {
     const getData = async () => {
-      const fetchedData = await fetchData();
-      if (fetchedData) {
-        setData(fetchedData);
-      }
+      setData((await fetchData()) as dataJSON);
     };
 
     void getData();
@@ -218,15 +203,11 @@ export default function Home() {
   const [data, setData] = useState<dataJSON>();
   useEffect(() => {
     const getData = async () => {
-      const fetchedData = await fetchData();
-      if (fetchedData) {
-        setData(fetchedData);
-      }
+      setData((await fetchData()) as dataJSON);
     };
 
     void getData();
   }, []);
-
   return (
     <div className="flex min-h-screen w-full items-center font-inter">
       <div className="h-full w-full bg-white pb-[4.68em]">
