@@ -85,22 +85,13 @@ const BigBox = ({
   }, []);
 
   return (
-    <div className="flex h-[13.5em] max-w-[15.95em] flex-col items-center">
+    <div className="flex h-[13.5em] w-full flex-col items-center">
       <div
         style={{
-          marginBottom: '-1%',
-          height: '4.2px',
+          height: '4.1px',
           width: '100%',
           background: `${top}`,
           clipPath: 'polygon(1% 0, 99% 0, 100% 100%, 0 100%)',
-        }}
-      ></div>
-      <div
-        style={{
-          height: '2px',
-          width: '100%',
-          background: `${top}`,
-          clipPath: 'polygon(0.5% 0, 99.5% 0, 100% 100%, 0 100%)',
         }}
       ></div>
       <div className="flex h-full w-full flex-col items-center justify-between rounded-b-[0.3em] bg-[#F0F3FA] pb-[1.3em] pt-[1.8em]">
@@ -163,7 +154,7 @@ const SmallBox = ({ social, isSecond, header }: { social: Social; isSecond?: boo
   }, []);
 
   return (
-    <div className="flex h-[7.8em] max-w-[15.95em] items-center justify-center rounded-[0.3em] bg-[#F0F3FA]">
+    <div className="flex h-[7.8em] w-full items-center justify-center rounded-[0.3em] bg-[#F0F3FA]">
       <div className="mt-[0.66em] flex h-[5.37em] w-full flex-col justify-between pl-[1.5em] pr-[1.92em]">
         <div className="flex items-center justify-between">
           <span className="text-[0.88rem] font-[700] text-darkGrayishBlue_Text">{isSecond ? 'Likes' : header}</span>
@@ -255,7 +246,7 @@ export default function Home() {
         </nav>
         <main className="h-fit w-full">
           <div className="mt-[-6.8em] flex h-full w-full flex-col md:px-[3em] lg:px-[5em] xl:px-[10.3em]">
-            <div className="grid w-full gap-[1.9em] md:grid-cols-3 lg:grid-cols-4">
+            <div className="grid w-full gap-[1.9em] md:grid-cols-2 lg:grid-cols-4">
               <BigBox social={Social.facebook} top="hsl(208 92% 53%)" />
               <BigBox social={Social.twitter} top="hsl(203, 89%, 53%)" />
               <BigBox
@@ -268,7 +259,7 @@ export default function Home() {
               Overview <span className="px-[0.22em]">-</span>
               <span>T</span>oday
             </span>
-            <div className="grid grid-cols-4 gap-x-[1.9em] gap-y-[1.5em]">
+            <div className="gri grid gap-x-[1.9em] gap-y-[1.5em] md:grid-cols-2 lg:grid-cols-4">
               <SmallBox social={Social.facebook} header="Page Views" />
               <SmallBox social={Social.facebook} isSecond={true} />
               <SmallBox social={Social.instagram} isSecond={true} />
