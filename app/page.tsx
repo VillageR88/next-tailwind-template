@@ -18,8 +18,14 @@ enum Theme {
 }
 
 const palette = {
-  [Theme.light]: ['bg-white'],
-  [Theme.dark]: ['bg-[#1D2029]'],
+  [Theme.light]: [
+    'bg-white',
+    'bg-veryPaleBlue_Top_BG_Pattern',
+    'text-black',
+    'text-darkGrayishBlue_Text',
+    'text-[#8F93AD]',
+  ],
+  [Theme.dark]: ['bg-[#1D2029]', 'bg-[#20222F]', 'text-[#FEFFFF]', 'text-[#919BBF]', 'text-[#919BBF]'],
 };
 
 enum Social {
@@ -246,11 +252,13 @@ export default function Home() {
   return (
     <div className="flex min-h-screen w-full items-center font-inter">
       <div className={`${palette[theme][0]} h-full w-full pb-[4.68em]`}>
-        <nav className="h-[15.3em] w-full rounded-b-[1.3em] bg-veryPaleBlue_Top_BG_Pattern">
+        <nav className={`${palette[theme][1]} h-[15.3em] w-full rounded-b-[1.3em]`}>
           <div className="flex flex-row items-center justify-between pt-[2.3em] md:px-[3em] lg:px-[5em] xl:px-[10.1em]">
             <div className="flex flex-col">
-              <span className="text-[1.75rem] font-[700] leading-[1.25em]">Social Media Dashboard</span>
-              <span className="text-[0.9rem] font-[700] text-darkGrayishBlue_Text">
+              <span className={`${palette[theme][2]} text-[1.75rem] font-[700] leading-[1.25em]`}>
+                Social Media Dashboard
+              </span>
+              <span className={`${palette[theme][3]} text-[0.9rem] font-[700]`}>
                 {data ? (
                   'Total Followers: ' +
                   (
@@ -265,7 +273,7 @@ export default function Home() {
               </span>
             </div>
             <div className="flex flex-row gap-[0.88em] pb-[0.5em] pr-[0.2em]">
-              <span className="pt-[0.2em] text-[0.87rem] font-[700] text-[#8F93AD]">Dark Mode</span>
+              <span className={`${palette[theme][4]} pt-[0.2em] text-[0.87rem] font-[700]`}>Dark Mode</span>
               <button
                 onClick={() => {
                   theme === Theme.light ? setTheme(Theme.dark) : setTheme(Theme.light);
