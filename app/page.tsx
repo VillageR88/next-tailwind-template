@@ -53,6 +53,17 @@ interface dataJSON {
   };
 }
 
+const fetchData = async () => {
+  try {
+    const response = await fetch('./data.json');
+    const data = (await response.json()) as dataJSON;
+    return data;
+  } catch (error) {
+    console.error(error);
+    return null;
+  }
+};
+
 const numberControl = (value: number): number | string =>
   value > 10000 && value < 99999 ? ('' + value).slice(0, -3).concat('k') : value;
 
@@ -74,14 +85,14 @@ const BigBox = ({
 }) => {
   const [data, setData] = useState<dataJSON>();
   useEffect(() => {
-    fetch('./data.json')
-      .then((response) => response.json())
-      .then((response: dataJSON) => {
-        setData(response);
-      })
-      .catch((error) => {
-        console.error(error);
-      });
+    const getData = async () => {
+      const fetchedData = await fetchData();
+      if (fetchedData) {
+        setData(fetchedData);
+      }
+    };
+
+    void getData();
   }, []);
 
   return (
@@ -143,14 +154,14 @@ const BigBox = ({
 const SmallBox = ({ social, isSecond, header }: { social: Social; isSecond?: boolean; header?: string }) => {
   const [data, setData] = useState<dataJSON>();
   useEffect(() => {
-    fetch('./data.json')
-      .then((response) => response.json())
-      .then((response: dataJSON) => {
-        setData(response);
-      })
-      .catch((error) => {
-        console.error(error);
-      });
+    const getData = async () => {
+      const fetchedData = await fetchData();
+      if (fetchedData) {
+        setData(fetchedData);
+      }
+    };
+
+    void getData();
   }, []);
 
   return (
@@ -206,15 +217,16 @@ const SmallBox = ({ social, isSecond, header }: { social: Social; isSecond?: boo
 export default function Home() {
   const [data, setData] = useState<dataJSON>();
   useEffect(() => {
-    fetch('./data.json')
-      .then((response) => response.json())
-      .then((response: dataJSON) => {
-        setData(response);
-      })
-      .catch((error) => {
-        console.error(error);
-      });
+    const getData = async () => {
+      const fetchedData = await fetchData();
+      if (fetchedData) {
+        setData(fetchedData);
+      }
+    };
+
+    void getData();
   }, []);
+
   return (
     <div className="flex min-h-screen w-full items-center font-inter">
       <div className="h-full w-full bg-white pb-[4.68em]">
