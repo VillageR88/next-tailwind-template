@@ -26,6 +26,8 @@ const palette = {
     'text-[#8F93AD]',
     'text-darkGrayishBlue_Text',
     'bg-[#F0F3FA]',
+    'text-darkGrayishBlue_Text',
+    'text-black',
   ],
   [Theme.dark]: [
     'bg-[#1D2029]',
@@ -35,6 +37,8 @@ const palette = {
     'text-[#919BBF]',
     'text-[#FEFFFF]',
     'bg-[#252B43]',
+    'text-[#919BBF]',
+    'text-white',
   ],
 };
 
@@ -130,19 +134,19 @@ const BigBox = ({
       <div
         className={`${palette[theme][6]} flex h-full w-full flex-col items-center justify-between rounded-b-[0.3em]  pb-[1.3em] pt-[1.8em]`}
       >
-        <div className="flex items-center gap-[0.47em] text-darkGrayishBlue_Text">
+        <div className={` flex items-center gap-[0.47em] `}>
           <Image className="h-fit" src={feed[social][0] as string} alt={`${feed[social][1]} logo`} />
-          <span className="text-[0.75rem] font-[700]">{feed[social][2]}</span>
+          <span className={`${palette[theme][7]} text-[0.75rem] font-[700]`}>{feed[social][2]}</span>
         </div>
         <div className="flex flex-col items-center">
-          <span className="text-[3.5rem] font-[700] leading-[1.12em] tracking-[-0.04em]">
+          <span className={`${palette[theme][8]} text-[3.5rem] font-[700] leading-[1.12em] tracking-[-0.04em]`}>
             {data ? (
               numberControl(data[Social[social] as keyof dataJSON].sumFollowers)
             ) : (
               <PuffLoader className="mb-[0.1em]" size={50} color="#36d7b7" />
             )}
           </span>
-          <span className="text-[0.75rem] tracking-[0.42em] text-darkGrayishBlue_Text">
+          <span className={`${palette[theme][7]} text-[0.75rem] tracking-[0.42em]`}>
             {textSubscribers ? 'SUBSCRIBERS' : 'FOLLOWERS'}
           </span>
         </div>
