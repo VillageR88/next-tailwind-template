@@ -30,6 +30,7 @@ const palette = {
     'text-black',
     'bg-toggleLight',
     'bg-[#F2F3F8]',
+    'hover:bg-[#E1E3F0]',
   ],
   [Theme.dark]: [
     'bg-[#1D2029]',
@@ -43,6 +44,7 @@ const palette = {
     'text-white',
     'bg-gradient-to-r from-toggleDarkColor1 to-toggleDarkColor2',
     'bg-[#262A46]',
+    'hover:bg-[#333A56]',
   ],
 };
 
@@ -116,6 +118,7 @@ const BigBox = ({
   social: keyof typeof feed;
   textSubscribers?: boolean;
 }) => {
+  const [hoverOn, setHoverOn] = useState<boolean>(false);
   const [data, setData] = useState<dataJSON>();
   useEffect(() => {
     const getData = async () => {
@@ -126,7 +129,15 @@ const BigBox = ({
   }, []);
 
   return (
-    <div className="flex h-[13.5em] w-full flex-col items-center">
+    <div
+      onMouseEnter={() => {
+        setHoverOn(true);
+      }}
+      onMouseLeave={() => {
+        setHoverOn(false);
+      }}
+      className="flex h-[13.5em] w-full flex-col items-center hover:cursor-pointer"
+    >
       <div
         style={{
           height: '4.1px',
@@ -136,7 +147,9 @@ const BigBox = ({
         }}
       ></div>
       <div
-        className={`${palette[theme][6]} flex h-full w-full flex-col items-center justify-between rounded-b-[0.3em] pb-[1.3em] pt-[1.8em] transition-colors duration-300`}
+        className={`${palette[theme][6]} ${
+          hoverOn && palette[theme][11]
+        } flex h-full w-full flex-col items-center justify-between rounded-b-[0.3em] pb-[1.3em] pt-[1.8em] transition-colors duration-300`}
       >
         <div className={` flex items-center gap-[0.47em] `}>
           <Image className="h-fit" src={feed[social][0] as string} alt={`${feed[social][1]} logo`} />
@@ -200,6 +213,7 @@ const SmallBox = ({
   header?: string;
   visibilityRule?: SmallBoxVisibility;
 }) => {
+  const [hoverOn, setHoverOn] = useState<boolean>(false);
   const [data, setData] = useState<dataJSON>();
   useEffect(() => {
     const getData = async () => {
@@ -211,15 +225,21 @@ const SmallBox = ({
 
   return (
     <div
+      onMouseEnter={() => {
+        setHoverOn(true);
+      }}
+      onMouseLeave={() => {
+        setHoverOn(false);
+      }}
       className={`${
         visibilityRule === SmallBoxVisibility.onlyOnAverageScreen
           ? 'hidden md:flex lg:hidden'
           : visibilityRule === SmallBoxVisibility.exceptAverageScreen
           ? 'flex md:hidden lg:flex'
           : 'flex'
-      } h-[7.8em] w-full items-center justify-center rounded-[0.3em] ${
-        palette[theme][6]
-      } transition-colors duration-300`}
+      } h-[7.8em] w-full items-center justify-center rounded-[0.3em] ${palette[theme][6]} ${
+        hoverOn && palette[theme][11]
+      } cursor-pointer transition-colors duration-300`}
     >
       <div className="mt-[0.66em] flex h-[5.37em] w-full flex-col justify-between pl-[1.5em] pr-[1.92em]">
         <div className="flex items-center justify-between">
