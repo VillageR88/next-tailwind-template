@@ -7,6 +7,21 @@ import Image from 'next/image';
 import heroDesktop from './images/image-intro-desktop.jpg';
 import leftPatternDesktop from './images/bg-pattern-intro-left-desktop.svg';
 import logo from './images/logo.svg';
+import snappyProcess from './images/icon-snappy-process.svg';
+import affordablePrices from './images/icon-affordable-prices.svg';
+import peopleFirst from './images/icon-people-first.svg';
+
+const Article = () => {
+  return (
+    <div className="flex max-w-[22em] flex-col">
+      <Image src={snappyProcess as string} alt="icon" />
+      <span className="font-dMSerifDisplay text-[1.7rem] text-[#2A272E]">Snappy Process</span>
+      <span className="font-karla text-darkGrayishViolet">
+        Our application process can be completed in minutes, not hours. Don’t get stuck filling in tedious forms.
+      </span>
+    </div>
+  );
+};
 
 export default function Home() {
   return (
@@ -51,7 +66,13 @@ export default function Home() {
             <div className="flex flex-col">
               <Image className="mt-[-10.7em]" src={leftPatternDesktop as string} alt="" />
             </div>
-            <div className=" bg-slate-200">ss</div>
+            <div className="flex w-full flex-col px-[10.5em]">
+              <div className="h-[1px] w-[9em] bg-[#96A9C6]"></div>
+              <span className="font-dMSerifDisplay text-[4.5rem] tracking-[-0.015em] text-[#2A272E]">
+                We’re different
+              </span>
+              <Article />
+            </div>
           </div>
         </div>
       </main>
