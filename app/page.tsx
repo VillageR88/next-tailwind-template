@@ -25,6 +25,7 @@ export default function Home() {
               </button>
               <span>Monthly</span>
             </div>
+            <div className="mt-[4em] h-[31.2em] w-[21.9em] rounded-[0.6em] bg-gradient-to-br from-linearGradient1 to-linearGradient2"></div>
           </div>
         </div>
       </div>
