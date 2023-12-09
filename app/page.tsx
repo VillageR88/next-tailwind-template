@@ -48,10 +48,10 @@ const FooterBlock = ({
 }) => {
   return (
     <div
-      className={`flex w-fit flex-col items-start font-karla text-[0.88rem] font-[700] tracking-[0.06em] ${xlOptionalPadding}`}
+      className={`flex w-fit flex-col items-center font-karla text-[0.88rem] font-[700] tracking-[0.06em] md:items-start ${xlOptionalPadding}`}
     >
-      <span className="mb-[2.2em] text-darkGrayishViolet">{title}</span>
-      <div className="flex flex-col items-start gap-[0.7em]">
+      <span className="mb-[2.2em]  text-darkGrayishViolet">{title}</span>
+      <div className="flex flex-col items-center gap-[0.7em] md:items-start">
         {buttons.map((x, i) => (
           <button key={i} className="tracking-[0.06em] text-darkViolet hover:underline">
             {x}
@@ -191,7 +191,7 @@ export default function Home() {
                 />
               </div>
               <div className="pd:h-[15.6em] mt-[10em] h-full w-full bg-darkViolet">
-                <div className="flex h-full  w-full flex-col items-center justify-around gap-[2.5em] bg-[url('./images/bg-pattern-how-we-work-mobile.svg')] bg-contain bg-[100%_-2em] bg-no-repeat px-[1.5em] md:px-[5em] py-[4em] md:flex-row md:justify-between md:bg-[url('./images/bg-pattern-how-we-work-desktop.svg')] md:bg-right md:py-0">
+                <div className="flex h-full  w-full flex-col items-center justify-around gap-[2.5em] bg-[url('./images/bg-pattern-how-we-work-mobile.svg')] bg-contain bg-[100%_-2em] bg-no-repeat px-[1.5em] py-[4em] md:flex-row md:justify-between md:bg-[url('./images/bg-pattern-how-we-work-desktop.svg')] md:bg-right md:px-[5em] md:py-0">
                   <span className="max-w-[10em] text-center font-dMSerifDisplay text-[2.5rem] leading-[1em] text-veryLightGray md:whitespace-pre-line md:text-left md:text-[3.4rem]">
                     {'Find out more\nabout how we work'}
                   </span>
@@ -205,10 +205,10 @@ export default function Home() {
         </div>
       </main>
       <footer className="h-full w-full">
-        <div className="h-[24.55em] w-full bg-veryLightGray">
+        <div className="h-full w-full bg-veryLightGray md:h-[24.55em]">
           <div className="h-full w-full bg-[url('./images/bg-pattern-footer-desktop.svg')] bg-no-repeat">
             <div className="h-full w-full pt-[4.2em] md:px-[5em] xl:px-[10.3em]">
-              <div className="flex justify-between">
+              <div className="flex flex-col items-center justify-between gap-[2em] md:flex-row">
                 <Image className="h-fit " src={logo as string} alt="logo" />
                 <div className="mt-[-0.2em] flex h-fit items-center gap-[1em]">
                   <button
@@ -269,8 +269,8 @@ export default function Home() {
                   </button>
                 </div>
               </div>
-              <div className="mb-[2.8em] mt-[2.05em] h-[1px] w-full bg-zinc-300"></div>
-              <div className="flex-row] flex w-full justify-between lg:pr-[5em] xl:pr-[11.5em]">
+              <div className="mb-[2.8em]  mt-[2.05em] h-[1px] w-full bg-zinc-300"></div>
+              <div className="flex w-full flex-col items-center justify-between gap-[2.8em] pb-[6em] md:flex-row md:items-start md:gap-0 md:pb-0 lg:pr-[5em] xl:pr-[11.5em]">
                 <FooterBlock title={'OUR COMPANY'} buttons={['HOW WE WORK', 'WHY INSURE?', 'VIEW PLANS', 'REVIEWS']} />
                 <FooterBlock
                   title={'HELP ME'}
