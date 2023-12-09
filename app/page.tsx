@@ -81,12 +81,12 @@ export default function Home() {
   return (
     <div
       className={`${
-        burgerOpen ? 'h-screen overflow-hidden' : 'min-h-screen'
+        burgerOpen ? 'h-screen overflow-hidden overscroll-none' : 'min-h-screen'
       } flex flex-col items-center justify-center md:h-max `}
     >
       {/*right nav mobile*/}
       {burgerOpen && (
-        <div className="absolute top-0 z-20 flex h-full w-full flex-col  bg-[#2B282F]">
+        <div className="absolute top-0 z-20 flex h-screen w-full flex-col  bg-[#2B282F]">
           <div className="h-full w-full bg-[url('./images/bg-pattern-mobile-nav.svg')] bg-contain bg-bottom bg-no-repeat">
             <div className="flex h-[5em] w-full items-center justify-between bg-white px-[2em]">
               <Image className="h-fit" src={logo as string} alt="logo" />
