@@ -190,9 +190,9 @@ export default function Home() {
                   sure you’re covered when you need it."
                 />
               </div>
-              <div className="mt-[10em] h-[15.6em] w-full bg-darkViolet">
-                <div className="flex h-full w-full items-center justify-between bg-[url('./images/bg-pattern-how-we-work-desktop.svg')] bg-contain bg-right bg-no-repeat px-[5em]">
-                  <span className="max-w-[10em] whitespace-pre-line font-dMSerifDisplay text-[3.4rem] leading-[1em] text-veryLightGray">
+              <div className="pd:h-[15.6em] mt-[10em] h-full w-full bg-darkViolet">
+                <div className="flex h-full  w-full flex-col items-center justify-around gap-[2.5em] bg-[url('./images/bg-pattern-how-we-work-mobile.svg')] bg-contain bg-[100%_-2em] bg-no-repeat px-[1.5em] md:px-[5em] py-[4em] md:flex-row md:justify-between md:bg-[url('./images/bg-pattern-how-we-work-desktop.svg')] md:bg-right md:py-0">
+                  <span className="max-w-[10em] text-center font-dMSerifDisplay text-[2.5rem] leading-[1em] text-veryLightGray md:whitespace-pre-line md:text-left md:text-[3.4rem]">
                     {'Find out more\nabout how we work'}
                   </span>
                   <button className="px-[1.6em] py-[0.5em] font-karla text-[0.9em] tracking-[0.08em] text-veryLightGray outline outline-2 hover:bg-veryLightGray hover:px-[1.5em] hover:py-[0.6em] hover:font-[700] hover:text-darkViolet">
