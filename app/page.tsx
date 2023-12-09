@@ -4,6 +4,7 @@ import '@fontsource/karla';
 import '@fontsource/karla/400.css';
 import '@fontsource/karla/700.css';
 import Image from 'next/image';
+import heroDesktop from './images/image-intro-desktop.jpg';
 import logo from './images/logo.svg';
 
 export default function Home() {
@@ -23,8 +24,22 @@ export default function Home() {
         </div>
       </nav>
       <main className="h-full w-full">
-        <div className="h-[37.5em] w-full bg-darkViolet">
-          <div className=" h-full w-full bg-[url('./images/bg-pattern-intro-right-desktop.svg')] bg-[100%_-5em] bg-no-repeat"></div>
+        <div className="flex h-[37.5em] w-full bg-darkViolet">
+          <div className="z-10 flex h-full w-full flex-none justify-end bg-[url('./images/bg-pattern-intro-right-desktop.svg')] bg-[100%_-5em] bg-no-repeat"></div>
+          <div className="absolute flex h-0 w-full justify-center xl:w-[90em]">
+            <div className="flex h-[37.5em] w-fit justify-center gap-[2em]">
+              <div className="flex h-full w-full max-w-[34em] flex-col justify-center">
+                <span className="whitespace-pre-line pb-[0.4em] font-dMSerifDisplay text-[4.5rem] leading-[0.9em] text-veryLightGray">
+                  {'Humanizing\n your insurance.'}
+                </span>
+                <span className="font-karla text-veryLightGray">
+                  Get your life insurance coverage easier and faster. We blend our expertise and technology to help you
+                  find the plan that’s right for you. Ensure you and your loved ones are protected.
+                </span>
+              </div>
+              <Image className="h-fit" src={heroDesktop} alt="image of family" />
+            </div>
+          </div>
         </div>
         <div className="h-[50em] bg-white"></div>
       </main>
