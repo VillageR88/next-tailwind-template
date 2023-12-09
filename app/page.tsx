@@ -11,14 +11,12 @@ import snappyProcess from './images/icon-snappy-process.svg';
 import affordablePrices from './images/icon-affordable-prices.svg';
 import peopleFirst from './images/icon-people-first.svg';
 
-const Article = () => {
+const Article = ({ image, header, main }: { image: string; header: string; main: string }) => {
   return (
     <div className="flex max-w-[22em] flex-col">
-      <Image src={snappyProcess as string} alt="icon" />
-      <span className="font-dMSerifDisplay text-[1.7rem] text-[#2A272E]">Snappy Process</span>
-      <span className="font-karla text-darkGrayishViolet">
-        Our application process can be completed in minutes, not hours. Don’t get stuck filling in tedious forms.
-      </span>
+      <Image src={image} alt="icon" />
+      <span className="font-dMSerifDisplay text-[1.7rem] text-[#2A272E]">{header}</span>
+      <span className="font-karla text-darkGrayishViolet">{main}</span>
     </div>
   );
 };
@@ -71,7 +69,25 @@ export default function Home() {
               <span className="font-dMSerifDisplay text-[4.5rem] tracking-[-0.015em] text-[#2A272E]">
                 We’re different
               </span>
-              <Article />
+              <div className="flex w-full flex-row justify-between">
+                <Article
+                  image={snappyProcess as string}
+                  header="Snappy Process"
+                  main="Our application process can be completed in minutes, not hours. Don’t get stuck filling in tedious forms."
+                />
+                <Article
+                  image={affordablePrices as string}
+                  header="Affordable Prices"
+                  main="We don’t want you worrying about high monthly costs. Our prices may be low, 
+                  but we still offer the best coverage possible."
+                />
+                <Article
+                  image={peopleFirst as string}
+                  header="People First"
+                  main="Our plans aren’t full of conditions and clauses to prevent payouts. We make 
+                  sure you’re covered when you need it."
+                />
+              </div>
             </div>
           </div>
         </div>
