@@ -57,10 +57,10 @@ export default function Home() {
         <div className="flex h-[5em] w-full items-center justify-between bg-white md:px-[2em] lg:px-[5em] xl:px-[10.5em]">
           <Image className="h-fit " src={logo as string} alt="logo" />
           <div className="mt-[0.2em] flex gap-[1.86em] font-karla text-[0.83rem] font-[700]">
-            <button className="tracking-[0.1em] text-darkGrayishViolet">HOW WE WORK</button>
-            <button className="tracking-[0.1em] text-darkGrayishViolet">BLOG</button>
-            <button className="tracking-[0.1em] text-darkGrayishViolet">ACCOUNT</button>
-            <button className="ml-[0.75em] px-[1.95em] pb-[0.6em] pt-[0.63em] tracking-[0.1em] outline outline-[0.175em]">
+            <button className="tracking-[0.1em] text-darkGrayishViolet hover:text-[#2B282F]">HOW WE WORK</button>
+            <button className="tracking-[0.1em] text-darkGrayishViolet hover:text-[#2B282F]">BLOG</button>
+            <button className="tracking-[0.1em] text-darkGrayishViolet hover:text-[#2B282F]">ACCOUNT</button>
+            <button className="ml-[0.75em] px-[1.95em] pb-[0.6em] pt-[0.63em] tracking-[0.1em] outline outline-[0.175em] hover:bg-[#2B282F] hover:px-[1.615em] hover:pb-[0.8em] hover:pt-[0.8em] hover:font-[500] hover:tracking-[0.2em] hover:text-veryLightGray">
               VIEW PLANS
             </button>
           </div>
@@ -81,7 +81,7 @@ export default function Home() {
                     Get your life insurance coverage easier and faster. We blend our expertise and technology to help
                     you find the plan that’s right for you. Ensure you and your loved ones are protected.
                   </span>
-                  <button className="self-start px-[2.1em] py-[0.7em] text-[0.78rem] tracking-[0.1em] text-veryLightGray outline outline-[0.17em]">
+                  <button className="self-start px-[2.1em] py-[0.7em] text-[0.78rem] tracking-[0.1em] text-veryLightGray outline outline-[0.17em] hover:bg-veryLightGray hover:font-[700] hover:text-darkViolet">
                     VIEW PLANS
                   </button>
                 </div>
@@ -134,7 +134,7 @@ export default function Home() {
       <footer className="h-full w-full">
         <div className="h-[24.55em] w-full bg-veryLightGray">
           <div className="h-full w-full bg-[url('./images/bg-pattern-footer-desktop.svg')] bg-no-repeat">
-            <div className="h-full w-full px-[10.3em] pt-[4.2em]">
+            <div className="h-full w-full pt-[4.2em] md:px-[5em] xl:px-[10.3em]">
               <div className="flex justify-between">
                 <Image className="h-fit " src={logo as string} alt="logo" />
                 <div className="mt-[-0.2em] flex h-fit items-center gap-[1em]">
