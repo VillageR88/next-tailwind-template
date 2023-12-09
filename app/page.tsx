@@ -15,8 +15,8 @@ const Article = ({ image, header, main }: { image: string; header: string; main:
   return (
     <div className="flex max-w-[22em] flex-col">
       <Image src={image} alt="icon" />
-      <span className="font-dMSerifDisplay text-[1.7rem] text-[#2A272E]">{header}</span>
-      <span className="font-karla text-darkGrayishViolet">{main}</span>
+      <span className=" mt-[1.2em] font-dMSerifDisplay text-[1.7rem] text-[#2A272E]">{header}</span>
+      <span className="mt-[0.8em] font-karla leading-[1.6em] text-darkGrayishViolet">{main}</span>
     </div>
   );
 };
@@ -60,13 +60,13 @@ export default function Home() {
               </div>
             </div>
           </div>
-          <div className="h-[50em] w-full bg-white">
+          <div className="h-[70em] w-full bg-white">
             <div className="flex flex-col">
               <Image className="mt-[-10.7em]" src={leftPatternDesktop as string} alt="" />
             </div>
-            <div className="flex w-full flex-col px-[10.5em]">
-              <div className="h-[1px] w-[9em] bg-[#96A9C6]"></div>
-              <span className="font-dMSerifDisplay text-[4.5rem] tracking-[-0.015em] text-[#2A272E]">
+            <div className="flex w-full flex-col pl-[10.35em] pr-[10.1em]">
+              <div className="mb-[2.6em] mt-[-1.75em] h-[1px] w-[9.3em] bg-[#BBAEBD]"></div>
+              <span className="mb-[1.02em] font-dMSerifDisplay text-[4.5rem] tracking-[-0.015em] text-[#2A272E]">
                 We’re different
               </span>
               <div className="flex w-full flex-row justify-between">
