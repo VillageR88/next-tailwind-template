@@ -25,6 +25,31 @@ const Article = ({ image, header, main }: { image: string; header: string; main:
   );
 };
 
+const FooterBlock = ({
+  title,
+  buttons,
+  xlOptionalPadding,
+}: {
+  title: string;
+  buttons: string[];
+  xlOptionalPadding?: string;
+}) => {
+  return (
+    <div
+      className={`flex w-fit flex-col items-start font-karla text-[0.88rem] font-[700] tracking-[0.06em] ${xlOptionalPadding}`}
+    >
+      <span className="mb-[2.2em] text-darkGrayishViolet">{title}</span>
+      <div className="flex flex-col items-start gap-[0.7em]">
+        {buttons.map((x, i) => (
+          <button key={i} className="tracking-[0.06em]">
+            {x}
+          </button>
+        ))}
+      </div>
+    </div>
+  );
+};
+
 export default function Home() {
   return (
     <div className="flex min-h-screen flex-col items-center justify-center">
@@ -113,21 +138,34 @@ export default function Home() {
               <div className="flex justify-between">
                 <Image className="h-fit " src={logo as string} alt="logo" />
                 <div className="mt-[-0.2em] flex h-fit items-center gap-[1em]">
-                  <Image className="h-fit" src={iconFacebook as string} alt="facebook logo" />
-                  <Image className="h-fit" src={iconTwitter as string} alt="twitter logo" />
-                  <Image className="h-fit" src={iconPinterest as string} alt="pinterest logo" />
-                  <Image className="h-fit" src={iconInstagram as string} alt="instagram logo" />
+                  <button>
+                    <Image className="h-fit" src={iconFacebook as string} alt="facebook logo" />
+                  </button>
+                  <button>
+                    <Image className="h-fit" src={iconTwitter as string} alt="twitter logo" />
+                  </button>
+                  <button>
+                    <Image className="h-fit" src={iconPinterest as string} alt="pinterest logo" />
+                  </button>
+                  <button>
+                    <Image className="h-fit" src={iconInstagram as string} alt="instagram logo" />
+                  </button>
                 </div>
               </div>
               <div className="mb-[2.8em] mt-[2.05em] h-[1px] w-full bg-zinc-300"></div>
-              <div className="flex flex-col items-start font-karla text-[0.88rem] font-[700] tracking-[0.06em]">
-                <span className="mb-[2.2em] text-darkGrayishViolet">OUR COMPANY</span>
-                <div className="flex flex-col items-start gap-[0.7em]">
-                  <button className="tracking-[0.06em]">HOW WE WORK</button>
-                  <button className="tracking-[0.06em]">WHY INSURE?</button>
-                  <button className="tracking-[0.06em]">VIEW PLANS</button>
-                  <button className="tracking-[0.06em]">REVIEWS</button>
-                </div>
+              <div className="flex-row] flex w-full justify-between lg:pr-[5em] xl:pr-[11.5em]">
+                <FooterBlock title={'OUR COMPANY'} buttons={['HOW WE WORK', 'WHY INSURE?', 'VIEW PLANS', 'REVIEWS']} />
+                <FooterBlock
+                  title={'HELP ME'}
+                  buttons={['FAQ', 'TERMS OF USE', 'PRIVACY POLICY', 'COOKIES']}
+                  xlOptionalPadding="xl:pl-[0.5em]"
+                />
+                <FooterBlock
+                  title={'CONTACT'}
+                  buttons={['SALES', 'SUPPORT', 'LIVE CHAT']}
+                  xlOptionalPadding="xl:pr-[3.2em]"
+                />
+                <FooterBlock title={'OTHERS'} buttons={['CAREERS', 'PRESS', 'LICENSES']} />
               </div>
             </div>
           </div>
