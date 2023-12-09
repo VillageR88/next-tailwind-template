@@ -19,6 +19,8 @@ import iconPinterest from './images/icon-pinterest.svg';
 import iconPinterestHover from './images/icon-pinterestHover.svg';
 import iconInstagram from './images/icon-instagram.svg';
 import iconInstagramHover from './images/icon-instagramHover.svg';
+import burger from './images/icon-hamburger.svg';
+import close from './images/icon-close.svg';
 import { useState } from 'react';
 
 const Article = ({ image, header, main }: { image: string; header: string; main: string }) => {
@@ -61,13 +63,32 @@ export default function Home() {
   const [hoverOnTwitter, setHoverOnTwitter] = useState<boolean>(false);
   const [hoverOnPinterest, setHoverOnPinterest] = useState<boolean>(false);
   const [hoverOnInstagram, setHoverOnInstagram] = useState<boolean>(false);
-
+  const [burgerOpen, setBurgerOpen] = useState<boolean>(false);
   return (
     <div className="flex min-h-screen flex-col items-center justify-center">
       <nav className="h-full w-full">
-        <div className="flex h-[5em] w-full items-center justify-between bg-white md:px-[2em] lg:px-[5em] xl:px-[10.5em]">
+        {/*right nav mobile*/}
+        {burgerOpen && (
+          <div className="absolute z-20 h-full w-full bg-[#2B282F]">
+            <div className="flex h-[5em] w-full items-center justify-between bg-white px-[2em]">
+              <Image className="h-fit " src={logo as string} alt="logo" />
+
+              <button
+                onClick={() => {
+                  setBurgerOpen(false);
+                }}
+                className="h-fit"
+              >
+                <Image className="block h-fit md:hidden" src={close as string} alt="navigation button" />
+              </button>
+            </div>
+          </div>
+        )}
+        {/**/}
+        <div className="flex h-[5em] w-full items-center justify-between bg-white px-[2em] lg:px-[5em] xl:px-[10.5em]">
           <Image className="h-fit " src={logo as string} alt="logo" />
-          <div className="mt-[0.2em] flex gap-[1.86em] font-karla text-[0.83rem] font-[700]">
+          {/*right nav desktop*/}
+          <div className="mt-[0.2em] hidden gap-[1.86em] font-karla text-[0.83rem] font-[700] md:flex">
             <button className="tracking-[0.1em] text-darkGrayishViolet hover:text-[#2B282F]">HOW WE WORK</button>
             <button className="tracking-[0.1em] text-darkGrayishViolet hover:text-[#2B282F]">BLOG</button>
             <button className="tracking-[0.1em] text-darkGrayishViolet hover:text-[#2B282F]">ACCOUNT</button>
@@ -75,6 +96,14 @@ export default function Home() {
               VIEW PLANS
             </button>
           </div>
+          {/*burger*/}
+          <button
+            onClick={() => {
+              setBurgerOpen(true);
+            }}
+          >
+            <Image className="block md:hidden" src={burger as string} alt="navigation button" />
+          </button>
         </div>
       </nav>
       <main className="h-full w-full">
