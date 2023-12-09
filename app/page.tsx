@@ -60,16 +60,16 @@ export default function Home() {
               </div>
             </div>
           </div>
-          <div className="h-[70em] w-full bg-white">
+          <div className="h-[120em] w-full bg-white">
             <div className="flex flex-col">
               <Image className="mt-[-10.7em]" src={leftPatternDesktop as string} alt="" />
             </div>
-            <div className="flex w-full flex-col pl-[10.35em] pr-[10.1em]">
+            <div className="flex w-full flex-col md:px-[4em] xl:px-0 xl:pl-[10.35em] xl:pr-[10.1em]">
               <div className="mb-[2.6em] mt-[-1.75em] h-[1px] w-[9.3em] bg-[#BBAEBD]"></div>
               <span className="mb-[1.02em] font-dMSerifDisplay text-[4.5rem] tracking-[-0.015em] text-[#2A272E]">
                 We’re different
               </span>
-              <div className="flex w-full flex-row justify-between">
+              <div className="flex w-full flex-row justify-between md:gap-[3em] xl:gap-[1em]">
                 <Article
                   image={snappyProcess as string}
                   header="Snappy Process"
@@ -88,6 +88,7 @@ export default function Home() {
                   sure you’re covered when you need it."
                 />
               </div>
+              <div className="mt-[10em] h-[15.6em] w-full bg-darkViolet"></div>
             </div>
           </div>
         </div>
