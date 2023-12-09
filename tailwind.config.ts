@@ -11,12 +11,16 @@ const config: Config = {
       fontFamily: {
         sans: ['var(--font-sans)'],
         mono: ['var(--font-mono)'],
+        montserrat: 'Montserrat',
       },
       colors: {
-        // Slate
-        // 'accent-brand-800': '#1e293b',
-        // 'accent-brand-700': '#334155',
-        // 'accent-brand-600': '#475569',
+        linearGradient1: 'hsl(236, 72%, 79%)',
+        linearGradient2: 'hsl(237, 63%, 64%)',
+        //### Neutral
+        veryLightGrayishBlue: 'hsl(240, 78%, 98%)',
+        lightGrayishBlue: 'hsl(234, 14%, 74%)',
+        grayishBlue: 'hsl(233, 13%, 49%)',
+        darkGrayishBlue: 'hsl(232, 13%, 33%)',
       },
     },
   },
