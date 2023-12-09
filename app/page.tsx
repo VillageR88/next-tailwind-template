@@ -21,7 +21,7 @@ import iconInstagram from './images/icon-instagram.svg';
 import iconInstagramHover from './images/icon-instagramHover.svg';
 import burger from './images/icon-hamburger.svg';
 import close from './images/icon-close.svg';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 const Article = ({ image, header, main }: { image: string; header: string; main: string }) => {
   return (
@@ -64,6 +64,16 @@ export default function Home() {
   const [hoverOnPinterest, setHoverOnPinterest] = useState<boolean>(false);
   const [hoverOnInstagram, setHoverOnInstagram] = useState<boolean>(false);
   const [burgerOpen, setBurgerOpen] = useState<boolean>(false);
+  useEffect(() => {
+    const handleResize = () => {
+      window.innerWidth >= 768 && setBurgerOpen(false);
+    };
+    window.addEventListener('resize', handleResize);
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
   return (
     <div className="flex min-h-screen flex-col items-center justify-center">
       <nav className="h-full w-full">
