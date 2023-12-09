@@ -6,7 +6,9 @@ import '@fontsource/karla/400.css';
 import '@fontsource/karla/700.css';
 import Image from 'next/image';
 import heroDesktop from './images/image-intro-desktop.jpg';
+import heroMobile from './images/image-intro-mobile.jpg';
 import leftPatternDesktop from './images/bg-pattern-intro-left-desktop.svg';
+import rightPatternMobile from './images/bg-pattern-intro-right-mobile.svg';
 import logo from './images/logo.svg';
 import snappyProcess from './images/icon-snappy-process.svg';
 import affordablePrices from './images/icon-affordable-prices.svg';
@@ -83,27 +85,29 @@ export default function Home() {
       {/*right nav mobile*/}
       {burgerOpen && (
         <div className="absolute top-0 z-20 flex h-full w-full flex-col  bg-[#2B282F]">
-          <div className="flex h-[5em] w-full items-center justify-between bg-white px-[2em]">
-            <Image className="h-fit " src={logo as string} alt="logo" />
+          <div className="h-full w-full bg-[url('./images/bg-pattern-mobile-nav.svg')] bg-contain bg-bottom bg-no-repeat">
+            <div className="flex h-[5em] w-full items-center justify-between bg-white px-[2em]">
+              <Image className="h-fit" src={logo as string} alt="logo" />
 
-            <button
-              onClick={() => {
-                setBurgerOpen(false);
-              }}
-              className="h-fit"
-            >
-              <Image className="block h-fit md:hidden" src={close as string} alt="navigation button" />
-            </button>
-          </div>
-          <div className="flex mt-10 w-full gap-[2em] flex-col justify-center text-veryLightGray">
-            <button>HOW WE WORK</button>
-            <button>BLOG</button>
-            <button>ACCOUNT</button>
-            <button className='outline outline-2 mx-4 py-4'>VIEW PLANS</button>
+              <button
+                onClick={() => {
+                  setBurgerOpen(false);
+                }}
+                className="h-fit"
+              >
+                <Image className="block h-fit md:hidden" src={close as string} alt="navigation button" />
+              </button>
+            </div>
+            <div className="mt-10 flex w-full flex-col justify-center gap-[2em] text-veryLightGray">
+              <button>HOW WE WORK</button>
+              <button>BLOG</button>
+              <button>ACCOUNT</button>
+              <button className="mx-4 py-4 outline outline-2">VIEW PLANS</button>
+            </div>
           </div>
         </div>
       )}
-      <nav className="h-full  w-full">
+      <nav className="h-full w-full">
         {/**/}
         <div className="flex h-[5em] w-full items-center justify-between bg-white px-[2em] lg:px-[5em] xl:px-[10.5em]">
           <Image className="h-fit " src={logo as string} alt="logo" />
@@ -118,40 +122,47 @@ export default function Home() {
           </div>
           {/*burger*/}
           <button
+            className="block md:hidden"
             onClick={() => {
               setBurgerOpen(true);
             }}
           >
-            <Image className="block md:hidden" src={burger as string} alt="navigation button" />
+            <Image src={burger as string} alt="navigation button" />
           </button>
         </div>
       </nav>
       <main className="h-full w-full">
         <div className="flex flex-col">
+          <Image className="flex h-fit w-full md:hidden" src={heroMobile} alt="image of a family" />
           <div className="flex h-[37.5em] w-full bg-darkViolet">
-            <div className="z-10 flex h-full w-full flex-none justify-end bg-[url('./images/bg-pattern-intro-right-desktop.svg')] bg-[length:30.25%] bg-[100%_-5em] bg-no-repeat"></div>
+            <div className="z-10 flex h-full w-full flex-none justify-end bg-[url('./images/bg-pattern-intro-left-mobile.svg')]  bg-no-repeat md:bg-[url('./images/bg-pattern-intro-right-desktop.svg')] md:bg-[length:30.25%] md:bg-[100%_-5em]"></div>
             <div className="absolute flex h-0 w-full justify-center xl:w-[90em]">
-              <div className="flex h-[37.5em] w-full justify-center gap-[1.7em] px-[2em] pt-[6.55em]">
+              <div className="flex h-[37.5em] w-full justify-center gap-[1.7em] px-[1.5em] pt-[6.55em]">
                 <div className="z-10 flex h-full w-full max-w-[34em] flex-col justify-start gap-[2em] pl-[0.1em]">
-                  <div className="mb-[2em] h-[1px] max-w-[9.35em] bg-veryLightGray"></div>
-                  <span className="whitespace-pre-line font-dMSerifDisplay leading-[0.9em] tracking-[-0.01em] text-veryLightGray md:text-[3rem] xl:text-[4.45rem]">
+                  <div className="mb-[2em] hidden h-[1px] max-w-[9.35em] bg-veryLightGray md:block"></div>
+                  <span className="whitespace-pre-line text-center font-dMSerifDisplay text-[3rem] leading-[0.9em] tracking-[-0.01em] text-veryLightGray md:text-left md:text-[3rem] xl:text-[4.45rem]">
                     {'Humanizing\n your insurance.'}
                   </span>
-                  <span className="mt-[-0.3em] font-karla leading-[1.6em] tracking-[0.004em] text-veryLightGray">
+                  <span className="mt-[-0.3em] text-center font-karla leading-[1.6em] tracking-[0.004em] text-veryLightGray md:text-left">
                     Get your life insurance coverage easier and faster. We blend our expertise and technology to help
                     you find the plan that’s right for you. Ensure you and your loved ones are protected.
                   </span>
-                  <button className="self-start px-[2.1em] py-[0.7em] text-[0.78rem] tracking-[0.1em] text-veryLightGray outline outline-[0.17em] hover:bg-veryLightGray hover:py-[0.8em] hover:font-[700] hover:text-darkViolet">
+                  <button className="self-center px-[2.1em] py-[0.7em] text-[0.78rem] tracking-[0.1em] text-veryLightGray outline outline-[0.17em] hover:bg-veryLightGray hover:py-[0.8em] hover:font-[700] hover:text-darkViolet md:self-start">
                     VIEW PLANS
                   </button>
                 </div>
-                <Image className="h-[90%] w-fit xl:h-fit" src={heroDesktop} alt="image of family" />
+                <Image
+                  className="hidden h-fit w-fit md:block md:h-[85%] lg:h-[90%] xl:h-fit"
+                  src={heroDesktop}
+                  alt="image of family"
+                />
               </div>
             </div>
           </div>
           <div className="h-full w-full bg-white pb-[9.35em]">
-            <div className="flex flex-col">
-              <Image className="mt-[-10.7em]" src={leftPatternDesktop as string} alt="" />
+            <div className="flex w-full justify-end md:justify-start">
+              <Image className="mt-[-10.7em] hidden md:flex" src={leftPatternDesktop as string} alt="" />
+              <Image className="mt-[-10.7em] flex md:hidden" src={rightPatternMobile as string} alt="" />
             </div>
             <div className="flex w-full flex-col md:px-[4em] xl:px-0 xl:pl-[10.35em] xl:pr-[10.3em]">
               <div className="mb-[2.6em] mt-[-1.75em] h-[1px] w-[9.3em] bg-[#BBAEBD]"></div>
