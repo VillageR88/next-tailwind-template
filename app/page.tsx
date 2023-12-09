@@ -75,25 +75,35 @@ export default function Home() {
     };
   }, []);
   return (
-    <div className="flex min-h-screen flex-col items-center justify-center">
-      <nav className="h-full w-full">
-        {/*right nav mobile*/}
-        {burgerOpen && (
-          <div className="absolute z-20 h-full w-full bg-[#2B282F]">
-            <div className="flex h-[5em] w-full items-center justify-between bg-white px-[2em]">
-              <Image className="h-fit " src={logo as string} alt="logo" />
+    <div
+      className={`${
+        burgerOpen ? 'h-screen overflow-hidden' : 'min-h-screen'
+      } flex flex-col items-center justify-center md:h-max `}
+    >
+      {/*right nav mobile*/}
+      {burgerOpen && (
+        <div className="absolute top-0 z-20 flex h-full w-full flex-col  bg-[#2B282F]">
+          <div className="flex h-[5em] w-full items-center justify-between bg-white px-[2em]">
+            <Image className="h-fit " src={logo as string} alt="logo" />
 
-              <button
-                onClick={() => {
-                  setBurgerOpen(false);
-                }}
-                className="h-fit"
-              >
-                <Image className="block h-fit md:hidden" src={close as string} alt="navigation button" />
-              </button>
-            </div>
+            <button
+              onClick={() => {
+                setBurgerOpen(false);
+              }}
+              className="h-fit"
+            >
+              <Image className="block h-fit md:hidden" src={close as string} alt="navigation button" />
+            </button>
           </div>
-        )}
+          <div className="flex mt-10 w-full gap-[2em] flex-col justify-center text-veryLightGray">
+            <button>HOW WE WORK</button>
+            <button>BLOG</button>
+            <button>ACCOUNT</button>
+            <button className='outline outline-2 mx-4 py-4'>VIEW PLANS</button>
+          </div>
+        </div>
+      )}
+      <nav className="h-full  w-full">
         {/**/}
         <div className="flex h-[5em] w-full items-center justify-between bg-white px-[2em] lg:px-[5em] xl:px-[10.5em]">
           <Image className="h-fit " src={logo as string} alt="logo" />
