@@ -60,11 +60,11 @@ export default function Home() {
               </div>
             </div>
           </div>
-          <div className="h-[120em] w-full bg-white">
+          <div className="h-full w-full bg-white pb-[9.35em]">
             <div className="flex flex-col">
               <Image className="mt-[-10.7em]" src={leftPatternDesktop as string} alt="" />
             </div>
-            <div className="flex w-full flex-col md:px-[4em] xl:px-0 xl:pl-[10.35em] xl:pr-[10.1em]">
+            <div className="flex w-full flex-col md:px-[4em] xl:px-0 xl:pl-[10.35em] xl:pr-[10.3em]">
               <div className="mb-[2.6em] mt-[-1.75em] h-[1px] w-[9.3em] bg-[#BBAEBD]"></div>
               <span className="mb-[1.02em] font-dMSerifDisplay text-[4.5rem] tracking-[-0.015em] text-[#2A272E]">
                 We’re different
@@ -88,11 +88,21 @@ export default function Home() {
                   sure you’re covered when you need it."
                 />
               </div>
-              <div className="mt-[10em] h-[15.6em] w-full bg-darkViolet"></div>
+              <div className="mt-[10em] h-[15.6em] w-full bg-darkViolet">
+                <div className="flex h-full w-full items-center justify-between bg-[url('./images/bg-pattern-how-we-work-desktop.svg')] bg-contain bg-right bg-no-repeat px-[5em]">
+                  <span className="max-w-[10em] whitespace-pre-line font-dMSerifDisplay text-[3.4rem] leading-[1em] text-veryLightGray">
+                    {'Find out more\nabout how we work'}
+                  </span>
+                  <button className="px-[1.6em] py-[0.5em] font-karla text-[0.9em] tracking-[0.08em] text-veryLightGray outline outline-2">
+                    HOW WE WORK
+                  </button>
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </main>
+      <footer className='w-full h-full'><div className='h-[24.55em] w-full bg-veryLightGray'></div></footer>
     </div>
   );
 }
