@@ -12,11 +12,13 @@ export default function Home() {
       <nav className="h-full w-full">
         <div className="flex h-[5em] w-full items-center justify-between bg-white px-[10.5em]">
           <Image className="h-fit " src={logo as string} alt="logo" />
-          <div className="font-karla flex gap-[2em] text-[0.85rem] font-[700]">
-            <button className="tracking-[0.1em]">HOW WE WORK</button>
-            <button className="tracking-[0.1em]">BLOG</button>
-            <button className="tracking-[0.1em]">ACCOUNT</button>
-            <button className="px-6 py-2 tracking-[0.1em] outline outline-2">VIEW PLANS</button>
+          <div className="mt-[0.2em] flex gap-[1.86em] font-karla text-[0.83rem] font-[700]">
+            <button className="tracking-[0.1em] text-darkGrayishViolet">HOW WE WORK</button>
+            <button className="tracking-[0.1em] text-darkGrayishViolet">BLOG</button>
+            <button className="tracking-[0.1em] text-darkGrayishViolet">ACCOUNT</button>
+            <button className="ml-[0.75em] px-[1.95em] pt-[0.63em] pb-[0.6em] tracking-[0.1em] outline outline-2">
+              VIEW PLANS
+            </button>
           </div>
         </div>
       </nav>
