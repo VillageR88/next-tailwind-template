@@ -112,11 +112,21 @@ export default function Home() {
             <div className="h-full w-full px-[10.3em] pt-[4.2em]">
               <div className="flex justify-between">
                 <Image className="h-fit " src={logo as string} alt="logo" />
-                <div className="flex h-fit items-center mt-[-0.2em] gap-[1em]">
+                <div className="mt-[-0.2em] flex h-fit items-center gap-[1em]">
                   <Image className="h-fit" src={iconFacebook as string} alt="facebook logo" />
                   <Image className="h-fit" src={iconTwitter as string} alt="twitter logo" />
                   <Image className="h-fit" src={iconPinterest as string} alt="pinterest logo" />
                   <Image className="h-fit" src={iconInstagram as string} alt="instagram logo" />
+                </div>
+              </div>
+              <div className="mb-[2.8em] mt-[2.05em] h-[1px] w-full bg-zinc-300"></div>
+              <div className="flex flex-col items-start font-karla text-[0.88rem] font-[700] tracking-[0.06em]">
+                <span className="mb-[2.2em] text-darkGrayishViolet">OUR COMPANY</span>
+                <div className="flex flex-col items-start gap-[0.7em]">
+                  <button className="tracking-[0.06em]">HOW WE WORK</button>
+                  <button className="tracking-[0.06em]">WHY INSURE?</button>
+                  <button className="tracking-[0.06em]">VIEW PLANS</button>
+                  <button className="tracking-[0.06em]">REVIEWS</button>
                 </div>
               </div>
             </div>
