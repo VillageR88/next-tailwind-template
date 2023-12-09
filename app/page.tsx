@@ -27,10 +27,12 @@ import { useEffect, useState } from 'react';
 
 const Article = ({ image, header, main }: { image: string; header: string; main: string }) => {
   return (
-    <div className="flex max-w-[22em] flex-col">
+    <div className="flex max-w-[22em] flex-col items-center md:items-start">
       <Image src={image} alt="icon" />
       <span className=" mt-[1.2em] font-dMSerifDisplay text-[1.7rem] text-[#2A272E]">{header}</span>
-      <span className="mt-[0.8em] font-karla leading-[1.6em] text-darkGrayishViolet">{main}</span>
+      <span className="mt-[0.8em] text-center font-karla leading-[1.6em] text-darkGrayishViolet md:text-left">
+        {main}
+      </span>
     </div>
   );
 };
@@ -164,12 +166,12 @@ export default function Home() {
               <Image className="mt-[-10.7em] hidden md:flex" src={leftPatternDesktop as string} alt="" />
               <Image className="mt-[-10.7em] flex md:hidden" src={rightPatternMobile as string} alt="" />
             </div>
-            <div className="flex w-full flex-col md:px-[4em] xl:px-0 xl:pl-[10.35em] xl:pr-[10.3em]">
+            <div className="flex w-full flex-col items-center md:items-start md:px-[4em] xl:px-0 xl:pl-[10.35em] xl:pr-[10.3em]">
               <div className="mb-[2.6em] mt-[-1.75em] h-[1px] w-[9.3em] bg-[#BBAEBD]"></div>
-              <span className="mb-[1.02em] font-dMSerifDisplay text-[4.5rem] tracking-[-0.015em] text-[#2A272E]">
+              <span className="mb-[1.02em] text-center font-dMSerifDisplay text-[3rem] tracking-[-0.015em] text-[#2A272E] md:text-left md:text-[4.5rem]">
                 We’re different
               </span>
-              <div className="flex w-full flex-row justify-between md:gap-[3em] xl:gap-[1em]">
+              <div className="flex w-full flex-col items-center justify-between gap-[4em] md:flex-row md:gap-[3em] xl:gap-[1em]">
                 <Article
                   image={snappyProcess as string}
                   header="Snappy Process"
