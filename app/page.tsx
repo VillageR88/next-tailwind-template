@@ -25,12 +25,12 @@ export default function Home() {
       </nav>
       <main className="h-full w-full">
         <div className="flex h-[37.5em] w-full bg-darkViolet">
-          <div className="z-10 flex h-full w-full flex-none justify-end bg-[url('./images/bg-pattern-intro-right-desktop.svg')] bg-[100%_-5em] bg-no-repeat"></div>
+          <div className="z-10 flex h-full w-full flex-none justify-end bg-[url('./images/bg-pattern-intro-right-desktop.svg')] bg-[length:30.25%] bg-[100%_-5em] bg-no-repeat"></div>
           <div className="absolute flex h-0 w-full justify-center xl:w-[90em]">
-            <div className="flex h-[37.5em] w-fit gap-[1.7em] pt-[6.55em]">
+            <div className="flex h-[37.5em] w-full justify-center gap-[1.7em] pt-[6.55em]">
               <div className="z-10 flex h-full w-full max-w-[34em] flex-col justify-start gap-[2em] pl-[0.1em]">
-                <div className="mb-[2em] h-[1px] w-[9.35em] bg-veryLightGray"></div>
-                <span className="whitespace-pre-line font-dMSerifDisplay text-[4.45rem] leading-[0.9em] tracking-[-0.01em] text-veryLightGray">
+                <div className="mb-[2em] h-[1px] max-w-[9.35em] bg-veryLightGray"></div>
+                <span className="whitespace-pre-line font-dMSerifDisplay leading-[0.9em] tracking-[-0.01em] text-veryLightGray md:text-[3rem] xl:text-[4.45rem]">
                   {'Humanizing\n your insurance.'}
                 </span>
                 <span className="mt-[-0.3em] font-karla leading-[1.6em] tracking-[0.004em] text-veryLightGray">
@@ -41,7 +41,7 @@ export default function Home() {
                   VIEW PLANS
                 </button>
               </div>
-              <Image className="h-fit" src={heroDesktop} alt="image of family" />
+              <Image className="xl:h-fit h-[90%] w-fit" src={heroDesktop} alt="image of family" />
             </div>
           </div>
         </div>
