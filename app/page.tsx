@@ -10,6 +10,10 @@ import logo from './images/logo.svg';
 import snappyProcess from './images/icon-snappy-process.svg';
 import affordablePrices from './images/icon-affordable-prices.svg';
 import peopleFirst from './images/icon-people-first.svg';
+import iconFacebook from './images/icon-facebook.svg';
+import iconTwitter from './images/icon-twitter.svg';
+import iconPinterest from './images/icon-pinterest.svg';
+import iconInstagram from './images/icon-instagram.svg';
 
 const Article = ({ image, header, main }: { image: string; header: string; main: string }) => {
   return (
@@ -102,7 +106,23 @@ export default function Home() {
           </div>
         </div>
       </main>
-      <footer className='w-full h-full'><div className='h-[24.55em] w-full bg-veryLightGray'></div></footer>
+      <footer className="h-full w-full">
+        <div className="h-[24.55em] w-full bg-veryLightGray">
+          <div className="h-full w-full bg-[url('./images/bg-pattern-footer-desktop.svg')] bg-no-repeat">
+            <div className="h-full w-full px-[10.3em] pt-[4.2em]">
+              <div className="flex justify-between">
+                <Image className="h-fit " src={logo as string} alt="logo" />
+                <div className="flex h-fit items-center mt-[-0.2em] gap-[1em]">
+                  <Image className="h-fit" src={iconFacebook as string} alt="facebook logo" />
+                  <Image className="h-fit" src={iconTwitter as string} alt="twitter logo" />
+                  <Image className="h-fit" src={iconPinterest as string} alt="pinterest logo" />
+                  <Image className="h-fit" src={iconInstagram as string} alt="instagram logo" />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </footer>
     </div>
   );
 }
