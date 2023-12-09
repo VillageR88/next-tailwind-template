@@ -41,7 +41,7 @@ const FooterBlock = ({
       <span className="mb-[2.2em] text-darkGrayishViolet">{title}</span>
       <div className="flex flex-col items-start gap-[0.7em]">
         {buttons.map((x, i) => (
-          <button key={i} className="tracking-[0.06em]">
+          <button key={i} className="tracking-[0.06em] text-darkViolet">
             {x}
           </button>
         ))}
@@ -54,7 +54,7 @@ export default function Home() {
   return (
     <div className="flex min-h-screen flex-col items-center justify-center">
       <nav className="h-full w-full">
-        <div className="flex h-[5em] w-full items-center justify-between bg-white px-[10.5em]">
+        <div className="flex h-[5em] w-full items-center justify-between bg-white md:px-[2em] lg:px-[5em] xl:px-[10.5em]">
           <Image className="h-fit " src={logo as string} alt="logo" />
           <div className="mt-[0.2em] flex gap-[1.86em] font-karla text-[0.83rem] font-[700]">
             <button className="tracking-[0.1em] text-darkGrayishViolet">HOW WE WORK</button>
