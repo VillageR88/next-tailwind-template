@@ -16,14 +16,16 @@ export default function Home() {
             <button className="tracking-[0.1em] text-darkGrayishViolet">HOW WE WORK</button>
             <button className="tracking-[0.1em] text-darkGrayishViolet">BLOG</button>
             <button className="tracking-[0.1em] text-darkGrayishViolet">ACCOUNT</button>
-            <button className="ml-[0.75em] px-[1.95em] pt-[0.63em] pb-[0.6em] tracking-[0.1em] outline outline-2">
+            <button className="ml-[0.75em] px-[1.95em] pb-[0.6em] pt-[0.63em] tracking-[0.1em] outline outline-[0.175em]">
               VIEW PLANS
             </button>
           </div>
         </div>
       </nav>
       <main className="h-full w-full">
-        <div className="h-[37.5em] bg-darkViolet"></div>
+        <div className="h-[37.5em] w-full bg-darkViolet">
+          <div className=" h-full w-full bg-[url('./images/bg-pattern-intro-right-desktop.svg')] bg-[100%_-5em] bg-no-repeat"></div>
+        </div>
         <div className="h-[50em] bg-white"></div>
       </main>
     </div>
