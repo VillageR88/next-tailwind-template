@@ -47,7 +47,7 @@ const FooterBlock = ({
       <span className="mb-[2.2em] text-darkGrayishViolet">{title}</span>
       <div className="flex flex-col items-start gap-[0.7em]">
         {buttons.map((x, i) => (
-          <button key={i} className="tracking-[0.06em] text-darkViolet">
+          <button key={i} className="tracking-[0.06em] text-darkViolet hover:underline">
             {x}
           </button>
         ))}
