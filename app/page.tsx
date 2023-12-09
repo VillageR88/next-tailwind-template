@@ -1,3 +1,4 @@
+'use client';
 import '@fontsource/dm-serif-display';
 import '@fontsource/dm-serif-display/400.css';
 import '@fontsource/karla';
@@ -11,9 +12,14 @@ import snappyProcess from './images/icon-snappy-process.svg';
 import affordablePrices from './images/icon-affordable-prices.svg';
 import peopleFirst from './images/icon-people-first.svg';
 import iconFacebook from './images/icon-facebook.svg';
+import iconFacebookHover from './images/icon-facebookHover.svg';
 import iconTwitter from './images/icon-twitter.svg';
+import iconTwitterHover from './images/icon-twitterHover.svg';
 import iconPinterest from './images/icon-pinterest.svg';
+import iconPinterestHover from './images/icon-pinterestHover.svg';
 import iconInstagram from './images/icon-instagram.svg';
+import iconInstagramHover from './images/icon-instagramHover.svg';
+import { useState } from 'react';
 
 const Article = ({ image, header, main }: { image: string; header: string; main: string }) => {
   return (
@@ -51,6 +57,11 @@ const FooterBlock = ({
 };
 
 export default function Home() {
+  const [hoverOnFacebook, setHoverOnFacebook] = useState<boolean>(false);
+  const [hoverOnTwitter, setHoverOnTwitter] = useState<boolean>(false);
+  const [hoverOnPinterest, setHoverOnPinterest] = useState<boolean>(false);
+  const [hoverOnInstagram, setHoverOnInstagram] = useState<boolean>(false);
+
   return (
     <div className="flex min-h-screen flex-col items-center justify-center">
       <nav className="h-full w-full">
@@ -81,7 +92,7 @@ export default function Home() {
                     Get your life insurance coverage easier and faster. We blend our expertise and technology to help
                     you find the plan that’s right for you. Ensure you and your loved ones are protected.
                   </span>
-                  <button className="self-start px-[2.1em] py-[0.7em] text-[0.78rem] tracking-[0.1em] text-veryLightGray outline outline-[0.17em] hover:bg-veryLightGray hover:font-[700] hover:text-darkViolet">
+                  <button className="self-start px-[2.1em] py-[0.7em] text-[0.78rem] tracking-[0.1em] text-veryLightGray outline outline-[0.17em] hover:bg-veryLightGray hover:py-[0.8em] hover:font-[700] hover:text-darkViolet">
                     VIEW PLANS
                   </button>
                 </div>
@@ -122,7 +133,7 @@ export default function Home() {
                   <span className="max-w-[10em] whitespace-pre-line font-dMSerifDisplay text-[3.4rem] leading-[1em] text-veryLightGray">
                     {'Find out more\nabout how we work'}
                   </span>
-                  <button className="px-[1.6em] py-[0.5em] font-karla text-[0.9em] tracking-[0.08em] text-veryLightGray outline outline-2">
+                  <button className="px-[1.6em] py-[0.5em] font-karla text-[0.9em] tracking-[0.08em] text-veryLightGray outline outline-2 hover:bg-veryLightGray hover:px-[1.5em] hover:py-[0.6em] hover:font-[700] hover:text-darkViolet">
                     HOW WE WORK
                   </button>
                 </div>
@@ -138,17 +149,61 @@ export default function Home() {
               <div className="flex justify-between">
                 <Image className="h-fit " src={logo as string} alt="logo" />
                 <div className="mt-[-0.2em] flex h-fit items-center gap-[1em]">
-                  <button>
-                    <Image className="h-fit" src={iconFacebook as string} alt="facebook logo" />
+                  <button
+                    onMouseEnter={() => {
+                      setHoverOnFacebook(true);
+                    }}
+                    onMouseLeave={() => {
+                      setHoverOnFacebook(false);
+                    }}
+                  >
+                    <Image
+                      className="h-fit"
+                      src={(hoverOnFacebook ? iconFacebookHover : iconFacebook) as string}
+                      alt="facebook logo"
+                    />
                   </button>
-                  <button>
-                    <Image className="h-fit" src={iconTwitter as string} alt="twitter logo" />
+                  <button
+                    onMouseEnter={() => {
+                      setHoverOnTwitter(true);
+                    }}
+                    onMouseLeave={() => {
+                      setHoverOnTwitter(false);
+                    }}
+                  >
+                    <Image
+                      className="h-fit"
+                      src={(hoverOnTwitter ? iconTwitterHover : iconTwitter) as string}
+                      alt="twitter logo"
+                    />
                   </button>
-                  <button>
-                    <Image className="h-fit" src={iconPinterest as string} alt="pinterest logo" />
+                  <button
+                    onMouseEnter={() => {
+                      setHoverOnPinterest(true);
+                    }}
+                    onMouseLeave={() => {
+                      setHoverOnPinterest(false);
+                    }}
+                  >
+                    <Image
+                      className="h-fit"
+                      src={(hoverOnPinterest ? iconPinterestHover : iconPinterest) as string}
+                      alt="pinterest logo"
+                    />
                   </button>
-                  <button>
-                    <Image className="h-fit" src={iconInstagram as string} alt="instagram logo" />
+                  <button
+                    onMouseEnter={() => {
+                      setHoverOnInstagram(true);
+                    }}
+                    onMouseLeave={() => {
+                      setHoverOnInstagram(false);
+                    }}
+                  >
+                    <Image
+                      className="h-fit"
+                      src={(hoverOnInstagram ? iconInstagramHover : iconInstagram) as string}
+                      alt="instagram logo"
+                    />
                   </button>
                 </div>
               </div>
@@ -174,3 +229,4 @@ export default function Home() {
     </div>
   );
 }
+//#2B282F
