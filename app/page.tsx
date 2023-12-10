@@ -33,8 +33,8 @@ const Block = ({
   return (
     <div
       className={`${
-        alternate ? 'h-[28em] bg-white' : 'h-[31.2em] bg-gradient-to-br from-linearGradient1 to-linearGradient2'
-      } mt-[4em] flex  w-[21.9em] justify-center rounded-[0.6em] `}
+        alternate ? 'h-[28em] bg-white' : 'z-10 h-[31.2em] bg-gradient-to-br from-linearGradient1 to-linearGradient2'
+      } mt-[4em] flex  w-[21.9em] justify-center rounded-[0.6em] shadow-2xl shadow-slate-300`}
     >
       <div className="flex h-full w-full flex-col items-center justify-center px-[1.95em]">
         <span className={`${alternate ? 'text-grayishBlue' : 'text-veryLightGrayishBlue'} text-[1.13rem]`}>
