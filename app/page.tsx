@@ -46,8 +46,8 @@ export default function Home() {
       </nav>
       <main className="h-[23.301em] w-full bg-white">
         <div className="mt-[-13.5em] flex justify-between">
-          {/***/}
-          <div className="mt-[3em] flex flex-col font-barlowCondensed md:ml-[3em] lg:ml-[5em] xl:ml-[10.3em]">
+          
+          <div className="flex flex-col font-barlowCondensed md:ml-[3em] lg:ml-[5em] lg:mt-[2em] xl:ml-[10.3em] xl:mt-[3em]">
             <div className="flex gap-[1em]">
               <span className="flex h-fit w-[3.3em] justify-center rounded-[1em] bg-veryDarkBlue py-0.5 text-[0.9rem] font-[700] tracking-[0.1em] text-white">
                 NEW
@@ -60,14 +60,18 @@ export default function Home() {
             <span className="mt-[1.6em] max-w-[15em] font-barlow text-[1.15rem] leading-[1.4em] tracking-[-0.01em] text-darkGrayishBlue">
               Project planning and time tracking for agile teams
             </span>
-            <div className="mt-[4em] flex flex-col items-start gap-[0.5em] xl:flex-row xl:items-center xl:gap-[1.4em]">
+            <div className="mt-[4em] flex flex-col items-start gap-[0.5em] lg:flex-row lg:items-center xl:gap-[1.4em]">
               <button className="rounded-[0.3em] bg-[#FF5D5E] px-8 py-[0.7em] font-barlowCondensed text-[1.03rem] font-[700] tracking-[0.06em] text-lightGrayishBlue hover:bg-[#FF8584]">
                 SCHEDULE A DEMO
               </button>
               <span className="tracking-[0.3em] text-grayishBlue">TO SEE A PREVIEW</span>
             </div>
           </div>
-          <Image className="mr-[-16.75em] h-fit md:h-[22em] lg:h-[25em] w-fit xl:h-fit" src={illustration as string} alt="image of a computer" />
+          <Image
+            className="mr-[-16.75em] h-fit w-fit md:h-[22em] lg:h-[25em] xl:h-fit"
+            src={illustration as string}
+            alt="image of a computer"
+          />
         </div>
       </main>
     </div>
