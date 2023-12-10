@@ -18,7 +18,11 @@ const Block = ({
   alternate?: boolean;
 }) => {
   const Breaker = () => (
-    <div className="mt-[0.95em] h-[1px] w-full bg-gradient-to-r from-indigo-300 to-[#969CF4]"></div>
+    <div
+      className={`${
+        alternate ? 'bg-gray-300' : 'bg-gradient-to-r from-indigo-300 to-[#969CF4]'
+      } mt-[0.95em] h-[1px] w-full`}
+    ></div>
   );
   const Liner = ({ text }: { text: string }) => (
     <span className={`${alternate ? 'text-grayishBlue' : 'text-veryLightGrayishBlue'} mt-[0.95em] text-[0.93rem]`}>
@@ -32,7 +36,7 @@ const Block = ({
         alternate ? 'h-[28em] bg-white' : 'h-[31.2em] bg-gradient-to-br from-linearGradient1 to-linearGradient2'
       } mt-[4em] flex  w-[21.9em] justify-center rounded-[0.6em] `}
     >
-      <div className="justify-center flex h-full w-full flex-col items-center px-[1.95em]">
+      <div className="flex h-full w-full flex-col items-center justify-center px-[1.95em]">
         <span className={`${alternate ? 'text-grayishBlue' : 'text-veryLightGrayishBlue'} text-[1.13rem]`}>
           {title}
         </span>
@@ -50,7 +54,7 @@ const Block = ({
         <Liner text={line2} />
         <Breaker />
         <Liner text={line3} />
-        <div className="mt-[0.95em] h-[1px] w-full bg-gradient-to-r from-indigo-300 to-[#969CF4]"></div>
+        <Breaker />
         <button
           className={`${
             alternate
