@@ -8,13 +8,22 @@ const Block = ({
   line1,
   line2,
   line3,
+  alternate,
 }: {
   title: string;
   amount: string;
   line1: string;
   line2: string;
   line3: string;
+  alternate?: boolean;
 }) => {
+  const Breaker = () => (
+    <div className="mt-[0.95em] h-[1px] w-full bg-gradient-to-r from-indigo-300 to-[#969CF4]"></div>
+  );
+  const Liner = ({ text }: { text: string }) => (
+    <span className="mt-[0.95em] text-[0.93rem] text-veryLightGrayishBlue">{text}</span>
+  );
+
   return (
     <div className="mt-[4em] flex h-[31.2em] w-[21.9em] justify-center rounded-[0.6em] bg-gradient-to-br from-linearGradient1 to-linearGradient2">
       <div className="mt-[3.35em] flex h-full w-full flex-col items-center px-[1.95em]">
@@ -23,12 +32,12 @@ const Block = ({
           <span className="text-[2.5rem]">$</span>
           <span className="text-[4.45rem] tracking-[-0.025em]">{amount}</span>
         </div>
-        <div className="mt-[0.95em] h-[1px] w-full bg-gradient-to-r from-indigo-300 to-[#969CF4]"></div>
-        <span className="mt-[0.95em] text-[0.93rem] text-veryLightGrayishBlue">{line1}</span>
-        <div className="mt-[0.95em] h-[1px] w-full bg-gradient-to-r from-indigo-300 to-[#969CF4]"></div>
-        <span className="mt-[0.95em] text-[0.93rem] text-veryLightGrayishBlue">{line2}</span>
-        <div className="mt-[0.95em] h-[1px] w-full bg-gradient-to-r from-indigo-300 to-[#969CF4]"></div>
-        <span className="mt-[0.95em] text-[0.93rem] text-veryLightGrayishBlue">{line3}</span>
+        <Breaker />
+        <Liner text={line1} />
+        <Breaker />
+        <Liner text={line2} />
+        <Breaker />
+        <Liner text={line3} />
         <div className="mt-[0.95em] h-[1px] w-full bg-gradient-to-r from-indigo-300 to-[#969CF4]"></div>
         <button className="mt-[2.6em] h-[3.4em] w-full rounded-[0.4em] bg-white text-[0.8rem] tracking-[0.12em] text-linearGradient2">
           LEARN MORE
@@ -65,10 +74,10 @@ export default function Home() {
             <div className="flex flex-row justify-center">
               <Block
                 title="Basic"
-                amount="24.99"
-                line1="1 TB Storage"
-                line2="5 Users Allowed"
-                line3="Send up to 10 GB"
+                amount="19.99"
+                line1="500 GB Storage"
+                line2="2 Users Allowed"
+                line3="Send up to 3 GB"
               />
               <Block
                 title="Professional"
@@ -79,10 +88,10 @@ export default function Home() {
               />
               <Block
                 title="Master"
-                amount="24.99"
-                line1="1 TB Storage"
-                line2="5 Users Allowed"
-                line3="Send up to 10 GB"
+                amount="39.99"
+                line1="2 TB Storage"
+                line2="10 Users Allowed"
+                line3="Send up to 20 GB"
               />
             </div>
           </div>
