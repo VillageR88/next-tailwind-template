@@ -28,7 +28,23 @@ export default function Home() {
               <span>Monthly</span>
             </div>
             <div className="mt-[4em] flex h-[31.2em] w-[21.9em] justify-center rounded-[0.6em] bg-gradient-to-br from-linearGradient1 to-linearGradient2">
-              <div className="mt-[3.0em] h-full w-fit text-[1.13rem] text-veryLightGrayishBlue">Professional</div>
+              <div className="mt-[3.35em] flex h-full w-full flex-col items-center px-[1.95em]">
+                <span className="text-[1.13rem] text-veryLightGrayishBlue">Professional</span>
+                <div className="mt-[0.4em] flex items-center gap-[0.5em] text-veryLightGrayishBlue">
+                  <span className="text-[2.5rem]">$</span>
+                  <span className="text-[4.45rem] tracking-[-0.025em]">24.99</span>
+                </div>
+                <div className="mt-[0.95em] h-[1px] w-full bg-gradient-to-r from-indigo-300 to-[#969CF4]"></div>
+                <span className="mt-[0.95em] text-[0.93rem] text-veryLightGrayishBlue">1 TB Storage</span>
+                <div className="mt-[0.95em] h-[1px] w-full bg-gradient-to-r from-indigo-300 to-[#969CF4]"></div>
+                <span className="mt-[0.95em] text-[0.93rem] text-veryLightGrayishBlue">5 Users Allowed</span>
+                <div className="mt-[0.95em] h-[1px] w-full bg-gradient-to-r from-indigo-300 to-[#969CF4]"></div>
+                <span className="mt-[0.95em] text-[0.93rem] text-veryLightGrayishBlue">Send up to 10 GB</span>
+                <div className="mt-[0.95em] h-[1px] w-full bg-gradient-to-r from-indigo-300 to-[#969CF4]"></div>
+                <button className="mt-[2.6em] h-[3.4em] w-full rounded-[0.4em] bg-white text-[0.8rem] text-linearGradient2 tracking-[0.12em]">
+                  LEARN MORE
+                </button>
+              </div>
             </div>
           </div>
         </div>
