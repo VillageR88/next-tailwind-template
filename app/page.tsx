@@ -11,16 +11,24 @@ import navMobileClose from './images/icon-close.svg';
 import illustration from './images/illustration-devices.svg';
 import { useState } from 'react';
 
-const CustomButton1 = ({ text }: { text: string }) => {
+const CustomButton1 = ({ text, mobileText }: { text: string; mobileText?: boolean }) => {
   return (
-    <button className="z-10 pt-[0.2em] text-[0.9rem] font-[700] tracking-[0.1em] text-black hover:underline">
+    <button
+      className={`${
+        mobileText ? 'text-[1.2rem]' : 'text-[0.9rem]'
+      } z-10 pt-[0.2em] font-[700] tracking-[0.1em] text-black hover:underline`}
+    >
       {text}
     </button>
   );
 };
-const CustomButton2 = ({ text }: { text: string }) => {
+const CustomButton2 = ({ text, mobileText }: { text: string; mobileText?: boolean }) => {
   return (
-    <button className="z-10 ml-[0.5em] pt-[0.2em] text-[0.9rem] font-[700] tracking-[0.1em] text-[#838790] hover:underline">
+    <button
+      className={`${
+        mobileText ? 'text-[1.2rem]' : 'text-[0.9rem]'
+      } z-10 ml-[0.5em] pt-[0.2em] font-[700] tracking-[0.1em] text-[#838790] hover:underline`}
+    >
       {text}
     </button>
   );
@@ -57,6 +65,17 @@ export default function Home() {
                 />
               </button>
             </div>
+            {openMobileNav && (
+              <div className="absolute left-0 top-24 z-20 flex h-[15.5em] w-full justify-center md:hidden ">
+                <div className="flex h-full w-[90%] flex-col items-center justify-center gap-[1em] bg-white shadow-md">
+                  <CustomButton1 text="PRODUCT" mobileText={true} />
+                  <CustomButton1 text="FEATURES" mobileText={true} />
+                  <CustomButton1 text="PRICING" mobileText={true} />
+                  <div className="z-10 mt-[0.2em] h-[1px] w-full rounded-full bg-[#CDD3D7]"></div>
+                  <CustomButton2 text="LOGIN" mobileText={true} />
+                </div>
+              </div>
+            )}
           </div>
         </div>
         <div className="flex h-full w-full justify-end bg-white">
