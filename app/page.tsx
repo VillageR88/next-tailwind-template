@@ -1,3 +1,4 @@
+'use client';
 import '@fontsource/barlow-condensed';
 import '@fontsource/barlow-condensed/400.css';
 import '@fontsource/barlow-condensed/700.css';
@@ -8,6 +9,7 @@ import logo from './images/logo.svg';
 import navMobileOpen from './images/icon-hamburger.svg';
 import navMobileClose from './images/icon-close.svg';
 import illustration from './images/illustration-devices.svg';
+import { useState } from 'react';
 
 const CustomButton1 = ({ text }: { text: string }) => {
   return (
@@ -25,18 +27,35 @@ const CustomButton2 = ({ text }: { text: string }) => {
 };
 
 export default function Home() {
+  const [openMobileNav, setOpenMobileNav] = useState<boolean>(false);
   return (
     <div className="flex min-h-screen flex-col items-center justify-center">
       <nav className="flex-flex-row h-[24em] w-full md:h-[26.7em]">
         <div className="h-0">
           <div className="flex items-center justify-between px-[2em] pt-[2em] font-barlowCondensed md:px-[3em] md:pt-[4em] lg:px-[5em] xl:px-[10.3em]">
             <Image className="z-10 h-full" src={logo as string} alt="logo" />
+            {/*desktop nav */}
             <div className="hidden items-center gap-[2.45em] md:flex">
               <CustomButton1 text="PRODUCT" />
               <CustomButton1 text="FEATURES" />
               <CustomButton1 text="PRICING" />
               <div className="z-10 mt-[0.2em] h-1.5 w-1.5 rounded-full bg-[#CDD3D7]"></div>
               <CustomButton2 text="LOGIN" />
+            </div>
+            {/*mobile nav */}
+            <div className="flex md:hidden">
+              <button
+                onClick={() => {
+                  setOpenMobileNav(!openMobileNav);
+                }}
+                className="z-10"
+              >
+                <Image
+                  className="z-10 h-fit"
+                  src={(!openMobileNav ? navMobileOpen : navMobileClose) as string}
+                  alt="mobile navigation"
+                />
+              </button>
             </div>
           </div>
         </div>
@@ -59,8 +78,8 @@ export default function Home() {
             <span className="mt-[1.6em] max-w-[15em] font-barlow text-[1.15rem] leading-[1.4em] tracking-[-0.01em] text-darkGrayishBlue">
               Project planning and time tracking for agile teams
             </span>
-            <div className="mt-[2em] md:pb-0 pb-24 flex flex-row items-center gap-[1em] md:mt-[4em] md:flex-col md:items-start md:gap-[0.5em] lg:flex-row lg:items-center xl:gap-[1.4em]">
-              <button className="rounded-[0.3em] bg-[#FF5D5E] px-4 py-[0.5em] font-barlowCondensed text-[0.9rem] font-[700] tracking-[0.06em] text-lightGrayishBlue hover:bg-[#FF8584] md:px-8 md:py-[0.7em] md:text-[1.03rem] md:text-[1rem]">
+            <div className="mt-[2em] flex flex-row items-center gap-[1em] pb-24 md:mt-[4em] md:flex-col md:items-start md:gap-[0.5em] md:pb-0 lg:flex-row lg:items-center xl:gap-[1.4em]">
+              <button className="rounded-[0.3em] bg-[#FF5D5E] px-4 py-[0.5em] font-barlowCondensed text-[0.9rem] font-[700] tracking-[0.06em] text-lightGrayishBlue hover:bg-[#FF8584] md:px-8 md:py-[0.7em] md:text-[1.03rem]">
                 SCHEDULE A DEMO
               </button>
               <span className="text-[0.8rem] tracking-[0.3em] text-grayishBlue md:text-[1rem]">TO SEE A PREVIEW</span>
