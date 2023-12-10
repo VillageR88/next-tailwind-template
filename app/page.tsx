@@ -50,8 +50,12 @@ export default function Home() {
                 </span>
                 <span className="tracking-[0.28em] text-grayishBlue">MONOGRAPH DASHBOARD</span>
               </div>
-              <span>Powerful insights into your team</span>
-              <span>Project planning and time tracking for agile teams</span>
+              <span className="mt-[0.3em] font-barlowCondensed text-[4rem] font-[700] leading-[1em] text-veryDarkBlue">
+                POWERFUL INSIGHTS INTO YOUR TEAM
+              </span>
+              <span className="mt-[1.6em] max-w-[15em] font-barlow text-[1.15rem] tracking-[-0.01em] leading-[1.4em] text-darkGrayishBlue">
+                Project planning and time tracking for agile teams
+              </span>
             </div>
           </div>
           <Image className="mr-[-16.75em]" src={illustration as string} alt="image of a computer" />
