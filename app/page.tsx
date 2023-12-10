@@ -32,7 +32,7 @@ const Block = ({
         alternate ? 'h-[28em] bg-white' : 'h-[31.2em] bg-gradient-to-br from-linearGradient1 to-linearGradient2'
       } mt-[4em] flex  w-[21.9em] justify-center rounded-[0.6em] `}
     >
-      <div className="mt-[3.35em] flex h-full w-full flex-col items-center px-[1.95em]">
+      <div className="justify-center flex h-full w-full flex-col items-center px-[1.95em]">
         <span className={`${alternate ? 'text-grayishBlue' : 'text-veryLightGrayishBlue'} text-[1.13rem]`}>
           {title}
         </span>
