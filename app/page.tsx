@@ -10,11 +10,15 @@ import navMobileClose from './images/icon-close.svg';
 import illustration from './images/illustration-devices.svg';
 
 const CustomButton1 = ({ text }: { text: string }) => {
-  return <button className="z-10 pt-[0.2em] text-[0.9rem] font-[700] tracking-[0.1em] text-black">{text}</button>;
+  return (
+    <button className="z-10 pt-[0.2em] text-[0.9rem] font-[700] tracking-[0.1em] text-black hover:underline">
+      {text}
+    </button>
+  );
 };
 const CustomButton2 = ({ text }: { text: string }) => {
   return (
-    <button className="z-10 pl-[0.5em] pt-[0.2em] text-[0.9rem] font-[700] tracking-[0.1em] text-[#838790]">
+    <button className="z-10 ml-[0.5em] pt-[0.2em] text-[0.9rem] font-[700] tracking-[0.1em] text-[#838790] hover:underline">
       {text}
     </button>
   );
@@ -53,9 +57,15 @@ export default function Home() {
               <span className="mt-[0.3em] font-barlowCondensed text-[4rem] font-[700] leading-[1em] text-veryDarkBlue">
                 POWERFUL INSIGHTS INTO YOUR TEAM
               </span>
-              <span className="mt-[1.6em] max-w-[15em] font-barlow text-[1.15rem] tracking-[-0.01em] leading-[1.4em] text-darkGrayishBlue">
+              <span className="mt-[1.6em] max-w-[15em] font-barlow text-[1.15rem] leading-[1.4em] tracking-[-0.01em] text-darkGrayishBlue">
                 Project planning and time tracking for agile teams
               </span>
+              <div className="mt-[4em] flex items-center gap-[1.4em]">
+                <button className="rounded-[0.3em] bg-[#FF5D5E] px-8 py-[0.7em] font-barlowCondensed text-[1.03rem] font-[700] tracking-[0.06em] text-lightGrayishBlue hover:bg-[#FF8584]">
+                  SCHEDULE A DEMO
+                </button>
+                <span className="tracking-[0.3em] text-grayishBlue">TO SEE A PREVIEW</span>
+              </div>
             </div>
           </div>
           <Image className="mr-[-16.75em]" src={illustration as string} alt="image of a computer" />
