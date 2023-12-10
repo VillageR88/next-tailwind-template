@@ -21,14 +21,26 @@ const Block = ({
     <div className="mt-[0.95em] h-[1px] w-full bg-gradient-to-r from-indigo-300 to-[#969CF4]"></div>
   );
   const Liner = ({ text }: { text: string }) => (
-    <span className="mt-[0.95em] text-[0.93rem] text-veryLightGrayishBlue">{text}</span>
+    <span className={`${alternate ? 'text-grayishBlue' : 'text-veryLightGrayishBlue'} mt-[0.95em] text-[0.93rem]`}>
+      {text}
+    </span>
   );
 
   return (
-    <div className="mt-[4em] flex h-[31.2em] w-[21.9em] justify-center rounded-[0.6em] bg-gradient-to-br from-linearGradient1 to-linearGradient2">
+    <div
+      className={`${
+        alternate ? 'h-[28em] bg-white' : 'h-[31.2em] bg-gradient-to-br from-linearGradient1 to-linearGradient2'
+      } mt-[4em] flex  w-[21.9em] justify-center rounded-[0.6em] `}
+    >
       <div className="mt-[3.35em] flex h-full w-full flex-col items-center px-[1.95em]">
-        <span className="text-[1.13rem] text-veryLightGrayishBlue">{title}</span>
-        <div className="mt-[0.4em] flex items-center gap-[0.5em] text-veryLightGrayishBlue">
+        <span className={`${alternate ? 'text-grayishBlue' : 'text-veryLightGrayishBlue'} text-[1.13rem]`}>
+          {title}
+        </span>
+        <div
+          className={`${
+            alternate ? 'text-darkGrayishBlue' : 'text-veryLightGrayishBlue'
+          } mt-[0.4em] flex items-center gap-[0.5em]`}
+        >
           <span className="text-[2.5rem]">$</span>
           <span className="text-[4.45rem] tracking-[-0.025em]">{amount}</span>
         </div>
@@ -39,7 +51,13 @@ const Block = ({
         <Breaker />
         <Liner text={line3} />
         <div className="mt-[0.95em] h-[1px] w-full bg-gradient-to-r from-indigo-300 to-[#969CF4]"></div>
-        <button className="mt-[2.6em] h-[3.4em] w-full rounded-[0.4em] bg-white text-[0.8rem] tracking-[0.12em] text-linearGradient2">
+        <button
+          className={`${
+            alternate
+              ? 'bg-gradient-to-r from-linearGradient1 to-linearGradient2 text-veryLightGrayishBlue'
+              : 'bg-white text-linearGradient2'
+          } mt-[2.6em] h-[3.4em] w-full rounded-[0.4em]  text-[0.8rem] tracking-[0.12em] `}
+        >
           LEARN MORE
         </button>
       </div>
@@ -71,13 +89,14 @@ export default function Home() {
               </button>
               <span>Monthly</span>
             </div>
-            <div className="flex flex-row justify-center">
+            <div className="flex flex-row items-center justify-center">
               <Block
                 title="Basic"
                 amount="19.99"
                 line1="500 GB Storage"
                 line2="2 Users Allowed"
                 line3="Send up to 3 GB"
+                alternate={true}
               />
               <Block
                 title="Professional"
@@ -92,6 +111,7 @@ export default function Home() {
                 line1="2 TB Storage"
                 line2="10 Users Allowed"
                 line3="Send up to 20 GB"
+                alternate={true}
               />
             </div>
           </div>
