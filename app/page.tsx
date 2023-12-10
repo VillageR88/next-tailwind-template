@@ -59,9 +59,9 @@ const Block = ({
         <button
           className={`${
             alternate
-              ? 'bg-gradient-to-r from-linearGradient1 to-linearGradient2 text-veryLightGrayishBlue'
-              : 'bg-white text-linearGradient2'
-          } mt-[2.6em] h-[3.4em] w-full rounded-[0.4em]  text-[0.8rem] tracking-[0.12em] `}
+              ? 'bg-gradient-to-r from-linearGradient1 to-linearGradient2 text-veryLightGrayishBlue hover:from-transparent hover:text-linearGradient2 hover:outline-grayishBlue'
+              : 'bg-white text-linearGradient2 hover:bg-transparent hover:text-veryLightGrayishBlue'
+          } mt-[2.6em] h-[3.4em] w-full rounded-[0.4em]  text-[0.8rem] tracking-[0.12em] hover:outline hover:outline-1`}
         >
           LEARN MORE
         </button>
@@ -84,7 +84,7 @@ export default function Home() {
                 onClick={() => {
                   setAnnually(!annually);
                 }}
-                className="flex h-[2.15em] w-[3.8em] items-center justify-end rounded-[2em] bg-gradient-to-r from-linearGradient1 to-linearGradient2"
+                className="flex h-[2.15em] w-[3.8em] items-center justify-end rounded-[2em] bg-gradient-to-r from-linearGradient1 to-linearGradient2 hover:opacity-50"
               >
                 <div
                   className={`${
