@@ -41,12 +41,11 @@ export default function Home() {
           </div>
         </div>
         <div className="flex h-full w-full justify-end bg-white">
-          <div className=" h-[full] rounded-bl-[3.8em] bg-lightGrayishBlue md:w-[60%] xl:w-[44.05em]"></div>
+          <div className=" h-[full] w-[50%] rounded-bl-[3.8em] bg-lightGrayishBlue md:w-[60%] xl:w-[44.05em]"></div>
         </div>
       </nav>
-      <main className="h-[23.301em] w-full bg-white">
-        <div className="mt-[-13.5em] flex justify-between">
-          
+      <main className="w-full bg-white md:h-[23.301em]">
+        <div className="mt-[-13.5em] flex flex-col-reverse justify-between md:flex-row">
           <div className="flex flex-col font-barlowCondensed md:ml-[3em] lg:ml-[5em] lg:mt-[2em] xl:ml-[10.3em] xl:mt-[3em]">
             <div className="flex gap-[1em]">
               <span className="flex h-fit w-[3.3em] justify-center rounded-[1em] bg-veryDarkBlue py-0.5 text-[0.9rem] font-[700] tracking-[0.1em] text-white">
@@ -68,9 +67,10 @@ export default function Home() {
             </div>
           </div>
           <Image
-            className="mr-[-16.75em] h-fit w-fit md:h-[22em] lg:h-[25em] xl:h-fit"
+            className="scale-150 translate-x-20 md:translate-x-0 md:scale-100 md:mr-[-16.75em] md:h-[22em] md:w-fit lg:h-[25em] xl:h-fit"
             src={illustration as string}
             alt="image of a computer"
+            priority
           />
         </div>
       </main>
