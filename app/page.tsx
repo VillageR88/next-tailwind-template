@@ -10,6 +10,7 @@ const Block = ({
   line2,
   line3,
   alternate,
+  annually,
 }: {
   title: string;
   amount: string;
@@ -17,6 +18,7 @@ const Block = ({
   line2: string;
   line3: string;
   alternate?: boolean;
+  annually: boolean;
 }) => {
   const Breaker = () => (
     <div
@@ -47,7 +49,13 @@ const Block = ({
           } mt-[0.4em] flex items-center gap-[0.5em]`}
         >
           <span className="text-[2.5rem]">$</span>
-          <span className="text-[4.45rem] tracking-[-0.025em]">{amount}</span>
+          <div className="flex flex-row text-[4.45rem] tracking-[-0.025em]">
+            <span>{amount}</span>
+            <span className={`${annually ? 'translate-y-[-500%] text-[5px]' : 'translate-y-[0%]'} duration-500`}>
+              9
+            </span>
+            <span>.99</span>
+          </div>
         </div>
         <Breaker />
         <Liner text={line1} />
@@ -84,7 +92,7 @@ export default function Home() {
                 onClick={() => {
                   setAnnually(!annually);
                 }}
-                className="flex h-[2.15em] w-[3.8em] items-center justify-end rounded-[2em] bg-gradient-to-r from-linearGradient1 to-linearGradient2 hover:opacity-50"
+                className="z-20 flex h-[2.15em] w-[3.8em] items-center justify-end rounded-[2em] bg-gradient-to-r from-linearGradient1 to-linearGradient2 hover:opacity-50"
               >
                 <div
                   className={`${
@@ -97,26 +105,29 @@ export default function Home() {
             <div className="flex flex-row items-center justify-center">
               <Block
                 title="Basic"
-                amount={`19${annually ? '9' : ''}.99`}
+                amount={`19`}
                 line1="500 GB Storage"
                 line2="2 Users Allowed"
                 line3="Send up to 3 GB"
                 alternate={true}
+                annually={annually}
               />
               <Block
                 title="Professional"
-                amount={`24${annually ? '9' : ''}.99`}
+                amount={`24`}
                 line1="1 TB Storage"
                 line2="5 Users Allowed"
                 line3="Send up to 10 GB"
+                annually={annually}
               />
               <Block
                 title="Master"
-                amount={`39${annually ? '9' : ''}.99`}
+                amount={`39`}
                 line1="2 TB Storage"
                 line2="10 Users Allowed"
                 line3="Send up to 20 GB"
                 alternate={true}
+                annually={annually}
               />
             </div>
           </div>
