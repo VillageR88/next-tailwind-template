@@ -11,12 +11,17 @@ const config: Config = {
       fontFamily: {
         sans: ['var(--font-sans)'],
         mono: ['var(--font-mono)'],
+        barlowCondensed: 'Barlow Condensed',
+        barlow: 'Barlow',
       },
       colors: {
-        // Slate
-        // 'accent-brand-800': '#1e293b',
-        // 'accent-brand-700': '#334155',
-        // 'accent-brand-600': '#475569',
+        //### Primary
+        red: 'hsl(0, 100%, 68%)',
+        //### Neutral
+        veryDarkBlue: 'hsl(230, 29%, 20%)',
+        darkGrayishBlue: 'hsl(230, 11%, 40%)',
+        grayishBlue: 'hsl(231, 7%, 65%)',
+        lightGrayishBlue: 'hsl(207, 33%, 95%)',
       },
     },
   },
