@@ -20,12 +20,16 @@ export default function Home() {
                 className="flex h-[2.15em] w-[3.8em] items-center justify-end rounded-[2em] bg-gradient-to-r from-linearGradient1 to-linearGradient2"
               >
                 <div
-                  className={`${annually && '-translate-x-6'} mr-1 h-[1.65em] w-[1.65em] rounded-full bg-white`}
+                  className={`${
+                    annually && '-translate-x-6'
+                  } mr-1 h-[1.65em] w-[1.65em] rounded-full bg-white duration-300`}
                 ></div>
               </button>
               <span>Monthly</span>
             </div>
-            <div className="mt-[4em] h-[31.2em] w-[21.9em] rounded-[0.6em] bg-gradient-to-br from-linearGradient1 to-linearGradient2"></div>
+            <div className="mt-[4em] flex h-[31.2em] w-[21.9em] justify-center rounded-[0.6em] bg-gradient-to-br from-linearGradient1 to-linearGradient2">
+              <div className="mt-[3.0em] h-full w-fit text-[1.13rem] text-veryLightGrayishBlue">Professional</div>
+            </div>
           </div>
         </div>
       </div>
