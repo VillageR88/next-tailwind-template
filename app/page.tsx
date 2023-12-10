@@ -2,6 +2,7 @@
 import '@fontsource/montserrat';
 import '@fontsource/montserrat/700.css';
 import { useState } from 'react';
+
 const Block = ({
   title,
   amount,
@@ -96,7 +97,7 @@ export default function Home() {
             <div className="flex flex-row items-center justify-center">
               <Block
                 title="Basic"
-                amount="19.99"
+                amount={`19${annually ? '9' : ''}.99`}
                 line1="500 GB Storage"
                 line2="2 Users Allowed"
                 line3="Send up to 3 GB"
@@ -104,14 +105,14 @@ export default function Home() {
               />
               <Block
                 title="Professional"
-                amount="24.99"
+                amount={`24${annually ? '9' : ''}.99`}
                 line1="1 TB Storage"
                 line2="5 Users Allowed"
                 line3="Send up to 10 GB"
               />
               <Block
                 title="Master"
-                amount="39.99"
+                amount={`39${annually ? '9' : ''}.99`}
                 line1="2 TB Storage"
                 line2="10 Users Allowed"
                 line3="Send up to 20 GB"
