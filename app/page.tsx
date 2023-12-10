@@ -37,9 +37,9 @@ const Block = ({
     <div
       className={`${
         alternate ? 'h-[28em] bg-white' : 'z-10 h-[31.2em] bg-gradient-to-br from-linearGradient1 to-linearGradient2'
-      } mt-[4em] flex  w-[21.9em] justify-center rounded-[0.6em] shadow-2xl shadow-slate-300`}
+      } mt-[4em] flex w-full justify-center rounded-[0.6em] shadow-2xl shadow-slate-300 lg:w-[18em] xl:w-[21.9em]`}
     >
-      <div className="flex h-full w-full flex-col items-center justify-center px-[1.95em]">
+      <div className="flex h-full w-full flex-col items-center justify-center px-[1.5em] xl:px-[1.95em]">
         <span className={`${alternate ? 'text-grayishBlue' : 'text-veryLightGrayishBlue'} text-[1.13rem]`}>
           {title}
         </span>
@@ -49,9 +49,11 @@ const Block = ({
           } mt-[0.4em] flex items-center gap-[0.5em]`}
         >
           <span className="text-[2.5rem]">$</span>
-          <div className="flex flex-row text-[4.45rem] tracking-[-0.025em]">
+          <div className="lg:-text-[4rem] flex flex-row text-[3.5rem] tracking-[-0.025em] xl:text-[4.45rem]">
             <span>{amount}</span>
-            <span className={`${annually ? 'translate-y-[-500%] text-[5px]' : 'translate-y-[0%]'} duration-500`}>
+            <span
+              className={`${!annually ? 'translate-y-[-300%] text-[5px] opacity-0' : 'translate-y-[0%]'} duration-500`}
+            >
               9
             </span>
             <span>.99</span>
@@ -81,10 +83,10 @@ const Block = ({
 export default function Home() {
   const [annually, setAnnually] = useState<boolean>(false);
   return (
-    <main className="flex h-screen flex-col items-center justify-center font-montserrat font-[700]">
-      <div className="h-[53.125em] w-full bg-veryLightGrayishBlue">
-        <div className="h-full w-full bg-[url('./images/bg-top.svg')] bg-right-top bg-no-repeat ">
-          <div className="flex h-full w-full flex-col items-center bg-[url('./images/bg-bottom.svg')] bg-left-bottom bg-no-repeat ">
+    <main className="flex min-h-screen flex-col items-center justify-center font-montserrat font-[700]">
+      <div className="h-full w-full bg-veryLightGrayishBlue  pb-[5em] md:h-[53.125em]  md:pb-0">
+        <div className="h-full w-full bg-[url('./images/bg-top.svg')] bg-[15em_0] bg-no-repeat px-[2em] md:bg-right-top md:px-0">
+          <div className="flex h-full w-full flex-col items-center bg-left-bottom bg-no-repeat md:bg-[url('./images/bg-bottom.svg')] ">
             <span className="mt-[2.1em] text-[2rem] text-grayishBlue">Our Pricing</span>
             <div className="mt-[2.5em] flex flex-row items-center gap-[1.6em] text-[0.92rem] text-lightGrayishBlue">
               <span>Annually</span>
@@ -97,12 +99,12 @@ export default function Home() {
                 <div
                   className={`${
                     annually && '-translate-x-6'
-                  } mr-1 h-[1.65em] w-[1.65em] rounded-full bg-white duration-300`}
+                  } mr-1 h-[1.65em] w-[1.65em] rounded-full bg-white duration-300 ease-in-out`}
                 ></div>
               </button>
               <span>Monthly</span>
             </div>
-            <div className="flex flex-row items-center justify-center">
+            <div className="flex w-full flex-col items-center justify-center md:w-fit md:flex-row">
               <Block
                 title="Basic"
                 amount={`19`}
