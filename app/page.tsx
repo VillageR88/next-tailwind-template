@@ -8,6 +8,11 @@ import pad from './images/image-devices.png';
 import iconBlacklist from './images/icon-blacklist.svg';
 import iconText from './images/icon-text.svg';
 import iconPreview from './images/icon-preview.svg';
+import logoGoogle from './images/logo-google.png';
+import logoIBM from './images/logo-ibm.png';
+import logoMicrosoft from './images/logo-microsoft.png';
+import logoHP from './images/logo-hp.png';
+import logoVG from './images/logo-vector-graphics.png';
 
 enum CustomButtonType {
   iOS,
@@ -77,7 +82,7 @@ const Article3 = ({
 export default function Home() {
   return (
     <div className="font-baiJamjuree flex min-h-screen flex-col items-center justify-center">
-      <main className="h-full w-full bg-white">
+      <main className="h-full w-full bg-white pb-[9.5em]">
         <div className="flex h-full w-full flex-col items-center justify-center bg-[url('./images/bg-header-desktop.png')] bg-[0_0.2em] bg-no-repeat">
           <div className="flex h-full w-[44em] flex-col items-center text-center">
             <Image className="mt-[8.2em] h-fit" src={logo as string} alt="logo" />
@@ -142,7 +147,23 @@ export default function Home() {
               main="Quick preview of all snippets on your Clipboard for easy access."
             />
           </div>
-          <div className="mt-[15em]">s</div>
+          <div className="mt-[10em] flex flex-row items-center gap-[6em]">
+            <Image className="h-fit w-fit" src={logoGoogle} alt="Google logo" />
+            <Image className="h-fit w-fit" src={logoIBM} alt="IBM logo" />
+            <Image className="h-fit w-fit" src={logoMicrosoft} alt="Microsoft logo" />
+            <Image className="h-fit w-fit" src={logoHP} alt="Hewlett Packard logo" />
+            <Image className="h-fit w-fit" src={logoVG} alt="Vector Graphics logo" />
+          </div>
+          <Article1
+            header="Clipboard for iOS and Mac OS"
+            main="Available for free on the App Store. Download for Mac or iOS, sync with iCloud 
+            and you’re ready to start adding to your clipboard."
+            mt='mt-[4.45em]'
+          />
+          <div className="mt-[3em] flex gap-[1em]">
+            <CustomButton type={CustomButtonType.iOS} />
+            <CustomButton type={CustomButtonType.mac} />
+          </div>
         </div>
       </main>
     </div>
