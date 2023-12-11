@@ -29,7 +29,7 @@ const CustomButton = ({ type }: { type: CustomButtonType }) => {
       <div
         className={`${
           type === CustomButtonType.iOS ? 'bg-[#26BBA5]' : 'bg-[#6174FF]'
-        } flex h-[95%] w-full items-center justify-center rounded-[3em] pt-[0.2em] text-[1.1rem] font-[600] tracking-[0.05em] text-white`}
+        } flex h-[94%] w-full items-center justify-center rounded-[3em] pt-[0.2em] text-[1.1rem] font-[600] tracking-[0.05em] text-white`}
       >
         {type === CustomButtonType.iOS ? 'Download for iOS' : 'Download for Mac'}
       </div>
@@ -104,7 +104,7 @@ export default function Home() {
             />
           </div>
           <div className="mt-[5em] flex w-full items-center md:gap-[2em] lg:gap-[4em] xl:gap-[6.9em]">
-            <Image className="ml-[-2em] h-fit md:w-[50%] xl:w-fit" src={computer} alt="computer image" />
+            <Image className="ml-[-2em] h-fit md:w-[50%] xl:w-[52.25%]" src={computer} alt="computer image" />
             <div className="mb-[4.4em] mt-[2.5em] flex flex-col justify-around md:gap-[1em] xl:gap-[3.3em]">
               <Article2
                 header="Quick Search"
@@ -168,7 +168,11 @@ export default function Home() {
           </div>
         </div>
       </main>
-      <footer className="h-[9.35em] w-full bg-[#F5F6F8]"></footer>
+      <footer className="h-[9.38em] w-full bg-[#F5F6F8]">
+        <div className="ml-[10.5em] flex h-full w-full items-center">
+          <Image className="h-fit w-[3.4em]" src={logo as string} alt="logo" />
+        </div>
+      </footer>
     </div>
   );
 }
