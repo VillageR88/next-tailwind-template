@@ -82,7 +82,7 @@ const Article3 = ({
 export default function Home() {
   return (
     <div className="font-baiJamjuree flex min-h-screen flex-col items-center justify-center">
-      <main className="h-full w-full bg-white pb-[9.5em]">
+      <main className="h-full w-full bg-white pb-[9.4em]">
         <div className="flex h-full w-full flex-col items-center justify-center bg-[url('./images/bg-header-desktop.png')] bg-[0_0.2em] bg-no-repeat">
           <div className="flex h-full w-full flex-col items-center text-center lg:w-[44em]">
             <Image className="mt-[8.2em] h-fit" src={logo as string} alt="logo" />
@@ -148,7 +148,7 @@ export default function Home() {
             />
           </div>
           <div className="mt-[10em] flex flex-row items-center justify-around">
-            <div className="md:around grid items-center justify-center gap-[5em] xl:flex md:grid-cols-3 xl:grid-cols-5 xl:gap-[6em]">
+            <div className="md:around grid items-center justify-center gap-[5em] md:grid-cols-3 xl:flex xl:grid-cols-5 xl:gap-[6em]">
               <Image className="h-fit w-fit" src={logoGoogle} alt="Google logo" />
               <Image className="h-fit w-fit" src={logoIBM} alt="IBM logo" />
               <Image className="h-fit w-fit" src={logoMicrosoft} alt="Microsoft logo" />
@@ -168,6 +168,7 @@ export default function Home() {
           </div>
         </div>
       </main>
+      <footer className="h-[9.35em] w-full bg-[#F5F6F8]"></footer>
     </div>
   );
 }
