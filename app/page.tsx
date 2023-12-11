@@ -29,10 +29,10 @@ const CustomButton = ({ type }: { type: CustomButtonType }) => {
   );
 };
 
-const Article1 = ({ header, main }: { header: string; main: string }) => {
+const Article1 = ({ header, main, mt }: { header: string; main: string; mt?: string }) => {
   return (
     <div className="flex w-[44em] flex-col text-center">
-      <span className="mt-[4.2em] text-[2.18rem] font-[600] text-darkGrayishBlue">{header}</span>
+      <span className={`${mt ? mt : 'mt-[4.2em]'} text-[2.18rem] font-[600] text-darkGrayishBlue`}>{header}</span>
       <span className="mt-[0.9em] text-[1.14rem] leading-[1.65em] text-grayishBlue">{main}</span>
     </div>
   );
@@ -90,7 +90,12 @@ export default function Home() {
             main="Whether you’re on the go, or at your computer, you can access all your Clipboard 
   snippets in a few simple clicks."
           />
-          <Image className='h-fit mt-[6em]' src={pad} alt="image of an IPad" />
+          <Image className="mt-[6em] h-fit" src={pad} alt="image of an IPad" />
+          <Article1
+            header="Supercharge your workflow"
+            main="We’ve got the tools to boost your productivity."
+            mt={'mt-[2em]'}
+          />
         </div>
       </main>
     </div>
