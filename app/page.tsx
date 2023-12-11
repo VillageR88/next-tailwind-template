@@ -28,14 +28,11 @@ const CustomButton = ({ type }: { type: CustomButtonType }) => {
   );
 };
 
-const Article1 = () => {
+const Article1 = ({ header, main }: { header: string; main: string }) => {
   return (
-    <div className="flex flex-col">
-      <span className="mt-[4.2em] text-[2.18rem] font-[600] text-darkGrayishBlue">Keep track of your snippets</span>
-      <span className="mt-[0.9em] text-[1.14rem] leading-[1.65em] text-grayishBlue">
-        Clipboard instantly stores any item you copy in the cloud, meaning you can access your snippets immediately on
-        all your devices. Our Mac and iOS apps will help you organize everything.
-      </span>
+    <div className="flex w-[44em] flex-col text-center">
+      <span className="mt-[4.2em] text-[2.18rem] font-[600] text-darkGrayishBlue">{header}</span>
+      <span className="mt-[0.9em] text-[1.14rem] leading-[1.65em] text-grayishBlue">{main}</span>
     </div>
   );
 };
@@ -43,8 +40,8 @@ const Article1 = () => {
 const Article2 = ({ header, main }: { header: string; main: string }) => {
   return (
     <div className="flex w-[22em] flex-col">
-      <span className="text-[1.5rem] font-[600] text-darkGrayishBlue">{header}</span>
-      <span className="mt-[0.5em] text-[1rem] leading-[1.65em] text-grayishBlue">{main}</span>
+      <span className="text-[1.45rem] font-[600] leading-[1.4em] text-darkGrayishBlue">{header}</span>
+      <span className="mt-[0.5em] text-[1rem] leading-[1.85em] text-grayishBlue">{main}</span>
     </div>
   );
 };
@@ -67,11 +64,15 @@ export default function Home() {
               <CustomButton type={CustomButtonType.iOS} />
               <CustomButton type={CustomButtonType.mac} />
             </div>
-            <Article1 />
+            <Article1
+              header="Keep track of your snippets"
+              main="Clipboard instantly stores any item you copy in the cloud, meaning you can access your snippets immediately on
+        all your devices. Our Mac and iOS apps will help you organize everything."
+            />
           </div>
-          <div className="mt-[5em] flex w-full gap-[7em]">
+          <div className="mt-[5em] flex w-full gap-[6.9em]">
             <Image className="ml-[-2em] h-fit" src={computer} alt="computer image" />
-            <div className="mb-[5em] mt-[2em] flex flex-col justify-around">
+            <div className="mb-[4.4em] mt-[2.5em] flex flex-col justify-around">
               <Article2
                 header="Quick Search"
                 main="Easily search your snippets by content, category, web address, application, and more."
@@ -83,6 +84,11 @@ export default function Home() {
               />
             </div>
           </div>
+          <Article1
+            header="Access Clipboard anywhere"
+            main="Whether you’re on the go, or at your computer, you can access all your Clipboard 
+  snippets in a few simple clicks."
+          />
         </div>
       </main>
     </div>
