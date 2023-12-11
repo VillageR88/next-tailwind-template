@@ -24,7 +24,7 @@ const CustomButton = ({ type }: { type: CustomButtonType }) => {
     <button
       className={`${
         type === CustomButtonType.iOS ? 'bg-[#2F9681] shadow-[#D5F7E9]' : 'bg-[#5964BE]'
-      } flex h-[3.5em] w-[14.15em] items-start rounded-[3em] shadow-xl`}
+      } flex h-[3.5em] w-[14.15em] items-start rounded-[3em] shadow-xl hover:opacity-75`}
     >
       <div
         className={`${
