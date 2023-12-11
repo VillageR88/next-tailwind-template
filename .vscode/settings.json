@@ -2,7 +2,7 @@
   "typescript.tsdk": "./node_modules/typescript/lib",
   "editor.formatOnSave": true,
   "editor.codeActionsOnSave": {
-    "source.fixAll.eslint": true
+    "source.fixAll.eslint": "explicit"
   },
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "[typescriptreact]": {
@@ -11,5 +11,15 @@
   "[typescript]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
-  "cSpell.words": ["headlessui", "heroicons", "lato", "tabler", "tailwindcss", "unoptimized", "webp"]
+  "cSpell.words": [
+    "fontsource",
+    "headlessui",
+    "heroicons",
+    "jamjuree",
+    "lato",
+    "tabler",
+    "tailwindcss",
+    "unoptimized",
+    "webp"
+  ]
 }

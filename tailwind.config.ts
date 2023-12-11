@@ -11,12 +11,15 @@ const config: Config = {
       fontFamily: {
         sans: ['var(--font-sans)'],
         mono: ['var(--font-mono)'],
+        baiJamjuree: 'Bai Jamjuree',
       },
       colors: {
-        // Slate
-        // 'accent-brand-800': '#1e293b',
-        // 'accent-brand-700': '#334155',
-        // 'accent-brand-600': '#475569',
+        //### Primary
+        strongCyan: 'hsl(171, 66%, 44%)',
+        lightBlue: 'hsl(233, 100%, 69%)',
+        //### Neutral
+        darkGrayishBlue: 'hsl(210, 10%, 33%)',
+        grayishBlue: 'hsl(201, 11%, 66%)',
       },
     },
   },
