@@ -39,7 +39,7 @@ const CustomButton = ({ type }: { type: CustomButtonType }) => {
 
 const Article1 = ({ header, main, mt }: { header: string; main: string; mt?: string }) => {
   return (
-    <div className="flex w-[44em] flex-col text-center">
+    <div className="flex flex-col text-center lg:w-[44em]">
       <span className={`${mt ? mt : 'mt-[4.2em]'} text-[2.18rem] font-[600] text-darkGrayishBlue`}>{header}</span>
       <span className="mt-[0.9em] text-[1.14rem] leading-[1.65em] text-grayishBlue">{main}</span>
     </div>
@@ -84,7 +84,7 @@ export default function Home() {
     <div className="font-baiJamjuree flex min-h-screen flex-col items-center justify-center">
       <main className="h-full w-full bg-white pb-[9.5em]">
         <div className="flex h-full w-full flex-col items-center justify-center bg-[url('./images/bg-header-desktop.png')] bg-[0_0.2em] bg-no-repeat">
-          <div className="flex h-full w-[44em] flex-col items-center text-center">
+          <div className="flex h-full w-full flex-col items-center text-center lg:w-[44em]">
             <Image className="mt-[8.2em] h-fit" src={logo as string} alt="logo" />
             <span className="mt-[1.15em] text-[2.8rem] font-[600] tracking-[-0.005em] text-darkGrayishBlue">
               A history of everything you copy
@@ -103,9 +103,9 @@ export default function Home() {
         all your devices. Our Mac and iOS apps will help you organize everything."
             />
           </div>
-          <div className="mt-[5em] flex w-full gap-[6.9em]">
-            <Image className="ml-[-2em] h-fit" src={computer} alt="computer image" />
-            <div className="mb-[4.4em] mt-[2.5em] flex flex-col justify-around">
+          <div className="mt-[5em] flex w-full items-center md:gap-[2em] lg:gap-[4em] xl:gap-[6.9em]">
+            <Image className="ml-[-2em] h-fit md:w-[50%] xl:w-fit" src={computer} alt="computer image" />
+            <div className="mb-[4.4em] mt-[2.5em] flex flex-col justify-around md:gap-[1em] xl:gap-[3.3em]">
               <Article2
                 header="Quick Search"
                 main="Easily search your snippets by content, category, web address, application, and more."
@@ -158,7 +158,7 @@ export default function Home() {
             header="Clipboard for iOS and Mac OS"
             main="Available for free on the App Store. Download for Mac or iOS, sync with iCloud 
             and you’re ready to start adding to your clipboard."
-            mt='mt-[4.45em]'
+            mt="mt-[4.45em]"
           />
           <div className="mt-[3em] flex gap-[1em]">
             <CustomButton type={CustomButtonType.iOS} />
