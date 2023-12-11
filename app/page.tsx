@@ -27,12 +27,24 @@ const CustomButton = ({ type }: { type: CustomButtonType }) => {
   );
 };
 
+const Article = () => {
+  return (
+    <div className="flex flex-col">
+      <span className="mt-[4.2em] text-[2.18rem] font-[600] text-darkGrayishBlue">Keep track of your snippets</span>
+      <span className="mt-[0.9em] text-[1.14rem] text-grayishBlue leading-[1.65em]">
+        Clipboard instantly stores any item you copy in the cloud, meaning you can access your snippets immediately on
+        all your devices. Our Mac and iOS apps will help you organize everything.
+      </span>
+    </div>
+  );
+};
+
 export default function Home() {
   return (
     <div className="font-baiJamjuree flex min-h-screen flex-col items-center justify-center">
       <main className="h-full w-full bg-white">
         <div className="flex h-[140em] w-full justify-center bg-[url('./images/bg-header-desktop.png')] bg-[0_0.2em] bg-no-repeat">
-          <div className="flex h-full w-[43em] flex-col items-center text-center">
+          <div className="flex h-full w-[44em] flex-col items-center text-center">
             <Image className="mt-[8.2em] h-fit" src={logo as string} alt="logo" />
             <span className="mt-[1.15em] text-[2.8rem] font-[600] tracking-[-0.005em] text-darkGrayishBlue">
               A history of everything you copy
@@ -45,6 +57,7 @@ export default function Home() {
               <CustomButton type={CustomButtonType.iOS} />
               <CustomButton type={CustomButtonType.mac} />
             </div>
+            <Article />
           </div>
         </div>
       </main>
