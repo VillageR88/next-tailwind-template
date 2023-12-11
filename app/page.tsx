@@ -69,7 +69,7 @@ const Article3 = ({
   optionalMt2?: string;
 }) => {
   return (
-    <div className="flex w-[22em] flex-col items-center text-center">
+    <div className="flex flex-col items-center text-center xl:w-[22em]">
       <Image className={`${optionalMt ? optionalMt : 'mt-[1.85em]'} h-fit`} src={image} alt="icon" />
       <span className={`${optionalMt2 ? optionalMt2 : 'mt-[1.85em]'} text-[1.45rem] font-[600] text-darkGrayishBlue`}>
         {header}
@@ -128,7 +128,7 @@ export default function Home() {
             main="We’ve got the tools to boost your productivity."
             mt={'mt-[2em]'}
           />
-          <div className="mt-[2.8em] flex gap-[1.8em]">
+          <div className="mt-[2.8em] grid gap-[1.8em] md:grid-cols-3">
             <Article3
               image={iconBlacklist as string}
               header="Create blacklists"
@@ -147,12 +147,14 @@ export default function Home() {
               main="Quick preview of all snippets on your Clipboard for easy access."
             />
           </div>
-          <div className="mt-[10em] flex flex-row items-center gap-[6em]">
-            <Image className="h-fit w-fit" src={logoGoogle} alt="Google logo" />
-            <Image className="h-fit w-fit" src={logoIBM} alt="IBM logo" />
-            <Image className="h-fit w-fit" src={logoMicrosoft} alt="Microsoft logo" />
-            <Image className="h-fit w-fit" src={logoHP} alt="Hewlett Packard logo" />
-            <Image className="h-fit w-fit" src={logoVG} alt="Vector Graphics logo" />
+          <div className="mt-[10em] flex flex-row items-center justify-around">
+            <div className="md:around grid items-center justify-center gap-[5em] xl:flex md:grid-cols-3 xl:grid-cols-5 xl:gap-[6em]">
+              <Image className="h-fit w-fit" src={logoGoogle} alt="Google logo" />
+              <Image className="h-fit w-fit" src={logoIBM} alt="IBM logo" />
+              <Image className="h-fit w-fit" src={logoMicrosoft} alt="Microsoft logo" />
+              <Image className="h-fit w-fit " src={logoHP} alt="Hewlett Packard logo" />
+              <Image className="h-fit w-fit" src={logoVG} alt="Vector Graphics logo" />
+            </div>
           </div>
           <Article1
             header="Clipboard for iOS and Mac OS"
