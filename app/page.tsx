@@ -4,6 +4,7 @@ import '@fontsource/bai-jamjuree/600.css';
 import Image from 'next/image';
 import logo from './images/logo.svg';
 import computer from './images/image-computer.png';
+import pad from './images/image-devices.png';
 
 enum CustomButtonType {
   iOS,
@@ -89,6 +90,7 @@ export default function Home() {
             main="Whether you’re on the go, or at your computer, you can access all your Clipboard 
   snippets in a few simple clicks."
           />
+          <Image className='h-fit mt-[6em]' src={pad} alt="image of an IPad" />
         </div>
       </main>
     </div>
