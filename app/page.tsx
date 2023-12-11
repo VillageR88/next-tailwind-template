@@ -5,6 +5,9 @@ import Image from 'next/image';
 import logo from './images/logo.svg';
 import computer from './images/image-computer.png';
 import pad from './images/image-devices.png';
+import iconBlacklist from './images/icon-blacklist.svg';
+import iconText from './images/icon-text.svg';
+import iconPreview from './images/icon-preview.svg';
 
 enum CustomButtonType {
   iOS,
@@ -41,6 +44,16 @@ const Article1 = ({ header, main, mt }: { header: string; main: string; mt?: str
 const Article2 = ({ header, main }: { header: string; main: string }) => {
   return (
     <div className="flex w-[22em] flex-col">
+      <span className="text-[1.45rem] font-[600] leading-[1.4em] text-darkGrayishBlue">{header}</span>
+      <span className="mt-[0.5em] text-[1rem] leading-[1.85em] text-grayishBlue">{main}</span>
+    </div>
+  );
+};
+
+const Article3 = ({ image, header, main }: { image: string; header: string; main: string }) => {
+  return (
+    <div className='flex flex-col items-center'>
+      <Image src={image} alt="icon" />
       <span className="text-[1.45rem] font-[600] leading-[1.4em] text-darkGrayishBlue">{header}</span>
       <span className="mt-[0.5em] text-[1rem] leading-[1.85em] text-grayishBlue">{main}</span>
     </div>
@@ -96,6 +109,13 @@ export default function Home() {
             main="We’ve got the tools to boost your productivity."
             mt={'mt-[2em]'}
           />
+          <div className="mt-[4em] flex">
+            <Article3
+              image={iconText as string}
+              header="Plain text snippets"
+              main="Remove unwanted formatting from copied text for a consistent look."
+            />
+          </div>
         </div>
       </main>
     </div>
