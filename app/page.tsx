@@ -250,15 +250,9 @@ export default function Home() {
             ))}
           </div>
           <div className="flex items-center gap-[1.5em]">
-            <button>
-              <IconFacebook />
-            </button>
-            <button>
-              <IconTwitter />
-            </button>
-            <button>
-              <IconInstagram />
-            </button>
+            {[<IconFacebook key={0} />, <IconTwitter key={1} />, <IconInstagram key={2} />].map((x, i) => (
+              <button key={i}>{x}</button>
+            ))}
           </div>
         </div>
       </footer>
