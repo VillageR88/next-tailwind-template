@@ -8,6 +8,18 @@ import logo from './images/logo.svg';
 import illustrationMockups from './images/illustration-mockups.svg';
 import illustrationGrowTogether from './images/illustration-grow-together.svg';
 
+const LongBox1 = ({ image, header, main }: { image: string; header: string; main: string }) => {
+  return (
+    <div className="flex h-[27.5em] w-full items-center justify-between rounded-[1em] shadow-[0_1px_15px_-5px_rgba(0,0,0,0.2)]">
+      <div className="ml-[7.55em] flex w-[30em] flex-col gap-[0.66em]">
+        <span className="font-poppins text-[1.75rem] font-[700] text-veryDarkCyan">{header}</span>
+        <span className="font-openSans text-[1.125rem] text-grayishBlue">{main}</span>
+      </div>
+      <Image className="mr-[2em] h-fit w-[33%]" src={image} alt="picture of people" />
+    </div>
+  );
+};
+
 export default function Home() {
   return (
     <main className="flex min-h-screen flex-col items-center justify-center">
@@ -38,20 +50,12 @@ export default function Home() {
       </div>
       <div className="flex h-[100em] w-full justify-center bg-white">
         <div className="flex h-full w-[85.5566%] flex-col pt-[10em]">
-          <div className="flex h-[27.5em] w-full items-center justify-between rounded-[1em] shadow-[0_1px_15px_-5px_rgba(0,0,0,0.2)]">
-            <div className="ml-[7.6em] flex w-[30em] gap-[0.7em] flex-col">
-              <span className="font-poppins text-[1.75rem] font-[700] text-veryDarkCyan">Grow Together</span>
-              <span className="text-[1.12rem] font-openSans text-grayishBlue">
-                Generate meaningful discussions with your audience and build a strong, loyal community. Think of the
-                insightful conversations you miss out on with a feedback form.
-              </span>
-            </div>
-            <Image
-              className="mr-[2em] h-fit w-[33%]"
-              src={illustrationGrowTogether as string}
-              alt="picture of people"
-            />
-          </div>
+          <LongBox1
+            image={illustrationGrowTogether as string}
+            header="Grow Together"
+            main="Generate meaningful discussions with your audience and build a strong, loyal community. Think of the
+          insightful conversations you miss out on with a feedback form."
+          />
         </div>
       </div>
     </main>
