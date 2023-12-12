@@ -10,6 +10,9 @@ import illustrationMockups from './images/illustration-mockups.svg';
 import illustrationGrowTogether from './images/illustration-grow-together.svg';
 import illustrationFlowingConversation from './images/illustration-flowing-conversation.svg';
 import illustrationYourUsers from './images/illustration-your-users.svg';
+import iconLocation from './images/icon-location.svg';
+import iconPhone from './images/icon-phone.svg';
+import iconEmail from './images/icon-email.svg';
 
 const LongBox1 = ({
   image,
@@ -63,7 +66,7 @@ export default function Home() {
                     Huddle re-imagines the way we build communities. You have a voice, but so does your audience. Create
                     connections with your users as you engage in genuine discussion.
                   </span>
-                  <button className="rounded-[2.5em] bg-[#FE52C0] px-[5.3em] py-[1.3em] font-openSans text-[0.85rem] font-[700] text-white">
+                  <button className="rounded-[2.5em] bg-[#FE52C0] px-[5.3em] py-[1.3em] font-openSans text-[0.85rem] font-[700] text-veryPaleCyan">
                     Get Started For Free
                   </button>
                 </div>
@@ -110,13 +113,30 @@ export default function Home() {
           <span className="mt-[0.5em] flex font-poppins text-[1.99rem] font-[700] md:text-center">
             Ready To Build Your Community?
           </span>
-          <button className="rounded-[2.5em] bg-[#FE52C0] px-[5.4em] py-[1.35em] font-openSans text-[1.2rem] font-[700] text-white shadow-[0_8px_15px_-2px_rgba(0,0,0,0.2)]">
+          <button className="rounded-[2.5em] bg-[#FE52C0] px-[5.4em] py-[1.35em] font-openSans text-[1.2rem] font-[700] text-veryPaleCyan shadow-[0_8px_15px_-2px_rgba(0,0,0,0.2)]">
             Get Started For Free
           </button>
         </div>
-        <div className="mt-[6em] w-full pl-[7.6em]">
+        <div className="mt-[6em] w-full pl-[7.55em]">
           <div className="flex flex-col ">
-            <Image className="h-[2.35em] w-[14.9em]" src={logoWhite as string} alt="logo" />
+            <Image className="mb-[2.5em] h-[2.35em]" src={logoWhite as string} alt="logo" />
+            <div className="flex flex-col gap-[1.5em]">
+              <div className="flex w-[25em] flex-row items-start gap-[1.68em]">
+                <Image className="mt-[0.5em] h-fit" src={iconLocation as string} alt="location icon" />
+                <span className="font-openSans text-[1rem] text-veryPaleCyan">
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
+                  dolore magna aliqua
+                </span>
+              </div>
+              <div className="flex w-[25em] flex-row items-center gap-[1.2em]">
+                <Image className="ml-[0.15em] h-fit" src={iconPhone as string} alt="phone icon" />
+                <span className="font-openSans text-[1rem] text-veryPaleCyan">+1-543-123-4567</span>
+              </div>
+              <div className="flex w-[25em] flex-row items-center gap-[1.1em]">
+                <Image className="ml-[0.13em] h-fit" src={iconEmail as string} alt="email icon" />
+                <span className="font-openSans text-[1rem] text-veryPaleCyan">example@huddle.com</span>
+              </div>
+            </div>
           </div>
         </div>
       </footer>
