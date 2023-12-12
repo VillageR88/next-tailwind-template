@@ -7,15 +7,37 @@ import Image from 'next/image';
 import logo from './images/logo.svg';
 import illustrationMockups from './images/illustration-mockups.svg';
 import illustrationGrowTogether from './images/illustration-grow-together.svg';
+import illustrationFlowingConversation from './images/illustration-flowing-conversation.svg';
+import illustrationYourUsers from './images/illustration-your-users.svg';
 
-const LongBox1 = ({ image, header, main }: { image: string; header: string; main: string }) => {
+const LongBox1 = ({
+  image,
+  header,
+  main,
+  textWidth,
+  fit,
+  mr,
+  reversed,
+}: {
+  image: string;
+  header: string;
+  main: string;
+  textWidth: string;
+  fit: string;
+  mr: string;
+  reversed?: boolean;
+}) => {
   return (
-    <div className="flex h-[27.5em] w-full items-center justify-between rounded-[1em] shadow-[0_1px_15px_-5px_rgba(0,0,0,0.2)]">
-      <div className="ml-[7.55em] flex w-[30em] flex-col gap-[0.66em]">
+    <div
+      className={`${
+        reversed ? 'flex-row-reverse' : 'flex-row'
+      } flex h-[27.5em] w-full items-center justify-between rounded-[1em] shadow-[0_1px_15px_-5px_rgba(0,0,0,0.2)]`}
+    >
+      <div className={`${!reversed ? 'ml-[7.55em]' : 'mr-[2em]'} flex ${textWidth} flex-col gap-[0.66em]`}>
         <span className="font-poppins text-[1.75rem] font-[700] text-veryDarkCyan">{header}</span>
         <span className="font-openSans text-[1.125rem] text-grayishBlue">{main}</span>
       </div>
-      <Image className="mr-[2em] h-fit w-[33%]" src={image} alt="picture of people" />
+      <Image className={`${reversed && 'ml-[7.55em]'} ${mr} h-fit ${fit}`} src={image} alt="picture of people" />
     </div>
   );
 };
@@ -49,12 +71,34 @@ export default function Home() {
         </div>
       </div>
       <div className="flex h-[100em] w-full justify-center bg-white">
-        <div className="flex h-full w-[85.5566%] flex-col pt-[10em]">
+        <div className="flex h-full w-[85.5566%] flex-col gap-[2.5em] pt-[10em]">
           <LongBox1
             image={illustrationGrowTogether as string}
             header="Grow Together"
             main="Generate meaningful discussions with your audience and build a strong, loyal community. Think of the
           insightful conversations you miss out on with a feedback form."
+            textWidth="w-[30em]"
+            fit="w-[33%]"
+            mr="mr-[2em]"
+          />
+          <LongBox1
+            image={illustrationFlowingConversation as string}
+            header="Flowing Conversations"
+            main="You wouldn't paginate a conversation in real life, so why do it online? Our threads 
+            have just-in-time loading for a more natural flow."
+            textWidth="w-[31em]"
+            fit="w-[33.8%]"
+            mr="0"
+            reversed={true}
+          />
+          <LongBox1
+            image={illustrationYourUsers as string}
+            header="Your Users"
+            main="It takes no time at all to integrate Huddle with your app's authentication solution. 
+            This means, once signed in to your app, your users can start chatting immediately."
+            textWidth="w-[30em]"
+            fit="w-[34%]"
+            mr="mr-[1.5em]"
           />
         </div>
       </div>
