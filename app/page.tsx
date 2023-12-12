@@ -13,6 +13,9 @@ import logoIBM from './images/logo-ibm.png';
 import logoMicrosoft from './images/logo-microsoft.png';
 import logoHP from './images/logo-hp.png';
 import logoVG from './images/logo-vector-graphics.png';
+import iconFacebook from './images/icon-facebook.svg';
+import iconTwitter from './images/icon-twitter.svg';
+import iconInstagram from './images/icon-instagram.svg';
 
 enum CustomButtonType {
   iOS,
@@ -169,8 +172,20 @@ export default function Home() {
         </div>
       </main>
       <footer className="h-[9.38em] w-full bg-[#F5F6F8]">
-        <div className="ml-[10.5em] flex h-full w-full items-center">
-          <Image className="h-fit w-[3.4em]" src={logo as string} alt="logo" />
+        <div className="flex h-full w-full items-center justify-between pl-[10.3em] pr-[10.3em]">
+          <Image className="h-fit w-[3.4em] pb-[0.5em]" src={logo as string} alt="logo" />
+          <div className="grid grid-cols-3 gap-x-[4em] gap-y-[0.9em] pr-[9.5em] text-[1.1rem] text-darkGrayishBlue">
+            <button className="text-start tracking-wide hover:text-strongCyan">FAQs</button>
+            <button className="text-start tracking-wide hover:text-strongCyan">Privacy Policy</button>
+            <button className="text-start tracking-wide hover:text-strongCyan">Install Guide</button>
+            <button className="text-start tracking-wide hover:text-strongCyan">Contact Us</button>
+            <button className="text-start tracking-wide hover:text-strongCyan">Press Kit</button>
+          </div>
+          <div className="flex items-center gap-[1.5em]">
+            <Image src={iconFacebook as string} alt="Facebook logo" />
+            <Image src={iconTwitter as string} alt="Twitter logo" />
+            <Image src={iconInstagram as string} alt="Instagram logo" />
+          </div>
         </div>
       </footer>
     </div>
