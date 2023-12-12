@@ -5,6 +5,7 @@ import '@fontsource/open-sans/400.css';
 import '@fontsource/open-sans/700.css';
 import Image from 'next/image';
 import logo from './images/logo.svg';
+import logoWhite from './images/logoWhite.svg';
 import illustrationMockups from './images/illustration-mockups.svg';
 import illustrationGrowTogether from './images/illustration-grow-together.svg';
 import illustrationFlowingConversation from './images/illustration-flowing-conversation.svg';
@@ -105,11 +106,18 @@ export default function Home() {
         </div>
       </main>
       <footer className="flex h-[35em] w-full flex-col items-center bg-veryDarkCyan">
-        <div className="mt-[-11.5em] flex h-[17.5em] flex-col items-center justify-center gap-[2em] rounded-[1em] bg-white shadow-[0_1px_15px_-5px_rgba(0,0,0,0.2)] md:w-[80%] lg:w-[55.5%]">
-          <span className="font-poppins text-[1.99rem] mt-[0.3em] font-[700]">Ready To Build Your Community?</span>
-          <button className="rounded-[2.5em] bg-[#FE52C0] px-[5.3em] py-[1.3em] font-openSans text-[1.2rem] font-[700] text-white shadow-[0_8px_15px_-2px_rgba(0,0,0,0.2)]">
+        <div className="mt-[-11.5em] flex h-[17.5em] flex-col items-center justify-center gap-[2.2em] rounded-[1em] bg-white shadow-[0_1px_15px_-5px_rgba(0,0,0,0.2)] md:w-[40em] lg:w-[45em] lg:px-[2em] xl:w-[50em]">
+          <span className="mt-[0.5em] flex font-poppins text-[1.99rem] font-[700] md:text-center">
+            Ready To Build Your Community?
+          </span>
+          <button className="rounded-[2.5em] bg-[#FE52C0] px-[5.4em] py-[1.35em] font-openSans text-[1.2rem] font-[700] text-white shadow-[0_8px_15px_-2px_rgba(0,0,0,0.2)]">
             Get Started For Free
           </button>
+        </div>
+        <div className="mt-[6em] w-full pl-[7.6em]">
+          <div className="flex flex-col ">
+            <Image className="h-[2.35em] w-[14.9em]" src={logoWhite as string} alt="logo" />
+          </div>
         </div>
       </footer>
     </div>
