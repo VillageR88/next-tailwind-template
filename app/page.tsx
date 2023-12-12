@@ -256,7 +256,7 @@ export default function Home() {
           </div>
         </div>
       </main>
-      <footer className="flex h-[35em] w-full flex-col items-center bg-veryDarkCyan px-4 md:px-0">
+      <footer className="flex h-full w-full flex-col items-center bg-veryDarkCyan px-4 md:h-[35em] md:px-0">
         <div className="mt-[-10em] flex h-[15em] w-full flex-col items-center justify-center gap-[2.2em] rounded-[1em] bg-white text-center shadow-[0_1px_15px_-5px_rgba(0,0,0,0.2)] md:mt-[-11.5em] md:h-[17.5em] md:w-[40em] lg:w-[45em] lg:px-[2em] xl:w-[50em]">
           <span className="mt-[0.5em] flex font-poppins text-[1.12rem] font-[700] md:text-center md:text-[1.3rem] lg:text-[1.6rem] xl:text-[1.99rem]">
             Ready To Build Your Community?
@@ -265,7 +265,7 @@ export default function Home() {
             Get Started For Free
           </button>
         </div>
-        <div className="mt-[6em] flex w-full flex-row items-center justify-between md:px-[2em] lg:px-[4em] xl:px-0 xl:pl-[7.55em] xl:pr-[5em]">
+        <div className="mt-[6em] flex w-full flex-col items-center justify-between md:flex-row md:px-[2em] lg:px-[4em] xl:px-0 xl:pl-[7.55em] xl:pr-[5em]">
           <div className="flex flex-col ">
             <Image
               className="mb-[2.5em] h-[2.35em] w-[15em]"
@@ -275,24 +275,24 @@ export default function Home() {
               alt="logo"
             />
             <div className="flex flex-col gap-[1.5em]">
-              <div className="flex w-[25em] flex-row items-start gap-[1.68em]">
+              <div className="flex flex-row items-start gap-[1.68em] md:w-[25em]">
                 <Image className="mt-[0.5em] h-fit" src={iconLocation as string} alt="location icon" />
                 <span className="font-openSans text-[1rem] text-veryPaleCyan">
                   Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
                   dolore magna aliqua
                 </span>
               </div>
-              <div className="flex w-[25em] flex-row items-center gap-[1.2em]">
-                <Image className="ml-[0.15em] h-fit" src={iconPhone as string} alt="phone icon" />
+              <div className="flex flex-row items-center gap-[1.2em] md:w-[25em]">
+                <Image className="h-fit md:ml-[0.15em]" src={iconPhone as string} alt="phone icon" />
                 <span className="font-openSans text-[1rem] text-veryPaleCyan">+1-543-123-4567</span>
               </div>
-              <div className="flex w-[25em] flex-row items-center gap-[1.1em]">
-                <Image className="ml-[0.13em] h-fit" src={iconEmail as string} alt="email icon" />
+              <div className="flex flex-row items-center gap-[1.1em] md:w-[25em]">
+                <Image className="h-fit md:ml-[0.13em]" src={iconEmail as string} alt="email icon" />
                 <span className="font-openSans text-[1rem] text-veryPaleCyan">example@huddle.com</span>
               </div>
             </div>
           </div>
-          <div className="flex flex-col lg:flex-row lg:gap-[2em] xl:gap-[7em]">
+          <div className="flex w-full flex-col md:w-fit lg:flex-row lg:gap-[2em] xl:gap-[7em]">
             <div className="flex flex-col items-start gap-[1em] pt-[1em]">
               {['About Us', 'What We Do', 'FAQ'].map((x, i) => (
                 <button className="font-openSans text-[1.1rem] text-veryPaleCyan hover:underline" key={i}>
@@ -300,7 +300,7 @@ export default function Home() {
                 </button>
               ))}
             </div>
-            <div className="flex flex-col items-start gap-[1em] pt-[1em] lg:ml-[0.8em]">
+            <div className="flex w-full flex-col items-start gap-[1em] pt-[1em] md:w-fit lg:ml-[0.8em]">
               {['Career', 'Blog', 'Contact Us'].map((x, i) => (
                 <button className="font-openSans text-[1.1rem] text-veryPaleCyan hover:underline" key={i}>
                   {x}
@@ -308,7 +308,7 @@ export default function Home() {
               ))}
             </div>
           </div>
-          <div className="mt-[9.5em] flex h-full flex-col justify-between md:w-[10em] md:items-center lg:ml-[1em] lg:items-start xl:ml-[2.8em] xl:w-fit">
+          <div className="mt-[9.5em] flex h-full flex-col justify-between md:w-[10em] md:items-start lg:ml-[1em] lg:items-start xl:ml-[2.8em] xl:w-fit">
             <div className="flex flex-row gap-3">
               <IconFacebook />
               <IconTwitter />
