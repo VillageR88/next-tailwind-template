@@ -194,9 +194,9 @@ export default function Home() {
       <main className="h-full w-full">
         <div className="flex h-[45.06em] w-full bg-veryPaleCyan">
           <div className="h-full w-full bg-[url('./images/bg-hero-desktop.svg')] pb-[3em] pt-[3em] md:px-[2em] lg:px-[3em] xl:px-[5em]">
-            <div className=" flex items-center justify-between">
-              <Image className="h-[1.95em] w-[12.5em]" src={logo as string} alt="logo" />
-              <button className="h-[3.3em] w-[13.8em] rounded-[2em] bg-white font-openSans text-[0.9rem] font-[700] shadow-[0_4px_30px_-13px_rgba(0,0,0,0.3)] hover:text-[#8E98A0]">
+            <div className=" flex items-center justify-between px-4 md:px-0">
+              <Image className="h-[1.3em] w-[8em] md:h-[1.95em] md:w-[12.5em]" src={logo as string} alt="logo" />
+              <button className="h-[2.7em] w-[10em] rounded-[2em] bg-white font-openSans text-[0.9rem] font-[700] shadow-[0_4px_30px_-13px_rgba(0,0,0,0.3)] hover:text-[#8E98A0] md:h-[3.3em] md:w-[13.8em]">
                 Try It Free
               </button>
             </div>
@@ -296,7 +296,7 @@ export default function Home() {
                 </button>
               ))}
             </div>
-            <div className="lg:ml-[0.8em] flex flex-col items-start gap-[1em] pt-[1em]">
+            <div className="flex flex-col items-start gap-[1em] pt-[1em] lg:ml-[0.8em]">
               {['Career', 'Blog', 'Contact Us'].map((x, i) => (
                 <button className="font-openSans text-[1.1rem] text-veryPaleCyan hover:underline" key={i}>
                   {x}
@@ -304,7 +304,7 @@ export default function Home() {
               ))}
             </div>
           </div>
-          <div className="mt-[9.5em] flex h-full flex-col md:items-center lg:items-start xl:w-fit md:w-[10em] justify-between lg:ml-[1em] xl:ml-[2.8em]">
+          <div className="mt-[9.5em] flex h-full flex-col justify-between md:w-[10em] md:items-center lg:ml-[1em] lg:items-start xl:ml-[2.8em] xl:w-fit">
             <div className="flex flex-row gap-3">
               <IconFacebook />
               <IconTwitter />
