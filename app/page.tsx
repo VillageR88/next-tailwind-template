@@ -95,7 +95,7 @@ const CustomButton = ({ type }: { type: CustomButtonType }) => {
     <button
       className={`${
         type === CustomButtonType.iOS ? 'bg-[#2F9681] shadow-[#D5F7E9]' : 'bg-[#5964BE]'
-      } flex h-[3.5em] w-[14.15em] items-start rounded-[3em] shadow-xl hover:opacity-75`}
+      } flex h-[3.5em] w-full items-start rounded-[3em] shadow-xl hover:opacity-75 md:w-[14.15em]`}
     >
       <div
         className={`${
@@ -110,16 +110,18 @@ const CustomButton = ({ type }: { type: CustomButtonType }) => {
 
 const Article1 = ({ header, main, mt }: { header: string; main: string; mt?: string }) => {
   return (
-    <div className="flex flex-col text-center lg:w-[44em]">
-      <span className={`${mt ? mt : 'mt-[4.2em]'} text-[2.18rem] font-[600] text-darkGrayishBlue`}>{header}</span>
-      <span className="mt-[0.9em] text-[1.14rem] leading-[1.65em] text-grayishBlue">{main}</span>
+    <div className="flex flex-col text-center md:px-[2em] lg:w-[44em]">
+      <span className={`${mt ? mt : 'mt-[4.2em]'} text-[1.7rem] font-[600] text-darkGrayishBlue md:text-[2.18rem]`}>
+        {header}
+      </span>
+      <span className="mt-[0.9em] text-[1rem] leading-[1.65em] text-grayishBlue md:text-[1.14rem]">{main}</span>
     </div>
   );
 };
 
 const Article2 = ({ header, main }: { header: string; main: string }) => {
   return (
-    <div className="flex w-[22em] flex-col">
+    <div className="flex w-[22em] flex-col md:px-[2em]">
       <span className="text-[1.45rem] font-[600] leading-[1.4em] text-darkGrayishBlue">{header}</span>
       <span className="mt-[0.5em] text-[1rem] leading-[1.85em] text-grayishBlue">{main}</span>
     </div>
@@ -140,7 +142,7 @@ const Article3 = ({
   optionalMt2?: string;
 }) => {
   return (
-    <div className="flex flex-col items-center text-center xl:w-[22em]">
+    <div className="flex flex-col items-center text-center md:px-[2em] xl:w-[22em]  ">
       <Image className={`${optionalMt ? optionalMt : 'mt-[1.85em]'} h-fit`} src={image} alt="icon" />
       <span className={`${optionalMt2 ? optionalMt2 : 'mt-[1.85em]'} text-[1.45rem] font-[600] text-darkGrayishBlue`}>
         {header}
@@ -152,19 +154,19 @@ const Article3 = ({
 
 export default function Home() {
   return (
-    <div className="font-baiJamjuree flex min-h-screen flex-col items-center justify-center">
+    <div className="flex min-h-screen flex-col items-center justify-center font-baiJamjuree">
       <main className="h-full w-full bg-white pb-[9.4em]">
-        <div className="flex h-full w-full flex-col items-center justify-center bg-[url('./images/bg-header-desktop.png')] bg-[0_0.2em] bg-no-repeat">
-          <div className="flex h-full w-full flex-col items-center text-center lg:w-[44em]">
+        <div className="flex h-full w-full flex-col items-center justify-center bg-[url('./images/bg-header-mobile.png')] bg-contain bg-[0_0.2em] bg-no-repeat px-[2em] md:bg-[url('./images/bg-header-desktop.png')] md:px-0">
+          <div className="flex h-full w-full flex-col items-center text-center md:px-[2em] lg:w-[44em]">
             <Image className="mt-[8.2em] h-fit" src={logo as string} alt="logo" />
-            <span className="mt-[1.15em] text-[2.8rem] font-[600] tracking-[-0.005em] text-darkGrayishBlue">
+            <span className="mt-[1.15em] text-[2rem] font-[600] tracking-[-0.005em] text-darkGrayishBlue md:text-[2.8rem]">
               A history of everything you copy
             </span>
-            <span className="mt-[0.55em] text-[1.25rem] tracking-[0.008em] text-grayishBlue">
+            <span className="mt-[0.55em] text-[1rem] tracking-[0.008em] text-grayishBlue md:text-[1.25rem]">
               Clipboard allows you to track and organize everything you copy. Instantly access your clipboard on all
               your devices.
             </span>
-            <div className="mt-[3em] flex gap-[1em]">
+            <div className="mt-[3em] flex w-full flex-col gap-[1em] md:w-fit md:flex-row">
               <CustomButton type={CustomButtonType.iOS} />
               <CustomButton type={CustomButtonType.mac} />
             </div>
@@ -174,9 +176,9 @@ export default function Home() {
         all your devices. Our Mac and iOS apps will help you organize everything."
             />
           </div>
-          <div className="mt-[5em] flex w-full items-center md:gap-[2em] lg:gap-[4em] xl:gap-[6.9em]">
-            <Image className="ml-[-2em] h-fit md:w-[50%] xl:w-[52.25%]" src={computer} alt="computer image" />
-            <div className="mb-[4.4em] mt-[2.5em] flex flex-col justify-around md:gap-[1em] xl:gap-[3.3em]">
+          <div className="mt-[5em] flex w-full flex-col items-center md:flex-row md:gap-[2em] lg:gap-[4em] xl:gap-[6.9em]">
+            <Image className="h-fit md:ml-[-2em] md:w-[50%] xl:w-[52.25%]" src={computer} alt="computer image" />
+            <div className="mb-[4.4em] mt-[2.5em] flex flex-col justify-around gap-[3em] text-center md:gap-[1em] md:text-left xl:gap-[3.3em]">
               <Article2
                 header="Quick Search"
                 main="Easily search your snippets by content, category, web address, application, and more."
@@ -189,17 +191,17 @@ export default function Home() {
             </div>
           </div>
           <Article1
-            header="Access Clipboard anywhere"
+            header="Access Clipboard Anywhere"
             main="Whether you’re on the go, or at your computer, you can access all your Clipboard 
   snippets in a few simple clicks."
           />
-          <Image className="mt-[6em] h-fit" src={pad} alt="image of an IPad" />
+          <Image className="mt-[3em] h-fit pb-[2em] md:mt-[6em] md:pb-0" src={pad} alt="image of an IPad" />
           <Article1
             header="Supercharge your workflow"
             main="We’ve got the tools to boost your productivity."
             mt={'mt-[2em]'}
           />
-          <div className="mt-[2.8em] grid gap-[1.8em] md:grid-cols-3">
+          <div className="mt-[4em] grid gap-[1.8em] md:mt-[2.8em] md:grid-cols-3">
             <Article3
               image={iconBlacklist as string}
               header="Create blacklists"
@@ -219,37 +221,37 @@ export default function Home() {
             />
           </div>
           <div className="mt-[10em] flex flex-row items-center justify-around">
-            <div className="md:around grid items-center justify-center gap-[5em] md:grid-cols-3 xl:flex xl:grid-cols-5 xl:gap-[6em]">
-              <Image className="h-fit w-fit" src={logoGoogle} alt="Google logo" />
-              <Image className="h-fit w-fit" src={logoIBM} alt="IBM logo" />
-              <Image className="h-fit w-fit" src={logoMicrosoft} alt="Microsoft logo" />
-              <Image className="h-fit w-fit" src={logoHP} alt="Hewlett Packard logo" />
-              <Image className="h-fit w-fit" src={logoVG} alt="Vector Graphics logo" />
+            <div className="flex flex-col items-center justify-center gap-[5em] md:grid md:grid-cols-3 xl:flex xl:grid-cols-5 xl:flex-row xl:gap-[6em]">
+              <Image className="h-fit w-[85%] md:w-fit" src={logoGoogle} alt="Google logo" />
+              <Image className="h-fit w-[80%] md:w-fit" src={logoIBM} alt="IBM logo" />
+              <Image className="h-fit w-[80%] md:w-fit" src={logoMicrosoft} alt="Microsoft logo" />
+              <Image className="h-fit w-[70%] md:w-fit" src={logoHP} alt="Hewlett Packard logo" />
+              <Image className="h-fit w-[70%] md:w-fit" src={logoVG} alt="Vector Graphics logo" />
             </div>
           </div>
           <Article1
             header="Clipboard for iOS and Mac OS"
             main="Available for free on the App Store. Download for Mac or iOS, sync with iCloud 
             and you’re ready to start adding to your clipboard."
-            mt="mt-[4.45em]"
+            mt="md:mt-[4.45em] mt-[7em]"
           />
-          <div className="mt-[3em] flex gap-[1em]">
+          <div className="mt-[3em] flex w-full flex-col gap-[1em] md:w-fit md:flex-row">
             <CustomButton type={CustomButtonType.iOS} />
             <CustomButton type={CustomButtonType.mac} />
           </div>
         </div>
       </main>
-      <footer className="h-[9.38em] w-full bg-[#F5F6F8]">
-        <div className="flex h-full w-full items-center justify-between md:px-[2em] lg:px-[5em] xl:px-0 xl:pl-[10.3em] xl:pr-[10.3em]">
-          <Image className="h-fit w-[3.4em] pb-[0.5em]" src={logo as string} alt="logo" />
-          <div className="grid grid-cols-3 md:gap-x-[2em] lg:gap-x-[4em] gap-y-[0.9em] text-[1.1rem] text-darkGrayishBlue md:pr-[2em] lg:pr-[5em] xl:pr-[9.5em]">
+      <footer className="h-full w-full bg-[#F5F6F8] md:h-[9.38em]">
+        <div className="flex h-full w-full flex-col items-center justify-between gap-[3em] py-[4em] md:flex-row md:gap-0 md:px-[2em] md:py-0 lg:px-[5em] xl:px-0 xl:pl-[10.3em] xl:pr-[10.3em]">
+          <Image className="h-fit w-[3.4em] md:pb-[0.5em]" src={logo as string} alt="logo" />
+          <div className="flex grid-cols-3 flex-col gap-y-[0.9em] text-[1.1rem] text-darkGrayishBlue md:grid md:gap-x-[2em] md:pr-[2em] lg:gap-x-[4em] lg:pr-[5em] xl:pr-[9.5em]">
             {['FAQs', 'Privacy Policy', 'Install Guide', 'Contact Us', 'Press Kit'].map((x, i) => (
-              <button className="text-start tracking-wide hover:text-strongCyan" key={i}>
+              <button className="tracking-wide hover:text-strongCyan md:text-start" key={i}>
                 {x}
               </button>
             ))}
           </div>
-          <div className="flex items-center gap-[1.5em]">
+          <div className="flex items-center gap-[2.2em] md:gap-[1.5em]">
             {[<IconFacebook key={0} />, <IconTwitter key={1} />, <IconInstagram key={2} />].map((x, i) => (
               <button key={i}>{x}</button>
             ))}
