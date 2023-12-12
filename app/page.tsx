@@ -165,13 +165,25 @@ const LongBox1 = ({
     <div
       className={`${
         reversed ? 'flex-row-reverse' : 'flex-row'
-      } flex h-[27.5em] w-full items-center justify-between rounded-[1em] shadow-[0_1px_15px_-5px_rgba(0,0,0,0.2)]`}
+      } flex h-[27.5em] w-full items-center justify-between gap-6 rounded-[1em] shadow-[0_1px_15px_-5px_rgba(0,0,0,0.2)]`}
     >
-      <div className={`${!reversed ? 'ml-[7.55em]' : 'mr-[2em]'} flex ${textWidth} flex-col gap-[0.66em]`}>
-        <span className="font-poppins text-[1.75rem] font-[700] text-veryDarkCyan">{header}</span>
-        <span className="font-openSans text-[1.125rem] text-grayishBlue">{main}</span>
+      <div
+        className={`${
+          !reversed ? 'md:ml-[2em] lg:ml-[4em] xl:ml-[7.55em]' : 'mr-[2em]'
+        } flex ${textWidth} flex-col gap-[0.66em]`}
+      >
+        <span className="font-poppins font-[700] text-veryDarkCyan md:text-[1.25rem] lg:text-[1.5rem] xl:text-[1.75rem]">
+          {header}
+        </span>
+        <span className="font-openSans text-grayishBlue md:text-[0.9rem] lg:text-[1rem] xl:text-[1.125rem]">
+          {main}
+        </span>
       </div>
-      <Image className={`${reversed && 'ml-[7.55em]'} ${mr} h-fit ${fit}`} src={image} alt="picture of people" />
+      <Image
+        className={`${reversed && 'md:ml-[2em] lg:ml-[5em] xl:ml-[7.55em]'} ${mr} h-fit ${fit}`}
+        src={image}
+        alt="picture of people"
+      />
     </div>
   );
 };
@@ -181,7 +193,7 @@ export default function Home() {
     <div className="flex min-h-screen flex-col items-center justify-center">
       <main className="h-full w-full">
         <div className="flex h-[45.06em] w-full bg-veryPaleCyan">
-          <div className="h-full w-full bg-[url('./images/bg-hero-desktop.svg')] pb-[3em] pt-[3em] md:px-[5em]">
+          <div className="h-full w-full bg-[url('./images/bg-hero-desktop.svg')] pb-[3em] pt-[3em] md:px-[2em] lg:px-[3em] xl:px-[5em]">
             <div className=" flex items-center justify-between">
               <Image className="h-[1.95em] w-[12.5em]" src={logo as string} alt="logo" />
               <button className="h-[3.3em] w-[13.8em] rounded-[2em] bg-white font-openSans text-[0.9rem] font-[700] shadow-[0_4px_30px_-13px_rgba(0,0,0,0.3)] hover:text-[#8E98A0]">
@@ -190,9 +202,11 @@ export default function Home() {
             </div>
             <div className="flex h-full w-full items-center justify-between">
               <div className="mt-[0.9em] flex w-[32em] flex-col items-start gap-[1.7em]">
-                <span className="font-poppins text-[2.48rem] font-[600]">Build The Community Your Fans Will Love</span>
+                <span className="font-poppins font-[600] md:text-[1.8rem] lg:text-[2rem] xl:text-[2.48rem]">
+                  Build The Community Your Fans Will Love
+                </span>
                 <div className="flex flex-col items-start gap-[2em]">
-                  <span className="font-openSans text-[1.125rem]">
+                  <span className="font-openSans md:text-[0.95rem] lg:text-[1rem] xl:text-[1.125rem]">
                     Huddle re-imagines the way we build communities. You have a voice, but so does your audience. Create
                     connections with your users as you engage in genuine discussion.
                   </span>
@@ -212,7 +226,7 @@ export default function Home() {
               header="Grow Together"
               main="Generate meaningful discussions with your audience and build a strong, loyal community. Think of the
           insightful conversations you miss out on with a feedback form."
-              textWidth="w-[30em]"
+              textWidth="md:w-[25em] lg:w-[25em] xl:w-[30em]"
               fit="w-[33%]"
               mr="mr-[2em]"
             />
@@ -221,7 +235,7 @@ export default function Home() {
               header="Flowing Conversations"
               main="You wouldn't paginate a conversation in real life, so why do it online? Our threads 
             have just-in-time loading for a more natural flow."
-              textWidth="w-[31em]"
+              textWidth="md:w-[25em] lg:w-[25em] xl:w-[31em]"
               fit="w-[33.8%]"
               mr="0"
               reversed={true}
@@ -231,7 +245,7 @@ export default function Home() {
               header="Your Users"
               main="It takes no time at all to integrate Huddle with your app's authentication solution. 
             This means, once signed in to your app, your users can start chatting immediately."
-              textWidth="w-[30em]"
+              textWidth="md:w-[25em] lg:w-[25em] xl:w-[30em]"
               fit="w-[34%]"
               mr="mr-[1.5em]"
             />
@@ -240,10 +254,10 @@ export default function Home() {
       </main>
       <footer className="flex h-[35em] w-full flex-col items-center bg-veryDarkCyan">
         <div className="mt-[-11.5em] flex h-[17.5em] flex-col items-center justify-center gap-[2.2em] rounded-[1em] bg-white shadow-[0_1px_15px_-5px_rgba(0,0,0,0.2)] md:w-[40em] lg:w-[45em] lg:px-[2em] xl:w-[50em]">
-          <span className="mt-[0.5em] flex font-poppins text-[1.99rem] font-[700] md:text-center">
+          <span className="mt-[0.5em] flex font-poppins font-[700] md:text-center md:text-[1.3rem] lg:text-[1.6rem] xl:text-[1.99rem]">
             Ready To Build Your Community?
           </span>
-          <button className="rounded-[2.5em] bg-[#FE52C0] px-[5.4em] py-[1.35em] font-openSans text-[1.2rem] font-[700] text-veryPaleCyan shadow-[0_8px_15px_-2px_rgba(0,0,0,0.2)] hover:opacity-60">
+          <button className="lg:text-[1.1rem] rounded-[2.5em] bg-[#FE52C0] px-[5.4em] py-[1.35em] font-openSans font-[700] text-veryPaleCyan shadow-[0_8px_15px_-2px_rgba(0,0,0,0.2)] hover:opacity-60 md:text-[0.9rem] xl:text-[1.2rem]">
             Get Started For Free
           </button>
         </div>
