@@ -11,12 +11,15 @@ const config: Config = {
       fontFamily: {
         sans: ['var(--font-sans)'],
         mono: ['var(--font-mono)'],
+        poppins: 'Poppins',
+        openSans: 'Open Sans',
       },
       colors: {
-        // Slate
-        // 'accent-brand-800': '#1e293b',
-        // 'accent-brand-700': '#334155',
-        // 'accent-brand-600': '#475569',
+        pink: 'hsl(322, 100%, 66%)',
+        //### Neutral
+        veryPaleCyan: 'hsl(193, 100%, 96%)',
+        veryDarkCyan: 'hsl(192, 100%, 9%)',
+        grayishBlue: 'hsl(208, 11%, 55%)',
       },
     },
   },
