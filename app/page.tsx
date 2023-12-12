@@ -253,15 +253,15 @@ export default function Home() {
         </div>
       </main>
       <footer className="flex h-[35em] w-full flex-col items-center bg-veryDarkCyan">
-        <div className="mt-[-11.5em] flex h-[17.5em] flex-col items-center justify-center gap-[2.2em] rounded-[1em] bg-white shadow-[0_1px_15px_-5px_rgba(0,0,0,0.2)] md:w-[40em] lg:w-[45em] lg:px-[2em] xl:w-[50em]">
+        <div className="mt-[-11.5em] flex h-[17.5em] w-full flex-col items-center justify-center gap-[2.2em] rounded-[1em] bg-white shadow-[0_1px_15px_-5px_rgba(0,0,0,0.2)] md:w-[40em] lg:w-[45em] lg:px-[2em] xl:w-[50em]">
           <span className="mt-[0.5em] flex font-poppins font-[700] md:text-center md:text-[1.3rem] lg:text-[1.6rem] xl:text-[1.99rem]">
             Ready To Build Your Community?
           </span>
-          <button className="lg:text-[1.1rem] rounded-[2.5em] bg-[#FE52C0] px-[5.4em] py-[1.35em] font-openSans font-[700] text-veryPaleCyan shadow-[0_8px_15px_-2px_rgba(0,0,0,0.2)] hover:opacity-60 md:text-[0.9rem] xl:text-[1.2rem]">
+          <button className="rounded-[2.5em] bg-[#FE52C0] px-[5.4em] py-[1.35em] font-openSans font-[700] text-veryPaleCyan shadow-[0_8px_15px_-2px_rgba(0,0,0,0.2)] hover:opacity-60 md:text-[0.9rem] lg:text-[1.1rem] xl:text-[1.2rem]">
             Get Started For Free
           </button>
         </div>
-        <div className="mt-[6em] flex w-full flex-row items-center justify-between pl-[7.55em] pr-[5em]">
+        <div className="mt-[6em] flex w-full flex-row items-center justify-between md:px-[2em] lg:px-[4em] xl:px-0 xl:pl-[7.55em] xl:pr-[5em]">
           <div className="flex flex-col ">
             <Image
               className="mb-[2.5em] h-[2.35em] w-[15em]"
@@ -288,22 +288,24 @@ export default function Home() {
               </div>
             </div>
           </div>
-          <div className="flex flex-col items-start gap-[1em] pt-[1em]">
-            {['About Us', 'What We Do', 'FAQ'].map((x, i) => (
-              <button className="font-openSans text-[1.1rem] text-veryPaleCyan hover:underline" key={i}>
-                {x}
-              </button>
-            ))}
+          <div className="flex flex-col lg:flex-row lg:gap-[2em] xl:gap-[7em]">
+            <div className="flex flex-col items-start gap-[1em] pt-[1em]">
+              {['About Us', 'What We Do', 'FAQ'].map((x, i) => (
+                <button className="font-openSans text-[1.1rem] text-veryPaleCyan hover:underline" key={i}>
+                  {x}
+                </button>
+              ))}
+            </div>
+            <div className="lg:ml-[0.8em] flex flex-col items-start gap-[1em] pt-[1em]">
+              {['Career', 'Blog', 'Contact Us'].map((x, i) => (
+                <button className="font-openSans text-[1.1rem] text-veryPaleCyan hover:underline" key={i}>
+                  {x}
+                </button>
+              ))}
+            </div>
           </div>
-          <div className="ml-[0.8em] flex flex-col items-start gap-[1em] pt-[1em]">
-            {['Career', 'Blog', 'Contact Us'].map((x, i) => (
-              <button className="font-openSans text-[1.1rem] text-veryPaleCyan hover:underline" key={i}>
-                {x}
-              </button>
-            ))}
-          </div>
-          <div className="ml-[2.8em] mt-[9.5em]  flex h-full flex-col items-start justify-between">
-            <div className=" flex flex-row gap-3">
+          <div className="mt-[9.5em] flex h-full flex-col md:items-center lg:items-start xl:w-fit md:w-[10em] justify-between lg:ml-[1em] xl:ml-[2.8em]">
+            <div className="flex flex-row gap-3">
               <IconFacebook />
               <IconTwitter />
               <IconInstagram />
