@@ -200,7 +200,7 @@ export default function Home() {
                 Try It Free
               </button>
             </div>
-            <div className="flex h-full w-full flex-col items-center justify-between md:flex-row">
+            <div className="flex h-full w-full flex-col items-center justify-between md:flex-row md:gap-6">
               <div className="mt-[0.9em] flex flex-col items-center gap-[1.7em] pb-14 text-center md:w-[32em] md:items-start md:pb-0 md:text-left">
                 <span className="font-poppins text-[1.8rem] font-[600] md:text-[1.8rem] lg:text-[2rem] xl:text-[2.48rem]">
                   Build The Community Your Fans Will Love
@@ -277,7 +277,7 @@ export default function Home() {
             <div className="flex flex-col gap-[1.5em]">
               <div className="flex flex-row items-start gap-[1.68em] md:w-[25em]">
                 <Image className="mt-[0.5em] h-fit" src={iconLocation as string} alt="location icon" />
-                <span className="font-openSans text-[1rem] text-veryPaleCyan">
+                <span className="font-openSans text-[1.1rem] text-veryPaleCyan md:text-[1rem]">
                   Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
                   dolore magna aliqua
                 </span>
@@ -292,15 +292,15 @@ export default function Home() {
               </div>
             </div>
           </div>
-          <div className="flex w-full flex-col md:w-fit lg:flex-row lg:gap-[2em] xl:gap-[7em]">
-            <div className="flex flex-col items-start gap-[1em] pt-[1em]">
+          <div className="flex w-full flex-col pt-14 md:w-fit md:pt-0 lg:flex-row lg:gap-[2em] xl:gap-[7em]">
+            <div className="flex flex-col items-start gap-[1.5em] pt-[1em] md:gap-[1em]">
               {['About Us', 'What We Do', 'FAQ'].map((x, i) => (
                 <button className="font-openSans text-[1.1rem] text-veryPaleCyan hover:underline" key={i}>
                   {x}
                 </button>
               ))}
             </div>
-            <div className="flex w-full flex-col items-start gap-[1em] pt-[1em] md:w-fit lg:ml-[0.8em]">
+            <div className="flex w-full flex-col items-start gap-[1.5em] pt-[1.5em] md:w-fit md:gap-[1em] md:pt-[1em] lg:ml-[0.8em]">
               {['Career', 'Blog', 'Contact Us'].map((x, i) => (
                 <button className="font-openSans text-[1.1rem] text-veryPaleCyan hover:underline" key={i}>
                   {x}
@@ -308,13 +308,13 @@ export default function Home() {
               ))}
             </div>
           </div>
-          <div className="mt-[9.5em] flex h-full flex-col justify-between md:w-[10em] md:items-start lg:ml-[1em] lg:items-start xl:ml-[2.8em] xl:w-fit">
-            <div className="flex flex-row gap-3">
+          <div className="mt-[5em] flex h-full flex-col justify-between gap-8 md:mt-[9.5em] md:w-[10em] md:items-start md:gap-0 lg:ml-[1em] lg:items-start xl:ml-[2.8em] xl:w-fit">
+            <div className="flex scale-150 flex-row justify-center gap-3 md:scale-100">
               <IconFacebook />
               <IconTwitter />
               <IconInstagram />
             </div>
-            <span className="pb-[1.5em] font-poppins text-[0.75rem] text-veryPaleCyan">
+            <span className="pb-[4em] font-poppins text-[0.75rem] text-veryPaleCyan md:pb-[1.5em]">
               &copy; Copyright 2018 Huddle. All rights reserved.
             </span>
           </div>
