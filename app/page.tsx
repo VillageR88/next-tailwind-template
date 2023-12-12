@@ -165,17 +165,17 @@ const LongBox1 = ({
     <div
       className={`${
         reversed ? 'flex-col-reverse md:flex-row-reverse' : 'flex-col-reverse md:flex-row'
-      } flex h-full w-full items-center justify-between gap-6 rounded-[1em] shadow-[0_1px_15px_-5px_rgba(0,0,0,0.2)] md:h-[27.5em]`}
+      } flex h-full w-full items-center justify-between gap-16 rounded-[1em] px-6 py-10 shadow-[0_1px_15px_-5px_rgba(0,0,0,0.2)] md:h-[27.5em] md:gap-6 md:px-0 md:py-0`}
     >
       <div
         className={`${
           !reversed ? 'md:ml-[2em] lg:ml-[4em] xl:ml-[7.55em]' : 'md:mr-[2em]'
-        } flex ${textWidth} flex-col gap-[0.66em]`}
+        } flex ${textWidth} flex-col items-center gap-[0.66em] text-center md:items-start md:text-start`}
       >
-        <span className="font-poppins font-[700] text-veryDarkCyan md:text-[1.25rem] lg:text-[1.5rem] xl:text-[1.75rem]">
+        <span className="font-poppins text-[1.4rem] font-[700] text-veryDarkCyan md:text-[1.25rem] lg:text-[1.5rem] xl:text-[1.75rem]">
           {header}
         </span>
-        <span className="font-openSans text-grayishBlue md:text-[0.9rem] lg:text-[1rem] xl:text-[1.125rem]">
+        <span className="font-openSans text-[1.1rem] text-grayishBlue md:text-[0.9rem] lg:text-[1rem] xl:text-[1.125rem]">
           {main}
         </span>
       </div>
@@ -193,15 +193,15 @@ export default function Home() {
     <div className="flex min-h-screen flex-col items-center justify-center">
       <main className="h-full w-full">
         <div className="flex w-full flex-row bg-veryPaleCyan md:h-[45.06em]">
-          <div className="h-full w-full bg-[url('./images/bg-hero-mobile.svg')] md:bg-[url('./images/bg-hero-desktop.svg')] pb-[3em] pt-[3em] md:px-[2em] lg:px-[3em] xl:px-[5em]">
-            <div className=" flex items-center justify-between px-4 md:px-0">
+          <div className="h-full w-full bg-[url('./images/bg-hero-mobile.svg')] px-6 pb-[3em] pt-[2em] md:bg-[url('./images/bg-hero-desktop.svg')] md:px-[2em] md:pt-[3em] lg:px-[3em] xl:px-[5em]">
+            <div className=" flex items-center justify-between pb-16 md:px-0 md:pb-0">
               <Image className="h-[1.3em] w-[8em] md:h-[1.95em] md:w-[12.5em]" src={logo as string} alt="logo" />
               <button className="h-[2.7em] w-[10em] rounded-[2em] bg-white font-openSans text-[0.9rem] font-[700] shadow-[0_4px_30px_-13px_rgba(0,0,0,0.3)] hover:text-[#8E98A0] md:h-[3.3em] md:w-[13.8em]">
                 Try It Free
               </button>
             </div>
             <div className="flex h-full w-full flex-col items-center justify-between md:flex-row">
-              <div className="mt-[0.9em] flex flex-col items-center gap-[1.7em] text-center md:w-[32em] md:items-start md:text-left">
+              <div className="mt-[0.9em] flex flex-col items-center gap-[1.7em] pb-14 text-center md:w-[32em] md:items-start md:pb-0 md:text-left">
                 <span className="font-poppins text-[1.8rem] font-[600] md:text-[1.8rem] lg:text-[2rem] xl:text-[2.48rem]">
                   Build The Community Your Fans Will Love
                 </span>
@@ -224,7 +224,7 @@ export default function Home() {
           </div>
         </div>
         <div className="flex h-full w-full justify-center bg-white pb-[21.4em]">
-          <div className="flex h-full w-[85.5566%] flex-col gap-[2.5em] pt-[10em]">
+          <div className="flex h-full w-[85.5566%] flex-col gap-[2.5em] pt-[6em] md:pt-[10em]">
             <LongBox1
               image={illustrationGrowTogether as string}
               header="Grow Together"
