@@ -165,11 +165,11 @@ const LongBox1 = ({
     <div
       className={`${
         reversed ? 'flex-col-reverse md:flex-row-reverse' : 'flex-col-reverse md:flex-row'
-      } flex h-[27.5em] w-full items-center justify-between gap-6 rounded-[1em] shadow-[0_1px_15px_-5px_rgba(0,0,0,0.2)]`}
+      } flex h-full w-full items-center justify-between gap-6 rounded-[1em] shadow-[0_1px_15px_-5px_rgba(0,0,0,0.2)] md:h-[27.5em]`}
     >
       <div
         className={`${
-          !reversed ? 'md:ml-[2em] lg:ml-[4em] xl:ml-[7.55em]' : 'mr-[2em]'
+          !reversed ? 'md:ml-[2em] lg:ml-[4em] xl:ml-[7.55em]' : 'md:mr-[2em]'
         } flex ${textWidth} flex-col gap-[0.66em]`}
       >
         <span className="font-poppins font-[700] text-veryDarkCyan md:text-[1.25rem] lg:text-[1.5rem] xl:text-[1.75rem]">
@@ -180,7 +180,7 @@ const LongBox1 = ({
         </span>
       </div>
       <Image
-        className={`${reversed && 'md:ml-[2em] lg:ml-[5em] xl:ml-[7.55em]'} ${mr} h-fit ${fit}`}
+        className={`${reversed && 'md:ml-[2em] lg:ml-[5em] xl:ml-[7.55em]'} ${mr} h-fit ${fit} w-fit md:w-[33%]`}
         src={image}
         alt="picture of people"
       />
@@ -192,8 +192,8 @@ export default function Home() {
   return (
     <div className="flex min-h-screen flex-col items-center justify-center">
       <main className="h-full w-full">
-        <div className="flex h-[45.06em] w-full flex-row bg-veryPaleCyan">
-          <div className="h-full w-full bg-[url('./images/bg-hero-desktop.svg')] pb-[3em] pt-[3em] md:px-[2em] lg:px-[3em] xl:px-[5em]">
+        <div className="flex w-full flex-row bg-veryPaleCyan md:h-[45.06em]">
+          <div className="h-full w-full bg-[url('./images/bg-hero-mobile.svg')] md:bg-[url('./images/bg-hero-desktop.svg')] pb-[3em] pt-[3em] md:px-[2em] lg:px-[3em] xl:px-[5em]">
             <div className=" flex items-center justify-between px-4 md:px-0">
               <Image className="h-[1.3em] w-[8em] md:h-[1.95em] md:w-[12.5em]" src={logo as string} alt="logo" />
               <button className="h-[2.7em] w-[10em] rounded-[2em] bg-white font-openSans text-[0.9rem] font-[700] shadow-[0_4px_30px_-13px_rgba(0,0,0,0.3)] hover:text-[#8E98A0] md:h-[3.3em] md:w-[13.8em]">
@@ -232,7 +232,7 @@ export default function Home() {
           insightful conversations you miss out on with a feedback form."
               textWidth="md:w-[25em] lg:w-[25em] xl:w-[30em]"
               fit="w-[33%]"
-              mr="mr-[2em]"
+              mr="md:mr-[2em]"
             />
             <LongBox1
               image={illustrationFlowingConversation as string}
@@ -241,7 +241,7 @@ export default function Home() {
             have just-in-time loading for a more natural flow."
               textWidth="md:w-[25em] lg:w-[25em] xl:w-[31em]"
               fit="w-[33.8%]"
-              mr="0"
+              mr="md:0"
               reversed={true}
             />
             <LongBox1
@@ -251,7 +251,7 @@ export default function Home() {
             This means, once signed in to your app, your users can start chatting immediately."
               textWidth="md:w-[25em] lg:w-[25em] xl:w-[30em]"
               fit="w-[34%]"
-              mr="mr-[1.5em]"
+              mr="md:mr-[1.5em]"
             />
           </div>
         </div>
