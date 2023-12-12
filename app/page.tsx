@@ -223,7 +223,7 @@ export default function Home() {
               <Image className="h-fit w-fit" src={logoGoogle} alt="Google logo" />
               <Image className="h-fit w-fit" src={logoIBM} alt="IBM logo" />
               <Image className="h-fit w-fit" src={logoMicrosoft} alt="Microsoft logo" />
-              <Image className="h-fit w-fit " src={logoHP} alt="Hewlett Packard logo" />
+              <Image className="h-fit w-fit" src={logoHP} alt="Hewlett Packard logo" />
               <Image className="h-fit w-fit" src={logoVG} alt="Vector Graphics logo" />
             </div>
           </div>
@@ -240,9 +240,9 @@ export default function Home() {
         </div>
       </main>
       <footer className="h-[9.38em] w-full bg-[#F5F6F8]">
-        <div className="flex h-full w-full items-center justify-between pl-[10.3em] pr-[10.3em]">
+        <div className="flex h-full w-full items-center justify-between md:px-[2em] lg:px-[5em] xl:px-0 xl:pl-[10.3em] xl:pr-[10.3em]">
           <Image className="h-fit w-[3.4em] pb-[0.5em]" src={logo as string} alt="logo" />
-          <div className="grid grid-cols-3 gap-x-[4em] gap-y-[0.9em] pr-[9.5em] text-[1.1rem] text-darkGrayishBlue">
+          <div className="grid grid-cols-3 md:gap-x-[2em] lg:gap-x-[4em] gap-y-[0.9em] text-[1.1rem] text-darkGrayishBlue md:pr-[2em] lg:pr-[5em] xl:pr-[9.5em]">
             {['FAQs', 'Privacy Policy', 'Install Guide', 'Contact Us', 'Press Kit'].map((x, i) => (
               <button className="text-start tracking-wide hover:text-strongCyan" key={i}>
                 {x}
