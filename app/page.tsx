@@ -256,12 +256,12 @@ export default function Home() {
           </div>
         </div>
       </main>
-      <footer className="flex h-[35em] w-full flex-col items-center bg-veryDarkCyan">
-        <div className="mt-[-11.5em] flex h-[17.5em] w-full flex-col items-center justify-center gap-[2.2em] rounded-[1em] bg-white shadow-[0_1px_15px_-5px_rgba(0,0,0,0.2)] md:w-[40em] lg:w-[45em] lg:px-[2em] xl:w-[50em]">
-          <span className="mt-[0.5em] flex font-poppins font-[700] md:text-center md:text-[1.3rem] lg:text-[1.6rem] xl:text-[1.99rem]">
+      <footer className="flex h-[35em] w-full flex-col items-center bg-veryDarkCyan px-4 md:px-0">
+        <div className="mt-[-10em] flex h-[15em] w-full flex-col items-center justify-center gap-[2.2em] rounded-[1em] bg-white text-center shadow-[0_1px_15px_-5px_rgba(0,0,0,0.2)] md:mt-[-11.5em] md:h-[17.5em] md:w-[40em] lg:w-[45em] lg:px-[2em] xl:w-[50em]">
+          <span className="mt-[0.5em] flex font-poppins text-[1.12rem] font-[700] md:text-center md:text-[1.3rem] lg:text-[1.6rem] xl:text-[1.99rem]">
             Ready To Build Your Community?
           </span>
-          <button className="rounded-[2.5em] bg-[#FE52C0] px-[5.4em] py-[1.35em] font-openSans font-[700] text-veryPaleCyan shadow-[0_8px_15px_-2px_rgba(0,0,0,0.2)] hover:opacity-60 md:text-[0.9rem] lg:text-[1.1rem] xl:text-[1.2rem]">
+          <button className="rounded-[2.5em] bg-[#FE52C0] px-[3em] py-[1.35em] font-openSans font-[700] text-veryPaleCyan shadow-[0_8px_15px_-2px_rgba(0,0,0,0.2)] hover:opacity-60 md:px-[5.4em] md:text-[0.9rem] lg:text-[1.1rem] xl:text-[1.2rem]">
             Get Started For Free
           </button>
         </div>
