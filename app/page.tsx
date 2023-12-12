@@ -14,6 +14,8 @@ import iconLocation from './images/icon-location.svg';
 import iconPhone from './images/icon-phone.svg';
 import iconEmail from './images/icon-email.svg';
 
+const IconFacebook = () => {};
+
 const LongBox1 = ({
   image,
   header,
@@ -117,7 +119,7 @@ export default function Home() {
             Get Started For Free
           </button>
         </div>
-        <div className="mt-[6em] w-full pl-[7.55em]">
+        <div className="mt-[6em] flex w-full flex-row items-center pl-[7.55em]">
           <div className="flex flex-col ">
             <Image className="mb-[2.5em] h-[2.35em]" src={logoWhite as string} alt="logo" />
             <div className="flex flex-col gap-[1.5em]">
@@ -137,6 +139,20 @@ export default function Home() {
                 <span className="font-openSans text-[1rem] text-veryPaleCyan">example@huddle.com</span>
               </div>
             </div>
+          </div>
+          <div className="flex flex-col items-start gap-[1em]">
+            {['About Us', 'What We Do', 'FAQ'].map((x, i) => (
+              <button className="font-openSans text-[1.1rem] text-veryPaleCyan" key={i}>
+                {x}
+              </button>
+            ))}
+          </div>
+          <div className="flex flex-col items-start gap-[1em]">
+            {['Career', 'Blog', 'Contact Us'].map((x, i) => (
+              <button className="font-openSans text-[1.1rem] text-veryPaleCyan" key={i}>
+                {x}
+              </button>
+            ))}
           </div>
         </div>
       </footer>
