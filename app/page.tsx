@@ -104,7 +104,9 @@ export default function Home() {
           </div>
         </div>
       </main>
-      <footer className="h-[35em] w-full bg-veryDarkCyan"></footer>
+      <footer className="flex h-[35em] w-full flex-col items-center bg-veryDarkCyan">
+        <div className="h-[17.5em] md:w-[80%] mt-[-11.5em] rounded-[1em] lg:w-[55.5%] bg-white shadow-[0_1px_15px_-5px_rgba(0,0,0,0.2)]"></div>
+      </footer>
     </div>
   );
 }
