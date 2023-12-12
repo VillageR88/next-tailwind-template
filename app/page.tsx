@@ -243,11 +243,11 @@ export default function Home() {
         <div className="flex h-full w-full items-center justify-between pl-[10.3em] pr-[10.3em]">
           <Image className="h-fit w-[3.4em] pb-[0.5em]" src={logo as string} alt="logo" />
           <div className="grid grid-cols-3 gap-x-[4em] gap-y-[0.9em] pr-[9.5em] text-[1.1rem] text-darkGrayishBlue">
-            <button className="text-start tracking-wide hover:text-strongCyan">FAQs</button>
-            <button className="text-start tracking-wide hover:text-strongCyan">Privacy Policy</button>
-            <button className="text-start tracking-wide hover:text-strongCyan">Install Guide</button>
-            <button className="text-start tracking-wide hover:text-strongCyan">Contact Us</button>
-            <button className="text-start tracking-wide hover:text-strongCyan">Press Kit</button>
+            {['FAQs', 'Privacy Policy', 'Install Guide', 'Contact Us', 'Press Kit'].map((x, i) => (
+              <button className="text-start tracking-wide hover:text-strongCyan" key={i}>
+                {x}
+              </button>
+            ))}
           </div>
           <div className="flex items-center gap-[1.5em]">
             <button>
