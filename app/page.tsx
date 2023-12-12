@@ -105,7 +105,12 @@ export default function Home() {
         </div>
       </main>
       <footer className="flex h-[35em] w-full flex-col items-center bg-veryDarkCyan">
-        <div className="h-[17.5em] md:w-[80%] mt-[-11.5em] rounded-[1em] lg:w-[55.5%] bg-white shadow-[0_1px_15px_-5px_rgba(0,0,0,0.2)]"></div>
+        <div className="mt-[-11.5em] flex h-[17.5em] flex-col items-center justify-center gap-[2em] rounded-[1em] bg-white shadow-[0_1px_15px_-5px_rgba(0,0,0,0.2)] md:w-[80%] lg:w-[55.5%]">
+          <span className="font-poppins text-[1.99rem] mt-[0.3em] font-[700]">Ready To Build Your Community?</span>
+          <button className="rounded-[2.5em] bg-[#FE52C0] px-[5.3em] py-[1.3em] font-openSans text-[1.2rem] font-[700] text-white shadow-[0_8px_15px_-2px_rgba(0,0,0,0.2)]">
+            Get Started For Free
+          </button>
+        </div>
       </footer>
     </div>
   );
