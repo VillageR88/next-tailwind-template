@@ -16,6 +16,7 @@ import illustrationStayProductive from './images/illustration-stay-productive.pn
 import person1 from './images/profile-1.jpg';
 import person2 from './images/profile-2.jpg';
 import person3 from './images/profile-3.jpg';
+import iconLocation from './images/icon-location.svg';
 import { useState } from 'react';
 
 const Arrow = ({ alternate }: { alternate: boolean }) => {
@@ -272,6 +273,18 @@ export default function Home() {
               </div>
             </div>
           </form>
+        </div>
+        <div className="h-full w-full pl-[7.55em] pt-[12.55em]">
+          <Image className="h-fit" src={logo as string} alt="logo" />
+          <div className="mt-[2.5em] w-full">
+            <div className="flex flex-row gap-[1.65em]">
+              <Image className="h-fit" src={iconLocation as string} alt="Location" />
+              <span className="font-openSans mt-[-0.5em] w-[21em] text-[#BFC6CE]">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
+                dolore magna aliqua
+              </span>
+            </div>
+          </div>
         </div>
       </footer>
     </div>
