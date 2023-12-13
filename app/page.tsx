@@ -199,12 +199,20 @@ export default function Home() {
       </div>
       <footer className="bg-darkBlueFooter_background h-[32.2em] w-full">
         <div className="flex h-0 w-full justify-center">
-          <div className="mt-[-10em] flex h-[17.2em] w-[54em] flex-col text-center items-center justify-center rounded-[0.5em] bg-[#1C2230] shadow-[4px_5px_8px_3px_rgba(0,0,0,0.2)]">
-            <span className="font-raleway text-[2rem] font-[700] text-white">Get early access today</span>
-            <span className='text-[#BFC6CE] text-[0.9rem] font-openSans w-[45em]'>
-              It only takes a minute to sign up and our free starter tier is extremely generous. If you have any
-              questions, our support team would be happy to help you.
-            </span>
+          <div className="mt-[-10em] flex h-[17.2em] w-[54em] flex-col items-center justify-center gap-[2.2em] rounded-[0.5em] bg-[#1C2230] text-center shadow-[4px_5px_8px_3px_rgba(0,0,0,0.2)]">
+            <div className="flex flex-col gap-[1em]">
+              <span className="font-raleway text-[2rem] font-[700] text-white">Get early access today</span>
+              <span className="font-openSans w-[45em] text-[0.9rem] text-[#BFC6CE]">
+                It only takes a minute to sign up and our free starter tier is extremely generous. If you have any
+                questions, our support team would be happy to help you.
+              </span>
+            </div>
+            <div className="flex gap-[2em]">
+              <input type="text" className="rounded-[3em]" />
+              <button className="from-cyanInside_call_to_action_gradient font-raleway to-blueInside_call_to_action_gradient rounded-[2em] bg-gradient-to-r px-[2em] py-[0.8em] text-[0.9rem] font-[700] text-white">
+                Get Started For Free
+              </button>
+            </div>
           </div>
         </div>
       </footer>
