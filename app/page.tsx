@@ -119,7 +119,7 @@ export default function Home() {
             <Image className="h-fit" src={logo as string} alt="logo" />
             <div className="flex gap-[3.7em]">
               {['Features', 'Team', 'Sign In'].map((x, i) => (
-                <button className="font-raleway text-[0.97rem] text-[#BFC6CE]" key={i}>
+                <button className="font-raleway text-[0.97rem] text-[#BFC6CE] hover:text-white hover:underline" key={i}>
                   {x}
                 </button>
               ))}
@@ -135,7 +135,7 @@ export default function Home() {
                 Fylo stores all your most important files in one secure location. Access them wherever you need, share
                 and collaborate with friends family, and co-workers.
               </span>
-              <button className="from-cyanInside_call_to_action_gradient font-raleway to-blueInside_call_to_action_gradient mt-[2em] rounded-[2em] bg-gradient-to-r px-[5.95em] py-[1em] font-[700] text-white">
+              <button className="from-cyanInside_call_to_action_gradient font-raleway to-blueInside_call_to_action_gradient mt-[2em] rounded-[2em] bg-gradient-to-r px-[5.95em] py-[1em] font-[700] text-white hover:from-[#8CDAE4] hover:to-[#8CDAE4]">
                 Get Started
               </button>
             </div>
@@ -248,7 +248,7 @@ export default function Home() {
                 onClick={() => {
                   setShowMessage(true);
                 }}
-                className="from-cyanInside_call_to_action_gradient font-raleway to-blueInside_call_to_action_gradient rounded-[2em] bg-gradient-to-r px-[2.1em] py-[0.9em] text-[0.9rem] font-[700] text-white"
+                className="from-cyanInside_call_to_action_gradient font-raleway to-blueInside_call_to_action_gradient rounded-[2em] bg-gradient-to-r px-[2.1em] py-[0.9em] text-[0.9rem] font-[700] text-white hover:from-[#8CDAE4] hover:to-[#8CDAE4]"
               >
                 Get Started For Free
               </button>
