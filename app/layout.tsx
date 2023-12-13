@@ -29,8 +29,14 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png"></link>
         <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"></link>
       </head>
-      <body className={[fontSans, fontMono].map((font) => font.variable).join(' ')}>
-        <div className="ml-auto mr-auto max-w-7xl overflow-x-clip font-sans">{children}</div>
+      <body
+        className={[fontSans, fontMono]
+          .map((font) => font.variable)
+          .join(' ')
+          .concat(' ')
+          .concat('bg-[#0E0E0E]')}
+      >
+        <div className="ml-auto mr-auto max-w-[90em] overflow-x-clip font-sans">{children}</div>
       </body>
     </html>
   );

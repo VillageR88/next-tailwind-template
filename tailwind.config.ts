@@ -11,12 +11,21 @@ const config: Config = {
       fontFamily: {
         sans: ['var(--font-sans)'],
         mono: ['var(--font-mono)'],
+        raleway: 'Raleway',
+        openSans: 'Open Sans',
       },
       colors: {
-        // Slate
-        // 'accent-brand-800': '#1e293b',
-        // 'accent-brand-700': '#334155',
-        // 'accent-brand-600': '#475569',
+        //### Primary
+        darkBlueIntro_email_sign_up_background: 'hsl(217, 28%, 15%)',
+        darkBlueMain_background: 'hsl(218, 28%, 13%)',
+        darkBlueFooter_background: 'hsl(216, 53%, 9%)',
+        darkBlueTestimonials_background: 'hsl(219, 30%, 18%)',
+        //### Accent
+        cyanInside_call_to_action_gradient: 'hsl(176, 68%, 64%)',
+        blueInside_call_to_action_gradient: 'hsl(198, 60%, 50%)',
+        lightRedError: 'hsl(0, 100%, 63%)',
+        //### Neutral
+        white: 'hsl(0, 0%, 100%)',
       },
     },
   },
