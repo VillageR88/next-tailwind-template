@@ -1,3 +1,4 @@
+'use client';
 import '@fontsource/raleway';
 import '@fontsource/raleway/400.css';
 import '@fontsource/raleway/700.css';
@@ -15,6 +16,7 @@ import illustrationStayProductive from './images/illustration-stay-productive.pn
 import person1 from './images/profile-1.jpg';
 import person2 from './images/profile-2.jpg';
 import person3 from './images/profile-3.jpg';
+import { useState } from 'react';
 
 const Arrow = () => {
   return (
@@ -94,6 +96,20 @@ const SmallBox = ({ image, name }: { image: StaticImageData; name: string }) => 
 };
 
 export default function Home() {
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  const [message, setMessage] = useState<string>('');
+  const [messageColor, setMessageColor] = useState<string>('');
+
+  const testEmail = (value: string) => {
+    if (emailRegex.test(value)) {
+      setMessage('Thank you!');
+      setMessageColor('text-green-400');
+    } else {
+      setMessage('Please enter a valid email address');
+      setMessageColor('text-lightRedError');
+    }
+  };
+
   return (
     <div className="flex min-h-screen flex-col items-center justify-center">
       <div className="h-full w-full bg-[#1C2230]">
@@ -212,12 +228,17 @@ export default function Home() {
                 type="text"
                 className="font-openSans h-[3em] w-[30em] rounded-[3em] pl-[2.2em] pr-[1em]"
                 placeholder="email@example.com"
+                onChange={(value) => {
+                  testEmail(value.target.value);
+                }}
               />
               <button className="from-cyanInside_call_to_action_gradient font-raleway to-blueInside_call_to_action_gradient rounded-[2em] bg-gradient-to-r px-[2.1em] py-[0.9em] text-[0.9rem] font-[700] text-white">
                 Get Started For Free
               </button>
-              <div className="text-lightRedError font-openSans absolute mt-[4.7em] h-0 pl-[3em] text-[0.75rem] font-[700]">
-                Please enter a valid email address
+              <div
+                className={`${messageColor} font-openSans absolute mt-[4.7em] h-0 pl-[3em] text-[0.75rem] font-[700]`}
+              >
+                {message}
               </div>
             </div>
           </div>
