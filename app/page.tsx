@@ -70,6 +70,10 @@ const Article1 = ({
   );
 };
 
+const SmallBox = ({ image }: { image: string }) => {
+  return <div className="h-[12em] w-[22em] bg-[#21293C] rounded-[0.2em]"></div>;
+};
+
 export default function Home() {
   return (
     <div className="flex min-h-screen flex-col items-center justify-center">
@@ -101,7 +105,7 @@ export default function Home() {
             </div>
           </div>
         </div>
-        <div className="mt-[-2em] h-[81em] w-full bg-[#181E2A]">
+        <div className="mt-[-2em] h-full w-full bg-[#181E2A]">
           <div className="flex h-full w-full flex-col items-center">
             <div className="grid grid-cols-2 gap-x-[7.5em] gap-y-20">
               <Article1
@@ -161,6 +165,15 @@ export default function Home() {
                   <div className="mt-[0.2em] h-[1px] w-full bg-[#7BB1B3]"></div>
                 </div>
               </div>
+            </div>
+          </div>
+        </div>
+        <div className="h-[30em] w-full bg-[#181E2A] pt-[9em]">
+          <div className="mx-[8em] h-full w-[full] bg-[url('./images/bg-quotes.png')] bg-no-repeat">
+            <div className="flex h-full w-full justify-between px-[0.6em] pt-[2.3em]">
+              <SmallBox />
+              <SmallBox />
+              <SmallBox />
             </div>
           </div>
         </div>
