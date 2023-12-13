@@ -409,41 +409,45 @@ export default function Home() {
             </div>
           </form>
         </div>
-        <div className="h-full w-full pl-[7.55em] pt-[12.55em]">
-          <Image className="h-fit" src={logo as string} alt="logo" />
-          <div className="mt-[2.5em] flex w-full flex-row">
-            <div className="flex flex-row gap-[1.65em]">
-              <Image className="h-fit" src={iconLocation as string} alt="Location" />
-              <span className="font-openSans mt-[-0.5em] w-[21em] text-[#BFC6CE]">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
-                dolore magna aliqua
-              </span>
-            </div>
-            <div className="mt-[-0.4em] flex flex-col gap-[1.2em] pl-[5.5em]">
-              <div className="flex flex-row items-center gap-[1.6em]">
-                <Image className="h-fit" src={iconPhone as string} alt="Phone" />
-                <span className="font-openSans text-[0.9rem] text-[#BFC6CE]">+1-543-123-4567</span>
+        <div className="h-full w-full pt-[12.55em]">
+          <Image className="h-fit md:ml-[2em] lg:ml-[4em] xl:ml-[7.55em]" src={logo as string} alt="logo" />
+          <div className="mt-[2.5em] flex w-full flex-row justify-between md:px-[2em] lg:px-[4em] xl:px-0 xl:pl-[7.55em] xl:pr-[5em]">
+            <div className="flex flex-col justify-between md:gap-[1.7em] xl:w-[51%] xl:flex-row xl:gap-[3em] ">
+              <div className="flex flex-row gap-[1.65em]">
+                <Image className="h-fit" src={iconLocation as string} alt="Location" />
+                <span className="font-openSans mt-[-0.5em] w-[21em] text-[#BFC6CE]">
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
+                  dolore magna aliqua
+                </span>
               </div>
-              <div className="flex flex-row items-center gap-[1.6em]">
-                <Image className="h-fit" src={iconEmail as string} alt="Phone" />
-                <span className="font-openSans text-[0.9rem] text-[#BFC6CE]">example@fylo.com</span>
+              <div className="mt-[-0.4em] flex flex-col gap-[1.2em] xl:ml-[-2em]">
+                <div className="flex flex-row items-center gap-[1.6em]">
+                  <Image className="h-fit" src={iconPhone as string} alt="Phone" />
+                  <span className="font-openSans text-[0.9rem] text-[#BFC6CE]">+1-543-123-4567</span>
+                </div>
+                <div className="flex flex-row items-center gap-[1.6em]">
+                  <Image className="h-fit" src={iconEmail as string} alt="Phone" />
+                  <span className="font-openSans text-[0.9rem] text-[#BFC6CE]">example@fylo.com</span>
+                </div>
               </div>
             </div>
-            <div className="mt-[-0.55em] flex flex-col items-start gap-[0.85em] pl-[8.7em] text-[#BFC6CE] duration-300">
-              {['About Us', 'Jobs', 'Press', 'Blog'].map((x, i) => (
-                <button key={i} className="font-openSans duration-300 hover:text-white">
-                  {x}
-                </button>
-              ))}
+            <div className="flex flex-row md:gap-[3em] lg:gap-[4em] xl:ml-[1em] xl:gap-[5em]">
+              <div className="mt-[-0.55em] flex flex-col items-start gap-[0.85em] text-[#BFC6CE] duration-300">
+                {['About Us', 'Jobs', 'Press', 'Blog'].map((x, i) => (
+                  <button key={i} className="font-openSans duration-300 hover:text-white">
+                    {x}
+                  </button>
+                ))}
+              </div>
+              <div className="mt-[-0.55em] flex flex-col items-start gap-[0.85em] text-[#BFC6CE] duration-300">
+                {['Contact Us', 'Terms', 'Privacy'].map((x, i) => (
+                  <button key={i} className="font-openSans duration-300 hover:text-white">
+                    {x}
+                  </button>
+                ))}
+              </div>
             </div>
-            <div className="mt-[-0.55em] flex flex-col items-start gap-[0.85em] pl-[5em] text-[#BFC6CE] duration-300">
-              {['Contact Us', 'Terms', 'Privacy'].map((x, i) => (
-                <button key={i} className="font-openSans duration-300 hover:text-white">
-                  {x}
-                </button>
-              ))}
-            </div>
-            <div className="mt-[-0.5em] flex h-fit flex-row gap-[0.65em] pl-[7em]">
+            <div className="mt-[-0.5em] flex h-fit flex-row gap-[0.65em]">
               <IconFacebook />
               <IconTwitter />
               <IconInstagram />
