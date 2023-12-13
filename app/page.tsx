@@ -248,11 +248,11 @@ export default function Home() {
 
   return (
     <div className="flex min-h-screen flex-col items-center justify-center">
-      <div className="h-full w-full bg-[#1C2230]">
-        <div className="h-[76.5em] w-full bg-[url('./images/bg-curvy-desktop.svg')] bg-bottom bg-no-repeat">
-          <nav className="mt-[4.55em] flex w-full flex-row items-center justify-between px-[5em]">
-            <Image className="h-fit" src={logo as string} alt="logo" />
-            <div className="flex gap-[3.7em]">
+      <div className="h-full w-full md:bg-[#1C2230]">
+        <div className="h-full w-full bg-[url('./images/bg-curvy-mobile.svg')] bg-contain bg-[50%_50%] bg-no-repeat px-[1em]  md:h-[76.5em] md:bg-[url('./images/bg-curvy-desktop.svg')] md:bg-contain md:bg-bottom md:px-0">
+          <nav className="mt-[2em] flex w-full flex-row items-center justify-between px-[0.5em] md:mt-[4.55em] lg:px-[3.5em] xl:px-[5em]">
+            <Image className="h-fit w-[5em] md:w-fit" src={logo as string} alt="logo" />
+            <div className="flex gap-[1em] md:gap-[3.7em]">
               {['Features', 'Team', 'Sign In'].map((x, i) => (
                 <button
                   className="font-raleway text-[0.97rem] text-[#BFC6CE] duration-300 hover:text-white hover:underline"
@@ -264,12 +264,12 @@ export default function Home() {
             </div>
           </nav>
           <div className="mt-[4.7em] flex h-full w-full flex-col items-center">
-            <Image className="h-fit" src={intro} alt="image of the people" />
+            <Image className="h-fit px-[1em] md:px-0" src={intro} alt="image of the people" />
             <div className="mt-[2.2em] flex h-full w-full flex-col items-center text-center">
-              <span className="font-raleway w-[20em] text-[2.52rem] font-[700] text-white">
+              <span className="font-raleway w-full text-[1.8rem] font-[700] text-white md:w-[20em] md:px-0 md:text-[2rem] lg:text-[2.2rem] xl:text-[2.52rem]">
                 All your files in one secure location, accessible anywhere.
               </span>
-              <span className="font-openSans mt-[1.65em] w-[30em] text-[1.25rem] text-[#FBFFFF]">
+              <span className="font-openSans mt-[1.65em] w-full px-[1em] text-[#FBFFFF] md:w-[30em] md:px-0 md:text-[1rem] lg:text-[1.1rem] xl:text-[1.25rem]">
                 Fylo stores all your most important files in one secure location. Access them wherever you need, share
                 and collaborate with friends family, and co-workers.
               </span>
@@ -279,9 +279,9 @@ export default function Home() {
             </div>
           </div>
         </div>
-        <div className="mt-[-2em] h-full w-full bg-[#181E2A]">
+        <div className="h-full w-full bg-[#181E2A] pt-[10em] md:mt-[-2em]">
           <div className="flex h-full w-full flex-col items-center">
-            <div className="grid grid-cols-2 lg:gap-x-[4em] md:gap-x-[2em] xl:gap-x-[7.5em] gap-y-20">
+            <div className="grid grid-cols-1 gap-y-20 md:grid-cols-2 md:gap-x-[2em] lg:gap-x-[4em] xl:gap-x-[7.5em]">
               <Article1
                 width="w-[22em]"
                 header="Access your files, anywhere"
