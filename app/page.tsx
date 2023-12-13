@@ -216,6 +216,9 @@ export default function Home() {
               <button className="from-cyanInside_call_to_action_gradient font-raleway to-blueInside_call_to_action_gradient rounded-[2em] bg-gradient-to-r px-[2.1em] py-[0.9em] text-[0.9rem] font-[700] text-white">
                 Get Started For Free
               </button>
+              <div className="text-lightRedError font-openSans absolute mt-[4.7em] h-0 pl-[3em] text-[0.75rem] font-[700]">
+                Please enter a valid email address
+              </div>
             </div>
           </div>
         </div>
