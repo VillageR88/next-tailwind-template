@@ -13,6 +13,37 @@ import iconCollaboration from './images/icon-collaboration.svg';
 import iconAnyFile from './images/icon-any-file.svg';
 import illustrationStayProductive from './images/illustration-stay-productive.png';
 
+const Arrow = () => {
+  return (
+    <svg
+      className="mt-[0.2em]"
+      width="16"
+      height="16"
+      xmlns="http://www.w3.org/2000/svg"
+      xmlnsXlink="http://www.w3.org/1999/xlink"
+    >
+      <defs>
+        <circle id="b" cx="6" cy="6" r="6" />
+        <filter x="-25%" y="-25%" width="150%" height="150%" filterUnits="objectBoundingBox" id="a">
+          <feOffset in="SourceAlpha" result="shadowOffsetOuter1" />
+          <feGaussianBlur stdDeviation="1" in="shadowOffsetOuter1" result="shadowBlurOuter1" />
+          <feColorMatrix
+            values="0 0 0 0 0.384313725 0 0 0 0 0.878431373 0 0 0 0 0.850980392 0 0 0 0.811141304 0"
+            in="shadowBlurOuter1"
+          />
+        </filter>
+      </defs>
+      <g fill="none" fillRule="evenodd">
+        <g transform="translate(2 2)">
+          <use fill="#000" filter="url(#a)" xlinkHref="#b" />
+          <use fill="#62E0D9" xlinkHref="#b" />
+        </g>
+        <path d="M8.582 6l-.363.35 1.452 1.4H5.333v.5h4.338L8.22 9.65l.363.35 2.074-2z" fill="#1B2330" />
+      </g>
+    </svg>
+  );
+};
+
 const Article1 = ({
   width,
   image,
@@ -110,7 +141,7 @@ export default function Home() {
                 <span className="font-raleway w-[10em] text-[2.5rem] font-[700] leading-[1.25em] text-white">
                   Stay productive, wherever you are
                 </span>
-                <div className="mt-[1em] flex w-[35em] flex-col gap-[1em] text-[#BFC6CE]">
+                <div className="font-openSans mt-[1em] flex w-[35em] flex-col gap-[1em] text-[#BFC6CE]">
                   <span>
                     Never let location be an issue when accessing your files. Fylo has you covered for all of your file
                     storage needs.
@@ -120,12 +151,15 @@ export default function Home() {
                     email attachments required.
                   </span>
                 </div>
-                <a
-                  href="#"
-                  className="text-cyanInside_call_to_action_gradient mt-[1.5em] underline underline-offset-[0.5em]"
-                >
-                  See how Fylo works
-                </a>
+                <div className="flex w-fit flex-col">
+                  <div className="font-openSans mt-[1.5em] flex h-fit flex-row items-center gap-[0.4em]">
+                    <a href="#" className="text-[#7BB1B3]">
+                      See how Fylo works
+                    </a>
+                    <Arrow />
+                  </div>
+                  <div className="mt-[0.2em] h-[1px] w-full bg-[#7BB1B3]"></div>
+                </div>
               </div>
             </div>
           </div>
