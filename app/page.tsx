@@ -250,7 +250,7 @@ export default function Home() {
     <div className="flex min-h-screen flex-col items-center justify-center">
       <div className="h-full w-full bg-gradient-to-b from-[#1C2230] from-[10%] to-[#181E2A] to-[12%] md:bg-[#1C2230] md:bg-none">
         <div className="h-full w-full bg-[url('./images/bg-curvy-mobile.svg')] bg-contain bg-[50%_50%] bg-no-repeat px-[1em] md:h-[76.5em] md:bg-[url('./images/bg-curvy-desktop.svg')] md:bg-contain md:bg-bottom md:px-0">
-          <nav className="mt-[2em] flex w-full flex-row items-center justify-between px-[0.5em] md:mt-[4.55em] lg:px-[3.5em] xl:px-[5em]">
+          <nav className="mt-[2em] flex w-full flex-row items-center justify-between px-[0.5em] md:mt-[4.55em] md:px-[2em] lg:px-[3.5em] xl:px-[5em]">
             <Image className="h-fit w-[5em] md:w-fit" src={logo as string} alt="logo" />
             <div className="flex gap-[1em] md:gap-[3.7em]">
               {['Features', 'Team', 'Sign In'].map((x, i) => (
