@@ -104,8 +104,29 @@ export default function Home() {
                 alt="image of folder"
               />
             </div>
-            <div>
+            <div className="mt-[8em] flex flex-row items-center gap-[3.5em]">
               <Image src={illustrationStayProductive} alt="image of the people showing quotes" />
+              <div className="flex flex-col">
+                <span className="font-raleway w-[10em] text-[2.5rem] font-[700] leading-[1.25em] text-white">
+                  Stay productive, wherever you are
+                </span>
+                <div className="mt-[1em] flex w-[35em] flex-col gap-[1em] text-[#BFC6CE]">
+                  <span>
+                    Never let location be an issue when accessing your files. Fylo has you covered for all of your file
+                    storage needs.
+                  </span>
+                  <span>
+                    Securely share files and folders with friends, family and colleagues for live collaboration. No
+                    email attachments required.
+                  </span>
+                </div>
+                <a
+                  href="#"
+                  className="text-cyanInside_call_to_action_gradient mt-[1.5em] underline underline-offset-[0.5em]"
+                >
+                  See how Fylo works
+                </a>
+              </div>
             </div>
           </div>
         </div>
