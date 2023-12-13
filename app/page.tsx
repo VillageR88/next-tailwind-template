@@ -234,6 +234,8 @@ export default function Home() {
                   if (event.key === 'Enter') {
                     setShowMessage(true);
                     event.preventDefault(); // Prevent form submission
+                  } else if (event.key === 'Backspace') {
+                    setShowMessage(false);
                   }
                 }}
                 onChange={(value) => {
