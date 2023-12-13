@@ -97,8 +97,8 @@ const SmallBox = ({ image, name }: { image: StaticImageData; name: string }) => 
 
 export default function Home() {
   const emailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
-  const [message, setMessage] = useState<string>('');
-  const [messageColor, setMessageColor] = useState<string>('');
+  const [message, setMessage] = useState<string>('Please enter a valid email address');
+  const [messageColor, setMessageColor] = useState<string>('text-lightRedError');
   const [showMessage, setShowMessage] = useState<boolean>(false);
   const [hoverColor, setHoverColor] = useState<boolean>(false);
 
