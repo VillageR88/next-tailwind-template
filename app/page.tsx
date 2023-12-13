@@ -17,12 +17,14 @@ import person1 from './images/profile-1.jpg';
 import person2 from './images/profile-2.jpg';
 import person3 from './images/profile-3.jpg';
 import iconLocation from './images/icon-location.svg';
+import iconPhone from './images/icon-phone.svg';
+import iconEmail from './images/icon-email.svg';
 import { useState } from 'react';
 
 const Arrow = ({ alternate }: { alternate: boolean }) => {
   return (
     <svg
-      className="mt-[0.2em]"
+      className="mt-[0.2em] duration-300"
       width="16"
       height="16"
       xmlns="http://www.w3.org/2000/svg"
@@ -41,8 +43,8 @@ const Arrow = ({ alternate }: { alternate: boolean }) => {
       </defs>
       <g fill="none" fillRule="evenodd">
         <g transform="translate(2 2)">
-          <use fill={!alternate ? '#000' : 'white'} filter="url(#a)" xlinkHref="#b" />
-          <use fill={!alternate ? '#62E0D9' : 'white'} xlinkHref="#b" />
+          <use className="duration-300" fill={!alternate ? '#000' : 'white'} filter="url(#a)" xlinkHref="#b" />
+          <use className="duration-300" fill={!alternate ? '#62E0D9' : 'white'} xlinkHref="#b" />
         </g>
         <path d="M8.582 6l-.363.35 1.452 1.4H5.333v.5h4.338L8.22 9.65l.363.35 2.074-2z" fill="#1B2330" />
       </g>
@@ -206,13 +208,15 @@ export default function Home() {
                         setHoverColor(false);
                       }}
                       href="#"
-                      className={`${hoverColor ? 'text-[#BFC6CE]' : 'text-[#7BB1B3]'}`}
+                      className={`${hoverColor ? 'text-[#BFC6CE]' : 'text-[#7BB1B3]'} duration-300`}
                     >
                       See how Fylo works
                     </a>
                     <Arrow alternate={hoverColor} />
                   </div>
-                  <div className={`${hoverColor ? 'bg-[#BFC6CE]' : 'bg-[#7BB1B3]'} mt-[0.2em] h-[1px] w-full`}></div>
+                  <div
+                    className={`${hoverColor ? 'bg-[#BFC6CE]' : 'bg-[#7BB1B3]'} mt-[0.2em] h-[1px] w-full duration-300`}
+                  ></div>
                 </div>
               </div>
             </div>
@@ -276,13 +280,37 @@ export default function Home() {
         </div>
         <div className="h-full w-full pl-[7.55em] pt-[12.55em]">
           <Image className="h-fit" src={logo as string} alt="logo" />
-          <div className="mt-[2.5em] w-full">
+          <div className="mt-[2.5em] flex w-full flex-row">
             <div className="flex flex-row gap-[1.65em]">
               <Image className="h-fit" src={iconLocation as string} alt="Location" />
               <span className="font-openSans mt-[-0.5em] w-[21em] text-[#BFC6CE]">
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
                 dolore magna aliqua
               </span>
+            </div>
+            <div className="mt-[-0.4em] flex flex-col gap-[1.2em] pl-[5.5em]">
+              <div className="flex flex-row items-center gap-[1.6em]">
+                <Image className="h-fit" src={iconPhone as string} alt="Phone" />
+                <span className="font-openSans text-[0.9rem] text-[#BFC6CE]">+1-543-123-4567</span>
+              </div>
+              <div className="flex flex-row items-center gap-[1.6em]">
+                <Image className="h-fit" src={iconEmail as string} alt="Phone" />
+                <span className="font-openSans text-[0.9rem] text-[#BFC6CE]">example@fylo.com</span>
+              </div>
+            </div>
+            <div className="mt-[-0.55em] flex flex-col items-start gap-[0.85em] pl-[8.7em] text-[#BFC6CE] duration-300">
+              {['About Us', 'Jobs', 'Press', 'Blog'].map((x, i) => (
+                <button key={i} className="font-openSans duration-300 hover:text-white">
+                  {x}
+                </button>
+              ))}
+            </div>
+            <div className="mt-[-0.55em] flex flex-col items-start gap-[0.85em] pl-[5em] text-[#BFC6CE] duration-300">
+              {['Contact Us', 'Terms', 'Privacy'].map((x, i) => (
+                <button key={i} className="font-openSans duration-300 hover:text-white">
+                  {x}
+                </button>
+              ))}
             </div>
           </div>
         </div>
