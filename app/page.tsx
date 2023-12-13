@@ -71,7 +71,9 @@ const Article1 = ({
 };
 
 const SmallBox = ({ image }: { image: string }) => {
-  return <div className="h-[12em] w-[22em] bg-[#21293C] rounded-[0.2em]"></div>;
+  return (
+    <div className="h-[12em] w-[22.6em] rounded-[0.2em] bg-[#21293C] shadow-[#1B232E] shadow-[3px_6px_15px_5px_rgba(0,0,0,5)]"></div>
+  );
 };
 
 export default function Home() {
