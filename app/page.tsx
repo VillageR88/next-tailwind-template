@@ -11,6 +11,7 @@ import iconAccessAnywhere from './images/icon-access-anywhere.svg';
 import iconSecurity from './images/icon-security.svg';
 import iconCollaboration from './images/icon-collaboration.svg';
 import iconAnyFile from './images/icon-any-file.svg';
+import illustrationStayProductive from './images/illustration-stay-productive.png';
 
 const Article1 = ({
   width,
@@ -31,7 +32,7 @@ const Article1 = ({
         <div className="flex h-[5.5em] justify-center">
           <Image className="h-fit" src={image} alt={alt} />
         </div>
-        <span className="font-raleway mt-[1em] text-[1.2rem] font-[700] text-white">{header}</span>
+        <span className="font-raleway mt-[1em] text-[1.21rem] font-[700] text-white">{header}</span>
         <span className="font-openSans mt-[0.3em] text-[0.9rem] text-[#BFC6CE]">{main}</span>
       </div>
     </div>
@@ -69,9 +70,9 @@ export default function Home() {
             </div>
           </div>
         </div>
-        <div className="h-s[81em] mt-[-2em] w-full bg-[#181E2A]">
-          <div className="flex w-full justify-center">
-            <div className="grid grid-cols-2 gap-x-[7em] gap-y-20">
+        <div className="mt-[-2em] h-[81em] w-full bg-[#181E2A]">
+          <div className="flex h-full w-full flex-col items-center">
+            <div className="grid grid-cols-2 gap-x-[7.5em] gap-y-20">
               <Article1
                 width="w-[22em]"
                 header="Access your files, anywhere"
@@ -102,6 +103,9 @@ export default function Home() {
                 image={iconAnyFile as string}
                 alt="image of folder"
               />
+            </div>
+            <div>
+              <Image src={illustrationStayProductive} alt="image of the people showing quotes" />
             </div>
           </div>
         </div>
