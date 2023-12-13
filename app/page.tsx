@@ -248,7 +248,7 @@ export default function Home() {
 
   return (
     <div className="flex min-h-screen flex-col items-center justify-center">
-      <div className="h-full w-full bg-gradient-to-b from-[#1C2230] from-[12%] to-[#181E2A] to-[13%] md:bg-[#1C2230] md:bg-none">
+      <div className="h-full w-full bg-gradient-to-b from-[#1C2230] from-[10%] to-[#181E2A] to-[12%] md:bg-[#1C2230] md:bg-none">
         <div className="h-full w-full bg-[url('./images/bg-curvy-mobile.svg')] bg-contain bg-[50%_50%] bg-no-repeat px-[1em] md:h-[76.5em] md:bg-[url('./images/bg-curvy-desktop.svg')] md:bg-contain md:bg-bottom md:px-0">
           <nav className="mt-[2em] flex w-full flex-row items-center justify-between px-[0.5em] md:mt-[4.55em] lg:px-[3.5em] xl:px-[5em]">
             <Image className="h-fit w-[5em] md:w-fit" src={logo as string} alt="logo" />
@@ -281,7 +281,7 @@ export default function Home() {
         </div>
         <div className="h-full w-full bg-[#181E2A] pt-[10em] md:mt-[-2em]">
           <div className="flex h-full w-full flex-col items-center">
-            <div className="grid grid-cols-1 gap-y-20 md:grid-cols-2 md:gap-x-[2em] lg:gap-x-[4em] xl:gap-x-[7.5em]">
+            <div className="grid grid-cols-1 gap-y-20 px-[1.5em] md:grid-cols-2 md:gap-x-[2em] md:px-0 lg:gap-x-[4em] xl:gap-x-[7.5em]">
               <Article1
                 width="w-[22em]"
                 header="Access your files, anywhere"
@@ -318,6 +318,7 @@ export default function Home() {
                 className="h-fit md:w-[50%] xl:w-fit"
                 src={illustrationStayProductive}
                 alt="image of the people showing quotes"
+                priority
               />
               <div className="flex flex-col">
                 <span className="font-raleway w-full pl-1 text-[1.1rem] font-[700] leading-[1.25em] text-white md:pl-0 md:text-[1.75rem] lg:text-[2rem] xl:w-[10em] xl:text-[2.5rem]">
@@ -369,7 +370,7 @@ export default function Home() {
       </div>
       <footer className="bg-darkBlueFooter_background h-full w-full md:h-[32.2em]">
         <div className="flex h-0 w-full justify-center">
-          <form className="mx-[2em] mt-[-14em] flex h-fit w-full flex-col items-center justify-center gap-[2.3em] rounded-[0.5em] bg-[#1C2230] px-[2em] py-[4em] text-center shadow-[4px_5px_8px_3px_rgba(0,0,0,0.2)] md:mx-[2em] md:mt-[-10em] md:h-[17.2em] md:px-0 md:py-0 lg:mx-0 lg:w-[54em]">
+          <form className="mx-[1.5em] mt-[-14em] flex h-fit w-full flex-col items-center justify-center gap-[2.3em] rounded-[0.5em] bg-[#1C2230] px-[1.5em] py-[4em] text-center shadow-[4px_5px_8px_3px_rgba(0,0,0,0.2)] md:mx-[2em] md:mt-[-10em] md:h-[17.2em] md:px-0 md:py-0 lg:mx-0 lg:w-[54em]">
             <div className="flex flex-col gap-[1em]">
               <span className="font-raleway text-[1.5rem] font-[700] text-white lg:text-[1.75rem] xl:text-[2rem]">
                 Get early access today
@@ -379,11 +380,11 @@ export default function Home() {
                 questions, our support team would be happy to help you.
               </span>
             </div>
-            <div className="flex flex-col gap-[2.1em] md:flex-row md:gap-[1em] lg:gap-[2em]">
+            <div className="flex w-full flex-col gap-[2.1em] md:w-fit md:flex-row md:gap-[1em] lg:gap-[2em]">
               <input
                 inputMode="email"
                 type="text"
-                className={`font-openSans flex h-[3em] rounded-[3em] pl-[2.2em] pr-[1em] md:w-[25em] lg:w-[30em]`}
+                className={`font-openSans flex h-[3em] w-full rounded-[3em] pl-[2.2em] pr-[1em] text-[0.9rem] md:w-[25em] md:text-[1rem] lg:w-[30em]`}
                 placeholder="email@example.com"
                 onKeyDown={(event) => {
                   if (event.key === 'Enter') {
@@ -408,20 +409,24 @@ export default function Home() {
                 Get Started For Free
               </button>
               <div
-                className={`${messageColor} font-openSans absolute mt-[4.7em] justify-center flex w-[20em] md:w-fit h-0 md:pl-[3em] text-[0.75rem] font-[700]`}
+                className={`${messageColor} font-openSans absolute mt-[4.3em] flex h-0 w-[75%] justify-center text-[0.75rem] font-[700] md:mt-[4.7em] md:w-fit md:pl-[3em]`}
               >
                 {showMessage && message}
               </div>
             </div>
           </form>
         </div>
-        <div className="h-full w-full pt-[20em] md:pt-[12.55em]">
-          <Image className="h-fit md:ml-[2em] lg:ml-[4em] xl:ml-[7.55em]" src={logo as string} alt="logo" />
-          <div className="mt-[2.5em] flex w-full flex-row justify-between md:px-[2em] lg:px-[4em] xl:px-0 xl:pl-[7.55em] xl:pr-[5em]">
+        <div className="h-full w-full px-[2em] pt-[20em] md:px-0 md:pt-[12.55em]">
+          <Image
+            className="ml-[1em] h-fit pb-[1em] md:ml-[2em] md:pb-0 lg:ml-[4em] xl:ml-[7.55em]"
+            src={logo as string}
+            alt="logo"
+          />
+          <div className="mt-[2.5em] flex w-full flex-col justify-between md:flex-row md:px-[2em] lg:px-[4em] xl:px-0 xl:pl-[7.55em] xl:pr-[5em]">
             <div className="flex flex-col justify-between md:gap-[1.7em] xl:w-[51%] xl:flex-row xl:gap-[3em] ">
               <div className="flex flex-row gap-[1.65em]">
                 <Image className="h-fit" src={iconLocation as string} alt="Location" />
-                <span className="font-openSans mt-[-0.5em] w-[21em] text-[#BFC6CE]">
+                <span className="font-openSans mt-[-0.5em] w-[21em] pb-[2em] text-[#BFC6CE] md:pb-0">
                   Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
                   dolore magna aliqua
                 </span>
@@ -437,7 +442,7 @@ export default function Home() {
                 </div>
               </div>
             </div>
-            <div className="flex flex-row md:gap-[3em] lg:gap-[4em] xl:ml-[1em] xl:gap-[5em]">
+            <div className="mt-[6em] flex flex-col md:mt-0 md:flex-row md:gap-[3em] lg:gap-[4em] xl:ml-[1em] xl:gap-[5em]">
               <div className="mt-[-0.55em] flex flex-col items-start gap-[0.85em] text-[#BFC6CE] duration-300">
                 {['About Us', 'Jobs', 'Press', 'Blog'].map((x, i) => (
                   <button key={i} className="font-openSans duration-300 hover:text-white">
@@ -445,7 +450,7 @@ export default function Home() {
                   </button>
                 ))}
               </div>
-              <div className="mt-[-0.55em] flex flex-col items-start gap-[0.85em] text-[#BFC6CE] duration-300">
+              <div className="mt-[4em] flex flex-col items-start gap-[0.85em] text-[#BFC6CE] duration-300 md:mt-[-0.55em]">
                 {['Contact Us', 'Terms', 'Privacy'].map((x, i) => (
                   <button key={i} className="font-openSans duration-300 hover:text-white">
                     {x}
@@ -453,7 +458,7 @@ export default function Home() {
                 ))}
               </div>
             </div>
-            <div className="mt-[-0.5em] flex h-fit flex-row gap-[0.65em]">
+            <div className="mt-[5em] flex h-fit   w-full flex-row justify-center gap-[0.65em] pb-[3em] md:mt-[-0.5em] md:w-fit md:pb-0">
               <IconFacebook />
               <IconTwitter />
               <IconInstagram />
