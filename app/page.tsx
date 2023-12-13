@@ -99,6 +99,7 @@ export default function Home() {
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   const [message, setMessage] = useState<string>('');
   const [messageColor, setMessageColor] = useState<string>('');
+  const [showMessage, setShowMessage] = useState<boolean>(false);
 
   const testEmail = (value: string) => {
     if (emailRegex.test(value)) {
@@ -226,19 +227,25 @@ export default function Home() {
             <div className="flex gap-[2em]">
               <input
                 type="text"
-                className="font-openSans h-[3em] w-[30em] rounded-[3em] pl-[2.2em] pr-[1em]"
+                className={`font-openSans flex h-[3em] w-[30em] rounded-[3em] pl-[2.2em] pr-[1em]`}
                 placeholder="email@example.com"
                 onChange={(value) => {
                   testEmail(value.target.value);
+                  setShowMessage(false);
                 }}
               />
-              <button className="from-cyanInside_call_to_action_gradient font-raleway to-blueInside_call_to_action_gradient rounded-[2em] bg-gradient-to-r px-[2.1em] py-[0.9em] text-[0.9rem] font-[700] text-white">
+              <button
+                onClick={() => {
+                  setShowMessage(true);
+                }}
+                className="from-cyanInside_call_to_action_gradient font-raleway to-blueInside_call_to_action_gradient rounded-[2em] bg-gradient-to-r px-[2.1em] py-[0.9em] text-[0.9rem] font-[700] text-white"
+              >
                 Get Started For Free
               </button>
               <div
                 className={`${messageColor} font-openSans absolute mt-[4.7em] h-0 pl-[3em] text-[0.75rem] font-[700]`}
               >
-                {message}
+                {showMessage && message}
               </div>
             </div>
           </div>
