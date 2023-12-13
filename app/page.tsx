@@ -18,7 +18,7 @@ import person2 from './images/profile-2.jpg';
 import person3 from './images/profile-3.jpg';
 import { useState } from 'react';
 
-const Arrow = () => {
+const Arrow = ({ alternate }: { alternate: boolean }) => {
   return (
     <svg
       className="mt-[0.2em]"
@@ -40,8 +40,8 @@ const Arrow = () => {
       </defs>
       <g fill="none" fillRule="evenodd">
         <g transform="translate(2 2)">
-          <use fill="#000" filter="url(#a)" xlinkHref="#b" />
-          <use fill="#62E0D9" xlinkHref="#b" />
+          <use fill={!alternate ? '#000' : 'white'} filter="url(#a)" xlinkHref="#b" />
+          <use fill={!alternate ? '#62E0D9' : 'white'} xlinkHref="#b" />
         </g>
         <path d="M8.582 6l-.363.35 1.452 1.4H5.333v.5h4.338L8.22 9.65l.363.35 2.074-2z" fill="#1B2330" />
       </g>
@@ -100,6 +100,7 @@ export default function Home() {
   const [message, setMessage] = useState<string>('');
   const [messageColor, setMessageColor] = useState<string>('');
   const [showMessage, setShowMessage] = useState<boolean>(false);
+  const [hoverColor, setHoverColor] = useState<boolean>(false);
 
   const testEmail = (value: string) => {
     if (emailRegex.test(value)) {
@@ -119,7 +120,10 @@ export default function Home() {
             <Image className="h-fit" src={logo as string} alt="logo" />
             <div className="flex gap-[3.7em]">
               {['Features', 'Team', 'Sign In'].map((x, i) => (
-                <button className="font-raleway text-[0.97rem] text-[#BFC6CE] hover:text-white hover:underline" key={i}>
+                <button
+                  className="font-raleway text-[0.97rem] text-[#BFC6CE] duration-300 hover:text-white hover:underline"
+                  key={i}
+                >
                   {x}
                 </button>
               ))}
@@ -135,7 +139,7 @@ export default function Home() {
                 Fylo stores all your most important files in one secure location. Access them wherever you need, share
                 and collaborate with friends family, and co-workers.
               </span>
-              <button className="from-cyanInside_call_to_action_gradient font-raleway to-blueInside_call_to_action_gradient mt-[2em] rounded-[2em] bg-gradient-to-r px-[5.95em] py-[1em] font-[700] text-white hover:from-[#8CDAE4] hover:to-[#8CDAE4]">
+              <button className="from-cyanInside_call_to_action_gradient font-raleway to-blueInside_call_to_action_gradient mt-[2em] rounded-[2em] bg-gradient-to-r px-[5.95em] py-[1em] font-[700] text-white duration-300 hover:from-[#8CDAE4] hover:to-[#8CDAE4]">
                 Get Started
               </button>
             </div>
@@ -193,12 +197,21 @@ export default function Home() {
                 </div>
                 <div className="flex w-fit flex-col">
                   <div className="font-openSans mt-[1.5em] flex h-fit flex-row items-center gap-[0.4em]">
-                    <a href="#" className="text-[#7BB1B3]">
+                    <a
+                      onMouseEnter={() => {
+                        setHoverColor(true);
+                      }}
+                      onMouseLeave={() => {
+                        setHoverColor(false);
+                      }}
+                      href="#"
+                      className={`${hoverColor ? 'text-[#BFC6CE]' : 'text-[#7BB1B3]'}`}
+                    >
                       See how Fylo works
                     </a>
-                    <Arrow />
+                    <Arrow alternate={hoverColor} />
                   </div>
-                  <div className="mt-[0.2em] h-[1px] w-full bg-[#7BB1B3]"></div>
+                  <div className={`${hoverColor ? 'bg-[#BFC6CE]' : 'bg-[#7BB1B3]'} mt-[0.2em] h-[1px] w-full`}></div>
                 </div>
               </div>
             </div>
@@ -248,7 +261,7 @@ export default function Home() {
                 onClick={() => {
                   setShowMessage(true);
                 }}
-                className="from-cyanInside_call_to_action_gradient font-raleway to-blueInside_call_to_action_gradient rounded-[2em] bg-gradient-to-r px-[2.1em] py-[0.9em] text-[0.9rem] font-[700] text-white hover:from-[#8CDAE4] hover:to-[#8CDAE4]"
+                className="from-cyanInside_call_to_action_gradient font-raleway to-blueInside_call_to_action_gradient rounded-[2em] bg-gradient-to-r px-[2.1em] py-[0.9em] text-[0.9rem] font-[700] text-white duration-300 hover:from-[#8CDAE4] hover:to-[#8CDAE4]"
               >
                 Get Started For Free
               </button>
