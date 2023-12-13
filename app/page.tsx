@@ -4,7 +4,7 @@ import '@fontsource/raleway/700.css';
 import '@fontsource/open-sans';
 import '@fontsource/open-sans/400.css';
 import '@fontsource/open-sans/700.css';
-import Image from 'next/image';
+import Image, { StaticImageData } from 'next/image';
 import logo from './images/logo.svg';
 import intro from './images/illustration-intro.png';
 import iconAccessAnywhere from './images/icon-access-anywhere.svg';
@@ -12,6 +12,9 @@ import iconSecurity from './images/icon-security.svg';
 import iconCollaboration from './images/icon-collaboration.svg';
 import iconAnyFile from './images/icon-any-file.svg';
 import illustrationStayProductive from './images/illustration-stay-productive.png';
+import person1 from './images/profile-1.jpg';
+import person2 from './images/profile-2.jpg';
+import person3 from './images/profile-3.jpg';
 
 const Arrow = () => {
   return (
@@ -70,9 +73,23 @@ const Article1 = ({
   );
 };
 
-const SmallBox = ({ image }: { image: string }) => {
+const SmallBox = ({ image, name }: { image: StaticImageData; name: string }) => {
   return (
-    <div className="h-[12em] w-[22.6em] rounded-[0.2em] bg-[#21293C] shadow-[#1B232E] shadow-[3px_6px_15px_5px_rgba(0,0,0,5)]"></div>
+    <div className="flex h-fit w-[22.6em] items-center rounded-[0.2em] bg-[#21293C] px-[1.6em] pb-[1.5em] pt-[2.5em] shadow-[3px_6px_15px_5px_rgba(0,0,0,5)] shadow-[#1B232E]">
+      <div className="flex flex-col gap-[1.4em]">
+        <span className="font-openSans text-[0.85rem] tracking-[0.05em] text-[#BFC6CE]">
+          Fylo has improved our team productivity by an order of magnitude. Since making the switch our team has become
+          a well-oiled collaboration machine.
+        </span>
+        <div className="flex flex-row items-center gap-[0.5em]">
+          <Image className="h-[1.5em] w-fit rounded-full" src={image} alt="picture of person" />
+          <div className="flex flex-col justify-center">
+            <span className="font-openSans text-[0.7rem] font-[700] text-white">{name}</span>
+            <span className="font-openSans text-[0.6rem] text-[#BFC6CE]">Founder & CEO, Huddle</span>
+          </div>
+        </div>
+      </div>
+    </div>
   );
 };
 
@@ -170,12 +187,12 @@ export default function Home() {
             </div>
           </div>
         </div>
-        <div className="h-[30em] w-full bg-[#181E2A] pt-[9em]">
+        <div className="h-full w-full bg-[#181E2A] pb-[20em] pt-[9em]">
           <div className="mx-[8em] h-full w-[full] bg-[url('./images/bg-quotes.png')] bg-no-repeat">
-            <div className="flex h-full w-full justify-between px-[0.6em] pt-[2.3em]">
-              <SmallBox />
-              <SmallBox />
-              <SmallBox />
+            <div className="flex h-full w-full justify-between gap-[1.5em] px-[0.6em] pt-[2.3em]">
+              <SmallBox image={person1} name="Satish Patel" />
+              <SmallBox image={person2} name="Bruce McKenzie" />
+              <SmallBox image={person3} name="Iva Boyd" />
             </div>
           </div>
         </div>
