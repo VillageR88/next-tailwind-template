@@ -211,7 +211,7 @@ const Article1 = ({
 
 const SmallBox = ({ image, name }: { image: StaticImageData; name: string }) => {
   return (
-    <div className="flex h-fit w-[22.6em] items-center rounded-[0.2em] bg-[#21293C] px-[1.6em] pb-[1.5em] pt-[2.5em] shadow-[3px_6px_15px_5px_rgba(0,0,0,5)] shadow-[#1B232E]">
+    <div className="flex h-fit w-full items-center rounded-[0.2em] bg-[#21293C] px-[1.6em] pb-[1.5em] pt-[2.5em] shadow-[3px_6px_15px_5px_rgba(0,0,0,5)] shadow-[#1B232E] md:w-[22.6em]">
       <div className="flex flex-col gap-[1.4em]">
         <span className="font-openSans text-[0.85rem] tracking-[0.05em] text-[#BFC6CE]">
           Fylo has improved our team productivity by an order of magnitude. Since making the switch our team has become
@@ -313,14 +313,14 @@ export default function Home() {
                 alt="image of folder"
               />
             </div>
-            <div className="mt-[8em] flex w-full flex-row items-center justify-center gap-[3.5em] md:px-[2em] lg:px-[4em]">
+            <div className="mt-[11em] flex w-full flex-col items-center justify-center gap-[3.5em] px-[2em] md:mt-[8em] md:flex-row md:px-[2em] lg:px-[4em]">
               <Image
                 className="h-fit md:w-[50%] xl:w-fit"
                 src={illustrationStayProductive}
                 alt="image of the people showing quotes"
               />
               <div className="flex flex-col">
-                <span className="font-raleway w-full font-[700] leading-[1.25em] text-white md:text-[1.75rem] lg:text-[2rem] xl:w-[10em] xl:text-[2.5rem]">
+                <span className="font-raleway w-full pl-1 text-[1.1rem] font-[700] leading-[1.25em] text-white md:pl-0 md:text-[1.75rem] lg:text-[2rem] xl:w-[10em] xl:text-[2.5rem]">
                   Stay productive, wherever you are
                 </span>
                 <div className="font-openSans lg:-[0.95rem] mt-[1em] flex w-full flex-col gap-[1em] text-[#BFC6CE] md:text-[0.9rem] xl:w-[35em] xl:text-[1rem]">
@@ -357,9 +357,9 @@ export default function Home() {
             </div>
           </div>
         </div>
-        <div className="h-full w-full bg-[#181E2A] pb-[22.5em] pt-[9em]">
-          <div className="h-full w-[full] bg-[url('./images/bg-quotes.png')] bg-no-repeat md:mx-[2em] lg:mx-[4em] xl:mx-[8em]">
-            <div className="flex h-full w-full justify-between gap-[1.5em] px-[0.6em] pt-[2.3em]">
+        <div className="h-full w-full bg-[#181E2A] px-[2em] pb-[26em] pt-[9em] md:px-0 md:pb-[22.5em]">
+          <div className="h-full w-full bg-[url('./images/bg-quotes.png')] bg-[5%_0] bg-no-repeat  md:mx-[2em] md:w-fit md:bg-left-top lg:mx-[4em] xl:mx-[8em]">
+            <div className="flex  h-full w-full flex-col justify-between gap-[1.5em] pt-[2.3em] md:flex-row md:px-[0.6em]">
               <SmallBox image={person1} name="Satish Patel" />
               <SmallBox image={person2} name="Bruce McKenzie" />
               <SmallBox image={person3} name="Iva Boyd" />
@@ -367,17 +367,19 @@ export default function Home() {
           </div>
         </div>
       </div>
-      <footer className="bg-darkBlueFooter_background h-[32.2em] w-full">
+      <footer className="bg-darkBlueFooter_background h-full w-full md:h-[32.2em]">
         <div className="flex h-0 w-full justify-center">
-          <form className="mt-[-10em] flex h-[17.2em] w-full flex-col items-center justify-center gap-[2.3em] rounded-[0.5em] bg-[#1C2230] text-center shadow-[4px_5px_8px_3px_rgba(0,0,0,0.2)] md:mx-[2em] lg:mx-0 lg:w-[54em]">
+          <form className="mx-[2em] mt-[-14em] flex h-fit w-full flex-col items-center justify-center gap-[2.3em] rounded-[0.5em] bg-[#1C2230] px-[2em] py-[4em] text-center shadow-[4px_5px_8px_3px_rgba(0,0,0,0.2)] md:mx-[2em] md:mt-[-10em] md:h-[17.2em] md:px-0 md:py-0 lg:mx-0 lg:w-[54em]">
             <div className="flex flex-col gap-[1em]">
-              <span className="font-raleway text-[2rem] font-[700] text-white">Get early access today</span>
-              <span className="font-openSans w-[45em] text-[0.9rem] tracking-[-0.01em] text-[#BFC6CE]">
+              <span className="font-raleway text-[1.5rem] font-[700] text-white lg:text-[1.75rem] xl:text-[2rem]">
+                Get early access today
+              </span>
+              <span className="font-openSans w-full text-[0.9rem] tracking-[-0.01em] text-[#BFC6CE] md:w-[45em]">
                 It only takes a minute to sign up and our free starter tier is extremely generous. If you have any
                 questions, our support team would be happy to help you.
               </span>
             </div>
-            <div className="flex md:gap-[1em] lg:gap-[2em]">
+            <div className="flex flex-col gap-[2.1em] md:flex-row md:gap-[1em] lg:gap-[2em]">
               <input
                 inputMode="email"
                 type="text"
@@ -406,14 +408,14 @@ export default function Home() {
                 Get Started For Free
               </button>
               <div
-                className={`${messageColor} font-openSans absolute mt-[4.7em] h-0 pl-[3em] text-[0.75rem] font-[700]`}
+                className={`${messageColor} font-openSans absolute mt-[4.7em] justify-center flex w-[20em] md:w-fit h-0 md:pl-[3em] text-[0.75rem] font-[700]`}
               >
                 {showMessage && message}
               </div>
             </div>
           </form>
         </div>
-        <div className="h-full w-full pt-[12.55em]">
+        <div className="h-full w-full pt-[20em] md:pt-[12.55em]">
           <Image className="h-fit md:ml-[2em] lg:ml-[4em] xl:ml-[7.55em]" src={logo as string} alt="logo" />
           <div className="mt-[2.5em] flex w-full flex-row justify-between md:px-[2em] lg:px-[4em] xl:px-0 xl:pl-[7.55em] xl:pr-[5em]">
             <div className="flex flex-col justify-between md:gap-[1.7em] xl:w-[51%] xl:flex-row xl:gap-[3em] ">
