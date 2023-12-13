@@ -96,7 +96,7 @@ const SmallBox = ({ image, name }: { image: StaticImageData; name: string }) => 
 };
 
 export default function Home() {
-  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  const emailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
   const [message, setMessage] = useState<string>('');
   const [messageColor, setMessageColor] = useState<string>('');
   const [showMessage, setShowMessage] = useState<boolean>(false);
@@ -216,7 +216,7 @@ export default function Home() {
       </div>
       <footer className="bg-darkBlueFooter_background h-[32.2em] w-full">
         <div className="flex h-0 w-full justify-center">
-          <div className="mt-[-10em] flex h-[17.2em] w-[54em] flex-col items-center justify-center gap-[2.3em] rounded-[0.5em] bg-[#1C2230] text-center shadow-[4px_5px_8px_3px_rgba(0,0,0,0.2)]">
+          <form className="mt-[-10em] flex h-[17.2em] w-[54em] flex-col items-center justify-center gap-[2.3em] rounded-[0.5em] bg-[#1C2230] text-center shadow-[4px_5px_8px_3px_rgba(0,0,0,0.2)]">
             <div className="flex flex-col gap-[1em]">
               <span className="font-raleway text-[2rem] font-[700] text-white">Get early access today</span>
               <span className="font-openSans w-[45em] text-[0.9rem] tracking-[-0.01em] text-[#BFC6CE]">
@@ -226,15 +226,23 @@ export default function Home() {
             </div>
             <div className="flex gap-[2em]">
               <input
+                inputMode="email"
                 type="text"
                 className={`font-openSans flex h-[3em] w-[30em] rounded-[3em] pl-[2.2em] pr-[1em]`}
                 placeholder="email@example.com"
+                onKeyDown={(event) => {
+                  if (event.key === 'Enter') {
+                    setShowMessage(true);
+                    event.preventDefault(); // Prevent form submission
+                  }
+                }}
                 onChange={(value) => {
                   testEmail(value.target.value);
                   setShowMessage(false);
                 }}
               />
               <button
+                type="button"
                 onClick={() => {
                   setShowMessage(true);
                 }}
@@ -248,7 +256,7 @@ export default function Home() {
                 {showMessage && message}
               </div>
             </div>
-          </div>
+          </form>
         </div>
       </footer>
     </div>
