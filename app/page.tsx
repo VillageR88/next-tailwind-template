@@ -199,7 +199,13 @@ export default function Home() {
       </div>
       <footer className="bg-darkBlueFooter_background h-[32.2em] w-full">
         <div className="flex h-0 w-full justify-center">
-          <div className="mt-[-10em] h-[17.2em] w-[54em] rounded-[0.5em] bg-[#1C2230] shadow-[4px_5px_8px_3px_rgba(0,0,0,0.2)]"></div>
+          <div className="mt-[-10em] flex h-[17.2em] w-[54em] flex-col text-center items-center justify-center rounded-[0.5em] bg-[#1C2230] shadow-[4px_5px_8px_3px_rgba(0,0,0,0.2)]">
+            <span className="font-raleway text-[2rem] font-[700] text-white">Get early access today</span>
+            <span className='text-[#BFC6CE] text-[0.9rem] font-openSans w-[45em]'>
+              It only takes a minute to sign up and our free starter tier is extremely generous. If you have any
+              questions, our support team would be happy to help you.
+            </span>
+          </div>
         </div>
       </footer>
     </div>
