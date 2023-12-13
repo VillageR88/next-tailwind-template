@@ -6,12 +6,13 @@ import '@fontsource/open-sans/400.css';
 import '@fontsource/open-sans/700.css';
 import Image from 'next/image';
 import logo from './images/logo.svg';
+import intro from './images/illustration-intro.png';
 
 export default function Home() {
   return (
     <div className="flex min-h-screen flex-col items-center justify-center">
       <div className="h-full w-full bg-[#1C2230]">
-        <div className="h-[81em] w-full bg-[url('./images/bg-curvy-desktop.svg')] bg-bottom bg-no-repeat">
+        <div className="h-[76.5em] w-full bg-[url('./images/bg-curvy-desktop.svg')] bg-bottom bg-no-repeat">
           <nav className="mt-[4.55em] flex w-full flex-row items-center justify-between px-[5em]">
             <Image className="h-fit" src={logo as string} alt="logo" />
             <div className="flex gap-[3.7em]">
@@ -22,6 +23,9 @@ export default function Home() {
               ))}
             </div>
           </nav>
+          <div className="mt-[4.7em] flex h-full w-full justify-center">
+            <Image className="h-fit" src={intro} alt="image of the people" />
+          </div>
         </div>
         <div className="h-[81em] w-full bg-[#181E2A]"></div>
       </div>
