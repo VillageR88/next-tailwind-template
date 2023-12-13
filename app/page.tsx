@@ -187,7 +187,7 @@ export default function Home() {
             </div>
           </div>
         </div>
-        <div className="h-full w-full bg-[#181E2A] pb-[20em] pt-[9em]">
+        <div className="h-full w-full bg-[#181E2A] pb-[22.5em] pt-[9em]">
           <div className="mx-[8em] h-full w-[full] bg-[url('./images/bg-quotes.png')] bg-no-repeat">
             <div className="flex h-full w-full justify-between gap-[1.5em] px-[0.6em] pt-[2.3em]">
               <SmallBox image={person1} name="Satish Patel" />
@@ -197,6 +197,11 @@ export default function Home() {
           </div>
         </div>
       </div>
+      <footer className="bg-darkBlueFooter_background h-[32.2em] w-full">
+        <div className="flex h-0 w-full justify-center">
+          <div className="mt-[-10em] h-[17.2em] w-[54em] rounded-[0.5em] bg-[#1C2230] shadow-[4px_5px_8px_3px_rgba(0,0,0,0.2)]"></div>
+        </div>
+      </footer>
     </div>
   );
 }
