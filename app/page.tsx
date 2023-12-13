@@ -281,7 +281,7 @@ export default function Home() {
         </div>
         <div className="mt-[-2em] h-full w-full bg-[#181E2A]">
           <div className="flex h-full w-full flex-col items-center">
-            <div className="grid grid-cols-2 gap-x-[7.5em] gap-y-20">
+            <div className="grid grid-cols-2 lg:gap-x-[4em] md:gap-x-[2em] xl:gap-x-[7.5em] gap-y-20">
               <Article1
                 width="w-[22em]"
                 header="Access your files, anywhere"
@@ -313,13 +313,17 @@ export default function Home() {
                 alt="image of folder"
               />
             </div>
-            <div className="mt-[8em] flex flex-row items-center gap-[3.5em]">
-              <Image src={illustrationStayProductive} alt="image of the people showing quotes" />
+            <div className="mt-[8em] flex w-full flex-row items-center justify-center gap-[3.5em] md:px-[2em] lg:px-[4em]">
+              <Image
+                className="h-fit md:w-[50%] xl:w-fit"
+                src={illustrationStayProductive}
+                alt="image of the people showing quotes"
+              />
               <div className="flex flex-col">
-                <span className="font-raleway w-[10em] text-[2.5rem] font-[700] leading-[1.25em] text-white">
+                <span className="font-raleway w-full font-[700] leading-[1.25em] text-white md:text-[1.75rem] lg:text-[2rem] xl:w-[10em] xl:text-[2.5rem]">
                   Stay productive, wherever you are
                 </span>
-                <div className="font-openSans mt-[1em] flex w-[35em] flex-col gap-[1em] text-[#BFC6CE]">
+                <div className="font-openSans lg:-[0.95rem] mt-[1em] flex w-full flex-col gap-[1em] text-[#BFC6CE] md:text-[0.9rem] xl:w-[35em] xl:text-[1rem]">
                   <span>
                     Never let location be an issue when accessing your files. Fylo has you covered for all of your file
                     storage needs.
@@ -354,7 +358,7 @@ export default function Home() {
           </div>
         </div>
         <div className="h-full w-full bg-[#181E2A] pb-[22.5em] pt-[9em]">
-          <div className="mx-[8em] h-full w-[full] bg-[url('./images/bg-quotes.png')] bg-no-repeat">
+          <div className="h-full w-[full] bg-[url('./images/bg-quotes.png')] bg-no-repeat md:mx-[2em] lg:mx-[4em] xl:mx-[8em]">
             <div className="flex h-full w-full justify-between gap-[1.5em] px-[0.6em] pt-[2.3em]">
               <SmallBox image={person1} name="Satish Patel" />
               <SmallBox image={person2} name="Bruce McKenzie" />
@@ -365,7 +369,7 @@ export default function Home() {
       </div>
       <footer className="bg-darkBlueFooter_background h-[32.2em] w-full">
         <div className="flex h-0 w-full justify-center">
-          <form className="mt-[-10em] flex h-[17.2em] w-[54em] flex-col items-center justify-center gap-[2.3em] rounded-[0.5em] bg-[#1C2230] text-center shadow-[4px_5px_8px_3px_rgba(0,0,0,0.2)]">
+          <form className="mt-[-10em] flex h-[17.2em] w-full flex-col items-center justify-center gap-[2.3em] rounded-[0.5em] bg-[#1C2230] text-center shadow-[4px_5px_8px_3px_rgba(0,0,0,0.2)] md:mx-[2em] lg:mx-0 lg:w-[54em]">
             <div className="flex flex-col gap-[1em]">
               <span className="font-raleway text-[2rem] font-[700] text-white">Get early access today</span>
               <span className="font-openSans w-[45em] text-[0.9rem] tracking-[-0.01em] text-[#BFC6CE]">
@@ -373,11 +377,11 @@ export default function Home() {
                 questions, our support team would be happy to help you.
               </span>
             </div>
-            <div className="flex gap-[2em]">
+            <div className="flex md:gap-[1em] lg:gap-[2em]">
               <input
                 inputMode="email"
                 type="text"
-                className={`font-openSans flex h-[3em] w-[30em] rounded-[3em] pl-[2.2em] pr-[1em]`}
+                className={`font-openSans flex h-[3em] rounded-[3em] pl-[2.2em] pr-[1em] md:w-[25em] lg:w-[30em]`}
                 placeholder="email@example.com"
                 onKeyDown={(event) => {
                   if (event.key === 'Enter') {
