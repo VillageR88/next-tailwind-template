@@ -33,6 +33,9 @@ export default function Home() {
                 Fylo stores all your most important files in one secure location. Access them wherever you need, share
                 and collaborate with friends family, and co-workers.
               </span>
+              <button className="mt-[2em] from-cyanInside_call_to_action_gradient to-blueInside_call_to_action_gradient rounded-[2em] bg-gradient-to-r px-[6em] py-[1em] text-white">
+                Get Started
+              </button>
             </div>
           </div>
         </div>
