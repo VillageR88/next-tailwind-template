@@ -211,7 +211,7 @@ const Article1 = ({
 
 const SmallBox = ({ image, name }: { image: StaticImageData; name: string }) => {
   return (
-    <div className="flex h-fit w-full items-center rounded-[0.2em] bg-[#21293C] px-[1.6em] pb-[1.5em] pt-[2.5em] shadow-[3px_6px_15px_5px_rgba(0,0,0,5)] shadow-[#1B232E] xl:w-[22.6em]">
+    <div className="flex h-fit w-full items-center rounded-[0.2em] bg-[#21293C] px-[1.6em] pb-[1.5em] pt-[2.5em] shadow-[3px_6px_15px_5px_rgba(0,0,0,5)] shadow-[#1B232E]">
       <div className="flex flex-col gap-[1.4em]">
         <span className="font-openSans text-[0.85rem] tracking-[0.05em] text-[#BFC6CE]">
           Fylo has improved our team productivity by an order of magnitude. Since making the switch our team has become
