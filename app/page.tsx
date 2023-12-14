@@ -213,7 +213,7 @@ export default function Home() {
 
   return (
     <div className="flex min-h-screen flex-col items-center justify-center">
-      <nav className="flex w-full flex-row items-center justify-between bg-white px-[0.5em] pt-[4em] md:px-[2em] lg:px-[3.5em] xl:px-[5em]">
+      <nav className="flex w-full flex-row items-center justify-between bg-white px-[1em] pt-[2em] md:px-[2em] md:pt-[4em] lg:px-[3.5em] xl:px-[5em]">
         <Image className="h-fit w-[5em] md:w-fit" src={logo as string} alt="logo" />
         <div className="flex gap-[1em] md:gap-[3.6em]">
           {['Features', 'Team', 'Sign In'].map((x, i) => (
@@ -223,10 +223,10 @@ export default function Home() {
           ))}
         </div>
       </nav>
-      <main className="h-full-full bg-white">
-        <div className="mt-[5em] flex flex-row items-center bg-[url('./images/bg-curve-desktop.svg')] bg-bottom bg-no-repeat pb-[17.8em] xl:px-[5em]">
+      <main className="h-full w-full bg-white">
+        <div className="mt-[5em] flex flex-col-reverse items-center bg-[url('./images/bg-curve-mobile.svg')] bg-bottom bg-no-repeat px-6 pb-[17.8em] md:flex-row md:bg-[url('./images/bg-curve-desktop.svg')] md:px-0 xl:px-[5em]">
           <form className=" flex h-fit w-full flex-col items-center justify-center gap-[1.5em] rounded-[0.5em] text-left">
-            <div className="flex flex-col gap-[1em]">
+            <div className="flex flex-col gap-[1em] text-center md:text-left">
               <span className="font-raleway text-[1.5rem] font-[700] text-veryDarkBlue lg:text-[1.75rem]  xl:text-[2.5rem]">
                 All your files in one secure location, accessible anywhere.
               </span>
@@ -235,11 +235,11 @@ export default function Home() {
                 collaborate with friends, family, and co-workers.
               </span>
             </div>
-            <div className="flex w-full flex-col gap-[1em] md:flex-row">
+            <div className="flex w-full flex-col gap-[1.5em] md:flex-row md:gap-[1em]">
               <input
                 inputMode="email"
                 type="text"
-                className={`font-openSans flex h-[3em] w-[50%] rounded-[0.2em] px-6 text-[0.9rem] outline outline-1 ${
+                className={`font-openSans flex h-[3em] w-full rounded-[0.2em] px-6 text-[0.9rem] outline outline-1 md:w-[50%] ${
                   showMessage1 && message1 !== 'Thank you!' ? 'outline-pink-400' : 'outline-desaturatedBlue'
                 }`}
                 placeholder="Enter your email..."
@@ -261,7 +261,7 @@ export default function Home() {
                 onClick={() => {
                   setShowMessage1(true);
                 }}
-                className="font-raleway w-[30%] rounded-[0.2em] bg-brightBlue px-[2.1em] py-[0.8em] text-[0.9rem] font-[700] text-white duration-100 hover:opacity-70"
+                className="font-raleway w-full rounded-[0.2em] bg-brightBlue px-[2.1em] py-[0.8em] text-[0.9rem] font-[700] text-white duration-100 hover:opacity-70 md:w-[30%]"
               >
                 Get Started
               </button>
@@ -273,13 +273,13 @@ export default function Home() {
             </div>
           </form>
           <Image
-            className="h-fit w-1/2"
+            className="h-fit w-full md:w-1/2"
             src={illustration1 as string}
             alt="illustration of people putting documents in the folder"
           />
         </div>
         <div className="h-full w-full bg-lightGrayishBlue pb-[7em] pt-[4em]">
-          <div className="flex w-full flex-col items-center justify-center gap-[3.5em] px-[2em] md:flex-row md:px-[2em]">
+          <div className="flex w-full flex-col-reverse items-center justify-center gap-[3.5em] px-[2em] md:flex-row md:px-[2em]">
             <div className="flex flex-col">
               <span className="font-raleway w-full pb-[0.5em] pl-1 text-[1.1rem] font-[700] leading-[1.25em] text-veryDarkBlue md:pl-0 md:text-[1.75rem] lg:text-[2rem]  xl:text-[2.5rem]">
                 Stay productive, wherever you are
