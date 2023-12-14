@@ -17,14 +17,17 @@ export default function Home() {
         </button>
       </nav>
       <main className="h-[100em] w-full bg-white">
-        <div className="mt-[9.55em] flex w-full flex-col drop-shadow-md items-center">
-          <span className="text-center font-poppins text-[2.99rem] font-[700] text-veryDarkCyan">
+        <div className="mt-[9.55em] flex w-full flex-col items-center">
+          <span className="text-center font-poppins text-[2.99rem] font-[700] text-veryDarkCyan drop-shadow-md">
             Build The Community Your Fans Will Love
           </span>
-          <span className="mt-[1.2em] w-[31em] drop-shadow-sm text-center font-openSans text-[1.25rem] font-[400] text-veryDarkCyan">
+          <span className="mt-[1.15em] w-[31em] text-center font-openSans text-[1.25rem] font-[400] text-veryDarkCyan drop-shadow-sm">
             Huddle re-imagines the way we build communities. You have a voice, but so does your audience. Create
             connections with your users as you engage in genuine discussion.
           </span>
+          <button className="mt-[2.35em] rounded-[3em] bg-pink px-[5.1em] py-[1.25em] font-openSans text-[1.25rem] font-[600] text-white drop-shadow-xl">
+            Get Started For Free
+          </button>
         </div>
       </main>
     </div>
