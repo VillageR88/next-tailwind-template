@@ -36,7 +36,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           .concat(' ')
           .concat('bg-[#0E0E0E]')}
       >
-        <div className="ml-auto mr-auto max-w-7xl overflow-x-clip font-sans">{children}</div>
+        <div className="ml-auto mr-auto max-w-[90em] overflow-x-clip font-sans">{children}</div>
       </body>
     </html>
   );
