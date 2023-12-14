@@ -214,7 +214,9 @@ export default function Home() {
               <input
                 inputMode="email"
                 type="text"
-                className={`font-openSans flex h-[3em] w-[50%] rounded-[0.2em] px-6 text-[0.9rem] outline outline-1 outline-desaturatedBlue`}
+                className={`font-openSans flex h-[3em] w-[50%] rounded-[0.2em] px-6 text-[0.9rem] outline outline-1 ${
+                  showMessage && message !== 'Thank you!' ? 'outline-pink-400' : 'outline-desaturatedBlue'
+                }`}
                 placeholder="Enter your email..."
                 onKeyDown={(event) => {
                   if (event.key === 'Enter') {
@@ -251,7 +253,7 @@ export default function Home() {
             alt="illustration of people putting documents in the folder"
           />
         </div>
-        <div className='w-full h-[30em] bg-lightGrayishBlue'></div>
+        <div className="h-[30em] w-full bg-lightGrayishBlue"></div>
       </main>
     </div>
   );
