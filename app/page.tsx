@@ -264,7 +264,7 @@ export default function Home() {
         <div className="h-full w-full bg-lightGrayishBlue pb-[7em] pt-[4em]">
           <div className="flex w-full flex-col items-center justify-center gap-[3.5em] px-[2em] md:flex-row md:px-[2em]">
             <div className="flex flex-col">
-              <span className="font-raleway w-full pl-1 text-[1.1rem] font-[700] pb-[0.5em] leading-[1.25em] text-veryDarkBlue md:pl-0 md:text-[1.75rem] lg:text-[2rem]  xl:text-[2.5rem]">
+              <span className="font-raleway w-full pb-[0.5em] pl-1 text-[1.1rem] font-[700] leading-[1.25em] text-veryDarkBlue md:pl-0 md:text-[1.75rem] lg:text-[2rem]  xl:text-[2.5rem]">
                 Stay productive, wherever you are
               </span>
               <div className="lg:-[0.95rem] font-openSans mt-[1em] flex w-full flex-col gap-[1em] text-veryDarkBlue md:text-[0.9rem] xl:w-[33em] xl:text-[1rem]">
@@ -323,6 +323,55 @@ export default function Home() {
               priority
             />
           </div>
+        </div>
+        <div className="bg-desaturatedBlue px-6 py-20">
+          <form className=" flex h-fit w-full flex-row items-center justify-center gap-[1.5em] rounded-[0.5em] text-left">
+            <div className="flex flex-col gap-[1em]">
+              <span className="font-raleway text-[1.5rem] font-[700] text-white lg:text-[1.75rem] xl:text-[2rem]">
+                Get early access today
+              </span>
+              <span className="font-openSans w-full leading-[1.4em] tracking-[0.02em] text-slate-200 xl:text-[1.08em]">
+                It only takes a minute to sign up and our free starter tier is extremely generous. If you have any
+                questions, our support team would be happy to help you.
+              </span>
+            </div>
+            <div className="flex w-full flex-col gap-[1em]">
+              <input
+                inputMode="email"
+                type="text"
+                className={`font-openSans flex h-[3em] w-[50%] rounded-[0.2em] px-6 text-[0.9rem] outline outline-1 ${
+                  showMessage && message !== 'Thank you!' ? 'outline-pink-400' : 'outline-desaturatedBlue'
+                }`}
+                placeholder="Enter your email..."
+                onKeyDown={(event) => {
+                  if (event.key === 'Enter') {
+                    setShowMessage(true);
+                    event.preventDefault();
+                  } else if (event.key === 'Backspace') {
+                    setShowMessage(false);
+                  }
+                }}
+                onChange={(value) => {
+                  testEmail(value.target.value);
+                  setShowMessage(false);
+                }}
+              />
+              <button
+                type="button"
+                onClick={() => {
+                  setShowMessage(true);
+                }}
+                className="font-raleway w-[30%] rounded-[0.2em] bg-brightBlue px-[2.1em] py-[0.8em] text-[0.9rem] font-[700] text-white duration-100 hover:opacity-70"
+              >
+                Get Started
+              </button>
+              <div
+                className={`${messageColor} font-openSans absolute mt-[4.3em] flex h-0 w-full justify-center text-[0.75rem] font-[700] drop-shadow-sm md:mt-[4.1em] md:w-fit`}
+              >
+                {showMessage && message}
+              </div>
+            </div>
+          </form>
         </div>
       </main>
     </div>
