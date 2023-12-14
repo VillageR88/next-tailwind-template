@@ -223,7 +223,7 @@ export default function Home() {
           ))}
         </div>
       </nav>
-      <main className="h-full w-full bg-white">
+      <main className="h-full w-full bg-white md:px-6 lg:px-10 xl:px-0">
         <div className="mt-[5em] flex flex-col-reverse items-center bg-[url('./images/bg-curve-mobile.svg')] bg-bottom bg-no-repeat px-6 pb-[10em] md:flex-row md:bg-[url('./images/bg-curve-desktop.svg')] md:px-0 md:pb-[17.8em] xl:px-[5em]">
           <form className=" flex h-fit w-full flex-col items-center justify-center gap-[1.5em] rounded-[0.5em] text-left">
             <div className="flex flex-col gap-[1em] text-center md:text-left">
@@ -341,9 +341,9 @@ export default function Home() {
             />
           </div>
         </div>
-        <div className="bg-desaturatedBlue px-[2em] py-[6em] md:px-[5em]">
-          <form className=" flex h-full w-full flex-col items-center justify-between gap-[2.5em] rounded-[0.5em] text-center md:h-fit md:flex-row md:gap-[15em] md:text-left">
-            <div className="flex w-full flex-col items-center gap-[1em] md:w-1/2 md:items-start">
+        <div className="bg-desaturatedBlue px-[2em] py-[6em] md:px-[2em] lg:px-[5em]">
+          <form className=" flex h-full w-full flex-col items-center justify-between gap-[2.5em] rounded-[0.5em] text-center md:h-fit md:flex-row md:text-left xl:gap-[15em]">
+            <div className="flex w-full flex-col items-center gap-[1em]  md:w-1/2 md:items-start">
               <span className="font-raleway text-[1.5rem] font-[700] text-white lg:text-[1.75rem] xl:text-[2rem]">
                 Get early access today
               </span>
@@ -356,7 +356,7 @@ export default function Home() {
               <input
                 inputMode="email"
                 type="text"
-                className={`font-openSans flex h-[3.4em] w-full rounded-[0.2em] px-6 text-[0.9rem] outline outline-1 drop-shadow-md md:w-[32em] ${
+                className={`font-openSans flex h-[3.4em] w-full rounded-[0.2em] px-6 text-[0.9rem] outline outline-1 drop-shadow-md lg:w-[32em] ${
                   showMessage2 && message2 !== 'Thank you!' ? 'outline-pink-400' : 'outline-desaturatedBlue'
                 }`}
                 placeholder="Enter your email..."
