@@ -171,6 +171,21 @@ const Arrow = ({ alternate }: { alternate: boolean }) => {
 };
 
 export default function Home() {
+  const emailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
+  const [message, setMessage] = useState<string>('Please check your email');
+  const [messageColor, setMessageColor] = useState<string>('text-pink-400');
+  const [showMessage, setShowMessage] = useState<boolean>(false);
+  //const [hoverColor, setHoverColor] = useState<boolean>(false);
+
+  const testEmail = (value: string) => {
+    if (emailRegex.test(value)) {
+      setMessage('Thank you!');
+      setMessageColor('text-teal-600');
+    } else {
+      setMessage('Please check your email');
+      setMessageColor('text-pink-400');
+    }
+  };
   return (
     <div className="flex min-h-screen flex-col items-center justify-center">
       <nav className="flex w-full flex-row items-center justify-between bg-white px-[0.5em] pt-[4em] md:px-[2em] lg:px-[3.5em] xl:px-[5em]">
@@ -183,8 +198,8 @@ export default function Home() {
           ))}
         </div>
       </nav>
-      <main className="h-[100em] w-full bg-white">
-        <div className="mt-[5em] flex flex-row items-center xl:px-[5em]">
+      <main className="h-full-full bg-white">
+        <div className="mt-[5em] flex flex-row items-center bg-[url('./images/bg-curve-desktop.svg')] bg-bottom bg-no-repeat pb-[17.8em] xl:px-[5em]">
           <form className=" flex h-fit w-full flex-col items-center justify-center gap-[1.5em] rounded-[0.5em] text-left">
             <div className="flex flex-col gap-[1em]">
               <span className="font-raleway text-[1.5rem] font-[700] text-veryDarkBlue lg:text-[1.75rem]  xl:text-[2.5rem]">
@@ -203,30 +218,30 @@ export default function Home() {
                 placeholder="Enter your email..."
                 onKeyDown={(event) => {
                   if (event.key === 'Enter') {
-                    //setShowMessage(true);
-                    event.preventDefault(); // Prevent form submission
+                    setShowMessage(true);
+                    event.preventDefault();
                   } else if (event.key === 'Backspace') {
-                    //setShowMessage(false);
+                    setShowMessage(false);
                   }
                 }}
                 onChange={(value) => {
-                  //testEmail(value.target.value);
-                  //setShowMessage(false);
+                  testEmail(value.target.value);
+                  setShowMessage(false);
                 }}
               />
               <button
                 type="button"
                 onClick={() => {
-                  //setShowMessage(true);
+                  setShowMessage(true);
                 }}
                 className="font-raleway w-[30%] rounded-[0.2em] bg-brightBlue px-[2.1em] py-[0.8em] text-[0.9rem] font-[700] text-white duration-100 hover:opacity-70"
               >
                 Get Started
               </button>
               <div
-                className={`font-openSans absolute mt-[4.3em] flex h-0 w-[75%] justify-center text-[0.75rem] font-[700] md:mt-[4.7em] md:w-fit md:pl-[3em]`}
+                className={`${messageColor} font-openSans absolute mt-[4.3em] flex h-0 w-full justify-center text-[0.75rem] font-[700] drop-shadow-sm md:mt-[4.1em] md:w-fit`}
               >
-                text
+                {showMessage && message}
               </div>
             </div>
           </form>
@@ -236,6 +251,7 @@ export default function Home() {
             alt="illustration of people putting documents in the folder"
           />
         </div>
+        <div className='w-full h-[30em] bg-lightGrayishBlue'></div>
       </main>
     </div>
   );
