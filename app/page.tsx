@@ -7,6 +7,7 @@ import Image, { StaticImageData } from 'next/image';
 import logo from './images/logo.svg';
 import illustration1 from './images/illustration-1.svg';
 import illustration2 from './images/illustration-2.svg';
+import person from './images/avatar-testimonial.jpg';
 import { useState } from 'react';
 
 const IconFacebook = () => {
@@ -162,10 +163,15 @@ const Arrow = ({ alternate }: { alternate: boolean }) => {
       </defs>
       <g fill="none" fillRule="evenodd">
         <g transform="translate(2 2)">
-          <use className="duration-300" fill={!alternate ? '#000' : 'white'} filter="url(#a)" xlinkHref="#b" />
-          <use className="duration-300" fill={!alternate ? '#62E0D9' : 'white'} xlinkHref="#b" />
+          <use
+            className="duration-300"
+            fill={!alternate ? 'hsl(170, 45%, 43%)' : '#7ADCCD'}
+            filter="url(#a)"
+            xlinkHref="#b"
+          />
+          <use className="duration-300" fill={!alternate ? 'hsl(170, 45%, 43%)' : '#7ADCCD'} xlinkHref="#b" />
         </g>
-        <path d="M8.582 6l-.363.35 1.452 1.4H5.333v.5h4.338L8.22 9.65l.363.35 2.074-2z" fill="#1B2330" />
+        <path d="M8.582 6l-.363.35 1.452 1.4H5.333v.5h4.338L8.22 9.65l.363.35 2.074-2z" fill="white" />
       </g>
     </svg>
   );
@@ -280,15 +286,32 @@ export default function Home() {
                       setHoverColor(false);
                     }}
                     href="#"
-                    className={`${hoverColor ? 'text-[#BFC6CE]' : 'text-[#7BB1B3]'} duration-300`}
+                    className={`${hoverColor ? 'text-[#77E1CB]' : 'text-moderateCyan'} duration-300`}
                   >
                     See how Fylo works
                   </a>
                   <Arrow alternate={hoverColor} />
                 </div>
                 <div
-                  className={`${hoverColor ? 'bg-[#BFC6CE]' : 'bg-[#7BB1B3]'} mt-[0.2em] h-[1px] w-full duration-300`}
+                  className={`${
+                    hoverColor ? 'bg-[#77E1CB]' : 'bg-moderateCyan'
+                  } mt-[0.2em] h-[1px] w-full duration-300`}
                 ></div>
+              </div>
+              <div className="flex h-fit w-full items-center rounded-[0.2em] bg-white px-[1.6em] pb-[1.5em] pt-[2.5em] shadow-[3px_6px_15px_5px_rgba(0,0,0,0.1)]">
+                <div className="flex flex-col gap-[1.4em]">
+                  <span className="font-openSans text-[0.85rem] tracking-[0.05em] text-veryDarkBlue">
+                    Fylo has improved our team productivity by an order of magnitude. Since making the switch our team
+                    has become a well-oiled collaboration machine.
+                  </span>
+                  <div className="flex flex-row items-center gap-[0.5em]">
+                    <Image className="h-[2em] w-fit rounded-full" src={person} alt="picture of person" />
+                    <div className="flex flex-col justify-center">
+                      <span className="font-openSans text-[0.7rem] font-[700] text-veryDarkBlue">Kyle Burton</span>
+                      <span className="font-openSans text-[0.6rem] text-veryDarkBlue">Founder & CEO, Huddle</span>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
             <Image
