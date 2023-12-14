@@ -224,7 +224,7 @@ export default function Home() {
         </div>
       </nav>
       <main className="h-full w-full bg-white">
-        <div className="mt-[5em] flex flex-col-reverse items-center bg-[url('./images/bg-curve-mobile.svg')] bg-bottom bg-no-repeat px-6 pb-[17.8em] md:flex-row md:bg-[url('./images/bg-curve-desktop.svg')] md:px-0 xl:px-[5em]">
+        <div className="mt-[5em] flex flex-col-reverse items-center bg-[url('./images/bg-curve-mobile.svg')] bg-bottom bg-no-repeat px-6 pb-[10em] md:flex-row md:bg-[url('./images/bg-curve-desktop.svg')] md:px-0 md:pb-[17.8em] xl:px-[5em]">
           <form className=" flex h-fit w-full flex-col items-center justify-center gap-[1.5em] rounded-[0.5em] text-left">
             <div className="flex flex-col gap-[1em] text-center md:text-left">
               <span className="font-raleway text-[1.5rem] font-[700] text-veryDarkBlue lg:text-[1.75rem]  xl:text-[2.5rem]">
@@ -266,7 +266,7 @@ export default function Home() {
                 Get Started
               </button>
               <div
-                className={`${message1Color} font-openSans absolute mt-[4.3em] flex h-0 w-full justify-center text-[0.75rem] font-[700] drop-shadow-sm md:mt-[4.1em] md:w-fit`}
+                className={`${message1Color} font-openSans absolute mt-[3.9em] flex h-0 w-fit justify-center self-center text-[0.75rem] font-[700] drop-shadow-sm md:mt-[4.1em] md:w-fit`}
               >
                 {showMessage1 && message1}
               </div>
@@ -281,7 +281,7 @@ export default function Home() {
         <div className="h-full w-full bg-lightGrayishBlue pb-[7em] pt-[4em]">
           <div className="flex w-full flex-col-reverse items-center justify-center gap-[3.5em] px-[2em] md:flex-row md:px-[2em]">
             <div className="flex flex-col">
-              <span className="font-raleway w-full pb-[0.5em] pl-1 text-[1.1rem] font-[700] leading-[1.25em] text-veryDarkBlue md:pl-0 md:text-[1.75rem] lg:text-[2rem]  xl:text-[2.5rem]">
+              <span className="font-raleway w-fit pb-[0.5em] md:w-full self-center text-[1.1rem] font-[700] leading-[1.25em] text-veryDarkBlue md:text-[1.75rem] lg:text-[2rem]  xl:text-[2.5rem]">
                 Stay productive, wherever you are
               </span>
               <div className="lg:-[0.95rem] font-openSans mt-[1em] flex w-full flex-col gap-[1em] text-veryDarkBlue md:text-[0.9rem] xl:w-[33em] xl:text-[1rem]">
