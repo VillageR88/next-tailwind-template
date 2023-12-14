@@ -12,7 +12,7 @@ const nextConfig = {
 
   // Optional: Change the output directory `out` -> `dist`
   distDir: 'build',
-
+  //assetPrefix: '/Frontend_Mentor/fylo-landing-page-with-two-column-layout-master/',
   reactStrictMode: true,
 }
 

@@ -224,13 +224,13 @@ export default function Home() {
         </div>
       </nav>
       <main className="h-full w-full bg-white ">
-        <div className="mt-[5em] flex flex-col-reverse items-center bg-[url('./images/bg-curve-mobile.svg')] bg-bottom bg-no-repeat px-6 pb-[10em] md:flex-row md:bg-[url('./images/bg-curve-desktop.svg')] md:px-0 md:pb-[17.8em] xl:px-[5em]">
+        <div className="mt-[5em] flex flex-col-reverse items-center bg-[url('./images/bg-curve-mobile.svg')] bg-contain bg-bottom bg-no-repeat px-6 pb-[10em] md:flex-row md:bg-[url('./images/bg-curve-desktop.svg')] md:px-0 md:pb-[17.8em] xl:px-[5em]">
           <form className=" flex h-fit w-full flex-col items-center justify-center gap-[1.5em] rounded-[0.5em] text-left md:px-6 lg:px-10 xl:px-0">
             <div className="flex flex-col gap-[1em] text-center md:text-left">
               <span className="font-raleway text-[1.5rem] font-[700] text-veryDarkBlue lg:text-[1.75rem]  xl:text-[2.5rem]">
                 All your files in one secure location, accessible anywhere.
               </span>
-              <span className="font-openSans w-full leading-[1.4em] tracking-[0.02em] text-veryDarkBlue xl:pr-[3.5em] xl:text-[1.08em]">
+              <span className="w-full font-openSans leading-[1.4em] tracking-[0.02em] text-veryDarkBlue xl:pr-[3.5em] xl:text-[1.08em]">
                 Fylo stores your most important files in one secure location. Access them wherever you need, share and
                 collaborate with friends, family, and co-workers.
               </span>
@@ -239,7 +239,7 @@ export default function Home() {
               <input
                 inputMode="email"
                 type="text"
-                className={`font-openSans flex h-[3em] w-full rounded-[0.2em] px-6 text-[0.9rem] outline outline-1 md:w-[80%] xl:w-[50%] ${
+                className={`flex h-[3em] w-full rounded-[0.2em] px-6 font-openSans text-[0.9rem] outline outline-1 md:w-[80%] xl:w-[50%] ${
                   showMessage1 && message1 !== 'Thank you!' ? 'outline-pink-400' : 'outline-desaturatedBlue'
                 }`}
                 placeholder="Enter your email..."
@@ -261,12 +261,12 @@ export default function Home() {
                 onClick={() => {
                   setShowMessage1(true);
                 }}
-                className="font-raleway w-full rounded-[0.2em] bg-brightBlue px-[2.1em] py-[0.8em] text-[0.9rem] font-[700] text-white duration-100 hover:opacity-70 md:w-[50%] xl:w-[30%]"
+                className="w-full rounded-[0.2em] bg-brightBlue px-[2.1em] py-[0.8em] font-raleway text-[0.9rem] font-[700] text-white duration-100 hover:opacity-70 md:w-[50%] xl:w-[30%]"
               >
                 Get Started
               </button>
               <div
-                className={`${message1Color} font-openSans absolute mt-[3.9em] flex h-0 w-fit justify-center self-center text-[0.75rem] font-[700] drop-shadow-sm md:mt-[3.8em] md:w-fit md:self-start xl:mt-[4.1em]`}
+                className={`${message1Color} absolute mt-[3.9em] flex h-0 w-fit justify-center self-center font-openSans text-[0.75rem] font-[700] drop-shadow-sm md:mt-[3.8em] md:w-fit md:self-start xl:mt-[4.1em]`}
               >
                 {showMessage1 && message1}
               </div>
@@ -281,10 +281,10 @@ export default function Home() {
         <div className="h-full w-full bg-lightGrayishBlue pb-[7em] pt-[4em]">
           <div className="flex w-full flex-col-reverse items-center justify-center gap-[3.5em] px-[2em] md:flex-row md:px-[2em]">
             <div className="flex flex-col">
-              <span className="font-raleway w-fit self-center pb-[0.5em] text-[1.1rem] font-[700] leading-[1.25em] text-veryDarkBlue md:w-full md:text-[1.75rem] lg:text-[2rem]  xl:text-[2.5rem]">
+              <span className="w-fit self-center pb-[0.5em] font-raleway text-[1.1rem] font-[700] leading-[1.25em] text-veryDarkBlue md:w-full md:text-[1.75rem] lg:text-[2rem]  xl:text-[2.5rem]">
                 Stay productive, wherever you are
               </span>
-              <div className="lg:-[0.95rem] font-openSans mt-[1em] flex w-full flex-col gap-[1em] text-veryDarkBlue md:text-[0.9rem] xl:w-[33em] xl:text-[1rem]">
+              <div className="lg:-[0.95rem] mt-[1em] flex w-full flex-col gap-[1em] font-openSans text-veryDarkBlue md:text-[0.9rem] xl:w-[33em] xl:text-[1rem]">
                 <span>
                   Never let location be an issue when accessing your files. Fylo has you covered for all of your file
                   storage needs.
@@ -295,7 +295,7 @@ export default function Home() {
                 </span>
               </div>
               <div className="flex w-fit flex-col">
-                <div className="font-openSans mt-[1.2em] flex h-fit flex-row items-center gap-[0.4em]">
+                <div className="mt-[1.2em] flex h-fit flex-row items-center gap-[0.4em] font-openSans">
                   <a
                     onMouseEnter={() => {
                       setHoverColor(true);
@@ -347,7 +347,7 @@ export default function Home() {
               <span className="font-raleway text-[1.5rem] font-[700] text-white lg:text-[1.75rem] xl:text-[2rem]">
                 Get early access today
               </span>
-              <span className="font-openSans w-full leading-[1.4em] tracking-[0.02em] text-slate-200 xl:text-[1em]">
+              <span className="w-full font-openSans leading-[1.4em] tracking-[0.02em] text-slate-200 xl:text-[1em]">
                 It only takes a minute to sign up and our free starter tier is extremely generous. If you have any
                 questions, our support team would be happy to help you.
               </span>
@@ -356,7 +356,7 @@ export default function Home() {
               <input
                 inputMode="email"
                 type="text"
-                className={`font-openSans flex h-[3.4em] w-full rounded-[0.2em] px-6 text-[0.9rem] outline outline-1 drop-shadow-md lg:w-[32em] ${
+                className={`flex h-[3.4em] w-full rounded-[0.2em] px-6 font-openSans text-[0.9rem] outline outline-1 drop-shadow-md lg:w-[32em] ${
                   showMessage2 && message2 !== 'Thank you!' ? 'outline-pink-400' : 'outline-desaturatedBlue'
                 }`}
                 placeholder="Enter your email..."
@@ -378,12 +378,12 @@ export default function Home() {
                 onClick={() => {
                   setShowMessage2(true);
                 }}
-                className="font-raleway w-full rounded-[0.2em] bg-brightBlue px-[2.1em] py-[0.8em] text-[0.9rem] font-[700] text-white drop-shadow-md duration-100 hover:bg-[#6B9BFF] md:w-[14em]"
+                className="w-full rounded-[0.2em] bg-brightBlue px-[2.1em] py-[0.8em] font-raleway text-[0.9rem] font-[700] text-white drop-shadow-md duration-100 hover:bg-[#6B9BFF] md:w-[14em]"
               >
                 Get Started For Free
               </button>
               <div
-                className={`${message2Color} font-openSans absolute mt-[4.5em] flex h-0 justify-center self-center text-[0.75rem] font-[400] md:mt-[4.4em] md:w-fit md:self-start`}
+                className={`${message2Color} absolute mt-[4.5em] flex h-0 justify-center self-center font-openSans text-[0.75rem] font-[400] md:mt-[4.4em] md:w-fit md:self-start`}
               >
                 {showMessage2 && message2}
               </div>
