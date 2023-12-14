@@ -180,20 +180,34 @@ const Arrow = ({ alternate }: { alternate: boolean }) => {
 
 export default function Home() {
   const emailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
-  const [message, setMessage] = useState<string>('Please check your email');
-  const [messageColor, setMessageColor] = useState<string>('text-pink-400');
-  const [showMessage, setShowMessage] = useState<boolean>(false);
   const [hoverColor, setHoverColor] = useState<boolean>(false);
+  const [message1, setMessage1] = useState<string>('Please check your email');
+  const [message1Color, setMessage1Color] = useState<string>('text-pink-400');
+  const [showMessage1, setShowMessage1] = useState<boolean>(false);
+  const [message2, setMessage2] = useState<string>('Please check your email');
+  const [message2Color, setMessage2Color] = useState<string>('text-white');
+  const [showMessage2, setShowMessage2] = useState<boolean>(false);
 
-  const testEmail = (value: string) => {
+  const testEmail1 = (value: string) => {
     if (emailRegex.test(value)) {
-      setMessage('Thank you!');
-      setMessageColor('text-teal-600');
+      setMessage1('Thank you!');
+      setMessage1Color('text-teal-600');
     } else {
-      setMessage('Please check your email');
-      setMessageColor('text-pink-400');
+      setMessage1('Please check your email');
+      setMessage1Color('text-pink-400');
     }
   };
+
+  const testEmail2 = (value: string) => {
+    if (emailRegex.test(value)) {
+      setMessage2('Thank you!');
+      setMessage2Color('text-teal-300');
+    } else {
+      setMessage2('Please check your email');
+      setMessage2Color('text-white');
+    }
+  };
+
   return (
     <div className="flex min-h-screen flex-col items-center justify-center">
       <nav className="flex w-full flex-row items-center justify-between bg-white px-[0.5em] pt-[4em] md:px-[2em] lg:px-[3.5em] xl:px-[5em]">
@@ -223,35 +237,35 @@ export default function Home() {
                 inputMode="email"
                 type="text"
                 className={`font-openSans flex h-[3em] w-[50%] rounded-[0.2em] px-6 text-[0.9rem] outline outline-1 ${
-                  showMessage && message !== 'Thank you!' ? 'outline-pink-400' : 'outline-desaturatedBlue'
+                  showMessage1 && message1 !== 'Thank you!' ? 'outline-pink-400' : 'outline-desaturatedBlue'
                 }`}
                 placeholder="Enter your email..."
                 onKeyDown={(event) => {
                   if (event.key === 'Enter') {
-                    setShowMessage(true);
+                    setShowMessage1(true);
                     event.preventDefault();
                   } else if (event.key === 'Backspace') {
-                    setShowMessage(false);
+                    setShowMessage1(false);
                   }
                 }}
                 onChange={(value) => {
-                  testEmail(value.target.value);
-                  setShowMessage(false);
+                  testEmail1(value.target.value);
+                  setShowMessage1(false);
                 }}
               />
               <button
                 type="button"
                 onClick={() => {
-                  setShowMessage(true);
+                  setShowMessage1(true);
                 }}
                 className="font-raleway w-[30%] rounded-[0.2em] bg-brightBlue px-[2.1em] py-[0.8em] text-[0.9rem] font-[700] text-white duration-100 hover:opacity-70"
               >
                 Get Started
               </button>
               <div
-                className={`${messageColor} font-openSans absolute mt-[4.3em] flex h-0 w-full justify-center text-[0.75rem] font-[700] drop-shadow-sm md:mt-[4.1em] md:w-fit`}
+                className={`${message1Color} font-openSans absolute mt-[4.3em] flex h-0 w-full justify-center text-[0.75rem] font-[700] drop-shadow-sm md:mt-[4.1em] md:w-fit`}
               >
-                {showMessage && message}
+                {showMessage1 && message1}
               </div>
             </div>
           </form>
@@ -325,8 +339,8 @@ export default function Home() {
           </div>
         </div>
         <div className="bg-desaturatedBlue px-[5em] py-20">
-          <form className=" flex h-fit w-full gap-[15em] flex-row items-center justify-between gap-[1.5em] rounded-[0.5em] text-left">
-            <div className="flex flex-col gap-[1em] w-1/2">
+          <form className=" flex h-fit w-full flex-row items-center justify-between gap-[15em] rounded-[0.5em] text-left">
+            <div className="flex w-1/2 flex-col gap-[1em]">
               <span className="font-raleway text-[1.5rem] font-[700] text-white lg:text-[1.75rem] xl:text-[2rem]">
                 Get early access today
               </span>
@@ -335,40 +349,40 @@ export default function Home() {
                 questions, our support team would be happy to help you.
               </span>
             </div>
-            <div className="flex flex-col w-1/2 gap-[2em]">
+            <div className="flex w-1/2 flex-col gap-[2em]">
               <input
                 inputMode="email"
                 type="text"
-                className={`font-openSans flex h-[3.4em] w-[32em] rounded-[0.2em] px-6 text-[0.9rem] outline outline-1 ${
-                  showMessage && message !== 'Thank you!' ? 'outline-pink-400' : 'outline-desaturatedBlue'
+                className={`font-openSans flex h-[3.4em] w-[32em] rounded-[0.2em] px-6 text-[0.9rem] outline outline-1 drop-shadow-md ${
+                  showMessage2 && message2 !== 'Thank you!' ? 'outline-pink-400' : 'outline-desaturatedBlue'
                 }`}
                 placeholder="Enter your email..."
                 onKeyDown={(event) => {
                   if (event.key === 'Enter') {
-                    setShowMessage(true);
+                    setShowMessage2(true);
                     event.preventDefault();
                   } else if (event.key === 'Backspace') {
-                    setShowMessage(false);
+                    setShowMessage2(false);
                   }
                 }}
                 onChange={(value) => {
-                  testEmail(value.target.value);
-                  setShowMessage(false);
+                  testEmail2(value.target.value);
+                  setShowMessage2(false);
                 }}
               />
               <button
                 type="button"
                 onClick={() => {
-                  setShowMessage(true);
+                  setShowMessage2(true);
                 }}
-                className="font-raleway w-[14em] rounded-[0.2em] bg-brightBlue px-[2.1em] py-[0.8em] text-[0.9rem] font-[700] text-white duration-100 hover:opacity-70"
+                className="font-raleway w-[14em] rounded-[0.2em] bg-brightBlue px-[2.1em] py-[0.8em] text-[0.9rem] font-[700] text-white drop-shadow-md duration-100 hover:bg-[#6B9BFF]"
               >
                 Get Started For Free
               </button>
               <div
-                className={`${messageColor} font-openSans absolute mt-[4.3em] flex h-0 w-full justify-center text-[0.75rem] font-[700] drop-shadow-sm md:mt-[4.1em] md:w-fit`}
+                className={`${message2Color} font-openSans absolute mt-[4.5em] flex h-0 w-full justify-center text-[0.75rem] font-[400]  md:mt-[4.4em] md:w-fit`}
               >
-                {showMessage && message}
+                {showMessage2 && message2}
               </div>
             </div>
           </form>
