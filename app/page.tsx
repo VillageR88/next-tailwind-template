@@ -360,7 +360,7 @@ export default function Home() {
         </div>
         <div className="h-full w-full bg-[#181E2A] px-[2em] pb-[26em] pt-[9em] md:px-0 md:pb-[22.5em]">
           <div className="h-full w-full bg-[url('./images/bg-quotes.png')] bg-[5%_0] bg-no-repeat md:mx-[2em] md:w-fit md:bg-left-top lg:mx-[4em] xl:mx-[8em]">
-            <div className="flex h-full w-full flex-col justify-between gap-[1.5em] pt-[2.3em] md:flex-row md:px-[0.6em]">
+            <div className="flex h-full w-full flex-col justify-between gap-[2.2em] pt-[2.3em] md:flex-row md:gap-[2.5em] md:px-[0.6em]">
               <SmallBox image={person1} name="Satish Patel" />
               <SmallBox image={person2} name="Bruce McKenzie" />
               <SmallBox image={person3} name="Iva Boyd" />
