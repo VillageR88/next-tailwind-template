@@ -12,7 +12,7 @@ const nextConfig = {
 
   // Optional: Change the output directory `out` -> `dist`
   distDir: 'build',
-
+  //assetPrefix: '/Frontend_Mentor/fylo-dark-theme-landing-page-master/',
   reactStrictMode: true,
 }
 

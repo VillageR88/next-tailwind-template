@@ -202,8 +202,8 @@ const Article1 = ({
         <div className="flex h-[5.5em] justify-center">
           <Image className="h-fit" src={image} alt={alt} />
         </div>
-        <span className="font-raleway mt-[1em] text-[1.21rem] font-[700] text-white">{header}</span>
-        <span className="font-openSans mt-[0.3em] text-[0.9rem] text-[#BFC6CE]">{main}</span>
+        <span className="mt-[1em] font-raleway text-[1.21rem] font-[700] text-white">{header}</span>
+        <span className="mt-[0.3em] font-openSans text-[0.9rem] text-[#BFC6CE]">{main}</span>
       </div>
     </div>
   );
@@ -211,7 +211,7 @@ const Article1 = ({
 
 const SmallBox = ({ image, name }: { image: StaticImageData; name: string }) => {
   return (
-    <div className="flex h-fit w-full items-center rounded-[0.2em] bg-[#21293C] px-[1.6em] pb-[1.5em] pt-[2.5em] shadow-[3px_6px_15px_5px_rgba(0,0,0,5)] shadow-[#1B232E] md:w-[22.6em]">
+    <div className="flex h-fit w-full items-center rounded-[0.2em] bg-[#21293C] px-[1.6em] pb-[1.5em] pt-[2.5em] shadow-[3px_6px_15px_5px_rgba(0,0,0,5)] shadow-[#1B232E] xl:w-[22.6em]">
       <div className="flex flex-col gap-[1.4em]">
         <span className="font-openSans text-[0.85rem] tracking-[0.05em] text-[#BFC6CE]">
           Fylo has improved our team productivity by an order of magnitude. Since making the switch our team has become
@@ -266,14 +266,14 @@ export default function Home() {
           <div className="mt-[4.7em] flex h-full w-full flex-col items-center">
             <Image className="h-fit px-[1em] md:px-0" src={intro} alt="image of the people" />
             <div className="mt-[2.2em] flex h-full w-full flex-col items-center text-center">
-              <span className="font-raleway w-full text-[1.8rem] font-[700] text-white md:w-[20em] md:px-0 md:text-[2rem] lg:text-[2.2rem] xl:text-[2.52rem]">
+              <span className="w-full font-raleway text-[1.8rem] font-[700] text-white md:w-[20em] md:px-0 md:text-[2rem] lg:text-[2.2rem] xl:text-[2.52rem]">
                 All your files in one secure location, accessible anywhere.
               </span>
-              <span className="font-openSans mt-[1.65em] w-full px-[1em] text-[#FBFFFF] md:w-[30em] md:px-0 md:text-[1rem] lg:text-[1.1rem] xl:text-[1.25rem]">
+              <span className="mt-[1.65em] w-full px-[1em] font-openSans text-[#FBFFFF] md:w-[30em] md:px-0 md:text-[1rem] lg:text-[1.1rem] xl:text-[1.25rem]">
                 Fylo stores all your most important files in one secure location. Access them wherever you need, share
                 and collaborate with friends family, and co-workers.
               </span>
-              <button className="from-cyanInside_call_to_action_gradient font-raleway to-blueInside_call_to_action_gradient mt-[2em] rounded-[2em] bg-gradient-to-r px-[5.95em] py-[1em] font-[700] text-white duration-300 hover:from-[#8CDAE4] hover:to-[#8CDAE4]">
+              <button className="mt-[2em] rounded-[2em] bg-gradient-to-r from-cyanInside_call_to_action_gradient to-blueInside_call_to_action_gradient px-[5.95em] py-[1em] font-raleway font-[700] text-white duration-300 hover:from-[#8CDAE4] hover:to-[#8CDAE4]">
                 Get Started
               </button>
             </div>
@@ -321,10 +321,10 @@ export default function Home() {
                 priority
               />
               <div className="flex flex-col">
-                <span className="font-raleway w-full pl-1 text-[1.1rem] font-[700] leading-[1.25em] text-white md:pl-0 md:text-[1.75rem] lg:text-[2rem] xl:w-[10em] xl:text-[2.5rem]">
+                <span className="w-full pl-1 font-raleway text-[1.1rem] font-[700] leading-[1.25em] text-white md:pl-0 md:text-[1.75rem] lg:text-[2rem] xl:w-[10em] xl:text-[2.5rem]">
                   Stay productive, wherever you are
                 </span>
-                <div className="font-openSans lg:-[0.95rem] mt-[1em] flex w-full flex-col gap-[1em] text-[#BFC6CE] md:text-[0.9rem] xl:w-[35em] xl:text-[1rem]">
+                <div className="lg:-[0.95rem] mt-[1em] flex w-full flex-col gap-[1em] font-openSans text-[#BFC6CE] md:text-[0.9rem] xl:w-[35em] xl:text-[1rem]">
                   <span>
                     Never let location be an issue when accessing your files. Fylo has you covered for all of your file
                     storage needs.
@@ -335,7 +335,7 @@ export default function Home() {
                   </span>
                 </div>
                 <div className="flex w-fit flex-col">
-                  <div className="font-openSans mt-[1.5em] flex h-fit flex-row items-center gap-[0.4em]">
+                  <div className="mt-[1.5em] flex h-fit flex-row items-center gap-[0.4em] font-openSans">
                     <a
                       onMouseEnter={() => {
                         setHoverColor(true);
@@ -359,8 +359,8 @@ export default function Home() {
           </div>
         </div>
         <div className="h-full w-full bg-[#181E2A] px-[2em] pb-[26em] pt-[9em] md:px-0 md:pb-[22.5em]">
-          <div className="h-full w-full bg-[url('./images/bg-quotes.png')] bg-[5%_0] bg-no-repeat  md:mx-[2em] md:w-fit md:bg-left-top lg:mx-[4em] xl:mx-[8em]">
-            <div className="flex  h-full w-full flex-col justify-between gap-[1.5em] pt-[2.3em] md:flex-row md:px-[0.6em]">
+          <div className="h-full w-full bg-[url('./images/bg-quotes.png')] bg-[5%_0] bg-no-repeat md:mx-[2em] md:w-fit md:bg-left-top lg:mx-[4em] xl:mx-[8em]">
+            <div className="flex h-full w-full flex-col justify-between gap-[1.5em] pt-[2.3em] md:flex-row md:px-[0.6em]">
               <SmallBox image={person1} name="Satish Patel" />
               <SmallBox image={person2} name="Bruce McKenzie" />
               <SmallBox image={person3} name="Iva Boyd" />
@@ -368,14 +368,14 @@ export default function Home() {
           </div>
         </div>
       </div>
-      <footer className="bg-darkBlueFooter_background h-full w-full md:h-[32.2em]">
+      <footer className="h-full w-full bg-darkBlueFooter_background md:h-[32.2em]">
         <div className="flex h-0 w-full justify-center">
           <form className="mx-[1.5em] mt-[-14em] flex h-fit w-full flex-col items-center justify-center gap-[2.3em] rounded-[0.5em] bg-[#1C2230] px-[1.5em] py-[4em] text-center shadow-[4px_5px_8px_3px_rgba(0,0,0,0.2)] md:mx-[2em] md:mt-[-10em] md:h-[17.2em] md:px-0 md:py-0 lg:mx-0 lg:w-[54em]">
             <div className="flex flex-col gap-[1em]">
               <span className="font-raleway text-[1.5rem] font-[700] text-white lg:text-[1.75rem] xl:text-[2rem]">
                 Get early access today
               </span>
-              <span className="font-openSans w-full text-[0.9rem] tracking-[-0.01em] text-[#BFC6CE] md:w-[45em]">
+              <span className="w-full font-openSans text-[0.9rem] tracking-[-0.01em] text-[#BFC6CE] md:w-[45em]">
                 It only takes a minute to sign up and our free starter tier is extremely generous. If you have any
                 questions, our support team would be happy to help you.
               </span>
@@ -384,7 +384,7 @@ export default function Home() {
               <input
                 inputMode="email"
                 type="text"
-                className={`font-openSans flex h-[3em] w-full rounded-[3em] pl-[2.2em] pr-[1em] text-[0.9rem] md:w-[25em] md:text-[1rem] lg:w-[30em]`}
+                className={`flex h-[3em] w-full rounded-[3em] pl-[2.2em] pr-[1em] font-openSans text-[0.9rem] md:w-[25em] md:text-[1rem] lg:w-[30em]`}
                 placeholder="email@example.com"
                 onKeyDown={(event) => {
                   if (event.key === 'Enter') {
@@ -404,12 +404,12 @@ export default function Home() {
                 onClick={() => {
                   setShowMessage(true);
                 }}
-                className="from-cyanInside_call_to_action_gradient font-raleway to-blueInside_call_to_action_gradient rounded-[2em] bg-gradient-to-r px-[2.1em] py-[0.9em] text-[0.9rem] font-[700] text-white duration-300 hover:from-[#8CDAE4] hover:to-[#8CDAE4]"
+                className="rounded-[2em] bg-gradient-to-r from-cyanInside_call_to_action_gradient to-blueInside_call_to_action_gradient px-[2.1em] py-[0.9em] font-raleway text-[0.9rem] font-[700] text-white duration-300 hover:from-[#8CDAE4] hover:to-[#8CDAE4]"
               >
                 Get Started For Free
               </button>
               <div
-                className={`${messageColor} font-openSans absolute mt-[4.3em] flex h-0 w-[75%] justify-center text-[0.75rem] font-[700] md:mt-[4.7em] md:w-fit md:pl-[3em]`}
+                className={`${messageColor} absolute mt-[4.3em] flex h-0 w-[75%] justify-center font-openSans text-[0.75rem] font-[700] md:mt-[4.7em] md:w-fit md:pl-[3em]`}
               >
                 {showMessage && message}
               </div>
@@ -426,7 +426,7 @@ export default function Home() {
             <div className="flex flex-col justify-between md:gap-[1.7em] xl:w-[51%] xl:flex-row xl:gap-[3em] ">
               <div className="flex flex-row gap-[1.65em]">
                 <Image className="h-fit" src={iconLocation as string} alt="Location" />
-                <span className="font-openSans mt-[-0.5em] w-[21em] pb-[2em] text-[#BFC6CE] md:pb-0">
+                <span className="mt-[-0.5em] w-[21em] pb-[2em] font-openSans text-[#BFC6CE] md:pb-0">
                   Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
                   dolore magna aliqua
                 </span>
