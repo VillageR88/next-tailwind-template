@@ -263,7 +263,7 @@ export default function Home() {
         <div className="h-[30em] w-full bg-lightGrayishBlue">
           <div className="flex w-full flex-col items-center justify-center gap-[3.5em] px-[2em] md:flex-row md:px-[2em] lg:px-[4em]">
             <div className="flex flex-col">
-              <span className="font-raleway w-full pl-1 text-[1.1rem] font-[700] leading-[1.25em] text-veryDarkBlue md:pl-0 md:text-[1.75rem] lg:text-[2rem] xl:w-[10em] xl:text-[2.5rem]">
+              <span className="font-raleway w-full pl-1 text-[1.1rem] font-[700] leading-[1.25em] text-veryDarkBlue md:pl-0 md:text-[1.75rem] lg:text-[2rem]  xl:text-[2.5rem]">
                 Stay productive, wherever you are
               </span>
               <div className="lg:-[0.95rem] font-openSans mt-[1em] flex w-full flex-col gap-[1em] text-veryDarkBlue md:text-[0.9rem] xl:w-[35em] xl:text-[1rem]">
@@ -298,9 +298,9 @@ export default function Home() {
                   } mt-[0.2em] h-[1px] w-full duration-300`}
                 ></div>
               </div>
-              <div className="flex h-fit w-full items-center rounded-[0.2em] bg-white px-[1.6em] pb-[1.5em] pt-[2.5em] shadow-[3px_6px_15px_5px_rgba(0,0,0,0.1)]">
+              <div className="flex h-fit w-full items-center rounded-[0.2em] md:w-[22em] bg-white px-[1.6em] pb-[1.5em] pt-[2.5em] shadow-[3px_6px_15px_5px_rgba(0,0,0,0.1)]">
                 <div className="flex flex-col gap-[1.4em]">
-                  <span className="font-openSans text-[0.85rem] tracking-[0.05em] text-veryDarkBlue">
+                  <span className="font-openSans text-[0.8rem] tracking-[0.05em] text-veryDarkBlue">
                     Fylo has improved our team productivity by an order of magnitude. Since making the switch our team
                     has become a well-oiled collaboration machine.
                   </span>
@@ -315,7 +315,7 @@ export default function Home() {
               </div>
             </div>
             <Image
-              className="h-fit md:w-[50%]"
+              className="h-fit md:w-[40%]"
               src={illustration2 as string}
               alt="image of the people showing quotes"
               priority
