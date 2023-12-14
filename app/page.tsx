@@ -281,7 +281,7 @@ export default function Home() {
         <div className="h-full w-full bg-lightGrayishBlue pb-[7em] pt-[4em]">
           <div className="flex w-full flex-col-reverse items-center justify-center gap-[3.5em] px-[2em] md:flex-row md:px-[2em]">
             <div className="flex flex-col">
-              <span className="font-raleway w-fit pb-[0.5em] md:w-full self-center text-[1.1rem] font-[700] leading-[1.25em] text-veryDarkBlue md:text-[1.75rem] lg:text-[2rem]  xl:text-[2.5rem]">
+              <span className="font-raleway w-fit self-center pb-[0.5em] text-[1.1rem] font-[700] leading-[1.25em] text-veryDarkBlue md:w-full md:text-[1.75rem] lg:text-[2rem]  xl:text-[2.5rem]">
                 Stay productive, wherever you are
               </span>
               <div className="lg:-[0.95rem] font-openSans mt-[1em] flex w-full flex-col gap-[1em] text-veryDarkBlue md:text-[0.9rem] xl:w-[33em] xl:text-[1rem]">
@@ -341,9 +341,9 @@ export default function Home() {
             />
           </div>
         </div>
-        <div className="bg-desaturatedBlue px-[5em] py-[6em]">
-          <form className=" flex h-fit w-full flex-row items-center justify-between gap-[15em] rounded-[0.5em] text-left">
-            <div className="flex w-1/2 flex-col gap-[1em]">
+        <div className="bg-desaturatedBlue px-[2em] py-[6em] md:px-[5em]">
+          <form className=" flex h-full w-full flex-col items-center justify-between gap-[2.5em] rounded-[0.5em] text-center md:h-fit md:flex-row md:gap-[15em] md:text-left">
+            <div className="flex w-full flex-col items-center gap-[1em] md:w-1/2 md:items-start">
               <span className="font-raleway text-[1.5rem] font-[700] text-white lg:text-[1.75rem] xl:text-[2rem]">
                 Get early access today
               </span>
@@ -352,11 +352,11 @@ export default function Home() {
                 questions, our support team would be happy to help you.
               </span>
             </div>
-            <div className="flex w-1/2 flex-col gap-[2em]">
+            <div className="flex w-full flex-col gap-[2em] md:w-1/2">
               <input
                 inputMode="email"
                 type="text"
-                className={`font-openSans flex h-[3.4em] w-[32em] rounded-[0.2em] px-6 text-[0.9rem] outline outline-1 drop-shadow-md ${
+                className={`font-openSans flex h-[3.4em] w-full rounded-[0.2em] px-6 text-[0.9rem] outline outline-1 drop-shadow-md md:w-[32em] ${
                   showMessage2 && message2 !== 'Thank you!' ? 'outline-pink-400' : 'outline-desaturatedBlue'
                 }`}
                 placeholder="Enter your email..."
@@ -378,12 +378,12 @@ export default function Home() {
                 onClick={() => {
                   setShowMessage2(true);
                 }}
-                className="font-raleway w-[14em] rounded-[0.2em] bg-brightBlue px-[2.1em] py-[0.8em] text-[0.9rem] font-[700] text-white drop-shadow-md duration-100 hover:bg-[#6B9BFF]"
+                className="font-raleway w-full rounded-[0.2em] bg-brightBlue px-[2.1em] py-[0.8em] text-[0.9rem] font-[700] text-white drop-shadow-md duration-100 hover:bg-[#6B9BFF] md:w-[14em]"
               >
                 Get Started For Free
               </button>
               <div
-                className={`${message2Color} font-openSans absolute mt-[4.5em] flex h-0 w-full justify-center text-[0.75rem] font-[400]  md:mt-[4.4em] md:w-fit`}
+                className={`${message2Color} font-openSans absolute mt-[4.5em] flex h-0 justify-center self-center text-[0.75rem] font-[400] md:mt-[4.4em] md:w-fit md:self-start`}
               >
                 {showMessage2 && message2}
               </div>
@@ -392,9 +392,9 @@ export default function Home() {
         </div>
       </main>
       <footer className="bg-darkBlueFooter_background h-full w-full bg-veryDarkBlue">
-        <div className="h-full w-full pb-[4.5em] pl-[2em] pt-[7.2em] md:px-0">
+        <div className="h-full w-full pb-[1em] pl-[2em] pt-[5em] md:px-0 md:pb-[4.5em] md:pt-[7.2em]">
           <Image
-            className="ml-[1em] h-fit w-fit md:ml-[2em] md:pb-0 lg:ml-[4em] xl:ml-[5.1em]"
+            className="h-fit w-fit pb-[2em] md:ml-[2em] md:pb-0 lg:ml-[4em] xl:ml-[5.1em]"
             src={logoWhite as string}
             alt="logo"
           />
@@ -427,7 +427,7 @@ export default function Home() {
                 ))}
               </div>
             </div>
-            <div className="mt-[5em] flex h-fit w-full flex-row justify-center gap-[0.65em] pb-[3em] md:mt-[-0.5em] md:w-fit md:pb-0">
+            <div className="mt-[5em] flex h-fit w-full flex-row justify-center gap-[0.65em] pb-[3em] pr-8 md:mt-[-0.5em] md:w-fit md:pb-0 md:pr-0">
               <IconFacebook />
               <IconTwitter />
               <IconInstagram />
