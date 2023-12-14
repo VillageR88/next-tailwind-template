@@ -341,7 +341,7 @@ export default function Home() {
             />
           </div>
         </div>
-        <div className="bg-desaturatedBlue px-[5em] py-20">
+        <div className="bg-desaturatedBlue px-[5em] py-[6em]">
           <form className=" flex h-fit w-full flex-row items-center justify-between gap-[15em] rounded-[0.5em] text-left">
             <div className="flex w-1/2 flex-col gap-[1em]">
               <span className="font-raleway text-[1.5rem] font-[700] text-white lg:text-[1.75rem] xl:text-[2rem]">
@@ -391,27 +391,27 @@ export default function Home() {
           </form>
         </div>
       </main>
-      <footer className="bg-darkBlueFooter_background h-full w-full bg-veryDarkBlue md:h-[32.2em]">
-        <div className="h-full w-full px-[2em] pt-[20em] md:px-0 md:pt-[12.55em]">
+      <footer className="bg-darkBlueFooter_background h-full w-full bg-veryDarkBlue">
+        <div className="h-full w-full pb-[4.5em] pl-[2em] pt-[7.2em] md:px-0">
           <Image
-            className="ml-[1em] h-[2.5em] w-fit md:ml-[2em] md:pb-0 lg:ml-[4em] xl:ml-[5.1em]"
+            className="ml-[1em] h-fit w-fit md:ml-[2em] md:pb-0 lg:ml-[4em] xl:ml-[5.1em]"
             src={logoWhite as string}
             alt="logo"
           />
-          <div className="mt-[2.5em] flex w-full flex-col justify-between md:flex-row md:px-[2em] lg:px-[4em] xl:px-0 xl:pl-[7.55em] xl:pr-[5em]">
-            <div className="flex flex-col justify-between md:gap-[1.7em] xl:w-[51%] xl:flex-row xl:gap-[3em] ">
+          <div className="mt-[1.7em] flex w-full flex-col justify-between md:flex-row md:px-[2em] lg:px-[4em] xl:px-0 xl:pl-[7.55em] xl:pr-[17em]">
+            <div className="flex flex-col justify-between md:gap-[1.7em] xl:flex-row xl:gap-[3em] ">
               <div className="mt-[-0.4em] flex flex-col gap-[1.2em] xl:ml-[-2em]">
                 <div className="flex flex-row items-center gap-[1.6em]">
                   <Image className="h-fit" src={iconPhone as string} alt="Phone" />
-                  <span className="font-openSans text-[0.9rem] text-[#BFC6CE]">+1-543-123-4567</span>
+                  <span className="font-openSans text-[1rem] text-[#BFC6CE]">Phone: +1-543-123-4567</span>
                 </div>
                 <div className="flex flex-row items-center gap-[1.6em]">
                   <Image className="h-fit" src={iconEmail as string} alt="Phone" />
-                  <span className="font-openSans text-[0.9rem] text-[#BFC6CE]">example@fylo.com</span>
+                  <span className="font-openSans text-[1rem] text-[#BFC6CE]">example@fylo.com</span>
                 </div>
               </div>
             </div>
-            <div className="mt-[6em] flex flex-col md:mt-0 md:flex-row md:gap-[3em] lg:gap-[4em] xl:ml-[1em] xl:gap-[5em]">
+            <div className="mt-[6em] flex flex-col md:mt-0 md:flex-row md:gap-[3em] lg:gap-[4em] xl:gap-[12em]">
               <div className="mt-[-0.55em] flex flex-col items-start gap-[0.85em] text-[#BFC6CE] duration-300">
                 {['About Us', 'Jobs', 'Press', 'Blog'].map((x, i) => (
                   <button key={i} className="font-openSans duration-300 hover:text-white">
@@ -427,7 +427,7 @@ export default function Home() {
                 ))}
               </div>
             </div>
-            <div className="mt-[5em] flex h-fit   w-full flex-row justify-center gap-[0.65em] pb-[3em] md:mt-[-0.5em] md:w-fit md:pb-0">
+            <div className="mt-[5em] flex h-fit w-full flex-row justify-center gap-[0.65em] pb-[3em] md:mt-[-0.5em] md:w-fit md:pb-0">
               <IconFacebook />
               <IconTwitter />
               <IconInstagram />
