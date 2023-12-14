@@ -324,22 +324,22 @@ export default function Home() {
             />
           </div>
         </div>
-        <div className="bg-desaturatedBlue px-6 py-20">
-          <form className=" flex h-fit w-full flex-row items-center justify-center gap-[1.5em] rounded-[0.5em] text-left">
-            <div className="flex flex-col gap-[1em]">
+        <div className="bg-desaturatedBlue px-[5em] py-20">
+          <form className=" flex h-fit w-full gap-[15em] flex-row items-center justify-between gap-[1.5em] rounded-[0.5em] text-left">
+            <div className="flex flex-col gap-[1em] w-1/2">
               <span className="font-raleway text-[1.5rem] font-[700] text-white lg:text-[1.75rem] xl:text-[2rem]">
                 Get early access today
               </span>
-              <span className="font-openSans w-full leading-[1.4em] tracking-[0.02em] text-slate-200 xl:text-[1.08em]">
+              <span className="font-openSans w-full leading-[1.4em] tracking-[0.02em] text-slate-200 xl:text-[1em]">
                 It only takes a minute to sign up and our free starter tier is extremely generous. If you have any
                 questions, our support team would be happy to help you.
               </span>
             </div>
-            <div className="flex w-full flex-col gap-[1em]">
+            <div className="flex flex-col w-1/2 gap-[2em]">
               <input
                 inputMode="email"
                 type="text"
-                className={`font-openSans flex h-[3em] w-[50%] rounded-[0.2em] px-6 text-[0.9rem] outline outline-1 ${
+                className={`font-openSans flex h-[3.4em] w-[32em] rounded-[0.2em] px-6 text-[0.9rem] outline outline-1 ${
                   showMessage && message !== 'Thank you!' ? 'outline-pink-400' : 'outline-desaturatedBlue'
                 }`}
                 placeholder="Enter your email..."
@@ -361,9 +361,9 @@ export default function Home() {
                 onClick={() => {
                   setShowMessage(true);
                 }}
-                className="font-raleway w-[30%] rounded-[0.2em] bg-brightBlue px-[2.1em] py-[0.8em] text-[0.9rem] font-[700] text-white duration-100 hover:opacity-70"
+                className="font-raleway w-[14em] rounded-[0.2em] bg-brightBlue px-[2.1em] py-[0.8em] text-[0.9rem] font-[700] text-white duration-100 hover:opacity-70"
               >
-                Get Started
+                Get Started For Free
               </button>
               <div
                 className={`${messageColor} font-openSans absolute mt-[4.3em] flex h-0 w-full justify-center text-[0.75rem] font-[700] drop-shadow-sm md:mt-[4.1em] md:w-fit`}
