@@ -11,6 +11,7 @@ import imageCommunities from './images/icon-communities.svg';
 import imageMessages from './images/icon-messages.svg';
 import illustrationGrowTogether from './images/illustration-grow-together.svg';
 import illustrationFlowingConversation from './images/illustration-flowing-conversation.svg';
+import illustrationYourUsers from './images/illustration-your-users.svg';
 
 const SmallBlock1 = ({
   image,
@@ -95,8 +96,8 @@ export default function Home() {
             <SmallBlock1 scale="scale-[84%]" image={imageMessages as string} text1="2.7m+" text2="Messages Sent" />
           </div>
         </div>
-        <div className="mt-[8.4em] h-[10em] w-full bg-[url('./images/bg-section-top-desktop-1.svg')]"></div>
-        <div className="h-[33em] w-full bg-[#F6FBFF]">
+        <div className="mt-[8.4em] h-[9.8em] w-full bg-[url('./images/bg-section-top-desktop-1.svg')]"></div>
+        <div className="h-[34em] w-full bg-[#F6FBFF] pt-[2em]">
           <Block1
             header="Grow Together"
             main="Generate meaningful discussions with your audience and build a strong, loyal community. Think of the insightful
@@ -105,16 +106,36 @@ export default function Home() {
           />
         </div>
         <div className="h-[8.6em] w-full bg-[url('./images/bg-section-bottom-desktop-1.svg')]"></div>
-        <div className="h-[33em]">
+        <div className="h-[42.8em] pt-[5.5em]">
           <Block1
             header="Flowing Conversations"
             main="You wouldn't paginate a conversation in real life, so why do it online? Our threads have just-in-time loading for a more natural flow."
             width="w-[44.2%]"
             image={illustrationFlowingConversation as string}
             reversed={true}
-            optionalPr='pr-[7em]'
+            optionalPr="pr-[7em]"
           />
         </div>
+        <div className="h-[8.6em] w-full bg-[url('./images/bg-section-top-desktop-2.svg')]"></div>{' '}
+        <div className="h-[31em] w-full bg-[#F6FBFF] pt-[1em]">
+          <Block1
+            header="Your Users"
+            main="It takes no time at all to integrate Huddle with your app's authentication solution. This means, 
+            once signed in to your app, your users can start chatting immediately."
+            image={illustrationYourUsers as string}
+            width="w-[45%]"
+          />
+        </div>
+        <div className="h-[8.6em] w-full bg-[url('./images/bg-section-bottom-desktop-2.svg')]"></div>
+        <div className="justify-center flex h-[32.5em] flex-col items-center">
+          <span className="font-poppins text-[2.5rem] font-[700] text-veryDarkCyan">
+            Ready To Build Your Community?
+          </span>
+          <button className="mt-[2em] rounded-[3em] bg-pink px-[5.1em] py-[1.25em] font-openSans text-[1.25rem] font-[600] text-white drop-shadow-xl">
+            Get Started For Free
+          </button>
+        </div>
+        <div className="h-[8.6em] w-full bg-[url('./images/bg-footer-top-desktop.svg')]"></div>
       </main>
     </div>
   );
