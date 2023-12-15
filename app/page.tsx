@@ -47,18 +47,20 @@ const Block1 = ({
   width,
   image,
   reversed,
+  optionalPr,
 }: {
   header: string;
   main: string;
   width?: string;
   image: string;
   reversed?: boolean;
+  optionalPr?: string;
 }) => {
   return (
     <div
       className={`flex ${
         reversed ? 'flex-row-reverse' : 'flex-row'
-      } h-full w-full items-center justify-between pl-[8.1em] pr-[9.5em]`}
+      } h-full w-full items-center justify-between pl-[8.1em] ${optionalPr ? optionalPr : 'pr-[9.5em]'}`}
     >
       <Article1 header={header} main={main} width={width} />
       <Image className="h-fit w-[44.5%] items-center" src={image} alt="image of two people" />
@@ -106,10 +108,11 @@ export default function Home() {
         <div className="h-[33em]">
           <Block1
             header="Flowing Conversations"
-            main="You wouldn't paginate a conversation in real life, so why do it online? Our threads have 
-            just-in-time loading for a more natural flow."
+            main="You wouldn't paginate a conversation in real life, so why do it online? Our threads have just-in-time loading for a more natural flow."
+            width="w-[44.2%]"
             image={illustrationFlowingConversation as string}
             reversed={true}
+            optionalPr='pr-[7em]'
           />
         </div>
       </main>
