@@ -215,7 +215,13 @@ export default function Home() {
                 >
                   {showMessage1 && message1}
                 </div>
-                <button className="rounded-[0.2em] bg-pink px-[2.6em] py-[0.75em] font-openSans text-[1rem] font-[600] text-white outline drop-shadow-xl hover:bg-lightPink">
+                <button
+                  type="button"
+                  onClick={() => {
+                    setShowMessage1(true);
+                  }}
+                  className="rounded-[0.2em] bg-pink px-[2.6em] py-[0.75em] font-openSans text-[1rem] font-[600] text-white drop-shadow-xl hover:bg-lightPink"
+                >
                   Subscribe
                 </button>
               </div>
