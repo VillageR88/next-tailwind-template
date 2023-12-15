@@ -60,12 +60,16 @@ export default function Home() {
         </div>
         <div className="mt-[8.4em] h-[10em] w-full bg-[url('./images/bg-section-top-desktop-1.svg')]"></div>
         <div className="h-[33em] w-full bg-[#F6FBFF]">
-          <div className="flex h-full w-full items-center justify-center px-[10em]">
-            <div className="w-1/2">
-              <span>assadsa</span>
+          <div className="flex h-full w-full items-center justify-between pr-[9.5em] pl-[8.1em]">
+            <div className="flex w-[44%] gap-[1.4em] flex-col">
+              <span className="font-poppins text-[2.5rem] font-[700] text-veryDarkCyan">Grow Together</span>
+              <span className="font-openSans text-veryDarkCyan">
+                Generate meaningful discussions with your audience and build a strong, loyal community. Think of the
+                insightful conversations you miss out on with a feedback form.
+              </span>
             </div>
             <Image
-              className="h-fit w-1/2 items-center"
+              className="h-fit w-[44.5%] items-center"
               src={illustrationGrowTogether as string}
               alt="image of two people"
             />
