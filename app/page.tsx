@@ -1,3 +1,4 @@
+'use client';
 import '@fontsource/poppins';
 import '@fontsource/poppins/700.css';
 import '@fontsource/open-sans';
@@ -15,6 +16,7 @@ import illustrationFlowingConversation from './images/illustration-flowing-conve
 import illustrationYourUsers from './images/illustration-your-users.svg';
 import iconPhone from './images/icon-phone.svg';
 import iconEmail from './images/icon-email.svg';
+import { useState } from 'react';
 
 const SmallBlock1 = ({
   image,
@@ -73,6 +75,20 @@ const Block1 = ({
 };
 
 export default function Home() {
+  const emailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
+  const [hoverColor, setHoverColor] = useState<boolean>(false);
+  const [message1, setMessage1] = useState<string>('Please check your email');
+  const [message1Color, setMessage1Color] = useState<string>('text-red-400');
+  const [showMessage1, setShowMessage1] = useState<boolean>(false);
+  const testEmail1 = (value: string) => {
+    if (emailRegex.test(value)) {
+      setMessage1('Thank you!');
+      setMessage1Color('text-teal-400');
+    } else {
+      setMessage1('Please check your email');
+      setMessage1Color('text-red-400');
+    }
+  };
   return (
     <div className="flex min-h-screen flex-col items-center justify-center">
       <nav className="flex h-[12.2em] w-full items-center justify-between bg-white md:px-[2em] lg:px-[3em] xl:px-0 xl:pl-[5em] xl:pr-[4em]">
@@ -175,8 +191,31 @@ export default function Home() {
                 spam or pass on your email address
               </span>
               <div className="mt-[1em] flex flex-row items-center gap-[2.5em]">
-                <input className="w-[20em] rounded-[0.2em] py-[0.7em]"></input>
-                <button className="rounded-[0.2em] bg-pink px-[2.6em] py-[0.75em] font-openSans text-[1rem] font-[600] text-white drop-shadow-xl hover:bg-lightPink">
+                <input
+                  inputMode="email"
+                  type="text"
+                  onKeyDown={(event) => {
+                    if (event.key === 'Enter') {
+                      setShowMessage1(true);
+                      event.preventDefault();
+                    } else if (event.key === 'Backspace') {
+                      setShowMessage1(false);
+                    }
+                  }}
+                  onChange={(value) => {
+                    testEmail1(value.target.value);
+                    setShowMessage1(false);
+                  }}
+                  className={`${
+                    showMessage1 && message1 !== 'Thank you!' && 'outline-red-400'
+                  } w-[20em] rounded-[0.2em] px-2 py-[0.7em]`}
+                ></input>
+                <div
+                  className={`${message1Color} absolute mt-[3.9em] flex h-0 w-fit justify-center self-center font-openSans text-[0.75rem] font-[700] drop-shadow-sm md:mt-[3.8em] md:w-fit md:self-start xl:mt-[4.5em]`}
+                >
+                  {showMessage1 && message1}
+                </div>
+                <button className="rounded-[0.2em] bg-pink px-[2.6em] py-[0.75em] font-openSans text-[1rem] font-[600] text-white outline drop-shadow-xl hover:bg-lightPink">
                   Subscribe
                 </button>
               </div>
