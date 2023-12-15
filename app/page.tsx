@@ -160,20 +160,20 @@ export default function Home() {
         <div className="flex h-[35.2em] w-full flex-row justify-between pt-[7.7em]">
           <div>
             <Image
-              className="mb-[2.5em] h-[2.35em] w-[15em]"
+              className="mb-[1.6em] h-[2.35em] w-[15em]"
               height={10}
               width={10}
               src={logoWhite as string}
               alt="logo"
             />
-            <div className="flex flex-col gap-[1.5em]">
-              <div className="flex flex-row items-start gap-[1.68em] md:w-[20em]">
-                <span className="text-veryPaleCyan font-openSans text-[1.1rem] text-white md:text-[0.9rem]">
+            <div className="flex flex-col gap-[1em]">
+              <div className="flex flex-row items-start md:w-[20em]">
+                <span className="text-veryPaleCyan font-openSans text-[1.1rem] leading-[1.7em] text-white md:text-[0.9rem]">
                   Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris nulla quam, hendrerit lacinia
                   vestibulum a, ultrices quis sem.
                 </span>
               </div>
-              <div className="flex flex-row items-center gap-[1.2em] md:w-[25em]">
+              <div className="flex flex-row items-center mt-[0.5em] gap-[1.2em] md:w-[25em]">
                 <Image className="h-fit md:ml-[0.15em]" src={iconPhone as string} alt="phone icon" />
                 <span className="text-veryPaleCyan font-openSans text-[1rem] text-white">Phone: +1-543-123-4567</span>
               </div>
