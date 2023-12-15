@@ -6,12 +6,15 @@ import '@fontsource/open-sans/600.css';
 import '@fontsource/open-sans/700.css';
 import Image from 'next/image';
 import logo from './images/logo.svg';
+import logoWhite from './images/logoWhite.svg';
 import imageMockup from './images/screen-mockups.svg';
 import imageCommunities from './images/icon-communities.svg';
 import imageMessages from './images/icon-messages.svg';
 import illustrationGrowTogether from './images/illustration-grow-together.svg';
 import illustrationFlowingConversation from './images/illustration-flowing-conversation.svg';
 import illustrationYourUsers from './images/illustration-your-users.svg';
+import iconPhone from './images/icon-phone.svg';
+import iconEmail from './images/icon-email.svg';
 
 const SmallBlock1 = ({
   image,
@@ -135,9 +138,35 @@ export default function Home() {
             Get Started For Free
           </button>
         </div>
-        <div className="h-[8.6em] w-full bg-[url('./images/bg-footer-top-desktop.svg')]"></div>
-        <div className="h-[36.4em] w-full bg-veryDarkCyan pt-[1em]"></div>
+        <div className="h-[9.8em] w-full bg-[url('./images/bg-footer-top-desktop.svg')]"></div>
       </main>
+      <footer className="flex h-full w-full flex-col">
+        <div className="h-[35.2em] w-full bg-veryDarkCyan">
+          <Image
+            className="mb-[2.5em] h-[2.35em] w-[15em]"
+            height={10}
+            width={10}
+            src={logoWhite as string}
+            alt="logo"
+          />
+          <div className="flex flex-col gap-[1.5em]">
+            <div className="flex flex-row items-start gap-[1.68em] md:w-[25em]">
+              <span className="text-veryPaleCyan font-openSans text-[1.1rem] text-white md:text-[1rem]">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris nulla quam, hendrerit lacinia vestibulum
+                a, ultrices quis sem.
+              </span>
+            </div>
+            <div className="flex flex-row items-center gap-[1.2em] md:w-[25em]">
+              <Image className="h-fit md:ml-[0.15em]" src={iconPhone as string} alt="phone icon" />
+              <span className="text-veryPaleCyan font-openSans text-[1rem] text-white">+1-543-123-4567</span>
+            </div>
+            <div className="flex flex-row items-center gap-[1.1em] md:w-[25em]">
+              <Image className="h-fit md:ml-[0.13em]" src={iconEmail as string} alt="email icon" />
+              <span className="text-veryPaleCyan font-openSans text-[1rem] text-white">example@huddle.com</span>
+            </div>
+          </div>
+        </div>
+      </footer>
     </div>
   );
 }
