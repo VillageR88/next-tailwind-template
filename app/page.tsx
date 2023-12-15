@@ -104,10 +104,14 @@ const SmallBlock1 = ({
   text2: string;
 }) => {
   return (
-    <div className="flex flex-col text-center">
-      <Image className={`${scale} mb-[-0.5em] h-fit w-fit pl-[0.3em]`} src={image} alt="image of communities" />
-      <span className="font-openSans text-[6rem] font-[700] text-veryDarkCyan">{text1}</span>
-      <span className="font-openSans text-[1.5rem] text-[#979EA8]">{text2}</span>
+    <div className="flex flex-col items-center text-center md:items-start">
+      <Image
+        className={`${scale} mb-[-0.5em] ml-[-8em] h-fit w-fit md:ml-0 md:pl-[0.3em]`}
+        src={image}
+        alt="image of communities"
+      />
+      <span className="font-openSans text-[4em] font-[700] text-veryDarkCyan md:text-[6rem]">{text1}</span>
+      <span className="font-openSans text-[1.1rem] text-[#979EA8] md:text-[1.5rem]">{text2}</span>
     </div>
   );
 };
@@ -139,11 +143,11 @@ const Block1 = ({
   return (
     <div
       className={`flex ${
-        reversed ? 'flex-row-reverse' : 'flex-row'
-      } h-full w-full items-center justify-between pl-[8.1em] ${optionalPr ? optionalPr : 'pr-[9.5em]'}`}
+        reversed ? 'flex-col-reverse md:flex-row-reverse' : 'flex-col-reverse md:flex-row'
+      } h-full w-full items-center justify-between md:pl-[8.1em] ${optionalPr ? optionalPr : 'md:pr-[9.5em]'}`}
     >
       <Article1 header={header} main={main} width={width} />
-      <Image className="h-fit w-[44.5%] items-center" src={image} alt="image of two people" />
+      <Image className="h-fit w-fit items-center md:w-[44.5%]" src={image} alt="image of two people" />
     </div>
   );
 };
@@ -163,27 +167,27 @@ export default function Home() {
     }
   };
   return (
-    <div className="flex min-h-screen flex-col items-center justify-center">
-      <nav className="flex h-[12.2em] w-full items-center justify-between bg-white md:px-[2em] lg:px-[3em] xl:px-0 xl:pl-[5em] xl:pr-[4em]">
-        <Image src={logo as string} alt="logo" />
-        <button className="rounded-[2em] px-[1.7em] py-[0.42em] font-openSans font-[600] text-lightPink shadow-[0_0px_5px_3px_rgba(0,0,0,0.1)] shadow-[#FBE5FC] outline outline-2 hover:opacity-50">
+    <div className="flex min-h-screen flex-col items-center justify-center ">
+      <nav className="flex h-full w-full items-center justify-between bg-white px-4 pb-2 pt-6 md:h-[12.2em] md:px-[2em] md:pb-0 md:pt-0 lg:px-[3em] xl:px-0 xl:pl-[5em] xl:pr-[4em]">
+        <Image className="h-fit w-[8em] md:w-fit" src={logo as string} alt="logo" />
+        <button className="rounded-[2em] px-[1em] py-[0.3em] font-openSans font-[600] text-lightPink shadow-[0_0px_5px_3px_rgba(0,0,0,0.1)] shadow-[#FBE5FC] outline outline-2 duration-150 hover:opacity-50 md:px-[1.7em] md:py-[0.42em]">
           Try It Free
         </button>
       </nav>
-      <main className="h-full w-full bg-white">
-        <div className="mt-[9.55em] flex w-full flex-col items-center">
-          <span className="text-center font-poppins text-[2.99rem] font-[700] text-veryDarkCyan drop-shadow-md">
+      <main className="h-full w-full bg-white ">
+        <div className="mt-[9.55em] flex w-full flex-col items-center px-[1em] md:px-[2em]">
+          <span className="text-center font-poppins text-[1.7rem] font-[700] text-veryDarkCyan drop-shadow-md md:text-[2.99rem]">
             Build The Community Your Fans Will Love
           </span>
-          <span className="mt-[1.15em] w-[31em] text-center font-openSans text-[1.25rem] font-[400] text-veryDarkCyan drop-shadow-sm">
+          <span className="mt-[1.15em] text-center font-openSans text-[1rem] font-[400] text-veryDarkCyan drop-shadow-sm md:w-[31em] md:text-[1.25rem]">
             Huddle re-imagines the way we build communities. You have a voice, but so does your audience. Create
             connections with your users as you engage in genuine discussion.
           </span>
-          <button className="mt-[2.35em] rounded-[3em] bg-pink px-[5.1em] py-[1.25em] font-openSans text-[1.25rem] font-[600] text-white drop-shadow-xl hover:opacity-70">
+          <button className="mt-[2.35em] rounded-[3em] bg-pink px-[3em] py-[1em] font-openSans font-[600] text-white drop-shadow-xl duration-150 hover:opacity-70 md:px-[5.1em] md:py-[1.25em] md:text-[1.25rem]">
             Get Started For Free
           </button>
           <Image className="mt-[6.86em] h-fit" src={imageMockup as string} alt="image of computer" />
-          <div className="mt-[7.45em] flex w-full flex-row justify-between lg:px-[10em] xl:px-[17.5em]">
+          <div className="mt-[7.45em] flex w-full flex-col justify-between gap-24 px-[4em] md:flex-row md:gap-0 md:px-0 lg:px-[10em] xl:px-[17.5em]">
             <SmallBlock1 image={imageCommunities as string} text1="1.4k+" text2="Communities Formed" />
             <SmallBlock1 scale="scale-[84%]" image={imageMessages as string} text1="2.7m+" text2="Messages Sent" />
           </div>
@@ -205,7 +209,7 @@ export default function Home() {
             width="w-[44.2%]"
             image={illustrationFlowingConversation as string}
             reversed={true}
-            optionalPr="pr-[7em]"
+            optionalPr="md:pr-[7em]"
           />
         </div>
         <div className="h-[8.6em] w-full bg-[url('./images/bg-section-top-desktop-2.svg')]"></div>{' '}
@@ -223,7 +227,7 @@ export default function Home() {
           <span className="font-poppins text-[2.5rem] font-[700] text-veryDarkCyan">
             Ready To Build Your Community?
           </span>
-          <button className="mt-[2em] rounded-[3em] bg-pink px-[5.1em] py-[1.25em] font-openSans text-[1.25rem] font-[600] text-white drop-shadow-xl hover:opacity-70">
+          <button className="mt-[2em] rounded-[3em] bg-pink px-[5.1em] py-[1.25em] font-openSans text-[1.25rem] font-[600] text-white drop-shadow-xl duration-150 hover:opacity-70">
             Get Started For Free
           </button>
         </div>
@@ -254,7 +258,7 @@ export default function Home() {
                 <Image className="h-fit md:ml-[0.13em]" src={iconEmail as string} alt="email icon" />
                 <span className="text-veryPaleCyan font-openSans text-[1rem] text-white">example@huddle.com</span>
               </div>
-              <div className="flex flex-row items-center mt-[4em] gap-[2em]">
+              <div className="mt-[4em] flex flex-row items-center gap-[2em]">
                 <Facebook />
                 <Instagram />
                 <Twitter />
@@ -286,7 +290,7 @@ export default function Home() {
                   }}
                   className={`${
                     showMessage1 && message1 !== 'Thank you!' && 'outline-red-400'
-                  } w-[20em] rounded-[0.2em] px-2 py-[0.7em]`}
+                  } w-[20em] rounded-[0.2em] px-2 py-[0.7em] hover:cursor-pointer`}
                 ></input>
                 <div
                   className={`${message1Color} absolute mt-[3.9em] flex h-0 w-fit justify-center self-center font-openSans text-[0.75rem] font-[700] drop-shadow-sm md:mt-[3.8em] md:w-fit md:self-start xl:mt-[4.5em]`}
@@ -298,7 +302,7 @@ export default function Home() {
                   onClick={() => {
                     setShowMessage1(true);
                   }}
-                  className="rounded-[0.2em] bg-pink px-[2.6em] py-[0.75em] font-openSans text-[1rem] font-[600] text-white drop-shadow-xl hover:bg-lightPink"
+                  className="rounded-[0.2em] bg-pink px-[2.6em] py-[0.75em] font-openSans text-[1rem] font-[600] text-white drop-shadow-xl duration-150 hover:bg-lightPink"
                 >
                   Subscribe
                 </button>
