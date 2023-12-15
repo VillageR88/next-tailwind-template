@@ -127,7 +127,7 @@ export default function Home() {
           />
         </div>
         <div className="h-[8.6em] w-full bg-[url('./images/bg-section-bottom-desktop-2.svg')]"></div>
-        <div className="justify-center flex h-[32.5em] flex-col items-center">
+        <div className="flex h-[32.5em] flex-col items-center justify-center">
           <span className="font-poppins text-[2.5rem] font-[700] text-veryDarkCyan">
             Ready To Build Your Community?
           </span>
@@ -136,6 +136,7 @@ export default function Home() {
           </button>
         </div>
         <div className="h-[8.6em] w-full bg-[url('./images/bg-footer-top-desktop.svg')]"></div>
+        <div className="h-[36.4em] w-full bg-veryDarkCyan pt-[1em]"></div>
       </main>
     </div>
   );
