@@ -214,8 +214,8 @@ export default function Home() {
             optionalPr="xl:pr-[7em]"
           />
         </div>
-        <div className="h-[8.6em] w-full bg-[url('./images/bg-section-top-desktop-2.svg')]"></div>{' '}
-        <div className="h-[31em] w-full bg-[#F6FBFF] pt-[1em]">
+        <div className="h-[14em] w-full bg-[url('./images/bg-section-top-mobile-2.svg')] bg-contain bg-bottom bg-no-repeat md:h-[8.6em] md:bg-[url('./images/bg-section-top-desktop-2.svg')] md:bg-cover"></div>{' '}
+        <div className="w-full bg-[#F6FBFF] pt-[1em] md:h-[31em]">
           <Block1
             header="Your Users"
             main="It takes no time at all to integrate Huddle with your app's authentication solution. This means, 
