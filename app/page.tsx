@@ -172,7 +172,7 @@ export default function Home() {
             <div className="flex flex-col gap-[1.5em]">
               <div className="flex flex-row items-start gap-[1.68em] md:w-[22em]">
                 <span className="text-veryPaleCyan pt-[1.3em] font-openSans text-[1.1rem] font-[600] text-white md:text-[0.9rem]">
-                  To recieve tips on how to grow your community, sign up to our weekly newsletter. We’ll never send you
+                  To receive tips on how to grow your community, sign up to our weekly newsletter. We’ll never send you
                   spam or pass on your email address
                 </span>
               </div>
