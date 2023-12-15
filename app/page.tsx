@@ -146,7 +146,7 @@ const Block1 = ({
         reversed ? 'flex-col-reverse md:flex-row-reverse' : 'flex-col-reverse md:flex-row'
       } h-full w-full items-center justify-between xl:pl-[8.1em] ${
         optionalPr ? optionalPr : 'xl:pr-[9.5em]'
-      } md-[3em] px-[2em] lg:px-[4em] xl:px-0 `}
+      } md-[3em] px-[2em] md:py-0 lg:px-[4em] xl:px-0 ${!reversed && 'py-[5em]'} gap-[4em] md:gap-0`}
     >
       <Article1 header={header} main={main} width={width} />
       <Image className="h-fit w-fit items-center md:w-[44.5%]" src={image} alt="image of two people" />
@@ -214,7 +214,7 @@ export default function Home() {
             optionalPr="xl:pr-[7em]"
           />
         </div>
-        <div className="h-[14em] w-full bg-[url('./images/bg-section-top-mobile-2.svg')] bg-contain bg-bottom bg-no-repeat md:h-[8.6em] md:bg-[url('./images/bg-section-top-desktop-2.svg')] md:bg-cover"></div>{' '}
+        <div className="h-[14em] w-full bg-[url('./images/bg-section-top-mobile-2.svg')] bg-contain bg-bottom bg-no-repeat md:h-[8.6em] md:bg-[url('./images/bg-section-top-desktop-2.svg')] md:bg-cover md:bg-top"></div>{' '}
         <div className="w-full bg-[#F6FBFF] pt-[1em] md:h-[31em]">
           <Block1
             header="Your Users"
@@ -224,19 +224,19 @@ export default function Home() {
             width="md:w-[45%]"
           />
         </div>
-        <div className="h-[8.6em] w-full bg-[url('./images/bg-section-bottom-desktop-2.svg')]"></div>
-        <div className="flex h-[32.5em] flex-col items-center justify-center">
+        <div className="h-[14em] w-full bg-[url('./images/bg-section-bottom-mobile-2.svg')] bg-contain bg-no-repeat md:h-[8.6em] md:bg-[url('./images/bg-section-bottom-desktop-2.svg')] md:bg-cover "></div>
+        <div className="flex flex-col items-center justify-center md:h-[32.5em]">
           <span className="text-center font-poppins text-[1.8rem] font-[700] text-veryDarkCyan md:text-[2.5rem]">
             Ready To Build Your Community?
           </span>
-          <button className="mt-[2em] rounded-[3em] bg-pink px-[2.8em] py-[0.9em] font-openSans text-[1.25rem] font-[600] text-white drop-shadow-xl duration-150 hover:opacity-70 md:px-[5.1em] md:py-[1.25em]">
+          <button className="mb-[6em] mt-[2em] rounded-[3em] bg-pink px-[2.8em] py-[0.9em] font-openSans text-[1.25rem] font-[600] text-white drop-shadow-xl duration-150 hover:opacity-70 md:mb-0 md:px-[5.1em] md:py-[1.25em]">
             Get Started For Free
           </button>
         </div>
-        <div className="h-[9.8em] w-full bg-[url('./images/bg-footer-top-desktop.svg')]"></div>
+        <div className="h-[9.8em] w-full bg-[url('./images/bg-footer-top-mobile.svg')] bg-contain bg-bottom bg-no-repeat md:bg-[url('./images/bg-footer-top-desktop.svg')] md:bg-cover"></div>
       </main>
       <footer className="h-full w-full bg-veryDarkCyan px-[2em] pb-[4em] md:px-[3em] md:pb-0 lg:px-[4em] xl:px-0 xl:pl-[7.5em] xl:pr-[7.5em]">
-        <div className="flex h-full w-full flex-col-reverse justify-between pt-[7.7em] md:h-[35.2em] md:flex-row">
+        <div className="flex h-full w-full flex-col-reverse justify-between pt-[3em] md:h-[35.2em] md:flex-row md:pt-[7.7em]">
           <div className="mt-[7em] md:mt-0">
             <Image
               className="h-fit w-fit md:mb-[1.6em] md:h-[2.35em] md:w-[15em]"
