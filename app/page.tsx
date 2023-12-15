@@ -194,7 +194,7 @@ export default function Home() {
             <SmallBlock1 scale="scale-[84%]" image={imageMessages as string} text1="2.7m+" text2="Messages Sent" />
           </div>
         </div>
-        <div className="h-[14em] w-full bg-[url('./images/bg-section-top-mobile-1.svg')] bg-cover bg-bottom bg-no-repeat md:mt-[8.4em] md:h-[9.8em] md:bg-[url('./images/bg-section-top-desktop-1.svg')] md:bg-top"></div>
+        <div className="mt-[-4em] h-[14em] w-full bg-[url('./images/bg-section-top-mobile-1.svg')] bg-contain bg-bottom bg-no-repeat md:mt-[8.4em] md:h-[9.8em] md:bg-[url('./images/bg-section-top-desktop-1.svg')] md:bg-cover md:bg-top"></div>
         <div className="w-full bg-[#F6FBFF] pt-[2em] md:h-[34em]">
           <Block1
             header="Grow Together"
@@ -203,8 +203,8 @@ export default function Home() {
             image={illustrationGrowTogether as string}
           />
         </div>
-        <div className="h-[14em] w-full bg-[url('./images/bg-section-bottom-mobile-1.svg')] bg-cover bg-top bg-no-repeat md:h-[8.6em] md:bg-[url('./images/bg-section-bottom-desktop-1.svg')] md:bg-bottom"></div>
-        <div className="pt-[5.5em] md:h-[42.8em]">
+        <div className="h-[10em] w-full bg-[url('./images/bg-section-bottom-mobile-1.svg')] bg-contain bg-top bg-no-repeat md:h-[8.6em] md:bg-[url('./images/bg-section-bottom-desktop-1.svg')]"></div>
+        <div className="md:h-[42.8em] md:pt-[5.5em]">
           <Block1
             header="Flowing Conversations"
             main="You wouldn't paginate a conversation in real life, so why do it online? Our threads have just-in-time loading for a more natural flow."
@@ -215,7 +215,7 @@ export default function Home() {
           />
         </div>
         <div className="h-[8.6em] w-full bg-[url('./images/bg-section-top-desktop-2.svg')]"></div>{' '}
-        <div className="w-full bg-[#F6FBFF] pt-[1em] md:h-[31em]">
+        <div className="h-[31em] w-full bg-[#F6FBFF] pt-[1em]">
           <Block1
             header="Your Users"
             main="It takes no time at all to integrate Huddle with your app's authentication solution. This means, 
