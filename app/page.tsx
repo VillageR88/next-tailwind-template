@@ -10,6 +10,7 @@ import imageMockup from './images/screen-mockups.svg';
 import imageCommunities from './images/icon-communities.svg';
 import imageMessages from './images/icon-messages.svg';
 import illustrationGrowTogether from './images/illustration-grow-together.svg';
+import illustrationFlowingConversation from './images/illustration-flowing-conversation.svg';
 
 const SmallBlock1 = ({
   image,
@@ -31,24 +32,36 @@ const SmallBlock1 = ({
   );
 };
 
-const Article1 = ({ header, main }: { header: string; main: string }) => {
+const Article1 = ({ header, main, width }: { header: string; main: string; width?: string }) => {
   return (
-    <div className="flex w-[44%] flex-col gap-[1.4em]">
+    <div className={`flex ${width ? width : 'w-[44%]'}  flex-col gap-[1.4em]`}>
       <span className="font-poppins text-[2.5rem] font-[700] text-veryDarkCyan">{header}</span>
       <span className="font-openSans text-veryDarkCyan">{main}</span>
     </div>
   );
 };
 
-const Block1 = ({ header, main }: { header: string; main: string }) => {
+const Block1 = ({
+  header,
+  main,
+  width,
+  image,
+  reversed,
+}: {
+  header: string;
+  main: string;
+  width?: string;
+  image: string;
+  reversed?: boolean;
+}) => {
   return (
-    <div className="flex h-full w-full items-center justify-between pl-[8.1em] pr-[9.5em]">
-      <Article1 header={header} main={main} />
-      <Image
-        className="h-fit w-[44.5%] items-center"
-        src={illustrationGrowTogether as string}
-        alt="image of two people"
-      />
+    <div
+      className={`flex ${
+        reversed ? 'flex-row-reverse' : 'flex-row'
+      } h-full w-full items-center justify-between pl-[8.1em] pr-[9.5em]`}
+    >
+      <Article1 header={header} main={main} width={width} />
+      <Image className="h-fit w-[44.5%] items-center" src={image} alt="image of two people" />
     </div>
   );
 };
@@ -86,10 +99,19 @@ export default function Home() {
             header="Grow Together"
             main="Generate meaningful discussions with your audience and build a strong, loyal community. Think of the insightful
         conversations you miss out on with a feedback form."
+            image={illustrationGrowTogether as string}
           />
         </div>
         <div className="h-[8.6em] w-full bg-[url('./images/bg-section-bottom-desktop-1.svg')]"></div>
-        <div className="h-[33em]"></div>
+        <div className="h-[33em]">
+          <Block1
+            header="Flowing Conversations"
+            main="You wouldn't paginate a conversation in real life, so why do it online? Our threads have 
+            just-in-time loading for a more natural flow."
+            image={illustrationFlowingConversation as string}
+            reversed={true}
+          />
+        </div>
       </main>
     </div>
   );
