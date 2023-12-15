@@ -118,8 +118,8 @@ const SmallBlock1 = ({
 
 const Article1 = ({ header, main, width }: { header: string; main: string; width?: string }) => {
   return (
-    <div className={`flex ${width ? width : 'w-[44%]'}  flex-col gap-[1.4em]`}>
-      <span className="font-poppins text-[2.5rem] font-[700] text-veryDarkCyan">{header}</span>
+    <div className={`flex ${width ? width : 'md:w-[44%]'} flex-col gap-[1.4em] text-center md:text-left`}>
+      <span className="font-poppins text-[2rem] font-[700] text-veryDarkCyan md:text-[2.5rem]">{header}</span>
       <span className="font-openSans text-veryDarkCyan">{main}</span>
     </div>
   );
@@ -144,7 +144,9 @@ const Block1 = ({
     <div
       className={`flex ${
         reversed ? 'flex-col-reverse md:flex-row-reverse' : 'flex-col-reverse md:flex-row'
-      } h-full w-full items-center justify-between md:pl-[8.1em] ${optionalPr ? optionalPr : 'md:pr-[9.5em]'}`}
+      } h-full w-full items-center justify-between xl:pl-[8.1em] ${
+        optionalPr ? optionalPr : 'xl:pr-[9.5em]'
+      } md-[3em] px-[2em] lg:px-[4em] xl:px-0 `}
     >
       <Article1 header={header} main={main} width={width} />
       <Image className="h-fit w-fit items-center md:w-[44.5%]" src={image} alt="image of two people" />
@@ -206,10 +208,10 @@ export default function Home() {
           <Block1
             header="Flowing Conversations"
             main="You wouldn't paginate a conversation in real life, so why do it online? Our threads have just-in-time loading for a more natural flow."
-            width="w-[44.2%]"
+            width="md:w-[44.2%]"
             image={illustrationFlowingConversation as string}
             reversed={true}
-            optionalPr="md:pr-[7em]"
+            optionalPr="xl:pr-[7em]"
           />
         </div>
         <div className="h-[8.6em] w-full bg-[url('./images/bg-section-top-desktop-2.svg')]"></div>{' '}
@@ -219,25 +221,25 @@ export default function Home() {
             main="It takes no time at all to integrate Huddle with your app's authentication solution. This means, 
             once signed in to your app, your users can start chatting immediately."
             image={illustrationYourUsers as string}
-            width="w-[45%]"
+            width="md:w-[45%]"
           />
         </div>
         <div className="h-[8.6em] w-full bg-[url('./images/bg-section-bottom-desktop-2.svg')]"></div>
         <div className="flex h-[32.5em] flex-col items-center justify-center">
-          <span className="font-poppins text-[2.5rem] font-[700] text-veryDarkCyan">
+          <span className="text-center font-poppins text-[1.8rem] font-[700] text-veryDarkCyan md:text-[2.5rem]">
             Ready To Build Your Community?
           </span>
-          <button className="mt-[2em] rounded-[3em] bg-pink px-[5.1em] py-[1.25em] font-openSans text-[1.25rem] font-[600] text-white drop-shadow-xl duration-150 hover:opacity-70">
+          <button className="mt-[2em] rounded-[3em] bg-pink px-[2.8em] py-[0.9em] font-openSans text-[1.25rem] font-[600] text-white drop-shadow-xl duration-150 hover:opacity-70 md:px-[5.1em] md:py-[1.25em]">
             Get Started For Free
           </button>
         </div>
         <div className="h-[9.8em] w-full bg-[url('./images/bg-footer-top-desktop.svg')]"></div>
       </main>
-      <footer className="h-full w-full bg-veryDarkCyan pl-[7.5em] pr-[7.5em]">
-        <div className="flex h-[35.2em] w-full flex-row justify-between pt-[7.7em]">
-          <div>
+      <footer className="h-full w-full bg-veryDarkCyan px-[2em] md:px-[3em] lg:px-[4em] md:pb-0 pb-[4em] xl:px-0 xl:pl-[7.5em] xl:pr-[7.5em]">
+        <div className="flex h-full w-full flex-col-reverse justify-between pt-[7.7em] md:h-[35.2em] md:flex-row">
+          <div className="mt-[7em] md:mt-0">
             <Image
-              className="mb-[1.6em] h-[2.35em] w-[15em]"
+              className="h-fit w-fit md:mb-[1.6em] md:h-[2.35em] md:w-[15em]"
               height={10}
               width={10}
               src={logoWhite as string}
@@ -245,16 +247,16 @@ export default function Home() {
             />
             <div className="flex flex-col gap-[1em]">
               <div className="flex flex-row items-start md:w-[20em]">
-                <span className="text-veryPaleCyan font-openSans text-[1.1rem] leading-[1.7em] text-white md:text-[0.9rem]">
+                <span className="text-veryPaleCyan pb-[2em] pt-[1em] font-openSans leading-[1.7em] text-white md:pb-0 md:pt-0 md:text-[0.9rem]">
                   Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris nulla quam, hendrerit lacinia
                   vestibulum a, ultrices quis sem.
                 </span>
               </div>
-              <div className="mt-[0.5em] flex flex-row items-center gap-[1.2em] md:w-[25em]">
+              <div className="mt-[0.5em] flex flex-row items-center gap-[1.2em]">
                 <Image className="h-fit md:ml-[0.15em]" src={iconPhone as string} alt="phone icon" />
                 <span className="text-veryPaleCyan font-openSans text-[1rem] text-white">Phone: +1-543-123-4567</span>
               </div>
-              <div className="flex flex-row items-center gap-[1.1em] md:w-[25em]">
+              <div className="flex flex-row items-center gap-[1.1em]">
                 <Image className="h-fit md:ml-[0.13em]" src={iconEmail as string} alt="email icon" />
                 <span className="text-veryPaleCyan font-openSans text-[1rem] text-white">example@huddle.com</span>
               </div>
@@ -265,14 +267,14 @@ export default function Home() {
               </div>
             </div>
           </div>
-          <div>
+          <div className="w-fit">
             <span className="font-openSans text-[1.5rem] font-[600] text-white">NEWSLETTER</span>
             <div className="flex flex-col gap-[1.5em] md:w-fit">
-              <span className="text-veryPaleCyan w-[25em] pt-[1.3em] font-openSans text-[1.1rem] font-[600] leading-[1.8em] tracking-[0.015em] text-white md:text-[0.85rem]">
+              <span className="text-veryPaleCyan pt-[1.3em] font-openSans text-[1.1rem] font-[600] leading-[1.8em] tracking-[0.015em] text-white md:w-[25em] md:text-[0.85rem]">
                 To receive tips on how to grow your community, sign up to our weekly newsletter. We’ll never send you
                 spam or pass on your email address
               </span>
-              <div className="mt-[1em] flex flex-row items-center gap-[2.5em]">
+              <div className="mt-[1em] flex flex-col items-center gap-[2.5em] md:items-start lg:flex-row">
                 <input
                   inputMode="email"
                   type="text"
@@ -290,10 +292,10 @@ export default function Home() {
                   }}
                   className={`${
                     showMessage1 && message1 !== 'Thank you!' && 'outline-red-400'
-                  } w-[20em] rounded-[0.2em] px-2 py-[0.7em] hover:cursor-pointer`}
+                  } w-full rounded-[0.2em] px-2 py-[0.7em] hover:cursor-pointer md:w-[20em]`}
                 ></input>
                 <div
-                  className={`${message1Color} absolute mt-[3.9em] flex h-0 w-fit justify-center self-center font-openSans text-[0.75rem] font-[700] drop-shadow-sm md:mt-[3.8em] md:w-fit md:self-start xl:mt-[4.5em]`}
+                  className={`${message1Color} absolute mt-[4.4em] flex h-0 w-fit justify-center self-center font-openSans text-[0.75rem] font-[700] drop-shadow-sm md:w-fit md:self-start`}
                 >
                   {showMessage1 && message1}
                 </div>
@@ -302,7 +304,7 @@ export default function Home() {
                   onClick={() => {
                     setShowMessage1(true);
                   }}
-                  className="rounded-[0.2em] bg-pink px-[2.6em] py-[0.75em] font-openSans text-[1rem] font-[600] text-white drop-shadow-xl duration-150 hover:bg-lightPink"
+                  className="self-end rounded-[0.2em] bg-pink px-[2.6em] py-[0.75em] font-openSans text-[1rem] font-[600] text-white drop-shadow-xl duration-150 hover:bg-lightPink md:self-center"
                 >
                   Subscribe
                 </button>
