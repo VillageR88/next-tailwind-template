@@ -90,7 +90,7 @@ export default function Home() {
             Huddle re-imagines the way we build communities. You have a voice, but so does your audience. Create
             connections with your users as you engage in genuine discussion.
           </span>
-          <button className="mt-[2.35em] rounded-[3em] bg-pink px-[5.1em] py-[1.25em] font-openSans text-[1.25rem] font-[600] text-white drop-shadow-xl">
+          <button className="mt-[2.35em] rounded-[3em] bg-pink px-[5.1em] py-[1.25em] font-openSans text-[1.25rem] font-[600] text-white drop-shadow-xl hover:opacity-70">
             Get Started For Free
           </button>
           <Image className="mt-[6.86em] h-fit" src={imageMockup as string} alt="image of computer" />
@@ -134,13 +134,13 @@ export default function Home() {
           <span className="font-poppins text-[2.5rem] font-[700] text-veryDarkCyan">
             Ready To Build Your Community?
           </span>
-          <button className="mt-[2em] rounded-[3em] bg-pink px-[5.1em] py-[1.25em] font-openSans text-[1.25rem] font-[600] text-white drop-shadow-xl">
+          <button className="mt-[2em] rounded-[3em] bg-pink px-[5.1em] py-[1.25em] font-openSans text-[1.25rem] font-[600] text-white drop-shadow-xl hover:opacity-70">
             Get Started For Free
           </button>
         </div>
         <div className="h-[9.8em] w-full bg-[url('./images/bg-footer-top-desktop.svg')]"></div>
       </main>
-      <footer className="h-full w-full bg-veryDarkCyan pl-[7em] pr-[15em]">
+      <footer className="h-full w-full bg-veryDarkCyan pl-[7.5em] pr-[7.5em]">
         <div className="flex h-[35.2em] w-full flex-row justify-between pt-[7.7em]">
           <div>
             <Image
@@ -169,16 +169,14 @@ export default function Home() {
           </div>
           <div>
             <span className="font-openSans text-[1.5rem] font-[600] text-white">NEWSLETTER</span>
-            <div className="flex flex-col gap-[1.5em]">
-              <div className="flex flex-row items-start gap-[1.68em] md:w-[22em]">
-                <span className="text-veryPaleCyan pt-[1.3em] font-openSans text-[1.1rem] font-[600] text-white md:text-[0.9rem]">
-                  To receive tips on how to grow your community, sign up to our weekly newsletter. We’ll never send you
-                  spam or pass on your email address
-                </span>
-              </div>
-              <div className="flex flex-row items-center gap-[1.2em] md:w-[25em]">
-                <input></input>
-                <button className="mt-[2em] rounded-[0.2em] bg-pink px-[5.1em] py-[1.25em] font-openSans text-[1.25rem] font-[600] text-white drop-shadow-xl">
+            <div className="flex flex-col gap-[1.5em] md:w-fit">
+              <span className="text-veryPaleCyan w-[25em] pt-[1.3em] font-openSans text-[1.1rem] font-[600] leading-[1.8em] tracking-[0.015em] text-white md:text-[0.85rem]">
+                To receive tips on how to grow your community, sign up to our weekly newsletter. We’ll never send you
+                spam or pass on your email address
+              </span>
+              <div className="mt-[1em] flex flex-row items-center gap-[2.5em]">
+                <input className="w-[20em] rounded-[0.2em] py-[0.7em]"></input>
+                <button className="rounded-[0.2em] bg-pink px-[2.6em] py-[0.75em] font-openSans text-[1rem] font-[600] text-white drop-shadow-xl hover:bg-lightPink">
                   Subscribe
                 </button>
               </div>
