@@ -31,14 +31,24 @@ const SmallBlock1 = ({
   );
 };
 
-const Article1 = ({ header, main }: { header: sting; main: string }) => {
+const Article1 = ({ header, main }: { header: string; main: string }) => {
   return (
     <div className="flex w-[44%] flex-col gap-[1.4em]">
-      <span className="font-poppins text-[2.5rem] font-[700] text-veryDarkCyan">Grow Together</span>
-      <span className="font-openSans text-veryDarkCyan">
-        Generate meaningful discussions with your audience and build a strong, loyal community. Think of the insightful
-        conversations you miss out on with a feedback form.
-      </span>
+      <span className="font-poppins text-[2.5rem] font-[700] text-veryDarkCyan">{header}</span>
+      <span className="font-openSans text-veryDarkCyan">{main}</span>
+    </div>
+  );
+};
+
+const Block1 = ({ header, main }: { header: string; main: string }) => {
+  return (
+    <div className="flex h-full w-full items-center justify-between pl-[8.1em] pr-[9.5em]">
+      <Article1 header={header} main={main} />
+      <Image
+        className="h-fit w-[44.5%] items-center"
+        src={illustrationGrowTogether as string}
+        alt="image of two people"
+      />
     </div>
   );
 };
@@ -72,14 +82,11 @@ export default function Home() {
         </div>
         <div className="mt-[8.4em] h-[10em] w-full bg-[url('./images/bg-section-top-desktop-1.svg')]"></div>
         <div className="h-[33em] w-full bg-[#F6FBFF]">
-          <div className="flex h-full w-full items-center justify-between pl-[8.1em] pr-[9.5em]">
-            <Article1 />
-            <Image
-              className="h-fit w-[44.5%] items-center"
-              src={illustrationGrowTogether as string}
-              alt="image of two people"
-            />
-          </div>
+          <Block1
+            header="Grow Together"
+            main="Generate meaningful discussions with your audience and build a strong, loyal community. Think of the insightful
+        conversations you miss out on with a feedback form."
+          />
         </div>
         <div className="h-[8.6em] w-full bg-[url('./images/bg-section-bottom-desktop-1.svg')]"></div>
         <div className="h-[33em]"></div>
