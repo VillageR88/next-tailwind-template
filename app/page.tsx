@@ -194,8 +194,8 @@ export default function Home() {
             <SmallBlock1 scale="scale-[84%]" image={imageMessages as string} text1="2.7m+" text2="Messages Sent" />
           </div>
         </div>
-        <div className="mt-[8.4em] h-[9.8em] w-full bg-[url('./images/bg-section-top-desktop-1.svg')]"></div>
-        <div className="h-[34em] w-full bg-[#F6FBFF] pt-[2em]">
+        <div className="h-[14em] w-full bg-[url('./images/bg-section-top-mobile-1.svg')] bg-cover bg-bottom bg-no-repeat md:mt-[8.4em] md:h-[9.8em] md:bg-[url('./images/bg-section-top-desktop-1.svg')] md:bg-top"></div>
+        <div className="w-full bg-[#F6FBFF] pt-[2em] md:h-[34em]">
           <Block1
             header="Grow Together"
             main="Generate meaningful discussions with your audience and build a strong, loyal community. Think of the insightful
@@ -203,8 +203,8 @@ export default function Home() {
             image={illustrationGrowTogether as string}
           />
         </div>
-        <div className="h-[8.6em] w-full bg-[url('./images/bg-section-bottom-desktop-1.svg')]"></div>
-        <div className="h-[42.8em] pt-[5.5em]">
+        <div className="h-[14em] w-full bg-[url('./images/bg-section-bottom-mobile-1.svg')] bg-cover bg-top bg-no-repeat md:h-[8.6em] md:bg-[url('./images/bg-section-bottom-desktop-1.svg')] md:bg-bottom"></div>
+        <div className="pt-[5.5em] md:h-[42.8em]">
           <Block1
             header="Flowing Conversations"
             main="You wouldn't paginate a conversation in real life, so why do it online? Our threads have just-in-time loading for a more natural flow."
@@ -215,7 +215,7 @@ export default function Home() {
           />
         </div>
         <div className="h-[8.6em] w-full bg-[url('./images/bg-section-top-desktop-2.svg')]"></div>{' '}
-        <div className="h-[31em] w-full bg-[#F6FBFF] pt-[1em]">
+        <div className="w-full bg-[#F6FBFF] pt-[1em] md:h-[31em]">
           <Block1
             header="Your Users"
             main="It takes no time at all to integrate Huddle with your app's authentication solution. This means, 
@@ -235,7 +235,7 @@ export default function Home() {
         </div>
         <div className="h-[9.8em] w-full bg-[url('./images/bg-footer-top-desktop.svg')]"></div>
       </main>
-      <footer className="h-full w-full bg-veryDarkCyan px-[2em] md:px-[3em] lg:px-[4em] md:pb-0 pb-[4em] xl:px-0 xl:pl-[7.5em] xl:pr-[7.5em]">
+      <footer className="h-full w-full bg-veryDarkCyan px-[2em] pb-[4em] md:px-[3em] md:pb-0 lg:px-[4em] xl:px-0 xl:pl-[7.5em] xl:pr-[7.5em]">
         <div className="flex h-full w-full flex-col-reverse justify-between pt-[7.7em] md:h-[35.2em] md:flex-row">
           <div className="mt-[7em] md:mt-0">
             <Image
