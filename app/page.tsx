@@ -140,29 +140,48 @@ export default function Home() {
         </div>
         <div className="h-[9.8em] w-full bg-[url('./images/bg-footer-top-desktop.svg')]"></div>
       </main>
-      <footer className="flex h-full w-full flex-col">
-        <div className="h-[35.2em] w-full bg-veryDarkCyan">
-          <Image
-            className="mb-[2.5em] h-[2.35em] w-[15em]"
-            height={10}
-            width={10}
-            src={logoWhite as string}
-            alt="logo"
-          />
-          <div className="flex flex-col gap-[1.5em]">
-            <div className="flex flex-row items-start gap-[1.68em] md:w-[25em]">
-              <span className="text-veryPaleCyan font-openSans text-[1.1rem] text-white md:text-[1rem]">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris nulla quam, hendrerit lacinia vestibulum
-                a, ultrices quis sem.
-              </span>
+      <footer className="h-full w-full bg-veryDarkCyan pl-[7em] pr-[15em]">
+        <div className="flex h-[35.2em] w-full flex-row justify-between pt-[7.7em]">
+          <div>
+            <Image
+              className="mb-[2.5em] h-[2.35em] w-[15em]"
+              height={10}
+              width={10}
+              src={logoWhite as string}
+              alt="logo"
+            />
+            <div className="flex flex-col gap-[1.5em]">
+              <div className="flex flex-row items-start gap-[1.68em] md:w-[20em]">
+                <span className="text-veryPaleCyan font-openSans text-[1.1rem] text-white md:text-[0.9rem]">
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris nulla quam, hendrerit lacinia
+                  vestibulum a, ultrices quis sem.
+                </span>
+              </div>
+              <div className="flex flex-row items-center gap-[1.2em] md:w-[25em]">
+                <Image className="h-fit md:ml-[0.15em]" src={iconPhone as string} alt="phone icon" />
+                <span className="text-veryPaleCyan font-openSans text-[1rem] text-white">Phone: +1-543-123-4567</span>
+              </div>
+              <div className="flex flex-row items-center gap-[1.1em] md:w-[25em]">
+                <Image className="h-fit md:ml-[0.13em]" src={iconEmail as string} alt="email icon" />
+                <span className="text-veryPaleCyan font-openSans text-[1rem] text-white">example@huddle.com</span>
+              </div>
             </div>
-            <div className="flex flex-row items-center gap-[1.2em] md:w-[25em]">
-              <Image className="h-fit md:ml-[0.15em]" src={iconPhone as string} alt="phone icon" />
-              <span className="text-veryPaleCyan font-openSans text-[1rem] text-white">+1-543-123-4567</span>
-            </div>
-            <div className="flex flex-row items-center gap-[1.1em] md:w-[25em]">
-              <Image className="h-fit md:ml-[0.13em]" src={iconEmail as string} alt="email icon" />
-              <span className="text-veryPaleCyan font-openSans text-[1rem] text-white">example@huddle.com</span>
+          </div>
+          <div>
+            <span className="font-openSans text-[1.5rem] font-[600] text-white">NEWSLETTER</span>
+            <div className="flex flex-col gap-[1.5em]">
+              <div className="flex flex-row items-start gap-[1.68em] md:w-[22em]">
+                <span className="text-veryPaleCyan pt-[1.3em] font-openSans text-[1.1rem] font-[600] text-white md:text-[0.9rem]">
+                  To recieve tips on how to grow your community, sign up to our weekly newsletter. We’ll never send you
+                  spam or pass on your email address
+                </span>
+              </div>
+              <div className="flex flex-row items-center gap-[1.2em] md:w-[25em]">
+                <input></input>
+                <button className="mt-[2em] rounded-[0.2em] bg-pink px-[5.1em] py-[1.25em] font-openSans text-[1.25rem] font-[600] text-white drop-shadow-xl">
+                  Subscribe
+                </button>
+              </div>
             </div>
           </div>
         </div>
