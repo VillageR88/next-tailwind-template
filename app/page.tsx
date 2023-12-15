@@ -173,7 +173,7 @@ export default function Home() {
                   vestibulum a, ultrices quis sem.
                 </span>
               </div>
-              <div className="flex flex-row items-center mt-[0.5em] gap-[1.2em] md:w-[25em]">
+              <div className="mt-[0.5em] flex flex-row items-center gap-[1.2em] md:w-[25em]">
                 <Image className="h-fit md:ml-[0.15em]" src={iconPhone as string} alt="phone icon" />
                 <span className="text-veryPaleCyan font-openSans text-[1rem] text-white">Phone: +1-543-123-4567</span>
               </div>
