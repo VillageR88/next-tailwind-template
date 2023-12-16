@@ -24,7 +24,7 @@ export default function Home() {
   const [border1, setBorder1] = useState<number[]>([]);
   const [border2, setBorder2] = useState<number[]>([]);
   useEffect(() => {
-    setBorder1([clicked, clicked - 10]);
+    clicked !== 0 && setBorder1([clicked, clicked - 10]);
   }, [clicked]);
   useEffect(() => {
     function calculateBorder2() {
@@ -39,8 +39,8 @@ export default function Home() {
       const array3 = array2.filter((x) => !border1.includes(x));
       return array3;
     }
-    setBorder2(calculateBorder2);
-  }, [border1]);
+    clicked !== 0 && setBorder2(calculateBorder2);
+  }, [clicked, border1]);
 
   return (
     <div className="flex min-h-screen flex-col items-center justify-center">
