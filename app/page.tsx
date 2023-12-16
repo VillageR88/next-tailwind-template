@@ -43,7 +43,7 @@ export default function Home() {
   }, [clicked, border1]);
 
   return (
-    <div className="flex min-h-screen flex-col items-center justify-center">
+    <div className="flex min-h-screen flex-col items-center justify-center bg-gradient-to-br from-cyan-300 to-cyan-200">
       <div className="flex flex-col">
         <span>debug selected number: {clicked}</span>
         <span>debug shipSizeOf2Vertical sector: {border1.toLocaleString()}</span>
