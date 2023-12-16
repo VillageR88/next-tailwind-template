@@ -43,18 +43,18 @@ export default function Home() {
   }, [clicked, border1]);
 
   return (
-    <div className="flex min-h-screen flex-col items-center justify-center bg-gradient-to-br from-cyan-300 to-cyan-200">
-      <div className="flex flex-col">
+    <div className="flex min-h-screen flex-col items-center justify-center bg-gradient-to-br from-cyan-300 to-cyan-200 font-[600] text-black">
+      <div className="mb-4 flex flex-col">
         <span>debug selected number: {clicked}</span>
         <span>debug shipSizeOf2Vertical sector: {border1.toLocaleString()}</span>
         <span>buffer shipSizeOf2Vertical sector: {border2.toLocaleString()}</span>
       </div>
-      <div className="flex flex-row">
+      <div className="flex items-center flex-row">
         <div className="flex flex-col">
           <div className="h-10 w-10"></div>
           <div className="flex flex-col">
             {letters.map((x, i) => (
-              <button disabled className="h-10 w-10" key={i + 1}>
+              <button disabled className="my-1 mr-2 h-8 w-8 rounded-2xl bg-cyan-100" key={i + 1}>
                 {x}
               </button>
             ))}
@@ -63,7 +63,7 @@ export default function Home() {
         <div>
           <div className="grid grid-cols-10">
             {letters.map((_, i) => (
-              <button disabled className="h-10 w-10" key={i}>
+              <button disabled className="m-1 mx-1 mb-2 h-8 w-8 rounded-2xl bg-cyan-100" key={i}>
                 {i + 1}
               </button>
             ))}
