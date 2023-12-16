@@ -5,6 +5,11 @@ export default function Home() {
   enum GamePhase {
     setup,
   }
+  const [gamePhase, setGamePhase] = useState<GamePhase>(GamePhase.setup);
+  const [clicked, setClicked] = useState<number>(0);
+  const [border1, setBorder1] = useState<number[]>([]);
+  const [border2, setBorder2] = useState<number[]>([]);
+
   const buttons = [];
   const letters = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J'];
   for (let i = 1; i <= 100; i++) {
@@ -13,16 +18,13 @@ export default function Home() {
         onClick={() => {
           setClicked(i);
         }}
-        className="h-10 w-10 outline outline-1 hover:bg-slate-300"
+        className={`${
+          border1.includes(i) ? 'bg-slate-500' : border2.includes(i) && 'bg-white'
+        } h-10 w-10 outline outline-1`}
         key={i}
       ></button>,
     );
   }
-
-  const [gamePhase, setGamePhase] = useState<GamePhase>(GamePhase.setup);
-  const [clicked, setClicked] = useState<number>(0);
-  const [border1, setBorder1] = useState<number[]>([]);
-  const [border2, setBorder2] = useState<number[]>([]);
   useEffect(() => {
     clicked !== 0 && setBorder1([clicked, clicked - 10]);
   }, [clicked]);
@@ -47,9 +49,9 @@ export default function Home() {
       <div className="mb-4 flex flex-col">
         <span>debug selected number: {clicked}</span>
         <span>debug shipSizeOf2Vertical sector: {border1.toLocaleString()}</span>
-        <span>buffer shipSizeOf2Vertical sector: {border2.toLocaleString()}</span>
+        <span>debug buffer shipSizeOf2Vertical sector: {border2.toLocaleString()}</span>
       </div>
-      <div className="flex items-center flex-row">
+      <div className="flex flex-row items-center">
         <div className="flex flex-col">
           <div className="h-10 w-10"></div>
           <div className="flex flex-col">
