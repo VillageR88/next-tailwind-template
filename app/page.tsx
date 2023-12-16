@@ -28,11 +28,16 @@ export default function Home() {
   }, [clicked]);
   useEffect(() => {
     function calculateBorder2() {
-      const array = [];
-      array.push(border1[0] + 10);
-      for (const i of border1) array.push(i);
-      array.push(border1[border1.length - 1] - 10);
-      return array;
+      const array1 = [];
+      const array2 = [];
+      array1.push(border1[0] + 10);
+      for (const i of border1) array1.push(i);
+      array1.push(border1[border1.length - 1] - 10);
+      for (const i of array1) {
+        array2.push(i - 1, i, i + 1);
+      }
+      const array3 = array2.filter((x) => !border1.includes(x));
+      return array3;
     }
     setBorder2(calculateBorder2);
   }, [border1]);
