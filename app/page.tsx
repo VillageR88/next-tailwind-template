@@ -6,8 +6,9 @@ export default function Home() {
     setup,
   }
   enum ShipSelection {
-    none,
-    ship2,
+    none = 'none',
+    ship2 = 'ship2',
+    ship3 = 'ship3',
   }
   const [gamePhase, setGamePhase] = useState<GamePhase>(GamePhase.setup);
   const [shipSelected, setShipSelected] = useState<ShipSelection>(ShipSelection.none);
@@ -27,6 +28,10 @@ export default function Home() {
         }}
         onClick={() => {
           if (i > 10 && shipSelected === ShipSelection.ship2) {
+            setClicked(i);
+            setShipSelected(ShipSelection.none);
+            setShipStack([]);
+          } else if (i > 20 && shipSelected === ShipSelection.ship3) {
             setClicked(i);
             setShipSelected(ShipSelection.none);
             setShipStack([]);
@@ -87,7 +92,7 @@ export default function Home() {
               {
                 const element = document.getElementById('oneTime');
                 if (element !== null) element.style.visibility = 'hidden';
-                setShipStack(['ship2']);
+                setShipStack(['ship2', 'ship3']);
               }
             }}
             className="mb-[1em] bg-slate-100 outline outline-1"
@@ -98,12 +103,12 @@ export default function Home() {
             {shipStack.map((x, i) => (
               <button
                 key={i}
-                id="button1"
+                id={`button${i}`}
                 onClick={() => {
-                  setShipSelected(ShipSelection.ship2);
+                  setShipSelected(x as ShipSelection);
                 }}
                 className={`${
-                  shipSelected === ShipSelection.ship2 ? 'bg-yellow-50' : 'bg-slate-100'
+                  shipSelected === (x as ShipSelection) ? 'bg-yellow-50' : 'bg-slate-100'
                 } w-full  outline outline-1`}
               >
                 {x}
