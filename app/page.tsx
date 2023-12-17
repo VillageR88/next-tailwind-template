@@ -16,12 +16,12 @@ export default function Home() {
   const [clicked, setClicked] = useState<number>(0);
   const [border1, setBorder1] = useState<number[]>([]);
   const [border2, setBorder2] = useState<number[]>([]);
+  const [coordinatesShip2, setCoordinatesShip2] = useState<number[]>([]);
+  const [imprinted, setImprinted] = useState<number[]>([]);
 
   const buttons = [];
-  const initialImprint = [];
   const letters = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J'];
   for (let i = 1; i <= 100; i++) {
-    initialImprint.push(i);
     buttons.push(
       <button
         id={'' + i}
@@ -45,7 +45,6 @@ export default function Home() {
       ></button>,
     );
   }
-  const [imprinted, setImprinted] = useState<number[]>(initialImprint);
 
   useEffect(() => {
     clicked === 0 && setBorder1([]);
@@ -65,7 +64,7 @@ export default function Home() {
         else if (i.toString().endsWith('0')) array2.push(i - 1, i);
         else array2.push(i - 1, i, i + 1);
       }
-      const array3 = array2.filter((x) => !border1.includes(x));
+      const array3 = array2.filter((x) => !border1.includes(x) && x > 0 && x < 100);
       return array3;
     }
     clicked !== 0 && setBorder2(calculateBorder2);
@@ -149,10 +148,13 @@ export default function Home() {
           <div>
             <span>debug: Imprinted values: </span>
           </div>
-          <div className="flex gap-4 justify-between p-2 h-[30em] w-[20em] flex-wrap outline outline-2">
-            {imprinted.map((x, i) => (
-              <span key={i}>{x}</span>
-            ))}
+          <div className="flex h-[30em] w-[20em] flex-wrap gap-4 p-2 outline outline-2">
+            <div>
+              Coordinates Ship2:
+              {coordinatesShip2.map((x, i) => (
+                <span key={i}>{x}</span>
+              ))}
+            </div>
           </div>
         </div>
       </div>
