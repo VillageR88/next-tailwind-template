@@ -20,12 +20,14 @@ export default function Home() {
   const [coordinatesShip2, setCoordinatesShip2] = useState<number[][]>([]);
   const [coordinatesShip3, setCoordinatesShip3] = useState<number[][]>([]);
   const [imprinted, setImprinted] = useState<number[]>([]);
-  console.log(shipSelected);
-  console.log(shipStack);
-  console.log(border1);
-  console.log(border2);
-  console.log(coordinatesShip2);
-  console.log(clicked);
+  //console.log(shipSelected);
+  //console.log(shipStack);
+  //console.log(border1);
+  //console.log(border2);
+  //console.log(coordinatesShip2);
+  //console.log(coordinatesShip3);
+  //console.log(clicked);
+  //console.log(trace);
   const buttons = [];
   const letters = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J'];
   for (let i = 1; i <= 100; i++) {
@@ -163,17 +165,29 @@ export default function Home() {
             <span>debug: Imprinted values: </span>
           </div>
           <div className="flex h-[30em] w-[20em] flex-col flex-wrap gap-4 p-2 outline outline-2">
-            <div>
-              <span>Coordinates Ship2:</span>
-              {coordinatesShip2.map((x, i) => (
-                <span key={i}>{x.toLocaleString()}</span>
-              ))}
-            </div>
-            <div>
-              <span>Coordinates Ship3:</span>
-              {coordinatesShip3.map((x, i) => (
-                <span key={i}>{x}</span>
-              ))}
+            {
+              <div className="flex flex-col">
+                Coordinates Ship2:
+                <div className="flex flex-wrap gap-2 pr-2">
+                  Border1:
+                  {coordinatesShip2[0]?.map((x, i) => <span key={i}>{x.toLocaleString()}</span>)}
+                </div>
+                <div className="flex flex-wrap gap-2 pr-2">
+                  Border2:
+                  {coordinatesShip2[1]?.map((x, i) => <span key={i}>{x.toLocaleString()}</span>)}
+                </div>
+              </div>
+            }
+            <div className="flex flex-col">
+              Coordinates Ship3:
+              <div className="flex flex-wrap gap-2 pr-2">
+                Border1:
+                {coordinatesShip3[0]?.map((x, i) => <span key={i}>{x.toLocaleString()}</span>)}
+              </div>
+              <div className="flex flex-wrap gap-2 pr-2">
+                Border2:
+                {coordinatesShip3[1]?.map((x, i) => <span key={i}>{x.toLocaleString()}</span>)}
+              </div>
             </div>
           </div>
         </div>
