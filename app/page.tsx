@@ -16,7 +16,15 @@ export default function Home() {
   const [clicked, setClicked] = useState<number>(0);
   const [border1, setBorder1] = useState<number[]>([]);
   const [border2, setBorder2] = useState<number[]>([]);
-  const [coordinatesShip2, setCoordinatesShip2] = useState<number[]>([]);
+  const [coordinatesShip2, setCoordinatesShip2] = useState<number[][]>([]);
+  console.log(shipSelected);
+  console.log(shipStack);
+  console.log(border1);
+  console.log(border2);
+  console.log(coordinatesShip2);
+  console.log(clicked);
+
+  const [coordinatesShip3, setCoordinatesShip3] = useState<number[][]>([]);
   const [imprinted, setImprinted] = useState<number[]>([]);
 
   const buttons = [];
@@ -68,7 +76,9 @@ export default function Home() {
       return array3;
     }
     clicked !== 0 && setBorder2(calculateBorder2);
-  }, [clicked, border1]);
+    //clicked !== 0 && setCoordinatesShip2([border1, border2]);
+  }, [border1, clicked]);
+
   useEffect(() => {
     setShipSelected(ShipSelection.none);
   }, [ShipSelection.none, clicked]);
@@ -148,10 +158,16 @@ export default function Home() {
           <div>
             <span>debug: Imprinted values: </span>
           </div>
-          <div className="flex h-[30em] w-[20em] flex-wrap gap-4 p-2 outline outline-2">
+          <div className="flex h-[30em] w-[20em] flex-col flex-wrap gap-4 p-2 outline outline-2">
             <div>
-              Coordinates Ship2:
+              <span>Coordinates Ship2:</span>
               {coordinatesShip2.map((x, i) => (
+                <span key={i}>{x.toLocaleString()}</span>
+              ))}
+            </div>
+            <div>
+              <span>Coordinates Ship3:</span>
+              {coordinatesShip3.map((x, i) => (
                 <span key={i}>{x}</span>
               ))}
             </div>
