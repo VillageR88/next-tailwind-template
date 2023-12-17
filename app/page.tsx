@@ -67,7 +67,7 @@ export default function Home() {
       else if (i.toString().endsWith('0')) array2.push(i - 1, i);
       else array2.push(i - 1, i, i + 1);
     }
-    const array3 = array2.filter((x) => !array.includes(x) && x > 0 && x < 100);
+    const array3 = array2.filter((x) => !array.includes(x) && x > 0 && x <= 100);
     return array3;
   }
 
