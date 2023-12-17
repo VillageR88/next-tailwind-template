@@ -18,8 +18,9 @@ export default function Home() {
   const [border2, setBorder2] = useState<number[]>([]);
   const [coordinatesShip2, setCoordinatesShip2] = useState<number[][]>([]);
   const [coordinatesShip3, setCoordinatesShip3] = useState<number[][]>([]);
-  const [imprinted, setImprinted] = useState<number[]>([]);
-  console.log(shipSelected);
+  const [imprinted, setImprinted] = useState<number[][][]>([]);
+  //console.log(imprinted);
+  //console.log(shipSelected);
   //console.log(shipStack);
   //console.log(border1);
   //console.log(border2);
@@ -89,6 +90,10 @@ export default function Home() {
     }
     setShipSelected(ShipSelection.none);
   }
+
+  useEffect(() => {
+    setImprinted([coordinatesShip2, coordinatesShip3]);
+  }, [coordinatesShip2, coordinatesShip3]);
 
   return (
     <div className="flex min-h-screen flex-col items-center justify-center bg-gradient-to-br from-cyan-300 to-cyan-200 font-[600] text-black">
