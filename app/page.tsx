@@ -59,6 +59,9 @@ export default function Home() {
         <span>debug buffer shipSizeOf2Vertical sector: {border2.toLocaleString()}</span>
       </div>
       <div className="flex flex-row items-center">
+        <div className="ml-[-10em] mr-[3em] h-[30em] w-[10em] flex-col outline outline-2">
+          <button className="bg-slate-100 outline outline-1 w-full">Ship2</button>
+        </div>
         <div className="flex flex-col">
           <div className="h-10 w-10"></div>
           <div className="flex flex-col">
