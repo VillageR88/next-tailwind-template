@@ -11,6 +11,7 @@ export default function Home() {
   }
   const [gamePhase, setGamePhase] = useState<GamePhase>(GamePhase.setup);
   const [shipSelected, setShipSelected] = useState<ShipSelection>(ShipSelection.none);
+  const [shipStack, setShipStack] = useState<string[]>([]);
   const [clicked, setClicked] = useState<number>(0);
   const [border1, setBorder1] = useState<number[]>([]);
   const [border2, setBorder2] = useState<number[]>([]);
@@ -27,8 +28,8 @@ export default function Home() {
         onClick={() => {
           if (i > 10 && shipSelected === ShipSelection.ship2) {
             setClicked(i);
-            document.getElementById('button1').style.display = 'none';
             setShipSelected(ShipSelection.none);
+            setShipStack([]);
           }
           document.getElementById('' + i)?.blur();
         }}
@@ -59,7 +60,6 @@ export default function Home() {
     }
     clicked !== 0 && setBorder2(calculateBorder2);
   }, [clicked, border1]);
-
   return (
     <div className="flex min-h-screen flex-col items-center justify-center bg-gradient-to-br from-cyan-300 to-cyan-200 font-[600] text-black">
       <div className="mb-4 flex flex-col">
@@ -68,18 +68,48 @@ export default function Home() {
         <span>debug buffer shipSizeOf2Vertical sector: {border2.toLocaleString()}</span>
       </div>
       <div className="flex flex-row items-center">
-        <div className="ml-[-10em] mr-[3em] h-[30em] w-[10em] flex-col outline outline-2">
+        <div className="absolute ml-[-15em] mr-[5em] flex w-[12em] flex-col justify-center">
           <button
-            id="button1"
             onClick={() => {
-              setShipSelected(ShipSelection.ship2);
+              const element = document.getElementById('oneTime');
+              if (element !== null) element.style.visibility = 'visible';
+              setClicked(-100);
+              setShipStack([]);
+              setShipSelected(ShipSelection.none);
             }}
-            className={`${
-              shipSelected === ShipSelection.ship2 ? 'bg-yellow-50' : 'bg-slate-100'
-            } w-full  outline outline-1`}
+            className="bg-slate-100 pl-2 text-left outline outline-1"
           >
-            Ship2
+            debug: Reset
           </button>
+          <button
+            id="oneTime"
+            onClick={() => {
+              {
+                const element = document.getElementById('oneTime');
+                if (element !== null) element.style.visibility = 'hidden';
+                setShipStack(['ship2']);
+              }
+            }}
+            className="mb-[1em] bg-slate-100 outline outline-1"
+          >
+            debug: Generate ships
+          </button>
+          <div className="h-[30em] flex-col outline outline-2">
+            {shipStack.map((x, i) => (
+              <button
+                key={i}
+                id="button1"
+                onClick={() => {
+                  setShipSelected(ShipSelection.ship2);
+                }}
+                className={`${
+                  shipSelected === ShipSelection.ship2 ? 'bg-yellow-50' : 'bg-slate-100'
+                } w-full  outline outline-1`}
+              >
+                {x}
+              </button>
+            ))}
+          </div>
         </div>
         <div className="flex flex-col">
           <div className="h-10 w-10"></div>
