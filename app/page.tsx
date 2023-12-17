@@ -49,9 +49,20 @@ export default function Home() {
           }
           document.getElementById('' + i)?.blur();
         }}
-        className={`${
-          border1.includes(i) ? 'bg-slate-500' : border2.includes(i) && 'bg-cyan-100'
-        } h-10 w-10 outline outline-1 focus:bg-black `}
+        className={`
+
+        ${
+          imprinted
+            .map((x) => x[0])
+            .flat()
+            .includes(i) && 'bg-slate-500'
+        } 
+        ${
+          imprinted
+            .map((x) => x[1])
+            .flat()
+            .includes(i) && 'bg-cyan-100'
+        }          h-10 w-10 outline outline-1 focus:bg-black `}
         key={i}
       ></button>,
     );
