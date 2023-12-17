@@ -31,10 +31,10 @@ export default function Home() {
         onClick={() => {
           if (i > 10 && shipSelected === ShipSelection.ship2) {
             setClicked(i);
-            setShipStack([]);
+            setShipStack(shipStack.filter((x) => (x as ShipSelection) !== shipSelected));
           } else if (i > 20 && shipSelected === ShipSelection.ship3) {
             setClicked(i);
-            setShipStack([]);
+            setShipStack(shipStack.filter((x) => (x as ShipSelection) !== shipSelected));
           }
           document.getElementById('' + i)?.blur();
         }}
