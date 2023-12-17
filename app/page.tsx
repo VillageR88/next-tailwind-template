@@ -92,7 +92,7 @@ export default function Home() {
 
   return (
     <div className="flex min-h-screen flex-col items-center justify-center bg-gradient-to-br from-cyan-300 to-cyan-200 font-[600] text-black">
-      <div className="mb-4 flex flex-col">
+      <div className="absolute mb-[45em] flex flex-col">
         <span>debug selected number: {clicked}</span>
         <span>debug shipSizeOf2Vertical sector: {border1.toLocaleString()}</span>
         <span>debug buffer shipSizeOf2Vertical sector: {border2.toLocaleString()}</span>
@@ -173,24 +173,24 @@ export default function Home() {
             {
               <div className="flex flex-col">
                 Coordinates Ship2:
-                <div className="flex flex-wrap gap-2 pr-2">
-                  Border1:
+                <div className="flex flex-wrap gap-x-2 pr-2">
+                  Border1(Ship):
                   {coordinatesShip2[0]?.map((x, i) => <span key={i}>{x.toLocaleString()}</span>)}
                 </div>
-                <div className="flex flex-wrap gap-2 pr-2">
-                  Border2:
+                <div className="flex flex-wrap gap-x-2 pr-2">
+                  Border2(Buffer):
                   {coordinatesShip2[1]?.map((x, i) => <span key={i}>{x.toLocaleString()}</span>)}
                 </div>
               </div>
             }
             <div className="flex flex-col">
               Coordinates Ship3:
-              <div className="flex flex-wrap gap-2 pr-2">
-                Border1:
+              <div className="flex flex-wrap gap-x-2 pr-2">
+                Border1(Ship):
                 {coordinatesShip3[0]?.map((x, i) => <span key={i}>{x.toLocaleString()}</span>)}
               </div>
-              <div className="flex flex-wrap gap-2 pr-2">
-                Border2:
+              <div className="flex flex-wrap gap-x-2 pr-2">
+                Border2(Buffer):
                 {coordinatesShip3[1]?.map((x, i) => <span key={i}>{x.toLocaleString()}</span>)}
               </div>
             </div>
