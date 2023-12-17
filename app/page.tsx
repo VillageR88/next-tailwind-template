@@ -20,11 +20,11 @@ export default function Home() {
           (key.keyCode === 13 || key.keyCode === 32) && document.getElementById('' + i)?.blur();
         }}
         onClick={() => {
-          setClicked(i);
+          i > 10 && setClicked(i);
           document.getElementById('' + i)?.blur();
         }}
         className={`${
-          border1.includes(i) ? 'bg-slate-500' : border2.includes(i) && 'bg-white'
+          border1.includes(i) ? 'bg-slate-500' : border2.includes(i) && 'bg-cyan-100'
         } h-10 w-10 outline outline-1 focus:bg-black `}
         key={i}
       ></button>,
@@ -41,7 +41,9 @@ export default function Home() {
       for (const i of border1) array1.push(i);
       array1.push(border1[border1.length - 1] - 10);
       for (const i of array1) {
-        array2.push(i - 1, i, i + 1);
+        if (i.toString().endsWith('1')) array2.push(i, i + 1);
+        else if (i.toString().endsWith('0')) array2.push(i - 1, i);
+        else array2.push(i - 1, i, i + 1);
       }
       const array3 = array2.filter((x) => !border1.includes(x));
       return array3;
