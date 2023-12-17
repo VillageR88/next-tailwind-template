@@ -5,7 +5,12 @@ export default function Home() {
   enum GamePhase {
     setup,
   }
+  enum ShipSelection {
+    none,
+    ship2,
+  }
   const [gamePhase, setGamePhase] = useState<GamePhase>(GamePhase.setup);
+  const [shipSelected, setShipSelected] = useState<ShipSelection>(ShipSelection.none);
   const [clicked, setClicked] = useState<number>(0);
   const [border1, setBorder1] = useState<number[]>([]);
   const [border2, setBorder2] = useState<number[]>([]);
@@ -20,7 +25,11 @@ export default function Home() {
           (key.keyCode === 13 || key.keyCode === 32) && document.getElementById('' + i)?.blur();
         }}
         onClick={() => {
-          i > 10 && setClicked(i);
+          if (i > 10 && shipSelected === ShipSelection.ship2) {
+            setClicked(i);
+            document.getElementById('button1').style.display = 'none';
+            setShipSelected(ShipSelection.none);
+          }
           document.getElementById('' + i)?.blur();
         }}
         className={`${
@@ -60,7 +69,17 @@ export default function Home() {
       </div>
       <div className="flex flex-row items-center">
         <div className="ml-[-10em] mr-[3em] h-[30em] w-[10em] flex-col outline outline-2">
-          <button className="bg-slate-100 outline outline-1 w-full">Ship2</button>
+          <button
+            id="button1"
+            onClick={() => {
+              setShipSelected(ShipSelection.ship2);
+            }}
+            className={`${
+              shipSelected === ShipSelection.ship2 ? 'bg-yellow-50' : 'bg-slate-100'
+            } w-full  outline outline-1`}
+          >
+            Ship2
+          </button>
         </div>
         <div className="flex flex-col">
           <div className="h-10 w-10"></div>
