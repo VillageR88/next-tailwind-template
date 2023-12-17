@@ -58,27 +58,34 @@ export default function Home() {
     );
   }
 
-  function calculateBorder2() {
+  function calculateBorder2(array: number[]) {
     const array1 = [];
     const array2 = [];
-    array1.push(border1[0] + 10);
-    for (const i of border1) array1.push(i);
-    array1.push(border1[border1.length - 1] - 10);
+    array1.push(array[0] + 10);
+    for (const i of array) array1.push(i);
+    array1.push(array[array.length - 1] - 10);
     for (const i of array1) {
       if (i.toString().endsWith('1')) array2.push(i, i + 1);
       else if (i.toString().endsWith('0')) array2.push(i - 1, i);
       else array2.push(i - 1, i, i + 1);
     }
-    const array3 = array2.filter((x) => !border1.includes(x) && x > 0 && x < 100);
+    const array3 = array2.filter((x) => !array.includes(x) && x > 0 && x < 100);
     return array3;
   }
 
   function doer1(i: number) {
     //clicked === 0 && setBorder1([]);
     //clicked === 0 && setBorder2([]);
-    i !== 0 && shipSelected === ShipSelection.ship2 && setBorder1([i, i - 10]);
-    i !== 0 && shipSelected === ShipSelection.ship3 && setBorder1([i, i - 10, i - 20]);
-    i !== 0 && setBorder2(calculateBorder2);
+    const array1 = [] as number[];
+    if (i !== 0) {
+      if (shipSelected === ShipSelection.ship2) {
+        [i, i - 10].map((x) => array1.push(x));
+      } else if (shipSelected === ShipSelection.ship3) {
+        [i, i - 10, i - 20].map((x) => array1.push(x));
+      }
+      setBorder1(array1);
+      setBorder2(calculateBorder2(array1));
+    }
     if (trace === ShipSelection.ship2) {
       setCoordinatesShip2([border1, border2]);
     } else if (trace === ShipSelection.ship3) {
