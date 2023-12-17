@@ -17,16 +17,14 @@ export default function Home() {
   const [border1, setBorder1] = useState<number[]>([]);
   const [border2, setBorder2] = useState<number[]>([]);
   const [coordinatesShip2, setCoordinatesShip2] = useState<number[][]>([]);
+  const [coordinatesShip3, setCoordinatesShip3] = useState<number[][]>([]);
+  const [imprinted, setImprinted] = useState<number[]>([]);
   console.log(shipSelected);
   console.log(shipStack);
   console.log(border1);
   console.log(border2);
   console.log(coordinatesShip2);
   console.log(clicked);
-
-  const [coordinatesShip3, setCoordinatesShip3] = useState<number[][]>([]);
-  const [imprinted, setImprinted] = useState<number[]>([]);
-
   const buttons = [];
   const letters = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J'];
   for (let i = 1; i <= 100; i++) {
@@ -78,6 +76,10 @@ export default function Home() {
     clicked !== 0 && setBorder2(calculateBorder2);
     //clicked !== 0 && setCoordinatesShip2([border1, border2]);
   }, [border1, clicked]);
+
+  useEffect(() => {
+    setCoordinatesShip2([border1, border2]);
+  }, [border1, border2]);
 
   useEffect(() => {
     setShipSelected(ShipSelection.none);
