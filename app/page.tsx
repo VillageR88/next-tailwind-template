@@ -20,7 +20,7 @@ export default function Home() {
   const [coordinatesShip2, setCoordinatesShip2] = useState<number[][]>([]);
   const [coordinatesShip3, setCoordinatesShip3] = useState<number[][]>([]);
   const [imprinted, setImprinted] = useState<number[]>([]);
-  //console.log(shipSelected);
+  console.log(shipSelected);
   //console.log(shipStack);
   //console.log(border1);
   //console.log(border2);
@@ -42,9 +42,11 @@ export default function Home() {
           if (i > 10 && shipSelected === ShipSelection.ship2) {
             setClicked(i);
             setShipStack(shipStack.filter((x) => (x as ShipSelection) !== shipSelected));
+            doer1(i);
           } else if (i > 20 && shipSelected === ShipSelection.ship3) {
             setClicked(i);
             setShipStack(shipStack.filter((x) => (x as ShipSelection) !== shipSelected));
+            doer1(i);
           }
           document.getElementById('' + i)?.blur();
         }}
@@ -56,38 +58,34 @@ export default function Home() {
     );
   }
 
-  useEffect(() => {
-    clicked === 0 && setBorder1([]);
-    clicked !== 0 && shipSelected === ShipSelection.ship2 && setBorder1([clicked, clicked - 10]);
-    clicked !== 0 && shipSelected === ShipSelection.ship3 && setBorder1([clicked, clicked - 10, clicked - 20]);
-  }, [ShipSelection.none, ShipSelection.ship2, ShipSelection.ship3, clicked, shipSelected]);
-  useEffect(() => {
-    clicked === 0 && setBorder2([]);
-    function calculateBorder2() {
-      const array1 = [];
-      const array2 = [];
-      array1.push(border1[0] + 10);
-      for (const i of border1) array1.push(i);
-      array1.push(border1[border1.length - 1] - 10);
-      for (const i of array1) {
-        if (i.toString().endsWith('1')) array2.push(i, i + 1);
-        else if (i.toString().endsWith('0')) array2.push(i - 1, i);
-        else array2.push(i - 1, i, i + 1);
-      }
-      const array3 = array2.filter((x) => !border1.includes(x) && x > 0 && x < 100);
-      return array3;
+  function calculateBorder2() {
+    const array1 = [];
+    const array2 = [];
+    array1.push(border1[0] + 10);
+    for (const i of border1) array1.push(i);
+    array1.push(border1[border1.length - 1] - 10);
+    for (const i of array1) {
+      if (i.toString().endsWith('1')) array2.push(i, i + 1);
+      else if (i.toString().endsWith('0')) array2.push(i - 1, i);
+      else array2.push(i - 1, i, i + 1);
     }
-    clicked !== 0 && setBorder2(calculateBorder2);
-  }, [border1, clicked]);
+    const array3 = array2.filter((x) => !border1.includes(x) && x > 0 && x < 100);
+    return array3;
+  }
 
-  useEffect(() => {
-    trace === ShipSelection.ship2 && setCoordinatesShip2([border1, border2]);
-    trace === ShipSelection.ship3 && setCoordinatesShip3([border1, border2]);
-  }, [ShipSelection.ship2, ShipSelection.ship3, border1, border2, trace]);
-
-  useEffect(() => {
+  function doer1(i: number) {
+    //clicked === 0 && setBorder1([]);
+    //clicked === 0 && setBorder2([]);
+    i !== 0 && shipSelected === ShipSelection.ship2 && setBorder1([i, i - 10]);
+    i !== 0 && shipSelected === ShipSelection.ship3 && setBorder1([i, i - 10, i - 20]);
+    i !== 0 && setBorder2(calculateBorder2);
+    if (trace === ShipSelection.ship2) {
+      setCoordinatesShip2([border1, border2]);
+    } else if (trace === ShipSelection.ship3) {
+      setCoordinatesShip3([border1, border2]);
+    }
     setShipSelected(ShipSelection.none);
-  }, [ShipSelection.none, clicked]);
+  }
 
   return (
     <div className="flex min-h-screen flex-col items-center justify-center bg-gradient-to-br from-cyan-300 to-cyan-200 font-[600] text-black">
