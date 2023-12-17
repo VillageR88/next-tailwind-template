@@ -18,8 +18,10 @@ export default function Home() {
   const [border2, setBorder2] = useState<number[]>([]);
 
   const buttons = [];
+  const initialImprint = [];
   const letters = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J'];
   for (let i = 1; i <= 100; i++) {
+    initialImprint.push(i);
     buttons.push(
       <button
         id={'' + i}
@@ -43,6 +45,8 @@ export default function Home() {
       ></button>,
     );
   }
+  const [imprinted, setImprinted] = useState<number[]>(initialImprint);
+
   useEffect(() => {
     clicked === 0 && setBorder1([]);
     clicked !== 0 && shipSelected === ShipSelection.ship2 && setBorder1([clicked, clicked - 10]);
@@ -78,7 +82,7 @@ export default function Home() {
         <span>debug buffer shipSizeOf2Vertical sector: {border2.toLocaleString()}</span>
       </div>
       <div className="flex flex-row items-center">
-        <div className="absolute ml-[-15em] mr-[5em] flex w-[12em] flex-col justify-center">
+        <div className=" absolute ml-[-15em] mr-[5em] flex w-[12em] flex-col justify-center">
           <button
             onClick={() => {
               const element = document.getElementById('oneTime');
@@ -87,7 +91,7 @@ export default function Home() {
               setShipStack([]);
               setShipSelected(ShipSelection.none);
             }}
-            className="bg-slate-100 pl-2 text-left outline outline-1"
+            className="bg-slate-100 pl-2  text-left outline outline-1"
           >
             debug: Reset
           </button>
@@ -140,6 +144,16 @@ export default function Home() {
             ))}
           </div>
           <div className="grid grid-cols-10 outline outline-2">{buttons}</div>
+        </div>
+        <div className="absolute ml-[31em] flex flex-col">
+          <div>
+            <span>debug: Imprinted values: </span>
+          </div>
+          <div className="flex gap-4 justify-between p-2 h-[30em] w-[20em] flex-wrap outline outline-2">
+            {imprinted.map((x, i) => (
+              <span key={i}>{x}</span>
+            ))}
+          </div>
         </div>
       </div>
     </div>
