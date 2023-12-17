@@ -12,6 +12,7 @@ export default function Home() {
   }
   const [gamePhase, setGamePhase] = useState<GamePhase>(GamePhase.setup);
   const [shipSelected, setShipSelected] = useState<ShipSelection>(ShipSelection.none);
+  const [trace, setTrace] = useState<ShipSelection>(ShipSelection.none);
   const [shipStack, setShipStack] = useState<string[]>([]);
   const [clicked, setClicked] = useState<number>(0);
   const [border1, setBorder1] = useState<number[]>([]);
@@ -35,6 +36,7 @@ export default function Home() {
           (key.keyCode === 13 || key.keyCode === 32) && document.getElementById('' + i)?.blur();
         }}
         onClick={() => {
+          setTrace(shipSelected);
           if (i > 10 && shipSelected === ShipSelection.ship2) {
             setClicked(i);
             setShipStack(shipStack.filter((x) => (x as ShipSelection) !== shipSelected));
@@ -74,12 +76,12 @@ export default function Home() {
       return array3;
     }
     clicked !== 0 && setBorder2(calculateBorder2);
-    //clicked !== 0 && setCoordinatesShip2([border1, border2]);
   }, [border1, clicked]);
 
   useEffect(() => {
-    setCoordinatesShip2([border1, border2]);
-  }, [border1, border2]);
+    trace === ShipSelection.ship2 && setCoordinatesShip2([border1, border2]);
+    trace === ShipSelection.ship3 && setCoordinatesShip3([border1, border2]);
+  }, [ShipSelection.ship2, ShipSelection.ship3, border1, border2, trace]);
 
   useEffect(() => {
     setShipSelected(ShipSelection.none);
