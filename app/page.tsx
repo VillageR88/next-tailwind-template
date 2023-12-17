@@ -104,6 +104,8 @@ export default function Home() {
               if (element !== null) element.style.visibility = 'visible';
               setClicked(0);
               setShipStack([]);
+              setCoordinatesShip2([]);
+              setCoordinatesShip3([]);
               setShipSelected(ShipSelection.none);
             }}
             className="bg-slate-100 pl-2  text-left outline outline-1"
