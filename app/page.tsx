@@ -72,8 +72,6 @@ export default function Home() {
   }
 
   function doer1(i: number) {
-    //clicked === 0 && setBorder1([]);
-    //clicked === 0 && setBorder2([]);
     const array1 = [] as number[];
     if (i !== 0) {
       if (shipSelected === ShipSelection.ship2) {
@@ -107,6 +105,8 @@ export default function Home() {
               if (element !== null) element.style.visibility = 'visible';
               setClicked(0);
               setShipStack([]);
+              setBorder1([]);
+              setBorder2([]);
               setCoordinatesShip2([]);
               setCoordinatesShip3([]);
               setShipSelected(ShipSelection.none);
