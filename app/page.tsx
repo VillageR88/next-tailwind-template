@@ -15,12 +15,17 @@ export default function Home() {
   for (let i = 1; i <= 100; i++) {
     buttons.push(
       <button
+        id={'' + i}
+        onKeyUp={(key) => {
+          (key.keyCode === 13 || key.keyCode === 32) && document.getElementById('' + i)?.blur();
+        }}
         onClick={() => {
           setClicked(i);
+          document.getElementById('' + i)?.blur();
         }}
         className={`${
           border1.includes(i) ? 'bg-slate-500' : border2.includes(i) && 'bg-white'
-        } h-10 w-10 outline outline-1`}
+        } h-10 w-10 outline outline-1 focus:bg-black `}
         key={i}
       ></button>,
     );
