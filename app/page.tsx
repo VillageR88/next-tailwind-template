@@ -29,11 +29,9 @@ export default function Home() {
         onClick={() => {
           if (i > 10 && shipSelected === ShipSelection.ship2) {
             setClicked(i);
-            setShipSelected(ShipSelection.none);
             setShipStack([]);
           } else if (i > 20 && shipSelected === ShipSelection.ship3) {
             setClicked(i);
-            setShipSelected(ShipSelection.none);
             setShipStack([]);
           }
           document.getElementById('' + i)?.blur();
@@ -46,9 +44,12 @@ export default function Home() {
     );
   }
   useEffect(() => {
-    clicked !== 0 && setBorder1([clicked, clicked - 10]);
-  }, [clicked]);
+    clicked === 0 && setBorder1([]);
+    clicked !== 0 && shipSelected === ShipSelection.ship2 && setBorder1([clicked, clicked - 10]);
+    clicked !== 0 && shipSelected === ShipSelection.ship3 && setBorder1([clicked, clicked - 10, clicked - 20]);
+  }, [ShipSelection.none, ShipSelection.ship2, ShipSelection.ship3, clicked, shipSelected]);
   useEffect(() => {
+    clicked === 0 && setBorder2([]);
     function calculateBorder2() {
       const array1 = [];
       const array2 = [];
@@ -65,6 +66,10 @@ export default function Home() {
     }
     clicked !== 0 && setBorder2(calculateBorder2);
   }, [clicked, border1]);
+  useEffect(() => {
+    setShipSelected(ShipSelection.none);
+  }, [ShipSelection.none, clicked]);
+
   return (
     <div className="flex min-h-screen flex-col items-center justify-center bg-gradient-to-br from-cyan-300 to-cyan-200 font-[600] text-black">
       <div className="mb-4 flex flex-col">
@@ -78,7 +83,7 @@ export default function Home() {
             onClick={() => {
               const element = document.getElementById('oneTime');
               if (element !== null) element.style.visibility = 'visible';
-              setClicked(-100);
+              setClicked(0);
               setShipStack([]);
               setShipSelected(ShipSelection.none);
             }}
