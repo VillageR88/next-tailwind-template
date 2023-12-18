@@ -9,6 +9,8 @@ export default function Home() {
     none = 'none',
     ship2 = 'ship2',
     ship3 = 'ship3',
+    ship4 = 'ship4',
+    ship5 = 'ship5',
   }
   //const [gamePhase, setGamePhase] = useState<GamePhase>(GamePhase.setup);
   const [shipSelected, setShipSelected] = useState<ShipSelection>(ShipSelection.none);
@@ -18,6 +20,8 @@ export default function Home() {
   const [border2, setBorder2] = useState<number[]>([]);
   const [coordinatesShip2, setCoordinatesShip2] = useState<number[][]>([]);
   const [coordinatesShip3, setCoordinatesShip3] = useState<number[][]>([]);
+  const [coordinatesShip4, setCoordinatesShip4] = useState<number[][]>([]);
+  const [coordinatesShip5, setCoordinatesShip5] = useState<number[][]>([]);
   const [imprinted, setImprinted] = useState<number[][][]>([]);
   const [horizontal, setHorizontal] = useState<boolean>(false);
   //console.log(imprinted);
@@ -45,6 +49,12 @@ export default function Home() {
           } else if (
             (!horizontal ? i > 20 : !('' + i).endsWith('0') && !('' + i).endsWith('9')) &&
             shipSelected === ShipSelection.ship3
+          ) {
+            setClicked(i);
+            doer1(i);
+          } else if (
+            (!horizontal ? i > 30 : !('' + i).endsWith('0') && !('' + i).endsWith('9') && !('' + i).endsWith('8')) &&
+            shipSelected === ShipSelection.ship4
           ) {
             setClicked(i);
             doer1(i);
@@ -81,6 +91,9 @@ export default function Home() {
           array1.push(array[array.length - 1] + 1)) ||
         (!array[0].toString().endsWith('8') &&
           shipSelected === ShipSelection.ship3 &&
+          array1.push(array[array.length - 1] + 1)) ||
+        (!array[0].toString().endsWith('7') &&
+          shipSelected === ShipSelection.ship4 &&
           array1.push(array[array.length - 1] + 1))
       : array1.push(array[array.length - 1] - 10);
     for (const i of array1) {
@@ -106,6 +119,10 @@ export default function Home() {
         horizontal ? [i, i + 1].map((x) => array1.push(x)) : [i, i - 10].map((x) => array1.push(x));
       } else if (shipSelected === ShipSelection.ship3) {
         horizontal ? [i, i + 1, i + 2].map((x) => array1.push(x)) : [i, i - 10, i - 20].map((x) => array1.push(x));
+      } else if (shipSelected === ShipSelection.ship4) {
+        horizontal
+          ? [i, i + 1, i + 2, i + 3].map((x) => array1.push(x))
+          : [i, i - 10, i - 20, i - 30].map((x) => array1.push(x));
       }
     }
     if (
@@ -124,6 +141,8 @@ export default function Home() {
         setCoordinatesShip2([array1, calculateBorder2(array1)]);
       } else if (shipSelected === ShipSelection.ship3) {
         setCoordinatesShip3([array1, calculateBorder2(array1)]);
+      } else if (shipSelected === ShipSelection.ship4) {
+        setCoordinatesShip4([array1, calculateBorder2(array1)]);
       }
       setShipStack(shipStack.filter((x) => (x as ShipSelection) !== shipSelected));
       setShipSelected(ShipSelection.none);
@@ -131,8 +150,8 @@ export default function Home() {
   }
 
   useEffect(() => {
-    setImprinted([coordinatesShip2, coordinatesShip3]);
-  }, [coordinatesShip2, coordinatesShip3]);
+    setImprinted([coordinatesShip2, coordinatesShip3, coordinatesShip4]);
+  }, [coordinatesShip2, coordinatesShip3, coordinatesShip4]);
 
   return (
     <div className="flex min-h-screen flex-col items-center justify-center bg-gradient-to-br from-cyan-300 to-cyan-200 font-[600] text-black">
@@ -161,6 +180,8 @@ export default function Home() {
               setBorder2([]);
               setCoordinatesShip2([]);
               setCoordinatesShip3([]);
+              setCoordinatesShip4([]);
+              setCoordinatesShip5([]);
               setHorizontal(false);
               setShipSelected(ShipSelection.none);
             }}
@@ -174,7 +195,7 @@ export default function Home() {
               {
                 const element = document.getElementById('oneTime');
                 if (element !== null) element.style.visibility = 'hidden';
-                setShipStack(['ship2', 'ship3']);
+                setShipStack(['ship2', 'ship3', 'ship4', 'ship5']);
               }
             }}
             className=" bg-slate-100 outline outline-1"
@@ -230,37 +251,7 @@ export default function Home() {
           </div>
           <div className="grid grid-cols-10 outline outline-2">{buttons}</div>
         </div>
-        <div className="absolute ml-[31em] flex flex-col">
-          <div>
-            <span>debug: Imprinted values: </span>
-          </div>
-          <div className="flex h-[30em] w-[20em] flex-col flex-wrap gap-4 p-2 outline outline-2">
-            {
-              <div className="flex flex-col">
-                Coordinates Ship2:
-                <div className="flex flex-wrap gap-x-2 pr-2">
-                  Border1(Ship):
-                  {coordinatesShip2[0]?.map((x, i) => <span key={i}>{x.toLocaleString()}</span>)}
-                </div>
-                <div className="flex flex-wrap gap-x-2 pr-2">
-                  Border2(Buffer):
-                  {coordinatesShip2[1]?.map((x, i) => <span key={i}>{x.toLocaleString()}</span>)}
-                </div>
-              </div>
-            }
-            <div className="flex flex-col">
-              Coordinates Ship3:
-              <div className="flex flex-wrap gap-x-2 pr-2">
-                Border1(Ship):
-                {coordinatesShip3[0]?.map((x, i) => <span key={i}>{x.toLocaleString()}</span>)}
-              </div>
-              <div className="flex flex-wrap gap-x-2 pr-2">
-                Border2(Buffer):
-                {coordinatesShip3[1]?.map((x, i) => <span key={i}>{x.toLocaleString()}</span>)}
-              </div>
-            </div>
-          </div>
-        </div>
+        <div className="absolute ml-[31em] flex flex-col"></div>
       </div>
     </div>
   );
