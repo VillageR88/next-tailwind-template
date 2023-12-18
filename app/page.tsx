@@ -71,9 +71,9 @@ export default function Home() {
   }
 
   function calculateBorder2(array: number[]) {
-    const array1 = [];
-    const array2 = [];
-    horizontal ? array1.push(array[0] - 1) : array1.push(array[0] + 10);
+    const array1 = [] as number[];
+    const array2 = [] as number[];
+    horizontal ? !array[0].toString().endsWith('1') && array1.push(array[0] - 1) : array1.push(array[0] + 10);
     for (const i of array) array1.push(i);
     horizontal ? array1.push(array[array.length - 1] + 1) : array1.push(array[array.length - 1] - 10);
     for (const i of array1) {
