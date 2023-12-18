@@ -1,5 +1,4 @@
 'use client';
-import { getRandomValues } from 'crypto';
 import { useEffect, useState } from 'react';
 
 export default function Home() {
@@ -176,7 +175,11 @@ export default function Home() {
 
   const randomPlacement = () => {
     const randomNumberFrom1to100 = Math.floor(Math.random() * 100) + 1;
+    const randomStackSelection = Math.floor(Math.random() * shipStack.length);
+    setHorizontal(Math.round(Math.random()) as unknown as boolean);
+    document.getElementById(`stack${randomStackSelection}`)?.click();
     document.getElementById(randomNumberFrom1to100.toString())?.click();
+    //while (shipStack.length !== 0) document.getElementById(randomNumberFrom1to100.toString())?.click();
   };
 
   return (
@@ -232,10 +235,7 @@ export default function Home() {
             id="random"
             disabled={shipStack.length === 0}
             onClick={() => {
-              {
-                randomPlacement();
-                //const element = document.getElementById('random');
-              }
+              randomPlacement();
             }}
             className="mb-[1em] bg-slate-100 outline outline-1 disabled:opacity-50"
           >
@@ -245,12 +245,12 @@ export default function Home() {
             {shipStack.map((x, i) => (
               <button
                 key={i}
-                id={`button${i}`}
+                id={`stack${i}`}
                 onClick={() => {
                   setShipSelected(x as ShipSelection);
                 }}
                 className={`${
-                  shipSelected === (x as ShipSelection) ? 'bg-yellow-50' : 'bg-slate-100'
+                  shipSelected === (x as ShipSelection) ? 'bg-yellow-100' : 'bg-slate-100'
                 } w-full  outline outline-1`}
               >
                 {x}
