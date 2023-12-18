@@ -82,6 +82,11 @@ export default function Home() {
         else if (i.toString().endsWith('0')) array2.push(i - 1, i);
         else array2.push(i - 1, i, i + 1);
       }
+      if (horizontal) {
+        if (i < 10) array2.push(i, i + 10);
+        else if (i > 90) array2.push(i - 10, i);
+        else array2.push(i - 10, i, i + 10);
+      }
     }
     const array3 = array2.filter((x) => !array.includes(x) && x > 0 && x <= 100);
     return array3;
