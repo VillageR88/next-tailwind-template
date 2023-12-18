@@ -58,6 +58,17 @@ export default function Home() {
           ) {
             setClicked(i);
             doer1(i);
+          } else if (
+            (!horizontal
+              ? i > 40
+              : !('' + i).endsWith('0') &&
+                !('' + i).endsWith('9') &&
+                !('' + i).endsWith('8') &&
+                !('' + i).endsWith('7')) &&
+            shipSelected === ShipSelection.ship5
+          ) {
+            setClicked(i);
+            doer1(i);
           }
           document.getElementById('' + i)?.blur();
         }}
@@ -94,6 +105,9 @@ export default function Home() {
           array1.push(array[array.length - 1] + 1)) ||
         (!array[0].toString().endsWith('7') &&
           shipSelected === ShipSelection.ship4 &&
+          array1.push(array[array.length - 1] + 1)) ||
+        (!array[0].toString().endsWith('6') &&
+          shipSelected === ShipSelection.ship5 &&
           array1.push(array[array.length - 1] + 1))
       : array1.push(array[array.length - 1] - 10);
     for (const i of array1) {
@@ -123,6 +137,10 @@ export default function Home() {
         horizontal
           ? [i, i + 1, i + 2, i + 3].map((x) => array1.push(x))
           : [i, i - 10, i - 20, i - 30].map((x) => array1.push(x));
+      } else if (shipSelected === ShipSelection.ship5) {
+        horizontal
+          ? [i, i + 1, i + 2, i + 3, i + 4].map((x) => array1.push(x))
+          : [i, i - 10, i - 20, i - 30, i - 40].map((x) => array1.push(x));
       }
     }
     if (
@@ -143,6 +161,8 @@ export default function Home() {
         setCoordinatesShip3([array1, calculateBorder2(array1)]);
       } else if (shipSelected === ShipSelection.ship4) {
         setCoordinatesShip4([array1, calculateBorder2(array1)]);
+      } else if (shipSelected === ShipSelection.ship5) {
+        setCoordinatesShip5([array1, calculateBorder2(array1)]);
       }
       setShipStack(shipStack.filter((x) => (x as ShipSelection) !== shipSelected));
       setShipSelected(ShipSelection.none);
@@ -150,8 +170,8 @@ export default function Home() {
   }
 
   useEffect(() => {
-    setImprinted([coordinatesShip2, coordinatesShip3, coordinatesShip4]);
-  }, [coordinatesShip2, coordinatesShip3, coordinatesShip4]);
+    setImprinted([coordinatesShip2, coordinatesShip3, coordinatesShip4, coordinatesShip5]);
+  }, [coordinatesShip2, coordinatesShip3, coordinatesShip4, coordinatesShip5]);
 
   return (
     <div className="flex min-h-screen flex-col items-center justify-center bg-gradient-to-br from-cyan-300 to-cyan-200 font-[600] text-black">
