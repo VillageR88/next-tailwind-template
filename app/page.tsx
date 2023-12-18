@@ -39,7 +39,7 @@ export default function Home() {
           (key.keyCode === 13 || key.keyCode === 32) && document.getElementById('' + i)?.blur();
         }}
         onClick={() => {
-          if (i > 10 && shipSelected === ShipSelection.ship2) {
+          if ((!horizontal ? i > 10 : !('' + i).endsWith('0')) && shipSelected === ShipSelection.ship2) {
             setClicked(i);
             doer1(i);
           } else if (i > 20 && shipSelected === ShipSelection.ship3) {
