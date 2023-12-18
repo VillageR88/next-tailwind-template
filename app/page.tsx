@@ -1,4 +1,5 @@
 'use client';
+import { getRandomValues } from 'crypto';
 import { useEffect, useState } from 'react';
 
 export default function Home() {
@@ -173,6 +174,11 @@ export default function Home() {
     setImprinted([coordinatesShip2, coordinatesShip3, coordinatesShip4, coordinatesShip5]);
   }, [coordinatesShip2, coordinatesShip3, coordinatesShip4, coordinatesShip5]);
 
+  const randomPlacement = () => {
+    const randomNumberFrom1to100 = Math.floor(Math.random() * 100) + 1;
+    document.getElementById(randomNumberFrom1to100.toString())?.click();
+  };
+
   return (
     <div className="flex min-h-screen flex-col items-center justify-center bg-gradient-to-br from-cyan-300 to-cyan-200 font-[600] text-black">
       <div className="absolute mb-[45em] flex flex-col">
@@ -227,6 +233,7 @@ export default function Home() {
             disabled={shipStack.length === 0}
             onClick={() => {
               {
+                randomPlacement();
                 //const element = document.getElementById('random');
               }
             }}
