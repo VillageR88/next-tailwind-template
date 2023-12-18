@@ -20,7 +20,6 @@ export default function Home() {
   const [coordinatesShip3, setCoordinatesShip3] = useState<number[][]>([]);
   const [imprinted, setImprinted] = useState<number[][][]>([]);
   const [horizontal, setHorizontal] = useState<boolean>(false);
-
   //console.log(imprinted);
   //console.log(shipSelected);
   //console.log(shipStack);
@@ -71,13 +70,15 @@ export default function Home() {
   function calculateBorder2(array: number[]) {
     const array1 = [];
     const array2 = [];
-    array1.push(array[0] + 10);
+    horizontal ? array1.push(array[0] - 1) : array1.push(array[0] + 10);
     for (const i of array) array1.push(i);
-    array1.push(array[array.length - 1] - 10);
+    horizontal ? array1.push(array[array.length - 1] + 1) : array1.push(array[array.length - 1] - 10);
     for (const i of array1) {
-      if (i.toString().endsWith('1')) array2.push(i, i + 1);
-      else if (i.toString().endsWith('0')) array2.push(i - 1, i);
-      else array2.push(i - 1, i, i + 1);
+      if (!horizontal) {
+        if (i.toString().endsWith('1')) array2.push(i, i + 1);
+        else if (i.toString().endsWith('0')) array2.push(i - 1, i);
+        else array2.push(i - 1, i, i + 1);
+      }
     }
     const array3 = array2.filter((x) => !array.includes(x) && x > 0 && x <= 100);
     return array3;
@@ -87,9 +88,9 @@ export default function Home() {
     const array1 = [] as number[];
     if (i !== 0) {
       if (shipSelected === ShipSelection.ship2) {
-        [i, i - 10].map((x) => array1.push(x));
+        horizontal ? [i, i + 1].map((x) => array1.push(x)) : [i, i - 10].map((x) => array1.push(x));
       } else if (shipSelected === ShipSelection.ship3) {
-        [i, i - 10, i - 20].map((x) => array1.push(x));
+        horizontal ? [i, i + 1, i + 2].map((x) => array1.push(x)) : [i, i - 10, i - 20].map((x) => array1.push(x));
       }
     }
     if (
@@ -122,8 +123,8 @@ export default function Home() {
     <div className="flex min-h-screen flex-col items-center justify-center bg-gradient-to-br from-cyan-300 to-cyan-200 font-[600] text-black">
       <div className="absolute mb-[45em] flex flex-col">
         <span>debug selected number: {clicked}</span>
-        <span>debug shipSizeOf2Vertical sector: {border1.toLocaleString()}</span>
-        <span>debug buffer shipSizeOf2Vertical sector: {border2.toLocaleString()}</span>
+        <span>debug ship sector: {border1.toLocaleString()}</span>
+        <span>debug buffer sector: {border2.toLocaleString()}</span>
       </div>
       <div className="flex flex-row items-center">
         <div className=" absolute ml-[-15em] mr-[5em] flex w-[12em] flex-col justify-center">
@@ -161,9 +162,21 @@ export default function Home() {
                 setShipStack(['ship2', 'ship3']);
               }
             }}
-            className="mb-[1em] bg-slate-100 outline outline-1"
+            className=" bg-slate-100 outline outline-1"
           >
             debug: Generate ships
+          </button>
+          <button
+            id="random"
+            disabled={true}
+            onClick={() => {
+              {
+                //const element = document.getElementById('random');
+              }
+            }}
+            className="mb-[1em] bg-slate-100 opacity-50 outline outline-1"
+          >
+            debug: Place randomly
           </button>
           <div className="h-[30em] flex-col outline outline-2">
             {shipStack.map((x, i) => (
