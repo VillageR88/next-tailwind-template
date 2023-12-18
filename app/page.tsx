@@ -2,15 +2,15 @@
 import { useEffect, useState } from 'react';
 
 export default function Home() {
-  enum GamePhase {
-    setup,
-  }
+  //enum GamePhase {
+  //  setup,
+  //}
   enum ShipSelection {
     none = 'none',
     ship2 = 'ship2',
     ship3 = 'ship3',
   }
-  const [gamePhase, setGamePhase] = useState<GamePhase>(GamePhase.setup);
+  //const [gamePhase, setGamePhase] = useState<GamePhase>(GamePhase.setup);
   const [shipSelected, setShipSelected] = useState<ShipSelection>(ShipSelection.none);
   const [shipStack, setShipStack] = useState<string[]>([]);
   const [clicked, setClicked] = useState<number>(0);
@@ -19,6 +19,7 @@ export default function Home() {
   const [coordinatesShip2, setCoordinatesShip2] = useState<number[][]>([]);
   const [coordinatesShip3, setCoordinatesShip3] = useState<number[][]>([]);
   const [imprinted, setImprinted] = useState<number[][][]>([]);
+
   //console.log(imprinted);
   //console.log(shipSelected);
   //console.log(shipStack);
@@ -91,9 +92,15 @@ export default function Home() {
       } else if (shipSelected === ShipSelection.ship3) {
         [i, i - 10, i - 20].map((x) => array1.push(x));
       }
-      setBorder1(array1);
-      setBorder2(calculateBorder2(array1));
     }
+    array1.map((x1) =>
+      imprinted
+        .map((x) => x)
+        .flat(2)
+        .includes(x1),
+    );
+    setBorder1(array1);
+    setBorder2(calculateBorder2(array1));
     if (shipSelected === ShipSelection.ship2) {
       setCoordinatesShip2([array1, calculateBorder2(array1)]);
     } else if (shipSelected === ShipSelection.ship3) {
