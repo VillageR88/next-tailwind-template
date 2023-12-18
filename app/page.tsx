@@ -12,6 +12,7 @@ export default function Home() {
     ship4 = 'ship4',
     ship5 = 'ship5',
   }
+
   //const [gamePhase, setGamePhase] = useState<GamePhase>(GamePhase.setup);
   const [shipSelected, setShipSelected] = useState<ShipSelection>(ShipSelection.none);
   const [shipStack, setShipStack] = useState<string[]>([]);
@@ -26,6 +27,12 @@ export default function Home() {
   const [horizontal, setHorizontal] = useState<boolean>(false);
   const [autoloader, setAutoloader] = useState<boolean>(false);
   const [autoloaderControl, setAutoloaderControl] = useState<number>(0);
+
+  const shipTemplate = ({ type, id, coordinates }: { type: ShipSelection; id: string; coordinates: number[][] }) => [
+    type,
+    id,
+    coordinates,
+  ];
   //console.log(imprinted);
   //console.log(shipSelected);
   //console.log(shipStack);
