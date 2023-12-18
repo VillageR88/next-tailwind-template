@@ -224,13 +224,13 @@ export default function Home() {
           </button>
           <button
             id="random"
-            disabled={true}
+            disabled={shipStack.length === 0}
             onClick={() => {
               {
                 //const element = document.getElementById('random');
               }
             }}
-            className="mb-[1em] bg-slate-100 opacity-50 outline outline-1"
+            className="mb-[1em] bg-slate-100 outline outline-1 disabled:opacity-50"
           >
             debug: Place randomly
           </button>
