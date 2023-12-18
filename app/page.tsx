@@ -75,7 +75,14 @@ export default function Home() {
     const array2 = [] as number[];
     horizontal ? !array[0].toString().endsWith('1') && array1.push(array[0] - 1) : array1.push(array[0] + 10);
     for (const i of array) array1.push(i);
-    horizontal ? array1.push(array[array.length - 1] + 1) : array1.push(array[array.length - 1] - 10);
+    horizontal
+      ? (!array[0].toString().endsWith('9') &&
+          shipSelected === ShipSelection.ship2 &&
+          array1.push(array[array.length - 1] + 1)) ||
+        (!array[0].toString().endsWith('8') &&
+          shipSelected === ShipSelection.ship3 &&
+          array1.push(array[array.length - 1] + 1))
+      : array1.push(array[array.length - 1] - 10);
     for (const i of array1) {
       if (!horizontal) {
         if (i.toString().endsWith('1')) array2.push(i, i + 1);
