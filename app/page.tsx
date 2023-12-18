@@ -93,20 +93,25 @@ export default function Home() {
         [i, i - 10, i - 20].map((x) => array1.push(x));
       }
     }
-    array1.map((x1) =>
-      imprinted
-        .map((x) => x)
-        .flat(2)
-        .includes(x1),
-    );
-    setBorder1(array1);
-    setBorder2(calculateBorder2(array1));
-    if (shipSelected === ShipSelection.ship2) {
-      setCoordinatesShip2([array1, calculateBorder2(array1)]);
-    } else if (shipSelected === ShipSelection.ship3) {
-      setCoordinatesShip3([array1, calculateBorder2(array1)]);
+    if (
+      !array1
+        .map((x1) =>
+          imprinted
+            .map((x) => x)
+            .flat(2)
+            .includes(x1),
+        )
+        .includes(true)
+    ) {
+      setBorder1(array1);
+      setBorder2(calculateBorder2(array1));
+      if (shipSelected === ShipSelection.ship2) {
+        setCoordinatesShip2([array1, calculateBorder2(array1)]);
+      } else if (shipSelected === ShipSelection.ship3) {
+        setCoordinatesShip3([array1, calculateBorder2(array1)]);
+      }
+      setShipSelected(ShipSelection.none);
     }
-    setShipSelected(ShipSelection.none);
   }
 
   useEffect(() => {
