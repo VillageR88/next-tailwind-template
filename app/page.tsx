@@ -24,6 +24,8 @@ export default function Home() {
   const [coordinatesShip5, setCoordinatesShip5] = useState<number[][]>([]);
   const [imprinted, setImprinted] = useState<number[][][]>([]);
   const [horizontal, setHorizontal] = useState<boolean>(false);
+  const [autoloader, setAutoloader] = useState<boolean>(false);
+  const [autoloaderControl, setAutoloaderControl] = useState<number>(0);
   //console.log(imprinted);
   //console.log(shipSelected);
   //console.log(shipStack);
@@ -173,14 +175,19 @@ export default function Home() {
     setImprinted([coordinatesShip2, coordinatesShip3, coordinatesShip4, coordinatesShip5]);
   }, [coordinatesShip2, coordinatesShip3, coordinatesShip4, coordinatesShip5]);
 
-  const randomPlacement = () => {
-    const randomNumberFrom1to100 = Math.floor(Math.random() * 100) + 1;
-    const randomStackSelection = Math.floor(Math.random() * shipStack.length);
-    setHorizontal(Math.round(Math.random()) as unknown as boolean);
-    document.getElementById(`stack${randomStackSelection}`)?.click();
-    document.getElementById(randomNumberFrom1to100.toString())?.click();
-    //while (shipStack.length !== 0) document.getElementById(randomNumberFrom1to100.toString())?.click();
-  };
+  useEffect(() => {
+    if (shipStack.length !== 0 && autoloader) {
+      const randomNumberFrom1to100 = Math.floor(Math.random() * 100) + 1;
+      const randomStackSelection = Math.floor(Math.random() * shipStack.length);
+      setHorizontal(Math.round(Math.random()) as unknown as boolean);
+      document.getElementById(`stack${randomStackSelection}`)?.click();
+      document.getElementById(randomNumberFrom1to100.toString())?.click();
+      setAutoloaderControl(autoloaderControl + 1);
+    } else {
+      setAutoloader(false);
+      setAutoloaderControl(0);
+    }
+  }, [autoloader, autoloaderControl, shipStack.length]);
 
   return (
     <div className="flex min-h-screen flex-col items-center justify-center bg-gradient-to-br from-cyan-300 to-cyan-200 font-[600] text-black">
@@ -235,7 +242,7 @@ export default function Home() {
             id="random"
             disabled={shipStack.length === 0}
             onClick={() => {
-              randomPlacement();
+              setAutoloader(true);
             }}
             className="mb-[1em] bg-slate-100 outline outline-1 disabled:opacity-50"
           >
