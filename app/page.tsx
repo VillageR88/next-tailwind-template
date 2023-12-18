@@ -19,6 +19,7 @@ export default function Home() {
   const [coordinatesShip2, setCoordinatesShip2] = useState<number[][]>([]);
   const [coordinatesShip3, setCoordinatesShip3] = useState<number[][]>([]);
   const [imprinted, setImprinted] = useState<number[][][]>([]);
+  const [horizontal, setHorizontal] = useState<boolean>(false);
 
   //console.log(imprinted);
   //console.log(shipSelected);
@@ -128,6 +129,14 @@ export default function Home() {
         <div className=" absolute ml-[-15em] mr-[5em] flex w-[12em] flex-col justify-center">
           <button
             onClick={() => {
+              setHorizontal(!horizontal);
+            }}
+            className="mb-[1em] bg-violet-200 pl-2 text-left outline outline-1"
+          >
+            {horizontal ? 'Align: horizontal' : 'Align: vertical'}
+          </button>
+          <button
+            onClick={() => {
               const element = document.getElementById('oneTime');
               if (element !== null) element.style.visibility = 'visible';
               setClicked(0);
@@ -136,6 +145,7 @@ export default function Home() {
               setBorder2([]);
               setCoordinatesShip2([]);
               setCoordinatesShip3([]);
+              setHorizontal(false);
               setShipSelected(ShipSelection.none);
             }}
             className="bg-slate-100 pl-2  text-left outline outline-1"
