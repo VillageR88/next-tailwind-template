@@ -42,7 +42,10 @@ export default function Home() {
           if ((!horizontal ? i > 10 : !('' + i).endsWith('0')) && shipSelected === ShipSelection.ship2) {
             setClicked(i);
             doer1(i);
-          } else if (i > 20 && shipSelected === ShipSelection.ship3) {
+          } else if (
+            (!horizontal ? i > 20 : !('' + i).endsWith('0') && !('' + i).endsWith('9')) &&
+            shipSelected === ShipSelection.ship3
+          ) {
             setClicked(i);
             doer1(i);
           }
