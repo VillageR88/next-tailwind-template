@@ -41,11 +41,9 @@ export default function Home() {
         onClick={() => {
           if (i > 10 && shipSelected === ShipSelection.ship2) {
             setClicked(i);
-            setShipStack(shipStack.filter((x) => (x as ShipSelection) !== shipSelected));
             doer1(i);
           } else if (i > 20 && shipSelected === ShipSelection.ship3) {
             setClicked(i);
-            setShipStack(shipStack.filter((x) => (x as ShipSelection) !== shipSelected));
             doer1(i);
           }
           document.getElementById('' + i)?.blur();
@@ -110,6 +108,7 @@ export default function Home() {
       } else if (shipSelected === ShipSelection.ship3) {
         setCoordinatesShip3([array1, calculateBorder2(array1)]);
       }
+      setShipStack(shipStack.filter((x) => (x as ShipSelection) !== shipSelected));
       setShipSelected(ShipSelection.none);
     }
   }
