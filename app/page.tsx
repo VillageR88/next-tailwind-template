@@ -176,7 +176,7 @@ export default function Home() {
         }
         return newValue;
       });
-      setShipStack(shipStack.filter((x) => (x as ShipSelection) !== shipSelected));
+      ///setShipStack(shipStack.filter((x) => (x as ShipSelection) !== shipSelected));
       setShipSelected(ShipSelection.none);
       setUnitSelected(null);
     }
@@ -238,19 +238,7 @@ export default function Home() {
           >
             debug: Reset
           </button>
-          <button
-            id="oneTime"
-            onClick={() => {
-              {
-                const element = document.getElementById('oneTime');
-                if (element !== null) element.style.visibility = 'hidden';
-                setShipStack(collection.map((x) => x[2] as string));
-              }
-            }}
-            className=" bg-slate-100 outline outline-1"
-          >
-            debug: Generate ships
-          </button>
+
           <button
             id="random"
             disabled={shipStack.length === 0}
@@ -262,19 +250,22 @@ export default function Home() {
             debug: Place randomly
           </button>
           <div className="h-[30em] flex-col outline outline-2">
-            {collection.map((x, i) => (
-              <button
-                key={i}
-                id={`stack${i}`}
-                onClick={() => {
-                  setShipSelected(x[0] as ShipSelection);
-                  setUnitSelected(x[2] as string);
-                }}
-                className={`${unitSelected === x[2] ? 'bg-yellow-100' : 'bg-slate-100'} w-full  outline outline-1`}
-              >
-                {x[0]}
-              </button>
-            ))}
+            {collection.map(
+              (x, i) =>
+                x[1].length === 0 && (
+                  <button
+                    key={i}
+                    id={`stack${i}`}
+                    onClick={() => {
+                      setShipSelected(x[0] as ShipSelection);
+                      setUnitSelected(x[2] as string);
+                    }}
+                    className={`${unitSelected === x[2] ? 'bg-yellow-100' : 'bg-slate-100'} w-full  outline outline-1`}
+                  >
+                    {x[0]}
+                  </button>
+                ),
+            )}
           </div>
         </div>
         <div className="flex flex-col">
