@@ -23,9 +23,9 @@ export default function Home() {
     const ids = ['unit1', 'unit2', 'unit3', 'unit4', 'unit5', 'unit6', 'unit7', 'unit8'];
     return [
       shipTemplate({ type: ShipSelection.ship2, coordinates: [], id: ids.shift() as unknown as string }),
-      //shipTemplate({ type: ShipSelection.ship2, coordinates: [] }),
+      shipTemplate({ type: ShipSelection.ship2, coordinates: [], id: ids.shift() as unknown as string }),
       shipTemplate({ type: ShipSelection.ship3, coordinates: [], id: ids.shift() as unknown as string }),
-      //shipTemplate({ type: ShipSelection.ship3, coordinates: [], id: ids.shift() as unknown as string }),
+      shipTemplate({ type: ShipSelection.ship3, coordinates: [], id: ids.shift() as unknown as string }),
       shipTemplate({ type: ShipSelection.ship4, coordinates: [], id: ids.shift() as unknown as string }),
       shipTemplate({ type: ShipSelection.ship5, coordinates: [], id: ids.shift() as unknown as string }),
     ];
