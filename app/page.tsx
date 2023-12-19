@@ -38,28 +38,13 @@ export default function Home() {
   const [clicked, setClicked] = useState<number>(0);
   const [border1, setBorder1] = useState<number[]>([]);
   const [border2, setBorder2] = useState<number[]>([]);
-  //const [coordinatesShip2, setCoordinatesShip2] = useState<number[][]>([]);
-  //const [coordinatesShip3, setCoordinatesShip3] = useState<number[][]>([]);
-  //const [coordinatesShip4, setCoordinatesShip4] = useState<number[][]>([]);
-  //const [coordinatesShip5, setCoordinatesShip5] = useState<number[][]>([]);
   const [imprinted, setImprinted] = useState<number[][][]>([]);
   const [collection, setCollection] = useState<(ShipSelection | number[][] | string)[][]>(defaultConfiguration);
   const [horizontal, setHorizontal] = useState<boolean>(false);
   const [autoloader, setAutoloader] = useState<boolean>(false);
   const [autoloaderControl, setAutoloaderControl] = useState<number>(0);
 
-  //if (collection.length === 0) setCollection(defaultConfiguration);
-
   console.log('collection:', collection);
-  //console.log(imprinted);
-  //console.log(shipSelected);
-  //console.log(shipStack);
-  //console.log(border1);
-  //console.log(border2);
-  //console.log(coordinatesShip2);
-  //console.log(coordinatesShip3);
-  //console.log(clicked);
-  //console.log(trace);
   const buttons = [];
   const letters = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J'];
   for (let i = 1; i <= 100; i++) {
@@ -191,15 +176,6 @@ export default function Home() {
         }
         return newValue;
       });
-      //if (shipSelected === ShipSelection.ship2) {
-      //  setCoordinatesShip2([array1, calculateBorder2(array1)]);
-      //} else if (shipSelected === ShipSelection.ship3) {
-      //  setCoordinatesShip3([array1, calculateBorder2(array1)]);
-      //} else if (shipSelected === ShipSelection.ship4) {
-      //  setCoordinatesShip4([array1, calculateBorder2(array1)]);
-      //} else if (shipSelected === ShipSelection.ship5) {
-      //  setCoordinatesShip5([array1, calculateBorder2(array1)]);
-      //}
       setShipStack(shipStack.filter((x) => (x as ShipSelection) !== shipSelected));
       setShipSelected(ShipSelection.none);
       setUnitSelected(null);
@@ -253,10 +229,6 @@ export default function Home() {
               setShipStack([]);
               setBorder1([]);
               setBorder2([]);
-              //setCoordinatesShip2([]);
-              //setCoordinatesShip3([]);
-              //setCoordinatesShip4([]);
-              //setCoordinatesShip5([]);
               setHorizontal(false);
               setShipSelected(ShipSelection.none);
               setUnitSelected(null);
@@ -272,7 +244,7 @@ export default function Home() {
               {
                 const element = document.getElementById('oneTime');
                 if (element !== null) element.style.visibility = 'hidden';
-                setShipStack(collection.map((x) => x[0] as string));
+                setShipStack(collection.map((x) => x[2] as string));
               }
             }}
             className=" bg-slate-100 outline outline-1"
