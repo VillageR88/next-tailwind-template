@@ -263,7 +263,7 @@ export default function Home() {
         <div className="absolute ml-[31em] flex flex-col"></div>
       </div>
       <div className="absolute mt-[35em]">
-        {!collection.map((x) => x[1].length === 0).includes(true) && (
+        {!collection.map((x) => x[1].length === 0).includes(true) && gamePhase !== GamePhase.battle && (
           <button
             onClick={() => {
               setGamePhase(GamePhase.battle);
