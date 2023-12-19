@@ -32,9 +32,7 @@ export default function Home() {
   };
 
   //const [gamePhase, setGamePhase] = useState<GamePhase>(GamePhase.setup);
-  const [shipSelected, setShipSelected] = useState<ShipSelection>(ShipSelection.none);
-  const [unitSelected, setUnitSelected] = useState<string | null>(null);
-  const [shipStack, setShipStack] = useState<string[]>([]);
+  const [unitSelected, setUnitSelected] = useState<(ShipSelection | string | null)[]>([]);
   const [clicked, setClicked] = useState<number>(0);
   const [border1, setBorder1] = useState<number[]>([]);
   const [border2, setBorder2] = useState<number[]>([]);
@@ -55,18 +53,18 @@ export default function Home() {
           (key.keyCode === 13 || key.keyCode === 32) && document.getElementById('' + i)?.blur();
         }}
         onClick={() => {
-          if ((!horizontal ? i > 10 : !('' + i).endsWith('0')) && shipSelected === ShipSelection.ship2) {
+          if ((!horizontal ? i > 10 : !('' + i).endsWith('0')) && unitSelected[0] === ShipSelection.ship2) {
             setClicked(i);
             doer1(i);
           } else if (
             (!horizontal ? i > 20 : !('' + i).endsWith('0') && !('' + i).endsWith('9')) &&
-            shipSelected === ShipSelection.ship3
+            unitSelected[0] === ShipSelection.ship3
           ) {
             setClicked(i);
             doer1(i);
           } else if (
             (!horizontal ? i > 30 : !('' + i).endsWith('0') && !('' + i).endsWith('9') && !('' + i).endsWith('8')) &&
-            shipSelected === ShipSelection.ship4
+            unitSelected[0] === ShipSelection.ship4
           ) {
             setClicked(i);
             doer1(i);
@@ -77,7 +75,7 @@ export default function Home() {
                 !('' + i).endsWith('9') &&
                 !('' + i).endsWith('8') &&
                 !('' + i).endsWith('7')) &&
-            shipSelected === ShipSelection.ship5
+            unitSelected[0] === ShipSelection.ship5
           ) {
             setClicked(i);
             doer1(i);
@@ -110,16 +108,16 @@ export default function Home() {
     for (const i of array) array1.push(i);
     horizontal
       ? (!array[0].toString().endsWith('9') &&
-          shipSelected === ShipSelection.ship2 &&
+          unitSelected[0] === ShipSelection.ship2 &&
           array1.push(array[array.length - 1] + 1)) ||
         (!array[0].toString().endsWith('8') &&
-          shipSelected === ShipSelection.ship3 &&
+          unitSelected[0] === ShipSelection.ship3 &&
           array1.push(array[array.length - 1] + 1)) ||
         (!array[0].toString().endsWith('7') &&
-          shipSelected === ShipSelection.ship4 &&
+          unitSelected[0] === ShipSelection.ship4 &&
           array1.push(array[array.length - 1] + 1)) ||
         (!array[0].toString().endsWith('6') &&
-          shipSelected === ShipSelection.ship5 &&
+          unitSelected[0] === ShipSelection.ship5 &&
           array1.push(array[array.length - 1] + 1))
       : array1.push(array[array.length - 1] - 10);
     for (const i of array1) {
@@ -141,15 +139,15 @@ export default function Home() {
   function doer1(i: number) {
     const array1 = [] as number[];
     if (i !== 0) {
-      if (shipSelected === ShipSelection.ship2) {
+      if (unitSelected[0] === ShipSelection.ship2) {
         horizontal ? [i, i + 1].map((x) => array1.push(x)) : [i, i - 10].map((x) => array1.push(x));
-      } else if (shipSelected === ShipSelection.ship3) {
+      } else if (unitSelected[0] === ShipSelection.ship3) {
         horizontal ? [i, i + 1, i + 2].map((x) => array1.push(x)) : [i, i - 10, i - 20].map((x) => array1.push(x));
-      } else if (shipSelected === ShipSelection.ship4) {
+      } else if (unitSelected[0] === ShipSelection.ship4) {
         horizontal
           ? [i, i + 1, i + 2, i + 3].map((x) => array1.push(x))
           : [i, i - 10, i - 20, i - 30].map((x) => array1.push(x));
-      } else if (shipSelected === ShipSelection.ship5) {
+      } else if (unitSelected[0] === ShipSelection.ship5) {
         horizontal
           ? [i, i + 1, i + 2, i + 3, i + 4].map((x) => array1.push(x))
           : [i, i - 10, i - 20, i - 30, i - 40].map((x) => array1.push(x));
@@ -169,16 +167,14 @@ export default function Home() {
       setBorder2(calculateBorder2(array1));
       setCollection((value) => {
         const newValue = [...value];
-        if (unitSelected !== null) {
+        if (unitSelected[1] !== null) {
           for (const x of newValue) {
-            if (x[2] === unitSelected) x[1] = [array1, calculateBorder2(array1)];
+            if (x[2] === unitSelected[1]) x[1] = [array1, calculateBorder2(array1)];
           }
         }
         return newValue;
       });
-      ///setShipStack(shipStack.filter((x) => (x as ShipSelection) !== shipSelected));
-      setShipSelected(ShipSelection.none);
-      setUnitSelected(null);
+      setUnitSelected([]);
     }
   }
   collection.map((x) => x[1].length === 0).includes(true);
@@ -223,12 +219,10 @@ export default function Home() {
               const element = document.getElementById('oneTime');
               if (element !== null) element.style.visibility = 'visible';
               setClicked(0);
-              setShipStack([]);
               setBorder1([]);
               setBorder2([]);
               setHorizontal(false);
-              setShipSelected(ShipSelection.none);
-              setUnitSelected(null);
+              setUnitSelected([]);
               setCollection(defaultConfiguration);
             }}
             className="bg-slate-100 pl-2  text-left outline outline-1"
@@ -254,10 +248,11 @@ export default function Home() {
                     key={i}
                     id={`stack${i}`}
                     onClick={() => {
-                      setShipSelected(x[0] as ShipSelection);
-                      setUnitSelected(x[2] as string);
+                      setUnitSelected([x[0] as ShipSelection, x[2] as string]);
                     }}
-                    className={`${unitSelected === x[2] ? 'bg-yellow-100' : 'bg-slate-100'} w-full  outline outline-1`}
+                    className={`${
+                      unitSelected[1] === (x[2] as string) ? 'bg-yellow-100' : 'bg-slate-100'
+                    } w-full  outline outline-1`}
                   >
                     {x[0]}
                   </button>
