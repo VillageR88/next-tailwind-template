@@ -13,6 +13,21 @@ export default function Home() {
     ship5 = 'ship5',
   }
 
+  const shipTemplate = ({ type, id, coordinates }: { type: ShipSelection; id: string; coordinates: number[][] }) => [
+    type,
+    id,
+    coordinates,
+  ];
+
+  const defaultConfiguration = () => [
+    shipTemplate({ type: ShipSelection.ship2, id: 'player1unit', coordinates: [] }),
+    shipTemplate({ type: ShipSelection.ship2, id: 'player1unit', coordinates: [] }),
+    shipTemplate({ type: ShipSelection.ship3, id: 'player1unit', coordinates: [] }),
+    shipTemplate({ type: ShipSelection.ship3, id: 'player1unit', coordinates: [] }),
+    shipTemplate({ type: ShipSelection.ship4, id: 'player1unit', coordinates: [] }),
+    shipTemplate({ type: ShipSelection.ship5, id: 'player1unit', coordinates: [] }),
+  ];
+
   //const [gamePhase, setGamePhase] = useState<GamePhase>(GamePhase.setup);
   const [shipSelected, setShipSelected] = useState<ShipSelection>(ShipSelection.none);
   const [shipStack, setShipStack] = useState<string[]>([]);
@@ -24,15 +39,11 @@ export default function Home() {
   const [coordinatesShip4, setCoordinatesShip4] = useState<number[][]>([]);
   const [coordinatesShip5, setCoordinatesShip5] = useState<number[][]>([]);
   const [imprinted, setImprinted] = useState<number[][][]>([]);
+  const [collection, setCollection] = useState<number[][][]>([]);
   const [horizontal, setHorizontal] = useState<boolean>(false);
   const [autoloader, setAutoloader] = useState<boolean>(false);
   const [autoloaderControl, setAutoloaderControl] = useState<number>(0);
 
-  const shipTemplate = ({ type, id, coordinates }: { type: ShipSelection; id: string; coordinates: number[][] }) => [
-    type,
-    id,
-    coordinates,
-  ];
   //console.log(imprinted);
   //console.log(shipSelected);
   //console.log(shipStack);
