@@ -20,7 +20,8 @@ export default function Home() {
   ];
 
   const defaultConfiguration = () => {
-    const ids = ['unit1', 'unit2', 'unit3', 'unit4', 'unit5', 'unit6', 'unit7', 'unit8'];
+    const ids = [];
+    for (let i = 1; i <= 10; i++) ids.push(`unit${i}`);
     return [
       shipTemplate({ type: ShipSelection.ship2, coordinates: [], id: ids.shift() as unknown as string }),
       shipTemplate({ type: ShipSelection.ship2, coordinates: [], id: ids.shift() as unknown as string }),
