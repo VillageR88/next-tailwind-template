@@ -40,7 +40,6 @@ export default function Home() {
   const [autoloader, setAutoloader] = useState<boolean>(false);
   const [autoloaderControl, setAutoloaderControl] = useState<number>(0);
 
-  console.log('collection:', collection);
   const buttons = [];
   const letters = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J'];
   for (let i = 1; i <= 100; i++) {
@@ -190,56 +189,57 @@ export default function Home() {
         <span>{`Game phase: ${gamePhase}`}</span>
       </div>
       <div className="flex flex-row items-center">
-        <div className=" absolute ml-[-15em] mr-[5em] flex w-[12em] flex-col justify-center">
-          <button
-            onClick={() => {
-              setHorizontal(!horizontal);
-            }}
-            className="mb-[1em] bg-violet-200 pl-2 text-left outline outline-1"
-          >
-            {horizontal ? 'Align: horizontal' : 'Align: vertical'}
-          </button>
-          <button
-            onClick={() => {
-              setHorizontal(false);
-              setUnitSelected([]);
-              setCollection(defaultConfiguration);
-            }}
-            className="bg-slate-100 pl-2  text-left outline outline-1"
-          >
-            debug: Reset
-          </button>
+        {gamePhase === GamePhase.setup && (
+          <div className=" absolute ml-[-15em] mr-[5em] flex w-[12em] flex-col justify-center">
+            <button
+              onClick={() => {
+                setHorizontal(!horizontal);
+              }}
+              className="mb-[1em] bg-violet-200 pl-2 text-left outline outline-1"
+            >
+              {horizontal ? 'Align: horizontal' : 'Align: vertical'}
+            </button>
+            <button
+              onClick={() => {
+                setHorizontal(false);
+                setUnitSelected([]);
+                setCollection(defaultConfiguration);
+              }}
+              className="bg-slate-100 pl-2  text-left outline outline-1"
+            >
+              debug: Reset
+            </button>
 
-          <button
-            id="random"
-            disabled={!collection.map((x) => x[1].length === 0).includes(true)}
-            onClick={() => {
-              setAutoloader(true);
-            }}
-            className="mb-[1em] bg-slate-100 outline outline-1 disabled:opacity-50"
-          >
-            debug: Place randomly
-          </button>
-          <div className="h-[30em] flex-col outline outline-2">
-            {collection.map(
-              (x, i) =>
-                x[1].length === 0 && (
-                  <button
-                    key={i}
-                    id={`stack${i}`}
-                    onClick={() => {
-                      setUnitSelected([x[0] as ShipSelection, x[2] as string]);
-                    }}
-                    className={`${
-                      unitSelected[1] === (x[2] as string) ? 'bg-yellow-100' : 'bg-slate-100'
-                    } w-full  outline outline-1`}
-                  >
-                    {x[0]}
-                  </button>
-                ),
-            )}
+            <button
+              disabled={!collection.map((x) => x[1].length === 0).includes(true)}
+              onClick={() => {
+                setAutoloader(true);
+              }}
+              className="mb-[1em] bg-slate-100 outline outline-1 disabled:opacity-50"
+            >
+              debug: Place randomly
+            </button>
+            <div className="h-[30em] flex-col outline outline-2">
+              {collection.map(
+                (x, i) =>
+                  x[1].length === 0 && (
+                    <button
+                      key={i}
+                      id={`stack${i}`}
+                      onClick={() => {
+                        setUnitSelected([x[0] as ShipSelection, x[2] as string]);
+                      }}
+                      className={`${
+                        unitSelected[1] === (x[2] as string) ? 'bg-yellow-100' : 'bg-slate-100'
+                      } w-full  outline outline-1`}
+                    >
+                      {x[0]}
+                    </button>
+                  ),
+              )}
+            </div>
           </div>
-        </div>
+        )}
         <div className="flex flex-col">
           <div className="h-10 w-10"></div>
           <div className="flex flex-col">
@@ -261,6 +261,18 @@ export default function Home() {
           <div className="grid grid-cols-10 outline outline-2">{buttons}</div>
         </div>
         <div className="absolute ml-[31em] flex flex-col"></div>
+      </div>
+      <div className="absolute mt-[35em]">
+        {!collection.map((x) => x[1].length === 0).includes(true) && (
+          <button
+            onClick={() => {
+              setGamePhase(GamePhase.battle);
+            }}
+            className="bg-green-200 px-6 py-2 outline outline-1"
+          >
+            Start battle
+          </button>
+        )}
       </div>
     </div>
   );
