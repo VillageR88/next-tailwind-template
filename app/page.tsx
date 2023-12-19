@@ -181,19 +181,16 @@ export default function Home() {
       setUnitSelected(null);
     }
   }
-  console.log(
-    'cc',
-    collection.map((x) => x[1]),
-  );
+  collection.map((x) => x[1].length === 0).includes(true);
   useEffect(() => {
     const coordinatesFromCollection = collection.map((x) => x[1]);
     setImprinted(coordinatesFromCollection as number[][][]);
   }, [collection]);
 
   useEffect(() => {
-    if (shipStack.length !== 0 && autoloader) {
+    if (collection.map((x) => x[1].length === 0).includes(true) && autoloader) {
       const randomNumberFrom1to100 = Math.floor(Math.random() * 100) + 1;
-      const randomStackSelection = Math.floor(Math.random() * shipStack.length);
+      const randomStackSelection = Math.floor(Math.random() * collection.length);
       setHorizontal(Math.round(Math.random()) as unknown as boolean);
       document.getElementById(`stack${randomStackSelection}`)?.click();
       document.getElementById(randomNumberFrom1to100.toString())?.click();
@@ -202,7 +199,7 @@ export default function Home() {
       setAutoloader(false);
       setAutoloaderControl(0);
     }
-  }, [autoloader, autoloaderControl, shipStack.length]);
+  }, [autoloader, autoloaderControl, collection]);
 
   return (
     <div className="flex min-h-screen flex-col items-center justify-center bg-gradient-to-br from-cyan-300 to-cyan-200 font-[600] text-black">
@@ -241,7 +238,7 @@ export default function Home() {
 
           <button
             id="random"
-            disabled={shipStack.length === 0}
+            disabled={!collection.map((x) => x[1].length === 0).includes(true)}
             onClick={() => {
               setAutoloader(true);
             }}
