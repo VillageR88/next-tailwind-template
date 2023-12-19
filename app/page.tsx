@@ -2,9 +2,10 @@
 import { useEffect, useState } from 'react';
 
 export default function Home() {
-  //enum GamePhase {
-  //  setup,
-  //}
+  enum GamePhase {
+    setup = 'Unit placement',
+    battle = 'Battle',
+  }
   enum ShipSelection {
     none = 'none',
     ship2 = 'ship2',
@@ -32,11 +33,9 @@ export default function Home() {
     ];
   };
 
-  //const [gamePhase, setGamePhase] = useState<GamePhase>(GamePhase.setup);
+  const [gamePhase, setGamePhase] = useState<GamePhase>(GamePhase.setup);
   const [collection, setCollection] = useState<(ShipSelection | number[][] | string)[][]>(defaultConfiguration);
   const [unitSelected, setUnitSelected] = useState<(ShipSelection | string | null)[]>([]);
-  const [clicked, setClicked] = useState<number>(0);
-  const [border, setBorder] = useState<number[][]>([]);
   const [horizontal, setHorizontal] = useState<boolean>(false);
   const [autoloader, setAutoloader] = useState<boolean>(false);
   const [autoloaderControl, setAutoloaderControl] = useState<number>(0);
@@ -53,20 +52,17 @@ export default function Home() {
         }}
         onClick={() => {
           if ((!horizontal ? i > 10 : !('' + i).endsWith('0')) && unitSelected[0] === ShipSelection.ship2) {
-            setClicked(i);
-            doer1(i);
+            calculateBorders(i);
           } else if (
             (!horizontal ? i > 20 : !('' + i).endsWith('0') && !('' + i).endsWith('9')) &&
             unitSelected[0] === ShipSelection.ship3
           ) {
-            setClicked(i);
-            doer1(i);
+            calculateBorders(i);
           } else if (
             (!horizontal ? i > 30 : !('' + i).endsWith('0') && !('' + i).endsWith('9') && !('' + i).endsWith('8')) &&
             unitSelected[0] === ShipSelection.ship4
           ) {
-            setClicked(i);
-            doer1(i);
+            calculateBorders(i);
           } else if (
             (!horizontal
               ? i > 40
@@ -76,8 +72,7 @@ export default function Home() {
                 !('' + i).endsWith('7')) &&
             unitSelected[0] === ShipSelection.ship5
           ) {
-            setClicked(i);
-            doer1(i);
+            calculateBorders(i);
           }
           document.getElementById('' + i)?.blur();
         }}
@@ -135,7 +130,7 @@ export default function Home() {
     return array3;
   }
 
-  function doer1(i: number) {
+  function calculateBorders(i: number) {
     const array1 = [] as number[];
     if (i !== 0) {
       if (unitSelected[0] === ShipSelection.ship2) {
@@ -162,7 +157,6 @@ export default function Home() {
         )
         .includes(true)
     ) {
-      setBorder([array1, calculateBorder2(array1)]);
       setCollection((value) => {
         const newValue = [...value];
         if (unitSelected[1] !== null) {
@@ -192,10 +186,8 @@ export default function Home() {
 
   return (
     <div className="flex min-h-screen flex-col items-center justify-center bg-gradient-to-br from-cyan-300 to-cyan-200 font-[600] text-black">
-      <div className="absolute mb-[45em] flex flex-col">
-        <span>debug selected number: {clicked}</span>
-        <span>debug ship sector: {border[0]?.toLocaleString()}</span>
-        <span>debug buffer sector: {border[1]?.toLocaleString()}</span>
+      <div className="absolute mb-[35em] flex flex-col">
+        <span>{`Game phase: ${gamePhase}`}</span>
       </div>
       <div className="flex flex-row items-center">
         <div className=" absolute ml-[-15em] mr-[5em] flex w-[12em] flex-col justify-center">
@@ -209,10 +201,6 @@ export default function Home() {
           </button>
           <button
             onClick={() => {
-              const element = document.getElementById('oneTime');
-              if (element !== null) element.style.visibility = 'visible';
-              setClicked(0);
-              setBorder([]);
               setHorizontal(false);
               setUnitSelected([]);
               setCollection(defaultConfiguration);
