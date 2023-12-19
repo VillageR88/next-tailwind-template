@@ -37,7 +37,6 @@ export default function Home() {
   const [clicked, setClicked] = useState<number>(0);
   const [border1, setBorder1] = useState<number[]>([]);
   const [border2, setBorder2] = useState<number[]>([]);
-  const [imprinted, setImprinted] = useState<number[][][]>([]);
   const [collection, setCollection] = useState<(ShipSelection | number[][] | string)[][]>(defaultConfiguration);
   const [horizontal, setHorizontal] = useState<boolean>(false);
   const [autoloader, setAutoloader] = useState<boolean>(false);
@@ -86,14 +85,14 @@ export default function Home() {
         className={`
 
         ${
-          imprinted
-            .map((x) => x[0])
+          collection
+            .map((x) => x[1][0])
             .flat()
             .includes(i) && 'bg-slate-500'
         } 
         ${
-          imprinted
-            .map((x) => x[1])
+          collection
+            .map((x) => x[1][1])
             .flat()
             .includes(i) && 'bg-cyan-100'
         }          h-10 w-10 outline outline-1 focus:bg-black `}
@@ -157,8 +156,8 @@ export default function Home() {
     if (
       !array1
         .map((x1) =>
-          imprinted
-            .map((x) => x)
+          collection
+            .map((x) => x[1])
             .flat(2)
             .includes(x1),
         )
@@ -178,11 +177,6 @@ export default function Home() {
       setUnitSelected([]);
     }
   }
-  collection.map((x) => x[1].length === 0).includes(true);
-  useEffect(() => {
-    const coordinatesFromCollection = collection.map((x) => x[1]);
-    setImprinted(coordinatesFromCollection as number[][][]);
-  }, [collection]);
 
   useEffect(() => {
     if (collection.map((x) => x[1].length === 0).includes(true) && autoloader) {
