@@ -33,11 +33,10 @@ export default function Home() {
   };
 
   //const [gamePhase, setGamePhase] = useState<GamePhase>(GamePhase.setup);
+  const [collection, setCollection] = useState<(ShipSelection | number[][] | string)[][]>(defaultConfiguration);
   const [unitSelected, setUnitSelected] = useState<(ShipSelection | string | null)[]>([]);
   const [clicked, setClicked] = useState<number>(0);
-  const [border1, setBorder1] = useState<number[]>([]);
-  const [border2, setBorder2] = useState<number[]>([]);
-  const [collection, setCollection] = useState<(ShipSelection | number[][] | string)[][]>(defaultConfiguration);
+  const [border, setBorder] = useState<number[][]>([]);
   const [horizontal, setHorizontal] = useState<boolean>(false);
   const [autoloader, setAutoloader] = useState<boolean>(false);
   const [autoloaderControl, setAutoloaderControl] = useState<number>(0);
@@ -163,8 +162,7 @@ export default function Home() {
         )
         .includes(true)
     ) {
-      setBorder1(array1);
-      setBorder2(calculateBorder2(array1));
+      setBorder([array1, calculateBorder2(array1)]);
       setCollection((value) => {
         const newValue = [...value];
         if (unitSelected[1] !== null) {
@@ -196,8 +194,8 @@ export default function Home() {
     <div className="flex min-h-screen flex-col items-center justify-center bg-gradient-to-br from-cyan-300 to-cyan-200 font-[600] text-black">
       <div className="absolute mb-[45em] flex flex-col">
         <span>debug selected number: {clicked}</span>
-        <span>debug ship sector: {border1.toLocaleString()}</span>
-        <span>debug buffer sector: {border2.toLocaleString()}</span>
+        <span>debug ship sector: {border[0]?.toLocaleString()}</span>
+        <span>debug buffer sector: {border[1]?.toLocaleString()}</span>
       </div>
       <div className="flex flex-row items-center">
         <div className=" absolute ml-[-15em] mr-[5em] flex w-[12em] flex-col justify-center">
@@ -214,8 +212,7 @@ export default function Home() {
               const element = document.getElementById('oneTime');
               if (element !== null) element.style.visibility = 'visible';
               setClicked(0);
-              setBorder1([]);
-              setBorder2([]);
+              setBorder([]);
               setHorizontal(false);
               setUnitSelected([]);
               setCollection(defaultConfiguration);
