@@ -13,16 +13,23 @@ export default function Home() {
     ship5 = 'ship5',
   }
 
-  const shipTemplate = ({ type, coordinates }: { type: ShipSelection; coordinates: number[][] }) => [type, coordinates];
-
-  const defaultConfiguration = [
-    shipTemplate({ type: ShipSelection.ship2, coordinates: [] }),
-    //shipTemplate({ type: ShipSelection.ship2, coordinates: [] }),
-    shipTemplate({ type: ShipSelection.ship3, coordinates: [] }),
-    //shipTemplate({ type: ShipSelection.ship3, coordinates: [] }),
-    //shipTemplate({ type: ShipSelection.ship4, coordinates: [] }),
-    //shipTemplate({ type: ShipSelection.ship5, coordinates: [] }),
+  const shipTemplate = ({ type, coordinates, id }: { type: ShipSelection; coordinates: number[][]; id: string }) => [
+    type,
+    coordinates,
+    id,
   ];
+
+  const defaultConfiguration = () => {
+    const ids = ['unit1', 'unit2', 'unit3', 'unit4', 'unit5', 'unit6', 'unit7', 'unit8'];
+    return [
+      shipTemplate({ type: ShipSelection.ship2, coordinates: [], id: ids.shift() as unknown as string }),
+      //shipTemplate({ type: ShipSelection.ship2, coordinates: [] }),
+      shipTemplate({ type: ShipSelection.ship3, coordinates: [], id: ids.shift() as unknown as string }),
+      //shipTemplate({ type: ShipSelection.ship3, coordinates: [] }),
+      //shipTemplate({ type: ShipSelection.ship4, coordinates: [] }),
+      //shipTemplate({ type: ShipSelection.ship5, coordinates: [] }),
+    ];
+  };
 
   //const [gamePhase, setGamePhase] = useState<GamePhase>(GamePhase.setup);
   const [shipSelected, setShipSelected] = useState<ShipSelection>(ShipSelection.none);
@@ -36,7 +43,7 @@ export default function Home() {
   const [coordinatesShip4, setCoordinatesShip4] = useState<number[][]>([]);
   const [coordinatesShip5, setCoordinatesShip5] = useState<number[][]>([]);
   const [imprinted, setImprinted] = useState<number[][][]>([]);
-  const [collection, setCollection] = useState<(ShipSelection | number[][])[][]>(defaultConfiguration);
+  const [collection, setCollection] = useState<(ShipSelection | number[][] | string)[][]>(defaultConfiguration);
   const [horizontal, setHorizontal] = useState<boolean>(false);
   const [autoloader, setAutoloader] = useState<boolean>(false);
   const [autoloaderControl, setAutoloaderControl] = useState<number>(0);
@@ -175,6 +182,11 @@ export default function Home() {
     ) {
       setBorder1(array1);
       setBorder2(calculateBorder2(array1));
+      setCollection((value) => {
+        const newValue = [...value];
+        if (unitSelected !== null) newValue[unitSelected][1] = [array1, calculateBorder2(array1)];
+        return newValue;
+      });
       if (shipSelected === ShipSelection.ship2) {
         setCoordinatesShip2([array1, calculateBorder2(array1)]);
       } else if (shipSelected === ShipSelection.ship3) {
@@ -238,7 +250,8 @@ export default function Home() {
               setCoordinatesShip5([]);
               setHorizontal(false);
               setShipSelected(ShipSelection.none);
-              setUnitSelected(0);
+              setUnitSelected(null);
+              setCollection(defaultConfiguration);
             }}
             className="bg-slate-100 pl-2  text-left outline outline-1"
           >
