@@ -18,7 +18,7 @@ export default function Home() {
   const defaultConfiguration = [
     shipTemplate({ type: ShipSelection.ship2, coordinates: [] }),
     //shipTemplate({ type: ShipSelection.ship2, coordinates: [] }),
-    //shipTemplate({ type: ShipSelection.ship3, coordinates: [] }),
+    shipTemplate({ type: ShipSelection.ship3, coordinates: [] }),
     //shipTemplate({ type: ShipSelection.ship3, coordinates: [] }),
     //shipTemplate({ type: ShipSelection.ship4, coordinates: [] }),
     //shipTemplate({ type: ShipSelection.ship5, coordinates: [] }),
@@ -26,6 +26,7 @@ export default function Home() {
 
   //const [gamePhase, setGamePhase] = useState<GamePhase>(GamePhase.setup);
   const [shipSelected, setShipSelected] = useState<ShipSelection>(ShipSelection.none);
+  const [unitSelected, setUnitSelected] = useState<number | null>(null);
   const [shipStack, setShipStack] = useState<string[]>([]);
   const [clicked, setClicked] = useState<number>(0);
   const [border1, setBorder1] = useState<number[]>([]);
@@ -35,12 +36,12 @@ export default function Home() {
   const [coordinatesShip4, setCoordinatesShip4] = useState<number[][]>([]);
   const [coordinatesShip5, setCoordinatesShip5] = useState<number[][]>([]);
   const [imprinted, setImprinted] = useState<number[][][]>([]);
-  const [collection, setCollection] = useState<(ShipSelection | number[][])[][]>([]);
+  const [collection, setCollection] = useState<(ShipSelection | number[][])[][]>(defaultConfiguration);
   const [horizontal, setHorizontal] = useState<boolean>(false);
   const [autoloader, setAutoloader] = useState<boolean>(false);
   const [autoloaderControl, setAutoloaderControl] = useState<number>(0);
 
-  if (collection.length === 0) setCollection(defaultConfiguration);
+  //if (collection.length === 0) setCollection(defaultConfiguration);
 
   console.log('collection:', collection);
   //console.log(imprinted);
@@ -237,6 +238,7 @@ export default function Home() {
               setCoordinatesShip5([]);
               setHorizontal(false);
               setShipSelected(ShipSelection.none);
+              setUnitSelected(0);
             }}
             className="bg-slate-100 pl-2  text-left outline outline-1"
           >
@@ -248,7 +250,7 @@ export default function Home() {
               {
                 const element = document.getElementById('oneTime');
                 if (element !== null) element.style.visibility = 'hidden';
-                setShipStack(['ship2', 'ship3', 'ship4', 'ship5']);
+                setShipStack(collection.map((x) => x[0] as string));
               }
             }}
             className=" bg-slate-100 outline outline-1"
@@ -272,10 +274,9 @@ export default function Home() {
                 id={`stack${i}`}
                 onClick={() => {
                   setShipSelected(x as ShipSelection);
+                  setUnitSelected(i);
                 }}
-                className={`${
-                  shipSelected === (x as ShipSelection) ? 'bg-yellow-100' : 'bg-slate-100'
-                } w-full  outline outline-1`}
+                className={`${unitSelected === i ? 'bg-yellow-100' : 'bg-slate-100'} w-full  outline outline-1`}
               >
                 {x}
               </button>
