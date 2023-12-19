@@ -25,23 +25,23 @@ export default function Home() {
       shipTemplate({ type: ShipSelection.ship2, coordinates: [], id: ids.shift() as unknown as string }),
       //shipTemplate({ type: ShipSelection.ship2, coordinates: [] }),
       shipTemplate({ type: ShipSelection.ship3, coordinates: [], id: ids.shift() as unknown as string }),
-      //shipTemplate({ type: ShipSelection.ship3, coordinates: [] }),
-      //shipTemplate({ type: ShipSelection.ship4, coordinates: [] }),
-      //shipTemplate({ type: ShipSelection.ship5, coordinates: [] }),
+      //shipTemplate({ type: ShipSelection.ship3, coordinates: [], id: ids.shift() as unknown as string }),
+      shipTemplate({ type: ShipSelection.ship4, coordinates: [], id: ids.shift() as unknown as string }),
+      shipTemplate({ type: ShipSelection.ship5, coordinates: [], id: ids.shift() as unknown as string }),
     ];
   };
 
   //const [gamePhase, setGamePhase] = useState<GamePhase>(GamePhase.setup);
   const [shipSelected, setShipSelected] = useState<ShipSelection>(ShipSelection.none);
-  const [unitSelected, setUnitSelected] = useState<number | null>(null);
+  const [unitSelected, setUnitSelected] = useState<string | null>(null);
   const [shipStack, setShipStack] = useState<string[]>([]);
   const [clicked, setClicked] = useState<number>(0);
   const [border1, setBorder1] = useState<number[]>([]);
   const [border2, setBorder2] = useState<number[]>([]);
-  const [coordinatesShip2, setCoordinatesShip2] = useState<number[][]>([]);
-  const [coordinatesShip3, setCoordinatesShip3] = useState<number[][]>([]);
-  const [coordinatesShip4, setCoordinatesShip4] = useState<number[][]>([]);
-  const [coordinatesShip5, setCoordinatesShip5] = useState<number[][]>([]);
+  //const [coordinatesShip2, setCoordinatesShip2] = useState<number[][]>([]);
+  //const [coordinatesShip3, setCoordinatesShip3] = useState<number[][]>([]);
+  //const [coordinatesShip4, setCoordinatesShip4] = useState<number[][]>([]);
+  //const [coordinatesShip5, setCoordinatesShip5] = useState<number[][]>([]);
   const [imprinted, setImprinted] = useState<number[][][]>([]);
   const [collection, setCollection] = useState<(ShipSelection | number[][] | string)[][]>(defaultConfiguration);
   const [horizontal, setHorizontal] = useState<boolean>(false);
@@ -184,26 +184,35 @@ export default function Home() {
       setBorder2(calculateBorder2(array1));
       setCollection((value) => {
         const newValue = [...value];
-        if (unitSelected !== null) newValue[unitSelected][1] = [array1, calculateBorder2(array1)];
+        if (unitSelected !== null) {
+          for (const x of newValue) {
+            if (x[2] === unitSelected) x[1] = [array1, calculateBorder2(array1)];
+          }
+        }
         return newValue;
       });
-      if (shipSelected === ShipSelection.ship2) {
-        setCoordinatesShip2([array1, calculateBorder2(array1)]);
-      } else if (shipSelected === ShipSelection.ship3) {
-        setCoordinatesShip3([array1, calculateBorder2(array1)]);
-      } else if (shipSelected === ShipSelection.ship4) {
-        setCoordinatesShip4([array1, calculateBorder2(array1)]);
-      } else if (shipSelected === ShipSelection.ship5) {
-        setCoordinatesShip5([array1, calculateBorder2(array1)]);
-      }
+      //if (shipSelected === ShipSelection.ship2) {
+      //  setCoordinatesShip2([array1, calculateBorder2(array1)]);
+      //} else if (shipSelected === ShipSelection.ship3) {
+      //  setCoordinatesShip3([array1, calculateBorder2(array1)]);
+      //} else if (shipSelected === ShipSelection.ship4) {
+      //  setCoordinatesShip4([array1, calculateBorder2(array1)]);
+      //} else if (shipSelected === ShipSelection.ship5) {
+      //  setCoordinatesShip5([array1, calculateBorder2(array1)]);
+      //}
       setShipStack(shipStack.filter((x) => (x as ShipSelection) !== shipSelected));
       setShipSelected(ShipSelection.none);
+      setUnitSelected(null);
     }
   }
-
+  console.log(
+    'cc',
+    collection.map((x) => x[1]),
+  );
   useEffect(() => {
-    setImprinted([coordinatesShip2, coordinatesShip3, coordinatesShip4, coordinatesShip5]);
-  }, [coordinatesShip2, coordinatesShip3, coordinatesShip4, coordinatesShip5]);
+    const coordinatesFromCollection = collection.map((x) => x[1]);
+    setImprinted(coordinatesFromCollection as number[][][]);
+  }, [collection]);
 
   useEffect(() => {
     if (shipStack.length !== 0 && autoloader) {
@@ -244,10 +253,10 @@ export default function Home() {
               setShipStack([]);
               setBorder1([]);
               setBorder2([]);
-              setCoordinatesShip2([]);
-              setCoordinatesShip3([]);
-              setCoordinatesShip4([]);
-              setCoordinatesShip5([]);
+              //setCoordinatesShip2([]);
+              //setCoordinatesShip3([]);
+              //setCoordinatesShip4([]);
+              //setCoordinatesShip5([]);
               setHorizontal(false);
               setShipSelected(ShipSelection.none);
               setUnitSelected(null);
@@ -281,17 +290,17 @@ export default function Home() {
             debug: Place randomly
           </button>
           <div className="h-[30em] flex-col outline outline-2">
-            {shipStack.map((x, i) => (
+            {collection.map((x, i) => (
               <button
                 key={i}
                 id={`stack${i}`}
                 onClick={() => {
-                  setShipSelected(x as ShipSelection);
-                  setUnitSelected(i);
+                  setShipSelected(x[0] as ShipSelection);
+                  setUnitSelected(x[2] as string);
                 }}
-                className={`${unitSelected === i ? 'bg-yellow-100' : 'bg-slate-100'} w-full  outline outline-1`}
+                className={`${unitSelected === x[2] ? 'bg-yellow-100' : 'bg-slate-100'} w-full  outline outline-1`}
               >
-                {x}
+                {x[0]}
               </button>
             ))}
           </div>
