@@ -221,8 +221,30 @@ export default function Home() {
                 <span>{x}:</span>
                 <span className="text-blue-600">{`${initialConfig[i]}`}</span>
                 <div className="flex gap-1">
-                  <button className="px-2 outline outline-1">{'<'}</button>
-                  <button className="px-2 outline outline-1">{'>'}</button>
+                  <button
+                    onClick={() => {
+                      setInitialConfig((value) => {
+                        const newValue = [...value];
+                        if (newValue[i] > 0) newValue[i] = newValue[i] - 1;
+                        return newValue;
+                      });
+                    }}
+                    className="px-2 outline outline-1"
+                  >
+                    {'<'}
+                  </button>
+                  <button
+                    onClick={() => {
+                      setInitialConfig((value) => {
+                        const newValue = [...value];
+                        newValue[i] = newValue[i] + 1;
+                        return newValue;
+                      });
+                    }}
+                    className="px-2 outline outline-1"
+                  >
+                    {'>'}
+                  </button>
                 </div>
               </div>
             ))}
