@@ -3,11 +3,11 @@ import { useEffect, useState } from 'react';
 
 export default function Home() {
   enum GamePhase {
+    menu = 'Menu',
     setup = 'Unit placement',
     battle = 'Battle',
   }
   enum ShipSelection {
-    none = 'none',
     ship2 = 'ship2',
     ship3 = 'ship3',
     ship4 = 'ship4',
@@ -33,7 +33,7 @@ export default function Home() {
     ];
   };
 
-  const [gamePhase, setGamePhase] = useState<GamePhase>(GamePhase.setup);
+  const [gamePhase, setGamePhase] = useState<GamePhase>(GamePhase.menu);
   const [collection, setCollection] = useState<(ShipSelection | number[][] | string)[][]>(defaultConfiguration);
   const [unitSelected, setUnitSelected] = useState<(ShipSelection | string | null)[]>([]);
   const [horizontal, setHorizontal] = useState<boolean>(false);
@@ -188,80 +188,93 @@ export default function Home() {
       <div className="absolute mb-[35em] flex flex-col">
         <span>{`Game phase: ${gamePhase}`}</span>
       </div>
-      <div className="flex flex-row items-center">
-        {gamePhase === GamePhase.setup && (
-          <div className=" absolute ml-[-15em] mr-[5em] flex w-[12em] flex-col justify-center">
-            <button
-              onClick={() => {
-                setHorizontal(!horizontal);
-              }}
-              className="mb-[1em] bg-violet-200 pl-2 text-left outline outline-1"
-            >
-              {horizontal ? 'Align: horizontal' : 'Align: vertical'}
-            </button>
-            <button
-              onClick={() => {
-                setHorizontal(false);
-                setUnitSelected([]);
-                setCollection(defaultConfiguration);
-              }}
-              className="bg-slate-100 pl-2  text-left outline outline-1"
-            >
-              debug: Reset
-            </button>
-
-            <button
-              disabled={!collection.map((x) => x[1].length === 0).includes(true)}
-              onClick={() => {
-                setAutoloader(true);
-              }}
-              className="mb-[1em] bg-slate-100 outline outline-1 disabled:opacity-50"
-            >
-              debug: Place randomly
-            </button>
-            <div className="h-[30em] flex-col outline outline-2">
-              {collection.map(
-                (x, i) =>
-                  x[1].length === 0 && (
-                    <button
-                      key={i}
-                      id={`stack${i}`}
-                      onClick={() => {
-                        setUnitSelected([x[0] as ShipSelection, x[2] as string]);
-                      }}
-                      className={`${
-                        unitSelected[1] === (x[2] as string) ? 'bg-yellow-100' : 'bg-slate-100'
-                      } w-full  outline outline-1`}
-                    >
-                      {x[0]}
-                    </button>
-                  ),
-              )}
-            </div>
-          </div>
-        )}
-        <div className="flex flex-col">
-          <div className="h-10 w-10"></div>
-          <div className="flex flex-col">
-            {letters.map((x, i) => (
-              <button disabled className="my-1 mr-2 h-8 w-8 rounded-2xl bg-cyan-100" key={i + 1}>
+      {gamePhase === GamePhase.menu && (
+        <div className="flex flex-col items-center">
+          <span className="text-3xl">Nuts on These Ships 1</span>
+          <div className="flex flex-col gap-4 py-10">
+            {['Start Game', 'Options', 'Exit'].map((x, i) => (
+              <button key={i} className="w-60 rounded-xl bg-slate-100 py-1.5 outline outline-1">
                 {x}
               </button>
             ))}
           </div>
         </div>
-        <div>
-          <div className="grid grid-cols-10">
-            {letters.map((_, i) => (
-              <button disabled className="m-1 mx-1 mb-2 h-8 w-8 rounded-2xl bg-cyan-100" key={i}>
-                {i + 1}
+      )}
+      {(gamePhase === GamePhase.setup || gamePhase === GamePhase.battle) && (
+        <div className="flex flex-row items-center">
+          {gamePhase === GamePhase.setup && (
+            <div className=" absolute ml-[-15em] mr-[5em] flex w-[12em] flex-col justify-center">
+              <button
+                onClick={() => {
+                  setHorizontal(!horizontal);
+                }}
+                className="mb-[1em] bg-violet-200 pl-2 text-left outline outline-1"
+              >
+                {horizontal ? 'Align: horizontal' : 'Align: vertical'}
               </button>
-            ))}
+              <button
+                onClick={() => {
+                  setHorizontal(false);
+                  setUnitSelected([]);
+                  setCollection(defaultConfiguration);
+                }}
+                className="bg-slate-100 pl-2  text-left outline outline-1"
+              >
+                debug: Reset
+              </button>
+
+              <button
+                disabled={!collection.map((x) => x[1].length === 0).includes(true)}
+                onClick={() => {
+                  setAutoloader(true);
+                }}
+                className="mb-[1em] bg-slate-100 outline outline-1 disabled:opacity-50"
+              >
+                debug: Place randomly
+              </button>
+              <div className="h-[30em] flex-col outline outline-2">
+                {collection.map(
+                  (x, i) =>
+                    x[1].length === 0 && (
+                      <button
+                        key={i}
+                        id={`stack${i}`}
+                        onClick={() => {
+                          setUnitSelected([x[0] as ShipSelection, x[2] as string]);
+                        }}
+                        className={`${
+                          unitSelected[1] === (x[2] as string) ? 'bg-yellow-100' : 'bg-slate-100'
+                        } w-full  outline outline-1`}
+                      >
+                        {x[0]}
+                      </button>
+                    ),
+                )}
+              </div>
+            </div>
+          )}
+          <div className="flex flex-col">
+            <div className="h-10 w-10"></div>
+            <div className="flex flex-col">
+              {letters.map((x, i) => (
+                <button disabled className="my-1 mr-2 h-8 w-8 rounded-2xl bg-cyan-100" key={i + 1}>
+                  {x}
+                </button>
+              ))}
+            </div>
           </div>
-          <div className="grid grid-cols-10 outline outline-2">{buttons}</div>
+          <div>
+            <div className="grid grid-cols-10">
+              {letters.map((_, i) => (
+                <button disabled className="m-1 mx-1 mb-2 h-8 w-8 rounded-2xl bg-cyan-100" key={i}>
+                  {i + 1}
+                </button>
+              ))}
+            </div>
+            <div className="grid grid-cols-10 outline outline-2">{buttons}</div>
+          </div>
         </div>
-        <div className="absolute ml-[31em] flex flex-col"></div>
-      </div>
+      )}
       <div className="absolute mt-[35em]">
         {!collection.map((x) => x[1].length === 0).includes(true) && gamePhase !== GamePhase.battle && (
           <button
