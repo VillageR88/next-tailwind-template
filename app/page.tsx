@@ -36,6 +36,7 @@ export default function Home() {
   };
 
   const [gamePhase, setGamePhase] = useState<GamePhase>(GamePhase.menu);
+  const [initialConfig, setInitialConfig] = useState<number[]>([2, 2, 1, 1]);
   const [collection, setCollection] = useState<(ShipSelection | number[][] | string)[][]>(shipConfiguration);
   const [unitSelected, setUnitSelected] = useState<(ShipSelection | string | null)[]>([]);
   const [horizontal, setHorizontal] = useState<boolean>(false);
@@ -214,6 +215,19 @@ export default function Home() {
       )}
       {gamePhase === GamePhase.options && (
         <div>
+          <div className="mb-2 flex flex-col gap-y-2 rounded-sm bg-teal-50 p-4 outline outline-1">
+            {['Ship2', 'Ship3', 'Ship4', 'Ship5'].map((x, i) => (
+              <div key={i} className="flex justify-around gap-2">
+                <span>{x}:</span>
+                <span className="text-blue-600">{`${initialConfig[i]}`}</span>
+                <div className="flex gap-1">
+                  <button className="px-2 outline outline-1">{'<'}</button>
+                  <button className="px-2 outline outline-1">{'>'}</button>
+                </div>
+              </div>
+            ))}
+          </div>
+
           <button
             onClick={() => {
               setGamePhase(GamePhase.menu);
