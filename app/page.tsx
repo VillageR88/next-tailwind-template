@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 export default function Home() {
   enum GamePhase {
     menu = 'Menu',
+    options = 'Options',
     exit = 'Exit',
     setup = 'Unit placement',
     battle = 'Battle',
@@ -21,7 +22,7 @@ export default function Home() {
     id,
   ];
 
-  const defaultConfiguration = () => {
+  const shipConfiguration = () => {
     const ids = [];
     for (let i = 1; i <= 10; i++) ids.push(`unit${i}`);
     return [
@@ -35,7 +36,7 @@ export default function Home() {
   };
 
   const [gamePhase, setGamePhase] = useState<GamePhase>(GamePhase.menu);
-  const [collection, setCollection] = useState<(ShipSelection | number[][] | string)[][]>(defaultConfiguration);
+  const [collection, setCollection] = useState<(ShipSelection | number[][] | string)[][]>(shipConfiguration);
   const [unitSelected, setUnitSelected] = useState<(ShipSelection | string | null)[]>([]);
   const [horizontal, setHorizontal] = useState<boolean>(false);
   const [autoloader, setAutoloader] = useState<boolean>(false);
@@ -195,10 +196,11 @@ export default function Home() {
         <div className="flex flex-col items-center">
           <span className="text-3xl">Nuts on These Ships</span>
           <div className="flex flex-col gap-4 py-10">
-            {['Start Game', 'Options', 'Exit'].map((x, i) => (
+            {['Single Player', 'Options', 'Exit'].map((x, i) => (
               <button
                 onClick={() => {
                   i === 0 && setGamePhase(GamePhase.setup);
+                  i === 1 && setGamePhase(GamePhase.options);
                   i === 2 && setGamePhase(GamePhase.exit);
                 }}
                 key={i}
@@ -208,6 +210,18 @@ export default function Home() {
               </button>
             ))}
           </div>
+        </div>
+      )}
+      {gamePhase === GamePhase.options && (
+        <div>
+          <button
+            onClick={() => {
+              setGamePhase(GamePhase.menu);
+            }}
+            className="w-60 rounded-xl bg-slate-100 py-1.5 outline outline-1"
+          >
+            Return
+          </button>
         </div>
       )}
       {(gamePhase === GamePhase.setup || gamePhase === GamePhase.battle) && (
@@ -226,7 +240,7 @@ export default function Home() {
                 onClick={() => {
                   setHorizontal(false);
                   setUnitSelected([]);
-                  setCollection(defaultConfiguration);
+                  setCollection(shipConfiguration);
                 }}
                 className="bg-slate-100 pl-2  text-left outline outline-1"
               >
@@ -285,18 +299,31 @@ export default function Home() {
           </div>
         </div>
       )}
-      <div className="absolute mt-[35em]">
-        {!collection.map((x) => x[1].length === 0).includes(true) && gamePhase !== GamePhase.battle && (
+      {(gamePhase === GamePhase.setup || gamePhase === GamePhase.battle) && (
+        <div className="flex flex-col">
           <button
             onClick={() => {
-              setGamePhase(GamePhase.battle);
+              setGamePhase(GamePhase.menu);
+              setHorizontal(false);
+              setUnitSelected([]);
+              setCollection(shipConfiguration);
             }}
-            className="bg-green-200 px-6 py-2 outline outline-1"
+            className="mt-3 w-60 rounded-xl bg-slate-100 py-1.5 outline outline-1"
           >
-            Start battle
+            Quit
           </button>
-        )}
-      </div>
+          {!collection.map((x) => x[1].length === 0).includes(true) && gamePhase !== GamePhase.battle && (
+            <button
+              onClick={() => {
+                setGamePhase(GamePhase.battle);
+              }}
+              className="mt-2 w-60 rounded-xl bg-green-200 py-1.5 outline outline-1"
+            >
+              Start battle
+            </button>
+          )}
+        </div>
+      )}
     </div>
   );
 }
