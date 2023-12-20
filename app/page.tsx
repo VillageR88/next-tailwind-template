@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 export default function Home() {
   enum GamePhase {
     menu = 'Menu',
+    exit = 'Exit',
     setup = 'Unit placement',
     battle = 'Battle',
   }
@@ -185,15 +186,24 @@ export default function Home() {
 
   return (
     <div className="flex min-h-screen flex-col items-center justify-center bg-gradient-to-br from-cyan-300 to-cyan-200 font-[600] text-black">
-      <div className="absolute mb-[35em] flex flex-col">
-        <span>{`Game phase: ${gamePhase}`}</span>
-      </div>
+      {gamePhase === GamePhase.exit && (
+        <div className="flex h-screen w-screen items-center justify-center bg-black">
+          <span className="whitespace-pre-line text-3xl text-amber-600">{"It's now safe to turn off\nthis site"}</span>
+        </div>
+      )}
       {gamePhase === GamePhase.menu && (
         <div className="flex flex-col items-center">
-          <span className="text-3xl">Nuts on These Ships 1</span>
+          <span className="text-3xl">Nuts on These Ships</span>
           <div className="flex flex-col gap-4 py-10">
             {['Start Game', 'Options', 'Exit'].map((x, i) => (
-              <button key={i} className="w-60 rounded-xl bg-slate-100 py-1.5 outline outline-1">
+              <button
+                onClick={() => {
+                  i === 0 && setGamePhase(GamePhase.setup);
+                  i === 2 && setGamePhase(GamePhase.exit);
+                }}
+                key={i}
+                className="w-60 rounded-xl bg-slate-100 py-1.5 outline outline-1"
+              >
                 {x}
               </button>
             ))}
