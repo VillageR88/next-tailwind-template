@@ -291,7 +291,7 @@ export default function Home() {
         </div>
       )}
       {(gamePhase === GamePhase.preSetup || gamePhase === GamePhase.setup || gamePhase === GamePhase.battle) && (
-        <div className="flex flex-row items-center">
+        <div className={`${gamePhase === GamePhase.preSetup && 'invisible'} flex flex-row items-center`}>
           {(gamePhase === GamePhase.preSetup || gamePhase === GamePhase.setup) && (
             <div className="ml-[-15em] mr-[5em] flex w-[12em] flex-col justify-center">
               <button
