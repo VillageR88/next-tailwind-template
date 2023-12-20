@@ -24,15 +24,22 @@ export default function Home() {
 
   const shipConfiguration = () => {
     const ids = [];
-    for (let i = 1; i <= 10; i++) ids.push(`unit${i}`);
-    return [
-      shipTemplate({ type: ShipSelection.ship2, coordinates: [], id: ids.shift() as unknown as string }),
-      shipTemplate({ type: ShipSelection.ship2, coordinates: [], id: ids.shift() as unknown as string }),
-      shipTemplate({ type: ShipSelection.ship3, coordinates: [], id: ids.shift() as unknown as string }),
-      shipTemplate({ type: ShipSelection.ship3, coordinates: [], id: ids.shift() as unknown as string }),
-      shipTemplate({ type: ShipSelection.ship4, coordinates: [], id: ids.shift() as unknown as string }),
-      shipTemplate({ type: ShipSelection.ship5, coordinates: [], id: ids.shift() as unknown as string }),
-    ];
+    const idsNeeded = initialConfig.reduce((p, n) => p + n);
+    for (let i = 1; i <= idsNeeded; i++) ids.push(`unit${i}`);
+    const stack = [];
+    for (let i = 0; i < initialConfig[0]; i++) {
+      stack.push(shipTemplate({ type: ShipSelection.ship2, coordinates: [], id: ids.shift() as unknown as string }));
+    }
+    for (let i = 0; i < initialConfig[1]; i++) {
+      stack.push(shipTemplate({ type: ShipSelection.ship3, coordinates: [], id: ids.shift() as unknown as string }));
+    }
+    for (let i = 0; i < initialConfig[2]; i++) {
+      stack.push(shipTemplate({ type: ShipSelection.ship4, coordinates: [], id: ids.shift() as unknown as string }));
+    }
+    for (let i = 0; i < initialConfig[3]; i++) {
+      stack.push(shipTemplate({ type: ShipSelection.ship5, coordinates: [], id: ids.shift() as unknown as string }));
+    }
+    return stack;
   };
 
   const [gamePhase, setGamePhase] = useState<GamePhase>(GamePhase.menu);
@@ -42,6 +49,7 @@ export default function Home() {
   const [horizontal, setHorizontal] = useState<boolean>(false);
   const [autoloader, setAutoloader] = useState<boolean>(false);
   const [autoloaderControl, setAutoloaderControl] = useState<number>(0);
+  const [autoloaderWarning, setAutoloaderWarning] = useState<string>('');
 
   const buttons = [];
   const letters = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J'];
@@ -184,6 +192,11 @@ export default function Home() {
       setAutoloader(false);
       setAutoloaderControl(0);
     }
+    if (autoloaderControl > 200) setAutoloaderWarning('Warning:\nDeployment takes more time than usual');
+    if (autoloaderControl > 500) {
+      setAutoloaderWarning('Warning:\nDeployment aborted.\nRestart or reduce number of ships');
+      setAutoloader(false);
+    }
   }, [autoloader, autoloaderControl, collection]);
 
   return (
@@ -253,6 +266,7 @@ export default function Home() {
           <button
             onClick={() => {
               setGamePhase(GamePhase.menu);
+              setCollection(shipConfiguration);
             }}
             className="w-60 rounded-xl bg-slate-100 py-1.5 outline outline-1"
           >
@@ -277,22 +291,26 @@ export default function Home() {
                   setHorizontal(false);
                   setUnitSelected([]);
                   setCollection(shipConfiguration);
+                  setAutoloader(false);
+                  setAutoloaderControl(0);
+                  setAutoloaderWarning('');
                 }}
                 className="bg-slate-100 pl-2  text-left outline outline-1"
               >
                 debug: Reset
               </button>
-
               <button
                 disabled={!collection.map((x) => x[1].length === 0).includes(true)}
                 onClick={() => {
+                  setAutoloaderControl(0);
+                  setAutoloaderWarning('');
                   setAutoloader(true);
                 }}
                 className="mb-[1em] bg-slate-100 outline outline-1 disabled:opacity-50"
               >
                 debug: Place randomly
               </button>
-              <div className="h-[30em] flex-col outline outline-2">
+              <div className="h-[30em] flex-col overflow-y-auto outline outline-2">
                 {collection.map(
                   (x, i) =>
                     x[1].length === 0 && (
@@ -324,6 +342,9 @@ export default function Home() {
             </div>
           </div>
           <div>
+            <div className="mb-6 text-red-600">
+              <span className="whitespace-pre-line">{`${autoloaderWarning}`}</span>
+            </div>
             <div className="grid grid-cols-10">
               {letters.map((_, i) => (
                 <button disabled className="m-1 mx-1 mb-2 h-8 w-8 rounded-2xl bg-cyan-100" key={i}>
@@ -342,7 +363,10 @@ export default function Home() {
               setGamePhase(GamePhase.menu);
               setHorizontal(false);
               setUnitSelected([]);
+              setAutoloader(false);
+              setAutoloaderControl(0);
               setCollection(shipConfiguration);
+              setAutoloaderWarning('');
             }}
             className="mt-3 w-60 rounded-xl bg-slate-100 py-1.5 outline outline-1"
           >
@@ -352,6 +376,7 @@ export default function Home() {
             <button
               onClick={() => {
                 setGamePhase(GamePhase.battle);
+                setAutoloaderWarning('');
               }}
               className="mt-2 w-60 rounded-xl bg-green-200 py-1.5 outline outline-1"
             >
