@@ -6,7 +6,8 @@ export default function Home() {
     menu = 'Menu',
     options = 'Options',
     exit = 'Exit',
-    setup = 'Unit placement',
+    preSetup = 'Enemy unit placement',
+    setup = 'Own unit placement',
     battle = 'Battle',
   }
   enum ShipSelection {
@@ -45,11 +46,13 @@ export default function Home() {
   const [gamePhase, setGamePhase] = useState<GamePhase>(GamePhase.menu);
   const [initialConfig, setInitialConfig] = useState<number[]>([2, 2, 1, 1]);
   const [collection, setCollection] = useState<(ShipSelection | number[][] | string)[][]>(shipConfiguration);
+  const [enemyCollection, setEnemyCollection] = useState<(ShipSelection | number[][] | string)[][]>([]);
   const [unitSelected, setUnitSelected] = useState<(ShipSelection | string | null)[]>([]);
   const [horizontal, setHorizontal] = useState<boolean>(false);
   const [autoloader, setAutoloader] = useState<boolean>(false);
   const [autoloaderControl, setAutoloaderControl] = useState<number>(0);
   const [autoloaderWarning, setAutoloaderWarning] = useState<string>('');
+  console.log(enemyCollection);
 
   const buttons = [];
   const letters = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J'];
@@ -199,6 +202,16 @@ export default function Home() {
     }
   }, [autoloader, autoloaderControl, collection]);
 
+  useEffect(() => {
+    if (gamePhase === GamePhase.preSetup && !collection.map((x) => x[1].length === 0).includes(true)) {
+      const newCollection = [...collection];
+      for (const i of newCollection) i[2] = 'enemy_'.concat(i[2] as string);
+      setEnemyCollection(newCollection);
+      setCollection(shipConfiguration);
+      setGamePhase(GamePhase.setup);
+    }
+  }, [GamePhase.preSetup, GamePhase.setup, collection, gamePhase, shipConfiguration]);
+
   return (
     <div className="flex min-h-screen flex-col items-center justify-center bg-gradient-to-br from-cyan-300 to-cyan-200 font-[600] text-black">
       {gamePhase === GamePhase.exit && (
@@ -213,7 +226,10 @@ export default function Home() {
             {['Single Player', 'Options', 'Exit'].map((x, i) => (
               <button
                 onClick={() => {
-                  i === 0 && setGamePhase(GamePhase.setup);
+                  if (i === 0) {
+                    setGamePhase(GamePhase.preSetup);
+                    setAutoloader(true);
+                  }
                   i === 1 && setGamePhase(GamePhase.options);
                   i === 2 && setGamePhase(GamePhase.exit);
                 }}
@@ -274,10 +290,10 @@ export default function Home() {
           </button>
         </div>
       )}
-      {(gamePhase === GamePhase.setup || gamePhase === GamePhase.battle) && (
+      {(gamePhase === GamePhase.preSetup || gamePhase === GamePhase.setup || gamePhase === GamePhase.battle) && (
         <div className="flex flex-row items-center">
-          {gamePhase === GamePhase.setup && (
-            <div className=" absolute ml-[-15em] mr-[5em] flex w-[12em] flex-col justify-center">
+          {(gamePhase === GamePhase.preSetup || gamePhase === GamePhase.setup) && (
+            <div className="ml-[-15em] mr-[5em] flex w-[12em] flex-col justify-center">
               <button
                 onClick={() => {
                   setHorizontal(!horizontal);
@@ -357,7 +373,18 @@ export default function Home() {
         </div>
       )}
       {(gamePhase === GamePhase.setup || gamePhase === GamePhase.battle) && (
-        <div className="flex flex-col">
+        <div className="flex flex-col gap-2">
+          {!collection.map((x) => x[1].length === 0).includes(true) && gamePhase !== GamePhase.battle && (
+            <button
+              onClick={() => {
+                setGamePhase(GamePhase.battle);
+                setAutoloaderWarning('');
+              }}
+              className="w-60 rounded-xl bg-green-200 py-1.5 outline outline-1"
+            >
+              Start battle
+            </button>
+          )}
           <button
             onClick={() => {
               setGamePhase(GamePhase.menu);
@@ -368,21 +395,10 @@ export default function Home() {
               setCollection(shipConfiguration);
               setAutoloaderWarning('');
             }}
-            className="mt-3 w-60 rounded-xl bg-slate-100 py-1.5 outline outline-1"
+            className="w-60 rounded-xl bg-slate-100 py-1.5 outline outline-1"
           >
             Quit
           </button>
-          {!collection.map((x) => x[1].length === 0).includes(true) && gamePhase !== GamePhase.battle && (
-            <button
-              onClick={() => {
-                setGamePhase(GamePhase.battle);
-                setAutoloaderWarning('');
-              }}
-              className="mt-2 w-60 rounded-xl bg-green-200 py-1.5 outline outline-1"
-            >
-              Start battle
-            </button>
-          )}
         </div>
       )}
     </div>
