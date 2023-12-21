@@ -477,9 +477,14 @@ export default function Home() {
         </div>
       )}
       {gamePhase === GamePhase.battle && (
-        <div className="flex gap-8">
-          <Board title="Player" buttons={Buttons2({ feed: collection })} />
-          <Board title="Computer" buttons={Buttons2({ feed: enemyCollection })} />
+        <div className="flex flex-col">
+          <div className="flex gap-8">
+            <Board title="Player" buttons={Buttons2({ feed: collection })} />
+            <Board title="Computer" buttons={Buttons2({ feed: enemyCollection })} />
+          </div>
+          <div className="w-full flex mt-10 justify-center">
+            <QuitButton />
+          </div>
         </div>
       )}
     </div>
