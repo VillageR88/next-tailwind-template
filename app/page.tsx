@@ -268,30 +268,41 @@ export default function Home() {
     );
   };
 
-  const Board = ({ buttons }: { buttons: JSX.Element[] }) => {
+  const Board = ({
+    buttons,
+    manipulative,
+    title,
+  }: {
+    buttons: JSX.Element[];
+    manipulative?: boolean;
+    title?: string;
+  }) => {
     return (
       <div>
-        <div className="flex">
-          <div className="h-10 w-10"></div>
-          <div className="grid grid-cols-10">
-            {letters.map((_, i) => (
-              <button disabled className="m-1 mx-1 mb-2 h-8 w-8 rounded-2xl bg-cyan-100" key={i}>
-                {i + 1}
-              </button>
-            ))}
-          </div>
-        </div>
-        <div className="flex">
-          <div className="flex flex-col">
-            <div className="flex flex-col">
-              {letters.map((x, i) => (
-                <button disabled className="my-1 mr-2 h-8 w-8 rounded-2xl bg-cyan-100" key={i + 1}>
-                  {x}
+        {title && <div>{title}</div>}
+        <div>
+          <div className="flex">
+            <div className="h-10 w-10"></div>
+            <div className="grid grid-cols-10">
+              {letters.map((_, i) => (
+                <button disabled className="m-1 mx-1 mb-2 h-8 w-8 rounded-2xl bg-cyan-100" key={i}>
+                  {i + 1}
                 </button>
               ))}
             </div>
           </div>
-          <div className="grid grid-cols-10 outline outline-2">{buttons}</div>
+          <div className="flex">
+            <div className="flex flex-col">
+              <div className="flex flex-col">
+                {letters.map((x, i) => (
+                  <button disabled className="my-1 mr-2 h-8 w-8 rounded-2xl bg-cyan-100" key={i + 1}>
+                    {x}
+                  </button>
+                ))}
+              </div>
+            </div>
+            <div className="grid grid-cols-10 outline outline-2">{buttons}</div>
+          </div>
         </div>
       </div>
     );
@@ -467,8 +478,8 @@ export default function Home() {
       )}
       {gamePhase === GamePhase.battle && (
         <div className="flex gap-8">
-          <Board buttons={Buttons2({ feed: collection })} />
-          <Board buttons={Buttons2({ feed: enemyCollection })} />
+          <Board title="Player" buttons={Buttons2({ feed: collection })} />
+          <Board title="Computer" buttons={Buttons2({ feed: enemyCollection })} />
         </div>
       )}
     </div>
