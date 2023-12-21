@@ -109,26 +109,27 @@ export default function Home() {
     ></button>
   ));
 
-  const Buttons2 = Array.from({ length: 100 }, (_, iterator, i = iterator + 1) => (
-    <button
-      key={i}
-      id={'' + i}
-      onClick={() => {
-        document.getElementById('' + i)?.blur();
-      }}
-      className={`${
-        collection
-          .map((x) => x[1][0])
-          .flat()
-          .includes(i) && 'bg-slate-500'
-      } ${
-        collection
-          .map((x) => x[1][1])
-          .flat()
-          .includes(i) && 'bg-cyan-100'
-      } h-10 w-10 outline outline-1 focus:bg-black`}
-    ></button>
-  ));
+  const Buttons2 = ({ feed }: { feed: (ShipSelection | number[][] | string)[][] }) =>
+    Array.from({ length: 100 }, (_, iterator, i = iterator + 1) => (
+      <button
+        key={i}
+        id={'' + i}
+        onClick={() => {
+          document.getElementById('' + i)?.blur();
+        }}
+        className={`${
+          feed
+            .map((x) => x[1][0])
+            .flat()
+            .includes(i) && 'bg-slate-500'
+        } ${
+          feed
+            .map((x) => x[1][1])
+            .flat()
+            .includes(i) && 'bg-cyan-100'
+        } h-10 w-10 outline outline-1 focus:bg-black`}
+      ></button>
+    ));
 
   const calculateBorder2 = (array: number[]) => {
     const array1 = [] as number[];
@@ -465,8 +466,9 @@ export default function Home() {
         </div>
       )}
       {gamePhase === GamePhase.battle && (
-        <div>
-          <Board buttons={Buttons2} />
+        <div className="flex gap-8">
+          <Board buttons={Buttons2({ feed: collection })} />
+          <Board buttons={Buttons2({ feed: enemyCollection })} />
         </div>
       )}
     </div>
