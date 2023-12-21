@@ -115,7 +115,7 @@ export default function Home() {
         key={i}
         id={'' + i}
         onClick={() => {
-          document.getElementById('' + i)?.blur();
+          //document.getElementById('' + i)?.blur();
         }}
         className={`${
           feed
@@ -127,7 +127,7 @@ export default function Home() {
             .map((x) => x[1][1])
             .flat()
             .includes(i) && 'bg-cyan-100'
-        } h-10 w-10 outline outline-1 focus:bg-black`}
+        } h-10 w-10 outline outline-1 active:border-[5px] active:border-blue-500`}
       ></button>
     ));
 
