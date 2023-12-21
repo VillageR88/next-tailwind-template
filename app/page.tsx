@@ -47,9 +47,8 @@ export default function Home() {
 
   enum AutoloaderWarning {
     none = '',
-    moreTime = 'Warning:\nDeployment takes more time than usual',
-    aborted1 = 'Warning:\nDeployment aborted.\nReduce number of ships',
-    aborted2 = 'Warning:\nDeployment aborted.\nRestart or reduce number of ships',
+    aborted1 = 'Deployment aborted!\nReduce number of ships.',
+    aborted2 = 'Deployment aborted!\nRestart or reduce number of ships.',
   }
 
   const [gamePhase, setGamePhase] = useState<GamePhase>(GamePhase.menu);
@@ -59,8 +58,7 @@ export default function Home() {
   const [horizontal, setHorizontal] = useState<boolean>(false);
   const [autoloader, setAutoloader] = useState<boolean>(false);
   const [autoloaderControl, setAutoloaderControl] = useState<number>(0);
-  const autoloaderTime = useCallback(() => [400, 1000], []);
-  console.log(enemyCollection);
+  const autoloaderTime = 700;
 
   const buttons = [];
   const letters = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J'];
@@ -202,7 +200,7 @@ export default function Home() {
     } else {
       setAutoloader(false);
     }
-    if (autoloaderControl === autoloaderTime()[1]) setAutoloader(false);
+    if (autoloaderControl === autoloaderTime) setAutoloader(false);
   }, [autoloader, autoloaderControl, autoloaderTime, collection]);
 
   useEffect(() => {
@@ -330,14 +328,11 @@ export default function Home() {
       )}
       {gamePhase === GamePhase.preSetup && (
         <div className="absolute mb-6 flex h-full w-full flex-col items-center justify-center gap-4">
-          {autoloaderControl >= autoloaderTime()[0] && autoloaderControl < autoloaderTime()[1] && (
-            <span className="whitespace-pre-line text-red-600">{AutoloaderWarning.moreTime}</span>
-          )}
-          {autoloaderControl >= autoloaderTime()[1] && (
+          {autoloaderControl >= autoloaderTime && (
             <span className="whitespace-pre-line text-red-600">{AutoloaderWarning.aborted1}</span>
           )}
 
-          {autoloaderControl < autoloaderTime()[1] && (
+          {autoloaderControl < autoloaderTime && (
             <Hourglass
               visible={true}
               height="80"
@@ -348,7 +343,7 @@ export default function Home() {
               colors={['#306cce', '#72a1ed']}
             />
           )}
-          {autoloaderControl >= autoloaderTime()[1] && <QuitButton />}
+          {autoloaderControl >= autoloaderTime && <QuitButton />}
         </div>
       )}
       {(gamePhase === GamePhase.preSetup || gamePhase === GamePhase.setup || gamePhase === GamePhase.battle) && (
@@ -407,10 +402,7 @@ export default function Home() {
           </div>
           <div>
             <div className="mb-6 text-red-600">
-              {autoloaderControl >= autoloaderTime()[0] && autoloaderControl < autoloaderTime()[1] && (
-                <span className="whitespace-pre-line text-red-600">{AutoloaderWarning.moreTime}</span>
-              )}
-              {autoloaderControl >= autoloaderTime()[1] && (
+              {autoloaderControl >= autoloaderTime && (
                 <span className="whitespace-pre-line text-red-600">{AutoloaderWarning.aborted2}</span>
               )}
             </div>
