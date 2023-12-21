@@ -233,18 +233,21 @@ export default function Home() {
 
   const ResetButton = () => {
     return (
-      <button
-        onClick={() => {
-          setHorizontal(false);
-          setUnitSelected([]);
-          setAutoloader(false);
-          setAutoloaderControl(0);
-          setCollection(shipConfiguration);
-        }}
-        className="bg-slate-100 pl-2  text-left outline outline-1"
-      >
-        debug: Reset
-      </button>
+      !autoloader &&
+      gamePhase === GamePhase.setup && (
+        <button
+          onClick={() => {
+            setHorizontal(false);
+            setUnitSelected([]);
+            setAutoloader(false);
+            setAutoloaderControl(0);
+            setCollection(shipConfiguration);
+          }}
+          className="w-60 rounded-xl bg-slate-100 py-1.5 outline outline-1"
+        >
+          Reset
+        </button>
+      )
     );
   };
 
@@ -356,20 +359,19 @@ export default function Home() {
                 onClick={() => {
                   setHorizontal(!horizontal);
                 }}
-                className="mb-[1em] bg-violet-200 pl-2 text-left outline outline-1"
+                className="mb-[1em] rounded-md bg-violet-200 outline outline-1"
               >
                 {horizontal ? 'Align: horizontal' : 'Align: vertical'}
               </button>
-              <ResetButton />
               <button
                 disabled={!collection.map((x) => x[1].length === 0).includes(true)}
                 onClick={() => {
                   setAutoloaderControl(0);
                   setAutoloader(true);
                 }}
-                className="mb-[1em] bg-slate-100 outline outline-1 disabled:opacity-50"
+                className="mb-[1em] rounded-md bg-slate-100 outline outline-1 disabled:opacity-50"
               >
-                debug: Place randomly
+                Place randomly
               </button>
               <div className="h-[30em] flex-col overflow-y-auto outline outline-2">
                 {collection.map(
@@ -431,6 +433,7 @@ export default function Home() {
               Start battle
             </button>
           )}
+          <ResetButton />
           <QuitButton />
         </div>
       )}
