@@ -130,7 +130,7 @@ export default function Home() {
     ></button>
   ));
 
-  function calculateBorder2(array: number[]) {
+  const calculateBorder2 = (array: number[]) => {
     const array1 = [] as number[];
     const array2 = [] as number[];
     horizontal ? !array[0].toString().endsWith('1') && array1.push(array[0] - 1) : array1.push(array[0] + 10);
@@ -163,9 +163,9 @@ export default function Home() {
     }
     const array3 = array2.filter((x) => !array.includes(x) && x > 0 && x <= 100);
     return array3;
-  }
+  };
 
-  function calculateBorders(i: number) {
+  const calculateBorders = (i: number) => {
     const array1 = [] as number[];
     if (i !== 0) {
       if (unitSelected[0] === ShipSelection.ship2) {
@@ -203,7 +203,7 @@ export default function Home() {
       });
       setUnitSelected([]);
     }
-  }
+  };
 
   useEffect(() => {
     if (collection.map((x) => x[1].length === 0).includes(true) && autoloader) {
