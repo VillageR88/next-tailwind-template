@@ -1,5 +1,6 @@
 'use client';
 import { useCallback, useEffect, useState } from 'react';
+import { Hourglass } from 'react-loader-spinner';
 
 export default function Home() {
   enum GamePhase {
@@ -44,6 +45,13 @@ export default function Home() {
     return stack;
   }, [initialConfig, ShipSelection]);
 
+  enum AutoloaderWarning {
+    none = '',
+    moreTime = 'Warning:\nDeployment takes more time than usual',
+    aborted1 = 'Warning:\nDeployment aborted.\nReduce number of ships',
+    aborted2 = 'Warning:\nDeployment aborted.\nRestart or reduce number of ships',
+  }
+
   const [gamePhase, setGamePhase] = useState<GamePhase>(GamePhase.menu);
   const [collection, setCollection] = useState<(ShipSelection | number[][] | string)[][]>(shipConfiguration);
   const [enemyCollection, setEnemyCollection] = useState<(ShipSelection | number[][] | string)[][]>([]);
@@ -51,7 +59,7 @@ export default function Home() {
   const [horizontal, setHorizontal] = useState<boolean>(false);
   const [autoloader, setAutoloader] = useState<boolean>(false);
   const [autoloaderControl, setAutoloaderControl] = useState<number>(0);
-  const [autoloaderWarning, setAutoloaderWarning] = useState<string>('');
+  const [autoloaderWarning, setAutoloaderWarning] = useState<AutoloaderWarning>(AutoloaderWarning.none);
   console.log(enemyCollection);
 
   const buttons = [];
@@ -195,12 +203,23 @@ export default function Home() {
       setAutoloader(false);
       setAutoloaderControl(0);
     }
-    if (autoloaderControl > 200) setAutoloaderWarning('Warning:\nDeployment takes more time than usual');
-    if (autoloaderControl > 500) {
-      setAutoloaderWarning('Warning:\nDeployment aborted.\nRestart or reduce number of ships');
+    if (gamePhase === GamePhase.setup && autoloaderControl === 200) setAutoloaderWarning(AutoloaderWarning.moreTime);
+    if (autoloaderControl === 500) {
+      if (gamePhase === GamePhase.preSetup) setAutoloaderWarning(AutoloaderWarning.aborted1);
+      else setAutoloaderWarning(AutoloaderWarning.aborted2);
       setAutoloader(false);
     }
-  }, [autoloader, autoloaderControl, collection]);
+  }, [
+    AutoloaderWarning.aborted1,
+    AutoloaderWarning.aborted2,
+    AutoloaderWarning.moreTime,
+    GamePhase.preSetup,
+    GamePhase.setup,
+    autoloader,
+    autoloaderControl,
+    collection,
+    gamePhase,
+  ]);
 
   useEffect(() => {
     if (gamePhase === GamePhase.preSetup && !collection.map((x) => x[1].length === 0).includes(true)) {
@@ -211,6 +230,43 @@ export default function Home() {
       setGamePhase(GamePhase.setup);
     }
   }, [GamePhase.preSetup, GamePhase.setup, collection, gamePhase, shipConfiguration]);
+
+  const QuitButton = () => {
+    return (
+      <button
+        onClick={() => {
+          setGamePhase(GamePhase.menu);
+          setHorizontal(false);
+          setUnitSelected([]);
+          setAutoloader(false);
+          setAutoloaderControl(0);
+          setCollection(shipConfiguration);
+          setAutoloaderWarning(AutoloaderWarning.none);
+        }}
+        className="w-60 rounded-xl bg-slate-100 py-1.5 outline outline-1"
+      >
+        Quit
+      </button>
+    );
+  };
+
+  const ResetButton = () => {
+    return (
+      <button
+        onClick={() => {
+          setHorizontal(false);
+          setUnitSelected([]);
+          setAutoloader(false);
+          setAutoloaderControl(0);
+          setCollection(shipConfiguration);
+          setAutoloaderWarning(AutoloaderWarning.none);
+        }}
+        className="bg-slate-100 pl-2  text-left outline outline-1"
+      >
+        debug: Reset
+      </button>
+    );
+  };
 
   return (
     <div className="flex min-h-screen flex-col items-center justify-center bg-gradient-to-br from-cyan-300 to-cyan-200 font-[600] text-black">
@@ -290,6 +346,27 @@ export default function Home() {
           </button>
         </div>
       )}
+      {gamePhase === GamePhase.preSetup && (
+        <div className="absolute mb-6 flex h-full w-full flex-col items-center justify-center gap-4">
+          <span className="whitespace-pre-line text-red-600">{`${autoloaderWarning}`}</span>
+          {autoloaderControl >= 200 && autoloaderControl < 500 && (
+            <span className="whitespace-pre-line text-red-600">{AutoloaderWarning.moreTime}</span>
+          )}
+
+          {autoloaderWarning !== AutoloaderWarning.aborted1 && (
+            <Hourglass
+              visible={true}
+              height="80"
+              width="80"
+              ariaLabel="hourglass-loading"
+              wrapperStyle={{}}
+              wrapperClass=""
+              colors={['#306cce', '#72a1ed']}
+            />
+          )}
+          {autoloaderWarning === AutoloaderWarning.aborted1 && <QuitButton />}
+        </div>
+      )}
       {(gamePhase === GamePhase.preSetup || gamePhase === GamePhase.setup || gamePhase === GamePhase.battle) && (
         <div className={`${gamePhase === GamePhase.preSetup && 'invisible'} flex flex-row items-center`}>
           {(gamePhase === GamePhase.preSetup || gamePhase === GamePhase.setup) && (
@@ -302,24 +379,12 @@ export default function Home() {
               >
                 {horizontal ? 'Align: horizontal' : 'Align: vertical'}
               </button>
-              <button
-                onClick={() => {
-                  setHorizontal(false);
-                  setUnitSelected([]);
-                  setCollection(shipConfiguration);
-                  setAutoloader(false);
-                  setAutoloaderControl(0);
-                  setAutoloaderWarning('');
-                }}
-                className="bg-slate-100 pl-2  text-left outline outline-1"
-              >
-                debug: Reset
-              </button>
+              <ResetButton />
               <button
                 disabled={!collection.map((x) => x[1].length === 0).includes(true)}
                 onClick={() => {
                   setAutoloaderControl(0);
-                  setAutoloaderWarning('');
+                  setAutoloaderWarning(AutoloaderWarning.none);
                   setAutoloader(true);
                 }}
                 className="mb-[1em] bg-slate-100 outline outline-1 disabled:opacity-50"
@@ -378,27 +443,14 @@ export default function Home() {
             <button
               onClick={() => {
                 setGamePhase(GamePhase.battle);
-                setAutoloaderWarning('');
+                setAutoloaderWarning(AutoloaderWarning.none);
               }}
               className="w-60 rounded-xl bg-green-200 py-1.5 outline outline-1"
             >
               Start battle
             </button>
           )}
-          <button
-            onClick={() => {
-              setGamePhase(GamePhase.menu);
-              setHorizontal(false);
-              setUnitSelected([]);
-              setAutoloader(false);
-              setAutoloaderControl(0);
-              setCollection(shipConfiguration);
-              setAutoloaderWarning('');
-            }}
-            className="w-60 rounded-xl bg-slate-100 py-1.5 outline outline-1"
-          >
-            Quit
-          </button>
+          <QuitButton />
         </div>
       )}
     </div>
