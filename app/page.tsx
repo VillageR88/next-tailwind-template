@@ -59,7 +59,7 @@ export default function Home() {
   const [horizontal, setHorizontal] = useState<boolean>(false);
   const [autoloader, setAutoloader] = useState<boolean>(false);
   const [autoloaderControl, setAutoloaderControl] = useState<number>(0);
-  const [autoloaderWarning, setAutoloaderWarning] = useState<AutoloaderWarning>(AutoloaderWarning.none);
+  const autoloaderTime = useCallback(() => [400, 1000], []);
   console.log(enemyCollection);
 
   const buttons = [];
@@ -201,25 +201,9 @@ export default function Home() {
       setAutoloaderControl(autoloaderControl + 1);
     } else {
       setAutoloader(false);
-      setAutoloaderControl(0);
     }
-    if (gamePhase === GamePhase.setup && autoloaderControl === 200) setAutoloaderWarning(AutoloaderWarning.moreTime);
-    if (autoloaderControl === 500) {
-      if (gamePhase === GamePhase.preSetup) setAutoloaderWarning(AutoloaderWarning.aborted1);
-      else setAutoloaderWarning(AutoloaderWarning.aborted2);
-      setAutoloader(false);
-    }
-  }, [
-    AutoloaderWarning.aborted1,
-    AutoloaderWarning.aborted2,
-    AutoloaderWarning.moreTime,
-    GamePhase.preSetup,
-    GamePhase.setup,
-    autoloader,
-    autoloaderControl,
-    collection,
-    gamePhase,
-  ]);
+    if (autoloaderControl === autoloaderTime()[1]) setAutoloader(false);
+  }, [autoloader, autoloaderControl, autoloaderTime, collection]);
 
   useEffect(() => {
     if (gamePhase === GamePhase.preSetup && !collection.map((x) => x[1].length === 0).includes(true)) {
@@ -241,7 +225,6 @@ export default function Home() {
           setAutoloader(false);
           setAutoloaderControl(0);
           setCollection(shipConfiguration);
-          setAutoloaderWarning(AutoloaderWarning.none);
         }}
         className="w-60 rounded-xl bg-slate-100 py-1.5 outline outline-1"
       >
@@ -259,7 +242,6 @@ export default function Home() {
           setAutoloader(false);
           setAutoloaderControl(0);
           setCollection(shipConfiguration);
-          setAutoloaderWarning(AutoloaderWarning.none);
         }}
         className="bg-slate-100 pl-2  text-left outline outline-1"
       >
@@ -348,12 +330,14 @@ export default function Home() {
       )}
       {gamePhase === GamePhase.preSetup && (
         <div className="absolute mb-6 flex h-full w-full flex-col items-center justify-center gap-4">
-          <span className="whitespace-pre-line text-red-600">{`${autoloaderWarning}`}</span>
-          {autoloaderControl >= 200 && autoloaderControl < 500 && (
+          {autoloaderControl >= autoloaderTime()[0] && autoloaderControl < autoloaderTime()[1] && (
             <span className="whitespace-pre-line text-red-600">{AutoloaderWarning.moreTime}</span>
           )}
+          {autoloaderControl >= autoloaderTime()[1] && (
+            <span className="whitespace-pre-line text-red-600">{AutoloaderWarning.aborted1}</span>
+          )}
 
-          {autoloaderWarning !== AutoloaderWarning.aborted1 && (
+          {autoloaderControl < autoloaderTime()[1] && (
             <Hourglass
               visible={true}
               height="80"
@@ -364,7 +348,7 @@ export default function Home() {
               colors={['#306cce', '#72a1ed']}
             />
           )}
-          {autoloaderWarning === AutoloaderWarning.aborted1 && <QuitButton />}
+          {autoloaderControl >= autoloaderTime()[1] && <QuitButton />}
         </div>
       )}
       {(gamePhase === GamePhase.preSetup || gamePhase === GamePhase.setup || gamePhase === GamePhase.battle) && (
@@ -384,7 +368,6 @@ export default function Home() {
                 disabled={!collection.map((x) => x[1].length === 0).includes(true)}
                 onClick={() => {
                   setAutoloaderControl(0);
-                  setAutoloaderWarning(AutoloaderWarning.none);
                   setAutoloader(true);
                 }}
                 className="mb-[1em] bg-slate-100 outline outline-1 disabled:opacity-50"
@@ -424,7 +407,12 @@ export default function Home() {
           </div>
           <div>
             <div className="mb-6 text-red-600">
-              <span className="whitespace-pre-line">{`${autoloaderWarning}`}</span>
+              {autoloaderControl >= autoloaderTime()[0] && autoloaderControl < autoloaderTime()[1] && (
+                <span className="whitespace-pre-line text-red-600">{AutoloaderWarning.moreTime}</span>
+              )}
+              {autoloaderControl >= autoloaderTime()[1] && (
+                <span className="whitespace-pre-line text-red-600">{AutoloaderWarning.aborted2}</span>
+              )}
             </div>
             <div className="grid grid-cols-10">
               {letters.map((_, i) => (
@@ -443,7 +431,6 @@ export default function Home() {
             <button
               onClick={() => {
                 setGamePhase(GamePhase.battle);
-                setAutoloaderWarning(AutoloaderWarning.none);
               }}
               className="w-60 rounded-xl bg-green-200 py-1.5 outline outline-1"
             >
