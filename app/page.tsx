@@ -58,7 +58,7 @@ export default function Home() {
   const [horizontal, setHorizontal] = useState<boolean>(false);
   const [autoloader, setAutoloader] = useState<boolean>(false);
   const [autoloaderControl, setAutoloaderControl] = useState<number>(0);
-  const autoloaderTime = 700;
+  const autoloaderTime = 500;
 
   const buttons = [];
   const letters = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J'];
@@ -394,35 +394,41 @@ export default function Home() {
               </div>
             </div>
           )}
-          <div className="flex flex-col">
-            <div className="h-10 w-10"></div>
-            <div className="flex flex-col">
-              {letters.map((x, i) => (
-                <button disabled className="my-1 mr-2 h-8 w-8 rounded-2xl bg-cyan-100" key={i + 1}>
-                  {x}
-                </button>
-              ))}
-            </div>
-          </div>
+
           <div>
             <div className="mb-6 text-red-600">
               {autoloaderControl >= autoloaderTime && (
                 <span className="whitespace-pre-line text-red-600">{AutoloaderWarning.aborted2}</span>
               )}
             </div>
-            <div className="grid grid-cols-10">
-              {letters.map((_, i) => (
-                <button disabled className="m-1 mx-1 mb-2 h-8 w-8 rounded-2xl bg-cyan-100" key={i}>
-                  {i + 1}
-                </button>
-              ))}
+            <div className="flex">
+              <div className="h-10 w-10"></div>
+              <div className="grid grid-cols-10">
+                {letters.map((_, i) => (
+                  <button disabled className="m-1 mx-1 mb-2 h-8 w-8 rounded-2xl bg-cyan-100" key={i}>
+                    {i + 1}
+                  </button>
+                ))}
+              </div>
             </div>
-            <div className="grid grid-cols-10 outline outline-2">{buttons}</div>
+            <div className="flex">
+              <div className="flex flex-col">
+                <div className="flex flex-col">
+                  {letters.map((x, i) => (
+                    <button disabled className="my-1 mr-2 h-8 w-8 rounded-2xl bg-cyan-100" key={i + 1}>
+                      {x}
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+              <div className="grid grid-cols-10 outline outline-2">{buttons}</div>
+            </div>
           </div>
         </div>
       )}
       {(gamePhase === GamePhase.setup || gamePhase === GamePhase.battle) && (
-        <div className="flex flex-col gap-2 mt-5">
+        <div className="mt-5 flex flex-col gap-2">
           {!collection.map((x) => x[1].length === 0).includes(true) && gamePhase !== GamePhase.battle && (
             <button
               onClick={() => {
