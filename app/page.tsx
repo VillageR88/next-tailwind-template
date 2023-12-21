@@ -1,5 +1,5 @@
 'use client';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 
 export default function Home() {
   enum GamePhase {
@@ -17,13 +17,14 @@ export default function Home() {
     ship5 = 'ship5',
   }
 
-  const shipTemplate = ({ type, coordinates, id }: { type: ShipSelection; coordinates: number[][]; id: string }) => [
-    type,
-    coordinates,
-    id,
-  ];
+  const [initialConfig, setInitialConfig] = useState<number[]>([2, 2, 1, 1]);
 
-  const shipConfiguration = () => {
+  const shipConfiguration = useCallback(() => {
+    const shipTemplate = ({ type, coordinates, id }: { type: ShipSelection; coordinates: number[][]; id: string }) => [
+      type,
+      coordinates,
+      id,
+    ];
     const ids = [];
     const idsNeeded = initialConfig.reduce((p, n) => p + n);
     for (let i = 1; i <= idsNeeded; i++) ids.push(`unit${i}`);
@@ -41,10 +42,9 @@ export default function Home() {
       stack.push(shipTemplate({ type: ShipSelection.ship5, coordinates: [], id: ids.shift() as unknown as string }));
     }
     return stack;
-  };
+  }, [initialConfig, ShipSelection]);
 
   const [gamePhase, setGamePhase] = useState<GamePhase>(GamePhase.menu);
-  const [initialConfig, setInitialConfig] = useState<number[]>([2, 2, 1, 1]);
   const [collection, setCollection] = useState<(ShipSelection | number[][] | string)[][]>(shipConfiguration);
   const [enemyCollection, setEnemyCollection] = useState<(ShipSelection | number[][] | string)[][]>([]);
   const [unitSelected, setUnitSelected] = useState<(ShipSelection | string | null)[]>([]);
