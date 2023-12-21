@@ -1,5 +1,5 @@
 'use client';
-import { ReactElement, useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { Hourglass } from 'react-loader-spinner';
 
 export default function Home() {
@@ -60,41 +60,39 @@ export default function Home() {
   const [autoloaderControl, setAutoloaderControl] = useState<number>(0);
   const autoloaderTime = 500;
   const letters = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J'];
-  const buttons1 = [] as ReactElement[];
-  for (let i = 1; i <= 100; i++) {
-    buttons1.push(
-      <button
-        id={'' + i}
-        onKeyUp={(key) => {
-          (key.keyCode === 13 || key.keyCode === 32) && document.getElementById('' + i)?.blur();
-        }}
-        onClick={() => {
-          if ((!horizontal ? i > 10 : !('' + i).endsWith('0')) && unitSelected[0] === ShipSelection.ship2) {
-            calculateBorders(i);
-          } else if (
-            (!horizontal ? i > 20 : !('' + i).endsWith('0') && !('' + i).endsWith('9')) &&
-            unitSelected[0] === ShipSelection.ship3
-          ) {
-            calculateBorders(i);
-          } else if (
-            (!horizontal ? i > 30 : !('' + i).endsWith('0') && !('' + i).endsWith('9') && !('' + i).endsWith('8')) &&
-            unitSelected[0] === ShipSelection.ship4
-          ) {
-            calculateBorders(i);
-          } else if (
-            (!horizontal
-              ? i > 40
-              : !('' + i).endsWith('0') &&
-                !('' + i).endsWith('9') &&
-                !('' + i).endsWith('8') &&
-                !('' + i).endsWith('7')) &&
-            unitSelected[0] === ShipSelection.ship5
-          ) {
-            calculateBorders(i);
-          }
-          document.getElementById('' + i)?.blur();
-        }}
-        className={`
+  const Buttons1 = Array.from({ length: 100 }, (_, iterator, i = iterator + 1) => (
+    <button
+      id={'' + i}
+      onKeyUp={(key) => {
+        (key.keyCode === 13 || key.keyCode === 32) && document.getElementById('' + i)?.blur();
+      }}
+      onClick={() => {
+        if ((!horizontal ? i > 10 : !('' + i).endsWith('0')) && unitSelected[0] === ShipSelection.ship2) {
+          calculateBorders(i);
+        } else if (
+          (!horizontal ? i > 20 : !('' + i).endsWith('0') && !('' + i).endsWith('9')) &&
+          unitSelected[0] === ShipSelection.ship3
+        ) {
+          calculateBorders(i);
+        } else if (
+          (!horizontal ? i > 30 : !('' + i).endsWith('0') && !('' + i).endsWith('9') && !('' + i).endsWith('8')) &&
+          unitSelected[0] === ShipSelection.ship4
+        ) {
+          calculateBorders(i);
+        } else if (
+          (!horizontal
+            ? i > 40
+            : !('' + i).endsWith('0') &&
+              !('' + i).endsWith('9') &&
+              !('' + i).endsWith('8') &&
+              !('' + i).endsWith('7')) &&
+          unitSelected[0] === ShipSelection.ship5
+        ) {
+          calculateBorders(i);
+        }
+        document.getElementById('' + i)?.blur();
+      }}
+      className={`
         ${
           collection
             .map((x) => x[1][0])
@@ -107,33 +105,30 @@ export default function Home() {
             .flat()
             .includes(i) && 'bg-cyan-100'
         }          h-10 w-10 outline outline-1 focus:bg-black `}
-        key={i}
-      ></button>,
-    );
-  }
-  const buttons2 = [] as ReactElement[];
-  for (let i = 1; i <= 100; i++) {
-    buttons2.push(
-      <button
-        key={i}
-        id={'' + i}
-        onClick={() => {
-          document.getElementById('' + i)?.blur();
-        }}
-        className={`${
-          collection
-            .map((x) => x[1][0])
-            .flat()
-            .includes(i) && 'bg-slate-500'
-        } ${
-          collection
-            .map((x) => x[1][1])
-            .flat()
-            .includes(i) && 'bg-cyan-100'
-        } h-10 w-10 outline outline-1 focus:bg-black`}
-      ></button>,
-    );
-  }
+      key={i}
+    ></button>
+  ));
+
+  const Buttons2 = Array.from({ length: 100 }, (_, iterator, i = iterator + 1) => (
+    <button
+      key={i}
+      id={'' + i}
+      onClick={() => {
+        document.getElementById('' + i)?.blur();
+      }}
+      className={`${
+        collection
+          .map((x) => x[1][0])
+          .flat()
+          .includes(i) && 'bg-slate-500'
+      } ${
+        collection
+          .map((x) => x[1][1])
+          .flat()
+          .includes(i) && 'bg-cyan-100'
+      } h-10 w-10 outline outline-1 focus:bg-black`}
+    ></button>
+  ));
 
   function calculateBorder2(array: number[]) {
     const array1 = [] as number[];
@@ -272,7 +267,7 @@ export default function Home() {
     );
   };
 
-  const Board = ({ buttons }: { buttons: ReactElement[] }) => {
+  const Board = ({ buttons }: { buttons: JSX.Element[] }) => {
     return (
       <div>
         <div className="flex">
@@ -449,7 +444,7 @@ export default function Home() {
                 <span className="whitespace-pre-line text-red-600">{AutoloaderWarning.aborted2}</span>
               )}
             </div>
-            <Board buttons={buttons1} />
+            <Board buttons={Buttons1} />
           </div>
         </div>
       )}
@@ -471,7 +466,7 @@ export default function Home() {
       )}
       {gamePhase === GamePhase.battle && (
         <div>
-          <Board buttons={buttons2} />
+          <Board buttons={Buttons2} />
         </div>
       )}
     </div>
