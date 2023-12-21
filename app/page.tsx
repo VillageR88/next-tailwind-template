@@ -61,6 +61,7 @@ export default function Home() {
   const autoloaderTime = 500;
 
   const buttons1 = [] as ReactElement[];
+  const buttons2 = [] as ReactElement[];
   const letters = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J'];
   for (let i = 1; i <= 100; i++) {
     buttons1.push(
@@ -96,7 +97,6 @@ export default function Home() {
           document.getElementById('' + i)?.blur();
         }}
         className={`
-
         ${
           collection
             .map((x) => x[1][0])
@@ -110,6 +110,18 @@ export default function Home() {
             .includes(i) && 'bg-cyan-100'
         }          h-10 w-10 outline outline-1 focus:bg-black `}
         key={i}
+      ></button>,
+    );
+  }
+
+  for (let i = 1; i <= 100; i++) {
+    buttons2.push(
+      <button
+        id={'' + i}
+        onClick={() => {
+          document.getElementById('' + i)?.blur();
+        }}
+        className="h-10 w-10 outline outline-1 focus:bg-black"
       ></button>,
     );
   }
@@ -446,6 +458,11 @@ export default function Home() {
           )}
           <ResetButton />
           <QuitButton />
+        </div>
+      )}
+      {gamePhase === GamePhase.battle && (
+        <div>
+          <Board buttons={buttons2} />
         </div>
       )}
     </div>
