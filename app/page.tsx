@@ -59,10 +59,8 @@ export default function Home() {
   const [autoloader, setAutoloader] = useState<boolean>(false);
   const [autoloaderControl, setAutoloaderControl] = useState<number>(0);
   const autoloaderTime = 500;
-
-  const buttons1 = [] as ReactElement[];
-  const buttons2 = [] as ReactElement[];
   const letters = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J'];
+  const buttons1 = [] as ReactElement[];
   for (let i = 1; i <= 100; i++) {
     buttons1.push(
       <button
@@ -113,6 +111,7 @@ export default function Home() {
       ></button>,
     );
   }
+  const buttons2 = [] as ReactElement[];
   for (let i = 1; i <= 100; i++) {
     buttons2.push(
       <button
