@@ -317,8 +317,10 @@ export default function Home() {
 
           <button
             onClick={() => {
-              setGamePhase(GamePhase.menu);
-              setCollection(shipConfiguration);
+              if (initialConfig.reduce((p, n) => p + n) !== 0) {
+                setGamePhase(GamePhase.menu);
+                setCollection(shipConfiguration);
+              }
             }}
             className="w-60 rounded-xl bg-slate-100 py-1.5 outline outline-1"
           >
