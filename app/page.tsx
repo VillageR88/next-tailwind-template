@@ -60,10 +60,10 @@ export default function Home() {
   const [autoloaderControl, setAutoloaderControl] = useState<number>(0);
   const autoloaderTime = 500;
 
-  const buttons = [] as ReactElement[];
+  const buttons1 = [] as ReactElement[];
   const letters = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J'];
   for (let i = 1; i <= 100; i++) {
-    buttons.push(
+    buttons1.push(
       <button
         id={'' + i}
         onKeyUp={(key) => {
@@ -251,7 +251,7 @@ export default function Home() {
     );
   };
 
-  const Board = () => {
+  const Board = ({ buttons }: { buttons: ReactElement[] }) => {
     return (
       <div>
         <div className="flex">
@@ -429,7 +429,7 @@ export default function Home() {
                 <span className="whitespace-pre-line text-red-600">{AutoloaderWarning.aborted2}</span>
               )}
             </div>
-            <Board />
+            <Board buttons={buttons1} />
           </div>
         </div>
       )}
