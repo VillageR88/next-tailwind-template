@@ -380,49 +380,48 @@ export default function Home() {
           {autoloaderControl >= autoloaderTime && <QuitButton />}
         </div>
       )}
-      {(gamePhase === GamePhase.preSetup || gamePhase === GamePhase.setup || gamePhase === GamePhase.battle) && (
+      {(gamePhase === GamePhase.preSetup || gamePhase === GamePhase.setup) && (
         <div className={`${gamePhase === GamePhase.preSetup && 'invisible'} flex flex-row items-center`}>
-          {(gamePhase === GamePhase.preSetup || gamePhase === GamePhase.setup) && (
-            <div className="ml-[-15em] mr-[5em] flex w-[12em] flex-col justify-center">
-              <button
-                onClick={() => {
-                  setHorizontal(!horizontal);
-                }}
-                className="mb-[1em] rounded-md bg-violet-200 outline outline-1"
-              >
-                {horizontal ? 'Align: horizontal' : 'Align: vertical'}
-              </button>
-              <button
-                disabled={!collection.map((x) => x[1].length === 0).includes(true)}
-                onClick={() => {
-                  setAutoloaderControl(0);
-                  setAutoloader(true);
-                }}
-                className="mb-[1em] rounded-md bg-slate-100 outline outline-1 disabled:opacity-50"
-              >
-                Place randomly
-              </button>
-              <div className="h-[30em] flex-col overflow-y-auto outline outline-2">
-                {collection.map(
-                  (x, i) =>
-                    x[1].length === 0 && (
-                      <button
-                        key={i}
-                        id={`stack${i}`}
-                        onClick={() => {
-                          setUnitSelected([x[0] as ShipSelection, x[2] as string]);
-                        }}
-                        className={`${
-                          unitSelected[1] === (x[2] as string) ? 'bg-yellow-100' : 'bg-slate-100'
-                        } w-full  outline outline-1`}
-                      >
-                        {x[0]}
-                      </button>
-                    ),
-                )}
-              </div>
+          <div className="ml-[-15em] mr-[5em] flex w-[12em] flex-col justify-center">
+            <button
+              onClick={() => {
+                setHorizontal(!horizontal);
+              }}
+              className="mb-[1em] rounded-md bg-violet-200 outline outline-1"
+            >
+              {horizontal ? 'Align: horizontal' : 'Align: vertical'}
+            </button>
+            <button
+              disabled={!collection.map((x) => x[1].length === 0).includes(true)}
+              onClick={() => {
+                setAutoloaderControl(0);
+                setAutoloader(true);
+              }}
+              className="mb-[1em] rounded-md bg-slate-100 outline outline-1 disabled:opacity-50"
+            >
+              Place randomly
+            </button>
+            <div className="h-[30em] flex-col overflow-y-auto outline outline-2">
+              {collection.map(
+                (x, i) =>
+                  x[1].length === 0 && (
+                    <button
+                      key={i}
+                      id={`stack${i}`}
+                      onClick={() => {
+                        setUnitSelected([x[0] as ShipSelection, x[2] as string]);
+                      }}
+                      className={`${
+                        unitSelected[1] === (x[2] as string) ? 'bg-yellow-100' : 'bg-slate-100'
+                      } w-full  outline outline-1`}
+                    >
+                      {x[0]}
+                    </button>
+                  ),
+              )}
             </div>
-          )}
+          </div>
+
           <div>
             <div className="mb-6 text-red-600">
               {autoloaderControl >= autoloaderTime && (
