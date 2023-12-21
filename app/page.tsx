@@ -1,5 +1,5 @@
 'use client';
-import { useCallback, useEffect, useState } from 'react';
+import { ReactElement, useCallback, useEffect, useState } from 'react';
 import { Hourglass } from 'react-loader-spinner';
 
 export default function Home() {
@@ -60,7 +60,7 @@ export default function Home() {
   const [autoloaderControl, setAutoloaderControl] = useState<number>(0);
   const autoloaderTime = 500;
 
-  const buttons = [];
+  const buttons = [] as ReactElement[];
   const letters = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J'];
   for (let i = 1; i <= 100; i++) {
     buttons.push(
@@ -251,6 +251,35 @@ export default function Home() {
     );
   };
 
+  const Board = () => {
+    return (
+      <div>
+        <div className="flex">
+          <div className="h-10 w-10"></div>
+          <div className="grid grid-cols-10">
+            {letters.map((_, i) => (
+              <button disabled className="m-1 mx-1 mb-2 h-8 w-8 rounded-2xl bg-cyan-100" key={i}>
+                {i + 1}
+              </button>
+            ))}
+          </div>
+        </div>
+        <div className="flex">
+          <div className="flex flex-col">
+            <div className="flex flex-col">
+              {letters.map((x, i) => (
+                <button disabled className="my-1 mr-2 h-8 w-8 rounded-2xl bg-cyan-100" key={i + 1}>
+                  {x}
+                </button>
+              ))}
+            </div>
+          </div>
+          <div className="grid grid-cols-10 outline outline-2">{buttons}</div>
+        </div>
+      </div>
+    );
+  };
+
   return (
     <div className="flex min-h-screen flex-col items-center justify-center bg-gradient-to-br from-cyan-300 to-cyan-200 font-[600] text-black">
       {gamePhase === GamePhase.exit && (
@@ -400,31 +429,7 @@ export default function Home() {
                 <span className="whitespace-pre-line text-red-600">{AutoloaderWarning.aborted2}</span>
               )}
             </div>
-            <div>
-              <div className="flex">
-                <div className="h-10 w-10"></div>
-                <div className="grid grid-cols-10">
-                  {letters.map((_, i) => (
-                    <button disabled className="m-1 mx-1 mb-2 h-8 w-8 rounded-2xl bg-cyan-100" key={i}>
-                      {i + 1}
-                    </button>
-                  ))}
-                </div>
-              </div>
-              <div className="flex">
-                <div className="flex flex-col">
-                  <div className="flex flex-col">
-                    {letters.map((x, i) => (
-                      <button disabled className="my-1 mr-2 h-8 w-8 rounded-2xl bg-cyan-100" key={i + 1}>
-                        {x}
-                      </button>
-                    ))}
-                  </div>
-                </div>
-
-                <div className="grid grid-cols-10 outline outline-2">{buttons}</div>
-              </div>
-            </div>
+            <Board />
           </div>
         </div>
       )}
