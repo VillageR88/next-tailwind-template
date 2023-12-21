@@ -113,15 +113,25 @@ export default function Home() {
       ></button>,
     );
   }
-
   for (let i = 1; i <= 100; i++) {
     buttons2.push(
       <button
+        key={i}
         id={'' + i}
         onClick={() => {
           document.getElementById('' + i)?.blur();
         }}
-        className="h-10 w-10 outline outline-1 focus:bg-black"
+        className={`${
+          collection
+            .map((x) => x[1][0])
+            .flat()
+            .includes(i) && 'bg-slate-500'
+        } ${
+          collection
+            .map((x) => x[1][1])
+            .flat()
+            .includes(i) && 'bg-cyan-100'
+        } h-10 w-10 outline outline-1 focus:bg-black`}
       ></button>,
     );
   }
