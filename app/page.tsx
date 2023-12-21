@@ -422,7 +422,7 @@ export default function Home() {
         </div>
       )}
       {(gamePhase === GamePhase.setup || gamePhase === GamePhase.battle) && (
-        <div className="flex flex-col gap-2">
+        <div className="flex flex-col gap-2 mt-5">
           {!collection.map((x) => x[1].length === 0).includes(true) && gamePhase !== GamePhase.battle && (
             <button
               onClick={() => {
