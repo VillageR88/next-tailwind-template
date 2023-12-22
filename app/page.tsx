@@ -57,6 +57,7 @@ export default function Home() {
   const [collection, setCollection] = useState<(ShipSelection | number[][] | string)[][]>(shipConfiguration);
   const [enemyCollection, setEnemyCollection] = useState<(ShipSelection | number[][] | string)[][]>([]);
   const [fogOfWar, setFogOfWar] = useState<number[]>([]);
+  const [computerMove, setComputerMove] = useState<number[]>([]);
   const [unitSelected, setUnitSelected] = useState<(ShipSelection | string | null)[]>([]);
   const [horizontal, setHorizontal] = useState<boolean>(false);
   const [autoloader, setAutoloader] = useState<boolean>(false);
@@ -140,9 +141,11 @@ export default function Home() {
   const Buttons2 = ({
     feed,
     manipulative,
+    aiControlled,
   }: {
     feed: (ShipSelection | number[][] | string)[][];
     manipulative?: boolean;
+    aiControlled?: boolean;
   }) =>
     Array.from({ length: 100 }, (_, iterator, i = iterator + 1) => (
       <button
@@ -154,7 +157,6 @@ export default function Home() {
             manipulative &&
             !fogOfWar.includes(i) &&
             setFogOfWar((value) => {
-              console.log('click registered', i);
               const newValue = [...value];
               newValue.push(i);
               return newValue;
@@ -323,6 +325,7 @@ export default function Home() {
           setCollection(shipConfiguration);
           setFogOfWar([]);
           setHealthComputer(100);
+          setHealthPlayer(100);
         }}
         className="w-60 rounded-xl bg-slate-100 py-1.5 outline outline-1"
       >
@@ -563,6 +566,7 @@ export default function Home() {
           <div className="flex h-24 w-96 items-center justify-center rounded-lg bg-white outline outline-2 drop-shadow-xl">
             {healthComputer === 0 && <span className="text-3xl">Player Wins!</span>}
             {healthPlayer === 0 && <span className="text-3xl">Computer Wins!</span>}
+            {healthPlayer === 0 && healthComputer === 0 && <span className="text-3xl">Draw!</span>}
           </div>
         </div>
       )}
@@ -570,7 +574,7 @@ export default function Home() {
       {gamePhase === GamePhase.battle && (
         <div className="flex flex-col">
           <div className="flex gap-8">
-            <Board health={healthPlayer} title="Player" buttons={Buttons2({ feed: collection })} />
+            <Board health={healthPlayer} title="Player" buttons={Buttons2({ aiControlled: true, feed: collection })} />
             <Board
               health={healthComputer}
               title="Computer"
