@@ -64,6 +64,7 @@ export default function Home() {
   const [autoloaderControl, setAutoloaderControl] = useState<number>(0);
   const autoloaderTime = 500;
   const letters = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J'];
+  console.log(computerMove);
 
   useEffect(() => {
     if (fogOfWar.length !== 0) {
@@ -152,15 +153,22 @@ export default function Home() {
         key={i}
         id={'' + i}
         onClick={() => {
-          healthPlayer !== 0 &&
-            healthComputer !== 0 &&
-            manipulative &&
-            !fogOfWar.includes(i) &&
+          if (healthPlayer !== 0 && healthComputer !== 0 && manipulative && !fogOfWar.includes(i)) {
             setFogOfWar((value) => {
               const newValue = [...value];
               newValue.push(i);
               return newValue;
             });
+            setComputerMove((value) => {
+              let randomNumberFrom1to100 = Math.floor(Math.random() * 100) + 1;
+              const newValue = [...value];
+              while (newValue.includes(randomNumberFrom1to100)) {
+                randomNumberFrom1to100 = Math.floor(Math.random() * 100) + 1;
+              }
+              newValue.push(randomNumberFrom1to100);
+              return newValue;
+            });
+          }
         }}
         className={`
         ${
