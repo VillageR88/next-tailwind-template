@@ -61,6 +61,9 @@ export default function Home() {
   const [autoloaderControl, setAutoloaderControl] = useState<number>(0);
   const autoloaderTime = 500;
   const letters = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J'];
+
+  console.log(fogOfWar);
+
   const Buttons1 = Array.from({ length: 100 }, (_, iterator, i = iterator + 1) => (
     <button
       id={'' + i}
@@ -125,7 +128,7 @@ export default function Home() {
           manipulative &&
             setFogOfWar((value) => {
               const newValue = [...value];
-              newValue.push(i);
+              !newValue.includes(i) && newValue.push(i);
               return newValue;
             });
         }}
