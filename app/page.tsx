@@ -139,7 +139,7 @@ export default function Home() {
           manipulative &&
             !fogOfWar.includes(i) &&
             setFogOfWar((value) => {
-              console.log('click registered');
+              console.log('click registered', i);
               const newValue = [...value];
               !newValue.includes(i) && newValue.push(i);
 
