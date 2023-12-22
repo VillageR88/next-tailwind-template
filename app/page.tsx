@@ -51,6 +51,8 @@ export default function Home() {
     aborted2 = 'Deployment aborted!\nRestart or reduce number of ships.',
   }
 
+  const [healthPlayer, setHealthPlayer] = useState<number>(100);
+  const [healthComputer, setHealthComputer] = useState<number>(100);
   const [gamePhase, setGamePhase] = useState<GamePhase>(GamePhase.menu);
   const [collection, setCollection] = useState<(ShipSelection | number[][] | string)[][]>(shipConfiguration);
   const [enemyCollection, setEnemyCollection] = useState<(ShipSelection | number[][] | string)[][]>([]);
@@ -334,14 +336,14 @@ export default function Home() {
     );
   };
 
-  const Board = ({ buttons, title }: { buttons: JSX.Element[]; title?: string }) => {
+  const Board = ({ buttons, title, health }: { buttons: JSX.Element[]; title?: string; health?: number }) => {
     return (
       <div>
         {title && (
           <div className="mb-4 flex h-8 items-center bg-green-500 outline outline-2 outline-yellow-300">
             <span className="absolute pl-4 text-lg text-yellow-300">{title}</span>
             <div className="flex h-full w-full justify-end">
-              <div style={{ width: '0%' }} className="self h-full bg-red-700"></div>
+              <div style={{ width: `${100 - (health ?? 0)}%` }} className="self h-full bg-red-700"></div>
             </div>
           </div>
         )}
@@ -544,8 +546,12 @@ export default function Home() {
       {gamePhase === GamePhase.battle && (
         <div className="flex flex-col">
           <div className="flex gap-8">
-            <Board title="Player" buttons={Buttons2({ feed: collection })} />
-            <Board title="Computer" buttons={Buttons2({ manipulative: true, feed: enemyCollection })} />
+            <Board health={healthPlayer} title="Player" buttons={Buttons2({ feed: collection })} />
+            <Board
+              health={healthComputer}
+              title="Computer"
+              buttons={Buttons2({ manipulative: true, feed: enemyCollection })}
+            />
           </div>
           <div className="mt-10 flex w-full justify-center">
             <QuitButton />
