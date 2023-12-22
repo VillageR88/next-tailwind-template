@@ -154,32 +154,34 @@ export default function Home() {
             setFogOfWar((value) => {
               console.log('click registered', i);
               const newValue = [...value];
-              !newValue.includes(i) && newValue.push(i);
-
+              newValue.push(i);
               return newValue;
             });
         }}
-        className={`${
+        className={`
+        ${
           feed
             .map((x) => x[1][0])
             .flat()
             .includes(i)
             ? (!manipulative || fogOfWar.includes(i)) && (!manipulative ? 'bg-slate-500' : 'bg-red-900')
-            : feed
-                .map((x) => x[1][1])
-                .flat()
-                .includes(i) &&
-              (!manipulative ||
-                enemyCollection
-                  .map(
-                    (eCol, ib1) =>
-                      !(eCol[1][0] as number[]).map((xb1) => fogOfWar.includes(xb1)).includes(false) &&
-                      enemyCollection[ib1][1][1],
-                  )
-                  .flat()
-                  .filter((xb2) => xb2 !== false)
-                  .includes(i)) &&
-              (!manipulative ? 'bg-cyan-100' : 'bg-red-300')
+            : manipulative && fogOfWar.includes(i) && 'bg-red-300'
+        } ${
+          feed
+            .map((x) => x[1][1])
+            .flat()
+            .includes(i) &&
+          (!manipulative ||
+            enemyCollection
+              .map(
+                (eCol, ib1) =>
+                  !(eCol[1][0] as number[]).map((xb1) => fogOfWar.includes(xb1)).includes(false) &&
+                  enemyCollection[ib1][1][1],
+              )
+              .flat()
+              .filter((xb2) => xb2 !== false)
+              .includes(i)) &&
+          (!manipulative ? 'bg-cyan-100' : 'bg-red-300')
         } h-10 w-10 outline outline-1 active:border-[5px] active:border-blue-500`}
       ></button>
     ));
