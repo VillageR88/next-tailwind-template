@@ -256,6 +256,7 @@ export default function Home() {
           setAutoloader(false);
           setAutoloaderControl(0);
           setCollection(shipConfiguration);
+          setFogOfWar([]);
         }}
         className="w-60 rounded-xl bg-slate-100 py-1.5 outline outline-1"
       >
