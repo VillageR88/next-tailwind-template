@@ -259,6 +259,7 @@ export default function Home() {
         .filter((xb2) => xb2 !== false),
     [enemyCollection, fogOfWar],
   );
+
   useEffect(() => {
     const array = [] as number[];
     visibleBorder2().map((x) => !fogOfWar.includes(x as number) && array.push(x as number));
@@ -336,7 +337,14 @@ export default function Home() {
   const Board = ({ buttons, title }: { buttons: JSX.Element[]; title?: string }) => {
     return (
       <div>
-        {title && <div>{title}</div>}
+        {title && (
+          <div className="mb-4 flex h-8 items-center bg-green-500 outline outline-2 outline-yellow-300">
+            <span className="absolute pl-4 text-lg text-yellow-300">{title}</span>
+            <div className="flex h-full w-full justify-end">
+              <div style={{ width: '0%' }} className="self h-full bg-red-700"></div>
+            </div>
+          </div>
+        )}
         <div>
           <div className="flex">
             <div className="h-10 w-10"></div>
