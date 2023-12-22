@@ -294,6 +294,7 @@ export default function Home() {
       setAutoloaderControl(autoloaderControl + 1);
     } else {
       setAutoloader(false);
+      setHorizontal(false);
     }
     if (autoloaderControl === autoloaderTime) setAutoloader(false);
   }, [autoloader, autoloaderControl, autoloaderTime, collection]);
@@ -494,7 +495,7 @@ export default function Home() {
               onClick={() => {
                 setHorizontal(!horizontal);
               }}
-              className="mb-[1em] rounded-md bg-violet-200 outline outline-1"
+              className={`${autoloader && 'invisible'} mb-[1em] rounded-md bg-violet-200 outline outline-1`}
             >
               {horizontal ? 'Align: horizontal' : 'Align: vertical'}
             </button>
