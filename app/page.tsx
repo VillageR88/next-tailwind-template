@@ -558,6 +558,15 @@ export default function Home() {
           <QuitButton />
         </div>
       )}
+      {gamePhase === GamePhase.battle && (healthComputer === 0 || healthPlayer === 0) && (
+        <div className="absolute flex items-center justify-center">
+          <div className="flex h-24 w-96 items-center justify-center rounded-lg bg-white outline outline-2 drop-shadow-xl">
+            {healthComputer === 0 && <span className="text-3xl">Player Wins!</span>}
+            {healthPlayer === 0 && <span className="text-3xl">Computer Wins!</span>}
+          </div>
+        </div>
+      )}
+
       {gamePhase === GamePhase.battle && (
         <div className="flex flex-col">
           <div className="flex gap-8">
