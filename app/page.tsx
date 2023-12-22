@@ -157,7 +157,7 @@ export default function Home() {
             .flat()
             .includes(i) &&
           (!manipulative || fogOfWar.includes(i)) &&
-          'bg-slate-500'
+          (!manipulative ? 'bg-slate-500' : 'bg-red-900')
         } ${
           feed
             .map((x) => x[1][1])
@@ -173,7 +173,7 @@ export default function Home() {
               .flat()
               .filter((x3) => x3 !== false)
               .includes(i)) &&
-          'bg-cyan-100'
+          (!manipulative ? 'bg-cyan-100' : 'bg-red-300')
         } h-10 w-10 outline outline-1 active:border-[5px] active:border-blue-500`}
       ></button>
     ));
