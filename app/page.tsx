@@ -64,6 +64,17 @@ export default function Home() {
   const autoloaderTime = 500;
   const letters = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J'];
 
+  useEffect(() => {
+    if (fogOfWar.length !== 0) {
+      const shipTotalLengthEnemy = enemyCollection.map((x) => x[1][0]).flat().length;
+      const shipCurrentLengthEnemy = enemyCollection
+        .map((x) => x[1][0])
+        .flat()
+        .filter((x) => fogOfWar.includes(x as number)).length;
+      setHealthComputer(100 - (shipCurrentLengthEnemy * 100) / shipTotalLengthEnemy);
+    }
+  }, [enemyCollection, fogOfWar]);
+
   //'is ship sunk in Array' enemyCollection.map((eCol) => !(eCol[1][0] as number[]).map((x) => fogOfWar.includes(x)).includes(false)),
   //'Array[sunkShip]' enemyCollection.map((eCol, i) => !(eCol[1][0] as number[]).map((x) => fogOfWar.includes(x)).includes(false) && i),
   //'Border2 of sunkShip'  enemyCollection.map((eCol, i) => !(eCol[1][0] as number[]).map((x) => fogOfWar.includes(x)).includes(false) && enemyCollection[i][1][1],);
