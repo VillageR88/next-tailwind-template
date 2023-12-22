@@ -62,10 +62,27 @@ export default function Home() {
   const autoloaderTime = 500;
   const letters = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J'];
 
-  //'ship sink' enemyCollection.map((eCol) => !(eCol[1][0] as number[]).map((x) => fogOfWar.includes(x)).includes(false)),
+  //'is ship sunk in Array' enemyCollection.map((eCol) => !(eCol[1][0] as number[]).map((x) => fogOfWar.includes(x)).includes(false)),
   //'Array[sunkShip]' enemyCollection.map((eCol, i) => !(eCol[1][0] as number[]).map((x) => fogOfWar.includes(x)).includes(false) && i),
   //'Border2 of sunkShip'  enemyCollection.map((eCol, i) => !(eCol[1][0] as number[]).map((x) => fogOfWar.includes(x)).includes(false) && enemyCollection[i][1][1],);
-
+  /* 'if ship was sunk this return border2 of all sunk ships
+  enemyCollection
+    .map(
+      (eCol, i) =>
+        !(eCol[1][0] as number[]).map((x) => fogOfWar.includes(x)).includes(false) && enemyCollection[i][1][1],
+    )
+    .flat()
+    .filter((x) => x !== false);
+  */
+  console.log(
+    enemyCollection
+      .map(
+        (eCol, i) =>
+          !(eCol[1][0] as number[]).map((x) => fogOfWar.includes(x)).includes(false) && enemyCollection[i][1][1],
+      )
+      .flat()
+      .filter((x) => x !== false),
+  );
   const Buttons1 = Array.from({ length: 100 }, (_, iterator, i = iterator + 1) => (
     <button
       id={'' + i}
@@ -146,7 +163,16 @@ export default function Home() {
             .map((x) => x[1][1])
             .flat()
             .includes(i) &&
-          (!manipulative || fogOfWar.includes(i)) &&
+          (!manipulative ||
+            enemyCollection
+              .map(
+                (eCol, i2) =>
+                  !(eCol[1][0] as number[]).map((x2) => fogOfWar.includes(x2)).includes(false) &&
+                  enemyCollection[i2][1][1],
+              )
+              .flat()
+              .filter((x3) => x3 !== false)
+              .includes(i)) &&
           'bg-cyan-100'
         } h-10 w-10 outline outline-1 active:border-[5px] active:border-blue-500`}
       ></button>
