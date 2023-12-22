@@ -149,7 +149,9 @@ export default function Home() {
         key={i}
         id={'' + i}
         onClick={() => {
-          manipulative &&
+          healthPlayer !== 0 &&
+            healthComputer !== 0 &&
+            manipulative &&
             !fogOfWar.includes(i) &&
             setFogOfWar((value) => {
               console.log('click registered', i);
