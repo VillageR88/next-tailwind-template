@@ -54,6 +54,7 @@ export default function Home() {
   const [gamePhase, setGamePhase] = useState<GamePhase>(GamePhase.menu);
   const [collection, setCollection] = useState<(ShipSelection | number[][] | string)[][]>(shipConfiguration);
   const [enemyCollection, setEnemyCollection] = useState<(ShipSelection | number[][] | string)[][]>([]);
+  const [fogOfWar, setFogOfWar] = useState<number[]>([]);
   const [unitSelected, setUnitSelected] = useState<(ShipSelection | string | null)[]>([]);
   const [horizontal, setHorizontal] = useState<boolean>(false);
   const [autoloader, setAutoloader] = useState<boolean>(false);
@@ -109,24 +110,39 @@ export default function Home() {
     ></button>
   ));
 
-  const Buttons2 = ({ feed }: { feed: (ShipSelection | number[][] | string)[][] }) =>
+  const Buttons2 = ({
+    feed,
+    manipulative,
+  }: {
+    feed: (ShipSelection | number[][] | string)[][];
+    manipulative?: boolean;
+  }) =>
     Array.from({ length: 100 }, (_, iterator, i = iterator + 1) => (
       <button
         key={i}
         id={'' + i}
         onClick={() => {
-          //document.getElementById('' + i)?.blur();
+          manipulative &&
+            setFogOfWar((value) => {
+              const newValue = [...value];
+              newValue.push(i);
+              return newValue;
+            });
         }}
         className={`${
           feed
             .map((x) => x[1][0])
             .flat()
-            .includes(i) && 'bg-slate-500'
+            .includes(i) &&
+          (!manipulative || fogOfWar.includes(i)) &&
+          'bg-slate-500'
         } ${
           feed
             .map((x) => x[1][1])
             .flat()
-            .includes(i) && 'bg-cyan-100'
+            .includes(i) &&
+          (!manipulative || fogOfWar.includes(i)) &&
+          'bg-cyan-100'
         } h-10 w-10 outline outline-1 active:border-[5px] active:border-blue-500`}
       ></button>
     ));
@@ -268,15 +284,7 @@ export default function Home() {
     );
   };
 
-  const Board = ({
-    buttons,
-    manipulative,
-    title,
-  }: {
-    buttons: JSX.Element[];
-    manipulative?: boolean;
-    title?: string;
-  }) => {
+  const Board = ({ buttons, title }: { buttons: JSX.Element[]; title?: string }) => {
     return (
       <div>
         {title && <div>{title}</div>}
@@ -480,9 +488,9 @@ export default function Home() {
         <div className="flex flex-col">
           <div className="flex gap-8">
             <Board title="Player" buttons={Buttons2({ feed: collection })} />
-            <Board title="Computer" buttons={Buttons2({ feed: enemyCollection })} />
+            <Board title="Computer" buttons={Buttons2({ manipulative: true, feed: enemyCollection })} />
           </div>
-          <div className="w-full flex mt-10 justify-center">
+          <div className="mt-10 flex w-full justify-center">
             <QuitButton />
           </div>
         </div>
