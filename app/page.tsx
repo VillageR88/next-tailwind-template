@@ -319,6 +319,7 @@ export default function Home() {
           setAutoloaderControl(0);
           setCollection(shipConfiguration);
           setFogOfWar([]);
+          setHealthComputer(100);
         }}
         className="w-60 rounded-xl bg-slate-100 py-1.5 outline outline-1"
       >
