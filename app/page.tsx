@@ -61,6 +61,7 @@ export default function Home() {
   const [autoloaderControl, setAutoloaderControl] = useState<number>(0);
   const autoloaderTime = 500;
   const letters = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J'];
+  console.log('fow', fogOfWar);
 
   //'is ship sunk in Array' enemyCollection.map((eCol) => !(eCol[1][0] as number[]).map((x) => fogOfWar.includes(x)).includes(false)),
   //'Array[sunkShip]' enemyCollection.map((eCol, i) => !(eCol[1][0] as number[]).map((x) => fogOfWar.includes(x)).includes(false) && i),
@@ -142,6 +143,7 @@ export default function Home() {
               console.log('click registered');
               const newValue = [...value];
               !newValue.includes(i) && newValue.push(i);
+
               return newValue;
             });
         }}
@@ -160,12 +162,12 @@ export default function Home() {
           (!manipulative ||
             enemyCollection
               .map(
-                (eCol, i2) =>
-                  !(eCol[1][0] as number[]).map((x2) => fogOfWar.includes(x2)).includes(false) &&
-                  enemyCollection[i2][1][1],
+                (eCol, ib1) =>
+                  !(eCol[1][0] as number[]).map((xb1) => fogOfWar.includes(xb1)).includes(false) &&
+                  enemyCollection[ib1][1][1],
               )
               .flat()
-              .filter((x3) => x3 !== false)
+              .filter((xb2) => xb2 !== false)
               .includes(i)) &&
           (!manipulative ? 'bg-cyan-100' : 'bg-red-300')
         } h-10 w-10 outline outline-1 active:border-[5px] active:border-blue-500`}
