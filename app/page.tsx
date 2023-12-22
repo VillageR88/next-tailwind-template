@@ -61,7 +61,6 @@ export default function Home() {
   const [autoloaderControl, setAutoloaderControl] = useState<number>(0);
   const autoloaderTime = 500;
   const letters = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J'];
-  console.log('fow', fogOfWar);
 
   //'is ship sunk in Array' enemyCollection.map((eCol) => !(eCol[1][0] as number[]).map((x) => fogOfWar.includes(x)).includes(false)),
   //'Array[sunkShip]' enemyCollection.map((eCol, i) => !(eCol[1][0] as number[]).map((x) => fogOfWar.includes(x)).includes(false) && i),
@@ -248,6 +247,28 @@ export default function Home() {
       setUnitSelected([]);
     }
   };
+  const visibleBorder2 = useCallback(
+    () =>
+      enemyCollection
+        .map(
+          (eCol, ib1) =>
+            !(eCol[1][0] as number[]).map((xb1) => fogOfWar.includes(xb1)).includes(false) &&
+            enemyCollection[ib1][1][1],
+        )
+        .flat()
+        .filter((xb2) => xb2 !== false),
+    [enemyCollection, fogOfWar],
+  );
+  useEffect(() => {
+    const array = [] as number[];
+    visibleBorder2().map((x) => !fogOfWar.includes(x as number) && array.push(x as number));
+    if (array.length !== 0)
+      setFogOfWar((value) => {
+        const newValue = [...value];
+        array.map((x) => newValue.push(x));
+        return newValue;
+      });
+  }, [fogOfWar, visibleBorder2]);
 
   useEffect(() => {
     if (collection.map((x) => x[1].length === 0).includes(true) && autoloader) {
