@@ -74,15 +74,7 @@ export default function Home() {
     .flat()
     .filter((x) => x !== false);
   */
-  console.log(
-    enemyCollection
-      .map(
-        (eCol, i) =>
-          !(eCol[1][0] as number[]).map((x) => fogOfWar.includes(x)).includes(false) && enemyCollection[i][1][1],
-      )
-      .flat()
-      .filter((x) => x !== false),
-  );
+
   const Buttons1 = Array.from({ length: 100 }, (_, iterator, i = iterator + 1) => (
     <button
       id={'' + i}
@@ -145,7 +137,9 @@ export default function Home() {
         id={'' + i}
         onClick={() => {
           manipulative &&
+            !fogOfWar.includes(i) &&
             setFogOfWar((value) => {
+              console.log('click registered');
               const newValue = [...value];
               !newValue.includes(i) && newValue.push(i);
               return newValue;
