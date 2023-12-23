@@ -189,7 +189,8 @@ export default function Home() {
             .map((x) => x[1][0])
             .flat()
             .includes(i)
-            ? (!manipulative || fogOfWar.includes(i)) && (!manipulative ? 'bg-slate-500' : 'bg-red-900')
+            ? (!manipulative || fogOfWar.includes(i)) &&
+              (!manipulative ? (computerMove.includes(i) ? 'bg-red-900' : 'bg-slate-500') : 'bg-red-900')
             : manipulative && fogOfWar.includes(i) && 'bg-red-300'
         } ${
           feed
