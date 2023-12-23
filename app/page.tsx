@@ -153,11 +153,9 @@ export default function Home() {
   const Buttons2 = ({
     feed,
     manipulative,
-    aiControlled,
   }: {
     feed: (ShipSelection | number[][] | string)[][];
     manipulative?: boolean;
-    aiControlled?: boolean;
   }) =>
     Array.from({ length: 100 }, (_, iterator, i = iterator + 1) => (
       <button
@@ -191,8 +189,9 @@ export default function Home() {
             .includes(i)
             ? (!manipulative || fogOfWar.includes(i)) &&
               (!manipulative ? (computerMove.includes(i) ? 'bg-red-900' : 'bg-slate-500') : 'bg-red-900')
-            : (manipulative && fogOfWar.includes(i) && 'bg-red-300') ||
-              (!manipulative && computerMove.includes(i) && 'bg-red-300')
+            : manipulative && fogOfWar.includes(i)
+              ? 'bg-red-300'
+              : !manipulative && computerMove.includes(i) && 'bg-red-300'
         } ${
           feed
             .map((x) => x[1][1])
@@ -640,7 +639,7 @@ export default function Home() {
       {gamePhase === GamePhase.battle && (
         <div className="flex flex-col">
           <div className="flex gap-8">
-            <Board health={healthPlayer} title="Player" buttons={Buttons2({ aiControlled: true, feed: collection })} />
+            <Board health={healthPlayer} title="Player" buttons={Buttons2({ feed: collection })} />
             <Board
               health={healthComputer}
               title="Computer"
