@@ -77,6 +77,17 @@ export default function Home() {
     }
   }, [enemyCollection, fogOfWar]);
 
+  useEffect(() => {
+    if (computerMove.length !== 0) {
+      const shipTotalLengthPlayer = collection.map((x) => x[1][0]).flat().length;
+      const shipCurrentLengthPlayer = collection
+        .map((x) => x[1][0])
+        .flat()
+        .filter((x) => computerMove.includes(x as number)).length;
+      setHealthPlayer(100 - (shipCurrentLengthPlayer * 100) / shipTotalLengthPlayer);
+    }
+  }, [collection, computerMove]);
+
   //'is ship sunk in Array' enemyCollection.map((eCol) => !(eCol[1][0] as number[]).map((x) => fogOfWar.includes(x)).includes(false)),
   //'Array[sunkShip]' enemyCollection.map((eCol, i) => !(eCol[1][0] as number[]).map((x) => fogOfWar.includes(x)).includes(false) && i),
   //'Border2 of sunkShip'  enemyCollection.map((eCol, i) => !(eCol[1][0] as number[]).map((x) => fogOfWar.includes(x)).includes(false) && enemyCollection[i][1][1],);
@@ -332,6 +343,7 @@ export default function Home() {
           setAutoloaderControl(0);
           setCollection(shipConfiguration);
           setFogOfWar([]);
+          setComputerMove([]);
           setHealthComputer(100);
           setHealthPlayer(100);
         }}
