@@ -283,6 +283,9 @@ export default function Home() {
       setUnitSelected([]);
     }
   };
+
+  /*Array of Border2's of collection. 
+  Logic in correlated useEffect is that when you uncover ship's sector (destroy ship) it uncovers boundary around that ship.*/
   const visibleBorder2Player = useCallback(
     () =>
       gamePhase === GamePhase.battle &&
@@ -295,6 +298,7 @@ export default function Home() {
     [GamePhase.battle, enemyCollection, fogOfWar, gamePhase],
   );
 
+  /*Here is the logic that makes Border2 of destroyed ship to appear*/
   useEffect(() => {
     if (gamePhase === GamePhase.battle) {
       const array = [] as number[];
@@ -308,6 +312,9 @@ export default function Home() {
     }
   }, [GamePhase.battle, fogOfWar, gamePhase, visibleBorder2Player]);
 
+  /*Autoloader:
+  - in pre-setup used as loading enemy,
+  - in setup used as random placement of player.*/
   useEffect(() => {
     if (collection.map((x) => x[1].length === 0).includes(true) && autoloader) {
       const randomNumberFrom1to100 = Math.floor(Math.random() * 100) + 1;
@@ -323,6 +330,8 @@ export default function Home() {
     if (autoloaderControl === autoloaderTime) setAutoloader(false);
   }, [autoloader, autoloaderControl, autoloaderTime, collection]);
 
+  /*UseEffect for Autoloader associated with pre-setup.
+  Concept is to load collection of ships using player functions and convert it to computer.*/
   useEffect(() => {
     if (gamePhase === GamePhase.preSetup && !collection.map((x) => x[1].length === 0).includes(true)) {
       const newCollection = [...collection];
