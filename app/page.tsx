@@ -87,19 +87,6 @@ export default function Home() {
     }
   }, [collection, computerMove]);
 
-  //'is ship sunk in Array' enemyCollection.map((eCol) => !(eCol[1][0] as number[]).map((x) => fogOfWar.includes(x)).includes(false)),
-  //'Array[sunkShip]' enemyCollection.map((eCol, i) => !(eCol[1][0] as number[]).map((x) => fogOfWar.includes(x)).includes(false) && i),
-  //'Border2 of sunkShip'  enemyCollection.map((eCol, i) => !(eCol[1][0] as number[]).map((x) => fogOfWar.includes(x)).includes(false) && enemyCollection[i][1][1],);
-  /* 'if ship was sunk this return border2 of all sunk ships
-  enemyCollection
-    .map(
-      (eCol, i) =>
-        !(eCol[1][0] as number[]).map((x) => fogOfWar.includes(x)).includes(false) && enemyCollection[i][1][1],
-    )
-    .flat()
-    .filter((x) => x !== false);
-  */
-
   const Buttons1 = Array.from({ length: 100 }, (_, iterator, i = iterator + 1) => (
     <button
       id={'' + i}
@@ -149,7 +136,8 @@ export default function Home() {
     ></button>
   ));
 
-  //Battle phase buttons logic
+  /*Battle phase buttons logic
+  IMPORTANT: includes AI movement*/
   const Buttons2 = ({
     feed,
     manipulative,
@@ -176,6 +164,7 @@ export default function Home() {
               while (newValue.includes(randomNumberFrom1to100)) {
                 randomNumberFrom1to100 = Math.floor(Math.random() * 100) + 1;
               }
+              //here TODO
               newValue.push(randomNumberFrom1to100);
               return newValue;
             });
@@ -371,12 +360,14 @@ export default function Home() {
       setGamePhase(GamePhase.setup);
     }
   }, [GamePhase.preSetup, GamePhase.setup, collection, gamePhase, shipConfiguration]);
-
-  console.log(visibleBorder2Player());
-  console.log(visibleBorder2Enemy());
-  console.log(computerMove);
-  //console.log(fogOfWar);
-
+  //all player ships -> console.log(collection.map((x) => x[1][0]).flat());
+  //last AI move -> console.log(computerMove[computerMove.length - 1]);
+  /*last AI move was hit on player ship -> console.log(
+    collection
+      .map((x) => x[1][0])
+      .flat()
+      .includes(computerMove[computerMove.length - 1]),
+  );*/
   const QuitButton = () => {
     return (
       <button
