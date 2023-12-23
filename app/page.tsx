@@ -64,7 +64,6 @@ export default function Home() {
   const [autoloaderControl, setAutoloaderControl] = useState<number>(0);
   const autoloaderTime = 500;
   const letters = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J'];
-  console.log(computerMove);
 
   useEffect(() => {
     if (fogOfWar.length !== 0) {
@@ -150,6 +149,7 @@ export default function Home() {
     ></button>
   ));
 
+  //Battle phase buttons logic
   const Buttons2 = ({
     feed,
     manipulative,
@@ -165,11 +165,13 @@ export default function Home() {
         id={'' + i}
         onClick={() => {
           if (healthPlayer !== 0 && healthComputer !== 0 && manipulative && !fogOfWar.includes(i)) {
+            //Player uncover Computer
             setFogOfWar((value) => {
               const newValue = [...value];
               newValue.push(i);
               return newValue;
             });
+            //Computer uncover Player (Computer(AI) move)
             setComputerMove((value) => {
               let randomNumberFrom1to100 = Math.floor(Math.random() * 100) + 1;
               const newValue = [...value];
@@ -286,6 +288,7 @@ export default function Home() {
 
   /*Array of Border2's of collection. 
   Logic in correlated useEffect is that when you uncover ship's sector (destroy ship) it uncovers boundary around that ship.*/
+  //Player board
   const visibleBorder2Player = useCallback(
     () =>
       gamePhase === GamePhase.battle &&
@@ -297,7 +300,7 @@ export default function Home() {
         .filter((x) => x !== false) as number[]),
     [GamePhase.battle, collection, computerMove, gamePhase],
   );
-
+  //Computer board
   const visibleBorder2Enemy = useCallback(
     () =>
       gamePhase === GamePhase.battle &&
@@ -311,6 +314,20 @@ export default function Home() {
   );
 
   /*Here is the logic that makes Border2 of destroyed ship to appear*/
+  //Player board
+  useEffect(() => {
+    if (gamePhase === GamePhase.battle) {
+      const array = [] as number[];
+      (visibleBorder2Player() as number[]).map((x) => !computerMove.includes(x) && array.push(x));
+      if (array.length !== 0)
+        setComputerMove((value) => {
+          const newValue = [...value];
+          array.map((x) => newValue.push(x));
+          return newValue;
+        });
+    }
+  }, [GamePhase.battle, computerMove, gamePhase, visibleBorder2Player]);
+  //Computer board
   useEffect(() => {
     if (gamePhase === GamePhase.battle) {
       const array = [] as number[];
@@ -353,6 +370,11 @@ export default function Home() {
       setGamePhase(GamePhase.setup);
     }
   }, [GamePhase.preSetup, GamePhase.setup, collection, gamePhase, shipConfiguration]);
+
+  console.log(visibleBorder2Player());
+  console.log(visibleBorder2Enemy());
+  //console.log(computerMove);
+  //console.log(fogOfWar);
 
   const QuitButton = () => {
     return (
