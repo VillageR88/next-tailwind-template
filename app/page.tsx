@@ -62,8 +62,21 @@ export default function Home() {
   const [horizontal, setHorizontal] = useState<boolean>(false);
   const [autoloader, setAutoloader] = useState<boolean>(false);
   const [autoloaderControl, setAutoloaderControl] = useState<number>(0);
+  const [playerShipFound, setPlayerShipFound] = useState<boolean>(false);
+  const [playerShipSunkControl, setPlayerShipSunkControl] = useState<number>(0);
+  const [seek, setSeek] = useState<number[]>([]);
   const autoloaderTime = 500;
   const letters = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J'];
+
+  //When one of Player's ship was hit for first time, this set state found to true until destroyed
+  useEffect(() => {
+    if (gamePhase === GamePhase.battle) {
+      collection
+        .map((x) => x[1][0])
+        .flat()
+        .includes(computerMove[computerMove.length - 1]) && setPlayerShipFound(true);
+    }
+  }, [GamePhase.battle, collection, computerMove, gamePhase]);
 
   useEffect(() => {
     if (fogOfWar.length !== 0) {
@@ -73,6 +86,7 @@ export default function Home() {
         .flat()
         .filter((x) => fogOfWar.includes(x as number)).length;
       setHealthComputer(100 - (shipCurrentLengthEnemy * 100) / shipTotalLengthEnemy);
+      return void [];
     }
   }, [enemyCollection, fogOfWar]);
 
@@ -84,6 +98,7 @@ export default function Home() {
         .flat()
         .filter((x) => computerMove.includes(x as number)).length;
       setHealthPlayer(100 - (shipCurrentLengthPlayer * 100) / shipTotalLengthPlayer);
+      return void [];
     }
   }, [collection, computerMove]);
 
@@ -164,7 +179,15 @@ export default function Home() {
               while (newValue.includes(randomNumberFrom1to100)) {
                 randomNumberFrom1to100 = Math.floor(Math.random() * 100) + 1;
               }
-              //here TODO
+
+              //here TODO  //all player ships -> console.log(collection.map((x) => x[1][0]).flat());
+              //last AI move -> console.log(computerMove[computerMove.length - 1]);
+              /*last AI move was hit on player ship -> console.log(
+    collection
+      .map((x) => x[1][0])
+      .flat()
+      .includes(computerMove[computerMove.length - 1]),
+  );*/
               newValue.push(randomNumberFrom1to100);
               return newValue;
             });
@@ -315,6 +338,7 @@ export default function Home() {
           array.map((x) => newValue.push(x));
           return newValue;
         });
+      return void [];
     }
   }, [GamePhase.battle, computerMove, gamePhase, visibleBorder2Player]);
   //Computer board
@@ -328,6 +352,7 @@ export default function Home() {
           array.map((x) => newValue.push(x));
           return newValue;
         });
+      return void [];
     }
   }, [GamePhase.battle, fogOfWar, gamePhase, visibleBorder2Enemy]);
 
@@ -347,6 +372,7 @@ export default function Home() {
       setHorizontal(false);
     }
     if (autoloaderControl === autoloaderTime) setAutoloader(false);
+    return void [];
   }, [autoloader, autoloaderControl, autoloaderTime, collection]);
 
   /*UseEffect for Autoloader associated with pre-setup.
