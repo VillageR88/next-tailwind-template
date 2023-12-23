@@ -286,19 +286,19 @@ export default function Home() {
   const visibleBorder2Player = useCallback(
     () =>
       gamePhase === GamePhase.battle &&
-      enemyCollection
+      (enemyCollection
         .map(
           (x, i) => !(x[1][0] as number[]).map((x) => fogOfWar.includes(x)).includes(false) && enemyCollection[i][1][1],
         )
         .flat()
-        .filter((x) => x !== false),
+        .filter((x) => x !== false) as number[]),
     [GamePhase.battle, enemyCollection, fogOfWar, gamePhase],
   );
 
   useEffect(() => {
     if (gamePhase === GamePhase.battle) {
       const array = [] as number[];
-      visibleBorder2Player().map((x) => !fogOfWar.includes(x) && array.push(x));
+      (visibleBorder2Player() as number[]).map((x) => !fogOfWar.includes(x) && array.push(x));
       if (array.length !== 0)
         setFogOfWar((value) => {
           const newValue = [...value];
