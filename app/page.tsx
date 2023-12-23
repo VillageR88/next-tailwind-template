@@ -283,29 +283,29 @@ export default function Home() {
       setUnitSelected([]);
     }
   };
-  const visibleBorder2 = useCallback(
+  const visibleBorder2Player = useCallback(
     () =>
       enemyCollection
         .map(
-          (eCol, ib1) =>
-            !(eCol[1][0] as number[]).map((xb1) => fogOfWar.includes(xb1)).includes(false) &&
-            enemyCollection[ib1][1][1],
+          (x, i) => !(x[1][0] as number[]).map((x) => fogOfWar.includes(x)).includes(false) && enemyCollection[i][1][1],
         )
         .flat()
-        .filter((xb2) => xb2 !== false),
+        .filter((x) => x !== false),
     [enemyCollection, fogOfWar],
   );
 
   useEffect(() => {
-    const array = [] as number[];
-    visibleBorder2().map((x) => !fogOfWar.includes(x as number) && array.push(x as number));
-    if (array.length !== 0)
-      setFogOfWar((value) => {
-        const newValue = [...value];
-        array.map((x) => newValue.push(x));
-        return newValue;
-      });
-  }, [fogOfWar, visibleBorder2]);
+    if (gamePhase === GamePhase.battle) {
+      const array = [] as number[];
+      visibleBorder2Player().map((x) => !fogOfWar.includes(x as number) && array.push(x as number));
+      if (array.length !== 0)
+        setFogOfWar((value) => {
+          const newValue = [...value];
+          array.map((x) => newValue.push(x));
+          return newValue;
+        });
+    }
+  }, [GamePhase.battle, fogOfWar, gamePhase, visibleBorder2Player]);
 
   useEffect(() => {
     if (collection.map((x) => x[1].length === 0).includes(true) && autoloader) {
