@@ -191,7 +191,8 @@ export default function Home() {
             .includes(i)
             ? (!manipulative || fogOfWar.includes(i)) &&
               (!manipulative ? (computerMove.includes(i) ? 'bg-red-900' : 'bg-slate-500') : 'bg-red-900')
-            : manipulative && fogOfWar.includes(i) && 'bg-red-300'
+            : (manipulative && fogOfWar.includes(i) && 'bg-red-300') ||
+              (!manipulative && computerMove.includes(i) && 'bg-red-300')
         } ${
           feed
             .map((x) => x[1][1])
@@ -374,7 +375,7 @@ export default function Home() {
 
   console.log(visibleBorder2Player());
   console.log(visibleBorder2Enemy());
-  //console.log(computerMove);
+  console.log(computerMove);
   //console.log(fogOfWar);
 
   const QuitButton = () => {
