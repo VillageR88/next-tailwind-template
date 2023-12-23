@@ -207,7 +207,7 @@ export default function Home() {
               .flat()
               .filter((xb2) => xb2 !== false)
               .includes(i)) &&
-          (!manipulative ? 'bg-cyan-100' : 'bg-red-300')
+          (!manipulative ? (computerMove.includes(i) ? 'bg-red-300' : 'bg-cyan-100') : 'bg-red-300')
         } h-10 w-10 outline outline-1 active:border-[5px] active:border-blue-500`}
       ></button>
     ));
