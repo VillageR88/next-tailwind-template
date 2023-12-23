@@ -289,6 +289,18 @@ export default function Home() {
   const visibleBorder2Player = useCallback(
     () =>
       gamePhase === GamePhase.battle &&
+      (collection
+        .map(
+          (x, i) => !(x[1][0] as number[]).map((x) => computerMove.includes(x)).includes(false) && collection[i][1][1],
+        )
+        .flat()
+        .filter((x) => x !== false) as number[]),
+    [GamePhase.battle, collection, computerMove, gamePhase],
+  );
+
+  const visibleBorder2Enemy = useCallback(
+    () =>
+      gamePhase === GamePhase.battle &&
       (enemyCollection
         .map(
           (x, i) => !(x[1][0] as number[]).map((x) => fogOfWar.includes(x)).includes(false) && enemyCollection[i][1][1],
@@ -302,7 +314,7 @@ export default function Home() {
   useEffect(() => {
     if (gamePhase === GamePhase.battle) {
       const array = [] as number[];
-      (visibleBorder2Player() as number[]).map((x) => !fogOfWar.includes(x) && array.push(x));
+      (visibleBorder2Enemy() as number[]).map((x) => !fogOfWar.includes(x) && array.push(x));
       if (array.length !== 0)
         setFogOfWar((value) => {
           const newValue = [...value];
@@ -310,7 +322,7 @@ export default function Home() {
           return newValue;
         });
     }
-  }, [GamePhase.battle, fogOfWar, gamePhase, visibleBorder2Player]);
+  }, [GamePhase.battle, fogOfWar, gamePhase, visibleBorder2Enemy]);
 
   /*Autoloader:
   - in pre-setup used as loading enemy,
