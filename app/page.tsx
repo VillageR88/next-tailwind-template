@@ -42,7 +42,7 @@ export default function Home() {
     for (let i = 0; i < initialConfig[3]; i++) {
       stack.push(shipTemplate({ type: ShipSelection.ship5, coordinates: [], id: ids.shift() as unknown as string }));
     }
-    return stack;
+    return stack as [ShipSelection, number[][], string][];
   }, [initialConfig, ShipSelection]);
 
   enum AutoloaderWarning {
@@ -54,29 +54,30 @@ export default function Home() {
   const [healthPlayer, setHealthPlayer] = useState<number>(100);
   const [healthComputer, setHealthComputer] = useState<number>(100);
   const [gamePhase, setGamePhase] = useState<GamePhase>(GamePhase.menu);
-  const [collection, setCollection] = useState<(ShipSelection | number[][] | string)[][]>(shipConfiguration);
-  const [enemyCollection, setEnemyCollection] = useState<(ShipSelection | number[][] | string)[][]>([]);
+  const [collection, setCollection] = useState<[ShipSelection, number[][], string][]>(shipConfiguration);
+  const [enemyCollection, setEnemyCollection] = useState<[ShipSelection, number[][], string][]>([]);
   const [fogOfWar, setFogOfWar] = useState<number[]>([]);
   const [computerMove, setComputerMove] = useState<number[]>([]);
   const [unitSelected, setUnitSelected] = useState<(ShipSelection | string | null)[]>([]);
   const [horizontal, setHorizontal] = useState<boolean>(false);
   const [autoloader, setAutoloader] = useState<boolean>(false);
   const [autoloaderControl, setAutoloaderControl] = useState<number>(0);
-  const [playerShipFound, setPlayerShipFound] = useState<boolean>(false);
-  const [playerShipSunkControl, setPlayerShipSunkControl] = useState<number>(0);
-  const [seek, setSeek] = useState<number[]>([]);
+  const [playerShipFound, setPlayerShipFound] = useState<[boolean, number | null]>([false, null]);
+  const [seek, setSeek] = useState<[number[], number[]]>([[], []]);
   const autoloaderTime = 500;
   const letters = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J'];
 
   //When one of Player's ship was hit for first time, this set state found to true until destroyed
   useEffect(() => {
-    if (gamePhase === GamePhase.battle) {
-      collection
-        .map((x) => x[1][0])
-        .flat()
-        .includes(computerMove[computerMove.length - 1]) && setPlayerShipFound(true);
+    if (gamePhase === GamePhase.battle && !playerShipFound[0]) {
+      collection.map((x, i) => {
+        if (x[1][0].includes(computerMove[computerMove.length - 1])) {
+          setPlayerShipFound([true, i]);
+          setSeek([[Math.floor(Math.random() * 4) + 1], [computerMove[computerMove.length - 1]]]);
+        }
+      });
     }
-  }, [GamePhase.battle, collection, computerMove, gamePhase]);
+  }, [GamePhase.battle, collection, computerMove, gamePhase, playerShipFound]);
 
   useEffect(() => {
     if (fogOfWar.length !== 0) {
@@ -84,7 +85,7 @@ export default function Home() {
       const shipCurrentLengthEnemy = enemyCollection
         .map((x) => x[1][0])
         .flat()
-        .filter((x) => fogOfWar.includes(x as number)).length;
+        .filter((x) => fogOfWar.includes(x)).length;
       setHealthComputer(100 - (shipCurrentLengthEnemy * 100) / shipTotalLengthEnemy);
       return void [];
     }
@@ -96,7 +97,7 @@ export default function Home() {
       const shipCurrentLengthPlayer = collection
         .map((x) => x[1][0])
         .flat()
-        .filter((x) => computerMove.includes(x as number)).length;
+        .filter((x) => computerMove.includes(x)).length;
       setHealthPlayer(100 - (shipCurrentLengthPlayer * 100) / shipTotalLengthPlayer);
       return void [];
     }
@@ -174,21 +175,17 @@ export default function Home() {
             });
             //Computer uncover Player (Computer(AI) move)
             setComputerMove((value) => {
-              let randomNumberFrom1to100 = Math.floor(Math.random() * 100) + 1;
               const newValue = [...value];
-              while (newValue.includes(randomNumberFrom1to100)) {
-                randomNumberFrom1to100 = Math.floor(Math.random() * 100) + 1;
+              if (!playerShipFound[0]) {
+                let randomNumberFrom1to100 = Math.floor(Math.random() * 100) + 1;
+                while (newValue.includes(randomNumberFrom1to100)) {
+                  randomNumberFrom1to100 = Math.floor(Math.random() * 100) + 1;
+                }
+                newValue.push(randomNumberFrom1to100);
+              } else {
+                //let randomNumberFrom1to4 = Math.floor(Math.random() * 4) + 1;
+                //while ()
               }
-
-              //here TODO  //all player ships -> console.log(collection.map((x) => x[1][0]).flat());
-              //last AI move -> console.log(computerMove[computerMove.length - 1]);
-              /*last AI move was hit on player ship -> console.log(
-    collection
-      .map((x) => x[1][0])
-      .flat()
-      .includes(computerMove[computerMove.length - 1]),
-  );*/
-              newValue.push(randomNumberFrom1to100);
               return newValue;
             });
           }
@@ -213,8 +210,7 @@ export default function Home() {
             enemyCollection
               .map(
                 (eCol, ib1) =>
-                  !(eCol[1][0] as number[]).map((xb1) => fogOfWar.includes(xb1)).includes(false) &&
-                  enemyCollection[ib1][1][1],
+                  !eCol[1][0].map((xb1) => fogOfWar.includes(xb1)).includes(false) && enemyCollection[ib1][1][1],
               )
               .flat()
               .filter((xb2) => xb2 !== false)
@@ -306,9 +302,7 @@ export default function Home() {
     () =>
       gamePhase === GamePhase.battle &&
       (collection
-        .map(
-          (x, i) => !(x[1][0] as number[]).map((x) => computerMove.includes(x)).includes(false) && collection[i][1][1],
-        )
+        .map((x, i) => !x[1][0].map((x) => computerMove.includes(x)).includes(false) && collection[i][1][1])
         .flat()
         .filter((x) => x !== false) as number[]),
     [GamePhase.battle, collection, computerMove, gamePhase],
@@ -318,9 +312,7 @@ export default function Home() {
     () =>
       gamePhase === GamePhase.battle &&
       (enemyCollection
-        .map(
-          (x, i) => !(x[1][0] as number[]).map((x) => fogOfWar.includes(x)).includes(false) && enemyCollection[i][1][1],
-        )
+        .map((x, i) => !x[1][0].map((x) => fogOfWar.includes(x)).includes(false) && enemyCollection[i][1][1])
         .flat()
         .filter((x) => x !== false) as number[]),
     [GamePhase.battle, enemyCollection, fogOfWar, gamePhase],
@@ -380,7 +372,7 @@ export default function Home() {
   useEffect(() => {
     if (gamePhase === GamePhase.preSetup && !collection.map((x) => x[1].length === 0).includes(true)) {
       const newCollection = [...collection];
-      for (const i of newCollection) i[2] = 'enemy_'.concat(i[2] as string);
+      for (const i of newCollection) i[2] = 'enemy_'.concat(i[2]);
       setEnemyCollection(newCollection);
       setCollection(shipConfiguration);
       setGamePhase(GamePhase.setup);
@@ -604,10 +596,10 @@ export default function Home() {
                       key={i}
                       id={`stack${i}`}
                       onClick={() => {
-                        setUnitSelected([x[0] as ShipSelection, x[2] as string]);
+                        setUnitSelected([x[0] as ShipSelection, x[2]]);
                       }}
                       className={`${
-                        unitSelected[1] === (x[2] as string) ? 'bg-yellow-100' : 'bg-slate-100'
+                        unitSelected[1] === x[2] ? 'bg-yellow-100' : 'bg-slate-100'
                       } w-full  outline outline-1`}
                     >
                       {x[0]}
