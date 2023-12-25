@@ -62,21 +62,47 @@ export default function Home() {
   const [horizontal, setHorizontal] = useState<boolean>(false);
   const [autoloader, setAutoloader] = useState<boolean>(false);
   const [autoloaderControl, setAutoloaderControl] = useState<number>(0);
-  const [playerShipFound, setPlayerShipFound] = useState<[boolean, number | null]>([false, null]);
+  const [playerShipFound, setPlayerShipFound] = useState<[boolean, number | null, number | null]>([false, null, null]);
   const [seek, setSeek] = useState<[number[], number[]]>([[], []]);
   const autoloaderTime = 500;
   const letters = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J'];
 
-  //When one of Player's ship was hit for first time, this set state found to true until destroyed
+  //AI Movement part of logic
   useEffect(() => {
-    if (gamePhase === GamePhase.battle && !playerShipFound[0]) {
-      collection.map((x, i) => {
-        if (x[1][0].includes(computerMove[computerMove.length - 1])) {
-          setPlayerShipFound([true, i]);
-          setSeek([[Math.floor(Math.random() * 4) + 1], [computerMove[computerMove.length - 1]]]);
+    if (gamePhase === GamePhase.battle)
+      if (!playerShipFound[0]) {
+        collection.map((x, i) => {
+          if (x[1][0].includes(computerMove[computerMove.length - 1])) {
+            //[bool, ship, parts of ship]
+            setPlayerShipFound([true, i, 1]);
+            //[heading (U,R,D,L), AI moves]
+            setSeek([[Math.floor(Math.random() * 4) + 1], [computerMove[computerMove.length - 1]]]);
+          }
+        });
+      } else {
+        if (seek[0][seek[0].length - 1] === 1) {
+          if (
+            seek[1][seek[1].length - 1] >= 1 &&
+            seek[1][seek[1].length - 1] <= 10 &&
+            collection
+              .map((x) => x[1][0])
+              .flat()
+              .includes(seek[1][seek[1].length - 1] - 10)
+          ) {
+            setSeek((value) => {
+              const newValue = [...value];
+              newValue[0].push(2);
+              return newValue as [number[], number[]];
+            });
+          } else {
+            setSeek((value) => {
+              const newValue = [...value];
+              newValue[1].push(seek[1][seek[1].length - 1] - 10);
+              return newValue as [number[], number[]];
+            });
+          }
         }
-      });
-    }
+      }
   }, [GamePhase.battle, collection, computerMove, gamePhase, playerShipFound]);
 
   useEffect(() => {
