@@ -62,7 +62,8 @@ export default function Home() {
   const [horizontal, setHorizontal] = useState<boolean>(false);
   const [autoloader, setAutoloader] = useState<boolean>(false);
   const [autoloaderControl, setAutoloaderControl] = useState<number>(0);
-  const [playerShipFound, setPlayerShipFound] = useState<[boolean, number | null, number | null]>([false, null, null]);
+  const [playerShipFound, setPlayerShipFound] = useState<[boolean, number | null]>([false, null]);
+  //seek[0] is heading and seek[1] is array of uncovered numbers on that heading
   const [seek, setSeek] = useState<[number[], number[]]>([[], []]);
   const autoloaderTime = 500;
   const letters = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J'];
@@ -70,40 +71,88 @@ export default function Home() {
   //AI Movement part of logic
   useEffect(() => {
     if (gamePhase === GamePhase.battle)
-      if (!playerShipFound[0]) {
+      if (
+        !playerShipFound[0] &&
+        collection
+          .map((x) => x[1][0])
+          .flat()
+          .includes(computerMove[computerMove.length - 1])
+      ) {
+        //When ship has been found it sets start values for seek
         collection.map((x, i) => {
           if (x[1][0].includes(computerMove[computerMove.length - 1])) {
             //[bool, ship, parts of ship]
-            setPlayerShipFound([true, i, 1]);
+            setPlayerShipFound([true, i]);
             //[heading (U,R,D,L), AI moves]
-            setSeek([[Math.floor(Math.random() * 4) + 1], [computerMove[computerMove.length - 1]]]);
+            let deBug = Math.floor(Math.random() * 4) + 1;
+            while (deBug === 2 || deBug === 4) deBug = Math.floor(Math.random() * 4) + 1;
+            setSeek([[deBug], [computerMove[computerMove.length - 1]]]);
           }
         });
-      } else {
-        if (seek[0][seek[0].length - 1] === 1) {
-          if (
-            seek[1][seek[1].length - 1] >= 1 &&
-            seek[1][seek[1].length - 1] <= 10 &&
-            collection
-              .map((x) => x[1][0])
-              .flat()
-              .includes(seek[1][seek[1].length - 1] - 10)
-          ) {
-            setSeek((value) => {
-              const newValue = [...value];
-              newValue[0].push(2);
-              return newValue as [number[], number[]];
-            });
-          } else {
-            setSeek((value) => {
-              const newValue = [...value];
-              newValue[1].push(seek[1][seek[1].length - 1] - 10);
-              return newValue as [number[], number[]];
-            });
-          }
-        }
       }
   }, [GamePhase.battle, collection, computerMove, gamePhase, playerShipFound]);
+
+  useEffect(() => {
+    //After ship has been found it sets next move
+    if (playerShipFound[0] as boolean) {
+      let heading = null;
+      //heading calculations
+      //U - Up
+      if (seek[0][seek[0].length - 1] === 1)
+        if (
+          (seek[1][seek[1].length - 1] >= 1 && seek[1][seek[1].length - 1] <= 10) ||
+          collection
+            .map((x) => x[1][0])
+            .flat()
+            .filter((x) => !collection[playerShipFound[1] as unknown as number][1][0].includes(x))
+            .includes(seek[1][seek[1].length - 1] - 10)
+        ) {
+          setSeek((value) => {
+            const newValue = [...value];
+            newValue[0].push(3);
+            newValue[1] = [newValue[1][0]];
+            console.log('one1', newValue);
+            return newValue as [number[], number[]];
+          });
+        } else heading = 1;
+      //D - Down
+      else if (seek[0][seek[0].length - 1] === 3)
+        if (
+          (seek[1][seek[1].length - 1] >= 91 && seek[1][seek[1].length - 1] <= 100) ||
+          collection
+            .map((x) => x[1][0])
+            .flat()
+            .filter((x) => !collection[playerShipFound[1] as unknown as number][1][0].includes(x))
+            .includes(seek[1][seek[1].length - 1] + 10)
+        ) {
+          setSeek((value) => {
+            const newValue = [...value];
+            newValue[0].push(1);
+            newValue[1] = [newValue[1][0]];
+            console.log('three1', newValue);
+            return newValue as [number[], number[]];
+          });
+        } else heading = 3;
+      if (heading !== null) {
+        console.log(heading);
+      }
+    }
+
+    /*
+      setSeek((value) => {
+            const newValue = [...value];
+            newValue[1].push(seek[1][seek[1].length - 1] - 10);
+            console.log('one2', newValue);
+            return newValue as [number[], number[]];
+          });
+      
+          setSeek((value) => {
+            const newValue = [...value];
+            newValue[1].push(seek[1][seek[1].length - 1] + 10);
+            console.log('three2', newValue);
+            return newValue as [number[], number[]];
+      */
+  }, [collection, playerShipFound, seek]);
 
   useEffect(() => {
     if (fogOfWar.length !== 0) {
@@ -209,8 +258,9 @@ export default function Home() {
                 }
                 newValue.push(randomNumberFrom1to100);
               } else {
-                //let randomNumberFrom1to4 = Math.floor(Math.random() * 4) + 1;
-                //while ()
+                newValue.push(seek[1][seek[1].length - 1]);
+                console.log('ioi');
+                //setSeekloader(true);
               }
               return newValue;
             });
@@ -404,14 +454,7 @@ export default function Home() {
       setGamePhase(GamePhase.setup);
     }
   }, [GamePhase.preSetup, GamePhase.setup, collection, gamePhase, shipConfiguration]);
-  //all player ships -> console.log(collection.map((x) => x[1][0]).flat());
-  //last AI move -> console.log(computerMove[computerMove.length - 1]);
-  /*last AI move was hit on player ship -> console.log(
-    collection
-      .map((x) => x[1][0])
-      .flat()
-      .includes(computerMove[computerMove.length - 1]),
-  );*/
+
   const QuitButton = () => {
     return (
       <button
