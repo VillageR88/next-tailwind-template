@@ -95,9 +95,14 @@ export default function Home() {
   }, [GamePhase.battle, collection, computerMove, gamePhase, playerShipFound]);
 
   useEffect(() => {
-    if (gamePhase === GamePhase.battle && seekLoader)
+    if (gamePhase === GamePhase.battle && seekLoader) {
       console.log('dry', collection[playerShipFound[1] as unknown as number][1][0]);
-  }, [GamePhase.battle, collection, gamePhase, playerShipFound, seekLoader]);
+      console.log(
+        'wet',
+        collection[playerShipFound[1] as unknown as number][1][0].filter((x) => !computerMove.includes(x)).length,
+      );
+    }
+  }, [GamePhase.battle, collection, computerMove, gamePhase, playerShipFound, seekLoader]);
 
   useEffect(() => {
     //After ship has been found it sets next move
@@ -121,7 +126,7 @@ export default function Home() {
         ) {
           setSeek((value) => {
             const newValue = [...value];
-            newValue[0].push(3);
+            if (!newValue[0].includes(3)) newValue[0].push(3);
             newValue[1] = [newValue[1][0]];
             console.log('one1', newValue);
             return newValue as [number[], number[]];
@@ -144,7 +149,7 @@ export default function Home() {
         ) {
           setSeek((value) => {
             const newValue = [...value];
-            newValue[0].push(1);
+            if (!newValue[0].includes(1)) newValue[0].push(1);
             newValue[1] = [newValue[1][0]];
             console.log('three1', newValue);
             return newValue as [number[], number[]];
