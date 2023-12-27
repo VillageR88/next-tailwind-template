@@ -85,9 +85,9 @@ export default function Home() {
             //[bool, ship, parts of ship]
             setPlayerShipFound([true, i]);
             //[heading (U,R,D,L), AI moves]
-            let deBug = Math.floor(Math.random() * 4) + 1;
-            while (deBug === 2 || deBug === 4) deBug = Math.floor(Math.random() * 4) + 1;
-            setSeek([[deBug], [computerMove[computerMove.length - 1]]]);
+            //let deBug = Math.floor(Math.random() * 4) + 1;
+            //while (deBug === 2 || deBug === 4) deBug = Math.floor(Math.random() * 4) + 1;
+            setSeek([[Math.floor(Math.random() * 4) + 1], [computerMove[computerMove.length - 1]]]);
             setSeekLoader(true);
           }
         });
@@ -103,7 +103,6 @@ export default function Home() {
       if (seek[0][seek[0].length - 1] === 1)
         if (
           (seek[1][seek[1].length - 1] >= 1 && seek[1][seek[1].length - 1] <= 10) ||
-          //TODO bug
           collection
             .map((x) => x[1][0])
             .flat()
@@ -122,11 +121,32 @@ export default function Home() {
             return newValue as [number[], number[]];
           });
         } else heading = 1;
+      //R - Right
+      if (seek[0][seek[0].length - 1] === 2)
+        if (
+          seek[1][seek[1].length - 1].toString().endsWith('0') ||
+          collection
+            .map((x) => x[1][0])
+            .flat()
+            .filter((x) => !collection[playerShipFound[1] as unknown as number][1][0].includes(x))
+            .includes(seek[1][seek[1].length - 1] + 1) ||
+          !collection
+            .map((x) => x[1][0])
+            .flat()
+            .includes(seek[1][seek[1].length - 1])
+        ) {
+          setSeek((value) => {
+            const newValue = [...value];
+            if (!newValue[0].includes(4)) newValue[0].push(4);
+            else newValue[0].push(Math.random() < 0.5 ? 1 : 3);
+            newValue[1] = [newValue[1][0]];
+            return newValue as [number[], number[]];
+          });
+        } else heading = 2;
       //D - Down
       else if (seek[0][seek[0].length - 1] === 3)
         if (
           (seek[1][seek[1].length - 1] >= 91 && seek[1][seek[1].length - 1] <= 100) ||
-          //TODO bug
           collection
             .map((x) => x[1][0])
             .flat()
@@ -145,6 +165,28 @@ export default function Home() {
             return newValue as [number[], number[]];
           });
         } else heading = 3;
+      //L - Left
+      if (seek[0][seek[0].length - 1] === 4)
+        if (
+          seek[1][seek[1].length - 1].toString().endsWith('1') ||
+          collection
+            .map((x) => x[1][0])
+            .flat()
+            .filter((x) => !collection[playerShipFound[1] as unknown as number][1][0].includes(x))
+            .includes(seek[1][seek[1].length - 1] - 1) ||
+          !collection
+            .map((x) => x[1][0])
+            .flat()
+            .includes(seek[1][seek[1].length - 1])
+        ) {
+          setSeek((value) => {
+            const newValue = [...value];
+            if (!newValue[0].includes(2)) newValue[0].push(2);
+            else newValue[0].push(Math.random() < 0.5 ? 1 : 3);
+            newValue[1] = [newValue[1][0]];
+            return newValue as [number[], number[]];
+          });
+        } else heading = 4;
       if (heading !== null) {
         console.log(heading);
         const seekFiller = seek[1];
