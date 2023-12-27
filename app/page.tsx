@@ -95,6 +95,11 @@ export default function Home() {
   }, [GamePhase.battle, collection, computerMove, gamePhase, playerShipFound]);
 
   useEffect(() => {
+    if (gamePhase === GamePhase.battle && seekLoader)
+      console.log('dry', collection[playerShipFound[1] as unknown as number][1][0]);
+  }, [GamePhase.battle, collection, gamePhase, playerShipFound, seekLoader]);
+
+  useEffect(() => {
     //After ship has been found it sets next move
     if ((playerShipFound[0] as boolean) && seekLoader) {
       let heading = null;
@@ -108,7 +113,11 @@ export default function Home() {
             .map((x) => x[1][0])
             .flat()
             .filter((x) => !collection[playerShipFound[1] as unknown as number][1][0].includes(x))
-            .includes(seek[1][seek[1].length - 1] - 10)
+            .includes(seek[1][seek[1].length - 1] - 10) ||
+          !collection
+            .map((x) => x[1][0])
+            .flat()
+            .includes(seek[1][seek[1].length - 1])
         ) {
           setSeek((value) => {
             const newValue = [...value];
@@ -127,7 +136,11 @@ export default function Home() {
             .map((x) => x[1][0])
             .flat()
             .filter((x) => !collection[playerShipFound[1] as unknown as number][1][0].includes(x))
-            .includes(seek[1][seek[1].length - 1] + 10)
+            .includes(seek[1][seek[1].length - 1] + 10) ||
+          !collection
+            .map((x) => x[1][0])
+            .flat()
+            .includes(seek[1][seek[1].length - 1])
         ) {
           setSeek((value) => {
             const newValue = [...value];
