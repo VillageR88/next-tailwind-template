@@ -113,13 +113,10 @@ export default function Home() {
             .flat()
             .includes(seek[1][seek[1].length - 1])
         ) {
-          setSeek((value) => {
-            const newValue = [...value];
-            if (!newValue[0].includes(3)) newValue[0].push(3);
-            else newValue[0].push(Math.random() < 0.5 ? 2 : 4);
-            newValue[1] = [newValue[1][0]];
-            return newValue as [number[], number[]];
-          });
+          const val1 = [...seek];
+          if (!val1[0].includes(3)) val1[0].push(3);
+          else val1[0].push(Math.random() < 0.5 ? 2 : 4);
+          setSeek([val1[0], [val1[1][0]]] as [number[], number[]]);
         } else heading = 1;
       //R - Right
       if (seek[0][seek[0].length - 1] === 2)
@@ -135,10 +132,11 @@ export default function Home() {
             .flat()
             .includes(seek[1][seek[1].length - 1])
         ) {
+          const random1or3 = Math.random() < 0.5 ? 1 : 3;
           setSeek((value) => {
             const newValue = [...value];
             if (!newValue[0].includes(4)) newValue[0].push(4);
-            else newValue[0].push(Math.random() < 0.5 ? 1 : 3);
+            else if (!newValue[0].includes(random1or3)) newValue[0].push(random1or3);
             newValue[1] = [newValue[1][0]];
             return newValue as [number[], number[]];
           });
@@ -157,10 +155,11 @@ export default function Home() {
             .flat()
             .includes(seek[1][seek[1].length - 1])
         ) {
+          const random2or4 = Math.random() < 0.5 ? 2 : 4;
           setSeek((value) => {
             const newValue = [...value];
             if (!newValue[0].includes(1)) newValue[0].push(1);
-            else newValue[0].push(Math.random() < 0.5 ? 2 : 4);
+            else if (!newValue[0].includes(random2or4)) newValue[0].push(random2or4);
             newValue[1] = [newValue[1][0]];
             return newValue as [number[], number[]];
           });
@@ -179,10 +178,11 @@ export default function Home() {
             .flat()
             .includes(seek[1][seek[1].length - 1])
         ) {
+          const random1or3 = Math.random() < 0.5 ? 1 : 3;
           setSeek((value) => {
             const newValue = [...value];
             if (!newValue[0].includes(2)) newValue[0].push(2);
-            else newValue[0].push(Math.random() < 0.5 ? 1 : 3);
+            else if (!newValue[0].includes(random1or3)) newValue[0].push(random1or3);
             newValue[1] = [newValue[1][0]];
             return newValue as [number[], number[]];
           });
@@ -203,6 +203,7 @@ export default function Home() {
       }
     }
   }, [collection, playerShipFound, seek, seekLoader]);
+  console.log(seek[0]);
 
   useEffect(() => {
     //after last ship hit this reset to normal uncover
