@@ -95,16 +95,6 @@ export default function Home() {
   }, [GamePhase.battle, collection, computerMove, gamePhase, playerShipFound]);
 
   useEffect(() => {
-    if (gamePhase === GamePhase.battle && seekLoader) {
-      console.log('dry', collection[playerShipFound[1] as unknown as number][1][0]);
-      console.log(
-        'wet',
-        collection[playerShipFound[1] as unknown as number][1][0].filter((x) => !computerMove.includes(x)).length,
-      );
-    }
-  }, [GamePhase.battle, collection, computerMove, gamePhase, playerShipFound, seekLoader]);
-
-  useEffect(() => {
     //After ship has been found it sets next move
     if ((playerShipFound[0] as boolean) && seekLoader) {
       let heading = null;
@@ -170,6 +160,18 @@ export default function Home() {
       }
     }
   }, [collection, playerShipFound, seek, seekLoader]);
+
+  useEffect(() => {
+    //after last ship hit this reset to normal uncover
+    if (
+      playerShipFound[0] &&
+      collection[playerShipFound[1] as unknown as number][1][0].filter((x) => !computerMove.includes(x)).length === 0
+    ) {
+      setPlayerShipFound([false, null]);
+      setSeek([[], []]);
+      setSeekLoader(false);
+    }
+  }, [collection, computerMove, playerShipFound]);
 
   useEffect(() => {
     if (fogOfWar.length !== 0) {
@@ -266,6 +268,7 @@ export default function Home() {
               return newValue;
             });
             //Computer uncover Player (Computer(AI) move)
+            //regular move
             if (!playerShipFound[0]) {
               setComputerMove((value) => {
                 const newValue = [...value];
@@ -276,7 +279,9 @@ export default function Home() {
                 newValue.push(randomNumberFrom1to100);
                 return newValue;
               });
-            } else {
+            }
+            //ship seek move
+            else {
               setComputerMove((value) => {
                 const newValue = [...value];
                 newValue.push(seek[1][seek[1].length - 1]);
