@@ -149,7 +149,9 @@ export default function Home() {
         console.log(heading);
         const seekFiller = seek[1];
         if (heading === 1) seekFiller.push(seek[1][seek[1].length - 1] - 10);
+        else if (heading === 2) seekFiller.push(seek[1][seek[1].length - 1] + 1);
         else if (heading === 3) seekFiller.push(seek[1][seek[1].length - 1] + 10);
+        else if (heading === 4) seekFiller.push(seek[1][seek[1].length - 1] - 1);
         setSeek((value) => {
           const newValue = [...value];
           newValue[1] = seekFiller;
