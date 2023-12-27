@@ -65,6 +65,7 @@ export default function Home() {
   const [playerShipFound, setPlayerShipFound] = useState<[boolean, number | null]>([false, null]);
   //seek[0] is heading and seek[1] is array of uncovered numbers on that heading
   const [seek, setSeek] = useState<[number[], number[]]>([[], []]);
+  const [seekLoader, setSeekLoader] = useState<boolean>(false);
   const autoloaderTime = 500;
   const letters = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J'];
 
@@ -87,6 +88,7 @@ export default function Home() {
             let deBug = Math.floor(Math.random() * 4) + 1;
             while (deBug === 2 || deBug === 4) deBug = Math.floor(Math.random() * 4) + 1;
             setSeek([[deBug], [computerMove[computerMove.length - 1]]]);
+            setSeekLoader(true);
           }
         });
       }
@@ -94,13 +96,14 @@ export default function Home() {
 
   useEffect(() => {
     //After ship has been found it sets next move
-    if (playerShipFound[0] as boolean) {
+    if ((playerShipFound[0] as boolean) && seekLoader) {
       let heading = null;
       //heading calculations
       //U - Up
       if (seek[0][seek[0].length - 1] === 1)
         if (
           (seek[1][seek[1].length - 1] >= 1 && seek[1][seek[1].length - 1] <= 10) ||
+          //TODO bug
           collection
             .map((x) => x[1][0])
             .flat()
@@ -119,6 +122,7 @@ export default function Home() {
       else if (seek[0][seek[0].length - 1] === 3)
         if (
           (seek[1][seek[1].length - 1] >= 91 && seek[1][seek[1].length - 1] <= 100) ||
+          //TODO bug
           collection
             .map((x) => x[1][0])
             .flat()
@@ -135,24 +139,19 @@ export default function Home() {
         } else heading = 3;
       if (heading !== null) {
         console.log(heading);
+        const seekFiller = seek[1];
+        if (heading === 1) seekFiller.push(seek[1][seek[1].length - 1] - 10);
+        else if (heading === 3) seekFiller.push(seek[1][seek[1].length - 1] + 10);
+        setSeek((value) => {
+          const newValue = [...value];
+          newValue[1] = seekFiller;
+          console.log('one2', newValue);
+          return newValue as [number[], number[]];
+        });
+        setSeekLoader(false);
       }
     }
-
-    /*
-      setSeek((value) => {
-            const newValue = [...value];
-            newValue[1].push(seek[1][seek[1].length - 1] - 10);
-            console.log('one2', newValue);
-            return newValue as [number[], number[]];
-          });
-      
-          setSeek((value) => {
-            const newValue = [...value];
-            newValue[1].push(seek[1][seek[1].length - 1] + 10);
-            console.log('three2', newValue);
-            return newValue as [number[], number[]];
-      */
-  }, [collection, playerShipFound, seek]);
+  }, [collection, playerShipFound, seek, seekLoader]);
 
   useEffect(() => {
     if (fogOfWar.length !== 0) {
@@ -249,21 +248,24 @@ export default function Home() {
               return newValue;
             });
             //Computer uncover Player (Computer(AI) move)
-            setComputerMove((value) => {
-              const newValue = [...value];
-              if (!playerShipFound[0]) {
+            if (!playerShipFound[0]) {
+              setComputerMove((value) => {
+                const newValue = [...value];
                 let randomNumberFrom1to100 = Math.floor(Math.random() * 100) + 1;
                 while (newValue.includes(randomNumberFrom1to100)) {
                   randomNumberFrom1to100 = Math.floor(Math.random() * 100) + 1;
                 }
                 newValue.push(randomNumberFrom1to100);
-              } else {
+                return newValue;
+              });
+            } else {
+              setComputerMove((value) => {
+                const newValue = [...value];
                 newValue.push(seek[1][seek[1].length - 1]);
-                console.log('ioi');
-                //setSeekloader(true);
-              }
-              return newValue;
-            });
+                setSeekLoader(true);
+                return newValue;
+              });
+            }
           }
         }}
         className={`
