@@ -117,8 +117,8 @@ export default function Home() {
           setSeek((value) => {
             const newValue = [...value];
             if (!newValue[0].includes(3)) newValue[0].push(3);
+            else newValue[0].push(Math.random() < 0.5 ? 2 : 4);
             newValue[1] = [newValue[1][0]];
-            console.log('one1', newValue);
             return newValue as [number[], number[]];
           });
         } else heading = 1;
@@ -140,8 +140,8 @@ export default function Home() {
           setSeek((value) => {
             const newValue = [...value];
             if (!newValue[0].includes(1)) newValue[0].push(1);
+            else newValue[0].push(Math.random() < 0.5 ? 2 : 4);
             newValue[1] = [newValue[1][0]];
-            console.log('three1', newValue);
             return newValue as [number[], number[]];
           });
         } else heading = 3;
@@ -155,7 +155,6 @@ export default function Home() {
         setSeek((value) => {
           const newValue = [...value];
           newValue[1] = seekFiller;
-          console.log('one2', newValue);
           return newValue as [number[], number[]];
         });
         setSeekLoader(false);
