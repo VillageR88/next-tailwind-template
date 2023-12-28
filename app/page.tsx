@@ -85,9 +85,11 @@ export default function Home() {
             //[bool, ship, parts of ship]
             setPlayerShipFound([true, i]);
             //[heading (U,R,D,L), AI moves]
-            //let deBug = Math.floor(Math.random() * 4) + 1;
-            //while (deBug === 2 || deBug === 4) deBug = Math.floor(Math.random() * 4) + 1;
-            setSeek([[Math.floor(Math.random() * 4) + 1], [computerMove[computerMove.length - 1]]]);
+            let deBugVer = Math.floor(Math.random() * 4) + 1;
+            let deBugHor = Math.floor(Math.random() * 4) + 1;
+            while (deBugVer === 2 || deBugVer === 4) deBugVer = Math.floor(Math.random() * 4) + 1;
+            while (deBugHor === 1 || deBugHor === 3) deBugHor = Math.floor(Math.random() * 4) + 1;
+            setSeek([[deBugHor], [computerMove[computerMove.length - 1]]]);
             setSeekLoader(true);
           }
         });
@@ -115,7 +117,7 @@ export default function Home() {
         ) {
           const val1 = [...seek];
           if (!val1[0].includes(3)) val1[0].push(3);
-          else val1[0].push(Math.random() < 0.5 ? 2 : 4);
+          //else val1[0].push(2);
           setSeek([val1[0], [val1[1][0]]] as [number[], number[]]);
         } else heading = 1;
       //R - Right
@@ -132,14 +134,10 @@ export default function Home() {
             .flat()
             .includes(seek[1][seek[1].length - 1])
         ) {
-          const random1or3 = Math.random() < 0.5 ? 1 : 3;
-          setSeek((value) => {
-            const newValue = [...value];
-            if (!newValue[0].includes(4)) newValue[0].push(4);
-            else if (!newValue[0].includes(random1or3)) newValue[0].push(random1or3);
-            newValue[1] = [newValue[1][0]];
-            return newValue as [number[], number[]];
-          });
+          const val1 = [...seek];
+          if (!val1[0].includes(4)) val1[0].push(4);
+          //else val1[0].push(1);
+          setSeek([val1[0], [val1[1][0]]] as [number[], number[]]);
         } else heading = 2;
       //D - Down
       else if (seek[0][seek[0].length - 1] === 3)
@@ -155,14 +153,10 @@ export default function Home() {
             .flat()
             .includes(seek[1][seek[1].length - 1])
         ) {
-          const random2or4 = Math.random() < 0.5 ? 2 : 4;
-          setSeek((value) => {
-            const newValue = [...value];
-            if (!newValue[0].includes(1)) newValue[0].push(1);
-            else if (!newValue[0].includes(random2or4)) newValue[0].push(random2or4);
-            newValue[1] = [newValue[1][0]];
-            return newValue as [number[], number[]];
-          });
+          const val1 = [...seek];
+          if (!val1[0].includes(1)) val1[0].push(1);
+          //else val1[0].push(4);
+          setSeek([val1[0], [val1[1][0]]] as [number[], number[]]);
         } else heading = 3;
       //L - Left
       if (seek[0][seek[0].length - 1] === 4)
@@ -178,14 +172,10 @@ export default function Home() {
             .flat()
             .includes(seek[1][seek[1].length - 1])
         ) {
-          const random1or3 = Math.random() < 0.5 ? 1 : 3;
-          setSeek((value) => {
-            const newValue = [...value];
-            if (!newValue[0].includes(2)) newValue[0].push(2);
-            else if (!newValue[0].includes(random1or3)) newValue[0].push(random1or3);
-            newValue[1] = [newValue[1][0]];
-            return newValue as [number[], number[]];
-          });
+          const val1 = [...seek];
+          if (!val1[0].includes(2)) val1[0].push(2);
+          //else val1[0].push(3);
+          setSeek([val1[0], [val1[1][0]]] as [number[], number[]]);
         } else heading = 4;
       if (heading !== null) {
         console.log(heading);
@@ -504,7 +494,7 @@ export default function Home() {
       document.getElementById(`stack${randomStackSelection}`)?.click();
       document.getElementById(randomNumberFrom1to100.toString())?.click();
       setAutoloaderControl(autoloaderControl + 1);
-    } else {
+    } else if (!collection.map((x) => x[1].length === 0).includes(true)) {
       setAutoloader(false);
       setHorizontal(false);
     }
