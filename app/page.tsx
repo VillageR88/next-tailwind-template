@@ -9,6 +9,7 @@ export default function Home() {
     exit = 'Exit',
     preSetup = 'Enemy unit placement',
     setup = 'Own unit placement',
+    multiplayer_lobby = 'Multiplayer - lobby',
     battle = 'Battle',
   }
   enum ShipSelection {
@@ -197,7 +198,7 @@ export default function Home() {
         setSeekLoader(false);
       }
     }
-  }, [collection, playerShipFound, seek, seekLoader]);
+  }, [collection, computerMove, playerShipFound, seek, seekLoader]);
 
   useEffect(() => {
     //after last ship hit this reset to normal uncover
@@ -613,15 +614,16 @@ export default function Home() {
         <div className="flex flex-col items-center">
           <span className="text-3xl">Nuts on These Ships</span>
           <div className="flex flex-col gap-4 py-10">
-            {['Single Player', 'Options', 'Exit'].map((x, i) => (
+            {['Single Player', 'Multiplayer', 'Options', 'Exit'].map((x, i) => (
               <button
                 onClick={() => {
                   if (i === 0) {
                     setGamePhase(GamePhase.preSetup);
                     setAutoloader(true);
                   }
-                  i === 1 && setGamePhase(GamePhase.options);
-                  i === 2 && setGamePhase(GamePhase.exit);
+                  i === 1 && setGamePhase(GamePhase.multiplayer_lobby);
+                  i === 2 && setGamePhase(GamePhase.options);
+                  i === 3 && setGamePhase(GamePhase.exit);
                 }}
                 key={i}
                 className="w-60 rounded-xl bg-slate-100 py-1.5 outline outline-1"
