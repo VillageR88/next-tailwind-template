@@ -781,7 +781,13 @@ export default function Home() {
           </div>
         </div>
       )}
-
+      {gamePhase === GamePhase.multiplayer_lobby && (
+        <div className="flex flex-col">
+          <div className="mt-10 flex w-full justify-center">
+            <QuitButton />
+          </div>
+        </div>
+      )}
       {gamePhase === GamePhase.battle && (
         <div className="flex flex-col">
           <div className="flex gap-8">
