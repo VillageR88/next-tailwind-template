@@ -85,16 +85,18 @@ export default function Home() {
             //[bool, ship, parts of ship]
             setPlayerShipFound([true, i]);
             //[heading (U,R,D,L), AI moves]
-            let deBugVer = Math.floor(Math.random() * 4) + 1;
-            let deBugHor = Math.floor(Math.random() * 4) + 1;
-            while (deBugVer === 2 || deBugVer === 4) deBugVer = Math.floor(Math.random() * 4) + 1;
-            while (deBugHor === 1 || deBugHor === 3) deBugHor = Math.floor(Math.random() * 4) + 1;
-            setSeek([[deBugHor], [computerMove[computerMove.length - 1]]]);
+            let headingHorizontal = Math.floor(Math.random() * 4) + 1;
+            let headingVertical = Math.floor(Math.random() * 4) + 1;
+            while (headingVertical === 2 || headingVertical === 4) headingVertical = Math.floor(Math.random() * 4) + 1;
+            while (headingHorizontal === 1 || headingHorizontal === 3)
+              headingHorizontal = Math.floor(Math.random() * 4) + 1;
+            const random1to4 = Math.floor(Math.random() * 4) + 1;
+            setSeek([[random1to4], [computerMove[computerMove.length - 1]]]);
             setSeekLoader(true);
           }
         });
       }
-  }, [GamePhase.battle, collection, computerMove, gamePhase, playerShipFound]);
+  }, [GamePhase.battle, collection, computerMove, gamePhase, playerShipFound, seek]);
 
   useEffect(() => {
     //After ship has been found it sets next move
@@ -110,6 +112,7 @@ export default function Home() {
             .flat()
             .filter((x) => !collection[playerShipFound[1] as unknown as number][1][0].includes(x))
             .includes(seek[1][seek[1].length - 1] - 10) ||
+          computerMove.includes(seek[1][seek[1].length - 1] - 10) ||
           !collection
             .map((x) => x[1][0])
             .flat()
@@ -117,11 +120,11 @@ export default function Home() {
         ) {
           const val1 = [...seek];
           if (!val1[0].includes(3)) val1[0].push(3);
-          //else val1[0].push(2);
+          else if (!val1[0].includes(2)) val1[0].push(2);
           setSeek([val1[0], [val1[1][0]]] as [number[], number[]]);
         } else heading = 1;
       //R - Right
-      if (seek[0][seek[0].length - 1] === 2)
+      else if (seek[0][seek[0].length - 1] === 2)
         if (
           seek[1][seek[1].length - 1].toString().endsWith('0') ||
           collection
@@ -129,6 +132,7 @@ export default function Home() {
             .flat()
             .filter((x) => !collection[playerShipFound[1] as unknown as number][1][0].includes(x))
             .includes(seek[1][seek[1].length - 1] + 1) ||
+          computerMove.includes(seek[1][seek[1].length - 1] + 1) ||
           !collection
             .map((x) => x[1][0])
             .flat()
@@ -136,7 +140,7 @@ export default function Home() {
         ) {
           const val1 = [...seek];
           if (!val1[0].includes(4)) val1[0].push(4);
-          //else val1[0].push(1);
+          else if (!val1[0].includes(1)) val1[0].push(1);
           setSeek([val1[0], [val1[1][0]]] as [number[], number[]]);
         } else heading = 2;
       //D - Down
@@ -148,6 +152,7 @@ export default function Home() {
             .flat()
             .filter((x) => !collection[playerShipFound[1] as unknown as number][1][0].includes(x))
             .includes(seek[1][seek[1].length - 1] + 10) ||
+          computerMove.includes(seek[1][seek[1].length - 1] + 10) ||
           !collection
             .map((x) => x[1][0])
             .flat()
@@ -155,11 +160,11 @@ export default function Home() {
         ) {
           const val1 = [...seek];
           if (!val1[0].includes(1)) val1[0].push(1);
-          //else val1[0].push(4);
+          else if (!val1[0].includes(4)) val1[0].push(4);
           setSeek([val1[0], [val1[1][0]]] as [number[], number[]]);
         } else heading = 3;
       //L - Left
-      if (seek[0][seek[0].length - 1] === 4)
+      else if (seek[0][seek[0].length - 1] === 4)
         if (
           seek[1][seek[1].length - 1].toString().endsWith('1') ||
           collection
@@ -167,6 +172,7 @@ export default function Home() {
             .flat()
             .filter((x) => !collection[playerShipFound[1] as unknown as number][1][0].includes(x))
             .includes(seek[1][seek[1].length - 1] - 1) ||
+          computerMove.includes(seek[1][seek[1].length - 1] - 1) ||
           !collection
             .map((x) => x[1][0])
             .flat()
@@ -174,11 +180,10 @@ export default function Home() {
         ) {
           const val1 = [...seek];
           if (!val1[0].includes(2)) val1[0].push(2);
-          //else val1[0].push(3);
+          else if (!val1[0].includes(3)) val1[0].push(3);
           setSeek([val1[0], [val1[1][0]]] as [number[], number[]]);
         } else heading = 4;
       if (heading !== null) {
-        console.log(heading);
         const seekFiller = seek[1];
         if (heading === 1) seekFiller.push(seek[1][seek[1].length - 1] - 10);
         else if (heading === 2) seekFiller.push(seek[1][seek[1].length - 1] + 1);
@@ -193,7 +198,6 @@ export default function Home() {
       }
     }
   }, [collection, playerShipFound, seek, seekLoader]);
-  console.log(seek[0]);
 
   useEffect(() => {
     //after last ship hit this reset to normal uncover
