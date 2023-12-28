@@ -1,4 +1,3 @@
-// WebSocketComponent.js
 import React, { useState, useEffect, useMemo } from 'react';
 
 const WebSocketComponent = () => {
