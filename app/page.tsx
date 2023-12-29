@@ -1,5 +1,5 @@
 'use client';
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useState, useRef } from 'react';
 import { Hourglass } from 'react-loader-spinner';
 import { w3cwebsocket as W3CWebSocket } from 'websocket';
 export default function Home() {
@@ -26,15 +26,14 @@ export default function Home() {
     const [client, setClient] = useState<W3CWebSocket | null>(null);
     const [messageInput, setMessageInput] = useState<string>('');
     const [messages, setMessages] = useState<string[]>([]);
+    const messagesEndRef = useRef<HTMLDivElement | null>(null);
 
     useEffect(() => {
       const newClient = new W3CWebSocket('ws://192.168.1.109:8080');
 
       newClient.onopen = () => {
         console.log('WebSocket Client Connected');
-        if (newClient.readyState === newClient.OPEN) {
-          newClient.send(JSON.stringify({ type: 'USERNAME', username: username })); // Sending username with a type
-        }
+        newClient.send(JSON.stringify({ type: 'USERNAME', username: username }));
       };
 
       newClient.onclose = () => {
@@ -50,6 +49,7 @@ export default function Home() {
           // Handle binary data
         } else {
           setMessages((prevMessages) => [...prevMessages, message.data] as string[]);
+          scrollToBottom();
         }
       };
 
@@ -60,24 +60,41 @@ export default function Home() {
       };
     }, []);
 
-    const handleMessageChange = (event: Event) => {
-      const target = event.target as HTMLInputElement;
-      setMessageInput(target.value);
+    useEffect(() => {
+      scrollToBottom();
+    }, [messages]);
+
+    const scrollToBottom = () => {
+      if (messagesEndRef.current) {
+        messagesEndRef.current.scrollIntoView({ behavior: 'smooth', block: 'end' });
+      }
+    };
+
+    const handleMessageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+      setMessageInput(event.target.value);
+    };
+
+    const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
+      if (event.key === 'Enter') {
+        event.preventDefault();
+        sendMessage();
+      }
     };
 
     const sendMessage = () => {
       if (client && messageInput.trim() !== '') {
-        client.send(JSON.stringify({ type: 'CHAT', message: messageInput })); // Sending chat message with a type
+        client.send(JSON.stringify({ type: 'CHAT', message: messageInput }));
         setMessageInput('');
       }
     };
 
     return (
-      <div className='gap-10 flex flex-col'>
-        <div className="mb-6 h-[20em] overflow-y-scroll">
+      <div className="flex h-[25em] flex-col justify-between gap-10">
+        <div className="mb-6 h-[18em] overflow-y-auto">
           {messages.map((msg, index) => (
             <div key={index}>{msg}</div>
           ))}
+          <div ref={messagesEndRef} />
         </div>
         <div className="flex gap-2">
           <input
@@ -86,22 +103,14 @@ export default function Home() {
             id="inputMessage"
             type="text"
             value={messageInput}
-            onChange={handleMessageChange as () => void}
+            onChange={handleMessageChange}
             placeholder="..."
-            onKeyDown={(event) => {
-              if (event.key === 'Enter') {
-                //event.preventDefault();
-                document.getElementById('sendMessage')?.click();
-                document.getElementById('inputMessage')?.click();
-              }
-            }}
+            onKeyDown={handleKeyDown}
           />
           <button
             className="rounded-sm bg-slate-100 px-4 py-1.5 outline outline-1"
             id="sendMessage"
-            onClick={() => {
-              sendMessage();
-            }}
+            onClick={sendMessage}
           >
             Send
           </button>
