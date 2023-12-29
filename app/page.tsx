@@ -54,8 +54,9 @@ export default function Home() {
       };
     }, []);
 
-    const handleMessageChange = (event) => {
-      setMessageInput(event.target.value);
+    const handleMessageChange = (event: Event) => {
+      const target = event.target as HTMLInputElement;
+      setMessageInput(target.value);
     };
 
     const sendMessage = () => {
@@ -73,7 +74,14 @@ export default function Home() {
           ))}
         </div>
         <div>
-          <input type="text" value={messageInput} onChange={handleMessageChange} placeholder="Type a message..." />
+          <input
+            type="text"
+            value={messageInput}
+            onChange={() => {
+              handleMessageChange;
+            }}
+            placeholder="Type a message..."
+          />
           <button onClick={sendMessage}>Send</button>
         </div>
       </div>
