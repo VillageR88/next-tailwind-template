@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { w3cwebsocket as W3CWebSocket } from 'websocket';
 
-const WebSocketChat = () => {
+const WebSocketComponent = () => {
   const [client, setClient] = useState(null);
   const [messageInput, setMessageInput] = useState('');
   const [messages, setMessages] = useState([]);
@@ -64,4 +64,4 @@ const WebSocketChat = () => {
   );
 };
 
-export default WebSocketChat;
+export default WebSocketComponent;

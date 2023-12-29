@@ -10,7 +10,7 @@ server.listen(webSocketsServerPort, () => {
 
 const wsServer = new webSocketServer({
     httpServer: server,
-    autoAcceptConnections: false, // Ustawienie ręcznego akceptowania połączeń
+    autoAcceptConnections: false, // Set to accept calls manually
 });
 
 const clients = {};
@@ -21,15 +21,15 @@ const getUniqueID = () => {
     return s4() + s4() + '-' + s4();
 };
 
-// Funkcja sprawdzająca, czy źródło jest dozwolone
+// A function that checks whether a source is allowed
 function originIsAllowed(origin) {
-    // W przykładzie zwracamy true dla każdego źródła - Należy dostosować to do rzeczywistych wymagań bezpieczeństwa
+    //In the example we return true for each source - This should be adapted to your actual security requirements
     return true;
 }
 
 wsServer.on('request', (request) => {
     if (!originIsAllowed(request.origin)) {
-        // Odrzucenie połączenia, jeśli źródło nie jest dozwolone
+        // Reject the connection if the source is not allowed
         request.reject();
         console.log(`${new Date()} Connection from origin ${request.origin} rejected.`);
         return;

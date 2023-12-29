@@ -1,8 +1,7 @@
 'use client';
 import { useCallback, useEffect, useState } from 'react';
 import { Hourglass } from 'react-loader-spinner';
-import WebSocketChat from './components/webSocketChat';
-
+import { w3cwebsocket as W3CWebSocket } from 'websocket';
 export default function Home() {
   enum GamePhase {
     menu = 'Menu',
@@ -19,6 +18,67 @@ export default function Home() {
     ship4 = 'ship4',
     ship5 = 'ship5',
   }
+
+  const WebSocketComponent = () => {
+    const [client, setClient] = useState<W3CWebSocket | null>(null);
+    const [messageInput, setMessageInput] = useState<string>('');
+    const [messages, setMessages] = useState<string[]>([]);
+
+    useEffect(() => {
+      const newClient = new W3CWebSocket('ws://192.168.1.109:8080');
+
+      newClient.onopen = () => {
+        console.log('WebSocket Client Connected');
+      };
+
+      newClient.onclose = () => {
+        console.log('WebSocket Client Disconnected');
+      };
+
+      newClient.onerror = (error) => {
+        console.error('Connection Error:', error);
+      };
+
+      newClient.onmessage = (message) => {
+        if (message.data instanceof Blob) {
+          // Handle binary data
+        } else {
+          setMessages((prevMessages) => [...prevMessages, message.data] as string[]);
+        }
+      };
+
+      setClient(newClient);
+
+      return () => {
+        newClient.close();
+      };
+    }, []);
+
+    const handleMessageChange = (event) => {
+      setMessageInput(event.target.value);
+    };
+
+    const sendMessage = () => {
+      if (client && messageInput.trim() !== '') {
+        client.send(messageInput);
+        setMessageInput('');
+      }
+    };
+
+    return (
+      <div>
+        <div>
+          {messages.map((msg, index) => (
+            <div key={index}>{msg}</div>
+          ))}
+        </div>
+        <div>
+          <input type="text" value={messageInput} onChange={handleMessageChange} placeholder="Type a message..." />
+          <button onClick={sendMessage}>Send</button>
+        </div>
+      </div>
+    );
+  };
 
   const [initialConfig, setInitialConfig] = useState<number[]>([2, 2, 1, 1]);
 
@@ -786,7 +846,7 @@ export default function Home() {
         <div className="flex flex-col">
           <div>
             <h1>Multiplayer Lobby</h1>
-            <WebSocketChat />
+            <WebSocketComponent />
           </div>
           <div className="mt-10 flex w-full justify-center">
             <QuitButton />
