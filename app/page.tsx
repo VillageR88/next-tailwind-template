@@ -1,7 +1,7 @@
 'use client';
 import { useCallback, useEffect, useState } from 'react';
 import { Hourglass } from 'react-loader-spinner';
-import WebSocketComponent from './components/webSocketComponent';
+import WebSocketChat from './components/webSocketChat';
 
 export default function Home() {
   enum GamePhase {
@@ -786,7 +786,7 @@ export default function Home() {
         <div className="flex flex-col">
           <div>
             <h1>Multiplayer Lobby</h1>
-            <WebSocketComponent />
+            <WebSocketChat />
           </div>
           <div className="mt-10 flex w-full justify-center">
             <QuitButton />
