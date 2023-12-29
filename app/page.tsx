@@ -32,6 +32,9 @@ export default function Home() {
 
       newClient.onopen = () => {
         console.log('WebSocket Client Connected');
+        if (newClient.readyState === newClient.OPEN) {
+          newClient.send(JSON.stringify({ type: 'USERNAME', username: username })); // Sending username with a type
+        }
       };
 
       newClient.onclose = () => {
@@ -64,7 +67,7 @@ export default function Home() {
 
     const sendMessage = () => {
       if (client && messageInput.trim() !== '') {
-        client.send(messageInput);
+        client.send(JSON.stringify({ type: 'CHAT', message: messageInput })); // Sending chat message with a type
         setMessageInput('');
       }
     };
@@ -122,6 +125,7 @@ export default function Home() {
     aborted2 = 'Deployment aborted!\nRestart or reduce number of ships.',
   }
 
+  const [username, setUsername] = useState<string>('MyUsername');
   const [healthPlayer, setHealthPlayer] = useState<number>(100);
   const [healthComputer, setHealthComputer] = useState<number>(100);
   const [gamePhase, setGamePhase] = useState<GamePhase>(GamePhase.menu);

@@ -1,7 +1,7 @@
-const webSocketsServerPort = 8080;
 const webSocketServer = require('websocket').server;
 const http = require('http');
 
+const webSocketsServerPort = 8080;
 const server = http.createServer();
 server.listen(webSocketsServerPort, () => {
     const address = server.address();
@@ -44,13 +44,29 @@ wsServer.on('request', (request) => {
 
     connection.on('message', (message) => {
         if (message.type === 'utf8') {
-            console.log('Received Message:', message.utf8Data);
+            try {
+                const receivedData = JSON.parse(message.utf8Data);
 
-            // Broadcast message to all connected clients
-            Object.keys(clients).forEach((clientID) => {
-                clients[clientID].sendUTF(message.utf8Data);
-                console.log('Sent Message to:', clientID);
-            });
+                if (receivedData.type === 'CHAT') {
+                    const chatMessage = receivedData.message;
+                    console.log('Received Chat Message:', chatMessage);
+
+                    // Broadcast chat message to all connected clients except the sender
+                    Object.keys(clients).forEach((clientID) => {
+                        //if (clientID !== userID) { ->this prevent to resent it to sender only
+                        //clients[clientID].sendUTF(JSON.stringify({ type: 'CHAT', message: chatMessage }));
+                        clients[clientID].sendUTF(chatMessage);
+                        console.log('Sent Chat Message to:', clientID);
+                        // }
+                    });
+                } else {
+                    // Handling other types of data messages
+                    // Process the different types of data messages here based on receivedData.type
+                    console.log('Received Data Message:', receivedData);
+                }
+            } catch (error) {
+                console.error('Error parsing message:', error);
+            }
         }
     });
 
