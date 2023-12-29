@@ -9,8 +9,11 @@ export default function Home() {
     exit = 'Exit',
     preSetup = 'Enemy unit placement',
     setup = 'Own unit placement',
-    multiplayer_lobby = 'Multiplayer - lobby',
+    multiplayer = 'Multiplayer',
     battle = 'Battle',
+  }
+  enum MultiplayerPhase {
+    lobby = 'Lobby',
   }
   enum ShipSelection {
     ship2 = 'ship2',
@@ -122,6 +125,7 @@ export default function Home() {
   const [healthPlayer, setHealthPlayer] = useState<number>(100);
   const [healthComputer, setHealthComputer] = useState<number>(100);
   const [gamePhase, setGamePhase] = useState<GamePhase>(GamePhase.menu);
+  const [multiplayerPhase, setMultiplayerPhase] = useState<MultiplayerPhase>(MultiplayerPhase.lobby);
   const [collection, setCollection] = useState<[ShipSelection, number[][], string][]>(shipConfiguration);
   const [enemyCollection, setEnemyCollection] = useState<[ShipSelection, number[][], string][]>([]);
   const [fogOfWar, setFogOfWar] = useState<number[]>([]);
@@ -688,7 +692,7 @@ export default function Home() {
                     setGamePhase(GamePhase.preSetup);
                     setAutoloader(true);
                   }
-                  i === 1 && setGamePhase(GamePhase.multiplayer_lobby);
+                  i === 1 && setGamePhase(GamePhase.multiplayer);
                   i === 2 && setGamePhase(GamePhase.options);
                   i === 3 && setGamePhase(GamePhase.exit);
                 }}
@@ -848,7 +852,7 @@ export default function Home() {
           </div>
         </div>
       )}
-      {gamePhase === GamePhase.multiplayer_lobby && (
+      {gamePhase === GamePhase.multiplayer && (
         <div className="flex flex-col">
           <div>
             <h1>Multiplayer Lobby</h1>
