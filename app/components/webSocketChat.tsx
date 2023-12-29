@@ -7,7 +7,7 @@ const WebSocketChat = () => {
   const [messages, setMessages] = useState([]);
 
   useEffect(() => {
-    const newClient = new W3CWebSocket('ws://localhost:8080');
+    const newClient = new W3CWebSocket('ws://192.168.1.109:8080');
 
     newClient.onopen = () => {
       console.log('WebSocket Client Connected');
