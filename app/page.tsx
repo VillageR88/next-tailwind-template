@@ -73,20 +73,38 @@ export default function Home() {
     };
 
     return (
-      <div>
-        <div>
+      <div className='gap-10 flex flex-col'>
+        <div className="mb-6 h-[20em] overflow-y-scroll">
           {messages.map((msg, index) => (
             <div key={index}>{msg}</div>
           ))}
         </div>
-        <div>
+        <div className="flex gap-2">
           <input
+            autoComplete="off"
+            className="w-[30em] px-2 py-1.5 outline outline-1"
+            id="inputMessage"
             type="text"
             value={messageInput}
             onChange={handleMessageChange as () => void}
-            placeholder="Type a message..."
+            placeholder="..."
+            onKeyDown={(event) => {
+              if (event.key === 'Enter') {
+                //event.preventDefault();
+                document.getElementById('sendMessage')?.click();
+                document.getElementById('inputMessage')?.click();
+              }
+            }}
           />
-          <button onClick={sendMessage}>Send</button>
+          <button
+            className="rounded-sm bg-slate-100 px-4 py-1.5 outline outline-1"
+            id="sendMessage"
+            onClick={() => {
+              sendMessage();
+            }}
+          >
+            Send
+          </button>
         </div>
       </div>
     );
@@ -678,6 +696,10 @@ export default function Home() {
     );
   };
 
+  const usernameEditor = (value: string) => {
+    return value;
+  };
+
   return (
     <div className="flex min-h-screen flex-col items-center justify-center bg-gradient-to-br from-cyan-300 to-cyan-200 font-[600] text-black">
       {gamePhase === GamePhase.exit && (
@@ -710,7 +732,26 @@ export default function Home() {
         </div>
       )}
       {gamePhase === GamePhase.options && (
-        <div>
+        <div className="flex flex-col items-center">
+          <div className="mb-2 rounded-sm bg-teal-50 py-2 outline outline-1">
+            <form className="px-2">
+              <span>Username: </span>
+              <input
+                value={username}
+                onChange={(e) => {
+                  setUsername(usernameEditor(e.target.value));
+                }}
+                onKeyDown={(event) => {
+                  if (event.key === 'Enter') {
+                    event.preventDefault();
+                    (event.target as HTMLFormElement).blur();
+                  }
+                }}
+                className="px-2 outline outline-1"
+                type="text"
+              />
+            </form>
+          </div>
           <div className="mb-2 flex flex-col gap-y-2 rounded-sm bg-teal-50 p-4 outline outline-1">
             {['Ship2', 'Ship3', 'Ship4', 'Ship5'].map((x, i) => (
               <div key={i} className="flex justify-around gap-2">
@@ -858,8 +899,8 @@ export default function Home() {
       )}
       {gamePhase === GamePhase.multiplayer && (
         <div className="flex flex-col">
-          <div>
-            <h1>Multiplayer Lobby</h1>
+          <div className="flex h-[30em] flex-col justify-between">
+            <span className="self-center">Multiplayer Lobby</span>
             <WebSocketComponent />
           </div>
           <div className="mt-10 flex w-full justify-center">

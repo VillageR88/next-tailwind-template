@@ -27,6 +27,13 @@ function originIsAllowed(origin) {
     return true;
 }
 
+// Function to broadcast a message to all connected clients
+const broadcast = (message) => {
+    Object.keys(clients).forEach((clientID) => {
+        clients[clientID].connection.sendUTF(message);
+    });
+};
+
 wsServer.on('request', (request) => {
     if (!originIsAllowed(request.origin)) {
         // Reject the connection if the source is not allowed
@@ -39,7 +46,7 @@ wsServer.on('request', (request) => {
     console.log(`${new Date()} Received a new connection from origin ${request.origin}.`);
 
     const connection = request.accept(null, request.origin);
-    clients[userID] = connection;
+    clients[userID] = { connection, username: null };
     console.log(`Connected: ${userID} in ${Object.getOwnPropertyNames(clients)}`);
 
     connection.on('message', (message) => {
@@ -47,17 +54,25 @@ wsServer.on('request', (request) => {
             try {
                 const receivedData = JSON.parse(message.utf8Data);
 
-                if (receivedData.type === 'CHAT') {
-                    const chatMessage = receivedData.message;
-                    console.log('Received Chat Message:', chatMessage);
+                if (receivedData.type === 'USERNAME') {
+                    clients[userID].username = receivedData.username;
+                    console.log(`${userID} set username to: ${receivedData.username}`);
 
-                    // Broadcast chat message to all connected clients except the sender
+                    // Sending a message to all connected clients about the new user
+                    broadcast(`${receivedData.username} joined the server`);
+                } else if (receivedData.type === 'CHAT') {
+                    const chatMessage = receivedData.message;
+                    const senderUsername = clients[userID].username;
+
+                    // Broadcast chat message to all connected clients with sender's username prefix
                     Object.keys(clients).forEach((clientID) => {
-                        //if (clientID !== userID) { ->this prevent to resent it to sender only
-                        //clients[clientID].sendUTF(JSON.stringify({ type: 'CHAT', message: chatMessage }));
-                        clients[clientID].sendUTF(chatMessage);
-                        console.log('Sent Chat Message to:', clientID);
-                        // }
+                        const recipientUsername = clients[clientID].username;
+                        const prefixedMessage = `${senderUsername}: ${chatMessage}`;
+
+                        if (recipientUsername !== null) {
+                            clients[clientID].connection.sendUTF(prefixedMessage);
+                            console.log(`Sent Chat Message to ${recipientUsername}: ${chatMessage}`);
+                        }
                     });
                 } else {
                     // Handling other types of data messages
