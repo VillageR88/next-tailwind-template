@@ -27,6 +27,7 @@ export default function Home() {
     const [messageInput, setMessageInput] = useState<string>('');
     const [messages, setMessages] = useState<string[]>([]);
     const messagesEndRef = useRef<HTMLDivElement | null>(null);
+    const [isSticky, setIsSticky] = useState<boolean>(true);
 
     useEffect(() => {
       const newClient = new W3CWebSocket('ws://192.168.1.109:8080');
@@ -49,7 +50,7 @@ export default function Home() {
           // Handle binary data
         } else {
           setMessages((prevMessages) => [...prevMessages, message.data] as string[]);
-          scrollToBottom();
+          //isSticky && scrollToBottom();
         }
       };
 
@@ -58,11 +59,11 @@ export default function Home() {
       return () => {
         newClient.close();
       };
-    }, []);
+    }, [isSticky]);
 
     useEffect(() => {
-      scrollToBottom();
-    }, [messages]);
+      isSticky && scrollToBottom();
+    }, [isSticky, messages]);
 
     const scrollToBottom = () => {
       if (messagesEndRef.current) {
@@ -90,7 +91,16 @@ export default function Home() {
 
     return (
       <div className="flex h-[25em] flex-col justify-between gap-10">
-        <div className="mb-6 h-[18em] overflow-y-auto">
+        <div
+          id="ChatBoxDiv"
+          onScroll={() => {
+            const ChatBoxDiv = document.getElementById('ChatBoxDiv');
+            if ((ChatBoxDiv?.scrollHeight ?? 0) - (ChatBoxDiv?.scrollTop ?? 0) - (ChatBoxDiv?.clientHeight ?? 0) >= 100)
+              setIsSticky(false);
+            else setIsSticky(true);
+          }}
+          className="mb-6 h-[18em] overflow-y-auto"
+        >
           {messages.map((msg, index) => (
             <div key={index}>{msg}</div>
           ))}
