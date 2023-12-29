@@ -77,9 +77,7 @@ export default function Home() {
           <input
             type="text"
             value={messageInput}
-            onChange={() => {
-              handleMessageChange;
-            }}
+            onChange={handleMessageChange as () => void}
             placeholder="Type a message..."
           />
           <button onClick={sendMessage}>Send</button>
