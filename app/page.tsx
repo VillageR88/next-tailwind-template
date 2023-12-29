@@ -2,6 +2,10 @@
 import { useCallback, useEffect, useState, useRef } from 'react';
 import { Hourglass } from 'react-loader-spinner';
 import { w3cwebsocket as W3CWebSocket } from 'websocket';
+
+const usernameFromStorage = localStorage.getItem('Username');
+localStorage.setItem('Username', usernameFromStorage ?? 'MyName');
+
 export default function Home() {
   enum GamePhase {
     menu = 'Menu',
@@ -162,7 +166,7 @@ export default function Home() {
     aborted2 = 'Deployment aborted!\nRestart or reduce number of ships.',
   }
 
-  const [username, setUsername] = useState<string>('MyUsername');
+  const [username, setUsername] = useState<string>(usernameFromStorage!);
   const [healthPlayer, setHealthPlayer] = useState<number>(100);
   const [healthComputer, setHealthComputer] = useState<number>(100);
   const [gamePhase, setGamePhase] = useState<GamePhase>(GamePhase.menu);
@@ -758,7 +762,9 @@ export default function Home() {
               <input
                 value={username}
                 onChange={(e) => {
-                  setUsername(usernameEditor(e.target.value));
+                  const newName = usernameEditor(e.target.value);
+                  setUsername(newName);
+                  localStorage.setItem('Username', newName);
                 }}
                 onKeyDown={(event) => {
                   if (event.key === 'Enter') {
