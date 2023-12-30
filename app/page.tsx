@@ -761,12 +761,15 @@ export default function Home() {
     );
   };
 
+  const button1class =
+    'w-60 rounded-xl bg-gradient-to-br from-orange-100 to-orange-300 py-1.5 text-orange-800 outline outline-2 -outline-offset-4 outline-orange-800 hover:text-red-600 hover:outline-red-600';
+
   const usernameEditor = (value: string) => {
     return value;
   };
 
   return (
-    <div className="font-frijole font-[300] flex min-h-screen flex-col items-center justify-center bg-[url('./images/summer_background_47_a.jpg')] bg-cover  text-black">
+    <div className="flex min-h-screen flex-col items-center justify-center bg-[url('./images/summer_background_47_a.jpg')] bg-cover font-frijole font-[300]  text-black">
       <style>{`@import url('https://fonts.googleapis.com/css2?family=Carrois+Gothic+SC&display=swap')`}</style>
       <style>{`@import url('https://fonts.googleapis.com/css2?family=Frijole&display=swap')`}</style>
       {gamePhase === GamePhase.exit && (
@@ -775,9 +778,15 @@ export default function Home() {
         </div>
       )}
       {gamePhase === GamePhase.menu && (
-        <div className="flex flex-col items-center">
-          <span className="text-3xl">Nuts on These Ships</span>
-          <div className="flex flex-col gap-4 py-10">
+        <div className="flex h-fit w-[40em] flex-col items-center gap-1 rounded-xl px-8 py-14">
+          <span
+            className="whitespace-pre-line rounded-xl bg-opacity-75 bg-[url('images/toppng.com-wooden-sign-600x187.png')] bg-contain bg-center bg-no-repeat p-10 	
+
+text-3xl text-orange-600"
+          >
+            {'Nuts\non These Ships'}
+          </span>
+          <div className="flex h-[30em] w-[30em] flex-col items-center justify-center gap-4 bg-[url('images/pngwing.com.png')] bg-contain bg-center bg-no-repeat py-2">
             {['Single Player', 'Multiplayer', 'Options', 'Exit'].map((x, i) => (
               <button
                 onClick={() => {
@@ -790,7 +799,7 @@ export default function Home() {
                   i === 3 && setGamePhase(GamePhase.exit);
                 }}
                 key={i}
-                className="w-60 rounded-xl bg-slate-100 py-1.5 outline outline-1"
+                className={button1class}
               >
                 {x}
               </button>
