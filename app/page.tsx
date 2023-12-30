@@ -40,6 +40,7 @@ export default function Home() {
     const [messages, setMessages] = useState<string[]>([]);
     const messagesEndRef = useRef<HTMLDivElement | null>(null);
     const [isSticky, setIsSticky] = useState<boolean>(true);
+    console.log(multiplayers);
 
     useEffect(() => {
       const newClient = new W3CWebSocket('ws://192.168.1.109:8080');
@@ -67,13 +68,19 @@ export default function Home() {
         const parsedJSON: JSONWebsocket = JSON.parse(message.data as string) as JSONWebsocket;
 
         if (parsedJSON.type === 'USER_JOIN' || parsedJSON.type === 'CHAT_MESSAGE' || parsedJSON.type === 'USER_LEFT') {
-          console.log('pjspn', parsedJSON);
           // Assuming 'parsedJSON.message' contains the chat message text
           setMessages((prevMessages) => [...prevMessages, parsedJSON.message] as string[]);
         } else if (parsedJSON.type === 'USER_LIST') {
           // Assuming 'parsedJSON2.message' is an array of user list items
           const parsedUserList = JSON.parse(parsedJSON.message) as string[][];
           setUserList(parsedUserList);
+        } else if (parsedJSON.type === 'MY_ID') {
+          //console.log('MY multiplayer ID is: ', parsedJSON.message);
+          setMultiplayers((value) => {
+            const newValue = [...value];
+            newValue[0] = parsedJSON.message;
+            return newValue as [string, string];
+          });
         }
       };
 

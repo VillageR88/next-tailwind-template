@@ -73,6 +73,13 @@ wsServer.on('request', (request) => {
                     clients[userID].username = receivedData.username;
                     console.log(`${userID} set username to: ${receivedData.username}`);
 
+                    // Sending a message to the individual client about their unique ID
+                    const myIdMessage = JSON.stringify({
+                        type: 'MY_ID',
+                        message: userID,
+                    });
+                    clients[userID].connection.sendUTF(myIdMessage);
+
                     // Sending a message to all connected clients about the new user
                     broadcast(`${receivedData.username} joined the server`, 'USER_JOIN');
                     // Broadcast the updated user list to all clients after a new user joins
