@@ -34,6 +34,7 @@ export default function Home() {
   const WebSocketComponent = () => {
     const [client, setClient] = useState<W3CWebSocket | null>(null);
     const [userList, setUserList] = useState<string[][]>([]);
+    const [multiplayers, setMultiplayers] = useState<[string | null, string | null]>([null, null]);
     const [selectedUser, setSelectedUser] = useState<string>('');
     const [messageInput, setMessageInput] = useState<string>('');
     const [messages, setMessages] = useState<string[]>([]);
