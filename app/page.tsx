@@ -28,11 +28,13 @@ export default function Home() {
 
   interface UserList {
     Username: string;
+    UniqueId: string;
   }
 
   const WebSocketComponent = () => {
     const [client, setClient] = useState<W3CWebSocket | null>(null);
     const [userList, setUserList] = useState<string[][]>([]);
+    const [selectedUser, setSelectedUser] = useState<string>('');
     const [messageInput, setMessageInput] = useState<string>('');
     const [messages, setMessages] = useState<string[]>([]);
     const messagesEndRef = useRef<HTMLDivElement | null>(null);
@@ -119,12 +121,16 @@ export default function Home() {
           <div className="h-[30em] flex-col overflow-y-auto p-0.5 outline outline-2">
             {userList.map((user, index) => (
               <button
+                id={`button_${(user as unknown as UserList).UniqueId}`}
                 key={index}
                 onClick={() => {
+                  setSelectedUser((user as unknown as UserList).UniqueId);
                   // Handle the onClick logic
                   // setUnitSelected([user.something, user.anotherProperty]);
                 }}
-                className={`${playerSelected !== null ? 'bg-yellow-100' : 'bg-slate-100'} w-full  outline outline-1`}
+                className={`${
+                  selectedUser === (user as unknown as UserList).UniqueId ? 'bg-yellow-100' : 'bg-slate-100'
+                } w-full  outline outline-1`}
               >
                 {(user as unknown as UserList).Username}
               </button>
@@ -761,7 +767,8 @@ export default function Home() {
     );
   };
 
-  const button1class = 'w-60 rounded-xl bg-gradient-to-br from-[#F4DAAC] to-[#E5C08A] bg-opacity-25 py-1.5 text-orange-700 outline outline-2 -outline-offset-4 outline-orange-800 hover:text-red-700 hover:outline-red-700';
+  const button1class =
+    'w-60 rounded-xl bg-gradient-to-br from-[#F4DAAC] to-[#E5C08A] bg-opacity-25 py-1.5 text-orange-700 outline outline-2 -outline-offset-4 outline-orange-800 hover:text-red-700 hover:outline-red-700';
 
   const usernameEditor = (value: string) => {
     return value;
