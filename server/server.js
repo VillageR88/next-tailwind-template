@@ -43,9 +43,14 @@ const broadcastUserList = () => {
 };
 
 // Function to broadcast a message to all connected clients
-const broadcast = (message) => {
+const broadcast = (message, messageType) => {
+    const formattedMessage = JSON.stringify({
+        type: messageType,
+        message: message,
+    });
+
     Object.keys(clients).forEach((clientID) => {
-        clients[clientID].connection.sendUTF(message);
+        clients[clientID].connection.sendUTF(formattedMessage);
     });
 };
 
@@ -74,7 +79,7 @@ wsServer.on('request', (request) => {
                     console.log(`${userID} set username to: ${receivedData.username}`);
 
                     // Sending a message to all connected clients about the new user
-                    broadcast(`${receivedData.username} joined the server`);
+                    broadcast(`${receivedData.username} joined the server`, 'USER_JOIN');
                     // Broadcast the updated user list to all clients after a new user joins
                     broadcastUserList();
                 } else if (receivedData.type === 'CHAT') {
@@ -86,7 +91,7 @@ wsServer.on('request', (request) => {
 
                         if (recipientUsername && recipientUsername.trim() !== '') {
                             const prefixedMessage = `${senderUsername}: ${chatMessage}`;
-                            clients[clientID].connection.sendUTF(prefixedMessage);
+                            broadcast(prefixedMessage, 'CHAT_MESSAGE');
                             console.log(`Sent Chat Message to ${recipientUsername}: ${chatMessage}`);
                         }
                     });

@@ -33,8 +33,6 @@ export default function Home() {
     const [messages, setMessages] = useState<string[]>([]);
     const messagesEndRef = useRef<HTMLDivElement | null>(null);
     const [isSticky, setIsSticky] = useState<boolean>(true);
-    console.log('listOFU', userList);
-    console.log('messages', messages);
 
     useEffect(() => {
       const newClient = new W3CWebSocket('ws://192.168.1.109:8080');
@@ -51,15 +49,22 @@ export default function Home() {
       newClient.onerror = (error) => {
         console.error('Connection Error:', error);
       };
-      newClient.onmessage = (message) => {
-        if (message.data instanceof Blob) {
-          // Handle binary data
-        } else {
-          setMessages((prevMessages) => [...prevMessages, message.data] as string[]);
-          //isSticky && scrollToBottom();
-        }
-      };
+      // Assuming 'newClient' is your WebSocket connection
 
+      newClient.onmessage = (message) => {
+        interface JSONWebsocket {
+          type: string;
+        }
+        //console.log('md', message.data);
+        const parsedJSON: JSONWebsocket = JSON.parse(message.data as string) as JSONWebsocket;
+        console.log(parsedJSON);
+        //if (message) {
+        //} else {
+        if (parsedJSON.type === 'USER_JOIN' || parsedJSON.type === 'CHAT_MESSAGE')
+          setMessages((prevMessages) => [...prevMessages, message.data] as string[]);
+        //isSticky && scrollToBottom();
+        //}
+      };
       setClient(newClient);
 
       return () => {
@@ -130,14 +135,14 @@ export default function Home() {
                 setIsSticky(false);
               else setIsSticky(true);
             }}
-            className="mb-6 h-[18em] overflow-y-auto bg-white"
+            className="mb-6 h-[18em] overflow-y-auto bg-cyan-50"
           >
             {messages.map((msg, index) => (
               <div key={index}>{msg}</div>
             ))}
             <div ref={messagesEndRef} />
           </div>
-          <div className="flex gap-2">
+          <div className="flex w-full justify-center gap-2">
             <input
               autoComplete="off"
               className="w-[30em] px-2 py-1.5 outline outline-1"
