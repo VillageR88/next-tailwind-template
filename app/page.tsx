@@ -761,8 +761,7 @@ export default function Home() {
     );
   };
 
-  const button1class =
-    'w-60 rounded-xl bg-gradient-to-br from-orange-100 to-orange-300 py-1.5 text-orange-800 outline outline-2 -outline-offset-4 outline-orange-800 hover:text-red-600 hover:outline-red-600';
+  const button1class = 'w-60 rounded-xl bg-gradient-to-br from-[#F4DAAC] to-[#E5C08A] bg-opacity-25 py-1.5 text-orange-700 outline outline-2 -outline-offset-4 outline-orange-800 hover:text-red-700 hover:outline-red-700';
 
   const usernameEditor = (value: string) => {
     return value;
@@ -782,7 +781,7 @@ export default function Home() {
           <span
             className="whitespace-pre-line rounded-xl bg-opacity-75 bg-[url('images/toppng.com-wooden-sign-600x187.png')] bg-contain bg-center bg-no-repeat p-10 	
 
-text-3xl text-orange-600"
+text-3xl text-orange-700"
           >
             {'Nuts\non These Ships'}
           </span>
