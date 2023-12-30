@@ -27,6 +27,21 @@ function originIsAllowed(origin) {
     return true;
 }
 
+// Function to broadcast user information to all connected clients
+const broadcastUserList = () => {
+    const userList = Object.keys(clients).map((clientID) => ({
+        UniqueId: clientID,
+        Username: clients[clientID].username,
+    }));
+
+    const userListMessage = JSON.stringify({
+        type: 'USER_LIST',
+        userList,
+    });
+
+    broadcast(userListMessage, 'USER_LIST');
+};
+
 // Function to broadcast a message to all connected clients
 const broadcast = (message) => {
     Object.keys(clients).forEach((clientID) => {
@@ -60,20 +75,22 @@ wsServer.on('request', (request) => {
 
                     // Sending a message to all connected clients about the new user
                     broadcast(`${receivedData.username} joined the server`);
+                    // Broadcast the updated user list to all clients after a new user joins
+                    broadcastUserList();
                 } else if (receivedData.type === 'CHAT') {
                     const chatMessage = receivedData.message;
                     const senderUsername = clients[userID].username;
-
                     // Broadcast chat message to all connected clients with sender's username prefix
                     Object.keys(clients).forEach((clientID) => {
                         const recipientUsername = clients[clientID].username;
-                        const prefixedMessage = `${senderUsername}: ${chatMessage}`;
 
-                        if (recipientUsername !== null) {
+                        if (recipientUsername && recipientUsername.trim() !== '') {
+                            const prefixedMessage = `${senderUsername}: ${chatMessage}`;
                             clients[clientID].connection.sendUTF(prefixedMessage);
                             console.log(`Sent Chat Message to ${recipientUsername}: ${chatMessage}`);
                         }
                     });
+
                 } else {
                     // Handling other types of data messages
                     // Process the different types of data messages here based on receivedData.type

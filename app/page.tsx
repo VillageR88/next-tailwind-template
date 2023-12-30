@@ -28,10 +28,13 @@ export default function Home() {
 
   const WebSocketComponent = () => {
     const [client, setClient] = useState<W3CWebSocket | null>(null);
+    const [userList, setUserList] = useState<string[]>([]);
     const [messageInput, setMessageInput] = useState<string>('');
     const [messages, setMessages] = useState<string[]>([]);
     const messagesEndRef = useRef<HTMLDivElement | null>(null);
     const [isSticky, setIsSticky] = useState<boolean>(true);
+    console.log('listOFU', userList);
+    console.log('messages', messages);
 
     useEffect(() => {
       const newClient = new W3CWebSocket('ws://192.168.1.109:8080');
@@ -48,7 +51,6 @@ export default function Home() {
       newClient.onerror = (error) => {
         console.error('Connection Error:', error);
       };
-
       newClient.onmessage = (message) => {
         if (message.data instanceof Blob) {
           // Handle binary data
@@ -94,40 +96,66 @@ export default function Home() {
     };
 
     return (
-      <div className="flex h-[25em] flex-col justify-between gap-10">
-        <div
-          id="ChatBoxDiv"
-          onScroll={() => {
-            const ChatBoxDiv = document.getElementById('ChatBoxDiv');
-            if ((ChatBoxDiv?.scrollHeight ?? 0) - (ChatBoxDiv?.scrollTop ?? 0) - (ChatBoxDiv?.clientHeight ?? 0) >= 100)
-              setIsSticky(false);
-            else setIsSticky(true);
-          }}
-          className="mb-6 h-[18em] overflow-y-auto"
-        >
-          {messages.map((msg, index) => (
-            <div key={index}>{msg}</div>
-          ))}
-          <div ref={messagesEndRef} />
+      <div className="flex">
+        <div className="ml-[-15em] mr-[5em] flex  w-[12em] flex-col justify-center">
+          <div className="h-[30em] flex-col overflow-y-auto outline outline-2">
+            {userList.map(
+              (x, i) =>
+                x.length === 0 && (
+                  <button
+                    key={i}
+                    //id={`stack${i}`}
+                    onClick={() => {
+                      //setUnitSelected([x[0] as ShipSelection, x[2]]);
+                    }}
+                    className={`${
+                      unitSelected[1] === x[2] ? 'bg-yellow-100' : 'bg-slate-100'
+                    } w-full  outline outline-1`}
+                  >
+                    {x[0]}
+                  </button>
+                ),
+            )}
+          </div>
         </div>
-        <div className="flex gap-2">
-          <input
-            autoComplete="off"
-            className="w-[30em] px-2 py-1.5 outline outline-1"
-            id="inputMessage"
-            type="text"
-            value={messageInput}
-            onChange={handleMessageChange}
-            placeholder="..."
-            onKeyDown={handleKeyDown}
-          />
-          <button
-            className="rounded-sm bg-slate-100 px-4 py-1.5 outline outline-1"
-            id="sendMessage"
-            onClick={sendMessage}
+        <div className="flex h-[25em] flex-col justify-between gap-10">
+          <div
+            id="ChatBoxDiv"
+            onScroll={() => {
+              const ChatBoxDiv = document.getElementById('ChatBoxDiv');
+              if (
+                (ChatBoxDiv?.scrollHeight ?? 0) - (ChatBoxDiv?.scrollTop ?? 0) - (ChatBoxDiv?.clientHeight ?? 0) >=
+                100
+              )
+                setIsSticky(false);
+              else setIsSticky(true);
+            }}
+            className="mb-6 h-[18em] overflow-y-auto bg-white"
           >
-            Send
-          </button>
+            {messages.map((msg, index) => (
+              <div key={index}>{msg}</div>
+            ))}
+            <div ref={messagesEndRef} />
+          </div>
+          <div className="flex gap-2">
+            <input
+              autoComplete="off"
+              className="w-[30em] px-2 py-1.5 outline outline-1"
+              id="inputMessage"
+              type="text"
+              value={messageInput}
+              onChange={handleMessageChange}
+              placeholder="..."
+              onKeyDown={handleKeyDown}
+            />
+            <button
+              className="rounded-sm bg-slate-100 px-4 py-1.5 outline outline-1"
+              id="sendMessage"
+              onClick={sendMessage}
+            >
+              Send
+            </button>
+          </div>
         </div>
       </div>
     );
@@ -166,7 +194,7 @@ export default function Home() {
     aborted2 = 'Deployment aborted!\nRestart or reduce number of ships.',
   }
 
-  const [username, setUsername] = useState<string>(usernameFromStorage!);
+  const [username, setUsername] = useState<string>(usernameFromStorage as unknown as string);
   const [healthPlayer, setHealthPlayer] = useState<number>(100);
   const [healthComputer, setHealthComputer] = useState<number>(100);
   const [gamePhase, setGamePhase] = useState<GamePhase>(GamePhase.menu);
@@ -923,14 +951,16 @@ export default function Home() {
         </div>
       )}
       {gamePhase === GamePhase.multiplayer && (
-        <div className="flex flex-col">
-          <div className="flex h-[30em] flex-col justify-between">
-            <span className="self-center">Multiplayer Lobby</span>
-            <WebSocketComponent />
-          </div>
-          <div className="mt-10 flex w-full justify-center">
-            <QuitButton />
-          </div>
+        <div className="flex">
+          <div className="flex flex-col">
+            <div className="flex h-[30em] flex-col justify-between">
+              <span className="self-center">Multiplayer Lobby</span>
+              <WebSocketComponent />
+            </div>
+            <div className="mt-10 flex w-full justify-center">
+              <QuitButton />
+            </div>
+          </div>{' '}
         </div>
       )}
       {gamePhase === GamePhase.battle && (
