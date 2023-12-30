@@ -132,7 +132,7 @@ export default function Home() {
                 id={`button_${(user as unknown as UserList).UniqueId}`}
                 key={index}
                 onClick={() => {
-                  setSelectedUser((user as unknown as UserList).UniqueId);
+                  (user as unknown as UserList).UniqueId !== multiplayers[0] && setSelectedUser((user as unknown as UserList).UniqueId);
                   // Handle the onClick logic
                   // setUnitSelected([user.something, user.anotherProperty]);
                 }}
