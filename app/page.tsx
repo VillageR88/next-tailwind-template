@@ -54,6 +54,7 @@ export default function Home() {
       newClient.onmessage = (message) => {
         interface JSONWebsocket {
           type: string;
+          message: string;
         }
         //console.log('md', message.data);
         const parsedJSON: JSONWebsocket = JSON.parse(message.data as string) as JSONWebsocket;
@@ -61,7 +62,7 @@ export default function Home() {
         //if (message) {
         //} else {
         if (parsedJSON.type === 'USER_JOIN' || parsedJSON.type === 'CHAT_MESSAGE')
-          setMessages((prevMessages) => [...prevMessages, message.data] as string[]);
+          setMessages((prevMessages) => [...prevMessages, parsedJSON.message] as string[]);
         //isSticky && scrollToBottom();
         //}
       };
