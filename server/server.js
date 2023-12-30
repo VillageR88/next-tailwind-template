@@ -23,7 +23,7 @@ const getUniqueID = () => {
 
 // A function that checks whether a source is allowed
 function originIsAllowed(origin) {
-    //In the example we return true for each source - This should be adapted to your actual security requirements
+    //In the example, we return true for each source - This should be adapted to your actual security requirements
     return true;
 }
 
@@ -35,19 +35,17 @@ const broadcastUserList = () => {
     }));
 
     broadcast(JSON.stringify(userList), 'USER_LIST');
-    console.log(JSON.stringify(userList));
 };
 
 // Function to broadcast a message to all connected clients
-//TODO must fix json sent to client
 const broadcast = (message, messageType) => {
     const formattedMessage = JSON.stringify({
         type: messageType,
         message: message,
     });
 
-    Object.keys(clients).forEach((clientID) => {
-        clients[clientID].connection.sendUTF(formattedMessage);
+    wsServer.connections.forEach((connection) => {
+        connection.sendUTF(formattedMessage);
     });
 };
 
@@ -83,16 +81,8 @@ wsServer.on('request', (request) => {
                     const chatMessage = receivedData.message;
                     const senderUsername = clients[userID].username;
                     // Broadcast chat message to all connected clients with sender's username prefix
-                    Object.keys(clients).forEach((clientID) => {
-                        const recipientUsername = clients[clientID].username;
-
-                        if (recipientUsername && recipientUsername.trim() !== '') {
-                            const prefixedMessage = `${senderUsername}: ${chatMessage}`;
-                            broadcast(prefixedMessage, 'CHAT_MESSAGE');
-                            console.log(`Sent Chat Message to ${recipientUsername}: ${chatMessage}`);
-                        }
-                    });
-
+                    broadcast(`${senderUsername}: ${chatMessage}`, 'CHAT_MESSAGE');
+                    console.log(`Sent Chat Message from ${senderUsername}: ${chatMessage}`);
                 } else {
                     // Handling other types of data messages
                     // Process the different types of data messages here based on receivedData.type
@@ -106,6 +96,8 @@ wsServer.on('request', (request) => {
 
     connection.on('close', () => {
         console.log(`Connection closed for ${userID}`);
+        clients[userID].username !== null && broadcast(`${clients[userID].username} left the server`, 'USER_LEFT'); // Broadcast message when user leaves
         delete clients[userID];
+        broadcastUserList(); // Broadcast updated user list after a user disconnects
     });
 });

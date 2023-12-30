@@ -37,7 +37,6 @@ export default function Home() {
     const [messages, setMessages] = useState<string[]>([]);
     const messagesEndRef = useRef<HTMLDivElement | null>(null);
     const [isSticky, setIsSticky] = useState<boolean>(true);
-    console.log(userList.map((x) => (x as unknown as UserList).Username));
 
     useEffect(() => {
       const newClient = new W3CWebSocket('ws://192.168.1.109:8080');
@@ -64,7 +63,8 @@ export default function Home() {
       newClient.onmessage = (message) => {
         const parsedJSON: JSONWebsocket = JSON.parse(message.data as string) as JSONWebsocket;
 
-        if (parsedJSON.type === 'USER_JOIN' || parsedJSON.type === 'CHAT_MESSAGE') {
+        if (parsedJSON.type === 'USER_JOIN' || parsedJSON.type === 'CHAT_MESSAGE' || parsedJSON.type === 'USER_LEFT') {
+          console.log('pjspn', parsedJSON);
           // Assuming 'parsedJSON.message' contains the chat message text
           setMessages((prevMessages) => [...prevMessages, parsedJSON.message] as string[]);
         } else if (parsedJSON.type === 'USER_LIST') {
@@ -116,7 +116,7 @@ export default function Home() {
     return (
       <div className="flex">
         <div className="ml-[-15em] mr-[5em] flex  w-[12em] flex-col justify-center">
-          <div className="h-[30em] flex-col overflow-y-auto outline outline-2">
+          <div className="h-[30em] flex-col overflow-y-auto p-0.5 outline outline-2">
             {userList.map((user, index) => (
               <button
                 key={index}
@@ -124,9 +124,7 @@ export default function Home() {
                   // Handle the onClick logic
                   // setUnitSelected([user.something, user.anotherProperty]);
                 }}
-                className={`${
-                  unitSelected[1] === user[2] ? 'bg-yellow-100' : 'bg-slate-100'
-                } w-full  outline outline-1`}
+                className={`${playerSelected !== null ? 'bg-yellow-100' : 'bg-slate-100'} w-full  outline outline-1`}
               >
                 {(user as unknown as UserList).Username}
               </button>
@@ -214,6 +212,7 @@ export default function Home() {
   const [healthComputer, setHealthComputer] = useState<number>(100);
   const [gamePhase, setGamePhase] = useState<GamePhase>(GamePhase.menu);
   const [multiplayerPhase, setMultiplayerPhase] = useState<MultiplayerPhase>(MultiplayerPhase.lobby);
+  const [playerSelected, setPlayerSelected] = useState<string | null>(null);
   const [collection, setCollection] = useState<[ShipSelection, number[][], string][]>(shipConfiguration);
   const [enemyCollection, setEnemyCollection] = useState<[ShipSelection, number[][], string][]>([]);
   const [fogOfWar, setFogOfWar] = useState<number[]>([]);
@@ -767,7 +766,9 @@ export default function Home() {
   };
 
   return (
-    <div className="flex min-h-screen flex-col items-center justify-center bg-gradient-to-br from-cyan-300 to-cyan-200 font-[600] text-black">
+    <div className="font-frijole font-[300] flex min-h-screen flex-col items-center justify-center bg-[url('./images/summer_background_47_a.jpg')] bg-cover  text-black">
+      <style>{`@import url('https://fonts.googleapis.com/css2?family=Carrois+Gothic+SC&display=swap')`}</style>
+      <style>{`@import url('https://fonts.googleapis.com/css2?family=Frijole&display=swap')`}</style>
       {gamePhase === GamePhase.exit && (
         <div className="flex h-screen w-screen items-center justify-center bg-black">
           <span className="whitespace-pre-line text-3xl text-amber-600">{"It's now safe to turn off\nthis site"}</span>
@@ -890,7 +891,7 @@ export default function Home() {
       )}
       {(gamePhase === GamePhase.preSetup || gamePhase === GamePhase.setup) && (
         <div className={`${gamePhase === GamePhase.preSetup && 'invisible'} flex flex-row items-center`}>
-          <div className="ml-[-15em] mr-[5em] flex w-[12em] flex-col justify-center">
+          <div className="ml-[-15em] mr-[5em] flex w-[13em] flex-col justify-center">
             <button
               onClick={() => {
                 setHorizontal(!horizontal);
@@ -909,7 +910,7 @@ export default function Home() {
             >
               Place randomly
             </button>
-            <div className="h-[30em] flex-col overflow-y-auto outline outline-2">
+            <div className="flex h-[30em] flex-col gap-1 overflow-y-auto rounded-md bg-blue-500   p-0.5">
               {collection.map(
                 (x, i) =>
                   x[1].length === 0 && (
@@ -920,8 +921,8 @@ export default function Home() {
                         setUnitSelected([x[0] as ShipSelection, x[2]]);
                       }}
                       className={`${
-                        unitSelected[1] === x[2] ? 'bg-yellow-100' : 'bg-slate-100'
-                      } w-full  outline outline-1`}
+                        unitSelected[1] === x[2] ? 'bg-yellow-100' : 'bg-neutral-100'
+                      } w-full  rounded-sm outline outline-1`}
                     >
                       {x[0]}
                     </button>
@@ -959,7 +960,7 @@ export default function Home() {
       {gamePhase === GamePhase.battle && (healthComputer === 0 || healthPlayer === 0) && (
         <div className="absolute flex items-center justify-center">
           <div className="flex h-24 w-96 items-center justify-center rounded-lg bg-white outline outline-2 drop-shadow-xl">
-            {healthComputer === 0 && <span className="text-3xl">Player Wins!</span>}
+            {healthComputer === 0 && <span className="text-3xl">{username} Wins!</span>}
             {healthPlayer === 0 && <span className="text-3xl">Computer Wins!</span>}
             {healthPlayer === 0 && healthComputer === 0 && <span className="text-3xl">Draw!</span>}
           </div>
@@ -981,7 +982,7 @@ export default function Home() {
       {gamePhase === GamePhase.battle && (
         <div className="flex flex-col">
           <div className="flex gap-8">
-            <Board health={healthPlayer} title="Player" buttons={Buttons2({ feed: collection })} />
+            <Board health={healthPlayer} title={username} buttons={Buttons2({ feed: collection })} />
             <Board
               health={healthComputer}
               title="Computer"
