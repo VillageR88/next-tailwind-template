@@ -34,15 +34,12 @@ const broadcastUserList = () => {
         Username: clients[clientID].username,
     }));
 
-    const userListMessage = JSON.stringify({
-        type: 'USER_LIST',
-        userList,
-    });
-
-    broadcast(userListMessage, 'USER_LIST');
+    broadcast(JSON.stringify(userList), 'USER_LIST');
+    console.log(JSON.stringify(userList));
 };
 
 // Function to broadcast a message to all connected clients
+//TODO must fix json sent to client
 const broadcast = (message, messageType) => {
     const formattedMessage = JSON.stringify({
         type: messageType,

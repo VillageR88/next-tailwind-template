@@ -25,17 +25,19 @@ export default function Home() {
     ship4 = 'ship4',
     ship5 = 'ship5',
   }
-  interface JSONWebsocket {
-    type: string;
-    message: string;
+
+  interface UserList {
+    Username: string;
   }
+
   const WebSocketComponent = () => {
     const [client, setClient] = useState<W3CWebSocket | null>(null);
-    const [userList, setUserList] = useState<string[]>([]);
+    const [userList, setUserList] = useState<string[][]>([]);
     const [messageInput, setMessageInput] = useState<string>('');
     const [messages, setMessages] = useState<string[]>([]);
     const messagesEndRef = useRef<HTMLDivElement | null>(null);
     const [isSticky, setIsSticky] = useState<boolean>(true);
+    console.log(userList.map((x) => (x as unknown as UserList).Username));
 
     useEffect(() => {
       const newClient = new W3CWebSocket('ws://192.168.1.109:8080');
@@ -54,20 +56,24 @@ export default function Home() {
       };
       // Assuming 'newClient' is your WebSocket connection
 
-      newClient.onmessage = (message) => {
-        //console.log('md', message.data);
-        const parsedJSON: JSONWebsocket = JSON.parse(message.data as string) as JSONWebsocket;
-        console.log(parsedJSON);
-        //if (message) {
-        //} else {
-        if (parsedJSON.type === 'USER_JOIN' || parsedJSON.type === 'CHAT_MESSAGE')
-          setMessages((prevMessages) => [...prevMessages, parsedJSON.message] as string[]);
-        else if (parsedJSON.type === 'USER_LIST')
-          setUserList((prevMessages) => [...prevMessages, parsedJSON.message] as string[]);
+      interface JSONWebsocket {
+        type: string;
+        message: string;
+      }
 
-        //isSticky && scrollToBottom();
-        //}
+      newClient.onmessage = (message) => {
+        const parsedJSON: JSONWebsocket = JSON.parse(message.data as string) as JSONWebsocket;
+
+        if (parsedJSON.type === 'USER_JOIN' || parsedJSON.type === 'CHAT_MESSAGE') {
+          // Assuming 'parsedJSON.message' contains the chat message text
+          setMessages((prevMessages) => [...prevMessages, parsedJSON.message] as string[]);
+        } else if (parsedJSON.type === 'USER_LIST') {
+          // Assuming 'parsedJSON2.message' is an array of user list items
+          const parsedUserList = JSON.parse(parsedJSON.message) as string[][];
+          setUserList(parsedUserList);
+        }
       };
+
       setClient(newClient);
 
       return () => {
@@ -102,22 +108,27 @@ export default function Home() {
         setMessageInput('');
       }
     };
-    console.log('userlist', userList);
+
+    interface userList {
+      Username: string;
+    }
 
     return (
       <div className="flex">
         <div className="ml-[-15em] mr-[5em] flex  w-[12em] flex-col justify-center">
           <div className="h-[30em] flex-col overflow-y-auto outline outline-2">
-            {userList.map((x, i) => (
+            {userList.map((user, index) => (
               <button
-                key={i}
-                //id={`stack${i}`}
+                key={index}
                 onClick={() => {
-                  //setUnitSelected([x[0] as ShipSelection, x[2]]);
+                  // Handle the onClick logic
+                  // setUnitSelected([user.something, user.anotherProperty]);
                 }}
-                className={`${unitSelected[1] === x[2] ? 'bg-yellow-100' : 'bg-slate-100'} w-full  outline outline-1`}
+                className={`${
+                  unitSelected[1] === user[2] ? 'bg-yellow-100' : 'bg-slate-100'
+                } w-full  outline outline-1`}
               >
-                {x}
+                {(user as unknown as UserList).Username}
               </button>
             ))}
           </div>
@@ -964,7 +975,7 @@ export default function Home() {
             <div className="mt-10 flex w-full justify-center">
               <QuitButton />
             </div>
-          </div>{' '}
+          </div>
         </div>
       )}
       {gamePhase === GamePhase.battle && (
