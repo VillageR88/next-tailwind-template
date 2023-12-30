@@ -25,7 +25,10 @@ export default function Home() {
     ship4 = 'ship4',
     ship5 = 'ship5',
   }
-
+  interface JSONWebsocket {
+    type: string;
+    message: string;
+  }
   const WebSocketComponent = () => {
     const [client, setClient] = useState<W3CWebSocket | null>(null);
     const [userList, setUserList] = useState<string[]>([]);
@@ -52,10 +55,6 @@ export default function Home() {
       // Assuming 'newClient' is your WebSocket connection
 
       newClient.onmessage = (message) => {
-        interface JSONWebsocket {
-          type: string;
-          message: string;
-        }
         //console.log('md', message.data);
         const parsedJSON: JSONWebsocket = JSON.parse(message.data as string) as JSONWebsocket;
         console.log(parsedJSON);
@@ -63,6 +62,9 @@ export default function Home() {
         //} else {
         if (parsedJSON.type === 'USER_JOIN' || parsedJSON.type === 'CHAT_MESSAGE')
           setMessages((prevMessages) => [...prevMessages, parsedJSON.message] as string[]);
+        else if (parsedJSON.type === 'USER_LIST')
+          setUserList((prevMessages) => [...prevMessages, parsedJSON.message] as string[]);
+
         //isSticky && scrollToBottom();
         //}
       };
@@ -100,28 +102,24 @@ export default function Home() {
         setMessageInput('');
       }
     };
+    console.log('userlist', userList);
 
     return (
       <div className="flex">
         <div className="ml-[-15em] mr-[5em] flex  w-[12em] flex-col justify-center">
           <div className="h-[30em] flex-col overflow-y-auto outline outline-2">
-            {userList.map(
-              (x, i) =>
-                x.length === 0 && (
-                  <button
-                    key={i}
-                    //id={`stack${i}`}
-                    onClick={() => {
-                      //setUnitSelected([x[0] as ShipSelection, x[2]]);
-                    }}
-                    className={`${
-                      unitSelected[1] === x[2] ? 'bg-yellow-100' : 'bg-slate-100'
-                    } w-full  outline outline-1`}
-                  >
-                    {x[0]}
-                  </button>
-                ),
-            )}
+            {userList.map((x, i) => (
+              <button
+                key={i}
+                //id={`stack${i}`}
+                onClick={() => {
+                  //setUnitSelected([x[0] as ShipSelection, x[2]]);
+                }}
+                className={`${unitSelected[1] === x[2] ? 'bg-yellow-100' : 'bg-slate-100'} w-full  outline outline-1`}
+              >
+                {x}
+              </button>
+            ))}
           </div>
         </div>
         <div className="flex h-[25em] flex-col justify-between gap-10">
