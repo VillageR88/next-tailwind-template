@@ -38,7 +38,6 @@ export default function Home() {
     const [messages, setMessages] = useState<string[]>([]);
     const messagesEndRef = useRef<HTMLDivElement | null>(null);
     const [isSticky, setIsSticky] = useState<boolean>(true);
-    console.log(multiplayers);
 
     useEffect(() => {
       const newClient = new W3CWebSocket('ws://192.168.1.109:8080');
@@ -126,6 +125,18 @@ export default function Home() {
     return (
       <div className="flex">
         <div className="ml-[-15em] mr-[5em] flex  w-[12em] flex-col justify-center">
+          <button
+            disabled={
+              selectedUser === '' || !userList.map((x) => (x as unknown as UserList).UniqueId).includes(selectedUser)
+            }
+            onClick={() => {
+              //setAutoloaderControl(0);
+              //setAutoloader(true);
+            }}
+            className="mb-[1em] rounded-md bg-slate-100 outline outline-1 disabled:opacity-50"
+          >
+            Send invitation
+          </button>
           <div className="h-[30em] flex-col overflow-y-auto p-0.5 outline outline-2">
             {userList.map((user, index) => (
               <button
@@ -133,7 +144,11 @@ export default function Home() {
                 key={index}
                 onClick={() => {
                   (user as unknown as UserList).UniqueId !== multiplayers[0] &&
-                    setSelectedUser((user as unknown as UserList).UniqueId);
+                    setSelectedUser((value) => {
+                      const newValue = value;
+                      if (newValue === selectedUser && newValue !== '') return '';
+                      else return (user as unknown as UserList).UniqueId;
+                    });
                   // Handle the onClick logic
                   // setUnitSelected([user.something, user.anotherProperty]);
                 }}
