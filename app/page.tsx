@@ -29,18 +29,30 @@ export default function Home() {
   }
 
   const WebSocketComponent = () => {
+    const [nameInvitation, setNameInvitation] = useState<string | null>(null);
+    const [invitationReceived, setInvitationReceived] = useState<null | string>(null);
     const [serverStatus, setServerStatus] = useState<boolean>(false);
     const [client, setClient] = useState<W3CWebSocket | null>(null);
     const [userList, setUserList] = useState<string[][]>([]);
     const [multiplayers, setMultiplayers] = useState<[string | null, string | null]>([null, null]);
-    const [selectedUser, setSelectedUser] = useState<string>('');
+    const [selectedUser, setSelectedUser] = useState<string | null>(null);
+    const [invitationList, setInvitationList] = useState<string[]>([]);
     const [messageInput, setMessageInput] = useState<string>('');
     const [messages, setMessages] = useState<string[]>([]);
     const messagesEndRef = useRef<HTMLDivElement | null>(null);
     const [isSticky, setIsSticky] = useState<boolean>(true);
 
     useEffect(() => {
-      const newClient = new W3CWebSocket('ws://192.168.1.109:8080');
+      if (nameInvitation === null && invitationReceived !== null)
+        setNameInvitation(
+          (userList.find((x) => (x as unknown as UserList).UniqueId === invitationReceived) as unknown as UserList)
+            .Username,
+        );
+    }, [invitationReceived, nameInvitation, userList]);
+
+    useEffect(() => {
+      //const newClient = new W3CWebSocket('ws://192.168.1.109:8080');
+      const newClient = new W3CWebSocket('ws://192.168.1.61:8080');
 
       newClient.onopen = () => {
         console.log('WebSocket Client Connected');
@@ -73,6 +85,8 @@ export default function Home() {
           // Assuming 'parsedJSON2.message' is an array of user list items
           const parsedUserList = JSON.parse(parsedJSON.message) as string[][];
           setUserList(parsedUserList);
+        } else if (parsedJSON.type === 'INVITATION_RESPONSE') {
+          setInvitationReceived(parsedJSON.message);
         } else if (parsedJSON.type === 'MY_ID') {
           //console.log('MY multiplayer ID is: ', parsedJSON.message);
           setMultiplayers((value) => {
@@ -123,15 +137,50 @@ export default function Home() {
     }
 
     return (
-      <div className="flex">
+      <div className="flex items-center justify-center">
+        {nameInvitation && (
+          <div className="absolute rounded-md outline outline-1">
+            <div className="flex h-fit w-fit flex-col items-center justify-center gap-2 bg-white px-4 py-4">
+              <span>{`${nameInvitation}`}</span>
+              <span>{`challenges you to a battle.`}</span>
+              <div className="flex gap-6">
+                {['Accept', 'Reject'].map((x, i) => (
+                  <button
+                    onClick={() => {
+                      if (i === 1) {
+                        setInvitationReceived(null);
+                        setNameInvitation(null);
+                      }
+                    }}
+                    className="px-2 py-1 outline outline-1"
+                    key={i}
+                  >
+                    {x}
+                  </button>
+                ))}
+              </div>
+            </div>
+          </div>
+        )}
         <div className="ml-[-15em] mr-[5em] flex  w-[12em] flex-col justify-center">
           <button
             disabled={
-              selectedUser === '' || !userList.map((x) => (x as unknown as UserList).UniqueId).includes(selectedUser)
+              selectedUser === null || !userList.map((x) => (x as unknown as UserList).UniqueId).includes(selectedUser)
             }
             onClick={() => {
-              //setAutoloaderControl(0);
-              //setAutoloader(true);
+              setInvitationList((value) => {
+                const newValue = [...value];
+                if (selectedUser && !newValue.includes(selectedUser)) newValue.push(selectedUser);
+                return newValue;
+              });
+              const sendInvitation = () => {
+                if (client && selectedUser) {
+                  client.send(JSON.stringify({ type: 'INVITATION', message: selectedUser }));
+                  console.log(multiplayers[0]);
+                }
+              };
+              sendInvitation();
+              setSelectedUser(null);
             }}
             className="mb-[1em] rounded-md bg-slate-100 outline outline-1 disabled:opacity-50"
           >
@@ -144,16 +193,19 @@ export default function Home() {
                 key={index}
                 onClick={() => {
                   (user as unknown as UserList).UniqueId !== multiplayers[0] &&
-                    setSelectedUser((value) => {
-                      const newValue = value;
-                      if (newValue === selectedUser && newValue !== '') return '';
+                    setSelectedUser(() => {
+                      if ((user as unknown as UserList).UniqueId === selectedUser) return null;
                       else return (user as unknown as UserList).UniqueId;
                     });
                   // Handle the onClick logic
                   // setUnitSelected([user.something, user.anotherProperty]);
                 }}
                 className={`${
-                  selectedUser === (user as unknown as UserList).UniqueId ? 'bg-yellow-100' : 'bg-slate-100'
+                  invitationList.includes((user as unknown as UserList).UniqueId)
+                    ? 'bg-yellow-300'
+                    : selectedUser === (user as unknown as UserList).UniqueId
+                      ? 'bg-yellow-100'
+                      : 'bg-slate-100'
                 } w-full  outline outline-1`}
               >
                 {(user as unknown as UserList).Username}
@@ -804,7 +856,7 @@ export default function Home() {
   };
 
   const button1class =
-    'w-60 rounded-xl bg-gradient-to-br from-[#F4DAAC] to-[#E5C08A] bg-opacity-25 py-1.5 text-orange-700 outline outline-2 -outline-offset-4 outline-orange-800 hover:text-red-700 hover:outline-red-700';
+    'w-48 rounded-xl bg-gradient-to-br from-[#F4DAAC] to-[#E5C08A] bg-opacity-25 py-1.5 text-orange-700 outline outline-2 -outline-offset-4 outline-orange-800 hover:text-red-700 hover:outline-red-700';
 
   const usernameEditor = (value: string) => {
     return value;
@@ -818,7 +870,7 @@ export default function Home() {
         </div>
       )}
       {gamePhase === GamePhase.menu && (
-        <div className="flex h-fit w-[40em] flex-col items-center gap-1 rounded-xl px-8 py-14">
+        <div className="flex h-full w-fit flex-col items-center gap-1 rounded-xl px-8 py-14">
           <span
             className="whitespace-pre-line rounded-xl bg-opacity-75 bg-[url('images/toppng.com-wooden-sign-600x187.png')] bg-contain bg-center bg-no-repeat p-10 	
 
@@ -826,7 +878,7 @@ text-3xl text-orange-700"
           >
             {'Nuts\non These Ships'}
           </span>
-          <div className="flex h-[30em] w-[30em] flex-col items-center justify-center gap-4 bg-[url('images/pngwing.com.png')] bg-contain bg-center bg-no-repeat py-2">
+          <div className="flex h-[22em] w-full flex-col items-center justify-center gap-4 bg-[url('images/pngwing.com.png')] bg-cover bg-center bg-no-repeat py-2">
             {['Single Player', 'Multiplayer', 'Options', 'Exit'].map((x, i) => (
               <button
                 onClick={() => {
@@ -907,7 +959,7 @@ text-3xl text-orange-700"
 
           <button
             onClick={() => {
-              if (initialConfig.reduce((p, n) => p + n) !== 0) {
+              if (initialConfig.reduce((p, n) => p + n) !== 0 && username != '') {
                 setGamePhase(GamePhase.menu);
                 setCollection(shipConfiguration);
               }
@@ -1007,7 +1059,7 @@ text-3xl text-orange-700"
         </div>
       )}
       {gamePhase === GamePhase.battle && (healthComputer === 0 || healthPlayer === 0) && (
-        <div className="absolute flex items-center justify-center">
+        <div className="flex items-center justify-center">
           <div className="flex h-24 w-96 items-center justify-center rounded-lg bg-white outline outline-2 drop-shadow-xl">
             {healthComputer === 0 && <span className="text-3xl">{username} Wins!</span>}
             {healthPlayer === 0 && <span className="text-3xl">Computer Wins!</span>}
@@ -1016,7 +1068,7 @@ text-3xl text-orange-700"
         </div>
       )}
       {gamePhase === GamePhase.multiplayer && (
-        <div className="flex">
+        <div className="flex h-full w-full items-center justify-center">
           <div className="flex flex-col">
             <div className="flex h-[30em] flex-col justify-between">
               <div className="flex w-full pb-2 pl-8">
