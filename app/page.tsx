@@ -158,10 +158,10 @@ export default function Home() {
                 setIsSticky(false);
               else setIsSticky(true);
             }}
-            className="mb-6 h-[18em] overflow-y-auto bg-cyan-50 py-1.5 px-2"
+            className="mb-6 h-[18em] overflow-y-auto bg-cyan-50 px-2 py-1.5"
           >
             {serverStatus ? (
-              <span className="text-green-900">Server Connected</span>
+              <span className="text-green-700">Server Connected</span>
             ) : (
               <span className="text-red-600">Server Disconnected</span>
             )}
