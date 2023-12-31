@@ -29,6 +29,7 @@ export default function Home() {
   }
 
   const WebSocketComponent = () => {
+    const [serverStatus, setServerStatus] = useState<boolean>(false);
     const [client, setClient] = useState<W3CWebSocket | null>(null);
     const [userList, setUserList] = useState<string[][]>([]);
     const [multiplayers, setMultiplayers] = useState<[string | null, string | null]>([null, null]);
@@ -44,11 +45,13 @@ export default function Home() {
 
       newClient.onopen = () => {
         console.log('WebSocket Client Connected');
+        setServerStatus(true);
         newClient.send(JSON.stringify({ type: 'USERNAME', username: username }));
       };
 
       newClient.onclose = () => {
         console.log('WebSocket Client Disconnected');
+        setServerStatus(false);
       };
 
       newClient.onerror = (error) => {
@@ -155,8 +158,13 @@ export default function Home() {
                 setIsSticky(false);
               else setIsSticky(true);
             }}
-            className="mb-6 h-[18em] overflow-y-auto bg-cyan-50"
+            className="mb-6 h-[18em] overflow-y-auto bg-cyan-50 py-1.5 px-2"
           >
+            {serverStatus ? (
+              <span className="text-green-900">Server Connected</span>
+            ) : (
+              <span className="text-red-600">Server Disconnected</span>
+            )}
             {messages.map((msg, index) => (
               <div key={index}>{msg}</div>
             ))}
