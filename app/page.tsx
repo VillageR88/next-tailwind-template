@@ -3,9 +3,6 @@ import { useCallback, useEffect, useState, useRef } from 'react';
 import { Hourglass } from 'react-loader-spinner';
 import { w3cwebsocket as W3CWebSocket } from 'websocket';
 
-const usernameFromStorage = localStorage.getItem('Username');
-localStorage.setItem('Username', usernameFromStorage ?? 'MyName');
-
 export default function Home() {
   enum GamePhase {
     menu = 'Menu',
@@ -132,7 +129,8 @@ export default function Home() {
                 id={`button_${(user as unknown as UserList).UniqueId}`}
                 key={index}
                 onClick={() => {
-                  (user as unknown as UserList).UniqueId !== multiplayers[0] && setSelectedUser((user as unknown as UserList).UniqueId);
+                  (user as unknown as UserList).UniqueId !== multiplayers[0] &&
+                    setSelectedUser((user as unknown as UserList).UniqueId);
                   // Handle the onClick logic
                   // setUnitSelected([user.something, user.anotherProperty]);
                 }}
@@ -220,8 +218,15 @@ export default function Home() {
     aborted1 = 'Deployment aborted!\nReduce number of ships.',
     aborted2 = 'Deployment aborted!\nRestart or reduce number of ships.',
   }
-
-  const [username, setUsername] = useState<string>(usernameFromStorage as unknown as string);
+  useEffect(() => {
+    // Perform localStorage action
+    const usernameFromStorage = localStorage.getItem('Username');
+    if (usernameFromStorage) {
+      localStorage.setItem('Username', usernameFromStorage);
+      setUsername(usernameFromStorage);
+    }
+  }, []);
+  const [username, setUsername] = useState<string>('defaultUsername');
   const [healthPlayer, setHealthPlayer] = useState<number>(100);
   const [healthComputer, setHealthComputer] = useState<number>(100);
   const [gamePhase, setGamePhase] = useState<GamePhase>(GamePhase.menu);
@@ -784,8 +789,6 @@ export default function Home() {
 
   return (
     <div className="flex min-h-screen flex-col items-center justify-center bg-[url('./images/summer_background_47_a.jpg')] bg-cover font-frijole font-[300]  text-black">
-      <style>{`@import url('https://fonts.googleapis.com/css2?family=Carrois+Gothic+SC&display=swap')`}</style>
-      <style>{`@import url('https://fonts.googleapis.com/css2?family=Frijole&display=swap')`}</style>
       {gamePhase === GamePhase.exit && (
         <div className="flex h-screen w-screen items-center justify-center bg-black">
           <span className="whitespace-pre-line text-3xl text-amber-600">{"It's now safe to turn off\nthis site"}</span>

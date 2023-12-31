@@ -11,8 +11,7 @@ const config: Config = {
       fontFamily: {
         sans: ['var(--font-sans)'],
         mono: ['var(--font-mono)'],
-        'carrois-gothic-sc': ['Carrois Gothic SC', 'sans-serif'],
-        frijole: ['Frijole', 'sans-serif'],
+        frijole: ['Frijole', 'sans-serif'], // Adding 'Frijole' font family
       },
       colors: {
         // Slate

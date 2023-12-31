@@ -37,7 +37,6 @@
     ".next/types/**/*.ts",
     "build/types/**/*.ts",
     "assets.d.ts",
-    "app/components/webSocketChat.tsx"
   ],
   "exclude": [
     "node_modules"
