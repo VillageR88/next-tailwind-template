@@ -1019,7 +1019,9 @@ text-3xl text-orange-700"
         <div className="flex">
           <div className="flex flex-col">
             <div className="flex h-[30em] flex-col justify-between">
-              <span className="self-center">Multiplayer Lobby</span>
+              <div className="flex w-full pb-2 pl-8">
+                <span className="rounded-lg bg-slate-50 p-1">Multiplayer Lobby</span>
+              </div>
               <WebSocketComponent />
             </div>
             <div className="mt-10 flex w-full justify-center">
