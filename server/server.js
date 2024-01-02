@@ -101,14 +101,48 @@ wsServer.on('request', (request) => {
             // Get the unique ID of the customer who sent the invitation from the client object
             const senderUserID = clients[userID].userID;
             // Sending a response to the target client containing the unique ID of the client sending the invitation
-            const invitationResponse = JSON.stringify({
-              type: 'INVITATION_RESPONSE',
+            const invitationPass = JSON.stringify({
+              type: 'INVITATION_PASS',
               message: senderUserID, // Your reply message
             });
-            invitedClient.connection.sendUTF(invitationResponse);
+            invitedClient.connection.sendUTF(invitationPass);
             console.log(`INVITATION PASSED ON from ${senderUserID}`);
           } else {
             console.log(`Selected user (${selectedUser}) not found.`);
+          }
+        } else if (receivedData.type === 'INVITATION_ACCEPT') {
+          const acceptedUser = receivedData.message;
+          // Get the unique ID of the client who accepted the invitation
+          const acceptedClient = clients[acceptedUser];
+          if (acceptedClient) {
+            // Get the unique ID of the client who sent the acceptance from the client object
+            const senderUserID = clients[userID].userID;
+            // Sending an acceptance response to the target client containing the unique ID of the client sending the acceptance
+            const acceptResponse = JSON.stringify({
+              type: 'INVITATION_ACCEPT_PASS',
+              message: senderUserID, // Your acceptance reply message
+            });
+            acceptedClient.connection.sendUTF(acceptResponse);
+            console.log(`INVITATION_ACCEPT PASSED ON from ${senderUserID}`);
+          } else {
+            console.log(`Accepted user (${acceptedUser}) not found.`);
+          }
+        } else if (receivedData.type === 'INVITATION_REJECT') {
+          const invitationReceived = receivedData.message;
+          // Get the unique ID of the client to whom the rejection is intended
+          const rejectedClient = clients[invitationReceived];
+          if (rejectedClient) {
+            // Get the unique ID of the client who sent the rejection from the client object
+            const senderUserID = clients[userID].userID;
+            // Sending a rejection response to the target client containing the unique ID of the client sending the rejection
+            const rejectionResponse = JSON.stringify({
+              type: 'INVITATION_REJECT_PASS',
+              message: senderUserID, // Your rejection reply message
+            });
+            rejectedClient.connection.sendUTF(rejectionResponse);
+            console.log(`INVITATION_REJECT PASSED ON from ${senderUserID}`);
+          } else {
+            console.log(`Rejected user (${invitationReceived}) not found.`);
           }
         } else {
           // Handling other types of data messages

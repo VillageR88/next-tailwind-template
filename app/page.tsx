@@ -37,10 +37,12 @@ export default function Home() {
     const [multiplayers, setMultiplayers] = useState<[string | null, string | null]>([null, null]);
     const [selectedUser, setSelectedUser] = useState<string | null>(null);
     const [invitationList, setInvitationList] = useState<string[]>([]);
+    const [rejectedList, setRejectedList] = useState<string[]>([]);
     const [messageInput, setMessageInput] = useState<string>('');
     const [messages, setMessages] = useState<string[]>([]);
     const messagesEndRef = useRef<HTMLDivElement | null>(null);
     const [isSticky, setIsSticky] = useState<boolean>(true);
+    console.log('multiplayers', multiplayers);
 
     useEffect(() => {
       if (nameInvitation === null && invitationReceived !== null)
@@ -85,8 +87,20 @@ export default function Home() {
           // Assuming 'parsedJSON2.message' is an array of user list items
           const parsedUserList = JSON.parse(parsedJSON.message) as string[][];
           setUserList(parsedUserList);
-        } else if (parsedJSON.type === 'INVITATION_RESPONSE') {
+        } else if (parsedJSON.type === 'INVITATION_PASS') {
           setInvitationReceived(parsedJSON.message);
+        } else if (parsedJSON.type === 'INVITATION_REJECT_PASS') {
+          setRejectedList((value) => {
+            const newValue = [...value];
+            if (!newValue.includes(parsedJSON.message)) newValue.push(parsedJSON.message);
+            return newValue;
+          });
+        } else if (parsedJSON.type === 'INVITATION_ACCEPT_PASS') {
+          setMultiplayers((value) => {
+            const newValue = [...value];
+            newValue[1] = parsedJSON.message;
+            return newValue as [string, string];
+          });
         } else if (parsedJSON.type === 'MY_ID') {
           //console.log('MY multiplayer ID is: ', parsedJSON.message);
           setMultiplayers((value) => {
@@ -147,10 +161,28 @@ export default function Home() {
                 {['Accept', 'Reject'].map((x, i) => (
                   <button
                     onClick={() => {
-                      if (i === 1) {
-                        setInvitationReceived(null);
-                        setNameInvitation(null);
+                      if (i === 0) {
+                        const acceptInvitation = () => {
+                          if (client && invitationReceived) {
+                            client.send(JSON.stringify({ type: 'INVITATION_ACCEPT', message: invitationReceived }));
+                            setMultiplayers((value) => {
+                              const newValue = [...value];
+                              newValue[1] = invitationReceived;
+                              return newValue as [string, string];
+                            });
+                          }
+                        };
+                        acceptInvitation();
+                      } else if (i === 1) {
+                        const rejectInvitation = () => {
+                          if (client && invitationReceived) {
+                            client.send(JSON.stringify({ type: 'INVITATION_REJECT', message: invitationReceived }));
+                          }
+                        };
+                        rejectInvitation();
                       }
+                      setInvitationReceived(null);
+                      setNameInvitation(null);
                     }}
                     className="px-2 py-1 outline outline-1"
                     key={i}
@@ -162,7 +194,7 @@ export default function Home() {
             </div>
           </div>
         )}
-        <div className="ml-[-15em] mr-[5em] flex  w-[12em] flex-col justify-center">
+        <div className="ml-[-15em] mr-[5em] flex w-[12em] flex-col justify-center">
           <button
             disabled={
               selectedUser === null || !userList.map((x) => (x as unknown as UserList).UniqueId).includes(selectedUser)
@@ -201,11 +233,13 @@ export default function Home() {
                   // setUnitSelected([user.something, user.anotherProperty]);
                 }}
                 className={`${
-                  invitationList.includes((user as unknown as UserList).UniqueId)
-                    ? 'bg-yellow-300'
-                    : selectedUser === (user as unknown as UserList).UniqueId
-                      ? 'bg-yellow-100'
-                      : 'bg-slate-100'
+                  rejectedList.includes((user as unknown as UserList).UniqueId)
+                    ? 'bg-red-300'
+                    : invitationList.includes((user as unknown as UserList).UniqueId)
+                      ? 'bg-yellow-300'
+                      : selectedUser === (user as unknown as UserList).UniqueId
+                        ? 'bg-yellow-100'
+                        : 'bg-slate-100'
                 } w-full  outline outline-1`}
               >
                 {(user as unknown as UserList).Username}
