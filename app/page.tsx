@@ -15,6 +15,8 @@ export default function Home() {
   }
   enum MultiplayerPhase {
     lobby = 'Lobby',
+    setup = 'Setup',
+    battle = 'Battle',
   }
   enum ShipSelection {
     ship2 = 'ship2',
@@ -42,7 +44,13 @@ export default function Home() {
     const [messages, setMessages] = useState<string[]>([]);
     const messagesEndRef = useRef<HTMLDivElement | null>(null);
     const [isSticky, setIsSticky] = useState<boolean>(true);
-    console.log('multiplayers', multiplayers);
+
+    useEffect(() => {
+      if (!multiplayers.includes(null)) {
+        setInitialConfig([2, 2, 1, 1]);
+        setMultiplayerPhase(MultiplayerPhase.setup);
+      }
+    }, [multiplayers]);
 
     useEffect(() => {
       if (nameInvitation === null && invitationReceived !== null)
@@ -149,150 +157,160 @@ export default function Home() {
     interface userList {
       Username: string;
     }
-
-    return (
-      <div className="flex items-center justify-center">
-        {nameInvitation && (
-          <div className="absolute rounded-md outline outline-1">
-            <div className="flex h-fit w-fit flex-col items-center justify-center gap-2 bg-white px-4 py-4">
-              <span>{`${nameInvitation}`}</span>
-              <span>{`challenges you to a battle.`}</span>
-              <div className="flex gap-6">
-                {['Accept', 'Reject'].map((x, i) => (
-                  <button
-                    onClick={() => {
-                      if (i === 0) {
-                        const acceptInvitation = () => {
-                          if (client && invitationReceived) {
-                            client.send(JSON.stringify({ type: 'INVITATION_ACCEPT', message: invitationReceived }));
-                            setMultiplayers((value) => {
-                              const newValue = [...value];
-                              newValue[1] = invitationReceived;
-                              return newValue as [string, string];
-                            });
-                          }
-                        };
-                        acceptInvitation();
-                      } else if (i === 1) {
-                        const rejectInvitation = () => {
-                          if (client && invitationReceived) {
-                            client.send(JSON.stringify({ type: 'INVITATION_REJECT', message: invitationReceived }));
-                          }
-                        };
-                        rejectInvitation();
-                      }
-                      setInvitationReceived(null);
-                      setNameInvitation(null);
-                    }}
-                    className="px-2 py-1 outline outline-1"
-                    key={i}
-                  >
-                    {x}
-                  </button>
-                ))}
+    if (multiplayerPhase === MultiplayerPhase.lobby) {
+      return (
+        <div className="flex items-center justify-center">
+          {nameInvitation && (
+            <div className="absolute rounded-md outline outline-1">
+              <div className="flex h-fit w-fit flex-col items-center justify-center gap-2 bg-white px-4 py-4">
+                <span>{`${nameInvitation}`}</span>
+                <span>{`challenges you to a battle.`}</span>
+                <div className="flex gap-6">
+                  {['Accept', 'Reject'].map((x, i) => (
+                    <button
+                      onClick={() => {
+                        if (i === 0) {
+                          const acceptInvitation = () => {
+                            if (client && invitationReceived) {
+                              client.send(JSON.stringify({ type: 'INVITATION_ACCEPT', message: invitationReceived }));
+                              setMultiplayers((value) => {
+                                const newValue = [...value];
+                                newValue[1] = invitationReceived;
+                                return newValue as [string, string];
+                              });
+                            }
+                          };
+                          acceptInvitation();
+                        } else if (i === 1) {
+                          const rejectInvitation = () => {
+                            if (client && invitationReceived) {
+                              client.send(JSON.stringify({ type: 'INVITATION_REJECT', message: invitationReceived }));
+                            }
+                          };
+                          rejectInvitation();
+                        }
+                        setInvitationReceived(null);
+                        setNameInvitation(null);
+                      }}
+                      className="px-2 py-1 outline outline-1"
+                      key={i}
+                    >
+                      {x}
+                    </button>
+                  ))}
+                </div>
               </div>
             </div>
-          </div>
-        )}
-        <div className="ml-[-15em] mr-[5em] flex w-[12em] flex-col justify-center">
-          <button
-            disabled={
-              selectedUser === null || !userList.map((x) => (x as unknown as UserList).UniqueId).includes(selectedUser)
-            }
-            onClick={() => {
-              setInvitationList((value) => {
-                const newValue = [...value];
-                if (selectedUser && !newValue.includes(selectedUser)) newValue.push(selectedUser);
-                return newValue;
-              });
-              const sendInvitation = () => {
-                if (client && selectedUser) {
-                  client.send(JSON.stringify({ type: 'INVITATION', message: selectedUser }));
-                  console.log(multiplayers[0]);
-                }
-              };
-              sendInvitation();
-              setSelectedUser(null);
-            }}
-            className="mb-[1em] rounded-md bg-slate-100 outline outline-1 disabled:opacity-50"
-          >
-            Send invitation
-          </button>
-          <div className="h-[30em] flex-col overflow-y-auto p-0.5 outline outline-2">
-            {userList.map((user, index) => (
-              <button
-                id={`button_${(user as unknown as UserList).UniqueId}`}
-                key={index}
-                onClick={() => {
-                  (user as unknown as UserList).UniqueId !== multiplayers[0] &&
-                    setSelectedUser(() => {
-                      if ((user as unknown as UserList).UniqueId === selectedUser) return null;
-                      else return (user as unknown as UserList).UniqueId;
-                    });
-                  // Handle the onClick logic
-                  // setUnitSelected([user.something, user.anotherProperty]);
-                }}
-                className={`${
-                  rejectedList.includes((user as unknown as UserList).UniqueId)
-                    ? 'bg-red-300'
-                    : invitationList.includes((user as unknown as UserList).UniqueId)
-                      ? 'bg-yellow-300'
-                      : selectedUser === (user as unknown as UserList).UniqueId
-                        ? 'bg-yellow-100'
-                        : 'bg-slate-100'
-                } w-full  outline outline-1`}
-              >
-                {(user as unknown as UserList).Username}
-              </button>
-            ))}
-          </div>
-        </div>
-        <div className="flex h-[25em] flex-col justify-between gap-10">
-          <div
-            id="ChatBoxDiv"
-            onScroll={() => {
-              const ChatBoxDiv = document.getElementById('ChatBoxDiv');
-              if (
-                (ChatBoxDiv?.scrollHeight ?? 0) - (ChatBoxDiv?.scrollTop ?? 0) - (ChatBoxDiv?.clientHeight ?? 0) >=
-                100
-              )
-                setIsSticky(false);
-              else setIsSticky(true);
-            }}
-            className="mb-6 h-[18em] overflow-y-auto bg-cyan-50 px-2 py-1.5"
-          >
-            {serverStatus ? (
-              <span className="text-green-700">Server Connected</span>
-            ) : (
-              <span className="text-red-600">Server Disconnected</span>
-            )}
-            {messages.map((msg, index) => (
-              <div key={index}>{msg}</div>
-            ))}
-            <div ref={messagesEndRef} />
-          </div>
-          <div className="flex w-full justify-center gap-2">
-            <input
-              autoComplete="off"
-              className="w-[30em] px-2 py-1.5 outline outline-1"
-              id="inputMessage"
-              type="text"
-              value={messageInput}
-              onChange={handleMessageChange}
-              placeholder="..."
-              onKeyDown={handleKeyDown}
-            />
+          )}
+          <div className="ml-[-15em] mr-[5em] flex w-[12em] flex-col justify-center">
             <button
-              className="rounded-sm bg-slate-100 px-4 py-1.5 outline outline-1"
-              id="sendMessage"
-              onClick={sendMessage}
+              disabled={
+                selectedUser === null ||
+                !userList.map((x) => (x as unknown as UserList).UniqueId).includes(selectedUser)
+              }
+              onClick={() => {
+                setInvitationList((value) => {
+                  const newValue = [...value];
+                  if (selectedUser && !newValue.includes(selectedUser)) newValue.push(selectedUser);
+                  return newValue;
+                });
+                const sendInvitation = () => {
+                  if (client && selectedUser) {
+                    client.send(JSON.stringify({ type: 'INVITATION', message: selectedUser }));
+                    console.log(multiplayers[0]);
+                  }
+                };
+                sendInvitation();
+                setSelectedUser(null);
+              }}
+              className="mb-[1em] rounded-md bg-slate-100 outline outline-1 disabled:opacity-50"
             >
-              Send
+              Send invitation
             </button>
+            <div className="h-[30em] flex-col overflow-y-auto p-0.5 outline outline-2">
+              {userList.map((user, index) => (
+                <button
+                  id={`button_${(user as unknown as UserList).UniqueId}`}
+                  key={index}
+                  onClick={() => {
+                    (user as unknown as UserList).UniqueId !== multiplayers[0] &&
+                      setSelectedUser(() => {
+                        if ((user as unknown as UserList).UniqueId === selectedUser) return null;
+                        else return (user as unknown as UserList).UniqueId;
+                      });
+                    // Handle the onClick logic
+                    // setUnitSelected([user.something, user.anotherProperty]);
+                  }}
+                  className={`${
+                    rejectedList.includes((user as unknown as UserList).UniqueId)
+                      ? 'bg-red-300'
+                      : invitationList.includes((user as unknown as UserList).UniqueId)
+                        ? 'bg-yellow-300'
+                        : selectedUser === (user as unknown as UserList).UniqueId
+                          ? 'bg-yellow-100'
+                          : 'bg-slate-100'
+                  } w-full  outline outline-1`}
+                >
+                  {(user as unknown as UserList).Username}
+                </button>
+              ))}
+            </div>
+          </div>
+          <div className="flex h-[25em] flex-col justify-between gap-10">
+            <div
+              id="ChatBoxDiv"
+              onScroll={() => {
+                const ChatBoxDiv = document.getElementById('ChatBoxDiv');
+                if (
+                  (ChatBoxDiv?.scrollHeight ?? 0) - (ChatBoxDiv?.scrollTop ?? 0) - (ChatBoxDiv?.clientHeight ?? 0) >=
+                  100
+                )
+                  setIsSticky(false);
+                else setIsSticky(true);
+              }}
+              className="mb-6 h-[18em] overflow-y-auto bg-cyan-50 px-2 py-1.5"
+            >
+              {serverStatus ? (
+                <span className="text-green-700">Server Connected</span>
+              ) : (
+                <span className="text-red-600">Server Disconnected</span>
+              )}
+              {messages.map((msg, index) => (
+                <div key={index}>{msg}</div>
+              ))}
+              <div ref={messagesEndRef} />
+            </div>
+            <div className="flex w-full justify-center gap-2">
+              <input
+                autoComplete="off"
+                className="w-[30em] px-2 py-1.5 outline outline-1"
+                id="inputMessage"
+                type="text"
+                value={messageInput}
+                onChange={handleMessageChange}
+                placeholder="..."
+                onKeyDown={handleKeyDown}
+              />
+              <button
+                className="rounded-sm bg-slate-100 px-4 py-1.5 outline outline-1"
+                id="sendMessage"
+                onClick={sendMessage}
+              >
+                Send
+              </button>
+            </div>
+            <QuitButton />
           </div>
         </div>
-      </div>
-    );
+      );
+    } else if ((multiplayerPhase as MultiplayerPhase) === MultiplayerPhase.setup) {
+      return (
+        <div className="flex h-full w-full flex-col items-center justify-center">
+          <Setup />
+          <Setup_LowerButtons />
+        </div>
+      );
+    }
   };
 
   const [initialConfig, setInitialConfig] = useState<number[]>([2, 2, 1, 1]);
@@ -335,12 +353,13 @@ export default function Home() {
       setUsername(usernameFromStorage);
     }
   }, []);
+
   const [username, setUsername] = useState<string>('defaultUsername');
   const [healthPlayer, setHealthPlayer] = useState<number>(100);
   const [healthComputer, setHealthComputer] = useState<number>(100);
   const [gamePhase, setGamePhase] = useState<GamePhase>(GamePhase.menu);
   const [multiplayerPhase, setMultiplayerPhase] = useState<MultiplayerPhase>(MultiplayerPhase.lobby);
-  const [playerSelected, setPlayerSelected] = useState<string | null>(null);
+  const [multiplayerMoves, setMultiplayerMoves] = useState<[string | null, string | null]>([null, null]);
   const [collection, setCollection] = useState<[ShipSelection, number[][], string][]>(shipConfiguration);
   const [enemyCollection, setEnemyCollection] = useState<[ShipSelection, number[][], string][]>([]);
   const [fogOfWar, setFogOfWar] = useState<number[]>([]);
@@ -355,6 +374,8 @@ export default function Home() {
   const [seekLoader, setSeekLoader] = useState<boolean>(false);
   const autoloaderTime = 500;
   const letters = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J'];
+  console.log('multiplayerPhase', multiplayerPhase);
+  console.log('gamePhase', gamePhase);
 
   //AI Movement part of logic
   useEffect(() => {
@@ -487,7 +508,7 @@ export default function Home() {
   }, [collection, computerMove, playerShipFound, seek, seekLoader]);
 
   useEffect(() => {
-    //after last ship hit this reset to normal uncover
+    //after last hit on ship (ship sunk) this reset to normal uncover
     if (
       playerShipFound[0] &&
       collection[playerShipFound[1] as unknown as number][1][0].filter((x) => !computerMove.includes(x)).length === 0
@@ -592,27 +613,29 @@ export default function Home() {
               newValue.push(i);
               return newValue;
             });
-            //Computer uncover Player (Computer(AI) move)
-            //regular move
-            if (!playerShipFound[0]) {
-              setComputerMove((value) => {
-                const newValue = [...value];
-                let randomNumberFrom1to100 = Math.floor(Math.random() * 100) + 1;
-                while (newValue.includes(randomNumberFrom1to100)) {
-                  randomNumberFrom1to100 = Math.floor(Math.random() * 100) + 1;
-                }
-                newValue.push(randomNumberFrom1to100);
-                return newValue;
-              });
-            }
-            //ship seek move
-            else {
-              setComputerMove((value) => {
-                const newValue = [...value];
-                newValue.push(seek[1][seek[1].length - 1]);
-                setSeekLoader(true);
-                return newValue;
-              });
+            if (gamePhase !== GamePhase.multiplayer) {
+              //Computer uncover Player (Computer(AI) move)
+              //regular move
+              if (!playerShipFound[0]) {
+                setComputerMove((value) => {
+                  const newValue = [...value];
+                  let randomNumberFrom1to100 = Math.floor(Math.random() * 100) + 1;
+                  while (newValue.includes(randomNumberFrom1to100)) {
+                    randomNumberFrom1to100 = Math.floor(Math.random() * 100) + 1;
+                  }
+                  newValue.push(randomNumberFrom1to100);
+                  return newValue;
+                });
+              }
+              //ship seek move
+              else {
+                setComputerMove((value) => {
+                  const newValue = [...value];
+                  newValue.push(seek[1][seek[1].length - 1]);
+                  setSeekLoader(true);
+                  return newValue;
+                });
+              }
             }
           }
         }}
@@ -809,7 +832,9 @@ export default function Home() {
     return (
       <button
         onClick={() => {
-          setGamePhase(GamePhase.menu);
+          if (gamePhase === GamePhase.multiplayer && multiplayerPhase !== MultiplayerPhase.lobby)
+            setMultiplayerPhase(MultiplayerPhase.lobby);
+          else setGamePhase(GamePhase.menu);
           setHorizontal(false);
           setUnitSelected([]);
           setAutoloader(false);
@@ -833,7 +858,7 @@ export default function Home() {
   const ResetButton = () => {
     return (
       !autoloader &&
-      gamePhase === GamePhase.setup && (
+      (gamePhase === GamePhase.setup || multiplayerPhase === MultiplayerPhase.setup) && (
         <button
           onClick={() => {
             setHorizontal(false);
@@ -894,6 +919,81 @@ export default function Home() {
 
   const usernameEditor = (value: string) => {
     return value;
+  };
+
+  const Setup = () => {
+    return (
+      <div className={`${gamePhase === GamePhase.preSetup && 'invisible'} flex flex-row items-center`}>
+        <div className="ml-[-15em] mr-[5em] flex w-[13em] flex-col justify-center">
+          <button
+            onClick={() => {
+              setHorizontal(!horizontal);
+            }}
+            className={`${autoloader && 'invisible'} mb-[1em] rounded-md bg-violet-200 outline outline-1`}
+          >
+            {horizontal ? 'Align: horizontal' : 'Align: vertical'}
+          </button>
+          <button
+            disabled={!collection.map((x) => x[1].length === 0).includes(true)}
+            onClick={() => {
+              setAutoloaderControl(0);
+              setAutoloader(true);
+            }}
+            className="mb-[1em] rounded-md bg-slate-100 outline outline-1 disabled:opacity-50"
+          >
+            Place randomly
+          </button>
+          <div className="flex h-[30em] flex-col gap-1 overflow-y-auto rounded-md bg-blue-500   p-0.5">
+            {collection.map(
+              (x, i) =>
+                x[1].length === 0 && (
+                  <button
+                    key={i}
+                    id={`stack${i}`}
+                    onClick={() => {
+                      setUnitSelected([x[0] as ShipSelection, x[2]]);
+                    }}
+                    className={`${
+                      unitSelected[1] === x[2] ? 'bg-yellow-100' : 'bg-neutral-100'
+                    } w-full  rounded-sm outline outline-1`}
+                  >
+                    {x[0]}
+                  </button>
+                ),
+            )}
+          </div>
+        </div>
+        <div>
+          <div className="mb-6 text-red-600">
+            {autoloaderControl >= autoloaderTime && (
+              <span className="whitespace-pre-line text-red-600">{AutoloaderWarning.aborted2}</span>
+            )}
+          </div>
+          <Board buttons={Buttons1} />
+        </div>
+      </div>
+    );
+  };
+
+  const Setup_LowerButtons = () => {
+    return (
+      <div className="flex flex-col gap-2">
+        {!collection.map((x) => x[1].length === 0).includes(true) && (
+          <button
+            onClick={() => {
+              if (gamePhase === GamePhase.multiplayer && multiplayerPhase === MultiplayerPhase.setup)
+                setMultiplayerPhase(MultiplayerPhase.battle);
+              else setGamePhase(GamePhase.battle);
+            }}
+            className="w-60 rounded-xl bg-green-200 py-1.5 outline outline-1"
+          >
+            Start battle
+          </button>
+        )}
+        <ResetButton />
+        <QuitButton />
+      </div>
+    );
   };
 
   return (
@@ -1024,74 +1124,8 @@ text-3xl text-orange-700"
           {autoloaderControl >= autoloaderTime && <QuitButton />}
         </div>
       )}
-      {(gamePhase === GamePhase.preSetup || gamePhase === GamePhase.setup) && (
-        <div className={`${gamePhase === GamePhase.preSetup && 'invisible'} flex flex-row items-center`}>
-          <div className="ml-[-15em] mr-[5em] flex w-[13em] flex-col justify-center">
-            <button
-              onClick={() => {
-                setHorizontal(!horizontal);
-              }}
-              className={`${autoloader && 'invisible'} mb-[1em] rounded-md bg-violet-200 outline outline-1`}
-            >
-              {horizontal ? 'Align: horizontal' : 'Align: vertical'}
-            </button>
-            <button
-              disabled={!collection.map((x) => x[1].length === 0).includes(true)}
-              onClick={() => {
-                setAutoloaderControl(0);
-                setAutoloader(true);
-              }}
-              className="mb-[1em] rounded-md bg-slate-100 outline outline-1 disabled:opacity-50"
-            >
-              Place randomly
-            </button>
-            <div className="flex h-[30em] flex-col gap-1 overflow-y-auto rounded-md bg-blue-500   p-0.5">
-              {collection.map(
-                (x, i) =>
-                  x[1].length === 0 && (
-                    <button
-                      key={i}
-                      id={`stack${i}`}
-                      onClick={() => {
-                        setUnitSelected([x[0] as ShipSelection, x[2]]);
-                      }}
-                      className={`${
-                        unitSelected[1] === x[2] ? 'bg-yellow-100' : 'bg-neutral-100'
-                      } w-full  rounded-sm outline outline-1`}
-                    >
-                      {x[0]}
-                    </button>
-                  ),
-              )}
-            </div>
-          </div>
-
-          <div>
-            <div className="mb-6 text-red-600">
-              {autoloaderControl >= autoloaderTime && (
-                <span className="whitespace-pre-line text-red-600">{AutoloaderWarning.aborted2}</span>
-              )}
-            </div>
-            <Board buttons={Buttons1} />
-          </div>
-        </div>
-      )}
-      {gamePhase === GamePhase.setup && (
-        <div className="mt-5 flex flex-col gap-2">
-          {!collection.map((x) => x[1].length === 0).includes(true) && (
-            <button
-              onClick={() => {
-                setGamePhase(GamePhase.battle);
-              }}
-              className="w-60 rounded-xl bg-green-200 py-1.5 outline outline-1"
-            >
-              Start battle
-            </button>
-          )}
-          <ResetButton />
-          <QuitButton />
-        </div>
-      )}
+      {(gamePhase === GamePhase.preSetup || gamePhase === GamePhase.setup) && <Setup />}
+      {gamePhase === GamePhase.setup && <Setup_LowerButtons />}
       {gamePhase === GamePhase.battle && (healthComputer === 0 || healthPlayer === 0) && (
         <div className="flex items-center justify-center">
           <div className="flex h-24 w-96 items-center justify-center rounded-lg bg-white outline outline-2 drop-shadow-xl">
@@ -1103,28 +1137,20 @@ text-3xl text-orange-700"
       )}
       {gamePhase === GamePhase.multiplayer && (
         <div className="flex h-full w-full items-center justify-center">
-          <div className="flex flex-col">
-            <div className="flex h-[30em] flex-col justify-between">
-              <div className="flex w-full pb-2 pl-8">
-                <span className="rounded-lg bg-slate-50 p-1">Multiplayer Lobby</span>
-              </div>
-              <WebSocketComponent />
-            </div>
-            <div className="mt-10 flex w-full justify-center">
-              <QuitButton />
-            </div>
-          </div>
+          <WebSocketComponent />
         </div>
       )}
-      {gamePhase === GamePhase.battle && (
+      {(gamePhase === GamePhase.battle || multiplayerPhase === MultiplayerPhase.battle) && (
         <div className="flex flex-col">
           <div className="flex gap-8">
             <Board health={healthPlayer} title={username} buttons={Buttons2({ feed: collection })} />
-            <Board
-              health={healthComputer}
-              title="Computer"
-              buttons={Buttons2({ manipulative: true, feed: enemyCollection })}
-            />
+            {gamePhase === GamePhase.battle && (
+              <Board
+                health={healthComputer}
+                title={(gamePhase as GamePhase) !== GamePhase.multiplayer ? `Computer` : `Player2`}
+                buttons={Buttons2({ manipulative: true, feed: enemyCollection })}
+              />
+            )}
           </div>
           <div className="mt-10 flex w-full justify-center">
             <QuitButton />
