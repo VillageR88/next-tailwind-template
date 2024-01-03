@@ -62,8 +62,8 @@ export default function Home() {
     }, [invitationReceived, nameInvitation, userList]);
 
     useEffect(() => {
-      //const newClient = new W3CWebSocket('ws://192.168.1.109:8080');
-      const newClient = new W3CWebSocket('ws://192.168.1.61:8080');
+      const newClient = new W3CWebSocket('ws://192.168.1.109:8080');
+      //const newClient = new W3CWebSocket('ws://192.168.1.61:8080');
 
       newClient.onopen = () => {
         console.log('WebSocket Client Connected');
@@ -314,7 +314,19 @@ export default function Home() {
     } else if ((multiplayerPhase as MultiplayerPhase) === MultiplayerPhase.battle) {
       return (
         <div>
-          <Battle />
+          {multiplayerFeed ? (
+            <Battle />
+          ) : (
+            <Hourglass
+              visible={true}
+              height="80"
+              width="80"
+              ariaLabel="hourglass-loading"
+              wrapperStyle={{}}
+              wrapperClass=""
+              colors={['#306cce', '#72a1ed']}
+            />
+          )}
         </div>
       );
     }
@@ -1007,13 +1019,11 @@ export default function Home() {
       <div className="flex flex-col">
         <div className="flex gap-8">
           <Board health={healthPlayer} title={username} buttons={Buttons2({ feed: collection })} />
-          {gamePhase === GamePhase.battle && (
-            <Board
-              health={healthComputer}
-              title={(gamePhase as GamePhase) !== GamePhase.multiplayer ? `Computer` : `Player2`}
-              buttons={Buttons2({ manipulative: true, feed: enemyCollection })}
-            />
-          )}
+          <Board
+            health={healthComputer}
+            title={(gamePhase as GamePhase) !== GamePhase.multiplayer ? `Computer` : `Player2`}
+            buttons={Buttons2({ manipulative: true, feed: enemyCollection })}
+          />
         </div>
         <div className="mt-10 flex w-full justify-center">
           <QuitButton />
