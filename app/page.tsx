@@ -31,6 +31,7 @@ export default function Home() {
   }
 
   const WebSocketComponent = () => {
+    const [multiplayerFeed, setMultiplayerFeed] = useState<[ShipSelection, number[][], string][] | null>(null);
     const [nameInvitation, setNameInvitation] = useState<string | null>(null);
     const [invitationReceived, setInvitationReceived] = useState<null | string>(null);
     const [serverStatus, setServerStatus] = useState<boolean>(false);
@@ -310,6 +311,12 @@ export default function Home() {
           <Setup_LowerButtons />
         </div>
       );
+    } else if ((multiplayerPhase as MultiplayerPhase) === MultiplayerPhase.battle) {
+      return (
+        <div>
+          <Battle />
+        </div>
+      );
     }
   };
 
@@ -359,7 +366,6 @@ export default function Home() {
   const [healthComputer, setHealthComputer] = useState<number>(100);
   const [gamePhase, setGamePhase] = useState<GamePhase>(GamePhase.menu);
   const [multiplayerPhase, setMultiplayerPhase] = useState<MultiplayerPhase>(MultiplayerPhase.lobby);
-  const [multiplayerMoves, setMultiplayerMoves] = useState<[string | null, string | null]>([null, null]);
   const [collection, setCollection] = useState<[ShipSelection, number[][], string][]>(shipConfiguration);
   const [enemyCollection, setEnemyCollection] = useState<[ShipSelection, number[][], string][]>([]);
   const [fogOfWar, setFogOfWar] = useState<number[]>([]);
@@ -996,6 +1002,26 @@ export default function Home() {
     );
   };
 
+  const Battle = () => {
+    return (
+      <div className="flex flex-col">
+        <div className="flex gap-8">
+          <Board health={healthPlayer} title={username} buttons={Buttons2({ feed: collection })} />
+          {gamePhase === GamePhase.battle && (
+            <Board
+              health={healthComputer}
+              title={(gamePhase as GamePhase) !== GamePhase.multiplayer ? `Computer` : `Player2`}
+              buttons={Buttons2({ manipulative: true, feed: enemyCollection })}
+            />
+          )}
+        </div>
+        <div className="mt-10 flex w-full justify-center">
+          <QuitButton />
+        </div>
+      </div>
+    );
+  };
+
   return (
     <div className="flex min-h-screen flex-col items-center justify-center bg-[url('./images/summer_background_47_a.jpg')] bg-cover font-frijole font-[300]  text-black">
       {gamePhase === GamePhase.exit && (
@@ -1127,8 +1153,8 @@ text-3xl text-orange-700"
       {(gamePhase === GamePhase.preSetup || gamePhase === GamePhase.setup) && <Setup />}
       {gamePhase === GamePhase.setup && <Setup_LowerButtons />}
       {gamePhase === GamePhase.battle && (healthComputer === 0 || healthPlayer === 0) && (
-        <div className="flex items-center justify-center">
-          <div className="flex h-24 w-96 items-center justify-center rounded-lg bg-white outline outline-2 drop-shadow-xl">
+        <div className="absolute flex items-center justify-center">
+          <div className="flex h-24  w-96 items-center justify-center rounded-lg bg-white outline outline-2 drop-shadow-xl">
             {healthComputer === 0 && <span className="text-3xl">{username} Wins!</span>}
             {healthPlayer === 0 && <span className="text-3xl">Computer Wins!</span>}
             {healthPlayer === 0 && healthComputer === 0 && <span className="text-3xl">Draw!</span>}
@@ -1140,23 +1166,7 @@ text-3xl text-orange-700"
           <WebSocketComponent />
         </div>
       )}
-      {(gamePhase === GamePhase.battle || multiplayerPhase === MultiplayerPhase.battle) && (
-        <div className="flex flex-col">
-          <div className="flex gap-8">
-            <Board health={healthPlayer} title={username} buttons={Buttons2({ feed: collection })} />
-            {gamePhase === GamePhase.battle && (
-              <Board
-                health={healthComputer}
-                title={(gamePhase as GamePhase) !== GamePhase.multiplayer ? `Computer` : `Player2`}
-                buttons={Buttons2({ manipulative: true, feed: enemyCollection })}
-              />
-            )}
-          </div>
-          <div className="mt-10 flex w-full justify-center">
-            <QuitButton />
-          </div>
-        </div>
-      )}
+      {gamePhase === GamePhase.battle && <Battle />}
     </div>
   );
 }
