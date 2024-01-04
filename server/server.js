@@ -144,7 +144,28 @@ wsServer.on('request', (request) => {
           } else {
             console.log(`Rejected user (${invitationReceived}) not found.`);
           }
-        } else {
+        } else if (receivedData.type === 'FEED') {
+          const targetClientID = receivedData.message[0]; // multiplayers[1]
+          const feedMessage = receivedData.message[1]; // collection
+
+          // Get the target client's connection
+          const targetClient = clients[targetClientID];
+          if (targetClient) {
+            // Prepare the FEED_PASS message
+            const feedPassMessage = JSON.stringify({
+              type: 'FEED_PASS',
+              message: feedMessage,
+            });
+
+            // Send the FEED_PASS message to the target client
+            targetClient.connection.sendUTF(feedPassMessage);
+            console.log(`FEED PASSED ON to ${targetClientID}`);
+          } else {
+            console.log(`Target client (${targetClientID}) not found.`);
+          }
+        }
+
+        else {
           // Handling other types of data messages
           // Process the different types of data messages here based on receivedData.type
           console.log('Received Data Message:', receivedData);

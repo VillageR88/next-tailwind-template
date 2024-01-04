@@ -13,25 +13,43 @@ enum MultiplayerPhase {
   battle = 'Battle',
 }
 
+enum ShipSelection {
+  ship2 = 'ship2',
+  ship3 = 'ship3',
+  ship4 = 'ship4',
+  ship5 = 'ship5',
+}
+
 const WebSocketComponent = ({
   username,
-  changeMultiplayerPhase,
+  collection,
+  multiplayerBattleReady,
+  passMultiplayerPhase,
+  passMultiplayerFeed,
+  passOpponentName,
   jsxElement1,
   jsxElement2,
+  jsxElement3,
 }: {
   username: string | null;
-  changeMultiplayerPhase(arg0: MultiplayerPhase): void;
+  collection: [ShipSelection, number[][], string][] | null;
+  multiplayerBattleReady: boolean;
+  passMultiplayerPhase(arg0: MultiplayerPhase): void;
+  passMultiplayerFeed(arg0: [ShipSelection, number[][], string][] | null): void;
+  passOpponentName(arg0: string): void;
   jsxElement1: JSX.Element;
   jsxElement2: JSX.Element;
+  jsxElement3: JSX.Element;
 }) => {
-  //const [multiplayerFeed, setMultiplayerFeed] = useState<[ShipSelection, number[][], string][] | null>(null);
   const [multiplayerPhase, setMultiplayerPhase] = useState<MultiplayerPhase>(MultiplayerPhase.lobby);
+  const [feed, setFeed] = useState<[ShipSelection, number[][], string][] | null>(null);
   const [nameInvitation, setNameInvitation] = useState<string | null>(null);
   const [invitationReceived, setInvitationReceived] = useState<null | string>(null);
   const [serverStatus, setServerStatus] = useState<boolean>(false);
   const [client, setClient] = useState<WebSocket | null>(null);
   const [userList, setUserList] = useState<string[][]>([]);
   const [multiplayers, setMultiplayers] = useState<[string | null, string | null]>([null, null]);
+  const [opponentName, setOpponentName] = useState<string | null>(null);
   const [selectedUser, setSelectedUser] = useState<string | null>(null);
   const [invitationList, setInvitationList] = useState<string[]>([]);
   const [rejectedList, setRejectedList] = useState<string[]>([]);
@@ -41,13 +59,26 @@ const WebSocketComponent = ({
   const [isSticky, setIsSticky] = useState<boolean>(true);
 
   useEffect(() => {
-    if ((multiplayerPhase as MultiplayerPhase) !== MultiplayerPhase.setup && !multiplayers.includes(null)) {
-      //setInitialConfig([2, 2, 1, 1]);
-      //setMultiplayerFeed(null);
-      changeMultiplayerPhase(MultiplayerPhase.setup);
+    if (multiplayerBattleReady) setMultiplayerPhase(MultiplayerPhase.battle);
+  }, [multiplayerBattleReady]);
+
+  useEffect(() => {
+    if (opponentName !== null)
+      () => {
+        passOpponentName(opponentName);
+      };
+  }, [opponentName, passOpponentName]);
+
+  useEffect(() => {
+    if ((multiplayerPhase as MultiplayerPhase) === MultiplayerPhase.lobby && !multiplayers.includes(null)) {
+      passMultiplayerPhase(MultiplayerPhase.setup);
       setMultiplayerPhase(MultiplayerPhase.setup);
     }
-  }, [changeMultiplayerPhase, multiplayerPhase, multiplayers]);
+  }, [passMultiplayerPhase, multiplayerPhase, multiplayers]);
+
+  useEffect(() => {
+    if (feed) passMultiplayerFeed(feed);
+  }, [feed, passMultiplayerFeed]);
 
   useEffect(() => {
     if (nameInvitation === null && invitationReceived !== null)
@@ -102,13 +133,15 @@ const WebSocketComponent = ({
           return newValue;
         });
       } else if (parsedJSON.type === 'INVITATION_ACCEPT_PASS') {
+        setOpponentName((parsedJSON.message as unknown as UserList).Username);
         setMultiplayers((value) => {
           const newValue = [...value];
           newValue[1] = parsedJSON.message;
           return newValue as [string, string];
         });
+      } else if (parsedJSON.type === 'FEED_PASS') {
+        setFeed(parsedJSON.message as unknown as [ShipSelection, number[][], string][]);
       } else if (parsedJSON.type === 'MY_ID') {
-        //console.log('MY multiplayer ID is: ', parsedJSON.message);
         setMultiplayers((value) => {
           const newValue = [...value];
           newValue[0] = parsedJSON.message;
@@ -122,7 +155,7 @@ const WebSocketComponent = ({
     return () => {
       newClient.close();
     };
-  }, [username]);
+  }, [passOpponentName, username]);
 
   useEffect(() => {
     isSticky && scrollToBottom();
@@ -152,163 +185,170 @@ const WebSocketComponent = ({
     }
   };
 
-  const sendFeed = () => {
-    if (client) {
+  useEffect(() => {
+    if (client && (multiplayerPhase as MultiplayerPhase) === MultiplayerPhase.battle) {
       console.log('feed has been sent');
-      //client.send(JSON.stringify({ type: 'FEED', message: [multiplayers[1], multiplayerFeed] }));
+      client.send(JSON.stringify({ type: 'FEED', message: [multiplayers[1], collection] }));
     }
-  };
+  }, [client, collection, multiplayerPhase, multiplayers]);
 
   interface userList {
     Username: string;
   }
-  return multiplayerPhase === MultiplayerPhase.lobby ? (
-    <div className="flex items-center justify-center">
-      {nameInvitation && (
-        <div className="absolute rounded-md outline outline-1">
-          <div className="flex h-fit w-fit flex-col items-center justify-center gap-2 bg-white px-4 py-4">
-            <span>{`${nameInvitation}`}</span>
-            <span>{`challenges you to a battle.`}</span>
-            <div className="flex gap-6">
-              {['Accept', 'Reject'].map((x, i) => (
-                <button
-                  onClick={() => {
-                    if (i === 0) {
-                      const acceptInvitation = () => {
-                        if (client && invitationReceived) {
-                          client.send(JSON.stringify({ type: 'INVITATION_ACCEPT', message: invitationReceived }));
-                          setMultiplayers((value) => {
-                            const newValue = [...value];
-                            newValue[1] = invitationReceived;
-                            return newValue as [string, string];
-                          });
-                        }
-                      };
-                      acceptInvitation();
-                    } else if (i === 1) {
-                      const rejectInvitation = () => {
-                        if (client && invitationReceived) {
-                          client.send(JSON.stringify({ type: 'INVITATION_REJECT', message: invitationReceived }));
-                        }
-                      };
-                      rejectInvitation();
-                    }
-                    setInvitationReceived(null);
-                    setNameInvitation(null);
-                  }}
-                  className="px-2 py-1 outline outline-1"
-                  key={i}
-                >
-                  {x}
-                </button>
-              ))}
+  if (multiplayerPhase === MultiplayerPhase.lobby)
+    return (
+      <div className="flex items-center justify-center">
+        {nameInvitation && (
+          <div className="absolute rounded-md outline outline-1">
+            <div className="flex h-fit w-fit flex-col items-center justify-center gap-2 bg-white px-4 py-4">
+              <span>{`${nameInvitation}`}</span>
+              <span>{`challenges you to a battle.`}</span>
+              <div className="flex gap-6">
+                {['Accept', 'Reject'].map((x, i) => (
+                  <button
+                    onClick={() => {
+                      if (i === 0) {
+                        const acceptInvitation = () => {
+                          if (client && invitationReceived) {
+                            client.send(JSON.stringify({ type: 'INVITATION_ACCEPT', message: invitationReceived }));
+                            setMultiplayers((value) => {
+                              const newValue = [...value];
+                              newValue[1] = invitationReceived;
+                              return newValue as [string, string];
+                            });
+                          }
+                        };
+                        acceptInvitation();
+                      } else if (i === 1) {
+                        const rejectInvitation = () => {
+                          if (client && invitationReceived) {
+                            client.send(JSON.stringify({ type: 'INVITATION_REJECT', message: invitationReceived }));
+                          }
+                        };
+                        rejectInvitation();
+                      }
+                      setInvitationReceived(null);
+                      setNameInvitation(null);
+                    }}
+                    className="px-2 py-1 outline outline-1"
+                    key={i}
+                  >
+                    {x}
+                  </button>
+                ))}
+              </div>
             </div>
           </div>
-        </div>
-      )}
-      <div className="ml-[-15em] mr-[5em] flex w-[12em] flex-col justify-center">
-        <button
-          disabled={
-            selectedUser === null || !userList.map((x) => (x as unknown as UserList).UniqueId).includes(selectedUser)
-          }
-          onClick={() => {
-            setInvitationList((value) => {
-              const newValue = [...value];
-              if (selectedUser && !newValue.includes(selectedUser)) newValue.push(selectedUser);
-              return newValue;
-            });
-            const sendInvitation = () => {
-              if (client && selectedUser) {
-                client.send(JSON.stringify({ type: 'INVITATION', message: selectedUser }));
-              }
-            };
-            sendInvitation();
-            setSelectedUser(null);
-          }}
-          className="mb-[1em] rounded-md bg-slate-100 outline outline-1 disabled:opacity-50"
-        >
-          Send invitation
-        </button>
-        <div className="h-[30em] flex-col overflow-y-auto p-0.5 outline outline-2">
-          {userList.map((user, index) => (
-            <button
-              id={`button_${(user as unknown as UserList).UniqueId}`}
-              key={index}
-              onClick={() => {
-                (user as unknown as UserList).UniqueId !== multiplayers[0] &&
-                  setSelectedUser(() => {
-                    if ((user as unknown as UserList).UniqueId === selectedUser) return null;
-                    else return (user as unknown as UserList).UniqueId;
-                  });
-                // Handle the onClick logic
-                // setUnitSelected([user.something, user.anotherProperty]);
-              }}
-              className={`${
-                rejectedList.includes((user as unknown as UserList).UniqueId)
-                  ? 'bg-red-300'
-                  : invitationList.includes((user as unknown as UserList).UniqueId)
-                    ? 'bg-yellow-300'
-                    : selectedUser === (user as unknown as UserList).UniqueId
-                      ? 'bg-yellow-100'
-                      : 'bg-slate-100'
-              } w-full  outline outline-1`}
-            >
-              {(user as unknown as UserList).Username}
-            </button>
-          ))}
-        </div>
-      </div>
-      <div className="flex h-[25em] flex-col justify-between gap-10">
-        <div
-          id="ChatBoxDiv"
-          onScroll={() => {
-            const ChatBoxDiv = document.getElementById('ChatBoxDiv');
-            if ((ChatBoxDiv?.scrollHeight ?? 0) - (ChatBoxDiv?.scrollTop ?? 0) - (ChatBoxDiv?.clientHeight ?? 0) >= 100)
-              setIsSticky(false);
-            else setIsSticky(true);
-          }}
-          className="mb-6 h-[18em] overflow-y-auto bg-cyan-50 px-2 py-1.5"
-        >
-          {serverStatus ? (
-            <span className="text-green-700">Server Connected</span>
-          ) : (
-            <span className="text-red-600">Server Disconnected</span>
-          )}
-          {messages.map((msg, index) => (
-            <div key={index}>{msg}</div>
-          ))}
-          <div ref={messagesEndRef} />
-        </div>
-        <div className="flex w-full justify-center gap-2">
-          <input
-            autoComplete="off"
-            className="w-[30em] px-2 py-1.5 outline outline-1"
-            id="inputMessage"
-            type="text"
-            value={messageInput}
-            onChange={handleMessageChange}
-            placeholder="..."
-            onKeyDown={handleKeyDown}
-          />
+        )}
+        <div className="ml-[-15em] mr-[5em] flex w-[12em] flex-col justify-center">
           <button
-            className="rounded-sm bg-slate-100 px-4 py-1.5 outline outline-1"
-            id="sendMessage"
-            onClick={sendMessage}
+            disabled={
+              selectedUser === null || !userList.map((x) => (x as unknown as UserList).UniqueId).includes(selectedUser)
+            }
+            onClick={() => {
+              setInvitationList((value) => {
+                const newValue = [...value];
+                if (selectedUser && !newValue.includes(selectedUser)) newValue.push(selectedUser);
+                return newValue;
+              });
+              const sendInvitation = () => {
+                if (client && selectedUser) {
+                  client.send(JSON.stringify({ type: 'INVITATION', message: selectedUser }));
+                }
+              };
+              sendInvitation();
+              setSelectedUser(null);
+            }}
+            className="mb-[1em] rounded-md bg-slate-100 outline outline-1 disabled:opacity-50"
           >
-            Send
+            Send invitation
           </button>
+          <div className="h-[30em] flex-col overflow-y-auto p-0.5 outline outline-2">
+            {userList.map((user, index) => (
+              <button
+                id={`button_${(user as unknown as UserList).UniqueId}`}
+                key={index}
+                onClick={() => {
+                  (user as unknown as UserList).UniqueId !== multiplayers[0] &&
+                    setSelectedUser(() => {
+                      if ((user as unknown as UserList).UniqueId === selectedUser) return null;
+                      else return (user as unknown as UserList).UniqueId;
+                    });
+                  // Handle the onClick logic
+                  // setUnitSelected([user.something, user.anotherProperty]);
+                }}
+                className={`${
+                  rejectedList.includes((user as unknown as UserList).UniqueId)
+                    ? 'bg-red-300'
+                    : invitationList.includes((user as unknown as UserList).UniqueId)
+                      ? 'bg-yellow-300'
+                      : selectedUser === (user as unknown as UserList).UniqueId
+                        ? 'bg-yellow-100'
+                        : 'bg-slate-100'
+                } w-full  outline outline-1`}
+              >
+                {(user as unknown as UserList).Username}
+              </button>
+            ))}
+          </div>
+        </div>
+        <div className="flex h-[25em] flex-col justify-between gap-10">
+          <div
+            id="ChatBoxDiv"
+            onScroll={() => {
+              const ChatBoxDiv = document.getElementById('ChatBoxDiv');
+              if (
+                (ChatBoxDiv?.scrollHeight ?? 0) - (ChatBoxDiv?.scrollTop ?? 0) - (ChatBoxDiv?.clientHeight ?? 0) >=
+                100
+              )
+                setIsSticky(false);
+              else setIsSticky(true);
+            }}
+            className="mb-6 h-[18em] overflow-y-auto bg-cyan-50 px-2 py-1.5"
+          >
+            {serverStatus ? (
+              <span className="text-green-700">Server Connected</span>
+            ) : (
+              <span className="text-red-600">Server Disconnected</span>
+            )}
+            {messages.map((msg, index) => (
+              <div key={index}>{msg}</div>
+            ))}
+            <div ref={messagesEndRef} />
+          </div>
+          <div className="flex w-full justify-center gap-2">
+            <input
+              autoComplete="off"
+              className="w-[30em] px-2 py-1.5 outline outline-1"
+              id="inputMessage"
+              type="text"
+              value={messageInput}
+              onChange={handleMessageChange}
+              placeholder="..."
+              onKeyDown={handleKeyDown}
+            />
+            <button
+              className="rounded-sm bg-slate-100 px-4 py-1.5 outline outline-1"
+              id="sendMessage"
+              onClick={sendMessage}
+            >
+              Send
+            </button>
+          </div>
         </div>
       </div>
-    </div>
-  ) : (
-    (multiplayerPhase as MultiplayerPhase) === MultiplayerPhase.setup && (
+    );
+  else if ((multiplayerPhase as MultiplayerPhase) === MultiplayerPhase.setup)
+    return (
       <div className="flex h-full w-full flex-col items-center justify-center">
         {jsxElement1}
         {jsxElement2}
       </div>
-    )
-  );
+    );
+  else if ((multiplayerPhase as MultiplayerPhase) === MultiplayerPhase.battle)
+    return <div className="flex h-full w-full flex-col items-center justify-center">{jsxElement3}</div>;
 };
+
 export default function Home() {
   enum GamePhase {
     menu = 'Menu',
@@ -318,13 +358,6 @@ export default function Home() {
     setup = 'Own unit placement',
     multiplayer = 'Multiplayer',
     battle = 'Battle',
-  }
-
-  enum ShipSelection {
-    ship2 = 'ship2',
-    ship3 = 'ship3',
-    ship4 = 'ship4',
-    ship5 = 'ship5',
   }
 
   const Hourglass1 = () => {
@@ -366,7 +399,7 @@ export default function Home() {
       stack.push(shipTemplate({ type: ShipSelection.ship5, coordinates: [], id: ids.shift() as unknown as string }));
     }
     return stack as [ShipSelection, number[][], string][];
-  }, [initialConfig, ShipSelection]);
+  }, [initialConfig]);
 
   enum AutoloaderWarning {
     none = '',
@@ -374,6 +407,8 @@ export default function Home() {
     aborted2 = 'Deployment aborted!\nRestart or reduce number of ships.',
   }
   const [multiplayerPhase, setMultiplayerPhase] = useState<MultiplayerPhase>(MultiplayerPhase.lobby);
+  const [passMultiplayerBattleReady, setPassMultiplayerBattleReady] = useState<boolean>(false);
+  const [multiplayerFeed, setMultiplayerFeed] = useState<[ShipSelection, number[][], string][] | null>(null);
   const [username, setUsername] = useState<string | null>(null);
   const [healthPlayer, setHealthPlayer] = useState<number>(100);
   const [healthComputer, setHealthComputer] = useState<number>(100);
@@ -1002,14 +1037,14 @@ export default function Home() {
     );
   };
 
-  const Setup_LowerButtons = ({ feedSender }: { feedSender?(): undefined }) => {
+  const Setup_LowerButtons = () => {
     return (
       <div className="flex flex-col gap-2">
         {!collection.map((x) => x[1].length === 0).includes(true) && (
           <button
             onClick={() => {
-              if (gamePhase === GamePhase.multiplayer && multiplayerPhase === MultiplayerPhase.setup) {
-                feedSender?.();
+              if (gamePhase === GamePhase.multiplayer) {
+                setPassMultiplayerBattleReady(true);
                 setMultiplayerPhase(MultiplayerPhase.battle);
               } else setGamePhase(GamePhase.battle);
             }}
@@ -1024,16 +1059,20 @@ export default function Home() {
     );
   };
 
-  const Battle = ({ feed }: { feed?: [ShipSelection, number[][], string][] }) => {
+  const Battle = ({ feed }: { feed?: [ShipSelection, number[][], string][] | null }) => {
     return (
       <div className="flex flex-col">
         <div className="flex gap-8">
           <Board health={healthPlayer} title={username ?? ''} buttons={Buttons2({ feed: collection })} />
-          <Board
-            health={healthComputer}
-            title={(gamePhase as GamePhase) !== GamePhase.multiplayer ? `Computer` : `Player2`}
-            buttons={Buttons2({ manipulative: true, feed: feed ? feed : enemyCollection })}
-          />
+          {gamePhase === GamePhase.battle || (gamePhase === GamePhase.multiplayer && feed) ? (
+            <Board
+              health={healthComputer}
+              title={(gamePhase as GamePhase) !== GamePhase.multiplayer ? `Computer` : `Player2`}
+              buttons={Buttons2({ manipulative: true, feed: feed ? feed : enemyCollection })}
+            />
+          ) : (
+            <Hourglass1 />
+          )}
         </div>
         <div className="mt-10 flex w-full justify-center">
           <QuitButton />
@@ -1042,20 +1081,9 @@ export default function Home() {
     );
   };
 
-  //else if ((multiplayerPhase as MultiplayerPhase) === MultiplayerPhase.setup) {
-  //   return (
-  //   <div className="flex h-full w-full flex-col items-center justify-center">
-  //    <Setup />
-  //    <Setup_LowerButtons
-  //     feedSender={() => {
-  //    sendFeed();
-  //   }}
-  //   />
-  //    </div>
-  //   );
-  // } else if ((multiplayerPhase as MultiplayerPhase) === MultiplayerPhase.battle) {
-  //    return <div>{multiplayerFeed ? <Battle feed={multiplayerFeed} /> : <Hourglass1 />}</div>;
-  //  }
+  useEffect(() => {
+    if (multiplayerPhase === MultiplayerPhase.setup) setInitialConfig([2, 2, 1, 1]);
+  }, [multiplayerPhase]);
 
   return (
     <div className="flex min-h-screen flex-col items-center justify-center bg-[url('./images/summer_background_47_a.jpg')] bg-cover font-frijole font-[300]  text-black">
@@ -1189,9 +1217,15 @@ text-3xl text-orange-700"
       {gamePhase === GamePhase.multiplayer && (
         <div className="flex h-full w-full items-center justify-center">
           <WebSocketComponent
+            multiplayerBattleReady={passMultiplayerBattleReady}
+            collection={collection}
             jsxElement1={<Setup />}
             jsxElement2={<Setup_LowerButtons />}
-            changeMultiplayerPhase={(value) => {
+            jsxElement3={<Battle feed={multiplayerFeed} />}
+            passMultiplayerFeed={(value) => {
+              setMultiplayerFeed(value);
+            }}
+            passMultiplayerPhase={(value) => {
               setMultiplayerPhase(value);
             }}
             username={username}
