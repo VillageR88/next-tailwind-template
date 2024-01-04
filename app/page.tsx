@@ -22,21 +22,13 @@ enum ShipSelection {
 
 const WebSocketComponent = ({
   username,
-  collection,
-  multiplayerBattleReady,
-  passMultiplayerPhase,
-  passMultiplayerFeed,
-  passOpponentName,
+  changeMultiplayerPhase,
   jsxElement1,
   jsxElement2,
   jsxElement3,
 }: {
   username: string | null;
-  collection: [ShipSelection, number[][], string][] | null;
-  multiplayerBattleReady: boolean;
-  passMultiplayerPhase(arg0: MultiplayerPhase): void;
-  passMultiplayerFeed(arg0: [ShipSelection, number[][], string][] | null): void;
-  passOpponentName(arg0: string): void;
+  changeMultiplayerPhase(arg0: MultiplayerPhase): void;
   jsxElement1: JSX.Element;
   jsxElement2: JSX.Element;
   jsxElement3: JSX.Element;
@@ -57,21 +49,14 @@ const WebSocketComponent = ({
   const [messages, setMessages] = useState<string[]>([]);
   const messagesEndRef = useRef<HTMLDivElement | null>(null);
   const [isSticky, setIsSticky] = useState<boolean>(true);
+  console.log('multiplayerPhaseComponent: ', multiplayerPhase);
+  console.log('feed', feed);
 
   useEffect(() => {
-    if (multiplayerBattleReady) setMultiplayerPhase(MultiplayerPhase.battle);
-  }, [multiplayerBattleReady]);
-
-  useEffect(() => {
-    if (opponentName !== null)
-      () => {
-        passOpponentName(opponentName);
-      };
-  }, [opponentName, passOpponentName]);
-
-  useEffect(() => {
-    if ((multiplayerPhase as MultiplayerPhase) === MultiplayerPhase.lobby && !multiplayers.includes(null)) {
-      passMultiplayerPhase(MultiplayerPhase.setup);
+    if ((multiplayerPhase as MultiplayerPhase) !== MultiplayerPhase.setup && !multiplayers.includes(null)) {
+      //setInitialConfig([2, 2, 1, 1]);
+      //setMultiplayerFeed(null);
+      changeMultiplayerPhase(MultiplayerPhase.setup);
       setMultiplayerPhase(MultiplayerPhase.setup);
     }
   }, [passMultiplayerPhase, multiplayerPhase, multiplayers]);
@@ -427,6 +412,8 @@ export default function Home() {
   const [seekLoader, setSeekLoader] = useState<boolean>(false);
   const autoloaderTime = 500;
   const letters = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J'];
+  console.log('multiplayerPhase: ', multiplayerPhase);
+  console.log('gamePhase', gamePhase);
 
   useEffect(() => {
     // Perform localStorage action
