@@ -163,8 +163,24 @@ wsServer.on('request', (request) => {
           } else {
             console.log(`Target client (${targetClientID}) not found.`);
           }
+        } else if (receivedData.type === 'MOVEMENT_REPORT') {
+          const targetClientID = receivedData.message;
+          const movementReportMessage = receivedData.message;
+          // Get the target client's connection
+          const targetClient = clients[targetClientID];
+          if (targetClient) {
+            // Prepare the MOVEMENT_REPORT_PASS message
+            const movementReportPassMessage = JSON.stringify({
+              type: 'MOVEMENT_REPORT_PASS',
+              message: movementReportMessage,
+            });
+            // Send the MOVEMENT_REPORT_PASS message to the target client
+            targetClient.connection.sendUTF(movementReportPassMessage);
+            console.log(`MOVEMENT_REPORT PASSED ON to ${targetClientID}`);
+          } else {
+            console.log(`Target client (${targetClientID}) not found.`);
+          }
         }
-
         else {
           // Handling other types of data messages
           // Process the different types of data messages here based on receivedData.type

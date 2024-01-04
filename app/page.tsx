@@ -24,10 +24,12 @@ const WebSocketComponent = ({
   username,
   collection,
   multiplayerBattleReady,
+  infoAboutPlayerMove,
   passMultiplayerPhase,
   passMultiplayerFeed,
   passOpponentName,
   passMoveAllowed,
+  passInfoAboutPlayerMoveReceived,
   jsxElement1,
   jsxElement2,
   jsxElement3,
@@ -35,10 +37,12 @@ const WebSocketComponent = ({
   username: string | null;
   collection: [ShipSelection, number[][], string][] | null;
   multiplayerBattleReady: boolean;
+  infoAboutPlayerMove: boolean;
   passMultiplayerPhase(arg0: MultiplayerPhase): void;
   passMultiplayerFeed(arg0: [ShipSelection, number[][], string][] | null): void;
   passOpponentName(arg0: string): void;
   passMoveAllowed(): void;
+  passInfoAboutPlayerMoveReceived(): void;
   jsxElement1: JSX.Element;
   jsxElement2: JSX.Element;
   jsxElement3: JSX.Element;
@@ -66,6 +70,21 @@ const WebSocketComponent = ({
       setMoveConductor([false, false]);
     }
   }, [moveConductor, multiplayerPhase, passMoveAllowed]);
+
+  useEffect(() => {
+    if (infoAboutPlayerMove) {
+      setMoveConductor((value) => {
+        const newValue = [...value];
+        newValue[0] = true;
+        return newValue as [boolean, boolean];
+      });
+      passInfoAboutPlayerMoveReceived();
+      if (client && (multiplayerPhase as MultiplayerPhase) === MultiplayerPhase.battle) {
+        console.log('info about move has been sent');
+        client.send(JSON.stringify({ type: 'MOVEMENT_REPORT', message: multiplayers[1] }));
+      }
+    }
+  }, [client, infoAboutPlayerMove, multiplayerPhase, multiplayers, passInfoAboutPlayerMoveReceived]);
 
   useEffect(() => {
     if (multiplayerBattleReady) setMultiplayerPhase(MultiplayerPhase.battle);
@@ -144,6 +163,12 @@ const WebSocketComponent = ({
         });
       } else if (parsedJSON.type === 'FEED_PASS') {
         setFeed(parsedJSON.message as unknown as [ShipSelection, number[][], string][]);
+      } else if (parsedJSON.type === 'MOVEMENT_REPORT_PASS') {
+        setMoveConductor((value) => {
+          const newValue = [...value];
+          newValue[1] = true;
+          return newValue as [boolean, boolean];
+        });
       } else if (parsedJSON.type === 'MY_ID') {
         setMultiplayers((value) => {
           const newValue = [...value];
@@ -410,6 +435,7 @@ export default function Home() {
     aborted2 = 'Deployment aborted!\nRestart or reduce number of ships.',
   }
   const [moveAllowed, setMoveAllowed] = useState<boolean>(false);
+  const [infoAboutPlayerMove, setInfoAboutPlayerMove] = useState<boolean>(false);
   const [multiplayerPhase, setMultiplayerPhase] = useState<MultiplayerPhase>(MultiplayerPhase.lobby);
   const [passMultiplayerBattleReady, setPassMultiplayerBattleReady] = useState<boolean>(false);
   const [multiplayerFeed, setMultiplayerFeed] = useState<[ShipSelection, number[][], string][] | null>(null);
@@ -704,7 +730,10 @@ export default function Home() {
                     return newValue;
                   });
                 }
-              } else setMoveAllowed(false);
+              } else {
+                setInfoAboutPlayerMove(true);
+                setMoveAllowed(false);
+              }
             }
           }
         }}
@@ -1226,6 +1255,7 @@ text-3xl text-orange-700"
       {gamePhase === GamePhase.multiplayer && (
         <div className="flex h-full w-full items-center justify-center">
           <WebSocketComponent
+            infoAboutPlayerMove={infoAboutPlayerMove}
             multiplayerBattleReady={passMultiplayerBattleReady}
             collection={collection}
             jsxElement1={<Setup />}
@@ -1242,6 +1272,9 @@ text-3xl text-orange-700"
             }}
             passMoveAllowed={() => {
               setMoveAllowed(true);
+            }}
+            passInfoAboutPlayerMoveReceived={() => {
+              setInfoAboutPlayerMove(false);
             }}
             username={username}
           />
