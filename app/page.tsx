@@ -27,6 +27,7 @@ const WebSocketComponent = ({
   passMultiplayerPhase,
   passMultiplayerFeed,
   passOpponentName,
+  passMoveAllowed,
   jsxElement1,
   jsxElement2,
   jsxElement3,
@@ -37,10 +38,12 @@ const WebSocketComponent = ({
   passMultiplayerPhase(arg0: MultiplayerPhase): void;
   passMultiplayerFeed(arg0: [ShipSelection, number[][], string][] | null): void;
   passOpponentName(arg0: string): void;
+  passMoveAllowed(): void;
   jsxElement1: JSX.Element;
   jsxElement2: JSX.Element;
   jsxElement3: JSX.Element;
 }) => {
+  const [moveConductor, setMoveConductor] = useState<[boolean, boolean]>([true, true]);
   const [multiplayerPhase, setMultiplayerPhase] = useState<MultiplayerPhase>(MultiplayerPhase.lobby);
   const [feed, setFeed] = useState<[ShipSelection, number[][], string][] | null>(null);
   const [nameInvitation, setNameInvitation] = useState<string | null>(null);
@@ -56,6 +59,13 @@ const WebSocketComponent = ({
   const [messages, setMessages] = useState<string[]>([]);
   const messagesEndRef = useRef<HTMLDivElement | null>(null);
   const [isSticky, setIsSticky] = useState<boolean>(true);
+
+  useEffect(() => {
+    if (!moveConductor.includes(false) && multiplayerPhase === MultiplayerPhase.battle) {
+      passMoveAllowed();
+      setMoveConductor([false, false]);
+    }
+  }, [moveConductor, multiplayerPhase, passMoveAllowed]);
 
   useEffect(() => {
     if (multiplayerBattleReady) setMultiplayerPhase(MultiplayerPhase.battle);
@@ -399,6 +409,7 @@ export default function Home() {
     aborted1 = 'Deployment aborted!\nReduce number of ships.',
     aborted2 = 'Deployment aborted!\nRestart or reduce number of ships.',
   }
+  const [moveAllowed, setMoveAllowed] = useState<boolean>(false);
   const [multiplayerPhase, setMultiplayerPhase] = useState<MultiplayerPhase>(MultiplayerPhase.lobby);
   const [passMultiplayerBattleReady, setPassMultiplayerBattleReady] = useState<boolean>(false);
   const [multiplayerFeed, setMultiplayerFeed] = useState<[ShipSelection, number[][], string][] | null>(null);
@@ -663,35 +674,37 @@ export default function Home() {
         id={'' + i}
         onClick={() => {
           if (healthPlayer !== 0 && healthComputer !== 0 && manipulative && !fogOfWar.includes(i)) {
-            //Player uncover Computer
-            setFogOfWar((value) => {
-              const newValue = [...value];
-              newValue.push(i);
-              return newValue;
-            });
-            if (gamePhase !== GamePhase.multiplayer) {
-              //Computer uncover Player (Computer(AI) move)
-              //regular move
-              if (!playerShipFound[0]) {
-                setComputerMove((value) => {
-                  const newValue = [...value];
-                  let randomNumberFrom1to100 = Math.floor(Math.random() * 100) + 1;
-                  while (newValue.includes(randomNumberFrom1to100)) {
-                    randomNumberFrom1to100 = Math.floor(Math.random() * 100) + 1;
-                  }
-                  newValue.push(randomNumberFrom1to100);
-                  return newValue;
-                });
-              }
-              //ship seek move
-              else {
-                setComputerMove((value) => {
-                  const newValue = [...value];
-                  newValue.push(seek[1][seek[1].length - 1]);
-                  setSeekLoader(true);
-                  return newValue;
-                });
-              }
+            //Player uncover Enemy
+            if (gamePhase !== GamePhase.multiplayer || moveAllowed) {
+              setFogOfWar((value) => {
+                const newValue = [...value];
+                newValue.push(i);
+                return newValue;
+              });
+              if (gamePhase !== GamePhase.multiplayer) {
+                //Computer uncover Player (Computer(AI) move)
+                //regular move
+                if (!playerShipFound[0]) {
+                  setComputerMove((value) => {
+                    const newValue = [...value];
+                    let randomNumberFrom1to100 = Math.floor(Math.random() * 100) + 1;
+                    while (newValue.includes(randomNumberFrom1to100)) {
+                      randomNumberFrom1to100 = Math.floor(Math.random() * 100) + 1;
+                    }
+                    newValue.push(randomNumberFrom1to100);
+                    return newValue;
+                  });
+                }
+                //ship seek move
+                else {
+                  setComputerMove((value) => {
+                    const newValue = [...value];
+                    newValue.push(seek[1][seek[1].length - 1]);
+                    setSeekLoader(true);
+                    return newValue;
+                  });
+                }
+              } else setMoveAllowed(false);
             }
           }
         }}
@@ -1226,6 +1239,9 @@ text-3xl text-orange-700"
             }}
             passOpponentName={(value) => {
               setOpponentName(value);
+            }}
+            passMoveAllowed={() => {
+              setMoveAllowed(true);
             }}
             username={username}
           />
