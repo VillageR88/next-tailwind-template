@@ -1133,6 +1133,14 @@ export default function Home() {
 
   return (
     <div className="flex min-h-screen flex-col items-center justify-center bg-[url('./images/summer_background_47_a.jpg')] bg-cover font-frijole font-[300]  text-black">
+      {gamePhase === GamePhase.multiplayer &&
+        multiplayerPhase === MultiplayerPhase.battle &&
+        !moveAllowed &&
+        passWaitForMove && (
+          <div className="absolute flex items-center justify-center">
+            <Hourglass1 />
+          </div>
+        )}
       {gamePhase === GamePhase.exit && (
         <div className="flex h-screen w-screen items-center justify-center bg-black">
           <span className="whitespace-pre-line text-3xl text-amber-600">{"It's now safe to turn off\nthis site"}</span>
