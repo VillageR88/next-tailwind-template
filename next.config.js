@@ -13,7 +13,7 @@ const nextConfig = {
   // Optional: Change the output directory `out` -> `dist`
   distDir: 'build',
 
-  reactStrictMode: false,
+  reactStrictMode: true,
 }
 
 module.exports = nextConfig
