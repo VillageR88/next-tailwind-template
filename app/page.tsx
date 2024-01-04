@@ -30,6 +30,7 @@ const WebSocketComponent = ({
   passOpponentName,
   passMoveAllowed,
   passInfoAboutPlayerMoveReceived,
+  passWaitForMove,
   jsxElement1,
   jsxElement2,
   jsxElement3,
@@ -43,6 +44,7 @@ const WebSocketComponent = ({
   passOpponentName(arg0: string): void;
   passMoveAllowed(): void;
   passInfoAboutPlayerMoveReceived(): void;
+  passWaitForMove(arg0: boolean): void;
   jsxElement1: JSX.Element;
   jsxElement2: JSX.Element;
   jsxElement3: JSX.Element;
@@ -63,6 +65,11 @@ const WebSocketComponent = ({
   const [messages, setMessages] = useState<string[]>([]);
   const messagesEndRef = useRef<HTMLDivElement | null>(null);
   const [isSticky, setIsSticky] = useState<boolean>(true);
+
+  useEffect(() => {
+    if (!moveConductor[1]) passWaitForMove(true);
+    else passWaitForMove(false);
+  }, [moveConductor, passWaitForMove]);
 
   useEffect(() => {
     if (!moveConductor.includes(false) && multiplayerPhase === MultiplayerPhase.battle) {
@@ -434,6 +441,7 @@ export default function Home() {
     aborted1 = 'Deployment aborted!\nReduce number of ships.',
     aborted2 = 'Deployment aborted!\nRestart or reduce number of ships.',
   }
+  const [passWaitForMove, setWaitForMove] = useState<boolean>(false);
   const [moveAllowed, setMoveAllowed] = useState<boolean>(false);
   const [infoAboutPlayerMove, setInfoAboutPlayerMove] = useState<boolean>(false);
   const [multiplayerPhase, setMultiplayerPhase] = useState<MultiplayerPhase>(MultiplayerPhase.lobby);
@@ -1275,6 +1283,9 @@ text-3xl text-orange-700"
             }}
             passInfoAboutPlayerMoveReceived={() => {
               setInfoAboutPlayerMove(false);
+            }}
+            passWaitForMove={(value) => {
+              setWaitForMove(value);
             }}
             username={username}
           />
