@@ -64,8 +64,6 @@ const WebSocketComponent = ({
   useEffect(() => {
     if ((multiplayerPhase as MultiplayerPhase) === MultiplayerPhase.lobby && !multiplayers.includes(null)) {
       const enemyOnList = userList.find((x) => (x as unknown as UserList).UniqueId === multiplayers[1]);
-      console.log(enemyOnList);
-      console.log((enemyOnList as unknown as UserList).Username);
       passOpponentName((enemyOnList as unknown as UserList).Username);
       passMultiplayerPhase(MultiplayerPhase.setup);
       setMultiplayerPhase(MultiplayerPhase.setup);
@@ -1063,11 +1061,13 @@ export default function Home() {
           {gamePhase === GamePhase.battle || (gamePhase === GamePhase.multiplayer && feed) ? (
             <Board
               health={healthComputer}
-              title={(gamePhase as GamePhase) !== GamePhase.multiplayer ? `Computer` : opponentName}
+              title={(gamePhase as GamePhase) !== GamePhase.multiplayer ? `Computer` : opponentName ?? ''}
               buttons={Buttons2({ manipulative: true, feed: feed ? feed : enemyCollection })}
             />
           ) : (
-            <Hourglass1 />
+            <div className="flex h-[30em] w-[25em] items-center justify-center">
+              <Hourglass1 />
+            </div>
           )}
         </div>
         <div className="mt-10 flex w-full justify-center">
