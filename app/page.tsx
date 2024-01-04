@@ -49,7 +49,6 @@ const WebSocketComponent = ({
   const [client, setClient] = useState<WebSocket | null>(null);
   const [userList, setUserList] = useState<string[][]>([]);
   const [multiplayers, setMultiplayers] = useState<[string | null, string | null]>([null, null]);
-  const [opponentName, setOpponentName] = useState<string | null>(null);
   const [selectedUser, setSelectedUser] = useState<string | null>(null);
   const [invitationList, setInvitationList] = useState<string[]>([]);
   const [rejectedList, setRejectedList] = useState<string[]>([]);
@@ -63,18 +62,15 @@ const WebSocketComponent = ({
   }, [multiplayerBattleReady]);
 
   useEffect(() => {
-    if (opponentName !== null)
-      () => {
-        passOpponentName(opponentName);
-      };
-  }, [opponentName, passOpponentName]);
-
-  useEffect(() => {
     if ((multiplayerPhase as MultiplayerPhase) === MultiplayerPhase.lobby && !multiplayers.includes(null)) {
+      const enemyOnList = userList.find((x) => (x as unknown as UserList).UniqueId === multiplayers[1]);
+      console.log(enemyOnList);
+      console.log((enemyOnList as unknown as UserList).Username);
+      passOpponentName((enemyOnList as unknown as UserList).Username);
       passMultiplayerPhase(MultiplayerPhase.setup);
       setMultiplayerPhase(MultiplayerPhase.setup);
     }
-  }, [passMultiplayerPhase, multiplayerPhase, multiplayers]);
+  }, [multiplayerPhase, multiplayers, passMultiplayerPhase, passOpponentName, userList]);
 
   useEffect(() => {
     if (feed) passMultiplayerFeed(feed);
@@ -133,7 +129,6 @@ const WebSocketComponent = ({
           return newValue;
         });
       } else if (parsedJSON.type === 'INVITATION_ACCEPT_PASS') {
-        setOpponentName((parsedJSON.message as unknown as UserList).Username);
         setMultiplayers((value) => {
           const newValue = [...value];
           newValue[1] = parsedJSON.message;
@@ -155,7 +150,7 @@ const WebSocketComponent = ({
     return () => {
       newClient.close();
     };
-  }, [passOpponentName, username]);
+  }, [username]);
 
   useEffect(() => {
     isSticky && scrollToBottom();
@@ -410,6 +405,7 @@ export default function Home() {
   const [passMultiplayerBattleReady, setPassMultiplayerBattleReady] = useState<boolean>(false);
   const [multiplayerFeed, setMultiplayerFeed] = useState<[ShipSelection, number[][], string][] | null>(null);
   const [username, setUsername] = useState<string | null>(null);
+  const [opponentName, setOpponentName] = useState<string | null>(null);
   const [healthPlayer, setHealthPlayer] = useState<number>(100);
   const [healthComputer, setHealthComputer] = useState<number>(100);
   const [gamePhase, setGamePhase] = useState<GamePhase>(GamePhase.menu);
@@ -1067,7 +1063,7 @@ export default function Home() {
           {gamePhase === GamePhase.battle || (gamePhase === GamePhase.multiplayer && feed) ? (
             <Board
               health={healthComputer}
-              title={(gamePhase as GamePhase) !== GamePhase.multiplayer ? `Computer` : `Player2`}
+              title={(gamePhase as GamePhase) !== GamePhase.multiplayer ? `Computer` : opponentName}
               buttons={Buttons2({ manipulative: true, feed: feed ? feed : enemyCollection })}
             />
           ) : (
@@ -1227,6 +1223,9 @@ text-3xl text-orange-700"
             }}
             passMultiplayerPhase={(value) => {
               setMultiplayerPhase(value);
+            }}
+            passOpponentName={(value) => {
+              setOpponentName(value);
             }}
             username={username}
           />
