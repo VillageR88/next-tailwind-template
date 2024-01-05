@@ -943,7 +943,9 @@ export default function Home() {
         onClick={() => {
           if (gamePhase === GamePhase.multiplayer && multiplayerPhase !== MultiplayerPhase.lobby) {
             setMultiplayerPhase(MultiplayerPhase.lobby);
-          } else setGamePhase(GamePhase.menu);
+          } else {
+            setGamePhase(GamePhase.menu);
+          }
           setHorizontal(false);
           setUnitSelected([]);
           setAutoloader(false);
