@@ -1134,9 +1134,9 @@ export default function Home() {
   return (
     <div className="flex min-h-screen flex-col  bg-[url('./images/summer_background_47_a.jpg')] bg-cover font-frijole font-[300]  text-black">
       <div className="container absolute flex h-screen w-full items-end">
-        <span className="pl-2 pb-1 text-orange-700">v. 0.1.0 (in progress)</span>
+        <span className="z-20 pb-1 pl-2 text-orange-700">v. 0.1.0 (in progress)</span>
       </div>
-      <div className="flex min-h-screen w-full flex-col items-center justify-center">
+      <div className="flex min-h-screen w-full flex-col items-center justify-center z-10">
         {gamePhase === GamePhase.multiplayer &&
           multiplayerPhase === MultiplayerPhase.battle &&
           !moveAllowed &&
