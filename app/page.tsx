@@ -34,6 +34,7 @@ const WebSocketComponent = ({
   jsxElement1,
   jsxElement2,
   jsxElement3,
+  jsxElementQuit,
 }: {
   username: string | null;
   collection: [ShipSelection, number[][], string][] | null;
@@ -48,6 +49,7 @@ const WebSocketComponent = ({
   jsxElement1: JSX.Element;
   jsxElement2: JSX.Element;
   jsxElement3: JSX.Element;
+  jsxElementQuit: JSX.Element;
 }) => {
   const [moveConductor, setMoveConductor] = useState<[boolean, boolean]>([true, true]);
   const [multiplayerPhase, setMultiplayerPhase] = useState<MultiplayerPhase>(MultiplayerPhase.lobby);
@@ -370,6 +372,7 @@ const WebSocketComponent = ({
               Send
             </button>
           </div>
+          {jsxElementQuit}
         </div>
       </div>
     );
@@ -1136,7 +1139,7 @@ export default function Home() {
       <div className="container absolute flex h-screen w-full items-end">
         <span className="z-20 pb-1 pl-2 text-orange-700">v. 0.1.0 (in progress)</span>
       </div>
-      <div className="flex min-h-screen w-full flex-col items-center justify-center z-10">
+      <div className="z-10 flex min-h-screen w-full flex-col items-center justify-center">
         {gamePhase === GamePhase.multiplayer &&
           multiplayerPhase === MultiplayerPhase.battle &&
           !moveAllowed &&
@@ -1283,6 +1286,7 @@ text-3xl text-orange-700"
               jsxElement1={<Setup />}
               jsxElement2={<Setup_LowerButtons />}
               jsxElement3={<Battle feed={multiplayerFeed} />}
+              jsxElementQuit={<QuitButton />}
               passMultiplayerFeed={(value) => {
                 setMultiplayerFeed(value);
               }}
