@@ -1132,174 +1132,181 @@ export default function Home() {
   }, [multiplayerPhase]);
 
   return (
-    <div className="flex min-h-screen flex-col items-center justify-center bg-[url('./images/summer_background_47_a.jpg')] bg-cover font-frijole font-[300]  text-black">
-      {gamePhase === GamePhase.multiplayer &&
-        multiplayerPhase === MultiplayerPhase.battle &&
-        !moveAllowed &&
-        passWaitForMove && (
-          <div className="absolute flex items-center justify-center">
-            <Hourglass1 />
+    <div className="flex min-h-screen flex-col  bg-[url('./images/summer_background_47_a.jpg')] bg-cover font-frijole font-[300]  text-black">
+      <div className="container absolute flex h-screen w-full items-end">
+        <span className="pl-2 pb-1 text-orange-700">v. 0.1.0 (in progress)</span>
+      </div>
+      <div className="flex min-h-screen w-full flex-col items-center justify-center">
+        {gamePhase === GamePhase.multiplayer &&
+          multiplayerPhase === MultiplayerPhase.battle &&
+          !moveAllowed &&
+          passWaitForMove && (
+            <div className="absolute flex items-center justify-center">
+              <Hourglass1 />
+            </div>
+          )}
+        {gamePhase === GamePhase.exit && (
+          <div className="flex h-screen w-screen items-center justify-center bg-black">
+            <span className="whitespace-pre-line text-3xl text-amber-600">
+              {"It's now safe to turn off\nthis site"}
+            </span>
           </div>
         )}
-      {gamePhase === GamePhase.exit && (
-        <div className="flex h-screen w-screen items-center justify-center bg-black">
-          <span className="whitespace-pre-line text-3xl text-amber-600">{"It's now safe to turn off\nthis site"}</span>
-        </div>
-      )}
-      {gamePhase === GamePhase.menu && (
-        <div className="flex h-full w-fit flex-col items-center gap-1 rounded-xl px-8 py-14">
-          <span
-            className="whitespace-pre-line rounded-xl bg-opacity-75 bg-[url('images/toppng.com-wooden-sign-600x187.png')] bg-contain bg-center bg-no-repeat p-10 	
+        {gamePhase === GamePhase.menu && (
+          <div className="flex h-full w-fit flex-col items-center gap-1 rounded-xl px-8 py-14">
+            <span
+              className="whitespace-pre-line rounded-xl bg-opacity-75 bg-[url('images/toppng.com-wooden-sign-600x187.png')] bg-contain bg-center bg-no-repeat p-10 	
 
 text-3xl text-orange-700"
-          >
-            {'Nuts\non These Ships'}
-          </span>
-          <div className="flex h-[22em] w-full flex-col items-center justify-center gap-4 bg-[url('images/pngwing.com.png')] bg-cover bg-center bg-no-repeat py-2">
-            {['Single Player', 'Multiplayer', 'Options', 'Exit'].map((x, i) => (
-              <button
-                onClick={() => {
-                  if (i === 0) {
-                    setGamePhase(GamePhase.preSetup);
-                    setAutoloader(true);
-                  }
-                  i === 1 && setGamePhase(GamePhase.multiplayer);
-                  i === 2 && setGamePhase(GamePhase.options);
-                  i === 3 && setGamePhase(GamePhase.exit);
-                }}
-                key={i}
-                className={button1class}
-              >
-                {x}
-              </button>
-            ))}
+            >
+              {'Nuts\non These Ships'}
+            </span>
+            <div className="flex h-[22em] w-full flex-col items-center justify-center gap-4 bg-[url('images/pngwing.com.png')] bg-cover bg-center bg-no-repeat py-2">
+              {['Single Player', 'Multiplayer', 'Options', 'Exit'].map((x, i) => (
+                <button
+                  onClick={() => {
+                    if (i === 0) {
+                      setGamePhase(GamePhase.preSetup);
+                      setAutoloader(true);
+                    }
+                    i === 1 && setGamePhase(GamePhase.multiplayer);
+                    i === 2 && setGamePhase(GamePhase.options);
+                    i === 3 && setGamePhase(GamePhase.exit);
+                  }}
+                  key={i}
+                  className={button1class}
+                >
+                  {x}
+                </button>
+              ))}
+            </div>
           </div>
-        </div>
-      )}
-      {gamePhase === GamePhase.options && (
-        <div className="flex flex-col items-center">
-          <div className="mb-2 rounded-sm bg-teal-50 py-2 outline outline-1">
-            <form className="px-2">
-              <span>Username: </span>
-              <input
-                value={username ?? ''}
-                onChange={(e) => {
-                  const newName = usernameEditor(e.target.value);
-                  setUsername(newName);
-                  localStorage.setItem('Username', newName);
-                }}
-                onKeyDown={(event) => {
-                  if (event.key === 'Enter') {
-                    event.preventDefault();
-                    (event.target as HTMLFormElement).blur();
-                  }
-                }}
-                className="px-2 outline outline-1"
-                type="text"
-              />
-            </form>
-          </div>
-          <div className="mb-2 flex flex-col gap-y-2 rounded-sm bg-teal-50 p-4 outline outline-1">
-            {['Ship2', 'Ship3', 'Ship4', 'Ship5'].map((x, i) => (
-              <div key={i} className="flex justify-around gap-2">
-                <span>{x}:</span>
-                <span className="text-blue-600">{`${initialConfig[i]}`}</span>
-                <div className="flex gap-1">
-                  <button
-                    onClick={() => {
-                      setInitialConfig((value) => {
-                        const newValue = [...value];
-                        if (newValue[i] > 0) newValue[i] = newValue[i] - 1;
-                        return newValue;
-                      });
-                    }}
-                    className="px-2 outline outline-1"
-                  >
-                    {'<'}
-                  </button>
-                  <button
-                    onClick={() => {
-                      setInitialConfig((value) => {
-                        const newValue = [...value];
-                        newValue[i] = newValue[i] + 1;
-                        return newValue;
-                      });
-                    }}
-                    className="px-2 outline outline-1"
-                  >
-                    {'>'}
-                  </button>
+        )}
+        {gamePhase === GamePhase.options && (
+          <div className="flex flex-col items-center">
+            <div className="mb-2 rounded-sm bg-teal-50 py-2 outline outline-1">
+              <form className="px-2">
+                <span>Username: </span>
+                <input
+                  value={username ?? ''}
+                  onChange={(e) => {
+                    const newName = usernameEditor(e.target.value);
+                    setUsername(newName);
+                    localStorage.setItem('Username', newName);
+                  }}
+                  onKeyDown={(event) => {
+                    if (event.key === 'Enter') {
+                      event.preventDefault();
+                      (event.target as HTMLFormElement).blur();
+                    }
+                  }}
+                  className="px-2 outline outline-1"
+                  type="text"
+                />
+              </form>
+            </div>
+            <div className="mb-2 flex flex-col gap-y-2 rounded-sm bg-teal-50 p-4 outline outline-1">
+              {['Ship2', 'Ship3', 'Ship4', 'Ship5'].map((x, i) => (
+                <div key={i} className="flex justify-around gap-2">
+                  <span>{x}:</span>
+                  <span className="text-blue-600">{`${initialConfig[i]}`}</span>
+                  <div className="flex gap-1">
+                    <button
+                      onClick={() => {
+                        setInitialConfig((value) => {
+                          const newValue = [...value];
+                          if (newValue[i] > 0) newValue[i] = newValue[i] - 1;
+                          return newValue;
+                        });
+                      }}
+                      className="px-2 outline outline-1"
+                    >
+                      {'<'}
+                    </button>
+                    <button
+                      onClick={() => {
+                        setInitialConfig((value) => {
+                          const newValue = [...value];
+                          newValue[i] = newValue[i] + 1;
+                          return newValue;
+                        });
+                      }}
+                      className="px-2 outline outline-1"
+                    >
+                      {'>'}
+                    </button>
+                  </div>
                 </div>
-              </div>
-            ))}
-          </div>
+              ))}
+            </div>
 
-          <button
-            onClick={() => {
-              if (initialConfig.reduce((p, n) => p + n) !== 0 && username != '') {
-                setGamePhase(GamePhase.menu);
-                setCollection(shipConfiguration);
-              }
-            }}
-            className="w-60 rounded-xl bg-slate-100 py-1.5 outline outline-1"
-          >
-            Return
-          </button>
-        </div>
-      )}
-      {gamePhase === GamePhase.preSetup && (
-        <div className="absolute mb-6 flex h-full w-full flex-col items-center justify-center gap-4">
-          {autoloaderControl >= autoloaderTime && (
-            <span className="whitespace-pre-line text-red-600">{AutoloaderWarning.aborted1}</span>
-          )}
-
-          {autoloaderControl < autoloaderTime && <Hourglass1 />}
-          {autoloaderControl >= autoloaderTime && <QuitButton />}
-        </div>
-      )}
-      {(gamePhase === GamePhase.preSetup || gamePhase === GamePhase.setup) && <Setup />}
-      {gamePhase === GamePhase.setup && <Setup_LowerButtons />}
-      {gamePhase === GamePhase.battle && (healthComputer === 0 || healthPlayer === 0) && (
-        <div className="absolute flex items-center justify-center">
-          <div className="flex h-24  w-96 items-center justify-center rounded-lg bg-white outline outline-2 drop-shadow-xl">
-            {healthComputer === 0 && <span className="text-3xl">{username} Wins!</span>}
-            {healthPlayer === 0 && <span className="text-3xl">Computer Wins!</span>}
-            {healthPlayer === 0 && healthComputer === 0 && <span className="text-3xl">Draw!</span>}
+            <button
+              onClick={() => {
+                if (initialConfig.reduce((p, n) => p + n) !== 0 && username != '') {
+                  setGamePhase(GamePhase.menu);
+                  setCollection(shipConfiguration);
+                }
+              }}
+              className="w-60 rounded-xl bg-slate-100 py-1.5 outline outline-1"
+            >
+              Return
+            </button>
           </div>
-        </div>
-      )}
-      {gamePhase === GamePhase.multiplayer && (
-        <div className="flex h-full w-full items-center justify-center">
-          <WebSocketComponent
-            infoAboutPlayerMove={infoAboutPlayerMove}
-            multiplayerBattleReady={passMultiplayerBattleReady}
-            collection={collection}
-            jsxElement1={<Setup />}
-            jsxElement2={<Setup_LowerButtons />}
-            jsxElement3={<Battle feed={multiplayerFeed} />}
-            passMultiplayerFeed={(value) => {
-              setMultiplayerFeed(value);
-            }}
-            passMultiplayerPhase={(value) => {
-              setMultiplayerPhase(value);
-            }}
-            passOpponentName={(value) => {
-              setOpponentName(value);
-            }}
-            passMoveAllowed={() => {
-              setMoveAllowed(true);
-            }}
-            passInfoAboutPlayerMoveReceived={() => {
-              setInfoAboutPlayerMove(false);
-            }}
-            passWaitForMove={(value) => {
-              setWaitForMove(value);
-            }}
-            username={username}
-          />
-        </div>
-      )}
-      {gamePhase === GamePhase.battle && <Battle />}
+        )}
+        {gamePhase === GamePhase.preSetup && (
+          <div className="absolute mb-6 flex h-full w-full flex-col items-center justify-center gap-4">
+            {autoloaderControl >= autoloaderTime && (
+              <span className="whitespace-pre-line text-red-600">{AutoloaderWarning.aborted1}</span>
+            )}
+
+            {autoloaderControl < autoloaderTime && <Hourglass1 />}
+            {autoloaderControl >= autoloaderTime && <QuitButton />}
+          </div>
+        )}
+        {(gamePhase === GamePhase.preSetup || gamePhase === GamePhase.setup) && <Setup />}
+        {gamePhase === GamePhase.setup && <Setup_LowerButtons />}
+        {gamePhase === GamePhase.battle && (healthComputer === 0 || healthPlayer === 0) && (
+          <div className="absolute flex items-center justify-center">
+            <div className="flex h-24  w-96 items-center justify-center rounded-lg bg-white outline outline-2 drop-shadow-xl">
+              {healthComputer === 0 && <span className="text-3xl">{username} Wins!</span>}
+              {healthPlayer === 0 && <span className="text-3xl">Computer Wins!</span>}
+              {healthPlayer === 0 && healthComputer === 0 && <span className="text-3xl">Draw!</span>}
+            </div>
+          </div>
+        )}
+        {gamePhase === GamePhase.multiplayer && (
+          <div className="flex h-full w-full items-center justify-center">
+            <WebSocketComponent
+              infoAboutPlayerMove={infoAboutPlayerMove}
+              multiplayerBattleReady={passMultiplayerBattleReady}
+              collection={collection}
+              jsxElement1={<Setup />}
+              jsxElement2={<Setup_LowerButtons />}
+              jsxElement3={<Battle feed={multiplayerFeed} />}
+              passMultiplayerFeed={(value) => {
+                setMultiplayerFeed(value);
+              }}
+              passMultiplayerPhase={(value) => {
+                setMultiplayerPhase(value);
+              }}
+              passOpponentName={(value) => {
+                setOpponentName(value);
+              }}
+              passMoveAllowed={() => {
+                setMoveAllowed(true);
+              }}
+              passInfoAboutPlayerMoveReceived={() => {
+                setInfoAboutPlayerMove(false);
+              }}
+              passWaitForMove={(value) => {
+                setWaitForMove(value);
+              }}
+              username={username}
+            />
+          </div>
+        )}
+        {gamePhase === GamePhase.battle && <Battle />}
+      </div>
     </div>
   );
 }
