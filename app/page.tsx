@@ -1267,7 +1267,7 @@ text-3xl text-orange-700"
         {gamePhase === GamePhase.battle && (healthComputer === 0 || healthPlayer === 0) && (
           <div className="absolute flex items-center justify-center">
             <div className="flex h-24  w-96 items-center justify-center rounded-lg bg-white outline outline-2 drop-shadow-xl">
-              {(gamePhase as GamePhase) !== GamePhase.multiplayer && (
+              {((gamePhase as GamePhase) !== GamePhase.multiplayer || moveAllowed) && (
                 <>
                   {healthComputer === 0 && <span className="text-3xl">{username} Wins!</span>}
                   {healthPlayer === 0 && (
