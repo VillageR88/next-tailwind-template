@@ -642,6 +642,7 @@ export default function Home() {
     }
   }, [collection, computerMove, playerShipFound]);
 
+  //this is opponent's health bar update
   useEffect(() => {
     if (fogOfWar.length !== 0) {
       let shipTotalLengthEnemy = 0;
@@ -664,17 +665,21 @@ export default function Home() {
     }
   }, [GamePhase.battle, GamePhase.multiplayer, enemyCollection, fogOfWar, gamePhase, multiplayerFeed]);
 
+  //this is player's health bar update
   useEffect(() => {
-    if (computerMove.length !== 0) {
+    let opponentMove = [] as number[];
+    if (gamePhase === GamePhase.battle) opponentMove = computerMove;
+    else if (gamePhase === GamePhase.multiplayer && opponentFogOfWar !== null) opponentMove = opponentFogOfWar;
+    if (opponentMove.length !== 0) {
       const shipTotalLengthPlayer = collection.map((x) => x[1][0]).flat().length;
       const shipCurrentLengthPlayer = collection
         .map((x) => x[1][0])
         .flat()
-        .filter((x) => computerMove.includes(x)).length;
+        .filter((x) => opponentMove.includes(x)).length;
       setHealthPlayer(100 - (shipCurrentLengthPlayer * 100) / shipTotalLengthPlayer);
       return void [];
     }
-  }, [collection, computerMove]);
+  }, [GamePhase.battle, GamePhase.multiplayer, collection, computerMove, gamePhase, opponentFogOfWar]);
 
   const Buttons1 = Array.from({ length: 100 }, (_, iterator, i = iterator + 1) => (
     <button
