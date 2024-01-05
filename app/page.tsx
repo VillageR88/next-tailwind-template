@@ -23,6 +23,7 @@ enum ShipSelection {
 const WebSocketComponent = ({
   username,
   collection,
+  fogOfWar,
   multiplayerBattleReady,
   infoAboutPlayerMove,
   passMultiplayerPhase,
@@ -31,6 +32,7 @@ const WebSocketComponent = ({
   passMoveAllowed,
   passInfoAboutPlayerMoveReceived,
   passWaitForMove,
+  passFogReport,
   jsxElement1,
   jsxElement2,
   jsxElement3,
@@ -38,6 +40,7 @@ const WebSocketComponent = ({
 }: {
   username: string | null;
   collection: [ShipSelection, number[][], string][] | null;
+  fogOfWar: number[] | null;
   multiplayerBattleReady: boolean;
   infoAboutPlayerMove: boolean;
   passMultiplayerPhase(arg0: MultiplayerPhase): void;
@@ -46,11 +49,13 @@ const WebSocketComponent = ({
   passMoveAllowed(): void;
   passInfoAboutPlayerMoveReceived(): void;
   passWaitForMove(arg0: boolean): void;
+  passFogReport(arg0: number[]): void;
   jsxElement1: JSX.Element;
   jsxElement2: JSX.Element;
   jsxElement3: JSX.Element;
   jsxElementQuit: JSX.Element;
 }) => {
+  const [opponentFogOfWar, setOpponentFogOfWar] = useState<number[] | null>(null);
   const [moveConductor, setMoveConductor] = useState<[boolean, boolean]>([true, true]);
   const [multiplayerPhase, setMultiplayerPhase] = useState<MultiplayerPhase>(MultiplayerPhase.lobby);
   const [feed, setFeed] = useState<[ShipSelection, number[][], string][] | null>(null);
@@ -67,6 +72,17 @@ const WebSocketComponent = ({
   const [messages, setMessages] = useState<string[]>([]);
   const messagesEndRef = useRef<HTMLDivElement | null>(null);
   const [isSticky, setIsSticky] = useState<boolean>(true);
+
+  useEffect(() => {
+    if (client && (multiplayerPhase as MultiplayerPhase) === MultiplayerPhase.battle && fogOfWar !== null) {
+      client.send(JSON.stringify({ type: 'FOG_REPORT', message: [multiplayers[1], fogOfWar] }));
+    }
+  }, [client, fogOfWar, multiplayerPhase, multiplayers]);
+
+  useEffect(() => {
+    if (client && (multiplayerPhase as MultiplayerPhase) === MultiplayerPhase.battle && opponentFogOfWar !== null)
+      passFogReport(opponentFogOfWar);
+  }, [client, multiplayerPhase, opponentFogOfWar, passFogReport]);
 
   useEffect(() => {
     if (!moveConductor[1]) passWaitForMove(true);
@@ -172,6 +188,8 @@ const WebSocketComponent = ({
         });
       } else if (parsedJSON.type === 'FEED_PASS') {
         setFeed(parsedJSON.message as unknown as [ShipSelection, number[][], string][]);
+      } else if (parsedJSON.type === 'FOG_REPORT_PASS') {
+        setOpponentFogOfWar(parsedJSON.message as unknown as number[]);
       } else if (parsedJSON.type === 'MOVEMENT_REPORT_PASS') {
         setMoveConductor((value) => {
           const newValue = [...value];
@@ -458,7 +476,7 @@ export default function Home() {
   const [collection, setCollection] = useState<[ShipSelection, number[][], string][]>(shipConfiguration);
   const [enemyCollection, setEnemyCollection] = useState<[ShipSelection, number[][], string][]>([]);
   const [fogOfWar, setFogOfWar] = useState<number[]>([]);
-  const [opponentFogOfWar, setOpponentFogOfWar] = useState<number[]>([]);
+  const [opponentFogOfWar, setOpponentFogOfWar] = useState<number[] | null>(null);
   const [computerMove, setComputerMove] = useState<number[]>([]);
   const [unitSelected, setUnitSelected] = useState<(ShipSelection | string | null)[]>([]);
   const [horizontal, setHorizontal] = useState<boolean>(false);
@@ -699,8 +717,17 @@ export default function Home() {
 
   /*Battle phase buttons logic
   IMPORTANT: includes AI movement*/
-  const Buttons2 = ({ feed, manipulative }: { feed: [ShipSelection, number[][], string][]; manipulative?: boolean }) =>
-    Array.from({ length: 100 }, (_, iterator, i = iterator + 1) => (
+  const Buttons2 = ({
+    feed,
+    manipulative,
+  }: {
+    feed: [ShipSelection, number[][], string][];
+    manipulative?: boolean;
+  }) => {
+    let enemyOperations = [] as number[];
+    if (gamePhase === GamePhase.battle) enemyOperations = computerMove;
+    else if (gamePhase === GamePhase.multiplayer && opponentFogOfWar !== null) enemyOperations = opponentFogOfWar;
+    return Array.from({ length: 100 }, (_, iterator, i = iterator + 1) => (
       <button
         key={i}
         id={'' + i}
@@ -750,7 +777,7 @@ export default function Home() {
             .flat()
             .includes(i)
             ? (!manipulative || fogOfWar.includes(i)) &&
-              (!manipulative ? (computerMove.includes(i) ? 'bg-red-900' : 'bg-slate-500') : 'bg-red-900')
+              (!manipulative ? (enemyOperations.includes(i) ? 'bg-red-900' : 'bg-slate-500') : 'bg-red-900')
             : manipulative && fogOfWar.includes(i)
               ? 'bg-red-300'
               : !manipulative && computerMove.includes(i) && 'bg-red-300'
@@ -766,10 +793,11 @@ export default function Home() {
               .flat()
               .filter((xb2) => xb2 !== false)
               .includes(i)) &&
-          (!manipulative ? (computerMove.includes(i) ? 'bg-red-300' : 'bg-cyan-100') : 'bg-red-300')
+          (!manipulative ? (enemyOperations.includes(i) ? 'bg-red-300' : 'bg-cyan-100') : 'bg-red-300')
         } h-10 w-10 outline outline-1 active:border-[5px] active:border-blue-500`}
       ></button>
     ));
+  };
 
   const calculateBorder2 = (array: number[]) => {
     const array1 = [] as number[];
@@ -937,6 +965,7 @@ export default function Home() {
           if (gamePhase === GamePhase.multiplayer && multiplayerPhase !== MultiplayerPhase.lobby) {
             setMultiplayerPhase(MultiplayerPhase.lobby);
             setOpponentName(null);
+            setOpponentFogOfWar(null);
           } else {
             setGamePhase(GamePhase.menu);
           }
@@ -1282,6 +1311,7 @@ text-3xl text-orange-700"
         {gamePhase === GamePhase.multiplayer && (
           <div className="flex h-full w-full items-center justify-center">
             <WebSocketComponent
+              fogOfWar={fogOfWar}
               infoAboutPlayerMove={infoAboutPlayerMove}
               multiplayerBattleReady={passMultiplayerBattleReady}
               collection={collection}
@@ -1306,6 +1336,9 @@ text-3xl text-orange-700"
               }}
               passWaitForMove={(value) => {
                 setWaitForMove(value);
+              }}
+              passFogReport={(value) => {
+                setOpponentFogOfWar(value);
               }}
               username={username}
             />

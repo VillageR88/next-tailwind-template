@@ -163,6 +163,25 @@ wsServer.on('request', (request) => {
           } else {
             console.log(`Target client (${targetClientID}) not found.`);
           }
+        } else if (receivedData.type === 'FOG_REPORT') {
+          const targetClientID = receivedData.message[0]; // multiplayers[1]
+          const feedMessage = receivedData.message[1]; // collection
+
+          // Get the target client's connection
+          const targetClient = clients[targetClientID];
+          if (targetClient) {
+            // Prepare the FOG_REPORT message
+            const fogPassMessage = JSON.stringify({
+              type: 'FOG_REPORT_PASS',
+              message: feedMessage,
+            });
+
+            // Send the FOG_REPORT message to the target client
+            targetClient.connection.sendUTF(fogPassMessage);
+            console.log(`FOG REPORT ON to ${targetClientID}`);
+          } else {
+            console.log(`Target client (${targetClientID}) not found.`);
+          }
         } else if (receivedData.type === 'MOVEMENT_REPORT') {
           const targetClientID = receivedData.message;
           const movementReportMessage = receivedData.message;
