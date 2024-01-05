@@ -462,6 +462,7 @@ export default function Home() {
     aborted1 = 'Deployment aborted!\nReduce number of ships.',
     aborted2 = 'Deployment aborted!\nRestart or reduce number of ships.',
   }
+  const [honoraryMoveLeft, setHonoraryMoveLeft] = useState<boolean>(true);
   const [passWaitForMove, setWaitForMove] = useState<boolean>(false);
   const [moveAllowed, setMoveAllowed] = useState<boolean>(false);
   const [infoAboutPlayerMove, setInfoAboutPlayerMove] = useState<boolean>(false);
@@ -488,9 +489,16 @@ export default function Home() {
   const [seekLoader, setSeekLoader] = useState<boolean>(false);
   const autoloaderTime = 500;
   const letters = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J'];
+  console.log('honoraryMoveLeft', honoraryMoveLeft);
 
+  //set honoraryMoveLeft to false for winner after his final hit
   useEffect(() => {
-    // Perform localStorage action
+    if (healthComputer === 0 && gamePhase === GamePhase.battle && multiplayerPhase === MultiplayerPhase.battle)
+      setHonoraryMoveLeft(false);
+  }, [GamePhase.battle, gamePhase, healthComputer, multiplayerPhase]);
+
+  //localStorage action - username
+  useEffect(() => {
     if (!username) {
       const usernameFromStorage = localStorage.getItem('Username');
       if (usernameFromStorage) {
@@ -749,13 +757,17 @@ export default function Home() {
         onClick={() => {
           if (healthPlayer !== 0 && healthComputer !== 0 && manipulative && !fogOfWar.includes(i)) {
             //Player uncover Enemy
-            if (gamePhase !== GamePhase.multiplayer || moveAllowed) {
+            if (
+              (gamePhase !== GamePhase.multiplayer || moveAllowed) &&
+              gamePhase === GamePhase.multiplayer &&
+              honoraryMoveLeft
+            ) {
               setFogOfWar((value) => {
                 const newValue = [...value];
                 newValue.push(i);
                 return newValue;
               });
-              if (gamePhase !== GamePhase.multiplayer) {
+              if ((gamePhase as GamePhase) !== GamePhase.multiplayer) {
                 //Computer uncover Player (Computer(AI) move)
                 //regular move
                 if (!playerShipFound[0]) {
@@ -981,6 +993,7 @@ export default function Home() {
             setMultiplayerPhase(MultiplayerPhase.lobby);
             setOpponentName(null);
             setOpponentFogOfWar(null);
+            setHonoraryMoveLeft(true);
           } else {
             setGamePhase(GamePhase.menu);
           }
@@ -1308,21 +1321,20 @@ text-3xl text-orange-700"
         )}
         {(gamePhase === GamePhase.preSetup || gamePhase === GamePhase.setup) && <Setup />}
         {gamePhase === GamePhase.setup && <Setup_LowerButtons />}
-        {gamePhase === GamePhase.battle && (healthComputer === 0 || healthPlayer === 0) && (
-          <div className="absolute flex items-center justify-center">
-            <div className="flex h-24  w-96 items-center justify-center rounded-lg bg-white outline outline-2 drop-shadow-xl">
-              {((gamePhase as GamePhase) !== GamePhase.multiplayer || moveAllowed) && (
-                <>
-                  {healthComputer === 0 && <span className="text-3xl">{username} Wins!</span>}
-                  {healthPlayer === 0 && (
-                    <span className="text-3xl">{opponentName ? opponentName : 'Computer'} Wins!</span>
-                  )}
-                  {healthPlayer === 0 && healthComputer === 0 && <span className="text-3xl">Draw!</span>}
-                </>
-              )}
+        {(gamePhase === GamePhase.battle || ((gamePhase as GamePhase) === GamePhase.multiplayer && moveAllowed)) &&
+          (healthComputer === 0 || healthPlayer === 0) && (
+            <div className="absolute flex items-center justify-center">
+              <div className="flex h-24  w-96 items-center justify-center rounded-lg bg-white outline outline-2 drop-shadow-xl">
+                {healthComputer === 0 && (!honoraryMoveLeft || gamePhase === GamePhase.battle) && (
+                  <span className="text-3xl">{username} Wins!</span>
+                )}
+                {healthPlayer === 0 && (
+                  <span className="text-3xl">{opponentName ? opponentName : 'Computer'} Wins!</span>
+                )}
+                {healthPlayer === 0 && healthComputer === 0 && <span className="text-3xl">Draw!</span>}
+              </div>
             </div>
-          </div>
-        )}
+          )}
         {gamePhase === GamePhase.multiplayer && (
           <div className="flex h-full w-full items-center justify-center">
             <WebSocketComponent
