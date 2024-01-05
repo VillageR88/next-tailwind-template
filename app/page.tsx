@@ -644,15 +644,25 @@ export default function Home() {
 
   useEffect(() => {
     if (fogOfWar.length !== 0) {
-      const shipTotalLengthEnemy = enemyCollection.map((x) => x[1][0]).flat().length;
-      const shipCurrentLengthEnemy = enemyCollection
-        .map((x) => x[1][0])
-        .flat()
-        .filter((x) => fogOfWar.includes(x)).length;
+      let shipTotalLengthEnemy = 0;
+      if (gamePhase === GamePhase.battle) shipTotalLengthEnemy = enemyCollection.map((x) => x[1][0]).flat().length;
+      else if (gamePhase === GamePhase.multiplayer && multiplayerFeed)
+        shipTotalLengthEnemy = multiplayerFeed.map((x) => x[1][0]).flat().length;
+      let shipCurrentLengthEnemy = 0;
+      if (gamePhase === GamePhase.battle)
+        shipCurrentLengthEnemy = enemyCollection
+          .map((x) => x[1][0])
+          .flat()
+          .filter((x) => fogOfWar.includes(x)).length;
+      else if (gamePhase === GamePhase.multiplayer && multiplayerFeed)
+        shipCurrentLengthEnemy = multiplayerFeed
+          .map((x) => x[1][0])
+          .flat()
+          .filter((x) => fogOfWar.includes(x)).length;
       setHealthComputer(100 - (shipCurrentLengthEnemy * 100) / shipTotalLengthEnemy);
       return void [];
     }
-  }, [enemyCollection, fogOfWar]);
+  }, [GamePhase.battle, GamePhase.multiplayer, enemyCollection, fogOfWar, gamePhase, multiplayerFeed]);
 
   useEffect(() => {
     if (computerMove.length !== 0) {
