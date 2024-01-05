@@ -458,6 +458,7 @@ export default function Home() {
   const [collection, setCollection] = useState<[ShipSelection, number[][], string][]>(shipConfiguration);
   const [enemyCollection, setEnemyCollection] = useState<[ShipSelection, number[][], string][]>([]);
   const [fogOfWar, setFogOfWar] = useState<number[]>([]);
+  const [opponentFogOfWar, setOpponentFogOfWar] = useState<number[]>([]);
   const [computerMove, setComputerMove] = useState<number[]>([]);
   const [unitSelected, setUnitSelected] = useState<(ShipSelection | string | null)[]>([]);
   const [horizontal, setHorizontal] = useState<boolean>(false);
@@ -698,13 +699,7 @@ export default function Home() {
 
   /*Battle phase buttons logic
   IMPORTANT: includes AI movement*/
-  const Buttons2 = ({
-    feed,
-    manipulative,
-  }: {
-    feed: (ShipSelection | number[][] | string)[][];
-    manipulative?: boolean;
-  }) =>
+  const Buttons2 = ({ feed, manipulative }: { feed: [ShipSelection, number[][], string][]; manipulative?: boolean }) =>
     Array.from({ length: 100 }, (_, iterator, i = iterator + 1) => (
       <button
         key={i}
@@ -765,11 +760,9 @@ export default function Home() {
             .flat()
             .includes(i) &&
           (!manipulative ||
-            enemyCollection
-              .map(
-                (eCol, ib1) =>
-                  !eCol[1][0].map((xb1) => fogOfWar.includes(xb1)).includes(false) && enemyCollection[ib1][1][1],
-              )
+            //TODO
+            feed
+              .map((eCol, ib1) => !eCol[1][0].map((xb1) => fogOfWar.includes(xb1)).includes(false) && feed[ib1][1][1])
               .flat()
               .filter((xb2) => xb2 !== false)
               .includes(i)) &&
@@ -943,6 +936,7 @@ export default function Home() {
         onClick={() => {
           if (gamePhase === GamePhase.multiplayer && multiplayerPhase !== MultiplayerPhase.lobby) {
             setMultiplayerPhase(MultiplayerPhase.lobby);
+            setOpponentName(null);
           } else {
             setGamePhase(GamePhase.menu);
           }
@@ -1273,9 +1267,15 @@ text-3xl text-orange-700"
         {gamePhase === GamePhase.battle && (healthComputer === 0 || healthPlayer === 0) && (
           <div className="absolute flex items-center justify-center">
             <div className="flex h-24  w-96 items-center justify-center rounded-lg bg-white outline outline-2 drop-shadow-xl">
-              {healthComputer === 0 && <span className="text-3xl">{username} Wins!</span>}
-              {healthPlayer === 0 && <span className="text-3xl">Computer Wins!</span>}
-              {healthPlayer === 0 && healthComputer === 0 && <span className="text-3xl">Draw!</span>}
+              {(gamePhase as GamePhase) !== GamePhase.multiplayer && (
+                <>
+                  {healthComputer === 0 && <span className="text-3xl">{username} Wins!</span>}
+                  {healthPlayer === 0 && (
+                    <span className="text-3xl">{opponentName ? opponentName : 'Computer'} Wins!</span>
+                  )}
+                  {healthPlayer === 0 && healthComputer === 0 && <span className="text-3xl">Draw!</span>}
+                </>
+              )}
             </div>
           </div>
         )}
