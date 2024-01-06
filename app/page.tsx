@@ -463,7 +463,6 @@ export default function Home() {
     aborted2 = 'Deployment aborted!\nRestart or reduce number of ships.',
   }
   const [autoCombat, setAutoCombat] = useState<boolean>(false);
-  const [autoCombatControl, setAutoCombatControl] = useState<number>(0);
   const [honoraryMoveLeft, setHonoraryMoveLeft] = useState<boolean>(true);
   const [passWaitForMove, setWaitForMove] = useState<boolean>(false);
   const [moveAllowed, setMoveAllowed] = useState<boolean>(false);
@@ -490,8 +489,8 @@ export default function Home() {
   const [seekLoader, setSeekLoader] = useState<boolean>(false);
   const autoloaderTime = 500;
   const letters = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J'];
-  console.log('honoraryMoveLeft', honoraryMoveLeft);
-  console.log('moveAllowed', moveAllowed);
+  //console.log('manageds', document.getElementsByClassName('managed').length);
+  console.log('autoCombat', autoCombat);
   //set honoraryMoveLeft to false for winner after his final hit
   useEffect(() => {
     if (healthComputer === 0 && multiplayerPhase === MultiplayerPhase.battle) setHonoraryMoveLeft(false);
@@ -734,7 +733,6 @@ export default function Home() {
       key={i}
     ></button>
   ));
-  console.log('fofOfWar', fogOfWar);
   /*Battle phase buttons logic
   IMPORTANT: includes AI movement*/
   const Buttons2 = ({
@@ -747,7 +745,7 @@ export default function Home() {
     return Array.from({ length: 100 }, (_, iterator, i = iterator + 1) => (
       <button
         key={i}
-        id={'' + i}
+        //id={`${manipulative && !fogOfWar.includes(i) && 'managed'}` + i}
         onClick={() => {
           if (
             manipulative &&
@@ -791,7 +789,7 @@ export default function Home() {
             }
           }
         }}
-        className={`
+        className={`${manipulative && !fogOfWar.includes(i) && 'managed'} ' ' 
         ${
           feed
             .map((x) => x[1][0])
@@ -1002,12 +1000,47 @@ export default function Home() {
     return (
       <button
         onClick={() => {
-          setAutoCombat(!autoCombat);
+          if (!(healthComputer === 0 || healthPlayer === 0)) setAutoCombat(!autoCombat);
         }}
         className="w-60 rounded-xl bg-slate-100 py-1.5 outline outline-1"
       >{`Auto Combat ${autoCombat ? '(ON)' : '(OFF)'}`}</button>
     );
   };
+
+  const elementRef = useRef<HTMLElement | null>(null);
+  useEffect(() => {
+    if (autoCombat) {
+      const interval = setInterval(() => {
+        const randomIndex = Math.floor(Math.random() * document.getElementsByClassName('managed').length);
+        const element = document.getElementsByClassName('managed').item(randomIndex) as HTMLElement;
+        elementRef.current = element;
+        elementRef.current.click();
+      }, 10);
+
+      return () => {
+        clearInterval(interval);
+      };
+    }
+  }, [autoCombat]);
+
+  //disable AutoCombat after end of fight
+  useEffect(() => {
+    if (
+      (healthPlayer === 0 || healthComputer === 0) &&
+      (gamePhase === GamePhase.battle ||
+        (gamePhase === GamePhase.multiplayer && multiplayerPhase === MultiplayerPhase.battle && !honoraryMoveLeft))
+    ) {
+      setAutoCombat(false);
+    }
+  }, [
+    GamePhase.battle,
+    GamePhase.multiplayer,
+    gamePhase,
+    healthComputer,
+    healthPlayer,
+    honoraryMoveLeft,
+    multiplayerPhase,
+  ]);
 
   const QuitButton = () => {
     return (
@@ -1020,6 +1053,7 @@ export default function Home() {
           } else {
             setGamePhase(GamePhase.menu);
           }
+          setAutoCombat(false);
           setHorizontal(false);
           setUnitSelected([]);
           setAutoloader(false);
