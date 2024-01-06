@@ -36,7 +36,7 @@ const WebSocketComponent = ({
   passFogReport,
   informMultiplayerPhaseLobbyReceived,
   honoraryMoveLeft,
-  opponentDidHonoraryMove,
+  passOpponentDidHonoraryMove,
   jsxElement1,
   jsxElement2,
   jsxElement3,
@@ -57,12 +57,13 @@ const WebSocketComponent = ({
   passFogReport(arg0: number[]): void;
   informMultiplayerPhaseLobbyReceived(): void;
   honoraryMoveLeft: boolean;
-  opponentDidHonoraryMove(): void;
+  passOpponentDidHonoraryMove(): void;
   jsxElement1: JSX.Element;
   jsxElement2: JSX.Element;
   jsxElement3: JSX.Element;
   jsxElementQuit: JSX.Element;
 }) => {
+  const [opponentHonoraryMoveLeft, setOpponentHonoraryMoveLeft] = useState<boolean>(true);
   const [opponentFogOfWar, setOpponentFogOfWar] = useState<number[]>([]);
   const [moveConductor, setMoveConductor] = useState<[boolean, boolean]>([true, true]);
   const [multiplayerPhase, setMultiplayerPhase] = useState<MultiplayerPhase>(MultiplayerPhase.lobby);
@@ -80,6 +81,27 @@ const WebSocketComponent = ({
   const [messages, setMessages] = useState<string[]>([]);
   const messagesEndRef = useRef<HTMLDivElement | null>(null);
   const [isSticky, setIsSticky] = useState<boolean>(true);
+
+  const opponentRef = useRef<string | null>(null);
+  if (multiplayers[1] !== null) {
+    opponentRef.current = multiplayers[1];
+  }
+
+  const reportLeftBattlefield = useCallback(() => {
+    if (client && (multiplayerPhase as MultiplayerPhase) !== MultiplayerPhase.lobby) {
+      client.send(JSON.stringify({ type: 'LEFT_BATTLEFIELD', message: opponentRef }));
+    }
+  }, [client, multiplayerPhase]);
+
+  useEffect(() => {
+    if (multiplayerPhase === MultiplayerPhase.battle && !opponentHonoraryMoveLeft) passOpponentDidHonoraryMove();
+  }, [multiplayerPhase, opponentHonoraryMoveLeft, passOpponentDidHonoraryMove]);
+
+  useEffect(() => {
+    if (client && (multiplayerPhase as MultiplayerPhase) === MultiplayerPhase.battle && !honoraryMoveLeft) {
+      client.send(JSON.stringify({ type: 'HONORARY_REPORT', message: multiplayers[1] }));
+    }
+  }, [client, honoraryMoveLeft, multiplayerPhase, multiplayers]);
 
   useEffect(() => {
     if (client && (multiplayerPhase as MultiplayerPhase) === MultiplayerPhase.battle && fogOfWar !== null) {
@@ -135,9 +157,10 @@ const WebSocketComponent = ({
   useEffect(() => {
     if ((multiplayerPhase as MultiplayerPhase) !== MultiplayerPhase.lobby && multiplayers.includes(null)) {
       console.log('QUIT TO LOBBY');
+      reportLeftBattlefield();
       setMultiplayerPhase(MultiplayerPhase.lobby);
     }
-  }, [multiplayerPhase, multiplayers, passMultiplayerPhase, passOpponentName, userList]);
+  }, [multiplayerPhase, multiplayers, passMultiplayerPhase, passOpponentName, reportLeftBattlefield, userList]);
 
   useEffect(() => {
     if (informMultiplayerPhaseLobby) {
@@ -216,6 +239,8 @@ const WebSocketComponent = ({
         setFeed(parsedJSON.message as unknown as [ShipSelection, number[][], string][]);
       } else if (parsedJSON.type === 'FOG_REPORT_PASS') {
         setOpponentFogOfWar(parsedJSON.message as unknown as number[]);
+      } else if (parsedJSON.type === 'HONORARY_REPORT_PASS') {
+        setOpponentHonoraryMoveLeft(false);
       } else if (parsedJSON.type === 'MOVEMENT_REPORT_PASS') {
         setMoveConductor((value) => {
           const newValue = [...value];
@@ -517,8 +542,7 @@ export default function Home() {
   const [seekLoader, setSeekLoader] = useState<boolean>(false);
   const autoloaderTime = 500;
   const letters = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J'];
-  console.log('honoraryMoveLeft', honoraryMoveLeft);
-  console.log('moveAllowed', moveAllowed);
+  //TODO INSPECT this later
   useEffect(() => {
     if (healthComputer === 0 && multiplayerPhase === MultiplayerPhase.battle) setHonoraryMoveLeft(false);
   }, [GamePhase.battle, gamePhase, healthComputer, multiplayerPhase]);
@@ -940,7 +964,7 @@ export default function Home() {
       opponentFeed = multiplayerFeed;
     return opponentFeed
       .map((x, i) => {
-        const isVisible = !x[1][0].map((x) => fogOfWar.includes(x)).includes(false);
+        const isVisible = !x[1][0]?.map((x) => fogOfWar.includes(x)).includes(false);
         return isVisible ? opponentFeed[i][1][1] : false;
       })
       .flat()
@@ -1080,6 +1104,7 @@ export default function Home() {
             setMultiplayerPhase(MultiplayerPhase.lobby);
             setOpponentName(null);
             setHonoraryMoveLeft(true);
+            setOpponentHonoraryMoveLeft(true);
           } else {
             setGamePhase(GamePhase.menu);
           }
@@ -1426,7 +1451,7 @@ text-3xl text-orange-700"
           <div className="flex h-full w-full items-center justify-center">
             <WebSocketComponent
               honoraryMoveLeft={honoraryMoveLeft}
-              opponentDidHonoraryMove={() => {
+              passOpponentDidHonoraryMove={() => {
                 setOpponentHonoraryMoveLeft(false);
               }}
               informMultiplayerPhaseLobby={informMultiplayerPhaseLobby}

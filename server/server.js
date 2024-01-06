@@ -199,8 +199,24 @@ wsServer.on('request', (request) => {
           } else {
             console.log(`Target client (${targetClientID}) not found.`);
           }
-        }
-        else {
+        } else if (receivedData.type === 'HONORARY_REPORT') {
+          const targetClientID = receivedData.message;
+          const honoraryReportMessage = receivedData.message;
+          // Get the target client's connection
+          const targetClient = clients[targetClientID];
+          if (targetClient) {
+            // Prepare the HONORARY_REPORT_PASS message
+            const honoraryReportPassMessage = JSON.stringify({
+              type: 'HONORARY_REPORT_PASS',
+              message: honoraryReportMessage,
+            });
+            // Send the HONORARY_REPORT_PASS message to the target client
+            targetClient.connection.sendUTF(honoraryReportPassMessage);
+            console.log(`HONORARY_REPORT PASSED ON to ${targetClientID}`);
+          } else {
+            console.log(`Target client (${targetClientID}) not found.`);
+          }
+        } else {
           // Handling other types of data messages
           // Process the different types of data messages here based on receivedData.type
           console.log('Received Data Message:', receivedData);
