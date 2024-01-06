@@ -462,6 +462,8 @@ export default function Home() {
     aborted1 = 'Deployment aborted!\nReduce number of ships.',
     aborted2 = 'Deployment aborted!\nRestart or reduce number of ships.',
   }
+  const [autoCombat, setAutoCombat] = useState<boolean>(false);
+  const [autoCombatControl, setAutoCombatControl] = useState<number>(0);
   const [honoraryMoveLeft, setHonoraryMoveLeft] = useState<boolean>(true);
   const [passWaitForMove, setWaitForMove] = useState<boolean>(false);
   const [moveAllowed, setMoveAllowed] = useState<boolean>(false);
@@ -996,6 +998,17 @@ export default function Home() {
     }
   }, [GamePhase.preSetup, GamePhase.setup, collection, gamePhase, shipConfiguration]);
 
+  const AutoCombatButton = () => {
+    return (
+      <button
+        onClick={() => {
+          setAutoCombat(!autoCombat);
+        }}
+        className="w-60 rounded-xl bg-slate-100 py-1.5 outline outline-1"
+      >{`Auto Combat ${autoCombat ? '(ON)' : '(OFF)'}`}</button>
+    );
+  };
+
   const QuitButton = () => {
     return (
       <button
@@ -1186,7 +1199,8 @@ export default function Home() {
             </div>
           )}
         </div>
-        <div className="mt-10 flex w-full justify-center">
+        <div className="mt-10 flex w-full flex-col items-center gap-2">
+          <AutoCombatButton />
           <QuitButton />
         </div>
       </div>
