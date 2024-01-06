@@ -35,6 +35,8 @@ const WebSocketComponent = ({
   passWaitForMove,
   passFogReport,
   informMultiplayerPhaseLobbyReceived,
+  honoraryMoveLeft,
+  opponentDidHonoraryMove,
   jsxElement1,
   jsxElement2,
   jsxElement3,
@@ -54,6 +56,8 @@ const WebSocketComponent = ({
   passWaitForMove(arg0: boolean): void;
   passFogReport(arg0: number[]): void;
   informMultiplayerPhaseLobbyReceived(): void;
+  honoraryMoveLeft: boolean;
+  opponentDidHonoraryMove(): void;
   jsxElement1: JSX.Element;
   jsxElement2: JSX.Element;
   jsxElement3: JSX.Element;
@@ -488,6 +492,7 @@ export default function Home() {
   const [informMultiplayerPhaseLobby, setInformMultiplayerPhaseLobby] = useState<boolean>(false);
   const [autoCombat, setAutoCombat] = useState<boolean>(false);
   const [honoraryMoveLeft, setHonoraryMoveLeft] = useState<boolean>(true);
+  const [opponentHonoraryMoveLeft, setOpponentHonoraryMoveLeft] = useState<boolean>(true);
   const [passWaitForMove, setWaitForMove] = useState<boolean>(false);
   const [moveAllowed, setMoveAllowed] = useState<boolean>(false);
   const [infoAboutPlayerMove, setInfoAboutPlayerMove] = useState<boolean>(false);
@@ -512,7 +517,8 @@ export default function Home() {
   const [seekLoader, setSeekLoader] = useState<boolean>(false);
   const autoloaderTime = 500;
   const letters = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J'];
-  console.log();
+  console.log('honoraryMoveLeft', honoraryMoveLeft);
+  console.log('moveAllowed', moveAllowed);
   useEffect(() => {
     if (healthComputer === 0 && multiplayerPhase === MultiplayerPhase.battle) setHonoraryMoveLeft(false);
   }, [GamePhase.battle, gamePhase, healthComputer, multiplayerPhase]);
@@ -1404,7 +1410,7 @@ text-3xl text-orange-700"
         {(gamePhase === GamePhase.preSetup || gamePhase === GamePhase.setup) && <Setup />}
         {gamePhase === GamePhase.setup && <Setup_LowerButtons />}
         {(gamePhase === GamePhase.battle ||
-          ((gamePhase as GamePhase) === GamePhase.multiplayer && moveAllowed && !honoraryMoveLeft)) &&
+          ((gamePhase as GamePhase) === GamePhase.multiplayer && !honoraryMoveLeft && !opponentHonoraryMoveLeft)) &&
           (healthComputer === 0 || healthPlayer === 0) && (
             <div className="absolute flex items-center justify-center">
               <div className="flex h-24  w-96 items-center justify-center rounded-lg bg-white outline outline-2 drop-shadow-xl">
@@ -1419,6 +1425,10 @@ text-3xl text-orange-700"
         {gamePhase === GamePhase.multiplayer && (
           <div className="flex h-full w-full items-center justify-center">
             <WebSocketComponent
+              honoraryMoveLeft={honoraryMoveLeft}
+              opponentDidHonoraryMove={() => {
+                setOpponentHonoraryMoveLeft(false);
+              }}
               informMultiplayerPhaseLobby={informMultiplayerPhaseLobby}
               informMultiplayerPhaseLobbyReceived={() => {
                 setInformMultiplayerPhaseLobby(false);
