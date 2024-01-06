@@ -21,6 +21,7 @@ enum ShipSelection {
 }
 
 const WebSocketComponent = ({
+  informMultiplayerPhaseLobby,
   username,
   collection,
   fogOfWar,
@@ -33,11 +34,13 @@ const WebSocketComponent = ({
   passInfoAboutPlayerMoveReceived,
   passWaitForMove,
   passFogReport,
+  informMultiplayerPhaseLobbyReceived,
   jsxElement1,
   jsxElement2,
   jsxElement3,
   jsxElementQuit,
 }: {
+  informMultiplayerPhaseLobby: boolean;
   username: string | null;
   collection: [ShipSelection, number[][], string][] | null;
   fogOfWar: number[] | null;
@@ -50,6 +53,7 @@ const WebSocketComponent = ({
   passInfoAboutPlayerMoveReceived(): void;
   passWaitForMove(arg0: boolean): void;
   passFogReport(arg0: number[]): void;
+  informMultiplayerPhaseLobbyReceived(): void;
   jsxElement1: JSX.Element;
   jsxElement2: JSX.Element;
   jsxElement3: JSX.Element;
@@ -72,7 +76,8 @@ const WebSocketComponent = ({
   const [messages, setMessages] = useState<string[]>([]);
   const messagesEndRef = useRef<HTMLDivElement | null>(null);
   const [isSticky, setIsSticky] = useState<boolean>(true);
-
+  console.log('informMultiplayerPhaseLobby', informMultiplayerPhaseLobby);
+  console.log(multiplayers);
   useEffect(() => {
     if (client && (multiplayerPhase as MultiplayerPhase) === MultiplayerPhase.battle && fogOfWar !== null) {
       client.send(JSON.stringify({ type: 'FOG_REPORT', message: [multiplayers[1], fogOfWar] }));
@@ -123,6 +128,24 @@ const WebSocketComponent = ({
       setMultiplayerPhase(MultiplayerPhase.setup);
     }
   }, [multiplayerPhase, multiplayers, passMultiplayerPhase, passOpponentName, userList]);
+
+  useEffect(() => {
+    if ((multiplayerPhase as MultiplayerPhase) !== MultiplayerPhase.lobby && multiplayers.includes(null)) {
+      console.log('QUIT TO LOBBY');
+      setMultiplayerPhase(MultiplayerPhase.lobby);
+    }
+  }, [multiplayerPhase, multiplayers, passMultiplayerPhase, passOpponentName, userList]);
+
+  useEffect(() => {
+    if (informMultiplayerPhaseLobby) {
+      setMultiplayers((value) => {
+        const newValue = [...value];
+        newValue[1] = null;
+        return newValue as [string, null];
+      });
+      informMultiplayerPhaseLobbyReceived();
+    }
+  }, [informMultiplayerPhaseLobby, informMultiplayerPhaseLobbyReceived]);
 
   useEffect(() => {
     if (feed) passMultiplayerFeed(feed);
@@ -462,6 +485,7 @@ export default function Home() {
     aborted1 = 'Deployment aborted!\nReduce number of ships.',
     aborted2 = 'Deployment aborted!\nRestart or reduce number of ships.',
   }
+  const [informMultiplayerPhaseLobby, setInformMultiplayerPhaseLobby] = useState<boolean>(false);
   const [autoCombat, setAutoCombat] = useState<boolean>(false);
   const [honoraryMoveLeft, setHonoraryMoveLeft] = useState<boolean>(true);
   const [passWaitForMove, setWaitForMove] = useState<boolean>(false);
@@ -484,14 +508,10 @@ export default function Home() {
   const [autoloader, setAutoloader] = useState<boolean>(false);
   const [autoloaderControl, setAutoloaderControl] = useState<number>(0);
   const [playerShipFound, setPlayerShipFound] = useState<[boolean, number | null]>([false, null]);
-  //seek[0] is heading and seek[1] is array of uncovered numbers on that heading
   const [seek, setSeek] = useState<[number[], number[]]>([[], []]);
   const [seekLoader, setSeekLoader] = useState<boolean>(false);
   const autoloaderTime = 500;
   const letters = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J'];
-  //console.log('manageds', document.getElementsByClassName('managed').length);
-  console.log('autoCombat', autoCombat);
-  //set honoraryMoveLeft to false for winner after his final hit
   useEffect(() => {
     if (healthComputer === 0 && multiplayerPhase === MultiplayerPhase.battle) setHonoraryMoveLeft(false);
   }, [GamePhase.battle, gamePhase, healthComputer, multiplayerPhase]);
@@ -995,7 +1015,7 @@ export default function Home() {
       setGamePhase(GamePhase.setup);
     }
   }, [GamePhase.preSetup, GamePhase.setup, collection, gamePhase, shipConfiguration]);
-
+  // eslint-disable-next-line
   const AutoCombatButton = () => {
     return (
       <button
@@ -1003,10 +1023,9 @@ export default function Home() {
           if (!(healthComputer === 0 || healthPlayer === 0)) setAutoCombat(!autoCombat);
         }}
         className="w-60 rounded-xl bg-slate-100 py-1.5 outline outline-1"
-      >{`Auto Combat ${autoCombat ? '(ON)' : '(OFF)'}`}</button>
+      >{`(Debug)Auto Combat ${autoCombat ? '(ON)' : '(OFF)'}`}</button>
     );
   };
-
   const elementRef = useRef<HTMLElement | null>(null);
   useEffect(() => {
     if (autoCombat) {
@@ -1027,14 +1046,17 @@ export default function Home() {
   useEffect(() => {
     if (
       (healthPlayer === 0 || healthComputer === 0) &&
-      (gamePhase === GamePhase.battle ||
-        (gamePhase === GamePhase.multiplayer && multiplayerPhase === MultiplayerPhase.battle && !honoraryMoveLeft))
+      (gamePhase !== GamePhase.multiplayer ||
+        ((gamePhase as GamePhase) === GamePhase.multiplayer &&
+          multiplayerPhase === MultiplayerPhase.battle &&
+          !honoraryMoveLeft))
     ) {
-      setAutoCombat(false);
+      if (autoCombat) setAutoCombat(false);
     }
   }, [
     GamePhase.battle,
     GamePhase.multiplayer,
+    autoCombat,
     gamePhase,
     healthComputer,
     healthPlayer,
@@ -1047,6 +1069,7 @@ export default function Home() {
       <button
         onClick={() => {
           if (gamePhase === GamePhase.multiplayer && multiplayerPhase !== MultiplayerPhase.lobby) {
+            setInformMultiplayerPhaseLobby(true);
             setMultiplayerPhase(MultiplayerPhase.lobby);
             setOpponentName(null);
             setHonoraryMoveLeft(true);
@@ -1234,7 +1257,7 @@ export default function Home() {
           )}
         </div>
         <div className="mt-10 flex w-full flex-col items-center gap-2">
-          <AutoCombatButton />
+          {/*<AutoCombatButton />*/}
           <QuitButton />
         </div>
       </div>
@@ -1242,7 +1265,7 @@ export default function Home() {
   };
 
   useEffect(() => {
-    if (multiplayerPhase === MultiplayerPhase.setup) setInitialConfig([2, 2, 1, 1]);
+    if (multiplayerPhase === MultiplayerPhase.lobby) setInitialConfig([1, 0, 0, 0]); //debug
   }, [multiplayerPhase]);
 
   return (
@@ -1395,6 +1418,10 @@ text-3xl text-orange-700"
         {gamePhase === GamePhase.multiplayer && (
           <div className="flex h-full w-full items-center justify-center">
             <WebSocketComponent
+              informMultiplayerPhaseLobby={informMultiplayerPhaseLobby}
+              informMultiplayerPhaseLobbyReceived={() => {
+                setInformMultiplayerPhaseLobby(false);
+              }}
               fogOfWar={fogOfWar}
               infoAboutPlayerMove={infoAboutPlayerMove}
               multiplayerBattleReady={passMultiplayerBattleReady}
