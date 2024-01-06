@@ -76,8 +76,7 @@ const WebSocketComponent = ({
   const [messages, setMessages] = useState<string[]>([]);
   const messagesEndRef = useRef<HTMLDivElement | null>(null);
   const [isSticky, setIsSticky] = useState<boolean>(true);
-  console.log('informMultiplayerPhaseLobby', informMultiplayerPhaseLobby);
-  console.log(multiplayers);
+
   useEffect(() => {
     if (client && (multiplayerPhase as MultiplayerPhase) === MultiplayerPhase.battle && fogOfWar !== null) {
       client.send(JSON.stringify({ type: 'FOG_REPORT', message: [multiplayers[1], fogOfWar] }));
@@ -513,6 +512,7 @@ export default function Home() {
   const [seekLoader, setSeekLoader] = useState<boolean>(false);
   const autoloaderTime = 500;
   const letters = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J'];
+  console.log();
   useEffect(() => {
     if (healthComputer === 0 && multiplayerPhase === MultiplayerPhase.battle) setHonoraryMoveLeft(false);
   }, [GamePhase.battle, gamePhase, healthComputer, multiplayerPhase]);
@@ -1158,7 +1158,7 @@ export default function Home() {
   };
 
   const button1class =
-    'w-48 rounded-xl bg-gradient-to-br from-[#F4DAAC] to-[#E5C08A] bg-opacity-25 py-1.5 text-orange-700 outline outline-2 -outline-offset-4 outline-orange-800 hover:text-red-700 hover:outline-red-700';
+    'w-48 rounded-xl bg-gradient-to-b from-[#F4DAAC] hover:from-orange-200 hover:to-red-300 to-[#E5C08A] py-1.5 text-orange-700 outline outline-2 -outline-offset-4 outline-orange-800 hover:text-red-700 hover:outline-red-700';
 
   const usernameEditor = (value: string) => {
     return value;
@@ -1403,9 +1403,9 @@ text-3xl text-orange-700"
         )}
         {(gamePhase === GamePhase.preSetup || gamePhase === GamePhase.setup) && <Setup />}
         {gamePhase === GamePhase.setup && <Setup_LowerButtons />}
-        {(gamePhase === GamePhase.battle || ((gamePhase as GamePhase) === GamePhase.multiplayer && moveAllowed)) &&
-          (healthComputer === 0 || healthPlayer === 0) &&
-          (!(gamePhase === GamePhase.multiplayer) || !honoraryMoveLeft) && (
+        {(gamePhase === GamePhase.battle ||
+          ((gamePhase as GamePhase) === GamePhase.multiplayer && moveAllowed && !honoraryMoveLeft)) &&
+          (healthComputer === 0 || healthPlayer === 0) && (
             <div className="absolute flex items-center justify-center">
               <div className="flex h-24  w-96 items-center justify-center rounded-lg bg-white outline outline-2 drop-shadow-xl">
                 {healthComputer === 0 && healthPlayer !== 0 && <span className="text-3xl">{username} Wins!</span>}
