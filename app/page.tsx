@@ -898,19 +898,19 @@ export default function Home() {
   //Player board
   const visibleBorder2Player = useCallback(
     () =>
-      gamePhase === GamePhase.battle &&
-      (collection
+      collection
         .map((x, i) => !x[1][0].map((x) => computerMove.includes(x)).includes(false) && collection[i][1][1])
         .flat()
-        .filter((x) => x !== false) as number[]),
-    [GamePhase.battle, collection, computerMove, gamePhase],
+        .filter((x) => x !== false) as number[],
+    [collection, computerMove],
   );
   //Computer board
   const visibleBorder2Enemy = useCallback(() => {
     //TODO multiplayer feed in MP
     let opponentFeed = [] as [ShipSelection, number[][], string][];
     if (gamePhase === GamePhase.battle) opponentFeed = enemyCollection;
-    else if (gamePhase === GamePhase.multiplayer && multiplayerFeed) opponentFeed = multiplayerFeed;
+    else if (gamePhase === GamePhase.multiplayer && multiplayerPhase === MultiplayerPhase.battle && multiplayerFeed)
+      opponentFeed = multiplayerFeed;
     return opponentFeed
       .map((x, i) => {
         const isVisible = !x[1][0].map((x) => fogOfWar.includes(x)).includes(false);
@@ -918,7 +918,15 @@ export default function Home() {
       })
       .flat()
       .filter((x) => x !== false) as number[];
-  }, [gamePhase, GamePhase.battle, GamePhase.multiplayer, enemyCollection, multiplayerFeed, fogOfWar]);
+  }, [
+    gamePhase,
+    GamePhase.battle,
+    GamePhase.multiplayer,
+    enemyCollection,
+    multiplayerPhase,
+    multiplayerFeed,
+    fogOfWar,
+  ]);
 
   /*Here is the logic that makes Border2 of destroyed ship to appear*/
   //Player board
@@ -928,7 +936,7 @@ export default function Home() {
       (gamePhase === GamePhase.multiplayer && multiplayerPhase === MultiplayerPhase.battle)
     ) {
       const array = [] as number[];
-      (visibleBorder2Player() as number[]).map((x) => !computerMove.includes(x) && array.push(x));
+      visibleBorder2Player().map((x) => !computerMove.includes(x) && array.push(x));
       if (array.length !== 0)
         setComputerMove((value) => {
           const newValue = [...value];
@@ -1324,11 +1332,12 @@ text-3xl text-orange-700"
         {(gamePhase === GamePhase.preSetup || gamePhase === GamePhase.setup) && <Setup />}
         {gamePhase === GamePhase.setup && <Setup_LowerButtons />}
         {(gamePhase === GamePhase.battle || ((gamePhase as GamePhase) === GamePhase.multiplayer && moveAllowed)) &&
-          (healthComputer === 0 || healthPlayer === 0) && (
+          (healthComputer === 0 || healthPlayer === 0) &&
+          (!(gamePhase === GamePhase.multiplayer) || !honoraryMoveLeft) && (
             <div className="absolute flex items-center justify-center">
               <div className="flex h-24  w-96 items-center justify-center rounded-lg bg-white outline outline-2 drop-shadow-xl">
                 {healthComputer === 0 && <span className="text-3xl">{username} Wins!</span>}
-                {healthPlayer === 0 && (!honoraryMoveLeft || gamePhase === GamePhase.battle) && (
+                {healthPlayer === 0 && (
                   <span className="text-3xl">{opponentName ? opponentName : 'Computer'} Wins!</span>
                 )}
                 {healthPlayer === 0 && healthComputer === 0 && <span className="text-3xl">Draw!</span>}
