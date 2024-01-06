@@ -82,16 +82,16 @@ const WebSocketComponent = ({
   const messagesEndRef = useRef<HTMLDivElement | null>(null);
   const [isSticky, setIsSticky] = useState<boolean>(true);
 
-  const opponentRef = useRef<string | null>(null);
+  const opponentRef = useRef<(typeof multiplayers)[1]>(null);
   if (multiplayers[1] !== null) {
     opponentRef.current = multiplayers[1];
   }
 
   const reportLeftBattlefield = useCallback(() => {
-    if (client && (multiplayerPhase as MultiplayerPhase) !== MultiplayerPhase.lobby) {
-      client.send(JSON.stringify({ type: 'LEFT_BATTLEFIELD', message: opponentRef }));
+    if (client) {
+      client.send(JSON.stringify({ type: 'LEFT_BATTLEFIELD', message: opponentRef.current as unknown as string }));
     }
-  }, [client, multiplayerPhase]);
+  }, [client]);
 
   useEffect(() => {
     if (multiplayerPhase === MultiplayerPhase.battle && !opponentHonoraryMoveLeft) passOpponentDidHonoraryMove();
@@ -161,6 +161,10 @@ const WebSocketComponent = ({
       setMultiplayerPhase(MultiplayerPhase.lobby);
     }
   }, [multiplayerPhase, multiplayers, passMultiplayerPhase, passOpponentName, reportLeftBattlefield, userList]);
+
+  useEffect(() => {
+    if (multiplayerPhase === MultiplayerPhase.lobby) passMultiplayerPhase(MultiplayerPhase.lobby);
+  }, [multiplayerPhase, passMultiplayerPhase]);
 
   useEffect(() => {
     if (informMultiplayerPhaseLobby) {
@@ -241,6 +245,9 @@ const WebSocketComponent = ({
         setOpponentFogOfWar(parsedJSON.message as unknown as number[]);
       } else if (parsedJSON.type === 'HONORARY_REPORT_PASS') {
         setOpponentHonoraryMoveLeft(false);
+      } else if (parsedJSON.type === 'LEFT_BATTLEFIELD_PASS') {
+        console.log('information about other player leaving the battlefield has been received');
+        setMultiplayerPhase(MultiplayerPhase.lobby);
       } else if (parsedJSON.type === 'MOVEMENT_REPORT_PASS') {
         setMoveConductor((value) => {
           const newValue = [...value];

@@ -216,6 +216,23 @@ wsServer.on('request', (request) => {
           } else {
             console.log(`Target client (${targetClientID}) not found.`);
           }
+        } else if (receivedData.type === 'LEFT_BATTLEFIELD') {
+          const targetClientID = receivedData.message;
+          const leftBattlefieldReportMessage = receivedData.message;
+          // Get the target client's connection
+          const targetClient = clients[targetClientID];
+          if (targetClient) {
+            // Prepare the LEFT_BATTLEFIELD_PASS message
+            const leftBattlefieldReportPassMessage = JSON.stringify({
+              type: 'LEFT_BATTLEFIELD_PASS',
+              message: leftBattlefieldReportMessage,
+            });
+            // Send the LEFT_BATTLEFIELD_PASS message to the target client
+            targetClient.connection.sendUTF(leftBattlefieldReportPassMessage);
+            console.log(`LEFT_BATTLEFIELD PASSED ON to ${targetClientID}`);
+          } else {
+            console.log(`Target client (${targetClientID}) not found.`);
+          }
         } else {
           // Handling other types of data messages
           // Process the different types of data messages here based on receivedData.type
