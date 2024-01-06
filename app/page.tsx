@@ -496,7 +496,7 @@ export default function Home() {
   };
 
   //debug const [initialConfig, setInitialConfig] = useState<number[]>([2, 2, 1, 1]);
-  const [initialConfig, setInitialConfig] = useState<number[]>([1, 0, 0, 0]);
+  const [initialConfig, setInitialConfig] = useState<number[]>([2, 2, 1, 1]);
 
   const shipConfiguration = useCallback(() => {
     const shipTemplate = ({ type, coordinates, id }: { type: ShipSelection; coordinates: number[][]; id: string }) => [
@@ -1312,7 +1312,7 @@ export default function Home() {
   };
 
   useEffect(() => {
-    if (multiplayerPhase === MultiplayerPhase.lobby) setInitialConfig([1, 0, 0, 0]); //debug
+    if (multiplayerPhase === MultiplayerPhase.lobby) setInitialConfig([2, 2, 1, 1]); //debug here to modify initial config for MP
   }, [multiplayerPhase]);
 
   return (
