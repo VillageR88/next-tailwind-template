@@ -55,7 +55,7 @@ const WebSocketComponent = ({
   jsxElement3: JSX.Element;
   jsxElementQuit: JSX.Element;
 }) => {
-  const [opponentFogOfWar, setOpponentFogOfWar] = useState<number[] | null>(null);
+  const [opponentFogOfWar, setOpponentFogOfWar] = useState<number[]>([]);
   const [moveConductor, setMoveConductor] = useState<[boolean, boolean]>([true, true]);
   const [multiplayerPhase, setMultiplayerPhase] = useState<MultiplayerPhase>(MultiplayerPhase.lobby);
   const [feed, setFeed] = useState<[ShipSelection, number[][], string][] | null>(null);
@@ -80,7 +80,7 @@ const WebSocketComponent = ({
   }, [client, fogOfWar, multiplayerPhase, multiplayers]);
 
   useEffect(() => {
-    if (client && (multiplayerPhase as MultiplayerPhase) === MultiplayerPhase.battle && opponentFogOfWar !== null)
+    if (client && (multiplayerPhase as MultiplayerPhase) === MultiplayerPhase.battle && opponentFogOfWar.length !== 0)
       passFogReport(opponentFogOfWar);
   }, [client, multiplayerPhase, opponentFogOfWar, passFogReport]);
 
@@ -477,7 +477,7 @@ export default function Home() {
   const [collection, setCollection] = useState<[ShipSelection, number[][], string][]>(shipConfiguration);
   const [enemyCollection, setEnemyCollection] = useState<[ShipSelection, number[][], string][]>([]);
   const [fogOfWar, setFogOfWar] = useState<number[]>([]);
-  const [opponentFogOfWar, setOpponentFogOfWar] = useState<number[] | null>(null);
+  const [opponentFogOfWar, setOpponentFogOfWar] = useState<number[]>([]);
   const [computerMove, setComputerMove] = useState<number[]>([]);
   const [unitSelected, setUnitSelected] = useState<(ShipSelection | string | null)[]>([]);
   const [horizontal, setHorizontal] = useState<boolean>(false);
@@ -676,7 +676,7 @@ export default function Home() {
   useEffect(() => {
     let opponentMove = [] as number[];
     if (gamePhase === GamePhase.battle) opponentMove = computerMove;
-    else if (gamePhase === GamePhase.multiplayer && opponentFogOfWar !== null) opponentMove = opponentFogOfWar;
+    else if (gamePhase === GamePhase.multiplayer && opponentFogOfWar.length !== 0) opponentMove = opponentFogOfWar;
     if (opponentMove.length !== 0) {
       const shipTotalLengthPlayer = collection.map((x) => x[1][0]).flat().length;
       const shipCurrentLengthPlayer = collection
@@ -748,7 +748,7 @@ export default function Home() {
   }) => {
     let enemyOperations = [] as number[];
     if (gamePhase === GamePhase.battle) enemyOperations = computerMove;
-    else if (gamePhase === GamePhase.multiplayer && opponentFogOfWar !== null) enemyOperations = opponentFogOfWar;
+    else if (gamePhase === GamePhase.multiplayer && opponentFogOfWar.length !== 0) enemyOperations = opponentFogOfWar;
     return Array.from({ length: 100 }, (_, iterator, i = iterator + 1) => (
       <button
         key={i}
@@ -948,7 +948,7 @@ export default function Home() {
       (gamePhase === GamePhase.multiplayer && multiplayerPhase === MultiplayerPhase.battle)
     ) {
       const array = [] as number[];
-      (visibleBorder2Enemy() as number[]).map((x) => !fogOfWar.includes(x) && array.push(x));
+      visibleBorder2Enemy().map((x) => !fogOfWar.includes(x) && array.push(x));
       if (array.length !== 0)
         setFogOfWar((value) => {
           const newValue = [...value];
@@ -997,7 +997,7 @@ export default function Home() {
           if (gamePhase === GamePhase.multiplayer && multiplayerPhase !== MultiplayerPhase.lobby) {
             setMultiplayerPhase(MultiplayerPhase.lobby);
             setOpponentName(null);
-            setOpponentFogOfWar(null);
+            setOpponentFogOfWar([]);
             setHonoraryMoveLeft(true);
           } else {
             setGamePhase(GamePhase.menu);
