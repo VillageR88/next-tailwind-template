@@ -453,7 +453,8 @@ export default function Home() {
     );
   };
 
-  const [initialConfig, setInitialConfig] = useState<number[]>([2, 2, 1, 1]);
+  //debug const [initialConfig, setInitialConfig] = useState<number[]>([2, 2, 1, 1]);
+  const [initialConfig, setInitialConfig] = useState<number[]>([1, 0, 0, 0]);
 
   const shipConfiguration = useCallback(() => {
     const shipTemplate = ({ type, coordinates, id }: { type: ShipSelection; coordinates: number[][]; id: string }) => [
@@ -1407,8 +1408,8 @@ text-3xl text-orange-700"
           (!(gamePhase === GamePhase.multiplayer) || !honoraryMoveLeft) && (
             <div className="absolute flex items-center justify-center">
               <div className="flex h-24  w-96 items-center justify-center rounded-lg bg-white outline outline-2 drop-shadow-xl">
-                {healthComputer === 0 && <span className="text-3xl">{username} Wins!</span>}
-                {healthPlayer === 0 && (
+                {healthComputer === 0 && healthPlayer !== 0 && <span className="text-3xl">{username} Wins!</span>}
+                {healthPlayer === 0 && healthComputer !== 0 && (
                   <span className="text-3xl">{opponentName ? opponentName : 'Computer'} Wins!</span>
                 )}
                 {healthPlayer === 0 && healthComputer === 0 && <span className="text-3xl">Draw!</span>}
