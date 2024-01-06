@@ -156,14 +156,21 @@ const WebSocketComponent = ({
 
   useEffect(() => {
     if ((multiplayerPhase as MultiplayerPhase) !== MultiplayerPhase.lobby && multiplayers.includes(null)) {
-      console.log('QUIT TO LOBBY');
       reportLeftBattlefield();
+      //TODO probably multi[1]
       setMultiplayerPhase(MultiplayerPhase.lobby);
     }
   }, [multiplayerPhase, multiplayers, passMultiplayerPhase, passOpponentName, reportLeftBattlefield, userList]);
 
   useEffect(() => {
-    if (multiplayerPhase === MultiplayerPhase.lobby) passMultiplayerPhase(MultiplayerPhase.lobby);
+    if (multiplayerPhase === MultiplayerPhase.lobby) {
+      setMultiplayers((value) => {
+        const newValue = [...value];
+        newValue[1] = null;
+        return newValue as [string, null];
+      });
+      passMultiplayerPhase(MultiplayerPhase.lobby);
+    }
   }, [multiplayerPhase, passMultiplayerPhase]);
 
   useEffect(() => {
@@ -1109,6 +1116,7 @@ export default function Home() {
           if (gamePhase === GamePhase.multiplayer && multiplayerPhase !== MultiplayerPhase.lobby) {
             setInformMultiplayerPhaseLobby(true);
             setMultiplayerPhase(MultiplayerPhase.lobby);
+            setPassMultiplayerBattleReady(false);
             setOpponentName(null);
             setHonoraryMoveLeft(true);
             setOpponentHonoraryMoveLeft(true);
@@ -1442,7 +1450,10 @@ text-3xl text-orange-700"
         {(gamePhase === GamePhase.preSetup || gamePhase === GamePhase.setup) && <Setup />}
         {gamePhase === GamePhase.setup && <Setup_LowerButtons />}
         {(gamePhase === GamePhase.battle ||
-          ((gamePhase as GamePhase) === GamePhase.multiplayer && !honoraryMoveLeft && !opponentHonoraryMoveLeft)) &&
+          ((gamePhase as GamePhase) === GamePhase.multiplayer &&
+            multiplayerPhase === MultiplayerPhase.battle &&
+            !honoraryMoveLeft &&
+            !opponentHonoraryMoveLeft)) &&
           (healthComputer === 0 || healthPlayer === 0) && (
             <div className="absolute flex items-center justify-center">
               <div className="flex h-24  w-96 items-center justify-center rounded-lg bg-white outline outline-2 drop-shadow-xl">
