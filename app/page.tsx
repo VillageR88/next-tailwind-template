@@ -477,7 +477,6 @@ export default function Home() {
   const [collection, setCollection] = useState<[ShipSelection, number[][], string][]>(shipConfiguration);
   const [enemyCollection, setEnemyCollection] = useState<[ShipSelection, number[][], string][]>([]);
   const [fogOfWar, setFogOfWar] = useState<number[]>([]);
-  const [opponentFogOfWar, setOpponentFogOfWar] = useState<number[]>([]);
   const [computerMove, setComputerMove] = useState<number[]>([]);
   const [unitSelected, setUnitSelected] = useState<(ShipSelection | string | null)[]>([]);
   const [horizontal, setHorizontal] = useState<boolean>(false);
@@ -674,19 +673,16 @@ export default function Home() {
 
   //this is player's health bar update
   useEffect(() => {
-    let opponentMove = [] as number[];
-    if (gamePhase === GamePhase.battle) opponentMove = computerMove;
-    else if (gamePhase === GamePhase.multiplayer && opponentFogOfWar.length !== 0) opponentMove = opponentFogOfWar;
-    if (opponentMove.length !== 0) {
+    if (computerMove.length !== 0) {
       const shipTotalLengthPlayer = collection.map((x) => x[1][0]).flat().length;
       const shipCurrentLengthPlayer = collection
         .map((x) => x[1][0])
         .flat()
-        .filter((x) => opponentMove.includes(x)).length;
+        .filter((x) => computerMove.includes(x)).length;
       setHealthPlayer(100 - (shipCurrentLengthPlayer * 100) / shipTotalLengthPlayer);
       return void [];
     }
-  }, [GamePhase.battle, GamePhase.multiplayer, collection, computerMove, gamePhase, opponentFogOfWar]);
+  }, [GamePhase.battle, GamePhase.multiplayer, collection, computerMove, gamePhase]);
 
   const Buttons1 = Array.from({ length: 100 }, (_, iterator, i = iterator + 1) => (
     <button
@@ -746,9 +742,6 @@ export default function Home() {
     feed: [ShipSelection, number[][], string][];
     manipulative?: boolean;
   }) => {
-    let enemyOperations = [] as number[];
-    if (gamePhase === GamePhase.battle) enemyOperations = computerMove;
-    else if (gamePhase === GamePhase.multiplayer && opponentFogOfWar.length !== 0) enemyOperations = opponentFogOfWar;
     return Array.from({ length: 100 }, (_, iterator, i = iterator + 1) => (
       <button
         key={i}
@@ -803,7 +796,7 @@ export default function Home() {
             .flat()
             .includes(i)
             ? (!manipulative || fogOfWar.includes(i)) &&
-              (!manipulative ? (enemyOperations.includes(i) ? 'bg-red-900' : 'bg-slate-500') : 'bg-red-900')
+              (!manipulative ? (computerMove.includes(i) ? 'bg-red-900' : 'bg-slate-500') : 'bg-red-900')
             : manipulative && fogOfWar.includes(i)
               ? 'bg-red-300'
               : !manipulative && computerMove.includes(i) && 'bg-red-300'
@@ -819,7 +812,7 @@ export default function Home() {
               .flat()
               .filter((xb2) => xb2 !== false)
               .includes(i)) &&
-          (!manipulative ? (enemyOperations.includes(i) ? 'bg-red-300' : 'bg-cyan-100') : 'bg-red-300')
+          (!manipulative ? (computerMove.includes(i) ? 'bg-red-300' : 'bg-cyan-100') : 'bg-red-300')
         } h-10 w-10 outline outline-1 active:border-[5px] active:border-blue-500`}
       ></button>
     ));
@@ -913,14 +906,19 @@ export default function Home() {
     [GamePhase.battle, collection, computerMove, gamePhase],
   );
   //Computer board
-  const visibleBorder2Enemy = useCallback(
-    () =>
-      enemyCollection
-        .map((x, i) => !x[1][0].map((x) => fogOfWar.includes(x)).includes(false) && enemyCollection[i][1][1])
-        .flat()
-        .filter((x) => x !== false) as number[],
-    [enemyCollection, fogOfWar],
-  );
+  const visibleBorder2Enemy = useCallback(() => {
+    //TODO multiplayer feed in MP
+    let opponentFeed = [] as [ShipSelection, number[][], string][];
+    if (gamePhase === GamePhase.battle) opponentFeed = enemyCollection;
+    else if (gamePhase === GamePhase.multiplayer && multiplayerFeed) opponentFeed = multiplayerFeed;
+    return opponentFeed
+      .map((x, i) => {
+        const isVisible = !x[1][0].map((x) => fogOfWar.includes(x)).includes(false);
+        return isVisible ? opponentFeed[i][1][1] : false;
+      })
+      .flat()
+      .filter((x) => x !== false) as number[];
+  }, [gamePhase, GamePhase.battle, GamePhase.multiplayer, enemyCollection, multiplayerFeed, fogOfWar]);
 
   /*Here is the logic that makes Border2 of destroyed ship to appear*/
   //Player board
@@ -997,7 +995,6 @@ export default function Home() {
           if (gamePhase === GamePhase.multiplayer && multiplayerPhase !== MultiplayerPhase.lobby) {
             setMultiplayerPhase(MultiplayerPhase.lobby);
             setOpponentName(null);
-            setOpponentFogOfWar([]);
             setHonoraryMoveLeft(true);
           } else {
             setGamePhase(GamePhase.menu);
@@ -1368,7 +1365,7 @@ text-3xl text-orange-700"
                 setWaitForMove(value);
               }}
               passFogReport={(value) => {
-                setOpponentFogOfWar(value);
+                setComputerMove(value);
               }}
               username={username}
             />
