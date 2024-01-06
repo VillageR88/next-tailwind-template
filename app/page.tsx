@@ -490,11 +490,10 @@ export default function Home() {
   const autoloaderTime = 500;
   const letters = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J'];
   console.log('honoraryMoveLeft', honoraryMoveLeft);
-
+  console.log('moveAllowed', moveAllowed);
   //set honoraryMoveLeft to false for winner after his final hit
   useEffect(() => {
-    if (healthComputer === 0 && gamePhase === GamePhase.battle && multiplayerPhase === MultiplayerPhase.battle)
-      setHonoraryMoveLeft(false);
+    if (healthComputer === 0 && multiplayerPhase === MultiplayerPhase.battle) setHonoraryMoveLeft(false);
   }, [GamePhase.battle, gamePhase, healthComputer, multiplayerPhase]);
 
   //localStorage action - username
@@ -737,7 +736,7 @@ export default function Home() {
       key={i}
     ></button>
   ));
-
+  console.log('fofOfWar', fogOfWar);
   /*Battle phase buttons logic
   IMPORTANT: includes AI movement*/
   const Buttons2 = ({
@@ -755,45 +754,45 @@ export default function Home() {
         key={i}
         id={'' + i}
         onClick={() => {
-          if (healthPlayer !== 0 && healthComputer !== 0 && manipulative && !fogOfWar.includes(i)) {
+          if (
+            manipulative &&
+            !fogOfWar.includes(i) &&
+            ((gamePhase !== GamePhase.multiplayer && healthPlayer !== 0 && healthComputer !== 0) ||
+              (gamePhase === GamePhase.multiplayer && honoraryMoveLeft && moveAllowed))
+          ) {
             //Player uncover Enemy
-            if (
-              (gamePhase !== GamePhase.multiplayer || moveAllowed) &&
-              gamePhase === GamePhase.multiplayer &&
-              honoraryMoveLeft
-            ) {
-              setFogOfWar((value) => {
-                const newValue = [...value];
-                newValue.push(i);
-                return newValue;
-              });
-              if ((gamePhase as GamePhase) !== GamePhase.multiplayer) {
-                //Computer uncover Player (Computer(AI) move)
-                //regular move
-                if (!playerShipFound[0]) {
-                  setComputerMove((value) => {
-                    const newValue = [...value];
-                    let randomNumberFrom1to100 = Math.floor(Math.random() * 100) + 1;
-                    while (newValue.includes(randomNumberFrom1to100)) {
-                      randomNumberFrom1to100 = Math.floor(Math.random() * 100) + 1;
-                    }
-                    newValue.push(randomNumberFrom1to100);
-                    return newValue;
-                  });
-                }
-                //ship seek move
-                else {
-                  setComputerMove((value) => {
-                    const newValue = [...value];
-                    newValue.push(seek[1][seek[1].length - 1]);
-                    setSeekLoader(true);
-                    return newValue;
-                  });
-                }
-              } else {
-                setInfoAboutPlayerMove(true);
-                setMoveAllowed(false);
+            setFogOfWar((value) => {
+              const newValue = [...value];
+              newValue.push(i);
+              return newValue;
+            });
+            if ((gamePhase as GamePhase) !== GamePhase.multiplayer) {
+              //Computer uncover Player (Computer(AI) move)
+              //regular move
+              if (!playerShipFound[0]) {
+                setComputerMove((value) => {
+                  const newValue = [...value];
+                  let randomNumberFrom1to100 = Math.floor(Math.random() * 100) + 1;
+                  while (newValue.includes(randomNumberFrom1to100)) {
+                    randomNumberFrom1to100 = Math.floor(Math.random() * 100) + 1;
+                  }
+                  newValue.push(randomNumberFrom1to100);
+                  return newValue;
+                });
               }
+              //ship seek move
+              else {
+                setComputerMove((value) => {
+                  const newValue = [...value];
+                  newValue.push(seek[1][seek[1].length - 1]);
+                  setSeekLoader(true);
+                  return newValue;
+                });
+              }
+            } else {
+              if (healthPlayer === 0) setHonoraryMoveLeft(false);
+              setInfoAboutPlayerMove(true);
+              setMoveAllowed(false);
             }
           }
         }}
@@ -916,18 +915,20 @@ export default function Home() {
   //Computer board
   const visibleBorder2Enemy = useCallback(
     () =>
-      gamePhase === GamePhase.battle &&
-      (enemyCollection
+      enemyCollection
         .map((x, i) => !x[1][0].map((x) => fogOfWar.includes(x)).includes(false) && enemyCollection[i][1][1])
         .flat()
-        .filter((x) => x !== false) as number[]),
-    [GamePhase.battle, enemyCollection, fogOfWar, gamePhase],
+        .filter((x) => x !== false) as number[],
+    [enemyCollection, fogOfWar],
   );
 
   /*Here is the logic that makes Border2 of destroyed ship to appear*/
   //Player board
   useEffect(() => {
-    if (gamePhase === GamePhase.battle) {
+    if (
+      gamePhase === GamePhase.battle ||
+      (gamePhase === GamePhase.multiplayer && multiplayerPhase === MultiplayerPhase.battle)
+    ) {
       const array = [] as number[];
       (visibleBorder2Player() as number[]).map((x) => !computerMove.includes(x) && array.push(x));
       if (array.length !== 0)
@@ -938,10 +939,14 @@ export default function Home() {
         });
       return void [];
     }
-  }, [GamePhase.battle, computerMove, gamePhase, visibleBorder2Player]);
+  }, [GamePhase.battle, GamePhase.multiplayer, computerMove, gamePhase, multiplayerPhase, visibleBorder2Player]);
+
   //Computer board
   useEffect(() => {
-    if (gamePhase === GamePhase.battle) {
+    if (
+      gamePhase === GamePhase.battle ||
+      (gamePhase === GamePhase.multiplayer && multiplayerPhase === MultiplayerPhase.battle)
+    ) {
       const array = [] as number[];
       (visibleBorder2Enemy() as number[]).map((x) => !fogOfWar.includes(x) && array.push(x));
       if (array.length !== 0)
@@ -952,7 +957,7 @@ export default function Home() {
         });
       return void [];
     }
-  }, [GamePhase.battle, fogOfWar, gamePhase, visibleBorder2Enemy]);
+  }, [GamePhase.battle, GamePhase.multiplayer, fogOfWar, gamePhase, multiplayerPhase, visibleBorder2Enemy]);
 
   /*Autoloader:
   - in pre-setup used as loading enemy,
@@ -1325,10 +1330,8 @@ text-3xl text-orange-700"
           (healthComputer === 0 || healthPlayer === 0) && (
             <div className="absolute flex items-center justify-center">
               <div className="flex h-24  w-96 items-center justify-center rounded-lg bg-white outline outline-2 drop-shadow-xl">
-                {healthComputer === 0 && (!honoraryMoveLeft || gamePhase === GamePhase.battle) && (
-                  <span className="text-3xl">{username} Wins!</span>
-                )}
-                {healthPlayer === 0 && (
+                {healthComputer === 0 && <span className="text-3xl">{username} Wins!</span>}
+                {healthPlayer === 0 && (!honoraryMoveLeft || gamePhase === GamePhase.battle) && (
                   <span className="text-3xl">{opponentName ? opponentName : 'Computer'} Wins!</span>
                 )}
                 {healthPlayer === 0 && healthComputer === 0 && <span className="text-3xl">Draw!</span>}
