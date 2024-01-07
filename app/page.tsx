@@ -1,8 +1,25 @@
+'use client';
 import Image from 'next/image';
 import picture1 from './images/avatars/image-amyrobson.webp';
 import iconReply from './images/icon-reply.svg';
+import { useEffect, useState } from 'react';
 
 export default function Home() {
+  const [data, setData] = useState<JSON | null>(null);
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch('./data.json');
+        const jsonData = (await response.json()) as JSON;
+        setData(jsonData);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
+    void fetchData();
+  }, []);
+  console.log(data);
+
   const Block = () => {
     return (
       <div className="flex h-[10.45em] w-[45.625em] gap-[1.5em] rounded-[0.5em] bg-white py-[1.5em] pl-[1.5em] pr-[1.55em]">
