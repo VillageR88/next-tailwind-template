@@ -1,13 +1,16 @@
-import '@fontsource/rubik';
-import '@fontsource/rubik/400.css';
-import '@fontsource/rubik/500.css';
-import '@fontsource/rubik/700.css';
-
 export default function Home() {
+  const Block = () => {
+    return (
+      <div className="flex h-[10.45em] w-[45.625em] gap-[1em] rounded-[0.5em] bg-white px-[1.5em] py-[1.5em]">
+        <div className="h-[6.25em] w-[2.5em] bg-[#F5F6FA] rounded-[0.65em]"></div>
+        <div>RIGHT</div>
+      </div>
+    );
+  };
   return (
-    <main className="font-rubik flex min-h-screen flex-col items-center justify-center bg-[#F5F6FA]">
-      <div className="h-[100em] items-center flex flex-col w-full mt-[4em]">
-        <div className="h-[10.45em] w-[45.625em] rounded-[0.5em] bg-white"></div>
+    <main className="flex min-h-screen flex-col items-center justify-center bg-[#F5F6FA] font-rubik">
+      <div className="mt-[4em] flex h-[100em] w-full flex-col items-center">
+        <Block />
       </div>
     </main>
   );
