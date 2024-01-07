@@ -29,7 +29,7 @@ export default function Home() {
               </div>
             </div>
           </div>
-          <div className='tracking-[0.001em] text-grayishBlue'>
+          <div className="tracking-[0.001em] text-grayishBlue">
             Impressive! Though it seems the drag feature could be improved. But overall it looks incredible. You've
             nailed the design and the responsiveness at various breakpoints works really well.
           </div>
