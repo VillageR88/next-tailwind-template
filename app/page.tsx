@@ -3,14 +3,13 @@ import Image from 'next/image';
 import iconReply from './images/icon-reply.svg';
 import iconEdit from './images/icon-edit.svg';
 import iconDelete from './images/icon-delete.svg';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import React from 'react';
-
-const IconPlus = ({ addFunction }: { addFunction(arg0): void }) => {
+const IconPlus = ({ plusFunction }: { plusFunction(arg0): void }) => {
   const [color, setColor] = useState('#C5C6EF');
   return (
     <button
-      onClick={addFunction}
+      onClick={plusFunction}
       onMouseEnter={() => {
         setColor('hsl(238, 40%, 52%)');
       }}
@@ -29,10 +28,11 @@ const IconPlus = ({ addFunction }: { addFunction(arg0): void }) => {
   );
 };
 
-const IconMinus = () => {
+const IconMinus = ({ minusFunction }: { minusFunction(arg0): void }) => {
   const [color, setColor] = useState('#C5C6EF');
   return (
     <button
+      onClick={minusFunction}
       onMouseEnter={() => {
         setColor('hsl(238, 40%, 52%)');
       }}
@@ -116,7 +116,8 @@ export default function Home() {
     replyingTo,
     username,
     webp,
-    addFunction,
+    plusFunction,
+    minusFunction,
   }: {
     content: string;
     createdAt: string;
@@ -124,7 +125,8 @@ export default function Home() {
     replyingTo?: string;
     username: string;
     webp: string;
-    addFunction(arg0): void;
+    plusFunction(arg0): void;
+    minusFunction(arg0): void;
   }) => {
     const isUser = data && username === data.currentUser.username;
     return (
@@ -134,9 +136,9 @@ export default function Home() {
         } gap-[1.5em] rounded-[0.5em] bg-white py-[1.5em] pl-[1.5em] pr-[1.55em]`}
       >
         <div className="flex h-[6.25em] w-[2.8em] flex-col items-center justify-between rounded-[0.65em] bg-[#F5F6FA]">
-          <IconPlus addFunction={addFunction} />
+          <IconPlus plusFunction={plusFunction} />
           <span className="text-[1.05rem] font-[500] text-moderateBlue">{score}</span>
-          <IconMinus />
+          <IconMinus minusFunction={minusFunction} />
         </div>
         <div className="flex w-full flex-col gap-[0.9em]">
           <div>
@@ -185,14 +187,21 @@ export default function Home() {
                 score={comment.score}
                 username={comment.user.username}
                 webp={comment.user.image.webp.replace('images/', '')}
-                //q: why this does +=1 instead of just +1? //a
-
-                addFunction={() => {
+                plusFunction={() => {
                   if (!data.comments[iteration].voted.includes(data.currentUser.username))
                     setData((value: dataJSON | null) => {
                       const newValue: dataJSON = { ...value };
                       newValue.comments[iteration].voted.push(data.currentUser.username);
                       newValue.comments[iteration].score++;
+                      return { ...newValue };
+                    });
+                }}
+                minusFunction={() => {
+                  if (!data.comments[iteration].voted.includes(data.currentUser.username))
+                    setData((value: dataJSON | null) => {
+                      const newValue: dataJSON = { ...value };
+                      newValue.comments[iteration].voted.push(data.currentUser.username);
+                      newValue.comments[iteration].score--;
                       return { ...newValue };
                     });
                 }}
@@ -210,12 +219,21 @@ export default function Home() {
                       replyingTo={'@'.concat(reply.replyingTo)}
                       username={reply.user.username}
                       webp={reply.user.image.webp.replace('images/', '')}
-                      addFunction={() => {
+                      plusFunction={() => {
                         if (!data.comments[iteration].replies[iteration2].voted.includes(data.currentUser.username))
                           setData((value: dataJSON | null) => {
                             const newValue: dataJSON = { ...value };
                             newValue.comments[iteration].replies[iteration2].voted.push(data.currentUser.username);
                             newValue.comments[iteration].replies[iteration2].score++;
+                            return { ...newValue };
+                          });
+                      }}
+                      minusFunction={() => {
+                        if (!data.comments[iteration].replies[iteration2].voted.includes(data.currentUser.username))
+                          setData((value: dataJSON | null) => {
+                            const newValue: dataJSON = { ...value };
+                            newValue.comments[iteration].replies[iteration2].voted.push(data.currentUser.username);
+                            newValue.comments[iteration].replies[iteration2].score--;
                             return { ...newValue };
                           });
                       }}
