@@ -1,6 +1,8 @@
 'use client';
 import Image from 'next/image';
 import iconReply from './images/icon-reply.svg';
+import iconEdit from './images/icon-edit.svg';
+import iconDelete from './images/icon-delete.svg';
 import { useEffect, useState } from 'react';
 
 export default function Home() {
@@ -69,8 +71,10 @@ export default function Home() {
     username: string;
     webp: string;
   }) => {
+    const isUser = username === (data as unknown as dataJSON).currentUser.username;
     return (
       <div
+        //q: how to break 'library/framework' in textarea //a: use &#8203; (zero-width space)
         className={`flex h-[10.45em] ${
           replyingTo ? 'w-[40.1em]' : 'w-[45.625em]'
         } gap-[1.5em] rounded-[0.5em] bg-white py-[1.5em] pl-[1.5em] pr-[1.55em]`}
@@ -89,13 +93,33 @@ export default function Home() {
             <div className="flex justify-between text-[1.05rem] tracking-[-0.03em]">
               <div className="flex items-center gap-[1em]">
                 <Image src={webp} height={32} width={32} alt="avatar" />
-                <span className="font-[500] text-darkBlue">{username}</span>
+                <div className="flex items-center gap-2">
+                  <span className="font-[500] text-darkBlue">{username}</span>
+                  {isUser && (
+                    <span className="mb-[-1px] flex h-[1.48em] w-[2.85em] items-center justify-center rounded-sm bg-moderateBlue px-2 text-[0.8rem] tracking-wide text-white">
+                      you
+                    </span>
+                  )}
+                </div>
                 <span className="text-grayishBlue">{createdAt}</span>
               </div>
-              <div className="flex items-center gap-[0.45em]">
-                <Image className="h-fit w-fit" src={iconReply as string} alt="reply" />
-                <span className="font-[500] text-moderateBlue">Reply</span>
-              </div>
+              {isUser ? (
+                <div className="flex gap-6">
+                  <button className="flex items-center gap-[0.45em]">
+                    <Image className="h-fit w-fit" src={iconDelete as string} alt="reply" />
+                    <span className="font-[500] text-softRed">Delete</span>
+                  </button>
+                  <button className="flex items-center gap-[0.45em]">
+                    <Image className="h-fit w-fit" src={iconEdit as string} alt="reply" />
+                    <span className="font-[500] text-moderateBlue">Edit</span>
+                  </button>
+                </div>
+              ) : (
+                <button className="flex items-center gap-[0.45em]">
+                  <Image className="h-fit w-fit" src={iconReply as string} alt="reply" />
+                  <span className="font-[500] text-moderateBlue">Reply</span>
+                </button>
+              )}
             </div>
           </div>
           <div className="flex tracking-[0.001em] text-grayishBlue">
@@ -150,7 +174,7 @@ export default function Home() {
             />
             <textarea
               placeholder="Add a comment…"
-              className="h-[5.8em] w-[31.5em] resize-none rounded-[0.5em] px-6 py-3 outline outline-1 outline-lightGray focus:outline-moderateBlue"
+              className="h-[5.8em] w-[31.5em] resize-none rounded-[0.5em] px-6 py-3 placeholder-grayishBlue outline outline-1 outline-lightGray focus:outline-moderateBlue"
             ></textarea>
             <button className="flex items-center justify-center rounded-[0.5em] bg-moderateBlue px-[1.92em] py-[0.75em] font-[500] text-white">
               SEND
