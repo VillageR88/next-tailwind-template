@@ -18,6 +18,7 @@ export default function Home() {
     void fetchData();
   }, []);
   interface dataJSON {
+    currentUser: { image: { png: string; webp: string }; username: string };
     comments: [
       {
         id: number;
@@ -98,10 +99,10 @@ export default function Home() {
             </div>
           </div>
           <div className="flex tracking-[0.001em] text-grayishBlue">
-            <span>
-              {replyingTo}
+            <div className="space-x-1">
+              {replyingTo && <span className="font-[500] text-moderateBlue">{replyingTo}</span>}
               <span>{content}</span>
-            </span>
+            </div>
           </div>
         </div>
       </div>
@@ -110,7 +111,7 @@ export default function Home() {
   return (
     data && (
       <main className="flex min-h-screen flex-col items-center justify-center bg-[#F5F6FA] font-rubik">
-        <div className="mt-[4em] flex h-[100em] w-full flex-col items-center">
+        <div className="mb-[4em] mt-[4em] flex w-full flex-col items-center">
           {(data as unknown as dataJSON).comments.map((comment, iteration) => (
             <div className="flex flex-col items-center gap-5" key={iteration}>
               <Block
@@ -120,10 +121,9 @@ export default function Home() {
                 username={comment.user.username}
                 webp={comment.user.image.webp.replace('images/', '')}
               />
-
               <div className="flex w-full justify-end gap-[2.7em]">
                 {/* eslint-disable-next-line @typescript-eslint/no-unnecessary-condition */}
-                {comment.replies.length > 0 && <div className="h-[97%] w-0.5 bg-lightGray"></div>}
+                {comment.replies.length > 0 && <div className="mb-[0.7em] w-0.5 bg-lightGray"></div>}
                 <div className="flex flex-col gap-6">
                   {comment.replies.map((reply, iteration2) => (
                     <Block
@@ -131,7 +131,7 @@ export default function Home() {
                       content={reply.content}
                       createdAt={reply.createdAt}
                       score={reply.score}
-                      replyingTo={reply.replyingTo}
+                      replyingTo={'@'.concat(reply.replyingTo)}
                       username={reply.user.username}
                       webp={reply.user.image.webp.replace('images/', '')}
                     />
@@ -140,6 +140,22 @@ export default function Home() {
               </div>
             </div>
           ))}
+          <div className="mt-5 flex h-[9em] w-[45.625em] items-start gap-[1.1em] rounded-[0.5em] bg-white py-[1.6em] pl-[1.5em] pr-[1.4em]">
+            <Image
+              className="mt-[0.18em]"
+              src={(data as unknown as dataJSON).currentUser.image.webp.replace('images/', '')}
+              height={40}
+              width={40}
+              alt="avatar"
+            />
+            <textarea
+              placeholder="Add a comment…"
+              className="h-[5.8em] w-[31.5em] resize-none rounded-[0.5em] px-6 py-3 outline outline-1 outline-lightGray focus:outline-moderateBlue"
+            ></textarea>
+            <button className="flex items-center justify-center rounded-[0.5em] bg-moderateBlue px-[1.92em] py-[0.75em] font-[500] text-white">
+              SEND
+            </button>
+          </div>
         </div>
       </main>
     )
