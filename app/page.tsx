@@ -5,11 +5,49 @@ import iconEdit from './images/icon-edit.svg';
 import iconDelete from './images/icon-delete.svg';
 import { useEffect, useState } from 'react';
 import React from 'react';
-const IconPlus = ({ plusFunction }: { plusFunction(arg0): void }) => {
+
+interface dataJSON {
+  currentUser: { image: { png: string; webp: string }; username: string };
+  comments: [
+    {
+      id: number;
+      content: string;
+      createdAt: string;
+      score: number;
+      voted: string[];
+      user: {
+        image: {
+          png: string;
+          webp: string;
+        };
+        username: string;
+      };
+      replies: [
+        {
+          id: number;
+          content: string;
+          createdAt: string;
+          score: number;
+          voted: string[];
+          replyingTo: string;
+          user: {
+            image: {
+              png: string;
+              webp: string;
+            };
+            username: string;
+          };
+        },
+      ];
+    },
+  ];
+}
+
+const IconPlus = ({ plusFunction }: { plusFunction(arg0: dataJSON | null): void }) => {
   const [color, setColor] = useState('#C5C6EF');
   return (
     <button
-      onClick={plusFunction}
+      onClick={plusFunction as () => void}
       onMouseEnter={() => {
         setColor('hsl(238, 40%, 52%)');
       }}
@@ -28,11 +66,11 @@ const IconPlus = ({ plusFunction }: { plusFunction(arg0): void }) => {
   );
 };
 
-const IconMinus = ({ minusFunction }: { minusFunction(arg0): void }) => {
+const IconMinus = ({ minusFunction }: { minusFunction(arg0: dataJSON | null): void }) => {
   const [color, setColor] = useState('#C5C6EF');
   return (
     <button
-      onClick={minusFunction}
+      onClick={minusFunction as () => void}
       onMouseEnter={() => {
         setColor('hsl(238, 40%, 52%)');
       }}
@@ -58,43 +96,6 @@ const BoxButtonType1 = ({ icon, text, color }: { icon: string; text: string; col
 );
 
 export default function Home() {
-  interface dataJSON {
-    currentUser: { image: { png: string; webp: string }; username: string };
-    comments: [
-      {
-        id: number;
-        content: string;
-        createdAt: string;
-        score: number;
-        voted: string[];
-        user: {
-          image: {
-            png: string;
-            webp: string;
-          };
-          username: string;
-        };
-        replies: [
-          {
-            id: number;
-            content: string;
-            createdAt: string;
-            score: number;
-            voted: string[];
-            replyingTo: string;
-            user: {
-              image: {
-                png: string;
-                webp: string;
-              };
-              username: string;
-            };
-          },
-        ];
-      },
-    ];
-  }
-
   const [data, setData] = useState<dataJSON | null>(null);
   useEffect(() => {
     const fetchData = async () => {
@@ -125,8 +126,8 @@ export default function Home() {
     replyingTo?: string;
     username: string;
     webp: string;
-    plusFunction(arg0): void;
-    minusFunction(arg0): void;
+    plusFunction(arg0: dataJSON | null): void;
+    minusFunction(arg0: dataJSON | null): void;
   }) => {
     const isUser = data && username === data.currentUser.username;
     return (
@@ -190,7 +191,7 @@ export default function Home() {
                 plusFunction={() => {
                   if (!data.comments[iteration].voted.includes(data.currentUser.username))
                     setData((value: dataJSON | null) => {
-                      const newValue: dataJSON = { ...value };
+                      const newValue: dataJSON = { ...value } as dataJSON;
                       newValue.comments[iteration].voted.push(data.currentUser.username);
                       newValue.comments[iteration].score++;
                       return { ...newValue };
@@ -199,7 +200,7 @@ export default function Home() {
                 minusFunction={() => {
                   if (!data.comments[iteration].voted.includes(data.currentUser.username))
                     setData((value: dataJSON | null) => {
-                      const newValue: dataJSON = { ...value };
+                      const newValue: dataJSON = { ...value } as dataJSON;
                       newValue.comments[iteration].voted.push(data.currentUser.username);
                       newValue.comments[iteration].score--;
                       return { ...newValue };
@@ -222,7 +223,7 @@ export default function Home() {
                       plusFunction={() => {
                         if (!data.comments[iteration].replies[iteration2].voted.includes(data.currentUser.username))
                           setData((value: dataJSON | null) => {
-                            const newValue: dataJSON = { ...value };
+                            const newValue: dataJSON = { ...value } as dataJSON;
                             newValue.comments[iteration].replies[iteration2].voted.push(data.currentUser.username);
                             newValue.comments[iteration].replies[iteration2].score++;
                             return { ...newValue };
@@ -231,7 +232,7 @@ export default function Home() {
                       minusFunction={() => {
                         if (!data.comments[iteration].replies[iteration2].voted.includes(data.currentUser.username))
                           setData((value: dataJSON | null) => {
-                            const newValue: dataJSON = { ...value };
+                            const newValue: dataJSON = { ...value } as dataJSON;
                             newValue.comments[iteration].replies[iteration2].voted.push(data.currentUser.username);
                             newValue.comments[iteration].replies[iteration2].score--;
                             return { ...newValue };
