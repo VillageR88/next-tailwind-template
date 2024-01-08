@@ -3,12 +3,14 @@ import Image from 'next/image';
 import iconReply from './images/icon-reply.svg';
 import iconEdit from './images/icon-edit.svg';
 import iconDelete from './images/icon-delete.svg';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
+import React from 'react';
 
-const IconPlus = () => {
+const IconPlus = ({ addFunction }: { addFunction(arg0): void }) => {
   const [color, setColor] = useState('#C5C6EF');
   return (
     <button
+      onClick={addFunction}
       onMouseEnter={() => {
         setColor('hsl(238, 40%, 52%)');
       }}
@@ -48,21 +50,14 @@ const IconMinus = () => {
     </button>
   );
 };
+const BoxButtonType1 = ({ icon, text, color }: { icon: string; text: string; color: string }) => (
+  <button className="flex items-center gap-[0.45em]">
+    <Image className="h-fit w-fit" src={icon} alt={text} />
+    <span className={`font-[500] ${color}`}>{text}</span>
+  </button>
+);
 
 export default function Home() {
-  const [data, setData] = useState<JSON | null>(null);
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetch('./data.json');
-        const jsonData = (await response.json()) as JSON;
-        setData(jsonData);
-      } catch (error) {
-        console.error('Error fetching data:', error);
-      }
-    };
-    void fetchData();
-  }, []);
   interface dataJSON {
     currentUser: { image: { png: string; webp: string }; username: string };
     comments: [
@@ -71,6 +66,7 @@ export default function Home() {
         content: string;
         createdAt: string;
         score: number;
+        voted: string[];
         user: {
           image: {
             png: string;
@@ -84,6 +80,7 @@ export default function Home() {
             content: string;
             createdAt: string;
             score: number;
+            voted: string[];
             replyingTo: string;
             user: {
               image: {
@@ -97,8 +94,20 @@ export default function Home() {
       },
     ];
   }
-  //q:fix this dataJSON bellow
-  data && console.log((data as unknown as dataJSON).comments);
+
+  const [data, setData] = useState<dataJSON | null>(null);
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch('./data.json');
+        const jsonData = (await response.json()) as dataJSON;
+        setData(jsonData);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
+    void fetchData();
+  }, []);
 
   const Block = ({
     content,
@@ -107,6 +116,7 @@ export default function Home() {
     replyingTo,
     username,
     webp,
+    addFunction,
   }: {
     content: string;
     createdAt: string;
@@ -114,8 +124,9 @@ export default function Home() {
     replyingTo?: string;
     username: string;
     webp: string;
+    addFunction(arg0): void;
   }) => {
-    const isUser = username === (data as unknown as dataJSON).currentUser.username;
+    const isUser = data && username === data.currentUser.username;
     return (
       <div
         className={`flex h-[10.45em] ${
@@ -123,7 +134,7 @@ export default function Home() {
         } gap-[1.5em] rounded-[0.5em] bg-white py-[1.5em] pl-[1.5em] pr-[1.55em]`}
       >
         <div className="flex h-[6.25em] w-[2.8em] flex-col items-center justify-between rounded-[0.65em] bg-[#F5F6FA]">
-          <IconPlus />
+          <IconPlus addFunction={addFunction} />
           <span className="text-[1.05rem] font-[500] text-moderateBlue">{score}</span>
           <IconMinus />
         </div>
@@ -144,20 +155,11 @@ export default function Home() {
               </div>
               {isUser ? (
                 <div className="flex gap-6">
-                  <button className="flex items-center gap-[0.45em]">
-                    <Image className="h-fit w-fit" src={iconDelete as string} alt="reply" />
-                    <span className="font-[500] text-softRed">Delete</span>
-                  </button>
-                  <button className="flex items-center gap-[0.45em]">
-                    <Image className="h-fit w-fit" src={iconEdit as string} alt="reply" />
-                    <span className="font-[500] text-moderateBlue">Edit</span>
-                  </button>
+                  <BoxButtonType1 icon={iconDelete as string} text="Delete" color="text-softRed" />
+                  <BoxButtonType1 icon={iconEdit as string} text="Edit" color="text-moderateBlue" />
                 </div>
               ) : (
-                <button className="flex items-center gap-[0.45em]">
-                  <Image className="h-fit w-fit" src={iconReply as string} alt="reply" />
-                  <span className="font-[500] text-moderateBlue">Reply</span>
-                </button>
+                <BoxButtonType1 icon={iconReply as string} text="Reply" color="text-moderateBlue" />
               )}
             </div>
           </div>
@@ -175,7 +177,7 @@ export default function Home() {
     data && (
       <main className="flex min-h-screen flex-col items-center justify-center bg-[#F5F6FA] font-rubik">
         <div className="mb-[4em] mt-[4em] flex w-full flex-col items-center">
-          {(data as unknown as dataJSON).comments.map((comment, iteration) => (
+          {data.comments.map((comment, iteration) => (
             <div className="flex flex-col items-center gap-5" key={iteration}>
               <Block
                 content={comment.content}
@@ -183,6 +185,17 @@ export default function Home() {
                 score={comment.score}
                 username={comment.user.username}
                 webp={comment.user.image.webp.replace('images/', '')}
+                //q: why this does +=1 instead of just +1? //a
+
+                addFunction={() => {
+                  if (!data.comments[iteration].voted.includes(data.currentUser.username))
+                    setData((value: dataJSON | null) => {
+                      const newValue: dataJSON = { ...value };
+                      newValue.comments[iteration].voted.push(data.currentUser.username);
+                      newValue.comments[iteration].score++;
+                      return { ...newValue };
+                    });
+                }}
               />
               <div className="flex w-full justify-end gap-[2.7em]">
                 {/* eslint-disable-next-line @typescript-eslint/no-unnecessary-condition */}
@@ -197,6 +210,15 @@ export default function Home() {
                       replyingTo={'@'.concat(reply.replyingTo)}
                       username={reply.user.username}
                       webp={reply.user.image.webp.replace('images/', '')}
+                      addFunction={() => {
+                        if (!data.comments[iteration].replies[iteration2].voted.includes(data.currentUser.username))
+                          setData((value: dataJSON | null) => {
+                            const newValue: dataJSON = { ...value };
+                            newValue.comments[iteration].replies[iteration2].voted.push(data.currentUser.username);
+                            newValue.comments[iteration].replies[iteration2].score++;
+                            return { ...newValue };
+                          });
+                      }}
                     />
                   ))}
                 </div>
