@@ -5,6 +5,50 @@ import iconEdit from './images/icon-edit.svg';
 import iconDelete from './images/icon-delete.svg';
 import { useEffect, useState } from 'react';
 
+const IconPlus = () => {
+  const [color, setColor] = useState('#C5C6EF');
+  return (
+    <button
+      onMouseEnter={() => {
+        setColor('hsl(238, 40%, 52%)');
+      }}
+      onMouseLeave={() => {
+        setColor('#C5C6EF');
+      }}
+      className="flex h-full w-full items-center justify-center"
+    >
+      <svg width="11" height="11" xmlns="http://www.w3.org/2000/svg">
+        <path
+          d="M6.33 10.896c.137 0 .255-.05.354-.149.1-.1.149-.217.149-.354V7.004h3.315c.136 0 .254-.05.354-.149.099-.1.148-.217.148-.354V5.272a.483.483 0 0 0-.148-.354.483.483 0 0 0-.354-.149H6.833V1.4a.483.483 0 0 0-.149-.354.483.483 0 0 0-.354-.149H4.915a.483.483 0 0 0-.354.149c-.1.1-.149.217-.149.354v3.37H1.08a.483.483 0 0 0-.354.15c-.1.099-.149.217-.149.353v1.23c0 .136.05.254.149.353.1.1.217.149.354.149h3.333v3.39c0 .136.05.254.15.353.098.1.216.149.353.149H6.33Z"
+          fill={color}
+        />
+      </svg>
+    </button>
+  );
+};
+
+const IconMinus = () => {
+  const [color, setColor] = useState('#C5C6EF');
+  return (
+    <button
+      onMouseEnter={() => {
+        setColor('hsl(238, 40%, 52%)');
+      }}
+      onMouseLeave={() => {
+        setColor('#C5C6EF');
+      }}
+      className="flex h-full w-full items-center justify-center"
+    >
+      <svg width="11" height="3" xmlns="http://www.w3.org/2000/svg">
+        <path
+          d="M9.256 2.66c.204 0 .38-.056.53-.167.148-.11.222-.243.222-.396V.722c0-.152-.074-.284-.223-.395a.859.859 0 0 0-.53-.167H.76a.859.859 0 0 0-.53.167C.083.437.009.57.009.722v1.375c0 .153.074.285.223.396a.859.859 0 0 0 .53.167h8.495Z"
+          fill={color}
+        />
+      </svg>
+    </button>
+  );
+};
+
 export default function Home() {
   const [data, setData] = useState<JSON | null>(null);
   useEffect(() => {
@@ -74,19 +118,14 @@ export default function Home() {
     const isUser = username === (data as unknown as dataJSON).currentUser.username;
     return (
       <div
-        //q: how to break 'library/framework' in textarea //a: use &#8203; (zero-width space)
         className={`flex h-[10.45em] ${
           replyingTo ? 'w-[40.1em]' : 'w-[45.625em]'
         } gap-[1.5em] rounded-[0.5em] bg-white py-[1.5em] pl-[1.5em] pr-[1.55em]`}
       >
-        <div className="flex h-[6.25em] w-[2.8em] flex-col items-center justify-between rounded-[0.65em] bg-[#F5F6FA] pb-[0.3em] pt-[0.2em]">
-          <button>
-            <span className="p-2 text-[1.1rem] font-[600] text-[#CFCDE2]">+</span>
-          </button>
+        <div className="flex h-[6.25em] w-[2.8em] flex-col items-center justify-between rounded-[0.65em] bg-[#F5F6FA]">
+          <IconPlus />
           <span className="text-[1.05rem] font-[500] text-moderateBlue">{score}</span>
-          <button>
-            <span className="p-2 text-[1.1rem] font-[600] text-[#CFCDE2]">—</span>
-          </button>
+          <IconMinus />
         </div>
         <div className="flex w-full flex-col gap-[0.9em]">
           <div>
