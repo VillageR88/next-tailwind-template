@@ -134,16 +134,16 @@ export default function Home() {
     const isUser = data && username === data.currentUser.username;
     return (
       <div
-        className={`flex h-[10.45em] ${
+        className={`flex min-h-[10.45em] gap-[1.5em] ${
           replyingTo ? 'w-[40.1em]' : 'w-[45.625em]'
-        } gap-[1.5em] rounded-[0.5em] bg-white py-[1.5em] pl-[1.5em] pr-[1.55em]`}
+        }  rounded-[0.5em] bg-white py-[1.5em] pl-[1.5em] `}
       >
         <div className="flex h-[6.25em] w-[2.8em] flex-col items-center justify-between rounded-[0.65em] bg-[#F5F6FA]">
           <IconPlus plusFunction={plusFunction} />
           <span className="text-[1.05rem] font-[500] text-moderateBlue">{score}</span>
           <IconMinus minusFunction={minusFunction} />
         </div>
-        <div className="flex w-full flex-col gap-[0.9em]">
+        <div className="flex w-full flex-col justify-center gap-[0.9em]">
           <div>
             <div className="flex justify-between text-[1.05rem] tracking-[-0.03em]">
               <div className="flex items-center gap-[1em]">
@@ -159,19 +159,21 @@ export default function Home() {
                 <span className="text-grayishBlue">{createdAt}</span>
               </div>
               {isUser ? (
-                <div className="flex gap-6">
+                <div className="flex gap-6 pr-[1.55em]">
                   <BoxButtonType1 icon={iconDelete as string} text="Delete" color="text-softRed" />
                   <BoxButtonType1 icon={iconEdit as string} text="Edit" color="text-moderateBlue" />
                 </div>
               ) : (
-                <BoxButtonType1 icon={iconReply as string} text="Reply" color="text-moderateBlue" />
+                <div className="flex pr-[1.55em]">
+                  <BoxButtonType1 icon={iconReply as string} text="Reply" color="text-moderateBlue" />{' '}
+                </div>
               )}
             </div>
           </div>
           <div className="flex tracking-[0.001em] text-grayishBlue">
-            <div className="space-x-1">
-              {replyingTo && <span className="font-[500] text-moderateBlue">{replyingTo}</span>}
-              <span>{content}</span>
+            <div className={`${replyingTo ? 'w-[32em]' : 'w-[38em]'} space-x-1`}>
+              {replyingTo && <span className="font-[500]  text-moderateBlue">{replyingTo}</span>}
+              <span className="break-words">{content}</span>
             </div>
           </div>
         </div>
