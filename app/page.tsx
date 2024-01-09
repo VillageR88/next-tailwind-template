@@ -89,7 +89,7 @@ const IconMinus = ({ minusFunction }: { minusFunction(arg0: dataJSON | null): vo
   );
 };
 const BoxButtonType1 = ({ icon, text, color }: { icon: string; text: string; color: string }) => (
-  <button className="flex items-center gap-[0.45em]">
+  <button className="flex items-center gap-[0.45em] hover:opacity-40">
     <Image className="h-fit w-fit" src={icon} alt={text} />
     <span className={`font-[500] ${color}`}>{text}</span>
   </button>
@@ -110,7 +110,7 @@ export default function Home() {
     void fetchData();
   }, []);
 
-  const Block = ({
+  const CommentBlock = ({
     content,
     createdAt,
     score,
@@ -176,89 +176,148 @@ export default function Home() {
       </div>
     );
   };
+  const AddCommentBlock = ({ addReply }: { addReply(): void }) => {
+    return (
+      <div className="flex h-[9em] w-[45.625em] items-start gap-[1.1em] rounded-[0.5em] bg-white py-[1.6em] pl-[1.5em] pr-[1.4em]">
+        <Image
+          className="mt-[0.18em]"
+          src={(data as unknown as dataJSON).currentUser.image.webp.replace('images/', '')}
+          height={40}
+          width={40}
+          alt="avatar"
+        />
+        <textarea
+          placeholder="Add a comment…"
+          className="h-[5.8em] w-[31.5em] resize-none rounded-[0.5em] px-6 py-3 placeholder-grayishBlue outline outline-1 outline-lightGray focus:outline-moderateBlue"
+        ></textarea>
+        <button
+          onClick={addReply}
+          className="flex items-center justify-center rounded-[0.5em] bg-moderateBlue px-[1.92em] py-[0.75em] font-[500] text-white hover:opacity-40"
+        >
+          SEND
+        </button>
+      </div>
+    );
+  };
   return (
     data && (
       <main className="flex min-h-screen flex-col items-center justify-center bg-[#F5F6FA] font-rubik">
         <div className="mb-[4em] mt-[4em] flex w-full flex-col items-center">
-          {data.comments.map((comment, iteration) => (
-            <div className="flex flex-col items-center gap-5" key={iteration}>
-              <Block
-                content={comment.content}
-                createdAt={comment.createdAt}
-                score={comment.score}
-                username={comment.user.username}
-                webp={comment.user.image.webp.replace('images/', '')}
-                plusFunction={() => {
-                  if (!data.comments[iteration].voted.includes(data.currentUser.username))
-                    setData((value: dataJSON | null) => {
-                      const newValue: dataJSON = { ...value } as dataJSON;
-                      newValue.comments[iteration].voted.push(data.currentUser.username);
-                      newValue.comments[iteration].score++;
-                      return { ...newValue };
-                    });
-                }}
-                minusFunction={() => {
-                  if (!data.comments[iteration].voted.includes(data.currentUser.username))
-                    setData((value: dataJSON | null) => {
-                      const newValue: dataJSON = { ...value } as dataJSON;
-                      newValue.comments[iteration].voted.push(data.currentUser.username);
-                      newValue.comments[iteration].score--;
-                      return { ...newValue };
-                    });
+          <div className="flex flex-col">
+            {data.comments.map((comment, iteration) => {
+              const isUserComment = data.comments[iteration].user.username === data.currentUser.username;
+              return (
+                <div className="flex flex-col items-center gap-[1.2em]" key={iteration}>
+                  <CommentBlock
+                    content={comment.content}
+                    createdAt={comment.createdAt}
+                    score={comment.score}
+                    username={comment.user.username}
+                    webp={comment.user.image.webp.replace('images/', '')}
+                    plusFunction={() => {
+                      if (!isUserComment && !data.comments[iteration].voted.includes(data.currentUser.username))
+                        setData((value: dataJSON | null) => {
+                          const newValue: dataJSON = { ...value } as dataJSON;
+                          newValue.comments[iteration].voted.push(data.currentUser.username);
+                          newValue.comments[iteration].score++;
+                          return { ...newValue };
+                        });
+                    }}
+                    minusFunction={() => {
+                      if (!isUserComment && !data.comments[iteration].voted.includes(data.currentUser.username))
+                        setData((value: dataJSON | null) => {
+                          const newValue: dataJSON = { ...value } as dataJSON;
+                          newValue.comments[iteration].voted.push(data.currentUser.username);
+                          newValue.comments[iteration].score--;
+                          return { ...newValue };
+                        });
+                    }}
+                  />
+                  <div className="flex w-full justify-end gap-[2.7em]">
+                    {/* eslint-disable-next-line @typescript-eslint/no-unnecessary-condition */}
+                    {comment.replies.length > 0 && <div className="mb-[0.7em] w-0.5 bg-lightGray"></div>}
+                    {/* eslint-disable-next-line @typescript-eslint/no-unnecessary-condition */}
+                    {comment.replies.length > 0 && (
+                      <div className="mb-5 flex flex-col gap-6">
+                        {comment.replies.map((reply, iteration2) => {
+                          const isUserReply =
+                            data.comments[iteration].replies[iteration2].user.username === data.currentUser.username;
+                          return (
+                            <CommentBlock
+                              key={iteration2}
+                              content={reply.content}
+                              createdAt={reply.createdAt}
+                              score={reply.score}
+                              replyingTo={'@'.concat(reply.replyingTo)}
+                              username={reply.user.username}
+                              webp={reply.user.image.webp.replace('images/', '')}
+                              plusFunction={() => {
+                                if (
+                                  !isUserReply &&
+                                  !data.comments[iteration].replies[iteration2].voted.includes(
+                                    data.currentUser.username,
+                                  )
+                                )
+                                  setData((value: dataJSON | null) => {
+                                    const newValue: dataJSON = { ...value } as dataJSON;
+                                    newValue.comments[iteration].replies[iteration2].voted.push(
+                                      data.currentUser.username,
+                                    );
+                                    newValue.comments[iteration].replies[iteration2].score++;
+                                    return { ...newValue };
+                                  });
+                              }}
+                              minusFunction={() => {
+                                if (
+                                  !isUserReply &&
+                                  !data.comments[iteration].replies[iteration2].voted.includes(
+                                    data.currentUser.username,
+                                  )
+                                )
+                                  setData((value: dataJSON | null) => {
+                                    const newValue: dataJSON = { ...value } as dataJSON;
+                                    newValue.comments[iteration].replies[iteration2].voted.push(
+                                      data.currentUser.username,
+                                    );
+                                    newValue.comments[iteration].replies[iteration2].score--;
+                                    return { ...newValue };
+                                  });
+                              }}
+                            />
+                          );
+                        })}
+                      </div>
+                    )}
+                  </div>
+                </div>
+              );
+            })}
+            <div>
+              <AddCommentBlock
+                addReply={() => {
+                  setData((value: dataJSON | null) => {
+                    const newValue: dataJSON = { ...value } as dataJSON;
+                    const newReply: dataJSON = {
+                      content: 'test',
+                      createdAt: 'now',
+                      score: 0,
+                      voted: [],
+                      replyingTo: 'test',
+                      user: {
+                        image: {
+                          png: data.currentUser.image.png,
+                          webp: data.currentUser.image.webp,
+                        },
+                        username: data.currentUser.username,
+                      },
+                      replies: [],
+                    };
+                    newValue.comments.push(newReply);
+                    return { ...newValue };
+                  });
                 }}
               />
-              <div className="flex w-full justify-end gap-[2.7em]">
-                {/* eslint-disable-next-line @typescript-eslint/no-unnecessary-condition */}
-                {comment.replies.length > 0 && <div className="mb-[0.7em] w-0.5 bg-lightGray"></div>}
-                <div className="flex flex-col gap-6">
-                  {comment.replies.map((reply, iteration2) => (
-                    <Block
-                      key={iteration2}
-                      content={reply.content}
-                      createdAt={reply.createdAt}
-                      score={reply.score}
-                      replyingTo={'@'.concat(reply.replyingTo)}
-                      username={reply.user.username}
-                      webp={reply.user.image.webp.replace('images/', '')}
-                      plusFunction={() => {
-                        if (!data.comments[iteration].replies[iteration2].voted.includes(data.currentUser.username))
-                          setData((value: dataJSON | null) => {
-                            const newValue: dataJSON = { ...value } as dataJSON;
-                            newValue.comments[iteration].replies[iteration2].voted.push(data.currentUser.username);
-                            newValue.comments[iteration].replies[iteration2].score++;
-                            return { ...newValue };
-                          });
-                      }}
-                      minusFunction={() => {
-                        if (!data.comments[iteration].replies[iteration2].voted.includes(data.currentUser.username))
-                          setData((value: dataJSON | null) => {
-                            const newValue: dataJSON = { ...value } as dataJSON;
-                            newValue.comments[iteration].replies[iteration2].voted.push(data.currentUser.username);
-                            newValue.comments[iteration].replies[iteration2].score--;
-                            return { ...newValue };
-                          });
-                      }}
-                    />
-                  ))}
-                </div>
-              </div>
             </div>
-          ))}
-          <div className="mt-5 flex h-[9em] w-[45.625em] items-start gap-[1.1em] rounded-[0.5em] bg-white py-[1.6em] pl-[1.5em] pr-[1.4em]">
-            <Image
-              className="mt-[0.18em]"
-              src={(data as unknown as dataJSON).currentUser.image.webp.replace('images/', '')}
-              height={40}
-              width={40}
-              alt="avatar"
-            />
-            <textarea
-              placeholder="Add a comment…"
-              className="h-[5.8em] w-[31.5em] resize-none rounded-[0.5em] px-6 py-3 placeholder-grayishBlue outline outline-1 outline-lightGray focus:outline-moderateBlue"
-            ></textarea>
-            <button className="flex items-center justify-center rounded-[0.5em] bg-moderateBlue px-[1.92em] py-[0.75em] font-[500] text-white">
-              SEND
-            </button>
           </div>
         </div>
       </main>
