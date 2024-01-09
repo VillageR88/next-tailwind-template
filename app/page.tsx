@@ -106,13 +106,13 @@ const BoxButtonType1 = ({
   </button>
 );
 
-const BoxButtonType2 = ({ onButtonClick }: { onButtonClick(): void }) => {
+const BoxButtonType2 = ({ text, onButtonClick }: { text: string; onButtonClick(): void }) => {
   return (
     <button
       onClick={onButtonClick}
-      className="flex items-center justify-center rounded-[0.5em] bg-moderateBlue px-[1.92em] py-[0.75em] font-[500] text-white hover:opacity-40"
+      className="flex w-[6.5em] items-center justify-center rounded-[0.5em] bg-moderateBlue py-[0.75em] font-[500] text-white hover:opacity-40"
     >
-      SEND
+      {text}
     </button>
   );
 };
@@ -156,12 +156,12 @@ export default function Home() {
   }) => {
     const isUser = data && username === data.currentUser.username;
     const [isEdited, setIsEdited] = useState<boolean>(false);
-    const [text, setText] = useState<string>(replyingTo?.concat(' ').concat(content) as unknown as string);
+    const [text, setText] = useState<string>(content);
     return (
       <div
-        className={`flex min-h-[10.45em] gap-[1.5em] ${
+        className={`flex min-h-[10.45em] gap-[1.5em] pt-[1.5em] ${
           replyingTo ? 'w-[40.1em]' : 'w-[45.625em]'
-        }  rounded-[0.5em] bg-white py-[1.5em] pl-[1.5em] `}
+        }  rounded-[0.5em] bg-white  pl-[1.5em] `}
       >
         <div className="flex h-[6.25em] w-[2.8em] flex-col items-center justify-between rounded-[0.65em] bg-[#F5F6FA]">
           <IconPlus plusFunction={plusFunction} />
@@ -211,22 +211,30 @@ export default function Home() {
             {!isEdited ? (
               <div className={`${replyingTo ? 'w-[33em]' : 'w-[38em]'} space-x-1`}>
                 {replyingTo && <span className="font-[500]  text-moderateBlue">{replyingTo}</span>}
-                <span className="break-words">{content}</span>
+                {text && <span className="break-words">{text}</span>}
               </div>
             ) : (
               <textarea
                 value={text}
                 onChange={(e) => {
-                  const oldValue: string = text;
-                  const newValue: string = e.target.value;
-                  if (newValue.startsWith(replyingTo as unknown as string)) setText(e.target.value);
-                  else if (newValue === '') setText(replyingTo as unknown as string);
-                  else setText(oldValue);
+                  setText(e.target.value);
                 }}
-                className={`resize-none ${replyingTo ? 'w-[33em]' : 'w-[38em]'} space-x-1`}
+                className={`${
+                  replyingTo ? 'w-[33em]' : 'w-[38em]'
+                } min-h-[8em] resize-none space-x-1 rounded-[0.5em] px-6 py-2 placeholder-grayishBlue outline outline-1 outline-lightGray focus:outline-moderateBlue`}
               >
                 {[replyingTo, content].join(' ')}
               </textarea>
+            )}
+          </div>
+          <div className="flex w-full justify-end pr-[1.5em]">
+            {isEdited && (
+              <BoxButtonType2
+                text="UPDATE"
+                onButtonClick={() => {
+                  setIsEdited(false);
+                }}
+              />
             )}
           </div>
         </div>
@@ -265,7 +273,7 @@ export default function Home() {
           placeholder="Add a comment…"
           className="min-h-[5.8em] w-[31.5em] resize-none rounded-[0.5em] px-6 py-3 placeholder-grayishBlue outline outline-1 outline-lightGray focus:outline-moderateBlue"
         ></textarea>
-        <BoxButtonType2 onButtonClick={addReply} />
+        <BoxButtonType2 text="SEND" onButtonClick={addReply} />
       </div>
     );
   };
@@ -311,7 +319,7 @@ export default function Home() {
                 />
                 <div className="flex w-full justify-end gap-[2.7em]">
                   {/* eslint-disable-next-line @typescript-eslint/no-unnecessary-condition */}
-                  {comment.replies.length > 0 && <div className="mb-[0.7em] w-0.5 bg-lightGray"></div>}
+                  {comment.replies.length > 0 && <div className="mb-[1.8em] w-0.5 bg-lightGray"></div>}
                   {/* eslint-disable-next-line @typescript-eslint/no-unnecessary-condition */}
                   {comment.replies.length > 0 && (
                     <div className="mb-5 flex flex-col gap-6">
