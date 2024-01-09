@@ -6,23 +6,21 @@ import iconDelete from './images/icon-delete.svg';
 import { useEffect, useState } from 'react';
 import React from 'react';
 
-interface dataJSON {
-  currentUser: { image: { png: string; webp: string }; username: string };
-  comments: [
-    {
-      id: number;
-      content: string;
-      createdAt: string;
-      score: number;
-      voted: string[];
-      user: {
-        image: {
-          png: string;
-          webp: string;
-        };
-        username: string;
-      };
-      replies: [
+interface comments {
+  id: number;
+  content: string;
+  createdAt: string;
+  score: number;
+  voted: string[];
+  user: {
+    image: {
+      png: string;
+      webp: string;
+    };
+    username: string;
+  };
+  replies:
+    | [
         {
           id: number;
           content: string;
@@ -38,9 +36,12 @@ interface dataJSON {
             username: string;
           };
         },
-      ];
-    },
-  ];
+      ]
+    | [];
+}
+interface dataJSON {
+  currentUser: { image: { png: string; webp: string }; username: string };
+  comments: comments[];
 }
 
 const IconPlus = ({ plusFunction }: { plusFunction(arg0: dataJSON | null): void }) => {
@@ -97,7 +98,7 @@ const BoxButtonType1 = ({ icon, text, color }: { icon: string; text: string; col
 
 export default function Home() {
   const [data, setData] = useState<dataJSON | null>(null);
-  let addCommentBlockText;
+  let addCommentBlockText: string;
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -310,12 +311,12 @@ export default function Home() {
                 addReply={() => {
                   setData((value: dataJSON | null) => {
                     const newValue: dataJSON = { ...value } as dataJSON;
-                    const newReply: dataJSON = {
+                    const newReply: comments = {
+                      id: data.comments.length + 1,
                       content: addCommentBlockText,
                       createdAt: 'now',
                       score: 0,
                       voted: [],
-                      replyingTo: 'test',
                       user: {
                         image: {
                           png: data.currentUser.image.png,
@@ -323,6 +324,7 @@ export default function Home() {
                         },
                         username: data.currentUser.username,
                       },
+                      //q: but i want replies to be empty and target requires 1. //a: just add an empty array
                       replies: [],
                     };
                     newValue.comments.push(newReply);
