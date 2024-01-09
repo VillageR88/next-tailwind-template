@@ -89,8 +89,18 @@ const IconMinus = ({ minusFunction }: { minusFunction(arg0: dataJSON | null): vo
     </button>
   );
 };
-const BoxButtonType1 = ({ icon, text, color }: { icon: string; text: string; color: string }) => (
-  <button className="flex items-center gap-[0.45em] hover:opacity-40">
+const BoxButtonType1 = ({
+  icon,
+  text,
+  color,
+  onButtonClick,
+}: {
+  icon: string;
+  text: string;
+  color: string;
+  onButtonClick(): void;
+}) => (
+  <button onClick={onButtonClick} className="flex items-center gap-[0.45em] hover:opacity-40">
     <Image className="h-fit w-fit" src={icon} alt={text} />
     <span className={`font-[500] ${color}`}>{text}</span>
   </button>
@@ -121,6 +131,7 @@ export default function Home() {
     webp,
     plusFunction,
     minusFunction,
+    onButtonDeleteClick,
   }: {
     content: string;
     createdAt: string;
@@ -130,6 +141,7 @@ export default function Home() {
     webp: string;
     plusFunction(arg0: dataJSON | null): void;
     minusFunction(arg0: dataJSON | null): void;
+    onButtonDeleteClick(): void;
   }) => {
     const isUser = data && username === data.currentUser.username;
     return (
@@ -160,7 +172,12 @@ export default function Home() {
               </div>
               {isUser ? (
                 <div className="flex gap-6 pr-[1.55em]">
-                  <BoxButtonType1 icon={iconDelete as string} text="Delete" color="text-softRed" />
+                  <BoxButtonType1
+                    onButtonClick={onButtonDeleteClick}
+                    icon={iconDelete as string}
+                    text="Delete"
+                    color="text-softRed"
+                  />
                   <BoxButtonType1 icon={iconEdit as string} text="Edit" color="text-moderateBlue" />
                 </div>
               ) : (
@@ -222,6 +239,13 @@ export default function Home() {
               return (
                 <div className="flex flex-col items-center gap-[1.2em]" key={iteration}>
                   <CommentBlock
+                    onButtonDeleteClick={() => {
+                      setData((value: dataJSON | null) => {
+                        const newValue: dataJSON = { ...value } as dataJSON;
+                        newValue.comments.splice(iteration, 1);
+                        return { ...newValue };
+                      });
+                    }}
                     content={comment.content}
                     createdAt={comment.createdAt}
                     score={comment.score}
@@ -257,6 +281,13 @@ export default function Home() {
                             data.comments[iteration].replies[iteration2].user.username === data.currentUser.username;
                           return (
                             <CommentBlock
+                              onButtonDeleteClick={() => {
+                                setData((value: dataJSON | null) => {
+                                  const newValue: dataJSON = { ...value } as dataJSON;
+                                  newValue.comments[iteration].replies.splice(iteration2, 1);
+                                  return { ...newValue };
+                                });
+                              }}
                               key={iteration2}
                               content={reply.content}
                               createdAt={reply.createdAt}
