@@ -155,7 +155,7 @@ export default function Home() {
           <span className="text-[1.05rem] font-[500] text-moderateBlue">{score}</span>
           <IconMinus minusFunction={minusFunction} />
         </div>
-        <div className="flex w-full flex-col justify-center gap-[0.9em]">
+        <div className="flex w-full flex-col justify-start gap-[0.9em]">
           <div>
             <div className="flex justify-between text-[1.05rem] tracking-[-0.03em]">
               <div className="flex items-center gap-[1em]">
@@ -231,7 +231,7 @@ export default function Home() {
   };
   return (
     data && (
-      <main className="flex min-h-screen flex-col items-center justify-center bg-[#F5F6FA] font-rubik">
+      <main className="flex min-h-screen flex-col items-center justify-start bg-[#F5F6FA] font-rubik">
         <div className="mb-[4em] mt-[4em] flex w-full flex-col items-center">
           <div className="flex flex-col">
             {data.comments.map((comment, iteration) => {
