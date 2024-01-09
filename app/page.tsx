@@ -106,6 +106,17 @@ const BoxButtonType1 = ({
   </button>
 );
 
+const BoxButtonType2 = ({ onButtonClick }: { onButtonClick(): void }) => {
+  return (
+    <button
+      onClick={onButtonClick}
+      className="flex items-center justify-center rounded-[0.5em] bg-moderateBlue px-[1.92em] py-[0.75em] font-[500] text-white hover:opacity-40"
+    >
+      SEND
+    </button>
+  );
+};
+
 export default function Home() {
   const [data, setData] = useState<dataJSON | null>(null);
   let addCommentBlockText: string;
@@ -254,12 +265,7 @@ export default function Home() {
           placeholder="Add a comment…"
           className="min-h-[5.8em] w-[31.5em] resize-none rounded-[0.5em] px-6 py-3 placeholder-grayishBlue outline outline-1 outline-lightGray focus:outline-moderateBlue"
         ></textarea>
-        <button
-          onClick={addReply}
-          className="flex items-center justify-center rounded-[0.5em] bg-moderateBlue px-[1.92em] py-[0.75em] font-[500] text-white hover:opacity-40"
-        >
-          SEND
-        </button>
+        <BoxButtonType2 onButtonClick={addReply} />
       </div>
     );
   };
