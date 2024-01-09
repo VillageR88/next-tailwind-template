@@ -97,6 +97,7 @@ const BoxButtonType1 = ({ icon, text, color }: { icon: string; text: string; col
 
 export default function Home() {
   const [data, setData] = useState<dataJSON | null>(null);
+  let addCommentBlockText;
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -176,7 +177,12 @@ export default function Home() {
       </div>
     );
   };
-  const AddCommentBlock = ({ addReply }: { addReply(): void }) => {
+  const AddCommentBlock = ({ addReply, passText }: { addReply(): void; passText(arg0: string): void }) => {
+    const [text, setText] = useState<string>('');
+    useEffect(() => {
+      passText(text);
+    }, [passText, text]);
+
     return (
       <div className="flex h-[9em] w-[45.625em] items-start gap-[1.1em] rounded-[0.5em] bg-white py-[1.6em] pl-[1.5em] pr-[1.4em]">
         <Image
@@ -187,6 +193,10 @@ export default function Home() {
           alt="avatar"
         />
         <textarea
+          value={text}
+          onChange={(event) => {
+            setText(event.target.value);
+          }}
           placeholder="Add a comment…"
           className="h-[5.8em] w-[31.5em] resize-none rounded-[0.5em] px-6 py-3 placeholder-grayishBlue outline outline-1 outline-lightGray focus:outline-moderateBlue"
         ></textarea>
@@ -294,11 +304,14 @@ export default function Home() {
             })}
             <div>
               <AddCommentBlock
+                passText={(val: string) => {
+                  addCommentBlockText = val;
+                }}
                 addReply={() => {
                   setData((value: dataJSON | null) => {
                     const newValue: dataJSON = { ...value } as dataJSON;
                     const newReply: dataJSON = {
-                      content: 'test',
+                      content: addCommentBlockText,
                       createdAt: 'now',
                       score: 0,
                       voted: [],
