@@ -5,7 +5,21 @@ import iconEdit from './images/icon-edit.svg';
 import iconDelete from './images/icon-delete.svg';
 import { useEffect, useState } from 'react';
 import React from 'react';
-
+interface replies {
+  id: number;
+  content: string;
+  createdAt: string;
+  score: number;
+  voted: string[];
+  replyingTo: string;
+  user: {
+    image: {
+      png: string;
+      webp: string;
+    };
+    username: string;
+  };
+}
 interface comments {
   id: number;
   content: string;
@@ -19,26 +33,9 @@ interface comments {
     };
     username: string;
   };
-  replies:
-    | [
-        {
-          id: number;
-          content: string;
-          createdAt: string;
-          score: number;
-          voted: string[];
-          replyingTo: string;
-          user: {
-            image: {
-              png: string;
-              webp: string;
-            };
-            username: string;
-          };
-        },
-      ]
-    | [];
+  replies: replies[] | [];
 }
+
 interface dataJSON {
   currentUser: { image: { png: string; webp: string }; username: string };
   comments: comments[];
@@ -143,6 +140,8 @@ export default function Home() {
     plusFunction,
     minusFunction,
     onButtonDeleteClick,
+    onButtonReplyClick,
+    passEditedData,
   }: {
     content: string;
     createdAt: string;
@@ -153,10 +152,13 @@ export default function Home() {
     plusFunction(arg0: dataJSON | null): void;
     minusFunction(arg0: dataJSON | null): void;
     onButtonDeleteClick(): void;
+    onButtonReplyClick(): void;
+    passEditedData(arg0: string): void;
   }) => {
     const isUser = data && username === data.currentUser.username;
     const [isEdited, setIsEdited] = useState<boolean>(false);
     const [text, setText] = useState<string>(content);
+
     return (
       <div
         className={`flex min-h-[9.45em] gap-[1.5em] pt-[1.5em] ${
@@ -202,7 +204,12 @@ export default function Home() {
                 </div>
               ) : (
                 <div className="flex pr-[1.55em]">
-                  <BoxButtonType1 icon={iconReply as string} text="Reply" color="text-moderateBlue" />
+                  <BoxButtonType1
+                    onButtonClick={onButtonReplyClick}
+                    icon={iconReply as string}
+                    text="Reply"
+                    color="text-moderateBlue"
+                  />
                 </div>
               )}
             </div>
@@ -227,11 +234,12 @@ export default function Home() {
               </textarea>
             )}
           </div>
-          <div className="flex w-full justify-end pr-[1.5em]">
+          <div className="flex w-full justify-end pb-[1.5em] pr-[1.5em]">
             {isEdited && (
               <BoxButtonType2
                 text="UPDATE"
                 onButtonClick={() => {
+                  passEditedData(text);
                   setIsEdited(false);
                 }}
               />
@@ -241,25 +249,13 @@ export default function Home() {
       </div>
     );
   };
-  const AddCommentBlock = ({
-    isNewMessage,
-    addReply,
-    passText,
-  }: {
-    isNewMessage?: boolean;
-    addReply(): void;
-    passText(arg0: string): void;
-  }) => {
+  const AddCommentBlock = () => {
     const [text, setText] = useState<string>('');
-    useEffect(() => {
-      passText(text);
-    }, [passText, text]);
-
     return (
       <div className="flex min-h-[9em] w-[45.625em] items-start gap-[1.1em] rounded-[0.5em] bg-white py-[1.6em] pl-[1.5em] pr-[1.4em]">
         <Image
           className="mt-[0.18em]"
-          src={(data as unknown as dataJSON).currentUser.image.webp.replace('images/', '')}
+          src={data ? data.currentUser.image.webp.replace('images/', '') : ''}
           height={40}
           width={40}
           alt="avatar"
@@ -273,7 +269,32 @@ export default function Home() {
           placeholder="Add a comment…"
           className="min-h-[5.8em] w-[31.5em] resize-none rounded-[0.5em] px-6 py-3 placeholder-grayishBlue outline outline-1 outline-lightGray focus:outline-moderateBlue"
         ></textarea>
-        <BoxButtonType2 text="SEND" onButtonClick={addReply} />
+        <BoxButtonType2
+          text="SEND"
+          onButtonClick={() => {
+            data &&
+              setData((value): dataJSON => {
+                const newValue = { ...value } as dataJSON;
+                const newReply: comments = {
+                  id: data.comments.length + 1,
+                  content: text,
+                  createdAt: 'now',
+                  score: 0,
+                  voted: [],
+                  user: {
+                    image: {
+                      png: data.currentUser.image.png,
+                      webp: data.currentUser.image.webp,
+                    },
+                    username: data.currentUser.username,
+                  },
+                  replies: [],
+                };
+                newValue.comments.push(newReply);
+                return newValue;
+              });
+          }}
+        />
       </div>
     );
   };
@@ -286,11 +307,41 @@ export default function Home() {
             return (
               <div className="flex flex-col items-center gap-[1.2em]" key={iteration}>
                 <CommentBlock
+                  passEditedData={(text) => {
+                    setData((value: dataJSON | null) => {
+                      const newValue: dataJSON = { ...value } as dataJSON;
+                      newValue.comments[iteration].content = text;
+                      return newValue;
+                    });
+                  }}
                   onButtonDeleteClick={() => {
                     setData((value: dataJSON | null) => {
                       const newValue: dataJSON = { ...value } as dataJSON;
                       newValue.comments.splice(iteration, 1);
-                      return { ...newValue };
+                      return newValue;
+                    });
+                  }}
+                  onButtonReplyClick={() => {
+                    setData((value): dataJSON => {
+                      const newValue = { ...value };
+                      const reply = {
+                        id: data.comments[iteration].replies.length + 1,
+                        content: addCommentBlockText,
+                        createdAt: 'now',
+                        score: 0,
+                        voted: [],
+                        replyingTo: data.comments[iteration].user.username,
+                        user: {
+                          image: {
+                            png: data.currentUser.image.png,
+                            webp: data.currentUser.image.webp,
+                          },
+                          username: data.currentUser.username,
+                        },
+                      };
+                      ((newValue as dataJSON).comments[iteration].replies as replies[]).push(reply);
+
+                      return newValue as dataJSON;
                     });
                   }}
                   content={comment.content}
@@ -304,7 +355,7 @@ export default function Home() {
                         const newValue: dataJSON = { ...value } as dataJSON;
                         newValue.comments[iteration].voted.push(data.currentUser.username);
                         newValue.comments[iteration].score++;
-                        return { ...newValue };
+                        return newValue;
                       });
                   }}
                   minusFunction={() => {
@@ -313,7 +364,7 @@ export default function Home() {
                         const newValue: dataJSON = { ...value } as dataJSON;
                         newValue.comments[iteration].voted.push(data.currentUser.username);
                         newValue.comments[iteration].score--;
-                        return { ...newValue };
+                        return newValue;
                       });
                   }}
                 />
@@ -328,11 +379,41 @@ export default function Home() {
                           data.comments[iteration].replies[iteration2].user.username === data.currentUser.username;
                         return (
                           <CommentBlock
+                            passEditedData={(text) => {
+                              setData((value: dataJSON | null) => {
+                                const newValue: dataJSON = { ...value } as dataJSON;
+                                newValue.comments[iteration].replies[iteration2].content = text;
+                                return newValue;
+                              });
+                            }}
+                            onButtonReplyClick={() => {
+                              setData((value): dataJSON => {
+                                const newValue = { ...value };
+                                const reply = {
+                                  id: data.comments[iteration].replies.length + 1,
+                                  content: addCommentBlockText,
+                                  createdAt: 'now',
+                                  score: 0,
+                                  voted: [],
+                                  replyingTo: data.comments[iteration].replies[iteration2].user.username,
+                                  user: {
+                                    image: {
+                                      png: data.currentUser.image.png,
+                                      webp: data.currentUser.image.webp,
+                                    },
+                                    username: data.currentUser.username,
+                                  },
+                                };
+                                ((newValue as dataJSON).comments[iteration].replies as replies[]).push(reply);
+
+                                return newValue as dataJSON;
+                              });
+                            }}
                             onButtonDeleteClick={() => {
                               setData((value: dataJSON | null) => {
                                 const newValue: dataJSON = { ...value } as dataJSON;
                                 newValue.comments[iteration].replies.splice(iteration2, 1);
-                                return { ...newValue };
+                                return newValue;
                               });
                             }}
                             key={iteration2}
@@ -353,7 +434,7 @@ export default function Home() {
                                     data.currentUser.username,
                                   );
                                   newValue.comments[iteration].replies[iteration2].score++;
-                                  return { ...newValue };
+                                  return newValue;
                                 });
                             }}
                             minusFunction={() => {
@@ -367,7 +448,7 @@ export default function Home() {
                                     data.currentUser.username,
                                   );
                                   newValue.comments[iteration].replies[iteration2].score--;
-                                  return { ...newValue };
+                                  return newValue;
                                 });
                             }}
                           />
@@ -379,35 +460,7 @@ export default function Home() {
               </div>
             );
           })}
-          <AddCommentBlock
-            isNewMessage={true}
-            passText={(val: string) => {
-              addCommentBlockText = val;
-            }}
-            addReply={() => {
-              setData((value: dataJSON | null) => {
-                const newValue: dataJSON = { ...value } as dataJSON;
-                const newReply: comments = {
-                  id: data.comments.length + 1,
-                  content: addCommentBlockText,
-                  createdAt: 'now',
-                  score: 0,
-                  voted: [],
-                  user: {
-                    image: {
-                      png: data.currentUser.image.png,
-                      webp: data.currentUser.image.webp,
-                    },
-                    username: data.currentUser.username,
-                  },
-                  //q: but i want replies to be empty and target requires 1. //a: just add an empty array
-                  replies: [],
-                };
-                newValue.comments.push(newReply);
-                return { ...newValue };
-              });
-            }}
-          />
+          <AddCommentBlock />
         </div>
       </main>
     )
