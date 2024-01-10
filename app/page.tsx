@@ -159,7 +159,7 @@ export default function Home() {
     const [text, setText] = useState<string>(content);
     return (
       <div
-        className={`flex min-h-[10.45em] gap-[1.5em] pt-[1.5em] ${
+        className={`flex min-h-[9.45em] gap-[1.5em] pt-[1.5em] ${
           replyingTo ? 'w-[40.1em]' : 'w-[45.625em]'
         }  rounded-[0.5em] bg-white  pl-[1.5em] `}
       >
@@ -209,7 +209,7 @@ export default function Home() {
           </div>
           <div className="flex h-full tracking-[0.001em] text-grayishBlue">
             {!isEdited ? (
-              <div className={`${replyingTo ? 'w-[33em]' : 'w-[38em]'} space-x-1`}>
+              <div className={`${replyingTo ? 'w-[33em]' : 'w-[38em]'} space-x-1 pb-[0.6em]`}>
                 {replyingTo && <span className="font-[500]  text-moderateBlue">{replyingTo}</span>}
                 {text && <span className="break-words">{text}</span>}
               </div>
