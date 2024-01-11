@@ -3,7 +3,7 @@ import Image from 'next/image';
 import iconReply from './images/icon-reply.svg';
 import iconEdit from './images/icon-edit.svg';
 import iconDelete from './images/icon-delete.svg';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import React from 'react';
 interface replies {
   id: number;
@@ -116,8 +116,10 @@ const BoxButtonType2 = ({ text, onButtonClick }: { text: string; onButtonClick()
 
 export default function Home() {
   const [data, setData] = useState<dataJSON | null>(null);
-  const dataRef = React.useRef<number[] | null>(null);
-  console.log(dataRef.current);
+  const [textareaActive, setTextareaActive] = useState<boolean>(false);
+  const currentReplyRef = useRef<number[] | null>(null);
+  const currentReplyIsFirstOne = useRef<boolean>(false);
+
   let addCommentBlockText: string;
   useEffect(() => {
     const fetchData = async () => {
@@ -160,22 +162,29 @@ export default function Home() {
     const isUser = data && username === data.currentUser.username;
     const [isEdited, setIsEdited] = useState<boolean>(false);
     const [text, setText] = useState<string>(content);
+    const [isFirstTime, setIsFirstTime] = useState<boolean>(true);
     useEffect(() => {
       !text && setIsEdited(true);
     }, [text]);
     return (
       <div
-        className={`flex min-h-[9.45em] gap-[1.5em] pt-[1.5em] ${
-          replyingTo ? 'w-[40.1em]' : 'w-[45.625em]'
-        }  rounded-[0.5em] bg-white  pl-[1.5em] `}
+        className={`flex min-h-[9.45em] gap-[1.5em] py-[1.5em] ${
+          replyingTo && !currentReplyIsFirstOne.current ? 'w-[40.1em]' : 'w-[45.625em]'
+        }  rounded-[0.5em] bg-white pl-[1.5em] ${isEdited && 'mt-[-0.6em]'}`}
       >
-        <div className="flex h-[6.25em] w-[2.8em] flex-col items-center justify-between rounded-[0.65em] bg-[#F5F6FA]">
-          <IconPlus plusFunction={plusFunction} />
-          <span className="text-[1.05rem] font-[500] text-moderateBlue">{score}</span>
-          <IconMinus minusFunction={minusFunction} />
-        </div>
+        {!isEdited && isFirstTime ? (
+          <div className="flex h-[6.25em] w-[2.8em] flex-col items-center justify-between rounded-[0.65em] bg-[#F5F6FA]">
+            <IconPlus plusFunction={plusFunction} />
+            <span className="text-[1.05rem] font-[500] text-moderateBlue">{score}</span>
+            <IconMinus minusFunction={minusFunction} />
+          </div>
+        ) : (
+          <div className="h-fit w-fit">
+            <Image src={webp} height={45} width={45} alt="avatar" />
+          </div>
+        )}
         <div className="flex w-full flex-col justify-start gap-[0.9em]">
-          <div>
+          {!isEdited && (
             <div className="flex justify-between text-[1.05rem] tracking-[-0.03em]">
               <div className="flex items-center gap-[1em]">
                 <Image src={webp} height={32} width={32} alt="avatar" />
@@ -199,6 +208,7 @@ export default function Home() {
                   />
                   <BoxButtonType1
                     onButtonClick={() => {
+                      setIsFirstTime(false);
                       setIsEdited(true);
                     }}
                     icon={iconEdit as string}
@@ -209,7 +219,21 @@ export default function Home() {
               ) : (
                 <div className="flex pr-[1.55em]">
                   <BoxButtonType1
-                    onButtonClick={onButtonReplyClick}
+                    onButtonClick={() => {
+                      if (textareaActive) {
+                        setData((value): dataJSON => {
+                          const newValue = { ...value } as dataJSON;
+                          currentReplyRef.current &&
+                            newValue.comments[currentReplyRef.current[0]].replies.splice(
+                              currentReplyRef.current[1] - 1,
+                              1,
+                            );
+                          return newValue;
+                        });
+                      }
+                      setTextareaActive(true);
+                      onButtonReplyClick();
+                    }}
                     icon={iconReply as string}
                     text="Reply"
                     color="text-moderateBlue"
@@ -217,40 +241,61 @@ export default function Home() {
                 </div>
               )}
             </div>
-          </div>
+          )}
           <div className="flex h-full tracking-[0.001em] text-grayishBlue">
             {!isEdited ? (
-              <div className={`${replyingTo ? 'w-[33em]' : 'w-[38em]'} space-x-1 pb-[0.6em]`}>
+              <div className={`${replyingTo ? 'w-[33em]' : 'w-[38em]'} space-x-1 `}>
                 {replyingTo && <span className="font-[500]  text-moderateBlue">{replyingTo}</span>}
                 {text && <span className="break-words">{text}</span>}
               </div>
             ) : (
-              <textarea
-                value={text}
-                onChange={(e) => {
-                  setText(e.target.value);
-                }}
-                className={`${
-                  replyingTo ? 'w-[33em]' : 'w-[38em]'
-                } min-h-[8em] resize-none space-x-1 rounded-[0.5em] px-6 py-2 placeholder-grayishBlue outline outline-1 outline-lightGray focus:outline-moderateBlue`}
-              >
-                {content}
-              </textarea>
+              <div className={`flex gap-4 ${replyingTo && !currentReplyIsFirstOne.current ? 'w-[33em]' : 'w-[38em]'}`}>
+                <textarea
+                  rows={1}
+                  autoFocus
+                  value={[replyingTo, text].join(' ')}
+                  onChange={(e) => {
+                    replyingTo && setText(e.target.value.slice(replyingTo.length + 1));
+                  }}
+                  className={`${
+                    replyingTo && !currentReplyIsFirstOne.current ? 'w-[33em]' : 'w-[38em]'
+                  } min-h-[6em] resize-none space-x-1 rounded-[0.5em] px-6 py-2 placeholder-grayishBlue outline outline-1 outline-lightGray focus:outline-moderateBlue`}
+                >
+                  {content}
+                </textarea>
+                {isFirstTime && (
+                  <div className="h-fit w-fit">
+                    <BoxButtonType2
+                      text="REPLY"
+                      onButtonClick={() => {
+                        if (text) {
+                          setTextareaActive(false);
+                          passEditedData(text);
+                          setIsEdited(false);
+                          currentReplyIsFirstOne.current = false;
+                        }
+                      }}
+                    />
+                  </div>
+                )}
+              </div>
             )}
           </div>
-          <div className="flex w-full justify-end pb-[1.5em] pr-[1.5em]">
-            {isEdited && (
-              <BoxButtonType2
-                text="UPDATE"
-                onButtonClick={() => {
-                  if (text) {
-                    passEditedData(text);
-                    setIsEdited(false);
-                  }
-                }}
-              />
-            )}
-          </div>
+          {!isFirstTime && (
+            <div className="flex w-full justify-end pb-[1.5em] pr-[1.5em]">
+              {isEdited && (
+                <BoxButtonType2
+                  text="UPDATE"
+                  onButtonClick={() => {
+                    if (text) {
+                      passEditedData(text);
+                      setIsEdited(false);
+                    }
+                  }}
+                />
+              )}
+            </div>
+          )}
         </div>
       </div>
     );
@@ -278,27 +323,28 @@ export default function Home() {
         <BoxButtonType2
           text="SEND"
           onButtonClick={() => {
-            data &&
-              setData((value): dataJSON => {
-                const newValue = { ...value } as dataJSON;
-                const newReply: comments = {
-                  id: data.comments.length + 1,
-                  content: text,
-                  createdAt: 'now',
-                  score: 0,
-                  voted: [],
-                  user: {
-                    image: {
-                      png: data.currentUser.image.png,
-                      webp: data.currentUser.image.webp,
+            if (text)
+              data &&
+                setData((value): dataJSON => {
+                  const newValue = { ...value } as dataJSON;
+                  const newReply: comments = {
+                    id: data.comments.length + 1,
+                    content: text,
+                    createdAt: 'now',
+                    score: 0,
+                    voted: [],
+                    user: {
+                      image: {
+                        png: data.currentUser.image.png,
+                        webp: data.currentUser.image.webp,
+                      },
+                      username: data.currentUser.username,
                     },
-                    username: data.currentUser.username,
-                  },
-                  replies: [],
-                };
-                newValue.comments.push(newReply);
-                return newValue;
-              });
+                    replies: [],
+                  };
+                  newValue.comments.push(newReply);
+                  return newValue;
+                });
           }}
         />
       </div>
@@ -328,7 +374,8 @@ export default function Home() {
                     });
                   }}
                   onButtonReplyClick={() => {
-                    dataRef.current = [iteration, data.comments[iteration].replies.length + 1];
+                    if (data.comments[iteration].replies.length === 0) currentReplyIsFirstOne.current = true;
+                    else currentReplyIsFirstOne.current = false;
                     setData((value): dataJSON => {
                       const newValue = { ...value };
                       const reply = {
@@ -347,7 +394,7 @@ export default function Home() {
                         },
                       };
                       ((newValue as dataJSON).comments[iteration].replies as replies[]).push(reply);
-
+                      currentReplyRef.current = [iteration, data.comments[iteration].replies.length];
                       return newValue as dataJSON;
                     });
                   }}
@@ -377,7 +424,9 @@ export default function Home() {
                 />
                 <div className="flex w-full justify-end gap-[2.7em]">
                   {/* eslint-disable-next-line @typescript-eslint/no-unnecessary-condition */}
-                  {comment.replies.length > 0 && <div className="mb-[1.8em] w-0.5 bg-lightGray"></div>}
+                  {comment.replies.length > 0 && !currentReplyIsFirstOne.current && (
+                    <div className="mb-[1.8em] w-0.5 bg-lightGray"></div>
+                  )}
                   {/* eslint-disable-next-line @typescript-eslint/no-unnecessary-condition */}
                   {comment.replies.length > 0 && (
                     <div className="mb-5 flex flex-col gap-6">
