@@ -116,6 +116,8 @@ const BoxButtonType2 = ({ text, onButtonClick }: { text: string; onButtonClick()
 
 export default function Home() {
   const [data, setData] = useState<dataJSON | null>(null);
+  const dataRef = React.useRef<number[] | null>(null);
+  console.log(dataRef.current);
   let addCommentBlockText: string;
   useEffect(() => {
     const fetchData = async () => {
@@ -230,7 +232,7 @@ export default function Home() {
                   replyingTo ? 'w-[33em]' : 'w-[38em]'
                 } min-h-[8em] resize-none space-x-1 rounded-[0.5em] px-6 py-2 placeholder-grayishBlue outline outline-1 outline-lightGray focus:outline-moderateBlue`}
               >
-                {[replyingTo, content].join(' ')}
+                {content}
               </textarea>
             )}
           </div>
@@ -322,6 +324,7 @@ export default function Home() {
                     });
                   }}
                   onButtonReplyClick={() => {
+                    dataRef.current = [iteration, data.comments[iteration].replies.length + 1];
                     setData((value): dataJSON => {
                       const newValue = { ...value };
                       const reply = {
