@@ -160,7 +160,9 @@ export default function Home() {
     const isUser = data && username === data.currentUser.username;
     const [isEdited, setIsEdited] = useState<boolean>(false);
     const [text, setText] = useState<string>(content);
-
+    useEffect(() => {
+      !text && setIsEdited(true);
+    }, [text]);
     return (
       <div
         className={`flex min-h-[9.45em] gap-[1.5em] pt-[1.5em] ${
@@ -241,8 +243,10 @@ export default function Home() {
               <BoxButtonType2
                 text="UPDATE"
                 onButtonClick={() => {
-                  passEditedData(text);
-                  setIsEdited(false);
+                  if (text) {
+                    passEditedData(text);
+                    setIsEdited(false);
+                  }
                 }}
               />
             )}
