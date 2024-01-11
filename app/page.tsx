@@ -251,7 +251,7 @@ export default function Home() {
             ) : (
               <div className={`flex gap-4 ${replyingTo && !currentReplyIsFirstOne.current ? 'w-[33em]' : 'w-[38em]'}`}>
                 <textarea
-                  rows={1}
+                  rows={text ? text.length / 50 + 1 : 1}
                   autoFocus
                   value={[replyingTo, text].join(' ')}
                   onChange={(e) => {
