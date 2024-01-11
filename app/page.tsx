@@ -172,7 +172,7 @@ export default function Home() {
           replyingTo && !currentReplyIsFirstOne.current ? 'w-[40.1em]' : 'w-[45.625em]'
         }  rounded-[0.5em] bg-white pl-[1.5em] ${isEdited && 'mt-[-0.6em]'}`}
       >
-        {!isEdited && isFirstTime ? (
+        {!isEdited || !isFirstTime ? (
           <div className="flex h-[6.25em] w-[2.8em] flex-col items-center justify-between rounded-[0.65em] bg-[#F5F6FA]">
             <IconPlus plusFunction={plusFunction} />
             <span className="text-[1.05rem] font-[500] text-moderateBlue">{score}</span>
@@ -184,7 +184,7 @@ export default function Home() {
           </div>
         )}
         <div className="flex w-full flex-col justify-start gap-[0.9em]">
-          {!isEdited && (
+          {(!isEdited || !isFirstTime) && (
             <div className="flex justify-between text-[1.05rem] tracking-[-0.03em]">
               <div className="flex items-center gap-[1em]">
                 <Image src={webp} height={32} width={32} alt="avatar" />
@@ -282,7 +282,7 @@ export default function Home() {
             )}
           </div>
           {!isFirstTime && (
-            <div className="flex w-full justify-end pb-[1.5em] pr-[1.5em]">
+            <div className="flex w-full justify-end pr-[1.5em]">
               {isEdited && (
                 <BoxButtonType2
                   text="UPDATE"
