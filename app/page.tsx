@@ -129,6 +129,8 @@ export default function Home() {
   const [textareaActive, setTextareaActive] = useState<boolean>(false);
   const currentReplyRef = useRef<number[] | null>(null);
   const currentReplyIsFirstOne = useRef<boolean>(false);
+  const [deleteConfirmation, setDeleteConfirmation] = useState<boolean>(false);
+  const [dataTemp, setDataTemp] = useState<dataJSON | null>(null);
 
   let addCommentBlockText: string;
   useEffect(() => {
@@ -156,6 +158,7 @@ export default function Home() {
     onButtonDeleteClick,
     onButtonReplyClick,
     passEditedData,
+    isNotReply,
   }: {
     content: string;
     createdAt: string;
@@ -168,6 +171,7 @@ export default function Home() {
     onButtonDeleteClick(): void;
     onButtonReplyClick(): void;
     passEditedData(arg0: string): void;
+    isNotReply?: boolean;
   }) => {
     const isUser = data && username === data.currentUser.username;
     const [isEdited, setIsEdited] = useState<boolean>(false);
@@ -179,7 +183,7 @@ export default function Home() {
     return (
       <div
         className={`flex min-h-[9.45em] gap-[1.5em] py-[1.5em] ${
-          replyingTo && !currentReplyIsFirstOne.current ? 'md:w-[40.1em]' : 'w-full md:w-[45.625em]'
+          replyingTo && !currentReplyIsFirstOne.current ? 'w-full md:w-[40.1em]' : 'w-full md:w-[45.625em]'
         }  rounded-[0.5em] bg-white pl-[1.5em] ${isEdited && 'mt-[-0.6em]'}`}
       >
         {!isEdited || !isFirstTime ? (
@@ -267,9 +271,11 @@ export default function Home() {
                 <textarea
                   rows={text ? text.length / 50 + 1 : 1}
                   autoFocus
-                  value={[replyingTo, text].join(' ')}
+                  value={!isNotReply ? [replyingTo, text].join(' ') : text}
                   onChange={(e) => {
-                    replyingTo && setText(e.target.value.slice(replyingTo.length + 1));
+                    !isNotReply
+                      ? replyingTo && setText(e.target.value.slice(replyingTo.length + 1))
+                      : setText(e.target.value);
                   }}
                   className={`${
                     replyingTo && !currentReplyIsFirstOne.current ? 'md:w-[33em]' : 'md:w-[38em]'
@@ -332,7 +338,7 @@ export default function Home() {
             setText(event.target.value);
           }}
           placeholder="Add a comment…"
-          className="min-h-[5.8em] w-full md:w-[31.5em] resize-none rounded-[0.5em] px-6 py-3 placeholder-grayishBlue outline outline-1 outline-lightGray focus:outline-moderateBlue"
+          className="min-h-[5.8em] w-full resize-none rounded-[0.5em] px-6 py-3 placeholder-grayishBlue outline outline-1 outline-lightGray focus:outline-moderateBlue md:w-[31.5em]"
         ></textarea>
         <BoxButtonType2
           mobileHide
@@ -368,12 +374,42 @@ export default function Home() {
   return (
     data && (
       <main className="flex min-h-screen flex-col items-center justify-start bg-[#F5F6FA] font-rubik">
+        {deleteConfirmation && (
+          <div className="fixed z-10 flex h-full w-full items-center justify-center bg-black bg-opacity-50">
+            <div className="flex h-[15.7em] w-[25em] flex-col items-start justify-between rounded-lg bg-white px-8 pb-8 pt-7">
+              <span className="text-[1.5rem] font-[500] text-[#38454D]">Delete comment</span>
+              <span className="text-[#87888B]">
+                Are you sure you want to delete this comment? This will remove the comment and can&lsquo;t be undone
+              </span>
+              <div className="flex h-[3em] w-full gap-3.5 self-center">
+                <button
+                  onClick={() => {
+                    setDeleteConfirmation(false);
+                  }}
+                  className="w-full rounded-lg bg-[#68727E] text-white"
+                >
+                  NO, CANCEL
+                </button>
+                <button
+                  onClick={() => {
+                    setData(dataTemp);
+                    setDeleteConfirmation(false);
+                  }}
+                  className="w-full rounded-lg bg-[#EF6365] text-white"
+                >
+                  YES, DELETE
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
         <div className="mb-[4em] mt-[4em] flex w-full flex-col items-center px-4 md:px-0">
           {data.comments.map((comment, iteration) => {
             const isUserComment = data.comments[iteration].user.username === data.currentUser.username;
             return (
               <div className="flex flex-col items-center gap-[1.2em]" key={iteration}>
                 <CommentBlock
+                  isNotReply
                   passEditedData={(text) => {
                     setData((value: dataJSON | null) => {
                       const newValue: dataJSON = { ...value } as dataJSON;
@@ -382,8 +418,9 @@ export default function Home() {
                     });
                   }}
                   onButtonDeleteClick={() => {
-                    setData((value: dataJSON | null) => {
-                      const newValue: dataJSON = { ...value } as dataJSON;
+                    setDeleteConfirmation(true);
+                    setDataTemp(() => {
+                      const newValue: dataJSON = JSON.parse(JSON.stringify(data)) as dataJSON;
                       newValue.comments.splice(iteration, 1);
                       return newValue;
                     });
@@ -444,7 +481,7 @@ export default function Home() {
                   )}
                   {/* eslint-disable-next-line @typescript-eslint/no-unnecessary-condition */}
                   {comment.replies.length > 0 && (
-                    <div className="mb-5 flex flex-col gap-6">
+                    <div className="mb-5 flex w-full flex-col gap-6 md:w-fit">
                       {comment.replies.map((reply, iteration2) => {
                         const isUserReply =
                           data.comments[iteration].replies[iteration2].user.username === data.currentUser.username;
@@ -481,8 +518,9 @@ export default function Home() {
                               });
                             }}
                             onButtonDeleteClick={() => {
-                              setData((value: dataJSON | null) => {
-                                const newValue: dataJSON = { ...value } as dataJSON;
+                              setDeleteConfirmation(true);
+                              setDataTemp(() => {
+                                const newValue: dataJSON = JSON.parse(JSON.stringify(data)) as dataJSON;
                                 newValue.comments[iteration].replies.splice(iteration2, 1);
                                 return newValue;
                               });
