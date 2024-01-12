@@ -103,11 +103,21 @@ const BoxButtonType1 = ({
   </button>
 );
 
-const BoxButtonType2 = ({ text, onButtonClick }: { text: string; onButtonClick(): void }) => {
+const BoxButtonType2 = ({
+  mobileHide,
+  text,
+  onButtonClick,
+}: {
+  mobileHide?: boolean;
+  text: string;
+  onButtonClick(): void;
+}) => {
   return (
     <button
       onClick={onButtonClick}
-      className="flex w-[6.5em] items-center justify-center rounded-[0.5em] bg-moderateBlue py-[0.75em] font-[500] text-white hover:opacity-40"
+      className={`${
+        mobileHide ? 'hidden md:flex' : 'flex'
+      }  w-[6.5em] items-center justify-center rounded-[0.5em] bg-moderateBlue py-[0.75em] font-[500] text-white hover:opacity-40`}
     >
       {text}
     </button>
@@ -169,11 +179,11 @@ export default function Home() {
     return (
       <div
         className={`flex min-h-[9.45em] gap-[1.5em] py-[1.5em] ${
-          replyingTo && !currentReplyIsFirstOne.current ? 'w-[40.1em]' : 'w-[45.625em]'
+          replyingTo && !currentReplyIsFirstOne.current ? 'md:w-[40.1em]' : 'w-full md:w-[45.625em]'
         }  rounded-[0.5em] bg-white pl-[1.5em] ${isEdited && 'mt-[-0.6em]'}`}
       >
         {!isEdited || !isFirstTime ? (
-          <div className="flex h-[6.25em] w-[2.8em] flex-col items-center justify-between rounded-[0.65em] bg-[#F5F6FA]">
+          <div className="hidden h-[6.25em] w-[2.8em] flex-col items-center justify-between rounded-[0.65em] bg-[#F5F6FA] sm:flex">
             <IconPlus plusFunction={plusFunction} />
             <span className="text-[1.05rem] font-[500] text-moderateBlue">{score}</span>
             <IconMinus minusFunction={minusFunction} />
@@ -199,7 +209,7 @@ export default function Home() {
                 <span className="text-grayishBlue">{createdAt}</span>
               </div>
               {isUser ? (
-                <div className="flex gap-6 pr-[1.55em]">
+                <div className="hidden gap-6 pr-[1.55em] md:flex">
                   <BoxButtonType1
                     onButtonClick={onButtonDeleteClick}
                     icon={iconDelete as string}
@@ -217,7 +227,7 @@ export default function Home() {
                   />
                 </div>
               ) : (
-                <div className="flex pr-[1.55em]">
+                <div className="hidden pr-[1.55em] md:flex">
                   <BoxButtonType1
                     onButtonClick={() => {
                       if (textareaActive) {
@@ -242,14 +252,18 @@ export default function Home() {
               )}
             </div>
           )}
-          <div className="flex h-full tracking-[0.001em] text-grayishBlue">
+          <div className="flex h-full pr-4 tracking-[0.001em] text-grayishBlue">
             {!isEdited ? (
-              <div className={`${replyingTo ? 'w-[33em]' : 'w-[38em]'} space-x-1 `}>
+              <div className={`${replyingTo ? 'md:w-[33em]' : 'md:w-[38em]'} w-full space-x-1`}>
                 {replyingTo && <span className="font-[500]  text-moderateBlue">{replyingTo}</span>}
                 {text && <span className="break-words">{text}</span>}
               </div>
             ) : (
-              <div className={`flex gap-4 ${replyingTo && !currentReplyIsFirstOne.current ? 'w-[33em]' : 'w-[38em]'}`}>
+              <div
+                className={`flex gap-4 ${
+                  replyingTo && !currentReplyIsFirstOne.current ? 'md:w-[33em]' : 'md:w-[38em]'
+                } w-full`}
+              >
                 <textarea
                   rows={text ? text.length / 50 + 1 : 1}
                   autoFocus
@@ -258,8 +272,8 @@ export default function Home() {
                     replyingTo && setText(e.target.value.slice(replyingTo.length + 1));
                   }}
                   className={`${
-                    replyingTo && !currentReplyIsFirstOne.current ? 'w-[33em]' : 'w-[38em]'
-                  } min-h-[6em] resize-none space-x-1 rounded-[0.5em] px-6 py-2 placeholder-grayishBlue outline outline-1 outline-lightGray focus:outline-moderateBlue`}
+                    replyingTo && !currentReplyIsFirstOne.current ? 'md:w-[33em]' : 'md:w-[38em]'
+                  } min-h-[6em] w-full resize-none space-x-1 rounded-[0.5em] px-6 py-2 placeholder-grayishBlue outline outline-1 outline-lightGray focus:outline-moderateBlue`}
                 >
                   {content}
                 </textarea>
@@ -303,9 +317,9 @@ export default function Home() {
   const AddCommentBlock = () => {
     const [text, setText] = useState<string>('');
     return (
-      <div className="flex min-h-[9em] w-[45.625em] items-start gap-[1.1em] rounded-[0.5em] bg-white py-[1.6em] pl-[1.5em] pr-[1.4em]">
+      <div className="flex min-h-[9em] w-full items-start gap-[1.1em] rounded-[0.5em] bg-white py-[1.6em] pl-[1.5em] pr-[1.4em] md:w-[45.625em]">
         <Image
-          className="mt-[0.18em]"
+          className="mt-[0.18em] hidden sm:block"
           src={data ? data.currentUser.image.webp.replace('images/', '') : ''}
           height={40}
           width={40}
@@ -318,9 +332,10 @@ export default function Home() {
             setText(event.target.value);
           }}
           placeholder="Add a comment…"
-          className="min-h-[5.8em] w-[31.5em] resize-none rounded-[0.5em] px-6 py-3 placeholder-grayishBlue outline outline-1 outline-lightGray focus:outline-moderateBlue"
+          className="min-h-[5.8em] w-full md:w-[31.5em] resize-none rounded-[0.5em] px-6 py-3 placeholder-grayishBlue outline outline-1 outline-lightGray focus:outline-moderateBlue"
         ></textarea>
         <BoxButtonType2
+          mobileHide
           text="SEND"
           onButtonClick={() => {
             if (text)
@@ -353,7 +368,7 @@ export default function Home() {
   return (
     data && (
       <main className="flex min-h-screen flex-col items-center justify-start bg-[#F5F6FA] font-rubik">
-        <div className="mb-[4em] mt-[4em] flex w-full flex-col items-center">
+        <div className="mb-[4em] mt-[4em] flex w-full flex-col items-center px-4 md:px-0">
           {data.comments.map((comment, iteration) => {
             const isUserComment = data.comments[iteration].user.username === data.currentUser.username;
             return (
@@ -422,7 +437,7 @@ export default function Home() {
                       });
                   }}
                 />
-                <div className="flex w-full justify-end gap-[2.7em]">
+                <div className="flex w-full justify-end gap-[1em] md:gap-[2.7em]">
                   {/* eslint-disable-next-line @typescript-eslint/no-unnecessary-condition */}
                   {comment.replies.length > 0 && !currentReplyIsFirstOne.current && (
                     <div className="mb-[1.8em] w-0.5 bg-lightGray"></div>
