@@ -2,7 +2,30 @@
 import Image from 'next/image';
 import logo from './images/logo.svg';
 import avatar from './images/image-avatar.png';
+import shoe1 from './images/image-product-1.jpg';
+import shoe2 from './images/image-product-2.jpg';
+import shoe3 from './images/image-product-3.jpg';
+import shoe4 from './images/image-product-4.jpg';
+import shoe1thumb from './images/image-product-1-thumbnail.jpg';
+import shoe2thumb from './images/image-product-2-thumbnail.jpg';
+import shoe3thumb from './images/image-product-3-thumbnail.jpg';
+import shoe4thumb from './images/image-product-4-thumbnail.jpg';
+import closeOrange from './images/icon-close_orange.svg';
 import { useState } from 'react';
+
+const Close = () => {
+  return (
+    <button>
+      <svg width={'14'} height={'15'} xmlns="http://www.w3.org/2000/svg">
+        <path
+          d="m11.596.782 2.122 2.122L9.12 7.499l4.597 4.597-2.122 2.122L7 9.62l-4.595 4.597-2.122-2.122L4.878 7.5.282 2.904 2.404.782l4.595 4.596L11.596.782Z"
+          fill={`${'#69707D'}`}
+          fillRule="evenodd"
+        />
+      </svg>
+    </button>
+  );
+};
 
 const Cart = () => {
   const [color, setColor] = useState('#69707D');
@@ -28,9 +51,66 @@ const Cart = () => {
 
 export default function Home() {
   const [hoverNavButtons, setHoverNavButtons] = useState<number | null>(null);
+  const [shoeSelected, setShoeSelected] = useState<number | null>(null);
+  const [lightboxShoeSelected, setLightboxShoeSelected] = useState<number | null>(null);
 
   return (
-    <main className="flex min-h-screen flex-col items-center justify-center">
+    <div
+      className={`${
+        lightboxShoeSelected !== null ? 'h-screen' : 'min-h-screen'
+      } flex flex-col items-center justify-center`}
+    >
+      {lightboxShoeSelected !== null && (
+        <div className="fixed z-10 flex h-screen w-full items-center justify-center bg-black bg-opacity-70">
+          <div className="flex flex-col gap-[2em]">
+            <div className="flex w-full justify-end">
+              <button
+                onClick={() => {
+                  setLightboxShoeSelected(null);
+                }}
+              >
+                <Image src={closeOrange as string} height={23} alt="close" />
+              </button>
+            </div>
+            <Image
+              className="h-[34em] w-full rounded-[1em] bg-gray-300"
+              src={
+                lightboxShoeSelected === 0
+                  ? shoe1
+                  : lightboxShoeSelected === 1
+                    ? shoe2
+                    : lightboxShoeSelected === 2
+                      ? shoe3
+                      : lightboxShoeSelected === 3
+                        ? shoe4
+                        : shoe1
+              }
+              alt="image of shoe"
+            />
+            <div className="flex justify-around gap-2 px-10">
+              {[shoe1thumb, shoe2thumb, shoe3thumb, shoe4thumb].map((x, i) => (
+                <button
+                  onClick={() => {
+                    setLightboxShoeSelected(i);
+                  }}
+                  className={`${
+                    lightboxShoeSelected === i && 'outline-orange outline outline-2'
+                  } rounded-[0.6em] bg-white`}
+                  key={i}
+                >
+                  <Image
+                    src={x}
+                    alt="shoe thumbnail"
+                    className={`${
+                      lightboxShoeSelected === i ? 'opacity-25' : 'hover:opacity-50'
+                    } h-[5.5em] w-[5.5em] rounded-[0.6em] bg-gray-300`}
+                  />
+                </button>
+              ))}
+            </div>
+          </div>
+        </div>
+      )}
       <div className="font-kumbhSans flex h-[56.25em] w-full flex-col bg-white px-[10.3em] py-[1.85em]">
         <nav className="flex flex-col">
           <div className="flex items-start justify-between">
@@ -70,14 +150,80 @@ export default function Home() {
             </div>
             <div className="flex items-center gap-[2.9em]">
               <Cart />
-              <button className="out rounded-full hover:outline outline-2 -outline-offset-[2px] outline-[#EC9858]">
+              <button className="out rounded-full outline-2 -outline-offset-[2px] outline-[#EC9858] hover:outline">
                 <Image className="mt-[-0.05em]" height={50} src={avatar} alt="avatar" />
               </button>
             </div>
           </div>
           <div className="h-[1px] w-full bg-[#EAE9EC]"></div>
         </nav>
+        <main className="flex h-full w-full items-center justify-between gap-[8em] px-[3em]">
+          <div className="flex w-1/2 flex-col">
+            <div className="flex flex-col gap-[2em]">
+              <button
+                onClick={() => {
+                  setLightboxShoeSelected(shoeSelected);
+                }}
+              >
+                <Image
+                  className="h-[27.8em] w-full rounded-[1em] bg-gray-300"
+                  src={
+                    shoeSelected === 0
+                      ? shoe1
+                      : shoeSelected === 1
+                        ? shoe2
+                        : shoeSelected === 2
+                          ? shoe3
+                          : shoeSelected === 3
+                            ? shoe4
+                            : shoe1
+                  }
+                  alt="image of shoe"
+                />
+              </button>
+              <div className="flex justify-between gap-2 ">
+                {[shoe1thumb, shoe2thumb, shoe3thumb, shoe4thumb].map((x, i) => (
+                  <button
+                    onClick={() => {
+                      setShoeSelected(i);
+                    }}
+                    className={`${shoeSelected === i && 'outline-orange outline outline-2'} rounded-[0.6em]`}
+                    key={i}
+                  >
+                    <Image
+                      src={x}
+                      alt="shoe thumbnail"
+                      className={`${
+                        shoeSelected === i ? 'opacity-25' : 'hover:opacity-50'
+                      } h-[5.5em] w-[5.5em] rounded-[0.6em] bg-gray-300`}
+                    />
+                  </button>
+                ))}
+              </div>
+            </div>
+          </div>
+          <div className="flex w-1/2 flex-col items-start">
+            <span className="text-[0.9rem] font-[700] text-[orange]">SNEAKER COMPANY</span>
+            <span className="text-[2.8rem] font-[700] leading-[1em] text-[#1E1F25]">Fall Limited Edition Sneakers</span>
+            <span className="text-darkGrayishBlue">
+              These low-profile sneakers are your perfect casual wear companion. Featuring a durable rubber outer sole,
+              they’ll withstand everything the weather can offer.
+            </span>
+            <div className="flex items-center gap-[1em]">
+              <span className="text-[1.8rem] font-[700]">$125.00</span>
+              <span className="text-orange bg-paleOrange rounded-md px-[0.6em] font-[700]">50%</span>
+            </div>
+            <div className="flex flex-col">
+              <span className="text-grayishBlue line-clamp-3 font-[700]">$250.00</span>
+              <div className="bg-grayishBlue absolute mt-[0.865em] h-[1px] w-[3.7em]"></div>
+            </div>
+            <div className="flex h-[3em] w-full gap-[1em]">
+              <button className="bg-lightGrayishBlue w-[36%] rounded-lg font-[700]">0</button>
+              <button className="bg-orange text-paleOrange w-[64%] rounded-lg font-[700]">Add to cart</button>
+            </div>
+          </div>
+        </main>
       </div>
-    </main>
+    </div>
   );
 }
