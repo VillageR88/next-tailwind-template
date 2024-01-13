@@ -22,6 +22,9 @@ const config: Config = {
         lightGrayishBlue: 'hsl(223, 64%, 98%)',
         white: 'hsl(0, 0%, 100%)',
       },
+      screens: {
+        xxl: '1440px',
+      },
     },
   },
   plugins: [],
