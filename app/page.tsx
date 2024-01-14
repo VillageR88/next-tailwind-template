@@ -42,7 +42,7 @@ export default function Home() {
   const [storage, setStorage] = useState<number>(0);
   const [shoes, setShoes] = useState<number>(0);
   const [cartShown, setCartShown] = useState(false);
-  const [isMobile, setIsMobile] = useState(false);
+  const [isMobile, setIsMobile] = useState(window.innerWidth >= 768 ? false : true);
   useEffect(() => {
     const handleResize = () => {
       if (window.innerWidth >= 768) setIsMobile(false);
@@ -84,14 +84,16 @@ export default function Home() {
     );
   };
 
-  const IconPrev = () => {
+  const IconPrev = ({ mobile }: { mobile?: boolean }) => {
     const [color, setColor] = useState('#1D2026');
     return (
       <button
         onClick={() => {
-          if (lightboxShoeSelected !== null)
-            if (lightboxShoeSelected > 0) setLightboxShoeSelected(lightboxShoeSelected - 1);
-            else setLightboxShoeSelected(lightboxSelection.length - 1);
+          if (!mobile) {
+            if (lightboxShoeSelected !== null)
+              if (lightboxShoeSelected > 0) setLightboxShoeSelected(lightboxShoeSelected - 1);
+              else setLightboxShoeSelected(lightboxSelection.length - 1);
+          } else setShoeSelected(shoeSelected === 0 || shoeSelected === null ? 3 : shoeSelected - 1);
         }}
         onMouseEnter={() => {
           setColor('#FF7B19');
@@ -99,7 +101,9 @@ export default function Home() {
         onMouseLeave={() => {
           setColor('#1D2026');
         }}
-        className="absolute z-10 ml-[-1.75em] flex h-[3.5em] w-[3.5em] items-center justify-center self-start rounded-full bg-white"
+        className={`${
+          !mobile ? 'ml-[-1.75em]' : 'left-5'
+        } absolute z-10 flex h-[3.5em] w-[3.5em] items-center justify-center self-start rounded-full bg-white`}
       >
         <svg className="ml-[-0.2em]" width="12" height="18" xmlns="http://www.w3.org/2000/svg">
           <path d="M11 1 3 9l8 8" stroke={color} strokeWidth="3" fill="none" fillRule="evenodd" />
@@ -108,14 +112,17 @@ export default function Home() {
     );
   };
 
-  const IconNext = () => {
+  const IconNext = ({ mobile }: { mobile?: boolean }) => {
     const [color, setColor] = useState('#1D2026');
     return (
       <button
         onClick={() => {
-          if (lightboxShoeSelected !== null)
-            if (lightboxShoeSelected < lightboxSelection.length - 1) setLightboxShoeSelected(lightboxShoeSelected + 1);
-            else setLightboxShoeSelected(0);
+          if (!mobile) {
+            if (lightboxShoeSelected !== null)
+              if (lightboxShoeSelected < lightboxSelection.length - 1)
+                setLightboxShoeSelected(lightboxShoeSelected + 1);
+              else setLightboxShoeSelected(0);
+          } else setShoeSelected(shoeSelected === 3 || shoeSelected === null ? 0 : shoeSelected + 1);
         }}
         onMouseEnter={() => {
           setColor('#FF7B19');
@@ -123,7 +130,9 @@ export default function Home() {
         onMouseLeave={() => {
           setColor('#1D2026');
         }}
-        className="absolute mr-[-1.75em] flex h-[3.5em] w-[3.5em] items-center justify-center self-end rounded-full bg-white"
+        className={`${
+          !mobile ? 'mr-[-1.75em]' : 'right-5'
+        } absolute flex h-[3.5em] w-[3.5em] items-center justify-center self-end rounded-full bg-white`}
       >
         <svg width="13" height="18" xmlns="http://www.w3.org/2000/svg">
           <path d="m2 1 8 8-8 8" stroke={color} strokeWidth="3" fill="none" fillRule="evenodd" />
@@ -306,11 +315,12 @@ export default function Home() {
                 onMouseEnter={() => {
                   setCartShown(false);
                 }}
-                className="rounded-full outline-2 -outline-offset-[2px] outline-[#EC9858] hover:outline"
+                className="mt-[-0.45em] rounded-full outline-2 -outline-offset-[2px] outline-[#EC9858] hover:outline"
               >
                 <Image
-                  className="mt-[-0.45em] h-[1.8em] w-[1.8em] md:mt-[-0.05em] md:h-[3em] md:w-[3em]"
+                  className=" h-[1.8em] w-[1.8em] md:mt-[-0.05em] md:h-[3em] md:w-[3em]"
                   height={50}
+                  width={50}
                   src={avatar}
                   alt="avatar"
                 />
@@ -321,33 +331,41 @@ export default function Home() {
         </nav>
         <main
           onMouseEnter={() => {
-            setCartShown(false);
+            !isMobile && setCartShown(false);
           }}
           className="flex h-full w-full flex-col items-center justify-center pb-[2.5em] pr-0 md:mt-[5.5em] md:flex-row md:gap-0 md:px-0 md:pr-6 lg:gap-[4em] lg:px-[3em] xl:gap-[6em] xxl:gap-[8em]"
         >
-          <div className="flex w-full flex-col  md:w-fit md:min-w-fit">
+          <div className="flex w-full flex-col md:w-fit md:min-w-fit">
             <div className="flex scale-100 flex-col gap-[2em] md:scale-75 lg:scale-100">
-              <button
-                onClick={() => {
-                  setLightboxShoeSelected(shoeSelected ?? 0);
-                }}
-              >
-                <Image
-                  className="h-[20em] w-full object-cover sm:h-[28em] md:w-fit md:rounded-[1em] md:bg-gray-300"
-                  src={
-                    shoeSelected === 0
-                      ? shoe1
-                      : shoeSelected === 1
-                        ? shoe2
-                        : shoeSelected === 2
-                          ? shoe3
-                          : shoeSelected === 3
-                            ? shoe4
-                            : shoe1
-                  }
-                  alt="image of shoe"
-                />
-              </button>
+              <div className="flex items-center justify-around">
+                <div className="block md:hidden">
+                  <IconPrev mobile />
+                </div>
+                <button
+                  onClick={() => {
+                    !isMobile && setLightboxShoeSelected(shoeSelected ?? 0);
+                  }}
+                >
+                  <Image
+                    className="h-[20em] object-cover sm:h-[28em] md:w-fit md:rounded-[1em] md:bg-gray-300"
+                    src={
+                      shoeSelected === 0
+                        ? shoe1
+                        : shoeSelected === 1
+                          ? shoe2
+                          : shoeSelected === 2
+                            ? shoe3
+                            : shoeSelected === 3
+                              ? shoe4
+                              : shoe1
+                    }
+                    alt="image of shoe"
+                  />
+                </button>
+                <div className="block md:hidden">
+                  <IconNext mobile />
+                </div>
+              </div>
               <div className="hidden justify-between gap-2 md:flex ">
                 {[shoe1thumb, shoe2thumb, shoe3thumb, shoe4thumb].map((x, i) => (
                   <button
@@ -369,7 +387,12 @@ export default function Home() {
               </div>
             </div>
           </div>
-          <div className="flex w-full flex-col items-start px-6 py-6 md:w-[33em] md:px-0 md:py-0">
+          <div
+            onMouseEnter={() => {
+              isMobile && setCartShown(false);
+            }}
+            className="flex w-full flex-col items-start px-6 py-6 md:w-[33em] md:px-0 md:py-0"
+          >
             <span className="mb-[1em] text-[0.85rem] font-[700] tracking-[0.1em] text-[orange]">SNEAKER COMPANY</span>
             <span className="mb-[0.8em] text-[2rem] font-[700] leading-[1em]  text-[#1E1F25] md:text-[2.8rem]">
               Fall Limited Edition Sneakers
