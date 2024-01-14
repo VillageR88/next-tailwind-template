@@ -2,8 +2,10 @@
 import { useState } from 'react';
 
 export default function Home() {
-  const [theme, setTheme] = useState(1);
-  const [calc, setCalc] = useState<number>(0);
+  const [theme, setTheme] = useState<number>(1);
+  const [calc, setCalc] = useState<string>('0');
+  const [storedNumber, setStoredNumber] = useState<string | null>(null);
+  const [storedOperation, setStoredOperation] = useState<string | null>(null);
   return (
     <main className="flex min-h-screen w-full flex-col items-center justify-center font-leagueSpartan">
       <div className="flex h-[56.25em] w-full flex-col items-center bg-[#3B4664]">
@@ -16,9 +18,9 @@ export default function Home() {
               <span className="mb-[0.2em] flex text-[0.75rem] tracking-widest text-white">THEME</span>
               <div>
                 <div className="font flex w-full justify-between px-[0.7em] text-[0.85rem] text-white">
-                  <span>1</span>
-                  <span>2</span>
-                  <span>3</span>
+                  {['1', '2', '3'].map((x, i) => (
+                    <span key={i}>{x}</span>
+                  ))}
                 </div>
                 <div className="flex h-[1.6em] w-[4.4em] justify-between rounded-full bg-[#252D44]">
                   <div
@@ -28,35 +30,68 @@ export default function Home() {
                   >
                     <div className="h-[1em] w-[1em] rounded-full bg-[#D43D31]"></div>
                   </div>
-                  <button
-                    onClick={() => {
-                      setTheme(1);
-                    }}
-                    className="z-10 h-full w-full rounded-full bg-transparent"
-                  ></button>
-                  <button
-                    onClick={() => {
-                      setTheme(2);
-                    }}
-                    className="z-10 h-full w-full rounded-full bg-transparent"
-                  ></button>
-                  <button
-                    onClick={() => {
-                      setTheme(3);
-                    }}
-                    className="z-10 h-full w-full rounded-full bg-transparent"
-                  ></button>
+                  {[1, 2, 3].map((x) => (
+                    <button
+                      key={x}
+                      onClick={() => {
+                        setTheme(x);
+                      }}
+                      className="z-10 h-full w-full rounded-full bg-transparent"
+                    ></button>
+                  ))}
                 </div>
               </div>
             </div>
           </div>
           <div className="mt-[2em] flex h-[8em] w-full items-center justify-end rounded-[0.6em] bg-[#181F32] pr-[2em] pt-[0.2em]">
-            <span className="text-[3.4rem] text-white">{calc.toLocaleString('en-US')}</span>
+            <span className="text-[3.4rem] text-white">{Number(calc).toLocaleString('en-US')}</span>
           </div>
           <div className="col-span-1 mt-[1.5em] grid h-[30em] grid-cols-4 gap-x-[1.55em] rounded-[0.6em] bg-[#252D44] pb-[0.45em] pl-[1.85em] pr-[2em]  pt-[2em]">
             {['7', '8', '9', 'DEL', '4', '5', '6', '+', '1', '2', '3', '-', '.', '0', '/', 'x', 'RESET', '='].map(
               (x, i) => (
                 <button
+                  onClick={() => {
+                    if (x === 'DEL') {
+                      setCalc((prev) => Math.floor(parseFloat(prev) / 10).toString());
+                    } else if (x === 'RESET') {
+                      setCalc('0');
+                      setStoredNumber(null);
+                      setStoredOperation(null);
+                    } else if (x === '=') {
+                      if (storedOperation && storedNumber !== null) {
+                        const calcFloat = parseFloat(calc);
+                        const storedNumberFloat = parseFloat(storedNumber);
+                        switch (storedOperation) {
+                          case '+':
+                            setCalc((storedNumberFloat + calcFloat).toString());
+                            break;
+                          case '-':
+                            setCalc((storedNumberFloat - calcFloat).toString());
+                            break;
+                          case '/':
+                            setCalc((storedNumberFloat / calcFloat).toString());
+                            break;
+                          case 'x':
+                            setCalc((storedNumberFloat * calcFloat).toString());
+                            break;
+                          default:
+                            break;
+                        }
+                        setStoredNumber(null);
+                        setStoredOperation(null);
+                      }
+                    } else if (x === '+' || x === '-' || x === '/' || x === 'x') {
+                      setStoredNumber(calc);
+                      setStoredOperation(x);
+                      setCalc('0');
+                    } else if (x === '.') {
+                      if (!calc.includes('.')) {
+                        setCalc((prev) => prev + '.');
+                      }
+                    } else if (!isNaN(parseInt(x))) {
+                      setCalc((prev) => (prev === '0' && !prev.includes('.') ? x : prev + x));
+                    }
+                  }}
                   key={i}
                   className={`${(i === 16 || i === 17) && 'col-span-2'} ${
                     i === 3 || i === 16 ? 'bg-[#424E6E]' : i === 17 ? 'bg-[#8F2316]' : 'bg-[#B6A499]'
