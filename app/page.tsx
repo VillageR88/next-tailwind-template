@@ -10,6 +10,7 @@ import shoe1thumb from './images/image-product-1-thumbnail.jpg';
 import shoe2thumb from './images/image-product-2-thumbnail.jpg';
 import shoe3thumb from './images/image-product-3-thumbnail.jpg';
 import shoe4thumb from './images/image-product-4-thumbnail.jpg';
+import iconClose from './images/icon-close.svg';
 import closeWhite from './images/icon-close_white.svg';
 import closeOrange from './images/icon-close_orange.svg';
 import iconMinus from './images/icon-minus.svg';
@@ -19,21 +20,8 @@ import iconDelete from './images/icon-delete.svg';
 import mobileNav from './images/icon-menu.svg';
 import { useEffect, useState } from 'react';
 
-const Close = () => {
-  return (
-    <button>
-      <svg width={'14'} height={'15'} xmlns="http://www.w3.org/2000/svg">
-        <path
-          d="m11.596.782 2.122 2.122L9.12 7.499l4.597 4.597-2.122 2.122L7 9.62l-4.595 4.597-2.122-2.122L4.878 7.5.282 2.904 2.404.782l4.595 4.596L11.596.782Z"
-          fill={`${'#69707D'}`}
-          fillRule="evenodd"
-        />
-      </svg>
-    </button>
-  );
-};
-
 export default function Home() {
+  const [mobileNavShown, setMobileNavShown] = useState(false);
   const [hoverNavButtons, setHoverNavButtons] = useState<number | null>(null);
   const [shoeSelected, setShoeSelected] = useState<number | null>(null);
   const [lightboxShoeSelected, setLightboxShoeSelected] = useState<number | null>(null);
@@ -43,12 +31,14 @@ export default function Home() {
   const [shoes, setShoes] = useState<number>(0);
   const [cartShown, setCartShown] = useState(false);
   const [isMobile, setIsMobile] = useState(window.innerWidth >= 768 ? false : true);
+  const navFeed = ['Collections', 'Men', 'Women', 'About', 'Contact'];
   useEffect(() => {
     const handleResize = () => {
       if (window.innerWidth >= 768) setIsMobile(false);
       else {
         setIsMobile(true);
         setLightboxShoeSelected(null);
+        setMobileNavShown(false);
       }
     };
     window.addEventListener('resize', handleResize);
@@ -122,7 +112,10 @@ export default function Home() {
               if (lightboxShoeSelected < lightboxSelection.length - 1)
                 setLightboxShoeSelected(lightboxShoeSelected + 1);
               else setLightboxShoeSelected(0);
-          } else setShoeSelected(shoeSelected === 3 || shoeSelected === null ? 0 : shoeSelected + 1);
+          } else
+            setShoeSelected(
+              shoeSelected === lightboxSelection.length - 1 ? 0 : shoeSelected === null ? 1 : shoeSelected + 1,
+            );
         }}
         onMouseEnter={() => {
           setColor('#FF7B19');
@@ -142,7 +135,25 @@ export default function Home() {
   };
 
   return (
-    <div className={`flex min-h-screen flex-col items-center justify-start bg-white`}>
+    <div className={`flex min-h-screen flex-col items-center justify-start bg-white font-kumbhSans`}>
+      {mobileNavShown && isMobile && (
+        <div className="fixed left-0 top-0 z-10 h-full w-full bg-black bg-opacity-60">
+          <div className="flex h-full w-[70%] flex-col bg-white pl-[1.58em] pt-[1.7em]">
+            <button
+              onClick={() => {
+                setMobileNavShown(false);
+              }}
+            >
+              <Image src={iconClose as string} alt="close navigation" />
+            </button>
+            <div className="mt-10 flex flex-col items-start gap-4 text-[1.3rem] font-[700]">
+              {navFeed.map((x, i) => (
+                <button key={i}>{x}</button>
+              ))}
+            </div>
+          </div>
+        </div>
+      )}
       {lightboxShoeSelected !== null && !isMobile && (
         <div
           className={`${'overflow-auto'} fixed z-10 flex h-full w-full items-start justify-center  bg-black  bg-opacity-70 pt-[5em]`}
@@ -207,12 +218,17 @@ export default function Home() {
           </div>
         </div>
       )}
-      <div className=" flex min-h-full w-full flex-col font-kumbhSans  xl:px-[3em] xxl:px-[10.3em]">
+      <div className=" flex min-h-full w-full flex-col xl:px-[3em] xxl:px-[10.3em]">
         <nav className="flex flex-col px-[1.5em] py-4 md:px-[2em] md:py-0 md:pt-[1.5em] xxl:px-0">
           <div className="flex items-center justify-between">
             <div className="flex gap-[3.5em] text-darkGrayishBlue">
               <div className="flex gap-4">
-                <button className="mt-[0.25em] flex md:hidden">
+                <button
+                  onClick={() => {
+                    setMobileNavShown(true);
+                  }}
+                  className="mt-[0.25em] flex md:hidden"
+                >
                   <Image src={mobileNav as string} alt="menu" />
                 </button>
                 <Image className="h-full md:h-fit" src={logo as string} alt="logo" />
@@ -223,7 +239,7 @@ export default function Home() {
                 }}
                 className="hidden gap-[1.98em] text-[0.95rem] md:flex"
               >
-                {['Collections', 'Men', 'Women', 'About', 'Contact'].map((x, i) => {
+                {navFeed.map((x, i) => {
                   return (
                     <div key={i} className="flex flex-col items-center ">
                       <button
@@ -247,7 +263,7 @@ export default function Home() {
                                 : i === 3
                                   ? 'w-[3em]'
                                   : i === 4 && 'w-[4.2em]'
-                        } ${hoverNavButtons === i ? 'block' : 'invisible'} absolute mt-[4.2em] h-[0.27em] bg-orange`}
+                        } ${hoverNavButtons === i ? 'block' : 'invisible'} absolute mt-[3.9em] h-[0.27em] bg-orange`}
                       ></div>
                     </div>
                   );
@@ -258,7 +274,7 @@ export default function Home() {
               <div>
                 <Cart />
                 {storage !== 0 && (
-                  <span className="pointer-events-none absolute ml-[-1.9em]	 mt-[-0.25em] rounded-[2em] bg-orange px-[0.8em] text-[0.55rem] text-white">
+                  <span className="pointer-events-none absolute ml-[-1.9em] mt-[-0.25em] rounded-[2em] bg-orange px-[0.8em] text-[0.55rem] text-white">
                     {storage}
                   </span>
                 )}
@@ -342,6 +358,7 @@ export default function Home() {
                   <IconPrev mobile />
                 </div>
                 <button
+                  className={`${isMobile && 'cursor-default'}`}
                   onClick={() => {
                     !isMobile && setLightboxShoeSelected(shoeSelected ?? 0);
                   }}
