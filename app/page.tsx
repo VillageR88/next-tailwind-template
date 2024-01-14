@@ -273,8 +273,8 @@ export default function Home() {
                               <div className="flex flex-col">
                                 <span>Fall Limited Edition Sneakers</span>{' '}
                                 <div className="flex gap-1.5">
-                                  <span>$125.00 x 3</span>
-                                  <span className="font-[700] text-black">$375.00</span>
+                                  <span>$125.00 x {storage}</span>
+                                  <span className="font-[700] text-black">${(125 * storage).toFixed(2)}</span>
                                 </div>
                               </div>
                               <button
