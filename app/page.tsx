@@ -245,7 +245,7 @@ export default function Home() {
                 })}
               </div>
             </div>
-            <div className="mt-[0.4em] flex items-center gap-[1.2em] md:mt-0 md:gap-[2.9em]">
+            <div className="mt-[0.4em] flex items-center gap-[1.2em] md:mt-0 md:gap-[2.5em]">
               <div>
                 <Cart />
                 {storage !== 0 && (
@@ -306,10 +306,10 @@ export default function Home() {
                 onMouseEnter={() => {
                   setCartShown(false);
                 }}
-                className="out rounded-full outline-2 -outline-offset-[2px] outline-[#EC9858] hover:outline"
+                className="rounded-full outline-2 -outline-offset-[2px] outline-[#EC9858] hover:outline"
               >
                 <Image
-                  className="mt-[-0.45em] scale-[65%] md:mt-[-0.05em] md:scale-100"
+                  className="mt-[-0.45em] h-[1.8em] w-[1.8em] md:mt-[-0.05em] md:h-[3em] md:w-[3em]"
                   height={50}
                   src={avatar}
                   alt="avatar"
