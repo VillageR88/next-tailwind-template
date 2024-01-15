@@ -69,7 +69,10 @@ export default function Home() {
     <main className="font-leagueSpartan flex min-h-screen flex-col items-center justify-center">
       <div className="flex h-[50em] w-full flex-col bg-gradient-to-b from-[#1e1e28] via-[hsl(272,21%,14%)] via-70% to-[#241E2C]">
         <div className="absolute h-[0.2em] w-[70%] self-center bg-[#1E1E28]"></div>
-        <div className="flex h-full w-full flex-col justify-end bg-[url('./images/bg-stars.svg')] bg-[0%_1.5%] ">
+        <div className="flex h-full w-full flex-col items-center justify-between bg-[url('./images/bg-stars.svg')] bg-[0%_1.5%] ">
+          <div className="z-10 flex flex-col items-center">
+            <span className="mt-[6em] text-[1.4rem] tracking-[0.4em] text-white">WE&prime;RE LAUNCHING SOON</span>
+          </div>
           <div className="h-[14.2em] w-full bg-[#241E2C]">
             <div className="flex h-full w-full flex-col justify-center bg-[url('./images/pattern-hills.svg')] bg-bottom bg-no-repeat">
               <div className="mt-[3.8em] flex h-full w-full justify-center gap-[2em]">
