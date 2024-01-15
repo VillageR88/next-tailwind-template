@@ -71,21 +71,23 @@ export default function Home() {
     },
   };
 
-  const preferredTheme = useRef<Theme>(null);
   const [theme, setTheme] = useState<Theme | null>(null);
+  console.log(theme);
 
   useEffect(() => {
-    if (typeof window !== 'undefined' && !localStorage.getItem('preferredTheme'))
-      if (window.matchMedia('(prefers-color-scheme: dark)').matches) setTheme(Theme.theme1);
-      else setTheme(Theme.theme2);
-  }, [Theme.theme1, Theme.theme2, preferredTheme]);
-
-  useEffect(() => {
-    if (!theme) {
+    {
       const savedTheme = localStorage.getItem('preferredTheme');
-      savedTheme && setTheme(savedTheme as unknown as Theme);
+      if (savedTheme && (savedTheme === '1' || savedTheme === '2' || savedTheme === '3'))
+        setTheme(savedTheme as unknown as Theme);
+      else {
+        if (typeof window !== 'undefined') {
+          localStorage.removeItem('preferredTheme');
+          if (window.matchMedia('(prefers-color-scheme: dark)').matches) setTheme(Theme.theme1);
+          else setTheme(Theme.theme2);
+        }
+      }
     }
-  }, [theme]);
+  }, [Theme.theme1, Theme.theme2]);
   const [switchHover, setSwitchHover] = useState<number | null>(null);
   const [calc, setCalc] = useState<string>('0');
   const [storedNumber, setStoredNumber] = useState<string | null>(null);
@@ -93,7 +95,86 @@ export default function Home() {
   const [lastInputNumber, setLastInputNumber] = useState<string | null>(null);
   const [lastOperation, setLastOperation] = useState<string | null>(null);
   const value = Number(calc).toLocaleString('en-US', { maximumFractionDigits: 7 });
-  console.log(theme);
+  useEffect(() => {
+    const handleKeyDown = (e: { key: string }) => {
+      if (e.key === '1') {
+        const element = document.getElementById('1');
+        element && element.click();
+      }
+      if (e.key === '2') {
+        const element = document.getElementById('2');
+        element && element.click();
+      }
+      if (e.key === '3') {
+        const element = document.getElementById('3');
+        element && element.click();
+      }
+      if (e.key === '4') {
+        const element = document.getElementById('4');
+        element && element.click();
+      }
+      if (e.key === '5') {
+        const element = document.getElementById('5');
+        element && element.click();
+      }
+      if (e.key === '6') {
+        const element = document.getElementById('6');
+        element && element.click();
+      }
+      if (e.key === '7') {
+        const element = document.getElementById('7');
+        element && element.click();
+      }
+      if (e.key === '8') {
+        const element = document.getElementById('8');
+        element && element.click();
+      }
+      if (e.key === '9') {
+        const element = document.getElementById('9');
+        element && element.click();
+      }
+      if (e.key === '0') {
+        const element = document.getElementById('0');
+        element && element.click();
+      }
+      if (e.key === '.') {
+        const element = document.getElementById('.');
+        element && element.click();
+      }
+      if (e.key === '+') {
+        const element = document.getElementById('+');
+        element && element.click();
+      }
+      if (e.key === '-') {
+        const element = document.getElementById('-');
+        element && element.click();
+      }
+      if (e.key === '/') {
+        const element = document.getElementById('/');
+        element && element.click();
+      }
+      if (e.key === '*') {
+        const element = document.getElementById('x');
+        element && element.click();
+      }
+      if (e.key === 'Enter') {
+        const element = document.getElementById('=');
+        element && element.click();
+      }
+      if (e.key === 'Backspace') {
+        const element = document.getElementById('DEL');
+        element && element.click();
+      }
+      if (e.key === 'Escape' || e.key === 'Delete' || e.key === 'c' || e.key === 'C') {
+        const element = document.getElementById('RESET');
+        element && element.click();
+      }
+    };
+    document.addEventListener('keydown', handleKeyDown);
+    return () => {
+      document.removeEventListener('keydown', handleKeyDown);
+    };
+  }, []);
 
   return (
     theme !== null && (
@@ -166,10 +247,14 @@ export default function Home() {
             >
               <span
                 className={`${composition[theme].textLabel} ${
-                  value.length > 14 ? 'text-[2rem] sm:text-[3rem]' : 'text-[2.5rem] sm:text-[3.4rem]'
+                  value.length <= 14
+                    ? 'text-[2.5rem] sm:text-[3.4rem]'
+                    : value.length > 14 && value.length <= 20
+                      ? 'text-[2rem] sm:text-[2.8rem]'
+                      : 'text-[1.7rem] sm:text-[2.4rem]'
                 } transition `}
               >
-                {value.length > 20 ? Number(calc).toExponential(2) : value}
+                {value.length > 24 ? Number(calc).toExponential(2) : value}
               </span>
             </div>
             <div
@@ -178,6 +263,7 @@ export default function Home() {
               {['7', '8', '9', 'DEL', '4', '5', '6', '+', '1', '2', '3', '-', '.', '0', '/', 'x', 'RESET', '='].map(
                 (x, i) => (
                   <button
+                    id={x}
                     onClick={() => {
                       if (x === 'DEL') {
                         setCalc((prev) => Math.floor(parseFloat(prev) / 10).toString());
