@@ -14,10 +14,11 @@ const config: Config = {
         leagueSpartan: 'League Spartan',
       },
       colors: {
-        // Slate
-        // 'accent-brand-800': '#1e293b',
-        // 'accent-brand-700': '#334155',
-        // 'accent-brand-600': '#475569',
+        grayishBlue: 'hsl(237, 18%, 59%)',
+        softRed: 'hsl(345, 95%, 68%)',
+        darkDesaturatedBlue: 'hsl(236, 21%, 26%)',
+        veryDarkBlue: 'hsl(235, 16%, 14%)',
+        veryDarkMostlyBlue: 'hsl(234, 17%, 12%)',
       },
     },
   },
