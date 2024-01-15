@@ -70,36 +70,30 @@ export default function Home() {
       buttonSpecial2Background2: 'bg-[#6DF7EF]',
     },
   };
+
   const preferredTheme = useRef<Theme>(null);
+  const [theme, setTheme] = useState<Theme | null>(null);
+
   useEffect(() => {
-    if (typeof window !== 'undefined')
+    if (typeof window !== 'undefined' && !localStorage.getItem('preferredTheme'))
       if (window.matchMedia('(prefers-color-scheme: dark)').matches) setTheme(Theme.theme1);
       else setTheme(Theme.theme2);
   }, [Theme.theme1, Theme.theme2, preferredTheme]);
 
-  const [isMobile, setIsMobile] = useState<boolean>(window.innerWidth >= 768 ? false : true);
+  useEffect(() => {
+    if (!theme) {
+      const savedTheme = localStorage.getItem('preferredTheme');
+      savedTheme && setTheme(savedTheme as unknown as Theme);
+    }
+  }, [theme]);
   const [switchHover, setSwitchHover] = useState<number | null>(null);
-  const [theme, setTheme] = useState<Theme | null>(preferredTheme.current);
   const [calc, setCalc] = useState<string>('0');
   const [storedNumber, setStoredNumber] = useState<string | null>(null);
   const [storedOperation, setStoredOperation] = useState<string | null>(null);
   const [lastInputNumber, setLastInputNumber] = useState<string | null>(null);
   const [lastOperation, setLastOperation] = useState<string | null>(null);
   const value = Number(calc).toLocaleString('en-US', { maximumFractionDigits: 7 });
-
-  useEffect(() => {
-    const handleResize = () => {
-      if (window.innerWidth >= 768) setIsMobile(false);
-      else {
-        setIsMobile(true);
-      }
-    };
-    window.addEventListener('resize', handleResize);
-
-    return () => {
-      window.removeEventListener('resize', handleResize);
-    };
-  }, []);
+  console.log(theme);
 
   return (
     theme !== null && (
@@ -136,13 +130,8 @@ export default function Home() {
                     className={`${composition[theme].backgroundThemeSelector} flex h-[1.6em] w-[4.4em] justify-between rounded-full`}
                   >
                     <div
-                      className={`${
-                        theme === Theme.theme1
-                          ? '-translate-x-[1.3em]'
-                          : theme === Theme.theme2
-                            ? 'translate-x-0'
-                            : 'translate-x-[1.5em]'
-                      } absolute ml-0.5 mt-0.5 flex h-[1.4em] w-[4em] items-center justify-center bg-transparent transition duration-300`}
+                      style={{ transform: `translateX(${{ 1: -1.3, 2: 0, 3: 1.5 }[theme]}em)` }}
+                      className={`absolute ml-0.5 mt-0.5 flex h-[1.4em] w-[4em] items-center justify-center bg-transparent transition duration-300`}
                     >
                       <div
                         className={`${
@@ -160,8 +149,10 @@ export default function Home() {
                           setSwitchHover(null);
                         }}
                         onClick={() => {
-                          if (x !== (theme as number)) setTheme(x);
-                          else setTheme(x + 1 > 3 ? 1 : x + 1);
+                          if (x !== (theme as number)) {
+                            setTheme(x);
+                            localStorage.setItem('preferredTheme', x.toString());
+                          } else setTheme(x + 1 > 3 ? 1 : x + 1);
                         }}
                         className="z-10 h-full w-full rounded-full bg-transparent"
                       ></button>
