@@ -1,5 +1,5 @@
 'use client';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 export default function Home() {
   enum Theme {
@@ -72,7 +72,6 @@ export default function Home() {
   };
 
   const [theme, setTheme] = useState<Theme | null>(null);
-  console.log(theme);
 
   useEffect(() => {
     {
