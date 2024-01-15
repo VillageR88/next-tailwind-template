@@ -2,10 +2,14 @@
 import { useState } from 'react';
 
 export default function Home() {
+  const [switchHover, setSwitchHover] = useState<number | null>(null);
   const [theme, setTheme] = useState<number>(1);
   const [calc, setCalc] = useState<string>('0');
   const [storedNumber, setStoredNumber] = useState<string | null>(null);
   const [storedOperation, setStoredOperation] = useState<string | null>(null);
+  const [lastInputNumber, setLastInputNumber] = useState<string | null>(null);
+  const [lastOperation, setLastOperation] = useState<string | null>(null);
+
   return (
     <main className="flex min-h-screen w-full flex-col items-center justify-center font-leagueSpartan">
       <div className="flex h-[56.25em] w-full flex-col items-center bg-[#3B4664]">
@@ -28,13 +32,24 @@ export default function Home() {
                       theme === 1 ? '-translate-x-[1.3em]' : theme === 2 ? 'translate-x-0' : 'translate-x-[1.5em]'
                     } absolute ml-0.5 mt-0.5 flex h-[1.4em] w-[4em] items-center justify-center bg-transparent transition duration-300`}
                   >
-                    <div className="h-[1em] w-[1em] rounded-full bg-[#D43D31]"></div>
+                    <div
+                      className={`${
+                        switchHover === theme ? 'bg-[#FA6A5F]' : 'bg-[#D43D31]'
+                      } h-[1em] w-[1em] rounded-full transition-colors duration-300`}
+                    ></div>
                   </div>
                   {[1, 2, 3].map((x) => (
                     <button
                       key={x}
+                      onMouseEnter={() => {
+                        setSwitchHover(x);
+                      }}
+                      onMouseLeave={() => {
+                        setSwitchHover(null);
+                      }}
                       onClick={() => {
-                        setTheme(x);
+                        if (x !== theme) setTheme(x);
+                        else setTheme(x + 1 > 3 ? 1 : x + 1);
                       }}
                       className="z-10 h-full w-full rounded-full bg-transparent"
                     ></button>
@@ -57,6 +72,8 @@ export default function Home() {
                       setCalc('0');
                       setStoredNumber(null);
                       setStoredOperation(null);
+                      setLastInputNumber(null);
+                      setLastOperation(null);
                     } else if (x === '=') {
                       if (storedOperation && storedNumber !== null) {
                         const calcFloat = parseFloat(calc);
@@ -77,13 +94,61 @@ export default function Home() {
                           default:
                             break;
                         }
-                        setStoredNumber(null);
+                        setLastInputNumber(calc);
+                        setLastOperation(storedOperation);
+                        setStoredNumber(calc);
                         setStoredOperation(null);
+                      } else if (lastOperation && lastInputNumber !== null) {
+                        const calcFloat = parseFloat(calc);
+                        const lastInputNumberFloat = parseFloat(lastInputNumber);
+                        switch (lastOperation) {
+                          case '+':
+                            setCalc((calcFloat + lastInputNumberFloat).toString());
+                            break;
+                          case '-':
+                            setCalc((calcFloat - lastInputNumberFloat).toString());
+                            break;
+                          case '/':
+                            setCalc((calcFloat / lastInputNumberFloat).toString());
+                            break;
+                          case 'x':
+                            setCalc((calcFloat * lastInputNumberFloat).toString());
+                            break;
+                          default:
+                            break;
+                        }
                       }
                     } else if (x === '+' || x === '-' || x === '/' || x === 'x') {
-                      setStoredNumber(calc);
-                      setStoredOperation(x);
-                      setCalc('0');
+                      if (storedNumber !== null && storedOperation !== null) {
+                        setLastInputNumber(calc);
+                        setLastOperation(x);
+                        const calcFloat = parseFloat(calc);
+                        const storedNumberFloat = parseFloat(storedNumber);
+                        switch (storedOperation) {
+                          case '+':
+                            setStoredNumber((storedNumberFloat + calcFloat).toString());
+                            break;
+                          case '-':
+                            setStoredNumber((storedNumberFloat - calcFloat).toString());
+                            break;
+                          case '/':
+                            setStoredNumber((storedNumberFloat / calcFloat).toString());
+                            break;
+                          case 'x':
+                            setStoredNumber((storedNumberFloat * calcFloat).toString());
+                            break;
+                          default:
+                            break;
+                        }
+                        setCalc('0');
+                        setStoredOperation(x);
+                      } else {
+                        setStoredNumber(calc);
+                        setLastInputNumber(calc);
+                        setStoredOperation(x);
+                        setLastOperation(x);
+                        setCalc('0');
+                      }
                     } else if (x === '.') {
                       if (!calc.includes('.')) {
                         setCalc((prev) => prev + '.');
@@ -99,7 +164,11 @@ export default function Home() {
                 >
                   <div
                     className={`${
-                      i === 3 || i === 16 ? 'bg-[#647299]' : i === 17 ? 'bg-[#D13F30]' : 'bg-[#EAE3DB]'
+                      i === 3 || i === 16
+                        ? 'bg-[#647299] hover:bg-[#A2B2E2]'
+                        : i === 17
+                          ? 'bg-[#D13F30] hover:bg-[#F96C5B]'
+                          : 'bg-[#EAE3DB] hover:bg-[#FFFFFF]'
                     } flex h-[94%] w-full flex-col items-center justify-center rounded-[0.6em] `}
                   >
                     <span
