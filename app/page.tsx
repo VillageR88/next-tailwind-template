@@ -65,32 +65,49 @@ const IconInstagram = () => {
 };
 
 export default function Home() {
-  const [value1, setValue1] = useState(100);
-  const [value2, setValue2] = useState(0);
-  const [value3, setValue3] = useState(0);
-  const [value4, setValue4] = useState(-2.2);
-  const [time, setTime] = useState(41);
+  const [value1, setValue1] = useState<number>(100);
+  const [value2, setValue2] = useState<number>(0);
+  const [value3, setValue3] = useState<number>(0);
+  const [value4, setValue4] = useState<number>(-2.2);
+  const [time, setTime] = useState<number>(58);
   useEffect(() => {
-    // do something every second for 3 seconds and then end effect (unmount) forever
-    const interval = setInterval(
-      () => {
-        if (value1 > 0) {
-          setValue1((prev) => prev - 1);
-          setValue2((prev) => prev + 0.022);
-        }
-        if (value1 == 0 && value3 < 100) {
-          setValue3((prev) => prev + 1);
-          setValue4((prev) => prev + 0.021);
-        }
-        // ...
-      },
-      value1 ? 1 : 1,
-    );
+    const interval = setInterval(() => {
+      if (value1 > 0) {
+        setValue1((prev) => prev - 1);
+        setValue2((prev) => prev + 0.022);
+      }
+      if (value1 == 0 && value3 < 100) {
+        setValue3((prev) => prev + 1);
+        setValue4((prev) => prev + 0.022);
+      }
+      // ...
+    }, 1);
     return () => {
-      clearInterval(interval); // clean up after yourself
+      clearInterval(interval);
     };
   }, [value1, value3]);
 
+  useEffect(() => {
+    const interval = setInterval(() => {
+      if (time < 59) setTime((prev) => prev + 1);
+      else setTime(0);
+      setValue1(100);
+      setValue2(0);
+      setValue3(0);
+      setValue4(-2.2);
+    }, 1000);
+    return () => {
+      clearInterval(interval);
+    };
+  }, [time]);
+
+  const formattedTimer = (n?: boolean) => {
+    if (!n) return time.toString().length == 1 ? '0' + time : time;
+    else {
+      if (time == 59) return '00';
+      else return (time + 1).toString().length == 1 ? '0' + (time + 1) : time + 1;
+    }
+  };
   return (
     <main className="flex min-h-screen flex-col items-center justify-center font-leagueSpartan">
       <div className="flex h-[50em] w-full flex-col bg-gradient-to-b from-[#1e1e28] via-[hsl(272,21%,14%)] via-70% to-[#241E2C]">
@@ -107,7 +124,7 @@ export default function Home() {
                   className="z-20 flex h-[50%] w-full items-center justify-center overflow-clip rounded-[5%] bg-[#2C2C44]  "
                 >
                   <span className="z-20 mt-[1.05em] scale-x-[120%] scale-y-[95%] pb-[0.1em] pl-[0.02em] text-[5.55rem] font-[600] tracking-tighter text-[#D45070]">
-                    {time}
+                    {formattedTimer()}
                   </span>
                 </div>
                 <div className="absolute z-30 flex h-[1px] w-[9.15em] justify-between bg-[#1A1A24]  bg-opacity-20">
@@ -116,7 +133,7 @@ export default function Home() {
                 </div>
                 <div className="flex h-[50%] w-full items-center justify-center overflow-clip rounded-[5%] bg-[#34364F] ">
                   <span className="mb-[0.53em]  flex scale-x-[120%] scale-y-[95%] pb-[0.1em] pl-[0.02em] text-[5.55rem] font-[600] tracking-tighter text-[#F95F83]">
-                    {time}
+                    {formattedTimer()}
                   </span>
                 </div>
               </div>
@@ -125,7 +142,7 @@ export default function Home() {
               <div className="flex h-[93%] w-full flex-col justify-center rounded-[5%]">
                 <div className=" flex h-[50%] w-full items-center justify-center overflow-clip rounded-[5%] bg-[#2C2C44]  ">
                   <span className="z-0 mt-[1.05em] scale-x-[120%] scale-y-[95%] pb-[0.1em] pl-[0.02em] text-[5.55rem] font-[600] tracking-tighter text-[#D45070]">
-                    {time + 1}
+                    {formattedTimer(true)}
                   </span>
                 </div>
                 <div className="absolute flex h-[1px] w-[9.15em] justify-between bg-[#1A1A24]  bg-opacity-20">
@@ -137,7 +154,7 @@ export default function Home() {
                   className="z-20 flex h-[50%] w-full items-center justify-center overflow-clip rounded-[5%] bg-[#34364F] "
                 >
                   <span className="mb-[0.53em]  flex scale-x-[120%] scale-y-[95%] pb-[0.1em] pl-[0.02em] text-[5.55rem] font-[600] tracking-tighter text-[#F95F83]">
-                    {time + 1}
+                    {formattedTimer(true)}
                   </span>
                 </div>
               </div>
