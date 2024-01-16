@@ -1,5 +1,5 @@
 'use client';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 const IconFacebook = () => {
   const [isHovered, setIsHovered] = useState(false);
@@ -65,17 +65,87 @@ const IconInstagram = () => {
 };
 
 export default function Home() {
+  const [value1, setValue1] = useState(100);
+  const [value2, setValue2] = useState(0);
+  const [value3, setValue3] = useState(0);
+  const [value4, setValue4] = useState(-2.2);
+  const [time, setTime] = useState(41);
+  useEffect(() => {
+    // do something every second for 3 seconds and then end effect (unmount) forever
+    const interval = setInterval(
+      () => {
+        if (value1 > 0) {
+          setValue1((prev) => prev - 1);
+          setValue2((prev) => prev + 0.022);
+        }
+        if (value1 == 0 && value3 < 100) {
+          setValue3((prev) => prev + 1);
+          setValue4((prev) => prev + 0.021);
+        }
+        // ...
+      },
+      value1 ? 1 : 1,
+    );
+    return () => {
+      clearInterval(interval); // clean up after yourself
+    };
+  }, [value1, value3]);
+
   return (
-    <main className="font-leagueSpartan flex min-h-screen flex-col items-center justify-center">
+    <main className="flex min-h-screen flex-col items-center justify-center font-leagueSpartan">
       <div className="flex h-[50em] w-full flex-col bg-gradient-to-b from-[#1e1e28] via-[hsl(272,21%,14%)] via-70% to-[#241E2C]">
         <div className="absolute h-[0.2em] w-[70%] self-center bg-[#1E1E28]"></div>
         <div className="flex h-full w-full flex-col items-center justify-between bg-[url('./images/bg-stars.svg')] bg-[0%_1.5%] ">
-          <div className="z-10 flex flex-col items-center">
-            <span className="mt-[6em] text-[1.4rem] tracking-[0.4em] text-white">WE&prime;RE LAUNCHING SOON</span>
+          <div className="flex flex-col items-center">
+            <span className="mt-[6em] text-[1.4rem] font-[700] tracking-[0.4em] text-white">
+              WE&prime;RE LAUNCHING SOON
+            </span>
+            <div className="] mr-[-33.7em] mt-[6.3em] h-[9.4em] w-[9.15em] overflow-hidden rounded-[5%] bg-[#1A1A24]">
+              <div className="flex h-[93%] w-full flex-col justify-center rounded-[5%]">
+                <div
+                  style={{ scale: `100% ${value1}%`, translate: `0 ${value2}em` }}
+                  className="z-20 flex h-[50%] w-full items-center justify-center overflow-clip rounded-[5%] bg-[#2C2C44]  "
+                >
+                  <span className="z-20 mt-[1.05em] scale-x-[120%] scale-y-[95%] pb-[0.1em] pl-[0.02em] text-[5.55rem] font-[600] tracking-tighter text-[#D45070]">
+                    {time}
+                  </span>
+                </div>
+                <div className="absolute z-30 flex h-[1px] w-[9.15em] justify-between bg-[#1A1A24]  bg-opacity-20">
+                  <div className="ml-[-0.85em] mt-[-0.4em] h-[0.8em] w-[1.2em] rounded-full bg-gradient-to-r from-transparent from-50% via-[#1A1A24] to-[#1A1A24] to-100%"></div>
+                  <div className="mr-[-0.85em] mt-[-0.4em] h-[0.8em] w-[1.2em] rounded-full bg-gradient-to-l from-transparent from-50% via-[#1A1A24] to-[#1A1A24] to-100%"></div>
+                </div>
+                <div className="flex h-[50%] w-full items-center justify-center overflow-clip rounded-[5%] bg-[#34364F] ">
+                  <span className="mb-[0.53em]  flex scale-x-[120%] scale-y-[95%] pb-[0.1em] pl-[0.02em] text-[5.55rem] font-[600] tracking-tighter text-[#F95F83]">
+                    {time}
+                  </span>
+                </div>
+              </div>
+            </div>
+            <div className="mr-[-33.7em] mt-[-9.4em] h-[9.4em] w-[9.15em] overflow-hidden rounded-[5%] bg-transparent">
+              <div className="flex h-[93%] w-full flex-col justify-center rounded-[5%]">
+                <div className=" flex h-[50%] w-full items-center justify-center overflow-clip rounded-[5%] bg-[#2C2C44]  ">
+                  <span className="z-0 mt-[1.05em] scale-x-[120%] scale-y-[95%] pb-[0.1em] pl-[0.02em] text-[5.55rem] font-[600] tracking-tighter text-[#D45070]">
+                    {time + 1}
+                  </span>
+                </div>
+                <div className="absolute flex h-[1px] w-[9.15em] justify-between bg-[#1A1A24]  bg-opacity-20">
+                  <div className="ml-[-0.85em] mt-[-0.4em] h-[0.8em] w-[1.2em] rounded-full bg-gradient-to-r from-transparent from-50% via-[#1A1A24] to-[#1A1A24] to-100%"></div>
+                  <div className="mr-[-0.85em] mt-[-0.4em] h-[0.8em] w-[1.2em] rounded-full bg-gradient-to-l from-transparent from-50% via-[#1A1A24] to-[#1A1A24] to-100%"></div>
+                </div>
+                <div
+                  style={{ scale: `100% ${value3}%`, translate: `0 ${value4}em` }}
+                  className="z-20 flex h-[50%] w-full items-center justify-center overflow-clip rounded-[5%] bg-[#34364F] "
+                >
+                  <span className="mb-[0.53em]  flex scale-x-[120%] scale-y-[95%] pb-[0.1em] pl-[0.02em] text-[5.55rem] font-[600] tracking-tighter text-[#F95F83]">
+                    {time + 1}
+                  </span>
+                </div>
+              </div>
+            </div>
           </div>
           <div className="h-[14.2em] w-full bg-[#241E2C]">
             <div className="flex h-full w-full flex-col justify-center bg-[url('./images/pattern-hills.svg')] bg-bottom bg-no-repeat">
-              <div className="mt-[3.8em] flex h-full w-full justify-center gap-[2em]">
+              <div className="mt-[3.8em] flex h-fit w-full justify-center gap-[2em]">
                 <IconFacebook />
                 <IconPinterest />
                 <IconInstagram />

@@ -31,7 +31,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="use-credentials" />
         {/*eslint-disable-next-line @next/next/no-page-custom-font*/}
-        <link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@700&display=swap" rel="stylesheet" />
+        <link
+          href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@100..900&display=swap"
+          rel="stylesheet"
+        />
       </head>
       <body
         className={[fontSans, fontMono]
