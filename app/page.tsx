@@ -69,7 +69,7 @@ export default function Home() {
   const [value2, setValue2] = useState<number>(0);
   const [value3, setValue3] = useState<number>(0);
   const [value4, setValue4] = useState<number>(-2.2);
-  const [time, setTime] = useState<number>(58);
+  const [time, setTime] = useState<number>(3);
   useEffect(() => {
     const interval = setInterval(() => {
       if (value1 > 0) {
@@ -89,8 +89,8 @@ export default function Home() {
 
   useEffect(() => {
     const interval = setInterval(() => {
-      if (time < 59) setTime((prev) => prev + 1);
-      else setTime(0);
+      if (time >= 1) setTime((prev) => prev - 1);
+      else setTime(59);
       setValue1(100);
       setValue2(0);
       setValue3(0);
@@ -104,8 +104,8 @@ export default function Home() {
   const formattedTimer = (n?: boolean) => {
     if (!n) return time.toString().length == 1 ? '0' + time : time;
     else {
-      if (time == 59) return '00';
-      else return (time + 1).toString().length == 1 ? '0' + (time + 1) : time + 1;
+      if (time == 0) return '59';
+      else return (time - 1).toString().length == 1 ? '0' + (time - 1) : time - 1;
     }
   };
   return (
