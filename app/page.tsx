@@ -66,6 +66,7 @@ const IconInstagram = () => {
 
 export default function Home() {
   enum TimerType {
+    hours,
     minutes,
     seconds,
   }
@@ -78,8 +79,9 @@ export default function Home() {
   const [value2, setValue2] = useState<number>(initialValue2);
   const [value3, setValue3] = useState<number>(initialValue3);
   const [value4, setValue4] = useState<number>(initialValue4);
-  const [seconds, setSeconds] = useState<number>(2);
-  const [minutes, setMinutes] = useState<number>(55);
+  const [hours, setHours] = useState<number>(0);
+  const [minutes, setMinutes] = useState<number>(0);
+  const [seconds, setSeconds] = useState<number>(5);
   const [isMobile, setIsMobile] = useState(window.innerWidth >= 768 ? false : true);
   useEffect(() => {
     const handleResize = () => {
@@ -122,6 +124,11 @@ export default function Home() {
         else {
           setMinutes(59);
         }
+        if (minutes === 0)
+          if (hours >= 1) setHours((prev) => prev - 1);
+          else {
+            setHours(23);
+          }
       }
       if (seconds >= 1) setSeconds((prev) => prev - 1);
       else {
@@ -135,12 +142,14 @@ export default function Home() {
     return () => {
       clearInterval(interval);
     };
-  }, [minutes, seconds]);
+  }, [hours, minutes, seconds]);
 
-  const formattedTime = ({ next, value }: { next?: boolean; value: number }) => {
+  const formattedTime = ({ next, value, timerType }: { next?: boolean; value: number; timerType: TimerType }) => {
     if (!next) return value.toString().length == 1 ? '0' + value : value;
     else {
-      if (value == 0) return '59';
+      if (value == 0)
+        if (timerType === TimerType.hours) return '23';
+        else return '59';
       else return (value - 1).toString().length == 1 ? '0' + (value - 1) : value - 1;
     }
   };
@@ -150,13 +159,17 @@ export default function Home() {
     let newValue3 = value3;
     let newValue4 = value4;
 
-    if (timerType == TimerType.minutes) {
-      if (seconds !== 0) {
-        newValue1 = initialValue1;
-        newValue2 = initialValue2;
-        newValue3 = initialValue3;
-        newValue4 = initialValue4;
-      }
+    if (timerType == TimerType.minutes && seconds !== 0) {
+      newValue1 = initialValue1;
+      newValue2 = initialValue2;
+      newValue3 = initialValue3;
+      newValue4 = initialValue4;
+    }
+    if (timerType == TimerType.hours && (minutes !== 0 || seconds !== 0)) {
+      newValue1 = initialValue1;
+      newValue2 = initialValue2;
+      newValue3 = initialValue3;
+      newValue4 = initialValue4;
     }
     return (
       <div className="flex w-full flex-col">
@@ -167,7 +180,7 @@ export default function Home() {
               className="z-20 flex h-[50%] w-[100%] items-center justify-center overflow-clip rounded-[5%] bg-[#2C2C44]  "
             >
               <span className="z-10 mt-[1.05em] scale-x-[120%] scale-y-[95%] cursor-default pb-[0.1em] pl-[0.02em] text-[5.55rem] font-[600] tracking-tighter text-[#D45070]">
-                {formattedTime({ value: value })}
+                {formattedTime({ value: value, timerType: timerType })}
               </span>
             </div>
             <div style={{ scale: `100% ${newValue1 - newValue3}%` }} className="z-30 flex h-0 w-full">
@@ -177,7 +190,7 @@ export default function Home() {
             </div>
             <div className="flex h-[50%] w-full items-center justify-center overflow-clip rounded-[0.5em] bg-[#34364F] ">
               <span className="mb-[0.53em] flex  scale-x-[120%] scale-y-[95%] cursor-default pb-[0.1em] pl-[0.02em] text-[5.55rem] font-[600] tracking-tighter text-[#F95F83]">
-                {formattedTime({ value: value })}
+                {formattedTime({ value: value, timerType: timerType })}
               </span>
             </div>
           </div>
@@ -186,7 +199,7 @@ export default function Home() {
           <div className="flex h-[93%] w-full flex-col justify-center rounded-[5%]">
             <div className=" flex h-[50%] w-full items-center justify-center overflow-clip rounded-[5%] bg-[#2C2C44]  ">
               <span className="z-0 mt-[1.05em] scale-x-[120%] scale-y-[95%] cursor-default pb-[0.1em] pl-[0.02em] text-[5.55rem] font-[600] tracking-tighter text-[#D45070]">
-                {formattedTime({ value: value, next: true })}
+                {formattedTime({ value: value, next: true, timerType: timerType })}
               </span>
             </div>
             <div className="z-10 flex h-0 w-full">
@@ -199,7 +212,7 @@ export default function Home() {
               className="z-10 flex h-[50%] w-[100%] items-center justify-center overflow-clip rounded-[0.5em] bg-[#34364F] "
             >
               <span className="mb-[0.53em] flex scale-x-[120%] scale-y-[95%] cursor-default pb-[0.1em] pl-[0.02em] text-[5.55rem] font-[600] tracking-tighter text-[#F95F83]">
-                {formattedTime({ value: value, next: true })}
+                {formattedTime({ value: value, next: true, timerType: timerType })}
               </span>
             </div>
           </div>
@@ -218,6 +231,7 @@ export default function Home() {
               WE&prime;RE LAUNCHING SOON
             </span>
             <div className="flex gap-[1em]">
+              <TimeComponent value={hours} timerType={TimerType.hours} />
               <TimeComponent value={minutes} timerType={TimerType.minutes} />
               <TimeComponent value={seconds} timerType={TimerType.seconds} />
             </div>
