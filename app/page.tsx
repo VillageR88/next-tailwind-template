@@ -65,33 +65,68 @@ const IconInstagram = () => {
 };
 
 export default function Home() {
-  const [value1, setValue1] = useState<number>(100);
-  const [value2, setValue2] = useState<number>(0);
-  const [value3, setValue3] = useState<number>(0);
-  const [value4, setValue4] = useState<number>(-2.2);
-  const [seconds, setSeconds] = useState<number>(10);
+  enum TimerType {
+    minutes,
+    seconds,
+  }
+
+  const initialValue1 = 100;
+  const initialValue2 = 0;
+  const initialValue3 = 0;
+  const initialValue4 = -2.2;
+  const [value1, setValue1] = useState<number>(initialValue1);
+  const [value2, setValue2] = useState<number>(initialValue2);
+  const [value3, setValue3] = useState<number>(initialValue3);
+  const [value4, setValue4] = useState<number>(initialValue4);
+  const [seconds, setSeconds] = useState<number>(2);
   const [minutes, setMinutes] = useState<number>(55);
+  const [isMobile, setIsMobile] = useState(window.innerWidth >= 768 ? false : true);
   useEffect(() => {
-    const interval = setInterval(() => {
-      if (value1 > 0) {
-        setValue1((prev) => prev - 1);
-        setValue2((prev) => prev + 0.022);
+    const handleResize = () => {
+      if (window.innerWidth >= 768) setIsMobile(false);
+      else {
+        setIsMobile(true);
       }
-      if (value1 == 0 && value3 < 100) {
-        setValue3((prev) => prev + 1);
-        setValue4((prev) => prev + 0.022);
-      }
-      // ...
-    }, 1);
+    };
+    window.addEventListener('resize', handleResize);
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
+
+  const multiplier = isMobile ? 20 : 10;
+  useEffect(() => {
+    const interval = setInterval(
+      () => {
+        if (value1 > 0) {
+          setValue1((prev) => prev - 1 * multiplier);
+          setValue2((prev) => prev + 0.022 * multiplier);
+        }
+        if (value1 == 0 && value3 < 100) {
+          setValue3((prev) => prev + 1 * multiplier);
+          setValue4((prev) => prev + 0.022 * multiplier);
+        }
+      },
+      isMobile ? 16 : 18,
+    );
     return () => {
       clearInterval(interval);
     };
-  }, [value1, value3]);
+  }, [isMobile, multiplier, value1, value3]);
 
   useEffect(() => {
     const interval = setInterval(() => {
+      if (seconds === 0) {
+        if (minutes >= 1) setMinutes((prev) => prev - 1);
+        else {
+          setMinutes(59);
+        }
+      }
       if (seconds >= 1) setSeconds((prev) => prev - 1);
-      else setSeconds(59);
+      else {
+        setSeconds(59);
+      }
       setValue1(100);
       setValue2(0);
       setValue3(0);
@@ -100,7 +135,7 @@ export default function Home() {
     return () => {
       clearInterval(interval);
     };
-  }, [seconds]);
+  }, [minutes, seconds]);
 
   const formattedTime = ({ next, value }: { next?: boolean; value: number }) => {
     if (!next) return value.toString().length == 1 ? '0' + value : value;
@@ -109,20 +144,33 @@ export default function Home() {
       else return (value - 1).toString().length == 1 ? '0' + (value - 1) : value - 1;
     }
   };
-  const TimeComponent = ({ value }: { value: number }) => {
+  const TimeComponent = ({ value, timerType }: { value: number; timerType: TimerType }) => {
+    let newValue1 = value1;
+    let newValue2 = value2;
+    let newValue3 = value3;
+    let newValue4 = value4;
+
+    if (timerType == TimerType.minutes) {
+      if (seconds !== 0) {
+        newValue1 = initialValue1;
+        newValue2 = initialValue2;
+        newValue3 = initialValue3;
+        newValue4 = initialValue4;
+      }
+    }
     return (
       <div className="flex w-full flex-col">
         <div className="]  mt-[6.3em] h-[9.4em] w-[9.16em] overflow-hidden rounded-[5%] bg-[#1A1A24]">
           <div className="flex h-[93%] w-full flex-col justify-center overflow-hidden bg-inherit">
             <div
-              style={{ scale: `100% ${value1}%`, translate: `0 ${value2}em` }}
+              style={{ scale: `100% ${newValue1}%`, translate: `0 ${newValue2}em` }}
               className="z-20 flex h-[50%] w-[100%] items-center justify-center overflow-clip rounded-[5%] bg-[#2C2C44]  "
             >
               <span className="z-10 mt-[1.05em] scale-x-[120%] scale-y-[95%] cursor-default pb-[0.1em] pl-[0.02em] text-[5.55rem] font-[600] tracking-tighter text-[#D45070]">
                 {formattedTime({ value: value })}
               </span>
             </div>
-            <div style={{ scale: `100% ${value1 - value3}%` }} className="z-30 flex h-0 w-full">
+            <div style={{ scale: `100% ${newValue1 - newValue3}%` }} className="z-30 flex h-0 w-full">
               <div className="ml-[-0.85em] mt-[-0.4em] h-[0.8em] w-[1.2em] rounded-full bg-[#1A1A24]"></div>
               <div className="h-[1px] w-full bg-[#222435] bg-opacity-10"></div>
               <div className="mr-[-0.85em] mt-[-0.4em] h-[0.8em] w-[1.2em] rounded-full bg-[#1A1A24]"></div>
@@ -147,7 +195,7 @@ export default function Home() {
               <div className="mr-[-0.85em] mt-[-0.4em] h-[0.8em] w-[1.2em] rounded-full bg-[#1A1A24]"></div>
             </div>
             <div
-              style={{ scale: `100% ${value3}%`, translate: `0 ${value4}em` }}
+              style={{ scale: `100% ${newValue3}%`, translate: `0 ${newValue4}em` }}
               className="z-10 flex h-[50%] w-[100%] items-center justify-center overflow-clip rounded-[0.5em] bg-[#34364F] "
             >
               <span className="mb-[0.53em] flex scale-x-[120%] scale-y-[95%] cursor-default pb-[0.1em] pl-[0.02em] text-[5.55rem] font-[600] tracking-tighter text-[#F95F83]">
@@ -169,7 +217,10 @@ export default function Home() {
             <span className="mt-[6em] text-[1.4rem] font-[700] tracking-[0.4em] text-white">
               WE&prime;RE LAUNCHING SOON
             </span>
-            <TimeComponent value={seconds} />
+            <div className="flex gap-[1em]">
+              <TimeComponent value={minutes} timerType={TimerType.minutes} />
+              <TimeComponent value={seconds} timerType={TimerType.seconds} />
+            </div>
           </div>
           <div className="h-[14.2em] w-full bg-[#241E2C]">
             <div className="flex h-full w-full flex-col justify-center bg-[url('./images/pattern-hills.svg')] bg-bottom bg-no-repeat">
