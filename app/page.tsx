@@ -69,7 +69,8 @@ export default function Home() {
   const [value2, setValue2] = useState<number>(0);
   const [value3, setValue3] = useState<number>(0);
   const [value4, setValue4] = useState<number>(-2.2);
-  const [time, setTime] = useState<number>(10);
+  const [seconds, setSeconds] = useState<number>(10);
+  const [minutes, setMinutes] = useState<number>(55);
   useEffect(() => {
     const interval = setInterval(() => {
       if (value1 > 0) {
@@ -89,8 +90,8 @@ export default function Home() {
 
   useEffect(() => {
     const interval = setInterval(() => {
-      if (time >= 1) setTime((prev) => prev - 1);
-      else setTime(59);
+      if (seconds >= 1) setSeconds((prev) => prev - 1);
+      else setSeconds(59);
       setValue1(100);
       setValue2(0);
       setValue3(0);
@@ -99,15 +100,66 @@ export default function Home() {
     return () => {
       clearInterval(interval);
     };
-  }, [time]);
+  }, [seconds]);
 
-  const formattedTimer = (n?: boolean) => {
-    if (!n) return time.toString().length == 1 ? '0' + time : time;
+  const formattedTime = ({ next, value }: { next?: boolean; value: number }) => {
+    if (!next) return value.toString().length == 1 ? '0' + value : value;
     else {
-      if (time == 0) return '59';
-      else return (time - 1).toString().length == 1 ? '0' + (time - 1) : time - 1;
+      if (value == 0) return '59';
+      else return (value - 1).toString().length == 1 ? '0' + (value - 1) : value - 1;
     }
   };
+  const TimeComponent = ({ value }: { value: number }) => {
+    return (
+      <div className="flex w-full flex-col">
+        <div className="]  mt-[6.3em] h-[9.4em] w-[9.16em] overflow-hidden rounded-[5%] bg-[#1A1A24]">
+          <div className="flex h-[93%] w-full flex-col justify-center overflow-hidden bg-inherit">
+            <div
+              style={{ scale: `100% ${value1}%`, translate: `0 ${value2}em` }}
+              className="z-20 flex h-[50%] w-[100%] items-center justify-center overflow-clip rounded-[5%] bg-[#2C2C44]  "
+            >
+              <span className="z-10 mt-[1.05em] scale-x-[120%] scale-y-[95%] cursor-default pb-[0.1em] pl-[0.02em] text-[5.55rem] font-[600] tracking-tighter text-[#D45070]">
+                {formattedTime({ value: value })}
+              </span>
+            </div>
+            <div style={{ scale: `100% ${value1 - value3}%` }} className="z-30 flex h-0 w-full">
+              <div className="ml-[-0.85em] mt-[-0.4em] h-[0.8em] w-[1.2em] rounded-full bg-[#1A1A24]"></div>
+              <div className="h-[1px] w-full bg-[#222435] bg-opacity-10"></div>
+              <div className="mr-[-0.85em] mt-[-0.4em] h-[0.8em] w-[1.2em] rounded-full bg-[#1A1A24]"></div>
+            </div>
+            <div className="flex h-[50%] w-full items-center justify-center overflow-clip rounded-[0.5em] bg-[#34364F] ">
+              <span className="mb-[0.53em] flex  scale-x-[120%] scale-y-[95%] cursor-default pb-[0.1em] pl-[0.02em] text-[5.55rem] font-[600] tracking-tighter text-[#F95F83]">
+                {formattedTime({ value: value })}
+              </span>
+            </div>
+          </div>
+        </div>
+        <div className="mt-[-9.4em] h-[9.4em] w-[9.15em] overflow-hidden rounded-[5%] bg-transparent">
+          <div className="flex h-[93%] w-full flex-col justify-center rounded-[5%]">
+            <div className=" flex h-[50%] w-full items-center justify-center overflow-clip rounded-[5%] bg-[#2C2C44]  ">
+              <span className="z-0 mt-[1.05em] scale-x-[120%] scale-y-[95%] cursor-default pb-[0.1em] pl-[0.02em] text-[5.55rem] font-[600] tracking-tighter text-[#D45070]">
+                {formattedTime({ value: value, next: true })}
+              </span>
+            </div>
+            <div className="z-10 flex h-0 w-full">
+              <div className="ml-[-0.85em] mt-[-0.4em] h-[0.8em] w-[1.2em] rounded-full bg-[#1A1A24]"></div>
+              <div className="h-[1px] w-full bg-[#2A2D43] bg-opacity-25"></div>
+              <div className="mr-[-0.85em] mt-[-0.4em] h-[0.8em] w-[1.2em] rounded-full bg-[#1A1A24]"></div>
+            </div>
+            <div
+              style={{ scale: `100% ${value3}%`, translate: `0 ${value4}em` }}
+              className="z-10 flex h-[50%] w-[100%] items-center justify-center overflow-clip rounded-[0.5em] bg-[#34364F] "
+            >
+              <span className="mb-[0.53em] flex scale-x-[120%] scale-y-[95%] cursor-default pb-[0.1em] pl-[0.02em] text-[5.55rem] font-[600] tracking-tighter text-[#F95F83]">
+                {formattedTime({ value: value, next: true })}
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  };
+
   return (
     <main className="flex min-h-screen flex-col items-center justify-center font-leagueSpartan">
       <div className="flex h-[50em] w-full flex-col bg-gradient-to-b from-[#1e1e28] via-[hsl(272,21%,14%)] via-70% to-[#241E2C]">
@@ -117,50 +169,7 @@ export default function Home() {
             <span className="mt-[6em] text-[1.4rem] font-[700] tracking-[0.4em] text-white">
               WE&prime;RE LAUNCHING SOON
             </span>
-            <div className="] mr-[-33.7em] mt-[6.3em] h-[9.4em] w-[9.16em] overflow-hidden rounded-[5%] bg-[#1A1A24]">
-              <div className="flex h-[93%] w-full flex-col justify-center overflow-hidden bg-inherit">
-                <div
-                  style={{ scale: `100% ${value1}%`, translate: `0 ${value2}em` }}
-                  className="z-20 flex h-[50%] w-[100.1%] items-center justify-center overflow-clip rounded-[5%] bg-[#2C2C44]  "
-                >
-                  <span className="z-10 mt-[1.05em] scale-x-[120%] scale-y-[95%] cursor-default pb-[0.1em] pl-[0.02em] text-[5.55rem] font-[600] tracking-tighter text-[#D45070]">
-                    {formattedTimer()}
-                  </span>
-                </div>
-                <div style={{ scale: `100% ${value1 - value3}%` }} className="z-30 flex h-0 w-full">
-                  <div className="ml-[-0.85em] mt-[-0.4em] h-[0.8em] w-[1.2em] rounded-full bg-[#1A1A24]"></div>
-                  <div className="h-[1px] w-full bg-[#222435] bg-opacity-10"></div>
-                  <div className="mr-[-0.85em] mt-[-0.4em] h-[0.8em] w-[1.2em] rounded-full bg-[#1A1A24]"></div>
-                </div>
-                <div className="flex h-[50%] w-full items-center justify-center overflow-clip rounded-[0.5em] bg-[#34364F] ">
-                  <span className="mb-[0.53em] flex  scale-x-[120%] scale-y-[95%] cursor-default pb-[0.1em] pl-[0.02em] text-[5.55rem] font-[600] tracking-tighter text-[#F95F83]">
-                    {formattedTimer()}
-                  </span>
-                </div>
-              </div>
-            </div>
-            <div className="mr-[-33.7em] mt-[-9.4em] h-[9.4em] w-[9.15em] overflow-hidden rounded-[5%] bg-transparent">
-              <div className="flex h-[93%] w-full flex-col justify-center rounded-[5%]">
-                <div className=" flex h-[50%] w-full items-center justify-center overflow-clip rounded-[5%] bg-[#2C2C44]  ">
-                  <span className="z-0 mt-[1.05em] scale-x-[120%] scale-y-[95%] cursor-default pb-[0.1em] pl-[0.02em] text-[5.55rem] font-[600] tracking-tighter text-[#D45070]">
-                    {formattedTimer(true)}
-                  </span>
-                </div>
-                <div className="z-10 flex h-0 w-full">
-                  <div className="ml-[-0.85em] mt-[-0.4em] h-[0.8em] w-[1.2em] rounded-full bg-[#1A1A24]"></div>
-                  <div className="h-[1px] w-full bg-[#2A2D43] bg-opacity-25"></div>
-                  <div className="mr-[-0.85em] mt-[-0.4em] h-[0.8em] w-[1.2em] rounded-full bg-[#1A1A24]"></div>
-                </div>
-                <div
-                  style={{ scale: `100% ${value3}%`, translate: `0 ${value4}em` }}
-                  className="z-10 flex h-[50%] w-[100.1%] items-center justify-center overflow-clip rounded-[0.5em] bg-[#34364F] "
-                >
-                  <span className="mb-[0.53em] flex scale-x-[120%] scale-y-[95%] cursor-default pb-[0.1em] pl-[0.02em] text-[5.55rem] font-[600] tracking-tighter text-[#F95F83]">
-                    {formattedTimer(true)}
-                  </span>
-                </div>
-              </div>
-            </div>
+            <TimeComponent value={seconds} />
           </div>
           <div className="h-[14.2em] w-full bg-[#241E2C]">
             <div className="flex h-full w-full flex-col justify-center bg-[url('./images/pattern-hills.svg')] bg-bottom bg-no-repeat">
