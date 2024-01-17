@@ -66,10 +66,10 @@ const IconInstagram = () => {
 
 export default function Home() {
   enum TimerType {
-    days,
-    hours,
-    minutes,
-    seconds,
+    days = 'DAYS',
+    hours = 'HOURS',
+    minutes = 'MINUTES',
+    seconds = 'SECONDS',
   }
 
   const initialValue1 = 100;
@@ -80,10 +80,10 @@ export default function Home() {
   const [value2, setValue2] = useState<number>(initialValue2);
   const [value3, setValue3] = useState<number>(initialValue3);
   const [value4, setValue4] = useState<number>(initialValue4);
-  const [days, setDays] = useState<number>(0);
-  const [hours, setHours] = useState<number>(0);
-  const [minutes, setMinutes] = useState<number>(0);
-  const [seconds, setSeconds] = useState<number>(5);
+  const [days, setDays] = useState<number>(8);
+  const [hours, setHours] = useState<number>(23);
+  const [minutes, setMinutes] = useState<number>(55);
+  const [seconds, setSeconds] = useState<number>(41);
   const [stopCountdown, setStopCountdown] = useState<boolean>(false);
   const [isMobile, setIsMobile] = useState(window.innerWidth >= 768 ? false : true);
   useEffect(() => {
@@ -194,8 +194,8 @@ export default function Home() {
       newValue4 = initialValue4;
     }
     return (
-      <div className="flex w-full flex-col">
-        <div className="]  mt-[6.3em] h-[9.4em] w-[9.16em] overflow-hidden rounded-[5%] bg-[#1A1A24]">
+      <div className="mb-[4em] flex w-full flex-col md:mb-0">
+        <div className="h-[9.4em] w-[9.16em] overflow-hidden rounded-[5%] bg-[#1A1A24] md:mt-[6.3em]">
           <div className="flex h-[93%] w-full flex-col justify-center overflow-hidden bg-inherit">
             <div
               style={{ scale: `100% ${newValue1}%`, translate: `0 ${newValue2}em` }}
@@ -239,6 +239,9 @@ export default function Home() {
             </div>
           </div>
         </div>
+        <div className="flex justify-center">
+          <span className="mt-[0.98em] text-[0.92rem] font-[700] tracking-[0.5em] text-[#8481A0]">{timerType}</span>
+        </div>
       </div>
     );
   };
@@ -249,10 +252,10 @@ export default function Home() {
         <div className="absolute h-[0.2em] w-[70%] self-center bg-[#1E1E28]"></div>
         <div className="flex h-full w-full flex-col items-center justify-between bg-[url('./images/bg-stars.svg')] bg-[0%_1.5%] ">
           <div className="flex flex-col items-center">
-            <span className="mt-[6em] text-[1.4rem] font-[700] tracking-[0.4em] text-white">
-              WE&prime;RE LAUNCHING SOON
+            <span className="mt-[6em] whitespace-pre-line text-center text-[1.2rem] font-[700] tracking-[0.4em] text-white sm:text-[1.4rem] md:whitespace-normal">
+              {`WE′RE LAUNCHING\nSOON`}
             </span>
-            <div className="flex gap-[2.05em]">
+            <div className="flex scale-[45%] gap-[2.05em] sm:scale-75 md:scale-90 lg:scale-100 ">
               <TimeComponent value={days} timerType={TimerType.days} />
               <TimeComponent value={hours} timerType={TimerType.hours} />
               <TimeComponent value={minutes} timerType={TimerType.minutes} />
@@ -260,8 +263,8 @@ export default function Home() {
             </div>
           </div>
           <div className="h-[14.2em] w-full bg-[#241E2C]">
-            <div className="flex h-full w-full flex-col justify-center bg-[url('./images/pattern-hills.svg')] bg-bottom bg-no-repeat">
-              <div className="mt-[3.8em] flex h-fit w-full justify-center gap-[2em]">
+            <div className="flex h-full w-full flex-col justify-center bg-[url('./images/pattern-hills.svg')] bg-[80%_100%] bg-no-repeat md:bg-auto md:bg-bottom">
+              <div className="mt-[6em] flex h-fit w-full justify-center gap-[2em] md:mt-[3.8em]">
                 <IconFacebook />
                 <IconPinterest />
                 <IconInstagram />
