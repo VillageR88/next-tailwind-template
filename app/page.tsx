@@ -66,6 +66,7 @@ const IconInstagram = () => {
 
 export default function Home() {
   enum TimerType {
+    days,
     hours,
     minutes,
     seconds,
@@ -79,10 +80,15 @@ export default function Home() {
   const [value2, setValue2] = useState<number>(initialValue2);
   const [value3, setValue3] = useState<number>(initialValue3);
   const [value4, setValue4] = useState<number>(initialValue4);
+  const [days, setDays] = useState<number>(0);
   const [hours, setHours] = useState<number>(0);
   const [minutes, setMinutes] = useState<number>(0);
   const [seconds, setSeconds] = useState<number>(5);
+  const [stopCountdown, setStopCountdown] = useState<boolean>(false);
   const [isMobile, setIsMobile] = useState(window.innerWidth >= 768 ? false : true);
+  useEffect(() => {
+    if (days === 0 && hours === 0 && minutes === 0 && seconds === 1) setStopCountdown(true);
+  }, [days, hours, minutes, seconds]);
   useEffect(() => {
     const handleResize = () => {
       if (window.innerWidth >= 768) setIsMobile(false);
@@ -118,17 +124,25 @@ export default function Home() {
   }, [isMobile, multiplier, value1, value3]);
 
   useEffect(() => {
+    if (stopCountdown) return;
     const interval = setInterval(() => {
       if (seconds === 0) {
         if (minutes >= 1) setMinutes((prev) => prev - 1);
         else {
           setMinutes(59);
         }
-        if (minutes === 0)
+        if (minutes === 0) {
           if (hours >= 1) setHours((prev) => prev - 1);
           else {
             setHours(23);
           }
+          if (hours === 0) {
+            if (days >= 1) setDays((prev) => prev - 1);
+            else {
+              setDays(0);
+            }
+          }
+        }
       }
       if (seconds >= 1) setSeconds((prev) => prev - 1);
       else {
@@ -142,14 +156,16 @@ export default function Home() {
     return () => {
       clearInterval(interval);
     };
-  }, [hours, minutes, seconds]);
+  }, [days, hours, minutes, seconds, stopCountdown]);
 
   const formattedTime = ({ next, value, timerType }: { next?: boolean; value: number; timerType: TimerType }) => {
     if (!next) return value.toString().length == 1 ? '0' + value : value;
     else {
       if (value == 0)
         if (timerType === TimerType.hours) return '23';
-        else return '59';
+        else if (timerType === TimerType.days) {
+          return '00';
+        } else return '59';
       else return (value - 1).toString().length == 1 ? '0' + (value - 1) : value - 1;
     }
   };
@@ -171,6 +187,12 @@ export default function Home() {
       newValue3 = initialValue3;
       newValue4 = initialValue4;
     }
+    if (timerType == TimerType.days && (hours !== 0 || minutes !== 0 || seconds !== 0)) {
+      newValue1 = initialValue1;
+      newValue2 = initialValue2;
+      newValue3 = initialValue3;
+      newValue4 = initialValue4;
+    }
     return (
       <div className="flex w-full flex-col">
         <div className="]  mt-[6.3em] h-[9.4em] w-[9.16em] overflow-hidden rounded-[5%] bg-[#1A1A24]">
@@ -179,7 +201,7 @@ export default function Home() {
               style={{ scale: `100% ${newValue1}%`, translate: `0 ${newValue2}em` }}
               className="z-20 flex h-[50%] w-[100%] items-center justify-center overflow-clip rounded-[5%] bg-[#2C2C44]  "
             >
-              <span className="z-10 mt-[1.05em] scale-x-[120%] scale-y-[95%] cursor-default pb-[0.1em] pl-[0.02em] text-[5.55rem] font-[600] tracking-tighter text-[#D45070]">
+              <span className="z-10 mt-[1.05em] scale-x-[105%] scale-y-[95%] cursor-default pb-[0.1em] pl-[0.02em] text-[5.55rem] font-[600] tracking-tight text-[#D45070]">
                 {formattedTime({ value: value, timerType: timerType })}
               </span>
             </div>
@@ -189,7 +211,7 @@ export default function Home() {
               <div className="mr-[-0.85em] mt-[-0.4em] h-[0.8em] w-[1.2em] rounded-full bg-[#1A1A24]"></div>
             </div>
             <div className="flex h-[50%] w-full items-center justify-center overflow-clip rounded-[0.5em] bg-[#34364F] ">
-              <span className="mb-[0.53em] flex  scale-x-[120%] scale-y-[95%] cursor-default pb-[0.1em] pl-[0.02em] text-[5.55rem] font-[600] tracking-tighter text-[#F95F83]">
+              <span className="mb-[0.53em] flex  scale-x-[105%] scale-y-[95%] cursor-default pb-[0.1em] pl-[0.02em] text-[5.55rem] font-[600] tracking-tight text-[#F95F83]">
                 {formattedTime({ value: value, timerType: timerType })}
               </span>
             </div>
@@ -198,7 +220,7 @@ export default function Home() {
         <div className="mt-[-9.4em] h-[9.4em] w-[9.15em] overflow-hidden rounded-[5%] bg-transparent">
           <div className="flex h-[93%] w-full flex-col justify-center rounded-[5%]">
             <div className=" flex h-[50%] w-full items-center justify-center overflow-clip rounded-[5%] bg-[#2C2C44]  ">
-              <span className="z-0 mt-[1.05em] scale-x-[120%] scale-y-[95%] cursor-default pb-[0.1em] pl-[0.02em] text-[5.55rem] font-[600] tracking-tighter text-[#D45070]">
+              <span className="z-0 mt-[1.05em] scale-x-[105%] scale-y-[95%] cursor-default pb-[0.1em] pl-[0.02em] text-[5.55rem] font-[600] tracking-tight text-[#D45070]">
                 {formattedTime({ value: value, next: true, timerType: timerType })}
               </span>
             </div>
@@ -211,7 +233,7 @@ export default function Home() {
               style={{ scale: `100% ${newValue3}%`, translate: `0 ${newValue4}em` }}
               className="z-10 flex h-[50%] w-[100%] items-center justify-center overflow-clip rounded-[0.5em] bg-[#34364F] "
             >
-              <span className="mb-[0.53em] flex scale-x-[120%] scale-y-[95%] cursor-default pb-[0.1em] pl-[0.02em] text-[5.55rem] font-[600] tracking-tighter text-[#F95F83]">
+              <span className="mb-[0.53em] flex scale-x-[105%] scale-y-[95%] cursor-default pb-[0.1em] pl-[0.02em] text-[5.55rem] font-[600] tracking-tight text-[#F95F83]">
                 {formattedTime({ value: value, next: true, timerType: timerType })}
               </span>
             </div>
@@ -230,7 +252,8 @@ export default function Home() {
             <span className="mt-[6em] text-[1.4rem] font-[700] tracking-[0.4em] text-white">
               WE&prime;RE LAUNCHING SOON
             </span>
-            <div className="flex gap-[1em]">
+            <div className="flex gap-[2.05em]">
+              <TimeComponent value={days} timerType={TimerType.days} />
               <TimeComponent value={hours} timerType={TimerType.hours} />
               <TimeComponent value={minutes} timerType={TimerType.minutes} />
               <TimeComponent value={seconds} timerType={TimerType.seconds} />
