@@ -3,7 +3,7 @@ import Image from 'next/image';
 import iconCheck from './images/icon-check.svg';
 import iconCross from './images/icon-cross.svg';
 import iconSun from './images/icon-sun.svg';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 interface TodoJSON {
   completed: boolean;
@@ -12,8 +12,73 @@ interface TodoJSON {
 
 export default function Home() {
   const [dataJSON, setDataJSON] = useState<TodoJSON[]>([]);
+  const dataJSONRefIndex = useRef<number | null>(null);
+  console.log(dataJSONRefIndex.current);
+  const [mouseHoverReference, setMouseHoverReference] = useState<number | null>(null);
   const [firstLoad, setFirstLoad] = useState<boolean>(false);
   const [inputText, setInputText] = useState<string>('');
+  const mouseYRef = useRef<number>(0);
+  const dragImageRef2 = useRef<HTMLDivElement | null>(null);
+  const [dragging, setDragging] = useState<boolean>(false);
+  const [hold, setHold] = useState<boolean>(false);
+  useEffect(() => {
+    if (dataJSONRefIndex.current === mouseHoverReference) setHold(true);
+    else setHold(false);
+  }, [mouseHoverReference]);
+
+  useEffect(() => {
+    if (dataJSONRefIndex.current !== null && mouseHoverReference !== null) {
+      if (mouseHoverReference !== dataJSONRefIndex.current && !hold) {
+        if (mouseHoverReference < dataJSONRefIndex.current) {
+          setDataJSON([
+            ...dataJSON.slice(0, mouseHoverReference),
+            dataJSON[dataJSONRefIndex.current],
+            ...dataJSON.slice(mouseHoverReference, dataJSONRefIndex.current),
+            ...dataJSON.slice(dataJSONRefIndex.current + 1),
+          ]);
+        } else {
+          setDataJSON([
+            ...dataJSON.slice(0, dataJSONRefIndex.current),
+            ...dataJSON.slice(dataJSONRefIndex.current + 1, mouseHoverReference + 1),
+            dataJSON[dataJSONRefIndex.current],
+            ...dataJSON.slice(mouseHoverReference + 1),
+          ]);
+        }
+      }
+      dataJSONRefIndex.current = mouseHoverReference;
+    }
+  }, [dataJSON, hold, mouseHoverReference]);
+
+  useEffect(() => {
+    window.addEventListener('mouseup', () => {
+      setDragging(false);
+    });
+    return () => {
+      window.removeEventListener('mouseup', () => {
+        setDragging(false);
+      });
+    };
+  }, [dragging]);
+
+  useEffect(() => {
+    if (dragging) {
+      const handleMouseMove = (e: MouseEvent) => {
+        if (dragImageRef2.current) {
+          dragImageRef2.current.style.top = `${e.clientY}px`;
+          dragImageRef2.current.style.left = `${e.clientX}px`;
+        }
+      };
+
+      window.addEventListener('mousemove', handleMouseMove);
+
+      return () => {
+        window.removeEventListener('mousemove', handleMouseMove);
+        if (dragImageRef2.current) document.body.removeChild(dragImageRef2.current);
+        dataJSONRefIndex.current = null;
+      };
+    }
+  }, [dragging]);
+
   useEffect(() => {
     fetch('./data.json')
       .then((response) => response.json())
@@ -27,38 +92,72 @@ export default function Home() {
   useEffect(() => {
     if (dataJSON.length > 0 && !firstLoad) setFirstLoad(true);
   }, [dataJSON.length, firstLoad]);
-  const [active, setActive] = useState<number>(0);
+  enum Mode {
+    All = 'All',
+    Active = 'Active',
+    Completed = 'Completed',
+  }
+  const [mode, setMode] = useState<Mode>(Mode.All);
 
   const TodoBlock = ({
     completed,
     task,
     buttonCheckClick,
     buttonCrossCLick,
+    classExtension,
+    index,
   }: {
     completed: boolean;
     task: string;
     buttonCheckClick(): void;
     buttonCrossCLick(): void;
+    classExtension: string;
+    index: number;
   }) => {
     const [xIsVisible, setXIsVisible] = useState<boolean>(false);
+    const dragImageRef = useRef<HTMLDivElement | null>(null);
+
     return (
       <div
+        style={{ visibility: dragging && dataJSONRefIndex.current === index ? 'hidden' : 'visible' }}
+        ref={dragImageRef}
+        draggable
+        onDragStart={(e) => {
+          dataJSONRefIndex.current = index;
+
+          mouseYRef.current = e.clientY;
+          if (dragImageRef.current) {
+            dragImageRef2.current = dragImageRef.current.cloneNode(true) as HTMLDivElement;
+            dragImageRef2.current.style.position = 'fixed';
+            dragImageRef2.current.style.width = '30.8em';
+            dragImageRef2.current.style.height = 'full';
+            dragImageRef2.current.style.boxShadow = '0 0 0.5em 0.1em #000000';
+            dragImageRef2.current.style.color = '#CACCE3';
+            dragImageRef2.current.style.fontFamily = 'Josefin Sans';
+            dragImageRef2.current.style.fontSize = '1.1rem';
+            dragImageRef2.current.style.fontWeight = 'normal';
+            document.body.appendChild(dragImageRef2.current);
+            setDragging(true);
+            e.preventDefault();
+          }
+        }}
         onMouseEnter={() => {
+          setMouseHoverReference(index);
           setXIsVisible(true);
         }}
         onMouseLeave={() => {
           setXIsVisible(false);
         }}
-        className=" flex h-[4em] w-full items-center gap-[1em] bg-[#25273C] px-[1.5em]"
+        className={`${classExtension} h-[4em] w-full items-center gap-[1em] bg-[#25273C] px-[1.5em]`}
       >
-        <button onClick={buttonCheckClick}>
+        <button className=" select-none" onClick={buttonCheckClick}>
           <div
             className={`${
               completed && 'bg-gradient-to-br hover:outline-offset-2 hover:outline-[#CACCE3]'
-            } flex h-[1.45em] w-[1.45em] items-center justify-center rounded-full from-[#6ABFFB] to-[#A373E8] outline outline-1 outline-[#37394E] hover:bg-gradient-to-br`}
+            } flex h-[1.45em]  w-[1.45em] items-center justify-center rounded-full from-[#6ABFFB] to-[#A373E8] outline outline-1 outline-[#37394E] hover:bg-gradient-to-br`}
           >
             {completed ? (
-              <Image src={iconCheck as string} alt="check" />
+              <Image src={iconCheck as string} alt="check" priority />
             ) : (
               <div className="h-[1.29em] w-[1.29em] rounded-full bg-[#25273C]"></div>
             )}
@@ -67,12 +166,12 @@ export default function Home() {
         <span
           className={`${
             !completed ? 'text-[#CACCE3]' : 'text-[#4E5065] line-through'
-          } w-[25em] bg-transparent px-2 text-[1.1rem]  placeholder-[#73758A]`}
+          } w-[25em] select-none bg-transparent px-2 text-[1.1rem] placeholder-[#73758A]`}
         >
           {task}
         </span>
         {xIsVisible && (
-          <button onClick={buttonCrossCLick}>
+          <button className="select-none" onClick={buttonCrossCLick}>
             <Image src={iconCross as string} alt="delete Task" />
           </button>
         )}
@@ -115,9 +214,21 @@ export default function Home() {
             </div>
             <div></div>
             <div className="mt-[1.5em] flex w-full flex-col">
-              {dataJSON.map((x, i) => (
+              {dataJSON.map((x: TodoJSON, i: number) => (
                 <div key={i} className="flex flex-col">
                   <TodoBlock
+                    index={i}
+                    classExtension={
+                      mode === Mode.All
+                        ? 'flex'
+                        : mode === Mode.Active
+                          ? dataJSON[i].completed
+                            ? 'hidden'
+                            : 'flex'
+                          : dataJSON[i].completed
+                            ? 'flex'
+                            : 'hidden'
+                    }
                     buttonCheckClick={() => {
                       setDataJSON((value) => {
                         const newValue = [...value];
@@ -142,14 +253,14 @@ export default function Home() {
                 <span className="text-[0.9rem]">{dataJSON.filter((x) => !x.completed).length} items left</span>
                 <div className="flex gap-[3.3em]">
                   <div className="flex gap-[1em]">
-                    {['All', 'Active', 'Completed'].map((x, i) => (
+                    {[Mode.All, Mode.Active, Mode.Completed].map((x) => (
                       <button
                         onClick={() => {
-                          setActive(i);
+                          setMode(x);
                         }}
-                        key={i}
+                        key={x}
                         className={`${
-                          i === active ? 'text-[#5480D8]' : 'hover:text-[#CACCE3]'
+                          x === mode ? 'text-[#5480D8]' : 'hover:text-[#CACCE3]'
                         } text-[0.9rem] font-[600] `}
                       >
                         {x}
