@@ -60,12 +60,17 @@ export default function Home() {
     if (dragging) {
       const handleMouseMove = (e: MouseEvent) => {
         if (dragImageRef2.current) {
-          const offsetY = e.clientY;
-          if (dataJSONDivRef.current && dataJSONDivRef.current.getBoundingClientRect().top + 20 < offsetY)
-            dragImageRef2.current.style.top = `${offsetY - 30}px`;
-          else dragImageRef2.current.style.top = `${dataJSONDivRef.current?.getBoundingClientRect()?.top}px`;
+          dragImageRef2.current.style.top = `${e.clientY - 30}px`;
+
+          if (dataJSONDivRef.current && dataJSONDivRef.current.getBoundingClientRect().top + 20 > e.clientY)
+            dragImageRef2.current.style.top = `${dataJSONDivRef.current.getBoundingClientRect().top}px`;
+
+          if (dataJSONDivRef.current && dataJSONDivRef.current.getBoundingClientRect().bottom + 10 < e.clientY + 100)
+            dragImageRef2.current.style.top = `${dataJSONDivRef.current.getBoundingClientRect().bottom - 120}px`;
           //q: help me with dataJSONDivRef.current?.getBoundingClientRect()?.bottom
         }
+        console.log(e.clientY + 100);
+        console.log(dataJSONDivRef.current?.getBoundingClientRect()?.bottom);
       };
       window.addEventListener('mousemove', handleMouseMove);
       return () => {
