@@ -19,6 +19,20 @@ export default function Home() {
   const [inputText, setInputText] = useState<string>('');
   const dragImageRef2 = useRef<HTMLDivElement | null>(null);
   const [dragging, setDragging] = useState<boolean>(false);
+  const [isMobile, setIsMobile] = useState<boolean>(false);
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth >= 768 || /Mobi|Android/i.test(navigator.userAgent)) setIsMobile(false);
+      else {
+        setIsMobile(true);
+      }
+    };
+    window.addEventListener('resize', handleResize);
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
 
   useEffect(() => {
     if (dataJSONRefIndex.current !== null && mouseHoverReference !== null) {
@@ -44,6 +58,7 @@ export default function Home() {
   }, [dataJSON, mouseHoverReference]);
 
   useEffect(() => {
+    if (isMobile) return;
     window.addEventListener('mouseup', () => {
       setDragging(false);
       document.body.style.cursor = 'default';
@@ -54,7 +69,7 @@ export default function Home() {
         document.body.style.cursor = 'default';
       });
     };
-  }, [dragging]);
+  }, [dragging, isMobile]);
 
   useEffect(() => {
     if (dragging) {
@@ -129,6 +144,7 @@ export default function Home() {
           }}
           onDragStart={(e) => {
             e.preventDefault();
+            if (isMobile) return;
             dataJSONRefIndex.current = index;
             if (dragImageRef.current) {
               dragImageRef2.current = dragImageRef.current.cloneNode(true) as HTMLDivElement;
@@ -166,7 +182,7 @@ export default function Home() {
           <span
             className={`${
               !completed ? 'text-[#CACCE3]' : 'text-[#4E5065] line-through'
-            } w-[25em] select-none bg-transparent px-2 text-[1.1rem] placeholder-[#73758A]`}
+            } w-full select-none bg-transparent px-2 text-[1.1rem] placeholder-[#73758A] md:w-[25em]`}
           >
             {task}
           </span>
@@ -190,7 +206,7 @@ export default function Home() {
       <main className="flex min-h-screen flex-col items-center justify-center font-josefinSans">
         <div className="h-[18.8em] w-full items-center bg-[url('./images/bg-desktop-dark.jpg')] bg-top bg-no-repeat"></div>
         <div className="flex min-h-[31.2em] w-full flex-col items-center bg-[#181824] text-[#FEFFFE]">
-          <div className="mt-[-14.4em] w-[33.8em] flex-col justify-center">
+          <div className="mt-[-14.4em] w-full flex-col justify-center md:w-[33.8em]">
             <div className="flex items-center justify-between">
               <span className="text-[2.45rem] font-[700] tracking-[0.4em]">TODO</span>
               <button className={`${dragging && 'pointer-events-none'}`}>
