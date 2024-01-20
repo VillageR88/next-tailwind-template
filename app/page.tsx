@@ -52,7 +52,29 @@ const composition = {
 };
 
 export default function Home() {
-  const [theme, setTheme] = useState<Theme>(Theme.Dark);
+  const [theme, setTheme] = useState<Theme | null>(null);
+
+  useEffect(() => {
+    {
+      const savedTheme = localStorage.getItem('preferredTheme');
+      console.log(savedTheme);
+
+      if (savedTheme && (savedTheme === 'Light' || savedTheme === 'Dark')) setTheme(savedTheme as unknown as Theme);
+      else {
+        if (typeof window !== 'undefined') {
+          localStorage.removeItem('preferredTheme');
+          if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+            setTheme(Theme.Dark);
+            localStorage.setItem('preferredTheme', Theme.Dark);
+          } else {
+            setTheme(Theme.Light);
+            localStorage.setItem('preferredTheme', Theme.Light);
+          }
+        }
+      }
+    }
+  }, []);
+
   const inputRef = useRef<HTMLDivElement | null>(null);
   const [dataJSON, setDataJSON] = useState<TodoJSON[]>([]);
   const dataJSONDivRef = useRef<HTMLDivElement | null>(null);
@@ -122,7 +144,6 @@ export default function Home() {
 
           if (dataJSONDivRef.current && dataJSONDivRef.current.getBoundingClientRect().bottom + 10 < e.clientY + 100)
             dragImageRef2.current.style.top = `${dataJSONDivRef.current.getBoundingClientRect().bottom - 120}px`;
-          //q: help me with dataJSONDivRef.current?.getBoundingClientRect()?.bottom
         }
         console.log(e.clientY + 100);
         console.log(dataJSONDivRef.current?.getBoundingClientRect()?.bottom);
@@ -174,91 +195,94 @@ export default function Home() {
     const dragImageRef = useRef<HTMLDivElement | null>(null);
 
     return (
-      <div>
-        <div
-          style={{
-            visibility: dragging && dataJSONRefIndex.current === index ? 'hidden' : 'visible',
-            transition: 'visibility 0.3s',
-          }}
-          ref={dragImageRef}
-          draggable
-          onMouseEnter={() => {
-            setMouseHoverReference(index);
-          }}
-          onDragStart={(e) => {
-            e.preventDefault();
-            dataJSONRefIndex.current = index;
-            if (dragImageRef.current) {
-              dragImageRef2.current = dragImageRef.current.cloneNode(true) as HTMLDivElement;
-              dragImageRef2.current.style.left = window.innerWidth > 768 ? 'calc(50% - 15.4em)' : '0';
-              dragImageRef2.current.style.height = 'full';
-              dragImageRef2.current.style.paddingInline = '1.5em';
-              dragImageRef2.current.style.boxShadow = '0 0 0.5em 0.1em #000000';
-              dragImageRef2.current.style.color = '#CACCE3';
-              dragImageRef2.current.style.fontFamily = 'Josefin Sans';
-              dragImageRef2.current.style.fontSize = '1.1rem';
-              dragImageRef2.current.style.fontWeight = 'normal';
-              dragImageRef2.current.style.userSelect = 'none';
-              dragImageRef2.current.style.pointerEvents = 'none';
-              dragImageRef2.current.classList.add('w-[calc(100%-1.98rem)]');
-              dragImageRef2.current.classList.add('md:w-[30.8em]');
-              dragImageRef2.current.classList.add('self-center');
-              dragImageRef2.current.classList.add('fixed');
-              dragImageRef2.current.classList.add('md:ml-0');
-              dragImageRef2.current.classList.add('ml-4');
-              document.body.appendChild(dragImageRef2.current);
-              document.body.style.cursor = 'grabbing';
-              setDragging(true);
-            }
-          }}
-          className={`${classExtension} h-[4em] w-full items-center gap-[1em] ${composition[theme].background2Color} px-[1.5em]`}
-        >
-          <button className=" select-none" onClick={buttonCheckClick}>
-            <div
-              className={`${
-                completed &&
-                'bg-gradient-to-br transition hover:outline-offset-2'
-                  .concat(' ')
-                  .concat(composition[theme].hoverOutlineColor)
-              } 
+      theme !== null && (
+        <div>
+          <div
+            style={{
+              visibility: dragging && dataJSONRefIndex.current === index ? 'hidden' : 'visible',
+              transition: 'visibility 0.3s',
+            }}
+            ref={dragImageRef}
+            draggable
+            onMouseEnter={() => {
+              setMouseHoverReference(index);
+            }}
+            onDragStart={(e) => {
+              e.preventDefault();
+              dataJSONRefIndex.current = index;
+              if (dragImageRef.current) {
+                dragImageRef2.current = dragImageRef.current.cloneNode(true) as HTMLDivElement;
+                dragImageRef2.current.style.left = window.innerWidth > 768 ? 'calc(50% - 15.4em)' : '0';
+                dragImageRef2.current.style.height = 'full';
+                dragImageRef2.current.style.paddingInline = '1.5em';
+                dragImageRef2.current.style.boxShadow = '0 0 0.5em 0.1em #000000';
+                dragImageRef2.current.style.color = '#CACCE3';
+                dragImageRef2.current.style.fontFamily = 'Josefin Sans';
+                dragImageRef2.current.style.fontSize = '1.1rem';
+                dragImageRef2.current.style.fontWeight = 'normal';
+                dragImageRef2.current.style.userSelect = 'none';
+                dragImageRef2.current.style.pointerEvents = 'none';
+                dragImageRef2.current.classList.add('w-[calc(100%-1.98rem)]');
+                dragImageRef2.current.classList.add('md:w-[30.8em]');
+                dragImageRef2.current.classList.add('self-center');
+                dragImageRef2.current.classList.add('fixed');
+                dragImageRef2.current.classList.add('md:ml-0');
+                dragImageRef2.current.classList.add('ml-4');
+                document.body.appendChild(dragImageRef2.current);
+                document.body.style.cursor = 'grabbing';
+                setDragging(true);
+              }
+            }}
+            className={`${classExtension} h-[4em] w-full items-center gap-[1em] ${composition[theme].background2Color} px-[1.5em]`}
+          >
+            <button className=" select-none" onClick={buttonCheckClick}>
+              <div
+                className={`${
+                  completed &&
+                  'bg-gradient-to-br transition hover:outline-offset-2'
+                    .concat(' ')
+                    .concat(composition[theme].hoverOutlineColor)
+                } 
             
               flex h-[1.45em] w-[1.45em] items-center justify-center rounded-full from-[#6ABFFB] to-[#A373E8] outline outline-1 ${
                 composition[theme].outlineColor
               } transition hover:bg-gradient-to-br`}
-            >
-              {completed ? (
-                <Image src={iconCheck as string} alt="check" priority unoptimized />
-              ) : (
-                <div
-                  className={`h-[1.29em] w-[1.29em] rounded-full ${composition[theme].background2Color} transition`}
-                ></div>
-              )}
-            </div>
-          </button>
-          <span
-            className={`${
-              !completed ? composition[theme].text1 : composition[theme].text2.concat(' ').concat('line-through')
-            } w-full select-none break-words bg-transparent px-2 text-[1.1rem] transition md:w-[25em]`}
-          >
-            {task}
-          </span>
-          {mouseHoverReference === index && (
-            <button className="select-none" onClick={buttonCrossCLick}>
-              <Image src={iconCross as string} alt="delete Task" />
+              >
+                {completed ? (
+                  <Image src={iconCheck as string} alt="check" priority unoptimized />
+                ) : (
+                  <div
+                    className={`h-[1.29em] w-[1.29em] rounded-full ${composition[theme].background2Color} transition`}
+                  ></div>
+                )}
+              </div>
             </button>
-          )}
+            <span
+              className={`${
+                !completed ? composition[theme].text1 : composition[theme].text2.concat(' ').concat('line-through')
+              } w-full select-none break-words bg-transparent px-2 text-[1.1rem] transition md:w-[25em]`}
+            >
+              {task}
+            </span>
+            {mouseHoverReference === index && (
+              <button className="select-none" onClick={buttonCrossCLick}>
+                <Image src={iconCross as string} alt="delete Task" />
+              </button>
+            )}
+          </div>
+          <div
+            onMouseEnter={() => {
+              setMouseHoverReference(index);
+            }}
+            className={`${!dragging && 'pointer-events-none'} absolute left-0 mt-[-4em] h-[4em] w-screen`}
+          ></div>
         </div>
-        <div
-          onMouseEnter={() => {
-            setMouseHoverReference(index);
-          }}
-          className={`${!dragging && 'pointer-events-none'} absolute left-0 mt-[-4em] h-[4em] w-screen`}
-        ></div>
-      </div>
+      )
     );
   };
   return (
-    firstLoad && (
+    firstLoad &&
+    theme !== null && (
       <main className="flex min-h-screen w-full flex-col items-center justify-center font-josefinSans">
         <div
           className={`h-[18.8em] w-full items-center ${composition[theme].backgroundImage} bg-top bg-no-repeat`}
@@ -273,6 +297,7 @@ export default function Home() {
               </span>
               <button
                 onClick={() => {
+                  localStorage.setItem('preferredTheme', theme === Theme.Dark ? Theme.Light : Theme.Dark);
                   setTheme(theme === Theme.Dark ? Theme.Light : Theme.Dark);
                 }}
                 className={`${dragging && 'pointer-events-none'}`}
