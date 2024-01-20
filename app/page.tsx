@@ -17,8 +17,36 @@ enum Theme {
 }
 
 const composition = {
-  [Theme.Light]: { background: "bg-[url('./images/bg-desktop-light.jpg')]", icon: iconMoon as string },
-  [Theme.Dark]: { background: "bg-[url('./images/bg-desktop-dark.jpg')]", icon: iconSun as string },
+  [Theme.Light]: {
+    placeholder: 'placeholder-[#98979D]',
+    textInput: 'text-[#3A393D]',
+    text1: 'text-[#5A586E]',
+    text2: 'text-[#BFBEC3]',
+    text3: 'text-[#B3B2BA]',
+    textHover: 'hover:text-[#646578]',
+    backgroundImage: "bg-[url('./images/bg-desktop-light.jpg')]",
+    icon: iconMoon as string,
+    background1Color: 'bg-[#FAFAFA]',
+    background2Color: 'bg-[#FFFFFF]',
+    lineColor: 'bg-[#E9E8EC]',
+    outlineColor: 'outline-[#d7d7d7]',
+    hoverOutlineColor: 'hover:outline-black',
+  },
+  [Theme.Dark]: {
+    placeholder: 'placeholder-[#73758A]',
+    textInput: 'text-[#CACCE3]',
+    text1: 'text-[#CACCE3]',
+    text2: 'text-[#4E5065]',
+    text3: 'text-[#62647D]',
+    textHover: 'hover:text-[#CACCE3]',
+    backgroundImage: "bg-[url('./images/bg-desktop-dark.jpg')]",
+    icon: iconSun as string,
+    background1Color: 'bg-[#181824]',
+    background2Color: 'bg-[#25273C]',
+    lineColor: 'bg-[#34364C]',
+    outlineColor: 'outline-[#37394E]',
+    hoverOutlineColor: 'hover:outline-[#CACCE3]',
+  },
 };
 
 export default function Home() {
@@ -146,7 +174,10 @@ export default function Home() {
     return (
       <div>
         <div
-          style={{ visibility: dragging && dataJSONRefIndex.current === index ? 'hidden' : 'visible' }}
+          style={{
+            visibility: dragging && dataJSONRefIndex.current === index ? 'hidden' : 'visible',
+            transition: 'visibility 0.3s',
+          }}
           ref={dragImageRef}
           draggable
           onMouseEnter={() => {
@@ -154,14 +185,12 @@ export default function Home() {
           }}
           onDragStart={(e) => {
             e.preventDefault();
-            //if (isMobile) return;
             dataJSONRefIndex.current = index;
             if (dragImageRef.current) {
               dragImageRef2.current = dragImageRef.current.cloneNode(true) as HTMLDivElement;
-              dragImageRef2.current.style.position = 'fixed';
-              dragImageRef2.current.style.left = screen.width > 768 ? 'calc(50% - 15.5em)' : 'calc(50% - 15.5em)';
-              dragImageRef2.current.style.width = '30.8em';
+              dragImageRef2.current.style.left = window.innerWidth > 768 ? 'calc(50% - 15.4em)' : '0';
               dragImageRef2.current.style.height = 'full';
+              dragImageRef2.current.style.paddingInline = '1.5em';
               dragImageRef2.current.style.boxShadow = '0 0 0.5em 0.1em #000000';
               dragImageRef2.current.style.color = '#CACCE3';
               dragImageRef2.current.style.fontFamily = 'Josefin Sans';
@@ -169,30 +198,45 @@ export default function Home() {
               dragImageRef2.current.style.fontWeight = 'normal';
               dragImageRef2.current.style.userSelect = 'none';
               dragImageRef2.current.style.pointerEvents = 'none';
+              dragImageRef2.current.classList.add('w-[calc(100%-1.98rem)]');
+              dragImageRef2.current.classList.add('md:w-[30.8em]');
+              dragImageRef2.current.classList.add('self-center');
+              dragImageRef2.current.classList.add('fixed');
+              dragImageRef2.current.classList.add('md:ml-0');
+              dragImageRef2.current.classList.add('ml-4');
               document.body.appendChild(dragImageRef2.current);
               document.body.style.cursor = 'grabbing';
               setDragging(true);
             }
           }}
-          className={`${classExtension} self h-[4em] w-full items-center gap-[1em] bg-[#25273C] px-[1.5em]`}
+          className={`${classExtension} h-[4em] w-full items-center gap-[1em] ${composition[theme].background2Color} px-[1.5em]`}
         >
           <button className=" select-none" onClick={buttonCheckClick}>
             <div
               className={`${
-                completed && 'bg-gradient-to-br hover:outline-offset-2 hover:outline-[#CACCE3]'
-              } flex h-[1.45em]  w-[1.45em] items-center justify-center rounded-full from-[#6ABFFB] to-[#A373E8] outline outline-1 outline-[#37394E] hover:bg-gradient-to-br`}
+                completed &&
+                'bg-gradient-to-br transition hover:outline-offset-2'
+                  .concat(' ')
+                  .concat(composition[theme].hoverOutlineColor)
+              } 
+            
+              flex h-[1.45em] w-[1.45em] items-center justify-center rounded-full from-[#6ABFFB] to-[#A373E8] outline outline-1 ${
+                composition[theme].outlineColor
+              } transition hover:bg-gradient-to-br`}
             >
               {completed ? (
                 <Image src={iconCheck as string} alt="check" priority unoptimized />
               ) : (
-                <div className="h-[1.29em] w-[1.29em] rounded-full bg-[#25273C]"></div>
+                <div
+                  className={`h-[1.29em] w-[1.29em] rounded-full ${composition[theme].background2Color} transition`}
+                ></div>
               )}
             </div>
           </button>
           <span
             className={`${
-              !completed ? 'text-[#CACCE3]' : 'text-[#4E5065] line-through'
-            } w-full select-none bg-transparent px-2 text-[1.1rem] placeholder-[#73758A] md:w-[25em]`}
+              !completed ? composition[theme].text1 : composition[theme].text2.concat(' ').concat('line-through')
+            } w-full select-none break-words bg-transparent px-2 text-[1.1rem] transition md:w-[25em]`}
           >
             {task}
           </span>
@@ -213,10 +257,14 @@ export default function Home() {
   };
   return (
     firstLoad && (
-      <main className="flex min-h-screen flex-col items-center justify-center font-josefinSans">
-        <div className={`h-[18.8em] w-full items-center ${composition[theme].background} bg-top bg-no-repeat`}></div>
-        <div className="flex min-h-[31.2em] w-full flex-col items-center bg-[#181824] text-[#FEFFFE]">
-          <div className="mt-[-14.4em] w-full flex-col justify-center md:w-[33.8em]">
+      <main className="flex min-h-screen w-full flex-col items-center justify-center font-josefinSans">
+        <div
+          className={`h-[18.8em] w-full items-center ${composition[theme].backgroundImage} bg-top bg-no-repeat`}
+        ></div>
+        <div
+          className={`flex min-h-[31.2em] w-full flex-col items-center ${composition[theme].background1Color} text-[#FEFFFE] transition`}
+        >
+          <div className="mt-[-14.4em] w-full flex-col justify-center px-4 md:w-[33.8em] md:px-0">
             <div className="flex select-none items-center justify-between">
               <span draggable={false} className="pointer-events-none text-[2.45rem] font-[700] tracking-[0.4em]">
                 TODO
@@ -227,14 +275,19 @@ export default function Home() {
                 }}
                 className={`${dragging && 'pointer-events-none'}`}
               >
-                <Image draggable={false} className="h-fit pb-[0.5em]" src={composition[theme].icon} alt="icon-sun" />
+                <Image
+                  draggable={false}
+                  className="h-fit pb-[0.5em] transition"
+                  src={composition[theme].icon}
+                  alt="icon-sun"
+                />
               </button>
             </div>
             <form
               onClick={() => {
                 inputRef.current && inputRef.current.focus();
               }}
-              className="mt-[1.9em] flex h-[4em] w-full items-center gap-[1em] bg-[#25273C] pl-[1.5em]"
+              className={`mt-[1.9em] flex h-[4em] w-full items-center gap-[1em] ${composition[theme].background2Color} pl-[1.5em] transition`}
               onSubmit={(e) => {
                 e.preventDefault();
                 if (inputText === '') return;
@@ -243,8 +296,12 @@ export default function Home() {
               }}
             >
               <button className={`${dragging && 'pointer-events-none'}`} type="submit">
-                <div className="flex h-[1.45em] w-[1.45em] items-center justify-center rounded-full from-[#6ABFFB] to-[#A373E8] outline outline-1 outline-[#37394E] hover:bg-gradient-to-br ">
-                  <div className="h-[1.29em] w-[1.29em] rounded-full bg-[#25273C]"></div>
+                <div
+                  className={`flex h-[1.45em] w-[1.45em] items-center justify-center rounded-full from-[#6ABFFB] to-[#A373E8] outline outline-1 ${composition[theme].outlineColor} transition hover:bg-gradient-to-br`}
+                >
+                  <div
+                    className={`h-[1.29em] w-[1.29em] rounded-full ${composition[theme].background2Color} transition`}
+                  ></div>
                 </div>
               </button>
               <input
@@ -252,7 +309,9 @@ export default function Home() {
                 value={inputText}
                 className={`${
                   dragging && 'pointer-events-none'
-                } mt-[0.3em] w-[25em] bg-transparent px-2 text-[1.1rem] text-[#CACCE3] placeholder-[#73758A] outline-none`}
+                } mt-[0.3em] w-[25em] bg-transparent px-2 text-[1.1rem] ${composition[theme].textInput} ${
+                  composition[theme].placeholder
+                } outline-none transition`}
                 placeholder="Create a new todo..."
                 type="text"
                 onChange={(e) => {
@@ -260,9 +319,9 @@ export default function Home() {
                 }}
               />
             </form>
-            <div ref={dataJSONDivRef} className="mt-[1.5em] flex w-full flex-col transition duration-300">
+            <div ref={dataJSONDivRef} className="mt-[1.5em] flex w-full flex-col transition">
               {dataJSON.map((x: TodoJSON, i: number) => (
-                <div key={i} className="flex flex-col">
+                <div key={i} className="flex flex-col transition">
                   <TodoBlock
                     index={i}
                     classExtension={
@@ -293,13 +352,15 @@ export default function Home() {
                     completed={x.completed}
                     task={x.task}
                   />
-                  <div className="h-[1px] w-full bg-[#34364C]"></div>
+                  <div className={`h-[1px] w-full ${composition[theme].lineColor} transition`}></div>
                 </div>
               ))}
-              <div className="flex h-[3em] w-full select-none items-center justify-between bg-[#25273C]  px-6 text-[#62647D]">
+              <div
+                className={`flex h-[3em] w-full select-none items-center justify-between ${composition[theme].background2Color} px-1 md:px-6 ${composition[theme].text3} transition`}
+              >
                 <span className="text-[0.9rem]">{dataJSON.filter((x) => !x.completed).length} items left</span>
-                <div className={`${dragging && 'pointer-events-none'} flex gap-[3.3em]`}>
-                  <div className="flex gap-[1em]">
+                <div className={`${dragging && 'pointer-events-none'} flex gap-[1em] lg:gap-[3.3em]`}>
+                  <div className="flex gap-[0.5em] md:gap-[0.9em]">
                     {[Mode.All, Mode.Active, Mode.Completed].map((x) => (
                       <button
                         onClick={() => {
@@ -307,8 +368,8 @@ export default function Home() {
                         }}
                         key={x}
                         className={`${
-                          x === mode ? 'text-[#5480D8]' : 'hover:text-[#CACCE3]'
-                        } text-[0.9rem] font-[600] `}
+                          x === mode ? 'text-[#5480D8]' : composition[theme].textHover
+                        } text-[0.9rem] font-[700] transition`}
                       >
                         {x}
                       </button>
@@ -320,7 +381,7 @@ export default function Home() {
                         return [...value.filter((x) => !x.completed)];
                       });
                     }}
-                    className="text-[0.9rem] hover:text-[#CACCE3]"
+                    className={`text-[0.9rem] transition ${composition[theme].textHover}`}
                   >
                     Clear Completed
                   </button>
