@@ -23,6 +23,7 @@ const composition = {
     text1: 'text-[#5A586E]',
     text2: 'text-[#BFBEC3]',
     text3: 'text-[#B3B2BA]',
+    textBottom: 'text-[#93929A]',
     textHover: 'hover:text-[#646578]',
     backgroundImage: "bg-[url('./images/bg-desktop-light.jpg')]",
     icon: iconMoon as string,
@@ -38,6 +39,7 @@ const composition = {
     text1: 'text-[#CACCE3]',
     text2: 'text-[#4E5065]',
     text3: 'text-[#62647D]',
+    textBottom: 'text-[#50516D]',
     textHover: 'hover:text-[#CACCE3]',
     backgroundImage: "bg-[url('./images/bg-desktop-dark.jpg')]",
     icon: iconSun as string,
@@ -287,7 +289,13 @@ export default function Home() {
               onClick={() => {
                 inputRef.current && inputRef.current.focus();
               }}
-              className={`mt-[1.9em] flex h-[4em] w-full items-center gap-[1em] ${composition[theme].background2Color} pl-[1.5em] transition`}
+              className={`${
+                theme === Theme.Dark
+                  ? 'shadow-[0_20px_30px_0px_rgba(0,0,0,0.3)]'
+                  : 'shadow-[0_20px_30px_0px_rgba(141,120,240,0.7)]'
+              } mt-[1.9em] flex h-[4em] w-full items-center gap-[1em] ${
+                composition[theme].background2Color
+              } rounded pl-[1.5em] transition`}
               onSubmit={(e) => {
                 e.preventDefault();
                 if (inputText === '') return;
@@ -319,7 +327,14 @@ export default function Home() {
                 }}
               />
             </form>
-            <div ref={dataJSONDivRef} className="mt-[1.5em] flex w-full flex-col transition">
+            <div
+              ref={dataJSONDivRef}
+              className={`mt-[1.5em] flex w-full flex-col ${
+                theme === Theme.Dark
+                  ? 'shadow-[0_30px_50px_-0px_rgba(0,0,0,0.4)]'
+                  : 'shadow-[0_30px_50px_-0px_rgba(0,0,0,0.07)]'
+              } transition `}
+            >
               {dataJSON.map((x: TodoJSON, i: number) => (
                 <div key={i} className="flex flex-col transition">
                   <TodoBlock
@@ -389,6 +404,9 @@ export default function Home() {
               </div>
             </div>
           </div>
+          <span className={`mt-[3.6em] text-[0.85rem] ${composition[theme].textBottom} pb-[3em]`}>
+            Drag and drop to reorder list
+          </span>
         </div>
       </main>
     )
