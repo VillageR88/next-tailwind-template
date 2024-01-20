@@ -11,6 +11,12 @@ interface TodoJSON {
   task: string;
 }
 
+enum Mode {
+  All = 'All',
+  Active = 'Active',
+  Completed = 'Completed',
+}
+
 enum Theme {
   Light = 'Light',
   Dark = 'Dark',
@@ -52,6 +58,31 @@ const composition = {
 };
 
 export default function Home() {
+  const [dataJSON, setDataJSON] = useState<TodoJSON[]>([]);
+  const [firstLoad, setFirstLoad] = useState<boolean>(false);
+
+  useEffect(() => {
+    const savedJSON = localStorage.getItem('savedJSON');
+    if (savedJSON) setDataJSON(JSON.parse(savedJSON) as TodoJSON[]);
+    else
+      fetch('./data.json')
+        .then((response) => response.json())
+        .then((data) => {
+          setDataJSON(data as TodoJSON[]);
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+  }, []);
+
+  useEffect(() => {
+    if (dataJSON.length > 0) localStorage.setItem('savedJSON', JSON.stringify(dataJSON));
+  }, [dataJSON]);
+
+  useEffect(() => {
+    if (dataJSON.length > 0 && !firstLoad) setFirstLoad(true);
+  }, [dataJSON.length, firstLoad]);
+
   const [theme, setTheme] = useState<Theme | null>(null);
 
   useEffect(() => {
@@ -76,15 +107,15 @@ export default function Home() {
   }, []);
 
   const inputRef = useRef<HTMLDivElement | null>(null);
-  const [dataJSON, setDataJSON] = useState<TodoJSON[]>([]);
   const dataJSONDivRef = useRef<HTMLDivElement | null>(null);
   const dataJSONRefIndex = useRef<number | null>(null);
   const [mouseHoverReference, setMouseHoverReference] = useState<number | null>(null);
-  const [firstLoad, setFirstLoad] = useState<boolean>(false);
   const [inputText, setInputText] = useState<string>('');
   const dragImageRef2 = useRef<HTMLDivElement | null>(null);
   const [dragging, setDragging] = useState<boolean>(false);
   const [isMobile, setIsMobile] = useState<boolean>(false);
+  const [mode, setMode] = useState<Mode>(Mode.All);
+
   useEffect(() => {
     if (inputText.length > 40) setInputText(inputText.slice(0, 40));
   }, [inputText]);
@@ -156,26 +187,6 @@ export default function Home() {
       };
     }
   }, [dragging]);
-
-  useEffect(() => {
-    fetch('./data.json')
-      .then((response) => response.json())
-      .then((data) => {
-        setDataJSON(data as TodoJSON[]);
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-  }, []);
-  useEffect(() => {
-    if (dataJSON.length > 0 && !firstLoad) setFirstLoad(true);
-  }, [dataJSON.length, firstLoad]);
-  enum Mode {
-    All = 'All',
-    Active = 'Active',
-    Completed = 'Completed',
-  }
-  const [mode, setMode] = useState<Mode>(Mode.All);
 
   const TodoBlock = ({
     completed,
@@ -431,29 +442,31 @@ export default function Home() {
               </div>
             </div>
           </div>
-          <div
-            className={`mt-4 flex h-[3em] w-[95%] items-center justify-center rounded-[0.3em] md:hidden ${
-              composition[theme].background2Color
-            } ${
-              theme === Theme.Dark
-                ? 'shadow-[0_30px_50px_-0px_rgba(0,0,0,0.4)]'
-                : 'shadow-[0_30px_50px_-0px_rgba(0,0,0,0.07)]'
-            } ${composition[theme].text3} transition`}
-          >
-            <div className="flex gap-[1em]">
-              {[Mode.All, Mode.Active, Mode.Completed].map((x) => (
-                <button
-                  onClick={() => {
-                    setMode(x);
-                  }}
-                  key={x}
-                  className={`${
-                    x === mode ? 'text-[#5480D8]' : composition[theme].textHover
-                  } text-[0.9rem] font-[700] transition`}
-                >
-                  {x}
-                </button>
-              ))}
+          <div className="w-full px-4 md:hidden">
+            <div
+              className={`mt-4 flex h-[3em] w-full items-center justify-center rounded-[0.3em] ${
+                composition[theme].background2Color
+              } ${
+                theme === Theme.Dark
+                  ? 'shadow-[0_30px_50px_-0px_rgba(0,0,0,0.4)]'
+                  : 'shadow-[0_30px_50px_-0px_rgba(0,0,0,0.07)]'
+              } ${composition[theme].text3} transition`}
+            >
+              <div className="flex gap-[1em]">
+                {[Mode.All, Mode.Active, Mode.Completed].map((x) => (
+                  <button
+                    onClick={() => {
+                      setMode(x);
+                    }}
+                    key={x}
+                    className={`${
+                      x === mode ? 'text-[#5480D8]' : composition[theme].textHover
+                    } text-[0.9rem] font-[700] transition`}
+                  >
+                    {x}
+                  </button>
+                ))}
+              </div>
             </div>
           </div>
           <span className={`mt-[3.6em] text-[0.85rem] ${composition[theme].textBottom} pb-[3em]`}>
