@@ -3,6 +3,7 @@ import Image from 'next/image';
 import iconCheck from './images/icon-check.svg';
 import iconCross from './images/icon-cross.svg';
 import iconSun from './images/icon-sun.svg';
+import iconMoon from './images/icon-moon.svg';
 import { useEffect, useRef, useState } from 'react';
 
 interface TodoJSON {
@@ -10,7 +11,19 @@ interface TodoJSON {
   task: string;
 }
 
+enum Theme {
+  Light = 'Light',
+  Dark = 'Dark',
+}
+
+const composition = {
+  [Theme.Light]: { background: "bg-[url('./images/bg-desktop-light.jpg')]", icon: iconMoon as string },
+  [Theme.Dark]: { background: "bg-[url('./images/bg-desktop-dark.jpg')]", icon: iconSun as string },
+};
+
 export default function Home() {
+  const [theme, setTheme] = useState<Theme>(Theme.Dark);
+  const inputRef = useRef<HTMLDivElement | null>(null);
   const [dataJSON, setDataJSON] = useState<TodoJSON[]>([]);
   const dataJSONDivRef = useRef<HTMLDivElement | null>(null);
   const dataJSONRefIndex = useRef<number | null>(null);
@@ -21,17 +34,14 @@ export default function Home() {
   const [dragging, setDragging] = useState<boolean>(false);
   const [isMobile, setIsMobile] = useState<boolean>(false);
   useEffect(() => {
-    const handleResize = () => {
-      if (window.innerWidth >= 768 || /Mobi|Android/i.test(navigator.userAgent)) setIsMobile(false);
-      else {
-        setIsMobile(true);
-      }
-    };
-    window.addEventListener('resize', handleResize);
+    if (inputText.length > 40) setInputText(inputText.slice(0, 40));
+  }, [inputText]);
 
-    return () => {
-      window.removeEventListener('resize', handleResize);
-    };
+  useEffect(() => {
+    if (/Mobi|Android/i.test(navigator.userAgent)) setIsMobile(true);
+    else {
+      setIsMobile(false);
+    }
   }, []);
 
   useEffect(() => {
@@ -144,7 +154,7 @@ export default function Home() {
           }}
           onDragStart={(e) => {
             e.preventDefault();
-            if (isMobile) return;
+            //if (isMobile) return;
             dataJSONRefIndex.current = index;
             if (dragImageRef.current) {
               dragImageRef2.current = dragImageRef.current.cloneNode(true) as HTMLDivElement;
@@ -204,24 +214,35 @@ export default function Home() {
   return (
     firstLoad && (
       <main className="flex min-h-screen flex-col items-center justify-center font-josefinSans">
-        <div className="h-[18.8em] w-full items-center bg-[url('./images/bg-desktop-dark.jpg')] bg-top bg-no-repeat"></div>
+        <div className={`h-[18.8em] w-full items-center ${composition[theme].background} bg-top bg-no-repeat`}></div>
         <div className="flex min-h-[31.2em] w-full flex-col items-center bg-[#181824] text-[#FEFFFE]">
           <div className="mt-[-14.4em] w-full flex-col justify-center md:w-[33.8em]">
-            <div className="flex items-center justify-between">
-              <span className="text-[2.45rem] font-[700] tracking-[0.4em]">TODO</span>
-              <button className={`${dragging && 'pointer-events-none'}`}>
-                <Image className="h-fit pb-[0.5em]" src={iconSun as string} alt="icon-sun" />
+            <div className="flex select-none items-center justify-between">
+              <span draggable={false} className="pointer-events-none text-[2.45rem] font-[700] tracking-[0.4em]">
+                TODO
+              </span>
+              <button
+                onClick={() => {
+                  setTheme(theme === Theme.Dark ? Theme.Light : Theme.Dark);
+                }}
+                className={`${dragging && 'pointer-events-none'}`}
+              >
+                <Image draggable={false} className="h-fit pb-[0.5em]" src={composition[theme].icon} alt="icon-sun" />
               </button>
             </div>
-            <div className="mt-[1.9em] flex h-[4em] w-full items-center gap-[1em] bg-[#25273C] pl-[1.5em]">
-              <button
-                className={`${dragging && 'pointer-events-none'}`}
-                onClick={() => {
-                  if (inputText === '') return;
-                  dataJSON.push({ completed: false, task: inputText });
-                  setInputText('');
-                }}
-              >
+            <form
+              onClick={() => {
+                inputRef.current && inputRef.current.focus();
+              }}
+              className="mt-[1.9em] flex h-[4em] w-full items-center gap-[1em] bg-[#25273C] pl-[1.5em]"
+              onSubmit={(e) => {
+                e.preventDefault();
+                if (inputText === '') return;
+                dataJSON.push({ completed: false, task: inputText });
+                setInputText('');
+              }}
+            >
+              <button className={`${dragging && 'pointer-events-none'}`} type="submit">
                 <div className="flex h-[1.45em] w-[1.45em] items-center justify-center rounded-full from-[#6ABFFB] to-[#A373E8] outline outline-1 outline-[#37394E] hover:bg-gradient-to-br ">
                   <div className="h-[1.29em] w-[1.29em] rounded-full bg-[#25273C]"></div>
                 </div>
@@ -231,16 +252,15 @@ export default function Home() {
                 value={inputText}
                 className={`${
                   dragging && 'pointer-events-none'
-                } mt-[0.3em] w-[25em] bg-transparent px-2 text-[1.1rem] text-[#CACCE3] placeholder-[#73758A]`}
+                } mt-[0.3em] w-[25em] bg-transparent px-2 text-[1.1rem] text-[#CACCE3] placeholder-[#73758A] outline-none`}
                 placeholder="Create a new todo..."
                 type="text"
                 onChange={(e) => {
                   setInputText(e.target.value);
                 }}
               />
-            </div>
-            <div></div>
-            <div ref={dataJSONDivRef} className="mt-[1.5em] flex w-full flex-col">
+            </form>
+            <div ref={dataJSONDivRef} className="mt-[1.5em] flex w-full flex-col transition duration-300">
               {dataJSON.map((x: TodoJSON, i: number) => (
                 <div key={i} className="flex flex-col">
                   <TodoBlock
@@ -276,7 +296,7 @@ export default function Home() {
                   <div className="h-[1px] w-full bg-[#34364C]"></div>
                 </div>
               ))}
-              <div className="flex h-[3em] w-full items-center justify-between bg-[#25273C]  px-6 text-[#62647D]">
+              <div className="flex h-[3em] w-full select-none items-center justify-between bg-[#25273C]  px-6 text-[#62647D]">
                 <span className="text-[0.9rem]">{dataJSON.filter((x) => !x.completed).length} items left</span>
                 <div className={`${dragging && 'pointer-events-none'} flex gap-[3.3em]`}>
                   <div className="flex gap-[1em]">
