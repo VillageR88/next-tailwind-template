@@ -25,7 +25,7 @@ const composition = {
     text3: 'text-[#B3B2BA]',
     textBottom: 'text-[#93929A]',
     textHover: 'hover:text-[#646578]',
-    backgroundImage: "bg-[url('./images/bg-desktop-light.jpg')]",
+    backgroundImage: "sm:bg-[url('./images/bg-desktop-light.jpg')] bg-[url('./images/bg-mobile-light.jpg')]",
     icon: iconMoon as string,
     background1Color: 'bg-[#FAFAFA]',
     background2Color: 'bg-[#FFFFFF]',
@@ -41,7 +41,7 @@ const composition = {
     text3: 'text-[#62647D]',
     textBottom: 'text-[#50516D]',
     textHover: 'hover:text-[#CACCE3]',
-    backgroundImage: "bg-[url('./images/bg-desktop-dark.jpg')]",
+    backgroundImage: "sm:bg-[url('./images/bg-desktop-dark.jpg')] bg-[url('./images/bg-mobile-dark.jpg')]",
     icon: iconSun as string,
     background1Color: 'bg-[#181824]',
     background2Color: 'bg-[#25273C]',
@@ -233,7 +233,9 @@ export default function Home() {
                 setDragging(true);
               }
             }}
-            className={`${classExtension} h-[4em] w-full items-center gap-[1em] ${composition[theme].background2Color} px-[1.5em]`}
+            className={`${classExtension} h-[4em] w-full items-center gap-[1em] ${
+              composition[theme].background2Color
+            } px-[1.5em] ${index === 0 && 'rounded-t-[0.3em]'}`}
           >
             <button className=" select-none" onClick={buttonCheckClick}>
               <div
@@ -285,13 +287,13 @@ export default function Home() {
     theme !== null && (
       <main className="flex min-h-screen w-full flex-col items-center justify-center font-josefinSans">
         <div
-          className={`h-[18.8em] w-full items-center ${composition[theme].backgroundImage} bg-top bg-no-repeat`}
+          className={`h-[10em] w-full items-center bg-cover md:h-[18.8em] ${composition[theme].backgroundImage} bg- bg-top bg-no-repeat md:bg-auto`}
         ></div>
         <div
           className={`flex min-h-[31.2em] w-full flex-col items-center ${composition[theme].background1Color} text-[#FEFFFE] transition`}
         >
-          <div className="mt-[-14.4em] w-full flex-col justify-center px-4 md:w-[33.8em] md:px-0">
-            <div className="flex select-none items-center justify-between">
+          <div className="mt-[-8em] w-full flex-col justify-center px-4 md:mt-[-14.4em] md:w-[33.8em] md:px-0">
+            <div className="flex select-none items-center justify-between pr-2 md:pl-0 md:pr-0">
               <span draggable={false} className="pointer-events-none text-[2.45rem] font-[700] tracking-[0.4em]">
                 TODO
               </span>
@@ -320,7 +322,7 @@ export default function Home() {
                   : 'shadow-[0_20px_30px_0px_rgba(141,120,240,0.7)]'
               } mt-[1.9em] flex h-[4em] w-full items-center gap-[1em] ${
                 composition[theme].background2Color
-              } rounded pl-[1.5em] transition`}
+              } rounded-[0.3em] pl-[1.5em] transition`}
               onSubmit={(e) => {
                 e.preventDefault();
                 if (inputText === '') return;
@@ -396,11 +398,11 @@ export default function Home() {
                 </div>
               ))}
               <div
-                className={`flex h-[3em] w-full select-none items-center justify-between ${composition[theme].background2Color} px-1 md:px-6 ${composition[theme].text3} transition`}
+                className={`flex h-[3em] w-full select-none items-center justify-between rounded-b-[0.3em] px-6 ${composition[theme].background2Color} px-1 md:px-6 ${composition[theme].text3} transition`}
               >
                 <span className="text-[0.9rem]">{dataJSON.filter((x) => !x.completed).length} items left</span>
-                <div className={`${dragging && 'pointer-events-none'} flex gap-[1em] lg:gap-[3.3em]`}>
-                  <div className="flex gap-[0.5em] md:gap-[0.9em]">
+                <div className={`${dragging && 'pointer-events-none'} flex gap-[3.3em]`}>
+                  <div className="hidden gap-[0.9em] md:flex">
                     {[Mode.All, Mode.Active, Mode.Completed].map((x) => (
                       <button
                         onClick={() => {
@@ -427,6 +429,31 @@ export default function Home() {
                   </button>
                 </div>
               </div>
+            </div>
+          </div>
+          <div
+            className={`mt-4 flex h-[3em] w-[95%] items-center justify-center rounded-[0.3em] md:hidden ${
+              composition[theme].background2Color
+            } ${
+              theme === Theme.Dark
+                ? 'shadow-[0_30px_50px_-0px_rgba(0,0,0,0.4)]'
+                : 'shadow-[0_30px_50px_-0px_rgba(0,0,0,0.07)]'
+            } ${composition[theme].text3} transition`}
+          >
+            <div className="flex gap-[1em]">
+              {[Mode.All, Mode.Active, Mode.Completed].map((x) => (
+                <button
+                  onClick={() => {
+                    setMode(x);
+                  }}
+                  key={x}
+                  className={`${
+                    x === mode ? 'text-[#5480D8]' : composition[theme].textHover
+                  } text-[0.9rem] font-[700] transition`}
+                >
+                  {x}
+                </button>
+              ))}
             </div>
           </div>
           <span className={`mt-[3.6em] text-[0.85rem] ${composition[theme].textBottom} pb-[3em]`}>
