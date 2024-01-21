@@ -61,9 +61,35 @@ export default function Home() {
     };
   }, [carouselDirection]);
 
+  useEffect(() => {
+    const handleArrowLeftPress = (event: KeyboardEvent) => {
+      if (event.key === 'ArrowLeft') {
+        setCarouselDirection(Direction.left);
+      }
+    };
+
+    document.addEventListener('keydown', handleArrowLeftPress);
+
+    return () => {
+      document.removeEventListener('keydown', handleArrowLeftPress);
+    };
+  }, []);
+
+  useEffect(() => {
+    const handleArrowRightPress = (event: KeyboardEvent) => {
+      if (event.key === 'ArrowRight') {
+        setCarouselDirection(Direction.right);
+      }
+    };
+    document.addEventListener('keydown', handleArrowRightPress);
+    return () => {
+      document.removeEventListener('keydown', handleArrowRightPress);
+    };
+  }, []);
+
   return (
     <div className="flex min-h-screen flex-col items-center justify-center font-leagueSpartan ">
-      <main className="flex h-[50em] w-full flex-col bg-white">
+      <main className="flex h-[50em] w-full flex-col">
         <div className="flex">
           <div className="w-[52.5em] overflow-hidden">
             <div
@@ -80,9 +106,9 @@ export default function Home() {
               <Image src={sequence[currentSequence][2]} alt="image of furniture" priority unoptimized />
             </div>
           </div>
-          <div className="flex h-full w-[37.5em] flex-col">
-            <div className="mt-[3.5em] flex h-full w-full flex-col items-center justify-center pl-[6.2em] pr-[6em]">
-              <h1 className="text-[3.05rem] font-[600] leading-[0.92em] tracking-tighter">
+          <div className="flex h-full w-[37.5em] flex-col bg-white">
+            <div className="ml-2 flex h-full flex-col items-center justify-center self-center lg:mt-[2em] lg:w-[85%] xl:mt-[3.5em] xl:w-[68%]">
+              <h1 className="font-[600] leading-[0.92em] tracking-tighter lg:text-[2.5rem] xl:text-[3.05rem]">
                 Discover innovative ways to decorate
               </h1>
               <span className="mt-[1.4em] leading-[1.38em] tracking-[-0.02em] text-[#B7B7B7]">
@@ -110,7 +136,7 @@ export default function Home() {
                 onClick={() => {
                   setCarouselDirection(Direction.left);
                 }}
-                className="bg-black px-[2.06em] py-[1.75em] hover:bg-[#444444]"
+                className="bg-black hover:bg-[#444444] lg:px-[1.25em] lg:py-[1em] xl:p-0 xl:px-[2.06em] xl:py-[1.75em]"
               >
                 <Image src={iconArrowLeft as string} alt="left arrow" />
               </button>
@@ -119,16 +145,16 @@ export default function Home() {
                 onClick={() => {
                   setCarouselDirection(Direction.right);
                 }}
-                className="bg-black px-[2.06em] py-[1.75em] hover:bg-[#444444]"
+                className="xl-p-0 bg-black hover:bg-[#444444] lg:px-[1.25em] lg:py-[1em] xl:px-[2.06em] xl:py-[1.75em]"
               >
                 <Image src={iconArrowRight as string} alt="right arrow" />
               </button>
             </div>
           </div>
         </div>
-        <div className="flex justify-between">
+        <div className="flex justify-between ">
           <Image src={imageAboutDark} alt="image about dark" />
-          <div className="mt-[0.5em] flex flex-col justify-center gap-2.5 pl-[3em] pr-[2.8em]">
+          <div className="flex flex-col justify-center gap-2.5 bg-white pl-[3em] pr-[2.8em] pt-[0.5em] lg:ml-[-14em] xl:ml-0">
             <h2 className="text-[1.02rem] font-[700] tracking-[0.4em]">ABOUT OUR FURNITURE</h2>
             <span className="leading-[1.4em] tracking-[-0.02em] text-[#B7B7B7]">
               Our multifunctional collection blends design and function to suit your individual taste. Make each room
