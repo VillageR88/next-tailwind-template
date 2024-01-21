@@ -20,6 +20,12 @@ enum Direction {
   right,
 }
 
+enum Text {
+  text1,
+  text2,
+  text3,
+}
+
 export default function Home() {
   const sequence = {
     [Sequence.first]: [imageHero3, imageHero1, imageHero2] as StaticImageData[],
@@ -27,9 +33,44 @@ export default function Home() {
     [Sequence.third]: [imageHero2, imageHero3, imageHero1] as StaticImageData[],
   };
 
+  const articleText = {
+    [Text.text1]: [
+      {
+        header: 'Discover innovative ways to decorate',
+        body: 'We provide unmatched quality, comfort, and style for property owners across the country. Our experts combine form and function in bringing your vision to life. Create a room in your own style with our collection and make your property a reflection of you and what you love.',
+      },
+    ],
+    [Text.text2]: [
+      {
+        header: 'We are available all across the globe',
+        body: 'With stores all over the world, it’s easy for you to find furniture for your home or place of business. Locally, we’re in most major cities throughout the country. Find the branch nearest you using our store locator. Any questions? Don’t hesitate to contact us today.',
+      },
+    ],
+    [Text.text3]: [
+      {
+        header: 'Manufactured with the best materials',
+        body: 'Our modern furniture store provide a high level of quality. Our company has invested in advanced technology to ensure that every product is made as perfect and as consistent as possible. With three decades of experience in this industry, we understand what customers want for their home and office.',
+      },
+    ],
+  };
+
   const [carouselDirection, setCarouselDirection] = useState<Direction | null>(null);
   const [currentSequence, setCurrentSequence] = useState<Sequence>(Sequence.first);
-
+  const [text, setText] = useState<Text>(Text.text1);
+  const [halfOfTime, setHalfOfTime] = useState<boolean>(false);
+  useEffect(() => {
+    if (halfOfTime) {
+      setText((text) => {
+        if (text === Text.text1) {
+          return Text.text2;
+        } else if (text === Text.text2) {
+          return Text.text3;
+        } else {
+          return Text.text1;
+        }
+      });
+    }
+  }, [halfOfTime]);
   useEffect(() => {
     if (carouselDirection === null) {
       return;
@@ -56,8 +97,13 @@ export default function Home() {
       setCarouselDirection(null);
     }, 1000);
 
+    const halfOfTimer = setTimeout(() => {
+      setHalfOfTime(true);
+    }, 500);
+
     return () => {
       clearTimeout(timeout);
+      clearTimeout(halfOfTimer);
     };
   }, [carouselDirection]);
 
@@ -90,8 +136,8 @@ export default function Home() {
   return (
     <div className="flex min-h-screen flex-col items-center justify-center font-leagueSpartan ">
       <main className="flex h-[50em] w-full flex-col">
-        <div className="flex">
-          <div className="w-[52.5em] overflow-hidden">
+        <div className="flex flex-col md:flex-row">
+          <div className="overflow-hidden md:w-[40em] lg:w-[52.5em]">
             <div
               style={{
                 transform: `translateX(${
@@ -106,17 +152,21 @@ export default function Home() {
               <Image src={sequence[currentSequence][2]} alt="image of furniture" priority unoptimized />
             </div>
           </div>
-          <div className="flex h-full w-[37.5em] flex-col bg-white">
-            <div className="ml-2 flex h-full flex-col items-center justify-center self-center lg:mt-[2em] lg:w-[85%] xl:mt-[3.5em] xl:w-[68%]">
-              <h1 className="font-[600] leading-[0.92em] tracking-tighter lg:text-[2.5rem] xl:text-[3.05rem]">
-                Discover innovative ways to decorate
+          <div className="h-ful flex w-[37.5em] flex-col bg-white">
+            <div
+              style={{
+                transform: `scale(${halfOfTime || carouselDirection === null ? 1 : 0.88})`,
+                transition: 'transform 0.5s ease-in-out',
+              }}
+              className="flex h-full flex-col items-center justify-center self-center md:px-[2em] lg:mt-[2em] lg:w-[85%] lg:px-[0em] xl:ml-2 xl:mt-[3.5em] xl:w-[68%]"
+            >
+              <h1 className="font-[600] leading-[0.92em] tracking-tighter md:text-[1.35rem] lg:text-[2.3rem] xl:text-[3.05rem]">
+                {articleText[text][0].header}
               </h1>
-              <span className="mt-[1.4em] leading-[1.38em] tracking-[-0.02em] text-[#B7B7B7]">
-                We provide unmatched quality, comfort, and style for property owners across the country. Our experts
-                combine form and function in bringing your vision to life. Create a room in your own style with our
-                collection and make your property a reflection of you and what you love.
+              <span className="mt-[0.7em] leading-[1.38em] tracking-[-0.02em] text-[#B7B7B7] lg:mt-[1.4em]">
+                {articleText[text][0].body}
               </span>
-              <div className="mt-[1.2em] w-full justify-start">
+              <div className="mt-[0.4em] w-full justify-start lg:mt-[1.2em]">
                 <button className="fill-black hover:fill-[#888888] hover:text-[#B7B7B7]">
                   <div className="flex w-full items-center gap-[1.2em]">
                     <span className="text-[0.95rem] font-[600] tracking-[0.8em]">SHOP NOW</span>
@@ -135,27 +185,37 @@ export default function Home() {
                 aria-label="Previous"
                 onClick={() => {
                   setCarouselDirection(Direction.left);
+                  setHalfOfTime(false);
                 }}
-                className="bg-black hover:bg-[#444444] lg:px-[1.25em] lg:py-[1em] xl:p-0 xl:px-[2.06em] xl:py-[1.75em]"
+                className="bg-black hover:bg-[#444444] md:py-[1em] md:pl-4 md:pr-3 lg:px-[1.25em] xl:p-0 xl:px-[2.06em] xl:py-[1.75em]"
               >
-                <Image src={iconArrowLeft as string} alt="left arrow" />
+                <Image
+                  className="flex justify-center md:h-[50%] md:w-[50%] lg:h-fit lg:w-fit"
+                  src={iconArrowLeft as string}
+                  alt="left arrow"
+                />
               </button>
               <button
                 aria-label="Next"
                 onClick={() => {
                   setCarouselDirection(Direction.right);
+                  setHalfOfTime(false);
                 }}
-                className="xl-p-0 bg-black hover:bg-[#444444] lg:px-[1.25em] lg:py-[1em] xl:px-[2.06em] xl:py-[1.75em]"
+                className="xl-p-0 bg-black hover:bg-[#444444] md:py-[1em] md:pl-3 md:pr-4 lg:px-[1.25em] xl:px-[2.06em] xl:py-[1.75em]"
               >
-                <Image src={iconArrowRight as string} alt="right arrow" />
+                <Image
+                  className="md:h-[50%] md:w-[50%] lg:h-fit lg:w-fit"
+                  src={iconArrowRight as string}
+                  alt="right arrow"
+                />
               </button>
             </div>
           </div>
         </div>
-        <div className="flex justify-between ">
+        <div className="flex justify-between md:flex-row-reverse lg:flex-row ">
           <Image src={imageAboutDark} alt="image about dark" />
-          <div className="flex flex-col justify-center gap-2.5 bg-white pl-[3em] pr-[2.8em] pt-[0.5em] lg:ml-[-14em] xl:ml-0">
-            <h2 className="text-[1.02rem] font-[700] tracking-[0.4em]">ABOUT OUR FURNITURE</h2>
+          <div className="ml-0 flex flex-col justify-center gap-2.5 bg-white px-[2em] pt-[0.5em] lg:ml-[-7em] lg:min-w-min lg:px-[2em] xl:ml-0 xl:px-0 xl:pl-[3em] xl:pr-[2.8em]">
+            <h2 className="font-[700] tracking-[0.4em] md:text-[0.91rem] lg:text-[1.02rem]">ABOUT OUR FURNITURE</h2>
             <span className="leading-[1.4em] tracking-[-0.02em] text-[#B7B7B7]">
               Our multifunctional collection blends design and function to suit your individual taste. Make each room
               unique, or pick a cohesive theme that best express your interests and what inspires you. Find the
@@ -163,7 +223,11 @@ export default function Home() {
               specialists are available to help you create your dream space.
             </span>
           </div>
-          <Image src={imageAboutLight} alt="image about light" />
+          <Image
+            className="mr-0 md:hidden lg:mr-[-7em] lg:flex xl:mr-0"
+            src={imageAboutLight}
+            alt="image about light"
+          />
         </div>
       </main>
     </div>
