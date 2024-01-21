@@ -6,7 +6,8 @@ import imageHero2 from './images/desktop-image-hero-2.jpg';
 import imageHero3 from './images/desktop-image-hero-3.jpg';
 import iconArrowLeft from './images/icon-angle-left.svg';
 import iconArrowRight from './images/icon-angle-right.svg';
-import iconArrow from './images/icon-arrow.svg';
+import imageAboutDark from './images/image-about-dark.jpg';
+import imageAboutLight from './images/image-about-light.jpg';
 
 enum Sequence {
   first,
@@ -80,24 +81,23 @@ export default function Home() {
             </div>
           </div>
           <div className="flex h-full w-[37.5em] flex-col">
-            <div className="mt-[3em] flex h-full w-full flex-col items-center justify-center pl-[6.2em] pr-[6em]">
-              <h1 className="text-[3rem] font-[600] leading-[0.9em] tracking-tighter">
+            <div className="mt-[3.5em] flex h-full w-full flex-col items-center justify-center pl-[6.2em] pr-[6em]">
+              <h1 className="text-[3.05rem] font-[600] leading-[0.92em] tracking-tighter">
                 Discover innovative ways to decorate
               </h1>
-              <span className="mt-[1.5em] leading-[1.4em] tracking-tight text-[#B7B7B7]">
+              <span className="mt-[1.4em] leading-[1.38em] tracking-[-0.02em] text-[#B7B7B7]">
                 We provide unmatched quality, comfort, and style for property owners across the country. Our experts
                 combine form and function in bringing your vision to life. Create a room in your own style with our
                 collection and make your property a reflection of you and what you love.
               </span>
-              <div className="w-full justify-start">
+              <div className="mt-[1.2em] w-full justify-start">
                 <button className="fill-black hover:fill-[#888888] hover:text-[#B7B7B7]">
-                  <div className="mt-[1.2em] flex w-full items-center gap-[1.2em]">
-                    <span className="tracking-[0.7em] ">SHOP NOW</span>
+                  <div className="flex w-full items-center gap-[1.2em]">
+                    <span className="text-[0.95rem] font-[600] tracking-[0.8em]">SHOP NOW</span>
                     <svg width="40" height="12" xmlns="http://www.w3.org/2000/svg">
                       <path
                         d="M34.05 0l5.481 5.527h.008v.008L40 6l-.461.465v.063l-.062-.001L34.049 12l-.662-.668 4.765-4.805H0v-1h38.206l-4.82-4.86L34.05 0z"
                         fillRule="nonzero"
-                        fill="nonzero"
                       />
                     </svg>
                   </div>
@@ -125,6 +125,19 @@ export default function Home() {
               </button>
             </div>
           </div>
+        </div>
+        <div className="flex justify-between">
+          <Image src={imageAboutDark} alt="image about dark" />
+          <div className="mt-[0.5em] flex flex-col justify-center gap-2.5 pl-[3em] pr-[2.8em]">
+            <h2 className="text-[1.02rem] font-[700] tracking-[0.4em]">ABOUT OUR FURNITURE</h2>
+            <span className="leading-[1.4em] tracking-[-0.02em] text-[#B7B7B7]">
+              Our multifunctional collection blends design and function to suit your individual taste. Make each room
+              unique, or pick a cohesive theme that best express your interests and what inspires you. Find the
+              furniture pieces you need, from traditional to contemporary styles or anything in between. Product
+              specialists are available to help you create your dream space.
+            </span>
+          </div>
+          <Image src={imageAboutLight} alt="image about light" />
         </div>
       </main>
     </div>
