@@ -1,5 +1,5 @@
 'use client';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import Image, { StaticImageData } from 'next/image';
 import imageHero1 from './images/desktop-image-hero-1.jpg';
 import imageHero2 from './images/desktop-image-hero-2.jpg';
@@ -132,12 +132,73 @@ export default function Home() {
       document.removeEventListener('keydown', handleArrowRightPress);
     };
   }, []);
+  const [divWidthNHeight, setDivWidthNHeight] = useState<number[]>([0, 0]);
+  const imageRef = useRef<HTMLImageElement>(null);
+  useEffect(() => {
+    const handleResize = () => {
+      imageRef.current && setDivWidthNHeight([imageRef.current.clientWidth, imageRef.current.clientHeight]);
+    };
+    handleResize();
+    window.addEventListener('resize', handleResize);
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
 
   return (
     <div className="flex min-h-screen flex-col items-center justify-center font-leagueSpartan ">
       <main className="flex h-[50em] w-full flex-col">
         <div className="flex flex-col md:flex-row">
           <div className="overflow-hidden md:w-[40em] lg:w-[52.5em]">
+            <div
+              style={{ width: divWidthNHeight[0], height: divWidthNHeight[1] }}
+              className="absolute z-10 flex h-full w-full flex-col justify-between "
+            >
+              <div className="flex h-fit w-fit text-white md:ml-[2em] md:mt-[1em] md:gap-6 lg:ml-[3em] lg:mt-[2em] lg:gap-12 xl:ml-[4em] xl:mt-[3em] ">
+                <span className="text-[2rem]">room</span>
+                <div className="flex items-center md:gap-3 lg:gap-5">
+                  {['home', 'shop', 'about', 'contact'].map((x, i) => (
+                    <button
+                      className="h-fit rounded-xl bg-[#A8ABB0] bg-opacity-90 md:px-2 lg:bg-opacity-0 lg:px-0"
+                      key={i}
+                    >
+                      {x}
+                    </button>
+                  ))}
+                </div>
+              </div>
+              <div className="self-end">
+                <button
+                  aria-label="Previous"
+                  onClick={() => {
+                    setCarouselDirection(Direction.left);
+                    setHalfOfTime(false);
+                  }}
+                  className="xl-p-0 inline-flex bg-black px-[1.5em] py-[1.1em] hover:bg-[#444444] lg:hidden"
+                >
+                  <Image
+                    className="flex justify-center md:h-[80%] md:w-[80%] lg:h-fit lg:w-fit"
+                    src={iconArrowLeft as string}
+                    alt="left arrow"
+                  />
+                </button>
+                <button
+                  aria-label="Next"
+                  onClick={() => {
+                    setCarouselDirection(Direction.right);
+                    setHalfOfTime(false);
+                  }}
+                  className="xl-p-0 inline-flex bg-black px-[1.5em] py-[1.1em] hover:bg-[#444444]  lg:hidden"
+                >
+                  <Image
+                    className="md:h-[80%] md:w-[80%] lg:h-fit lg:w-fit"
+                    src={iconArrowRight as string}
+                    alt="right arrow"
+                  />
+                </button>
+              </div>
+            </div>
             <div
               style={{
                 transform: `translateX(${
@@ -148,7 +209,7 @@ export default function Home() {
               className="flex w-full"
             >
               <Image src={sequence[currentSequence][0]} alt="image of furniture" priority unoptimized />
-              <Image src={sequence[currentSequence][1]} alt="image of furniture" priority unoptimized />
+              <Image ref={imageRef} src={sequence[currentSequence][1]} alt="image of furniture" priority unoptimized />
               <Image src={sequence[currentSequence][2]} alt="image of furniture" priority unoptimized />
             </div>
           </div>
@@ -158,15 +219,15 @@ export default function Home() {
                 transform: `scale(${halfOfTime || carouselDirection === null ? 1 : 0.88})`,
                 transition: 'transform 0.5s ease-in-out',
               }}
-              className="flex h-full flex-col items-center justify-center self-center md:px-[2em] lg:mt-[2em] lg:w-[85%] lg:px-[0em] xl:ml-2 xl:mt-[3.5em] xl:w-[68%]"
+              className="flex h-full flex-col items-start justify-center self-center md:px-[1em] lg:mt-[2em] lg:w-[88%] lg:px-[0em] xl:ml-2 xl:mt-[3.5em] xl:w-[68%]"
             >
-              <h1 className="font-[600] leading-[0.92em] tracking-tighter md:text-[1.35rem] lg:text-[2.3rem] xl:text-[3.05rem]">
+              <h1 className="font-[600] leading-[0.92em] tracking-tighter md:text-[1.5rem] lg:text-[2.3rem] xl:text-[3.05rem]">
                 {articleText[text][0].header}
               </h1>
               <span className="mt-[0.7em] leading-[1.38em] tracking-[-0.02em] text-[#B7B7B7] lg:mt-[1.4em]">
                 {articleText[text][0].body}
               </span>
-              <div className="mt-[0.4em] w-full justify-start lg:mt-[1.2em]">
+              <div className="mt-[0.8em] w-full justify-start lg:mt-[1.2em]">
                 <button className="fill-black hover:fill-[#888888] hover:text-[#B7B7B7]">
                   <div className="flex w-full items-center gap-[1.2em]">
                     <span className="text-[0.95rem] font-[600] tracking-[0.8em]">SHOP NOW</span>
@@ -187,13 +248,9 @@ export default function Home() {
                   setCarouselDirection(Direction.left);
                   setHalfOfTime(false);
                 }}
-                className="bg-black hover:bg-[#444444] md:py-[1em] md:pl-4 md:pr-3 lg:px-[1.25em] xl:p-0 xl:px-[2.06em] xl:py-[1.75em]"
+                className="hidden bg-black hover:bg-[#444444] md:py-[1em] lg:inline-flex  lg:px-[2.06em] lg:py-[1.75em]"
               >
-                <Image
-                  className="flex justify-center md:h-[50%] md:w-[50%] lg:h-fit lg:w-fit"
-                  src={iconArrowLeft as string}
-                  alt="left arrow"
-                />
+                <Image src={iconArrowLeft as string} alt="left arrow" />
               </button>
               <button
                 aria-label="Next"
@@ -201,20 +258,16 @@ export default function Home() {
                   setCarouselDirection(Direction.right);
                   setHalfOfTime(false);
                 }}
-                className="xl-p-0 bg-black hover:bg-[#444444] md:py-[1em] md:pl-3 md:pr-4 lg:px-[1.25em] xl:px-[2.06em] xl:py-[1.75em]"
+                className="hidden bg-black hover:bg-[#444444] md:py-[1em] lg:inline-flex  lg:px-[2.06em] lg:py-[1.75em]"
               >
-                <Image
-                  className="md:h-[50%] md:w-[50%] lg:h-fit lg:w-fit"
-                  src={iconArrowRight as string}
-                  alt="right arrow"
-                />
+                <Image src={iconArrowRight as string} alt="right arrow" />
               </button>
             </div>
           </div>
         </div>
         <div className="flex justify-between md:flex-row-reverse lg:flex-row ">
-          <Image src={imageAboutDark} alt="image about dark" />
-          <div className="ml-0 flex flex-col justify-center gap-2.5 bg-white px-[2em] pt-[0.5em] lg:ml-[-7em] lg:min-w-min lg:px-[2em] xl:ml-0 xl:px-0 xl:pl-[3em] xl:pr-[2.8em]">
+          <Image className="md:w-full lg:w-fit" src={imageAboutDark} alt="image about dark" />
+          <div className="ml-0 flex w-[103%] flex-col justify-center gap-2.5 bg-white pt-[0.5em] md:px-[1em] lg:ml-[-9em] lg:px-[2em] xl:ml-0 xl:px-0 xl:pl-[3em] xl:pr-[2.8em]">
             <h2 className="font-[700] tracking-[0.4em] md:text-[0.91rem] lg:text-[1.02rem]">ABOUT OUR FURNITURE</h2>
             <span className="leading-[1.4em] tracking-[-0.02em] text-[#B7B7B7]">
               Our multifunctional collection blends design and function to suit your individual taste. Make each room
@@ -224,7 +277,7 @@ export default function Home() {
             </span>
           </div>
           <Image
-            className="mr-0 md:hidden lg:mr-[-7em] lg:flex xl:mr-0"
+            className="mr-0 md:hidden lg:mr-[-4em] lg:flex xl:mr-0"
             src={imageAboutLight}
             alt="image about light"
           />
