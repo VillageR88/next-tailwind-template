@@ -4,21 +4,21 @@ import iconArrow from './images/icon-arrow.svg';
 import { useEffect, useState } from 'react';
 export default function Home() {
   interface locationJSON {
-    ip: '8.8.8.8';
+    ip: string;
     location: {
-      country: 'US';
-      region: 'California';
-      timezone: '-07:00';
+      country: string;
+      region: string;
+      timezone: string;
     };
-    domains: ['0d2.net', '003725.com', '0f6.b0094c.cn', '007515.com', '0guhi.jocose.cn'];
+    domains: string[];
     as: {
-      asn: 15169;
-      name: 'Google LLC';
-      route: '8.8.8.0/24';
-      domain: 'https://about.google/intl/en/';
-      type: 'Content';
+      asn: string;
+      name: string;
+      route: string;
+      domain: string;
+      type: string;
     };
-    isp: 'Google LLC';
+    isp: string;
   }
 
   const [text, setText] = useState('');
