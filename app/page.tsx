@@ -168,10 +168,14 @@ export default function Home() {
   const [isMobileNavOpen, setIsMobileNavOpen] = useState<boolean>(false);
   const [navHover, setNavHover] = useState<number | null>(null);
   return (
-    <div className="flex min-h-screen flex-col items-center justify-center font-leagueSpartan ">
+    <div
+      className={`flex ${
+        isMobileNavOpen && 'overflow-hidden'
+      } min-h-screen flex-col items-center justify-start font-leagueSpartan md:justify-center `}
+    >
       <main className="flex max-h-[50em] w-full flex-col">
         {isMobileNavOpen && (
-          <div className=" left-0 top-0 z-20 w-screen">
+          <div className=" absolute left-0 top-0 z-20 w-screen">
             <div className="flex h-[7.5em] w-[100%] items-center justify-between gap-12 bg-white px-6">
               <button
                 className="mb-[-0.2em] ml-[-0.4em]"
