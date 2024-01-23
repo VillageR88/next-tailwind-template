@@ -11,6 +11,8 @@ import iconArrowLeft from './images/icon-angle-left.svg';
 import iconArrowRight from './images/icon-angle-right.svg';
 import imageAboutDark from './images/image-about-dark.jpg';
 import imageAboutLight from './images/image-about-light.jpg';
+import iconMobileNav from './images/icon-hamburger.svg';
+import iconClose from './images/icon-close.svg';
 
 enum Sequence {
   first,
@@ -124,35 +126,31 @@ export default function Home() {
   }, [carouselDirection]);
 
   useEffect(() => {
-    const handleArrowLeftPress = (event: KeyboardEvent) => {
-      if (event.key === 'ArrowLeft') {
-        setCarouselDirection(Direction.left);
+    const handleArrowPress = (event: KeyboardEvent) => {
+      if (carouselDirection === null) {
+        if (event.key === 'ArrowLeft') {
+          setHalfOfTime(false);
+          setCarouselDirection(Direction.left);
+        } else if (event.key === 'ArrowRight') {
+          setHalfOfTime(false);
+          setCarouselDirection(Direction.right);
+        }
       }
     };
-
-    document.addEventListener('keydown', handleArrowLeftPress);
-
+    document.addEventListener('keydown', handleArrowPress);
     return () => {
-      document.removeEventListener('keydown', handleArrowLeftPress);
+      document.removeEventListener('keydown', handleArrowPress);
     };
-  }, []);
+  }, [carouselDirection]);
 
-  useEffect(() => {
-    const handleArrowRightPress = (event: KeyboardEvent) => {
-      if (event.key === 'ArrowRight') {
-        setCarouselDirection(Direction.right);
-      }
-    };
-    document.addEventListener('keydown', handleArrowRightPress);
-    return () => {
-      document.removeEventListener('keydown', handleArrowRightPress);
-    };
-  }, []);
   const [divWidthNHeight, setDivWidthNHeight] = useState<number[]>([0, 0]);
   const imageRef = useRef<HTMLImageElement>(null);
   useEffect(() => {
     const handleResize = () => {
       imageRef.current && setDivWidthNHeight([imageRef.current.clientWidth, imageRef.current.clientHeight]);
+      if (window.innerWidth > 640) {
+        setIsMobileNavOpen(false);
+      }
     };
     handleResize();
     window.addEventListener('resize', handleResize);
@@ -162,30 +160,79 @@ export default function Home() {
     };
   }, []);
 
+  const [isMobileNavOpen, setIsMobileNavOpen] = useState<boolean>(false);
+  const [navHover, setNavHover] = useState<number | null>(null);
   return (
     <div className="flex min-h-screen flex-col items-center justify-center font-leagueSpartan ">
       <main className="flex max-h-[50em] w-full flex-col">
+        {isMobileNavOpen && (
+          <div className=" left-0 top-0 z-20 w-screen">
+            <div className="flex h-[7.5em] w-[100%] items-center justify-between gap-12 bg-white px-6">
+              <button
+                className="mb-[-0.2em] ml-[-0.4em]"
+                onClick={() => {
+                  setIsMobileNavOpen(false);
+                }}
+              >
+                <Image className="m-2 flex sm:hidden" src={iconClose as string} alt="mobile navigation close" />
+              </button>
+              <div className="flex w-full justify-between">
+                {['home', 'shop', 'about', 'contact'].map((x, i) => (
+                  <button className="font-[600]" key={i}>
+                    {x}
+                  </button>
+                ))}
+              </div>
+            </div>
+          </div>
+        )}
         <div className="flex flex-col md:flex-row">
           <div className="overflow-hidden md:w-[40em] lg:w-[52.5em]">
             <div
               style={{ width: divWidthNHeight[0], height: divWidthNHeight[1] }}
               className="absolute z-10 flex h-full w-full flex-col justify-between "
             >
-              <div className="ml-[2em] mt-[2em] flex h-fit w-fit gap-[2em] text-white md:ml-[2em] md:mt-[0.75em] md:gap-6 lg:ml-[3em] lg:mt-[2em] lg:gap-12 xl:ml-[4em] xl:mt-[3em] ">
-                <span className="text-[2rem]">room</span>
-                <div className="hidden items-center gap-7 sm:flex md:gap-3 lg:gap-5">
+              <div className="ml-[2em] mt-[2em] flex h-fit w-fit gap-[2em] text-white md:ml-[2em] md:mt-[0.75em] md:gap-6 lg:ml-[3em] lg:mt-[2em] lg:gap-[3.4em] xl:ml-[4em] xl:mt-[3em] ">
+                <div className="absolute left-0 w-screen text-[2rem] sm:hidden">
+                  {!isMobileNavOpen && (
+                    <div className="absolute left-6 top-1">
+                      <button
+                        onClick={() => {
+                          setIsMobileNavOpen(true);
+                        }}
+                        aria-label="Open mobile navigation"
+                      >
+                        <Image className="flex sm:hidden" src={iconMobileNav as string} alt="mobile navigation" />
+                      </button>
+                    </div>
+                  )}
+
+                  <div className="flex w-full justify-center">
+                    <span>room</span>
+                  </div>
+                </div>
+                <span className="hidden text-[1.9rem] sm:flex">room</span>
+                <div className="hidden items-center gap-7 sm:flex md:gap-3 lg:gap-[1.9em]">
                   {['home', 'shop', 'about', 'contact'].map((x, i) => (
-                    <button
-                      className={`${
-                        ((currentSequence === Sequence.first && carouselDirection === null) ||
-                          (currentSequence === Sequence.second && carouselDirection === Direction.left) ||
-                          (currentSequence === Sequence.third && carouselDirection === Direction.right)) &&
-                        'bg-[#A8ABB0]'
-                      } h-fit rounded-xl bg-opacity-0 transition-colors duration-1000 md:bg-opacity-90 md:px-2 lg:bg-opacity-0 lg:px-0`}
-                      key={i}
-                    >
-                      {x}
-                    </button>
+                    <div className="flex flex-col items-center gap-[0.3em]" key={i}>
+                      <button
+                        onMouseEnter={() => {
+                          setNavHover(i);
+                        }}
+                        onMouseLeave={() => {
+                          setNavHover(null);
+                        }}
+                        className={`${
+                          ((currentSequence === Sequence.first && carouselDirection === null) ||
+                            (currentSequence === Sequence.second && carouselDirection === Direction.left) ||
+                            (currentSequence === Sequence.third && carouselDirection === Direction.right)) &&
+                          'bg-[#A8ABB0]'
+                        } h-fit rounded-xl bg-opacity-0 transition-colors duration-1000 md:bg-opacity-90 md:px-2 lg:bg-opacity-0 lg:px-0`}
+                      >
+                        {x}
+                      </button>
+                      {navHover === i && <div className="absolute mt-[1.7em] h-[2px] w-[1em] bg-white"></div>}
+                    </div>
                   ))}
                 </div>
               </div>
@@ -193,8 +240,10 @@ export default function Home() {
                 <button
                   aria-label="Previous"
                   onClick={() => {
-                    setCarouselDirection(Direction.left);
-                    setHalfOfTime(false);
+                    if (carouselDirection === null) {
+                      setCarouselDirection(Direction.left);
+                      setHalfOfTime(false);
+                    }
                   }}
                   className="xl-p-0 inline-flex bg-black px-[1.5em] py-[1.1em] hover:bg-[#444444] lg:hidden"
                 >
@@ -207,8 +256,10 @@ export default function Home() {
                 <button
                   aria-label="Next"
                   onClick={() => {
-                    setCarouselDirection(Direction.right);
-                    setHalfOfTime(false);
+                    if (carouselDirection === null) {
+                      setCarouselDirection(Direction.right);
+                      setHalfOfTime(false);
+                    }
                   }}
                   className="xl-p-0 inline-flex bg-black px-[1.5em] py-[1.1em] hover:bg-[#444444]  lg:hidden"
                 >
@@ -255,7 +306,6 @@ export default function Home() {
               />
               <Image
                 className="w-screen"
-                ref={imageRef}
                 src={SequenceMobile[currentSequence][1]}
                 alt="image of furniture"
                 priority
@@ -302,8 +352,10 @@ export default function Home() {
               <button
                 aria-label="Previous"
                 onClick={() => {
-                  setCarouselDirection(Direction.left);
-                  setHalfOfTime(false);
+                  if (carouselDirection === null) {
+                    setCarouselDirection(Direction.left);
+                    setHalfOfTime(false);
+                  }
                 }}
                 className="hidden bg-black hover:bg-[#444444] md:py-[1em] lg:inline-flex lg:px-[2.06em] lg:py-[1.75em]"
               >
@@ -312,8 +364,10 @@ export default function Home() {
               <button
                 aria-label="Next"
                 onClick={() => {
-                  setCarouselDirection(Direction.right);
-                  setHalfOfTime(false);
+                  if (carouselDirection === null) {
+                    setCarouselDirection(Direction.right);
+                    setHalfOfTime(false);
+                  }
                 }}
                 className="hidden bg-black hover:bg-[#444444] md:py-[1em] lg:inline-flex  lg:px-[2.06em] lg:py-[1.75em]"
               >
