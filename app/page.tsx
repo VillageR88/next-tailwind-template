@@ -144,12 +144,17 @@ export default function Home() {
   }, [carouselDirection]);
 
   const [divWidthNHeight, setDivWidthNHeight] = useState<number[]>([0, 0]);
-  const imageRef = useRef<HTMLImageElement>(null);
+  const imageRef1 = useRef<HTMLImageElement>(null);
+  const imageRef2 = useRef<HTMLImageElement>(null);
   useEffect(() => {
     const handleResize = () => {
-      imageRef.current && setDivWidthNHeight([imageRef.current.clientWidth, imageRef.current.clientHeight]);
       if (window.innerWidth > 640) {
         setIsMobileNavOpen(false);
+      }
+      if (window.innerWidth >= 768) {
+        imageRef1.current && setDivWidthNHeight([imageRef1.current.clientWidth, imageRef1.current.clientHeight]);
+      } else {
+        imageRef2.current && setDivWidthNHeight([imageRef2.current.clientWidth, imageRef2.current.clientHeight]);
       }
     };
     handleResize();
@@ -281,7 +286,7 @@ export default function Home() {
               className="hidden w-full md:flex"
             >
               <Image src={sequence[currentSequence][0]} alt="image of furniture" priority unoptimized />
-              <Image ref={imageRef} src={sequence[currentSequence][1]} alt="image of furniture" priority unoptimized />
+              <Image ref={imageRef1} src={sequence[currentSequence][1]} alt="image of furniture" priority unoptimized />
               <Image src={sequence[currentSequence][2]} alt="image of furniture" priority unoptimized />
             </div>
             <div
@@ -305,6 +310,7 @@ export default function Home() {
                 unoptimized
               />
               <Image
+                ref={imageRef2}
                 className="w-screen"
                 src={SequenceMobile[currentSequence][1]}
                 alt="image of furniture"
