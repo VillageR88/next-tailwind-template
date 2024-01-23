@@ -4,6 +4,9 @@ import Image, { StaticImageData } from 'next/image';
 import imageHero1 from './images/desktop-image-hero-1.jpg';
 import imageHero2 from './images/desktop-image-hero-2.jpg';
 import imageHero3 from './images/desktop-image-hero-3.jpg';
+import imageHero1Mobile from './images/mobile-image-hero-1.jpg';
+import imageHero2Mobile from './images/mobile-image-hero-2.jpg';
+import imageHero3Mobile from './images/mobile-image-hero-3.jpg';
 import iconArrowLeft from './images/icon-angle-left.svg';
 import iconArrowRight from './images/icon-angle-right.svg';
 import imageAboutDark from './images/image-about-dark.jpg';
@@ -31,6 +34,12 @@ export default function Home() {
     [Sequence.first]: [imageHero3, imageHero1, imageHero2] as StaticImageData[],
     [Sequence.second]: [imageHero1, imageHero2, imageHero3] as StaticImageData[],
     [Sequence.third]: [imageHero2, imageHero3, imageHero1] as StaticImageData[],
+  };
+
+  const SequenceMobile = {
+    [Sequence.first]: [imageHero3Mobile, imageHero1Mobile, imageHero2Mobile] as StaticImageData[],
+    [Sequence.second]: [imageHero1Mobile, imageHero2Mobile, imageHero3Mobile] as StaticImageData[],
+    [Sequence.third]: [imageHero2Mobile, imageHero3Mobile, imageHero1Mobile] as StaticImageData[],
   };
 
   const articleText = {
@@ -155,7 +164,7 @@ export default function Home() {
 
   return (
     <div className="flex min-h-screen flex-col items-center justify-center font-leagueSpartan ">
-      <main className="flex h-[50em] w-full flex-col">
+      <main className="flex max-h-[50em] w-full flex-col">
         <div className="flex flex-col md:flex-row">
           <div className="overflow-hidden md:w-[40em] lg:w-[52.5em]">
             <div
@@ -218,11 +227,47 @@ export default function Home() {
                 }%)`,
                 transition: carouselDirection !== null ? 'transform 1s ease-in-out' : 'none',
               }}
-              className="flex w-full"
+              className="hidden w-full md:flex"
             >
               <Image src={sequence[currentSequence][0]} alt="image of furniture" priority unoptimized />
               <Image ref={imageRef} src={sequence[currentSequence][1]} alt="image of furniture" priority unoptimized />
               <Image src={sequence[currentSequence][2]} alt="image of furniture" priority unoptimized />
+            </div>
+            <div
+              style={{
+                transform: `translateX(${
+                  carouselDirection === Direction.left
+                    ? '0'
+                    : carouselDirection === Direction.right
+                      ? '-66.666'
+                      : '-33.333'
+                }%)`,
+                transition: carouselDirection !== null ? 'transform 1s ease-in-out' : 'none',
+              }}
+              className="flex h-auto w-[300%] md:hidden"
+            >
+              <Image
+                className="w-screen"
+                src={SequenceMobile[currentSequence][0]}
+                alt="image of furniture"
+                priority
+                unoptimized
+              />
+              <Image
+                className="w-screen"
+                ref={imageRef}
+                src={SequenceMobile[currentSequence][1]}
+                alt="image of furniture"
+                priority
+                unoptimized
+              />
+              <Image
+                className="w-screen"
+                src={SequenceMobile[currentSequence][2]}
+                alt="image of furniture"
+                priority
+                unoptimized
+              />
             </div>
           </div>
           <div className="flex flex-col bg-white md:w-[37.5em]">
