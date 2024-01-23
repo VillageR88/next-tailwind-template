@@ -6,3 +6,14 @@ html {
   /* dark scroll bars */
   /* color-scheme: dark; */
 }
+@layer base {
+  h1 {
+    @apply text-[1.96rem] font-medium text-white;
+  }
+  h2 {
+    @apply text-[0.8rem] font-semibold tracking-[0.105em] text-[#939393];
+  }
+  .span1 {
+    @apply text-[1.6rem] font-medium text-[black];
+  }
+}
