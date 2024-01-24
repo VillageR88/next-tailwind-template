@@ -7,35 +7,49 @@ import { Icon } from 'leaflet';
 
 export default function Home() {
   interface locationJSON {
-    ip: string;
+    ip: '8.8.8.8';
     location: {
-      country: string;
-      region: string;
-      timezone: string;
+      country: 'US';
+      region: 'California';
+      city: 'Mountain View';
+      lat: 37.40599;
+      lng: -122.078514;
+      postalCode: '94043';
+      timezone: '-07:00';
+      geonameId: 5375481;
     };
-    domains: string[];
+    domains: ['0d2.net', '003725.com', '0f6.b0094c.cn', '007515.com'];
     as: {
-      asn: string;
-      name: string;
-      route: string;
-      domain: string;
-      type: string;
+      asn: 15169;
+      name: 'Google LLC';
+      route: '8.8.8.0/24';
+      domain: 'https://about.google/intl/en/';
+      type: 'Content';
     };
-    isp: string;
+    isp: 'Google LLC';
   }
 
   const [text, setText] = useState('');
   const [ip, setIp] = useState('');
   const [location, setLocation] = useState<locationJSON | null>(null);
   const [sendRequest, setSendRequest] = useState(false);
+  const [mapCenter, setMapCenter] = useState<[number, number]>([51.505, -0.09]);
+  console.log('Map Center:', mapCenter);
+  useEffect(() => {
+    if (location) {
+      setMapCenter([location.location.lat, location.location.lng]);
+    }
+  }, [location]);
+
   console.log(location);
   useEffect(() => {
     if (sendRequest) {
       const fetchData = async () => {
-        await fetch(`https://geo.ipify.org/api/v2/country?apiKey=at_xqRkAKbgy6cRtBa0DgnrGia2novyw&ipAddress=${ip}`)
+        await fetch(`https://geo.ipify.org/api/v2/country,city?apiKey=at_xqRkAKbgy6cRtBa0DgnrGia2novyw&ipAddress=${ip}`)
           .then((res) => res.json())
           .then((data) => {
             setLocation(data as locationJSON);
+            console.log('Updated Location:', data);
           })
           .catch((err) => {
             console.log(err);
@@ -49,7 +63,7 @@ export default function Home() {
   const customIcon = new Icon({
     //black icon
     iconUrl: './icon-location.svg',
-    iconSize: [45, 55],
+    iconSize: [45, 58],
   });
 
   return (
@@ -123,7 +137,7 @@ export default function Home() {
           </div>
           <div id="map" className=" h-full w-full">
             <MapContainer
-              center={[51.505, -0.09]}
+              center={mapCenter}
               zoom={13}
               scrollWheelZoom={false}
               dragging={false}
@@ -135,7 +149,7 @@ export default function Home() {
                 attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
                 url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
               />
-              <Marker icon={customIcon} position={[51.505, -0.09]}></Marker>
+              <Marker icon={customIcon} position={mapCenter}></Marker>
             </MapContainer>
           </div>
         </div>
