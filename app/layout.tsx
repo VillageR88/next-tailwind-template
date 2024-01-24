@@ -1,6 +1,7 @@
 import './globals.css';
 import type { Metadata } from 'next';
 import { Inter, Source_Code_Pro } from 'next/font/google';
+import 'leaflet/dist/leaflet.css';
 
 const fontSans = Inter({
   subsets: ['latin'],

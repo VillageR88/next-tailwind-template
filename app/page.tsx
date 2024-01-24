@@ -2,6 +2,8 @@
 import Image from 'next/image';
 import iconArrow from './images/icon-arrow.svg';
 import { useEffect, useState } from 'react';
+import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
+
 export default function Home() {
   interface locationJSON {
     ip: string;
@@ -44,7 +46,7 @@ export default function Home() {
   }, [ip, sendRequest]);
 
   return (
-    <main className="font-rubik flex min-h-screen flex-col items-center justify-center">
+    <main className="flex min-h-screen flex-col items-center justify-center font-rubik">
       <div className="flex h-[50em] w-full flex-col bg-white">
         <div className="flex h-full w-full flex-col bg-[url('./images/pattern-bg-desktop.png')] bg-no-repeat">
           <div className="mt-[1.6em] flex h-[24.5em] w-full flex-col items-center">
@@ -60,7 +62,7 @@ export default function Home() {
                   setSendRequest(true);
                 }
               }}
-              className="mt-[1.35em] flex h-[3.65em] w-[34.688em] rounded-[1em] bg-white"
+              className="mt-[1.35em] flex h-[3.65em] w-[34.688em] rounded-[1em] "
             >
               <input
                 onChange={(e) => {
@@ -79,7 +81,7 @@ export default function Home() {
                 }}
                 className="flex h-full w-[4.1em] items-center justify-center rounded-r-[1em] bg-[#000000] pl-[0.1em]"
               >
-                <Image src={iconArrow as string} alt="arrow" />
+                <Image src={iconArrow as string} alt="Search" />
               </button>
             </form>
             <div className="absolute z-10 mt-[10.95em] flex min-h-[10.05em] w-[69.4em] rounded-[1em] bg-white pb-[1em] pl-[2em] ">
@@ -112,7 +114,19 @@ export default function Home() {
               </div>
             </div>
           </div>
-          <div className="h-full w-full bg-slate-200"></div>
+          <div id="map" className=" h-full w-full">
+            <MapContainer center={[51.505, -0.09]} zoom={13} scrollWheelZoom={false}>
+              <TileLayer
+                attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+              />
+              <Marker position={[51.505, -0.09]}>
+                <Popup>
+                  A pretty CSS3 popup. <br /> Easily customizable.
+                </Popup>
+              </Marker>
+            </MapContainer>
+          </div>
         </div>
       </div>
     </main>
