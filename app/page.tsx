@@ -2,7 +2,8 @@
 import Image from 'next/image';
 import iconArrow from './images/icon-arrow.svg';
 import { useEffect, useState } from 'react';
-import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
+import { MapContainer, TileLayer, Marker } from 'react-leaflet';
+import { Icon } from 'leaflet';
 
 export default function Home() {
   interface locationJSON {
@@ -44,6 +45,12 @@ export default function Home() {
       setSendRequest(false);
     }
   }, [ip, sendRequest]);
+
+  const customIcon = new Icon({
+    //black icon
+    iconUrl: './icon-location.svg',
+    iconSize: [45, 55],
+  });
 
   return (
     <main className="flex min-h-screen flex-col items-center justify-center font-rubik">
@@ -115,16 +122,20 @@ export default function Home() {
             </div>
           </div>
           <div id="map" className=" h-full w-full">
-            <MapContainer center={[51.505, -0.09]} zoom={13} scrollWheelZoom={false}>
+            <MapContainer
+              center={[51.505, -0.09]}
+              zoom={13}
+              scrollWheelZoom={false}
+              dragging={false}
+              doubleClickZoom={false}
+              touchZoom={false}
+              zoomControl={false}
+            >
               <TileLayer
                 attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
                 url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
               />
-              <Marker position={[51.505, -0.09]}>
-                <Popup>
-                  A pretty CSS3 popup. <br /> Easily customizable.
-                </Popup>
-              </Marker>
+              <Marker icon={customIcon} position={[51.505, -0.09]}></Marker>
             </MapContainer>
           </div>
         </div>
