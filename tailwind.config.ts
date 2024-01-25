@@ -12,6 +12,7 @@ const config: Config = {
         sans: ['var(--font-sans)'],
         mono: ['var(--font-mono)'],
         roboto: ['Roboto'],
+        baloo2: ['Baloo'],
       },
       colors: {
         // Slate
