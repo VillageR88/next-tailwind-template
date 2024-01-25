@@ -8,7 +8,17 @@ import { mdiChevronRight } from '@mdi/js';
 import Image from 'next/image';
 import logo from './images/logo.png';
 
-const ButtonWithSlider = () => {
+const ButtonWithSlider = ({
+  width,
+  buttonText,
+  background1,
+  background2,
+}: {
+  width: string;
+  buttonText: string;
+  background1: string;
+  background2: string;
+}) => {
   const [buttonHoverValue, setButtonHoverValue] = useState(0);
 
   return (
@@ -19,18 +29,16 @@ const ButtonWithSlider = () => {
       onMouseLeave={() => {
         setButtonHoverValue(0);
       }}
-      className="flex h-[44px] w-[271.88px] items-center justify-between rounded-[0.5em] bg-[#ff8b00]"
+      className={`flex h-[44px] ${width} items-center justify-between rounded-[0.5em] ${background1}`}
     >
       <div className="flex h-full w-full items-center justify-end">
-        <span className="absolute z-10 pr-2.5 font-baloo2 text-[1.2rem] font-[500] text-white">
-          {'Przedszkole Mały Skarb'}
-        </span>
+        <span className="absolute z-10 pr-2.5 font-baloo2 text-[1.2rem] font-[500] text-white">{buttonText}</span>
         <div
           style={{ width: `${buttonHoverValue}%` }}
-          className="h-full rounded-l-[0.5em] bg-[#e07b21] transition-all duration-[400ms] ease-in-out"
+          className={`h-full rounded-l-[0.5em] ${background2} transition-all duration-[400ms] ease-in-out`}
         ></div>
       </div>
-      <div className="flex h-full items-center rounded-r-[0.5em] bg-[#e07b21] px-1">
+      <div className={`flex h-full items-center rounded-r-[0.5em] ${background2} px-1`}>
         <Icon color="white" path={mdiChevronRight} size={1.4} />
       </div>
     </button>
@@ -78,9 +86,14 @@ export default function Home() {
             <div className="flex h-full w-full flex-col items-center rounded-[3em] outline-dashed outline-1">
               <Image className="w-[50em] pt-[3.1em]" src={logo} alt="image of child" />
               <div className="mt-[5em] flex w-full justify-around px-[7em]">
-                <div className="w-[271.88px]">
-                  <ButtonWithSlider />
-
+                <div className="flex w-[271.88px] flex-col items-center">
+                  <ButtonWithSlider
+                    width="w-[271.88px]"
+                    aria-label="Przedszkole Mały Skarb"
+                    buttonText="Przedszkole Mały Skarb"
+                    background1="bg-[#ff8b00]"
+                    background2="bg-[#e07b21]"
+                  />
                   <div>
                     <span className="mt-[2em] flex whitespace-pre-line text-center text-[15px] leading-6 text-[#777]">
                       {`Nasze przedszkole funkcjonuje
@@ -90,9 +103,19 @@ export default function Home() {
                     </span>
                   </div>
                 </div>
-
-                <div>
-                  <button className="h-[44px] w-[211.5px] bg-blue-400"></button>
+                <div className="flex w-[271.88px] flex-col items-center">
+                  <ButtonWithSlider
+                    width="w-[211.5px]"
+                    aria-label="Centrum rozwoju"
+                    buttonText="Centrum rozwoju"
+                    background1="bg-[#5255c5]"
+                    background2="bg-[#474aab]"
+                  />
+                  <div>
+                    <span className="mt-[2em] flex whitespace-pre-line text-center text-[15px] leading-6 text-[#777]">
+                      {`TUS, terapia SI, terapia ręki, fizjoterapia,`}
+                    </span>
+                  </div>
                 </div>
               </div>
             </div>
