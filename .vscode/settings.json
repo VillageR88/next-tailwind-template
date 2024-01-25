@@ -11,5 +11,20 @@
   "[typescript]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
-  "cSpell.words": ["headlessui", "heroicons", "lato", "tabler", "tailwindcss", "unoptimized", "webp"]
+  "cSpell.words": [
+    "headlessui",
+    "heroicons",
+    "lato",
+    "Mały",
+    "Przedszkole",
+    "RODO",
+    "rozwoju",
+    "Skarb",
+    "tabler",
+    "tailwindcss",
+    "twórczego",
+    "unoptimized",
+    "webp"
+  ],
+  "cSpell.language": "en,pl"
 }
