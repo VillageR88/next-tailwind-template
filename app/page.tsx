@@ -3,6 +3,9 @@ import { Icon } from '@mdi/react';
 import { mdiFacebook } from '@mdi/js';
 import { mdiInstagram } from '@mdi/js';
 import { mdiYoutube } from '@mdi/js';
+import { mdiMapMarker } from '@mdi/js';
+import { mdiPhone } from '@mdi/js';
+import { mdiEmailOpenOutline } from '@mdi/js';
 import { useState } from 'react';
 import { mdiChevronRight } from '@mdi/js';
 import Image from 'next/image';
@@ -135,7 +138,7 @@ export default function Home() {
         <div className="h-[0.4em] w-full bg-white"></div>
       </main>
       <footer className="flex h-[23em] w-full justify-center bg-[#5dba3b] bg-[url('./images/absurdity.png')] text-white">
-        <div className="flex h-full w-[75em] justify-center gap-[3em] text-[15px]">
+        <div className="flex h-full w-[78em] justify-center  text-[15px]">
           <div className="flex h-full w-1/2 flex-col justify-center gap-[3em]">
             <span>{'Niepubliczne Przedszkole Muzyczno - Językowe Mały Skarb. Gdańsk Ujeścisko, Zakoniczyn.'}</span>
             <div className="flex items-center gap-4">
@@ -163,7 +166,32 @@ export default function Home() {
           </div>
           <div className="flex h-full w-1/2 flex-col justify-center">
             <h1 className="font-baloo text-[24px]">{'Skontaktuj się z nami'}</h1>
-            <span className='mt-[2em]'>{'Napisz do nas email bądź zadzwoń na jeden z podanych numerów telefonu.'}</span>
+            <span className="mt-[2em]">{'Napisz do nas email bądź zadzwoń na jeden z podanych numerów telefonu.'}</span>
+            <div className="mt-[2em] flex gap-[1em]">
+              <div className="flex gap-[1.5em]">
+                <Icon path={mdiMapMarker} size={1.6} />
+                <button className="duration-300 hover:text-[#337ab7]">
+                  <span className="flex whitespace-pre-wrap text-left">{'11 Listopada 68,\n80-180 Gdańsk'}</span>
+                </button>
+              </div>
+              <div className="flex gap-[1.5em]">
+                <Icon path={mdiPhone} size={1.6} />
+                <div className="flex flex-col">
+                  <button className="duration-300 hover:text-[#337ab7]">
+                    <span>{'608-674-006'}</span>
+                  </button>
+                  <button className="duration-300 hover:text-[#337ab7]">
+                    <span>{'698-675-406'}</span>
+                  </button>
+                </div>
+              </div>
+              <div className="flex gap-[1.5em]">
+                <Icon path={mdiEmailOpenOutline} size={1.6} />
+                <button className="duration-300 hover:text-[#337ab7]">
+                  <span>{'poczta@malyskarb.pl'}</span>
+                </button>
+              </div>
+            </div>
           </div>
         </div>
       </footer>
