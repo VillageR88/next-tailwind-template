@@ -54,8 +54,8 @@ export default function Home() {
   const [facebookHover, setFacebookHover] = useState(false);
   return (
     <div className="flex min-h-screen flex-col items-center justify-start font-roboto">
-      <nav className="flex h-[2.9em] w-full justify-center bg-[#5DBA3B]">
-        <div className="flex w-[75.7em] items-center justify-between pb-[0.1em] text-[0.94rem] text-[#fff]">
+      <nav className="flex h-[2.9em] w-full justify-center bg-[#5DBA3B] px-2 sm:px-2 md:px-4 lg:px-6 xl:px-10">
+        <div className="flex w-full items-center justify-between pb-[0.1em] text-[0.94rem] text-[#fff] xl:w-[75.7em]">
           <button>
             <span className="hover:underline">{'Mały Skarb - Centrum twórczego rozwoju'}</span>
           </button>
@@ -88,16 +88,20 @@ export default function Home() {
           </div>
         </div>
       </nav>
-      <main className="flex h-[50.5em] w-full flex-col">
-        <div className="flex h-full w-full flex-col items-center justify-center bg-[url('./images/home-slide_img.jpg')] bg-[50%_0%]">
-          <div className="flex h-0 w-[69.5em] justify-start">
+      <main className="flex h-[50.5em] w-full flex-col bg-[url('./images/home-slide_img.jpg')] bg-[50%_0%] px-10">
+        <div className="flex h-full w-full flex-col items-center justify-center">
+          <div className="flex h-0 w-full justify-start xl:w-[69.5em]">
             <Image className="myAnimatedImage1 z-10 h-fit w-fit" src={animatedButterfly} alt="animated butterfly" />
           </div>
-          <div className="h-[34.5em] w-[69.5em] rounded-[3em] bg-white p-[0.65em]">
-            <div className="flex h-full w-full flex-col items-center rounded-[3em] outline-dashed outline-1">
-              <Image className="w-[50em] pt-[3.1em]" src={logo} alt="image of child" />
-              <div className="mt-[5em] flex w-full justify-around px-[7em]">
-                <div className="flex w-[271.88px] flex-col items-center">
+          <div className="rounded-[3em] bg-white p-[0.65em] xl:h-[34.5em] xl:w-[69.5em]">
+            <div className="flex h-full w-full flex-col items-center rounded-[3em] py-[3.1em] outline-dashed outline-1">
+              <Image
+                className="w-full px-[2em] sm:px-[1em] md:px-[2em] lg:px-[4em] xl:px-[9em]"
+                src={logo}
+                alt="image of child"
+              />
+              <div className="mt-[5em] flex w-full flex-col items-center justify-around sm:flex-row sm:items-start sm:gap-[0.5em] sm:px-[1em] md:gap-[2em] md:px-[1em] lg:px-[4em] xl:gap-0 xl:px-[7em]">
+                <div className="flex flex-col items-center xl:w-[271.88px]">
                   <ButtonWithSlider
                     width="w-[271.88px]"
                     aria-label="Przedszkole Mały Skarb"
@@ -123,25 +127,28 @@ export default function Home() {
                     background2="bg-[#474aab]"
                   />
                   <div>
-                    <span className="mt-[2em] flex whitespace-pre-line text-center text-[15px] leading-6 text-[#777]">
-                      {`TUS, terapia SI, terapia ręki, fizjoterapia,`}
+                    <span className="mt-[2em] flex whitespace-pre-line text-center text-[15px] leading-6 text-[#777] md:whitespace-normal">
+                      {`TUS, terapia SI, terapia ręki,
+                       fizjoterapia,`}
                     </span>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-          <div className="flex h-0 w-[69.5em] justify-end">
+          <div className="flex h-0 w-full justify-end xl:w-[69.5em]">
             <Image className="myAnimatedImage2 z-10 h-fit w-fit" src={animatedBee} alt="animated bee" />
           </div>
         </div>
-        <div className="h-[0.4em] w-full bg-white"></div>
       </main>
-      <footer className="flex h-[23em] w-full justify-center bg-[#5dba3b] bg-[url('./images/absurdity.png')] text-white">
-        <div className="flex h-full w-[78em] justify-center  text-[15px]">
-          <div className="flex h-full w-1/2 flex-col justify-center gap-[3em]">
-            <span>{'Niepubliczne Przedszkole Muzyczno - Językowe Mały Skarb. Gdańsk Ujeścisko, Zakoniczyn.'}</span>
-            <div className="flex items-center gap-4">
+      <div className="h-[0.4em] w-full bg-white"></div>
+      <footer className="flex w-full justify-center bg-[#5dba3b] bg-[url('./images/absurdity.png')] px-4 py-8 text-white lg:h-[23em] lg:px-0 lg:py-0">
+        <div className="flex h-full w-full flex-col items-center gap-[1.5em] text-[15px] lg:flex-row lg:justify-around lg:px-4 xl:w-[78em] xl:justify-center xl:gap-0 xl:px-6">
+          <div className="flex h-full flex-col justify-center gap-[3em] xl:w-1/2">
+            <span className="text-center md:text-left lg:whitespace-pre-wrap xl:whitespace-normal">
+              {'Niepubliczne Przedszkole Muzyczno - Językowe Mały Skarb. \nGdańsk Ujeścisko, Zakoniczyn.'}
+            </span>
+            <div className="flex items-center justify-center gap-4 lg:justify-start">
               <button className="mb-[0.1em] fill-white transition-all duration-300 hover:fill-[#FF5157]">
                 <svg
                   style={{
@@ -164,10 +171,12 @@ export default function Home() {
               </button>
             </div>
           </div>
-          <div className="flex h-full w-1/2 flex-col justify-center">
-            <h1 className="font-baloo text-[24px]">{'Skontaktuj się z nami'}</h1>
-            <span className="mt-[2em]">{'Napisz do nas email bądź zadzwoń na jeden z podanych numerów telefonu.'}</span>
-            <div className="mt-[2em] flex gap-[1em]">
+          <div className="flex h-full flex-col justify-center xl:w-1/2">
+            <h1 className="font-baloo flex justify-center text-[24px] lg:justify-start">{'Skontaktuj się z nami'}</h1>
+            <span className="mt-[2em] text-center lg:text-left">
+              {'Napisz do nas email bądź zadzwoń na jeden z podanych numerów telefonu.'}
+            </span>
+            <div className="mt-[2em] flex flex-col items-center sm:flex-row gap-[1em]">
               <div className="flex gap-[1.5em]">
                 <Icon path={mdiMapMarker} size={1.6} />
                 <button className="duration-300 hover:text-[#337ab7]">
