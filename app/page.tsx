@@ -55,7 +55,7 @@ export default function Home() {
             <span className="hover:underline">{'Mały Skarb - Centrum twórczego rozwoju'}</span>
           </button>
           <div className="flex items-center gap-4">
-            <button className="hover:text-[#FF5157] hover:underline">
+            <button className="transition-all duration-300 hover:text-[#FF5157] hover:underline">
               <span className=" text-[1.05rem] ">{'RODO'}</span>
             </button>
             <button
@@ -68,14 +68,17 @@ export default function Home() {
             >
               <div className="mb-[0.28em] flex h-full w-full items-center justify-center">
                 <Icon className="z-10" path={mdiFacebook} size={1} color="#5DBA3B" />
-                <div className={`absolute h-[1.2em] w-[0.5em] ${facebookHover ? 'bg-[#FF5157]' : 'bg-white'}`}></div>
+                <div
+                  style={{ transition: 'all 300ms ease-in-out' }}
+                  className={`absolute h-[1.2em] w-[0.5em] ${facebookHover ? 'bg-[#FF5157]' : 'bg-white'}`}
+                ></div>
               </div>
             </button>
             <button>
-              <Icon className="hover:text-[#FF5157]" path={mdiInstagram} size={0.75} />
+              <Icon className="transition-all duration-300 hover:text-[#FF5157]" path={mdiInstagram} size={0.75} />
             </button>
             <button>
-              <Icon className=" hover:text-[#FF5157]" path={mdiYoutube} size={0.75} />
+              <Icon className=" transition-all duration-300 hover:text-[#FF5157]" path={mdiYoutube} size={0.75} />
             </button>
           </div>
         </div>
