@@ -12,7 +12,7 @@ const nextConfig = {
 
   // Optional: Change the output directory `out` -> `dist`
   distDir: 'build',
-
+  //assetPrefix: '/malySkarb/',
   reactStrictMode: true,
 }
 
