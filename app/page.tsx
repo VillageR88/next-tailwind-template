@@ -7,6 +7,8 @@ import { useState } from 'react';
 import { mdiChevronRight } from '@mdi/js';
 import Image from 'next/image';
 import logo from './images/logo.png';
+import animatedButterfly from './images/butterfly2.png';
+import animatedBee from './images/bee.png';
 
 const ButtonWithSlider = ({
   width,
@@ -32,7 +34,7 @@ const ButtonWithSlider = ({
       className={`flex h-[44px] ${width} items-center justify-between rounded-[0.5em] ${background1}`}
     >
       <div className="flex h-full w-full items-center justify-end">
-        <span className="absolute z-10 pr-2.5 font-baloo2 text-[1.2rem] font-[500] text-white">{buttonText}</span>
+        <h1 className="font-baloo absolute z-10 pr-2.5 text-[1.2rem] font-[500] text-white">{buttonText}</h1>
         <div
           style={{ width: `${buttonHoverValue}%` }}
           className={`h-full rounded-l-[0.5em] ${background2} transition-all duration-[400ms] ease-in-out`}
@@ -84,7 +86,10 @@ export default function Home() {
         </div>
       </nav>
       <main className="flex h-[50.5em] w-full flex-col">
-        <div className="flex h-full w-full items-center justify-center bg-[url('./images/home-slide_img.jpg')] bg-[50%_0%]">
+        <div className="flex h-full w-full flex-col items-center justify-center bg-[url('./images/home-slide_img.jpg')] bg-[50%_0%]">
+          <div className="flex h-0 w-[69.5em] justify-start">
+            <Image className="myAnimatedImage1 z-10 h-fit w-fit" src={animatedButterfly} alt="animated butterfly" />
+          </div>
           <div className="h-[34.5em] w-[69.5em] rounded-[3em] bg-white p-[0.65em]">
             <div className="flex h-full w-full flex-col items-center rounded-[3em] outline-dashed outline-1">
               <Image className="w-[50em] pt-[3.1em]" src={logo} alt="image of child" />
@@ -123,10 +128,45 @@ export default function Home() {
               </div>
             </div>
           </div>
+          <div className="flex h-0 w-[69.5em] justify-end">
+            <Image className="myAnimatedImage2 z-10 h-fit w-fit" src={animatedBee} alt="animated bee" />
+          </div>
         </div>
         <div className="h-[0.4em] w-full bg-white"></div>
       </main>
-      <footer className="h-[23em] w-full bg-[#5dba3b] bg-[url('./images/absurdity.png')]"></footer>
+      <footer className="flex h-[23em] w-full justify-center bg-[#5dba3b] bg-[url('./images/absurdity.png')] text-white">
+        <div className="flex h-full w-[75em] justify-center gap-[3em] text-[15px]">
+          <div className="flex h-full w-1/2 flex-col justify-center gap-[3em]">
+            <span>{'Niepubliczne Przedszkole Muzyczno - Językowe Mały Skarb. Gdańsk Ujeścisko, Zakoniczyn.'}</span>
+            <div className="flex items-center gap-4">
+              <button className="mb-[0.1em] fill-white transition-all duration-300 hover:fill-[#FF5157]">
+                <svg
+                  style={{
+                    height: '2em',
+                    verticalAlign: 'middle',
+                    overflow: 'hidden',
+                  }}
+                  viewBox="0 0 1024 1024"
+                  version="1.1"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path d="M725.333333 85.333333v170.666667h-85.333333c-29.44 0-42.666667 34.56-42.666667 64V426.666667h128v170.666666h-128v341.333334h-170.666666v-341.333334H298.666667v-170.666666h128V256a170.666667 170.666667 0 0 1 170.666666-170.666667h128z" />
+                </svg>
+              </button>
+              <button>
+                <Icon className="transition-all duration-300 hover:text-[#FF5157]" path={mdiInstagram} size={1} />
+              </button>
+              <button className="ml-1">
+                <Icon className=" transition-all duration-300 hover:text-[#FF5157]" path={mdiYoutube} size={1} />
+              </button>
+            </div>
+          </div>
+          <div className="flex h-full w-1/2 flex-col justify-center">
+            <h1 className="font-baloo text-[24px]">{'Skontaktuj się z nami'}</h1>
+            <span className='mt-[2em]'>{'Napisz do nas email bądź zadzwoń na jeden z podanych numerów telefonu.'}</span>
+          </div>
+        </div>
+      </footer>
     </div>
   );
 }

@@ -6,3 +6,77 @@ html {
   /* dark scroll bars */
   /* color-scheme: dark; */
 }
+
+@keyframes myAnimation1 {
+  0% {
+    transform: translate(0, 0);
+  }
+  10% {
+    transform: translate(20px, -15px) rotate(10deg);
+  }
+  15% {
+    transform: translate(20px, -15px) rotate(180deg);
+  }
+  30% {
+    transform: translate(-20px, 15px) rotate(180deg);
+  }
+  40% {
+    transform: translate(-40px, -15px) rotate(-100deg);
+  }
+  50% {
+    transform: translate(-10px, -45px) rotate(10deg);
+  }
+  60% {
+    transform: translate(50px, -85px) rotate(50deg);
+  }
+  70% {
+    transform: translate(40px, -25px) rotate(150deg);
+  }
+  85% {
+    transform: translate(80px, -15px) rotate(-100deg);
+  }
+  100% {
+    transform: translate(0, 0) rotate(0);
+  }
+}
+
+.myAnimatedImage1 {
+  animation: myAnimation1 15s infinite;
+}
+
+@keyframes myAnimation2 {
+  0% {
+    transform: translate(0, 0);
+  }
+  10% {
+    transform: translate(20px, -15px) rotate(10deg);
+  }
+  15% {
+    transform: translate(20px, -15px) rotate(180deg);
+  }
+  30% {
+    transform: translate(-20px, 15px) rotate(180deg);
+  }
+  40% {
+    transform: translate(-40px, -15px) rotate(-100deg);
+  }
+  50% {
+    transform: translate(-10px, -45px) rotate(10deg);
+  }
+  60% {
+    transform: translate(50px, -85px) rotate(50deg);
+  }
+  70% {
+    transform: translate(40px, -25px) rotate(150deg);
+  }
+  85% {
+    transform: translate(80px, -15px) rotate(-100deg);
+  }
+  100% {
+    transform: translate(0, 0) rotate(0);
+  }
+}
+
+.myAnimatedImage2 {
+  animation: myAnimation2 15s infinite;
+}
