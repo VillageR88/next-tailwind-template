@@ -4,7 +4,7 @@ import Icon from '@mdi/react';
 const Footer = () => {
   return (
     <footer className="flex w-full justify-center bg-[#5dba3b] bg-[url('./images/absurdity.png')] px-4 py-8 text-white lg:h-[23em] lg:px-0 lg:py-0">
-      <div className="flex h-full w-full flex-col items-center gap-[1.5em] text-[15px] lg:flex-row lg:justify-around lg:px-4 xl:w-[78em] xl:justify-center xl:gap-0 xl:px-6">
+      <div className="flex h-full w-full flex-col items-center gap-[1.5em] text-[15px] sm:gap-0 lg:flex-row lg:justify-around lg:px-4 xl:w-[82em] xl:justify-center xl:gap-0 xl:px-6">
         <div className="flex h-full flex-col justify-center gap-[3em] xl:w-1/2">
           <span className="text-center md:text-left lg:whitespace-pre-wrap xl:whitespace-normal">
             {'Niepubliczne Przedszkole Muzyczno - Językowe Mały Skarb. \nGdańsk Ujeścisko, Zakoniczyn.'}
@@ -37,14 +37,14 @@ const Footer = () => {
           <span className="mt-[2em] text-center lg:text-left">
             {'Napisz do nas email bądź zadzwoń na jeden z podanych numerów telefonu.'}
           </span>
-          <div className="mt-[2em] flex flex-col items-center gap-[1em] sm:flex-row">
-            <div className="flex gap-[1.5em]">
+          <div className="mt-[2em] grid grid-cols-2 flex-row items-center gap-[1em] md:flex">
+            <div className="flex w-full justify-center gap-[1.5em]  md:w-fit">
               <Icon path={mdiMapMarker} size={1.6} />
               <button className="duration-300 hover:text-[#337ab7]">
                 <span className="flex whitespace-pre-wrap text-left">{'11 Listopada 68,\n80-180 Gdańsk'}</span>
               </button>
             </div>
-            <div className="flex gap-[1.5em]">
+            <div className="flex w-full justify-center gap-[1.5em] md:w-fit">
               <Icon path={mdiPhone} size={1.6} />
               <div className="flex flex-col">
                 <button className="duration-300 hover:text-[#337ab7]">
@@ -55,7 +55,7 @@ const Footer = () => {
                 </button>
               </div>
             </div>
-            <div className="flex gap-[1.5em]">
+            <div className="col-span-2 flex w-full justify-center gap-[1.5em] md:w-fit">
               <Icon path={mdiEmailOpenOutline} size={1.6} />
               <button className="duration-300 hover:text-[#337ab7]">
                 <span>{'poczta@malyskarb.pl'}</span>
