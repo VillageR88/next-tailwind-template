@@ -11,7 +11,7 @@ export default function Start() {
       <Header />
       <Header2 />
       <div className="flex h-[50em] w-full items-center justify-center">
-        <span className="text-[2rem] font-[700]">Start content</span>
+        <span className="text-[2rem] font-[700]">Pliki content</span>
       </div>
       <Footer />
     </div>

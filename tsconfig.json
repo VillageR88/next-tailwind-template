@@ -31,6 +31,6 @@
     ".next/types/**/*.ts",
     "build/types/**/*.ts",
     "assets.d.ts"
-  ],
+, "app/co-jemy"  ],
   "exclude": ["node_modules"]
 }
