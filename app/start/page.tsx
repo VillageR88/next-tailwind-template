@@ -9,6 +9,8 @@ import image1 from '@/public/images/people1.jpg';
 import image2 from '@/public/images/people2.jpg';
 import signsInst from '@/public/images/signsInst.png';
 import ButtonWithSlider from '@/app/components/ButtonWithSlider';
+import { mdiRocketLaunch } from '@mdi/js';
+import Icon from '@mdi/react';
 
 export default function Start() {
   return (
@@ -20,7 +22,7 @@ export default function Start() {
           <Image className="rounded-[1.2em]" src={image1} alt="image of people" />
           <h2 className="font-baloo text-[36px]">{'O nas'}</h2>
           <Image src={signsInst} alt="Image of institutions" />
-          <div className="flex flex-col text-[15px] text-[#777] gap-[2em] py-4">
+          <div className="flex flex-col gap-[2em] py-4 text-[15px] text-[#777]">
             <span>{'Witamy serdecznie na stronie Przedszkola Muzyczno-Językowego MAŁY SKARB!'}</span>
             <span>
               {
@@ -44,6 +46,12 @@ export default function Start() {
         <div>
           <Image className="rounded-[1.2em]" src={image2} alt="image of people" />
           <h2 className="font-baloo text-[36px]">{'Nasza Misja:'}</h2>
+          <ul>
+            <div className="flex gap-3 text-[15px] text-[#777]">
+              <Icon path={mdiRocketLaunch} size={0.8} />
+              <span>test</span>
+            </div>
+          </ul>
         </div>
         <div className="flex h-[30.8em] w-full flex-col items-center justify-center gap-[2em] rounded-[1.2em] bg-[#5dba3b] text-white">
           <h3 className="font-baloo text-[24px]">{'Godziny pracy'}</h3>

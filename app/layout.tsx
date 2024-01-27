@@ -32,7 +32,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
         {/*eslint-disable-next-line @next/next/no-page-custom-font*/}
         <link
-          href="https://fonts.googleapis.com/css2?family=Baloo:wght@400;500;700;800&family=Roboto:wght@400;500;700&family=Varela+Round&display=swap"
+          href="https://fonts.googleapis.com/css2?family=Baloo:wght@400;500;700;800&family=Roboto:wght@400;500;700&family=Varela+Round&Material+Design+Icons&display=swap"
           rel="stylesheet"
         />
         <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons"></link>

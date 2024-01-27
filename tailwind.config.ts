@@ -14,6 +14,7 @@ const config: Config = {
         roboto: ['Roboto'],
         baloo: ['Baloo'],
         varelaRound: ['Varela Round'],
+        materialDesignIcons: ['Material Design Icons'],
       },
       colors: {
         // Slate
