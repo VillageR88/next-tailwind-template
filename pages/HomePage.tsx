@@ -4,7 +4,6 @@ import logo from '@/app/images/logo.png';
 import animatedButterfly from '@/app/images/butterfly2.png';
 import animatedBee from '@/app/images/bee.png';
 import ButtonWithSlider from '@/app/components/ButtonWithSlider';
-import Link from 'next/link';
 
 const HomePage = () => {
   return (
@@ -23,15 +22,14 @@ const HomePage = () => {
               />
               <div className="mt-[5em] flex w-full flex-col items-center justify-around gap-[2em] sm:flex-row sm:items-start sm:gap-[0.5em] sm:px-[1em] md:gap-[2em] md:px-[1em] lg:px-[4em] xl:gap-0 xl:px-[7em]">
                 <div className="flex flex-col items-center xl:w-[271.88px]">
-                  <Link href="/Start" passHref>
-                    <ButtonWithSlider
-                      width="w-[271.88px]"
-                      aria-label="Przedszkole Mały Skarb"
-                      buttonText="Przedszkole Mały Skarb"
-                      background1="bg-[#ff8b00]"
-                      background2="bg-[#e07b21]"
-                    />
-                  </Link>
+                  <ButtonWithSlider
+                    width="w-[271.88px]"
+                    aria-label="Przedszkole Mały Skarb"
+                    buttonText="Przedszkole Mały Skarb"
+                    background1="bg-[#ff8b00]"
+                    background2="bg-[#e07b21]"
+                    href="/Start"
+                  />
                   <div>
                     <span className="mt-[2em] flex whitespace-pre-line text-center text-[15px] leading-6 text-[#777]">
                       {`Nasze przedszkole funkcjonuje
@@ -48,6 +46,7 @@ const HomePage = () => {
                     buttonText="Centrum rozwoju"
                     background1="bg-[#5255c5]"
                     background2="bg-[#474aab]"
+                    href="/Start"
                   />
                   <div>
                     <span className="mt-[2em] flex whitespace-pre-line text-center text-[15px] leading-6 text-[#777] md:whitespace-normal">
