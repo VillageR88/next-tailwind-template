@@ -28,7 +28,7 @@ const HomePage = () => {
                     buttonText="Przedszkole Mały Skarb"
                     background1="bg-[#ff8b00]"
                     background2="bg-[#e07b21]"
-                    href="/start"
+                    href="./start"
                   />
                   <div>
                     <span className="mt-[2em] flex whitespace-pre-line text-center text-[15px] leading-6 text-[#777]">
@@ -46,7 +46,7 @@ const HomePage = () => {
                     buttonText="Centrum rozwoju"
                     background1="bg-[#5255c5]"
                     background2="bg-[#474aab]"
-                    href="/start"
+                    href="./start"
                   />
                   <div>
                     <span className="mt-[2em] flex whitespace-pre-line text-center text-[15px] leading-6 text-[#777] md:whitespace-normal">

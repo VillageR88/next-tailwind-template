@@ -7,7 +7,7 @@ const Header = () => {
   const [facebookHover, setFacebookHover] = useState(false);
 
   return (
-    <nav className="flex h-full w-full  justify-center bg-[#5DBA3B] px-4 py-2 lg:px-6 xl:px-10">
+    <nav className="flex h-full w-full justify-center bg-[#5DBA3B] px-4 py-2 lg:px-6 xl:px-10">
       <div className="flex w-full flex-col items-center justify-between pb-[0.1em] text-[0.94rem] text-[#fff] sm:flex-row xl:w-[75.7em]">
         <Link href={'/'}>
           <button>

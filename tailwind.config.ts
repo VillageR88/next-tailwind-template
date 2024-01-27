@@ -13,6 +13,7 @@ const config: Config = {
         mono: ['var(--font-mono)'],
         roboto: ['Roboto'],
         baloo: ['Baloo'],
+        varelaRound: ['Varela Round'],
       },
       colors: {
         // Slate
