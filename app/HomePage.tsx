@@ -1,8 +1,8 @@
 import React from 'react';
 import Image from 'next/image';
-import logo from '@/app/images/logo.png';
-import animatedButterfly from '@/app/images/butterfly2.png';
-import animatedBee from '@/app/images/bee.png';
+import logo from '@/public/images/logo.png';
+import animatedButterfly from '@/public/images/butterfly2.png';
+import animatedBee from '@/public/images/bee.png';
 import ButtonWithSlider from '@/app/components/ButtonWithSlider';
 
 const HomePage = () => {

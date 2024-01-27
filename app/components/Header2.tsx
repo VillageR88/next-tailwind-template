@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import logo from '@/app/images/logo.png';
+import logo from '@/public/images/logo.png';
 import { mdiEmailOpenOutline, mdiMapMarker, mdiPhone } from '@mdi/js';
 import Icon from '@mdi/react';
 import Link from 'next/link';
@@ -10,7 +10,7 @@ const Header2 = () => (
       <button>
         <div className="flex flex-col items-center decoration-[#23527c] hover:underline">
           <Image height={60} src={logo} alt="logo" />
-          <span className="font-varelaRound mt-[0.3em] text-[1.7rem] font-[800] tracking-[0.1em] text-[#00b596]">
+          <span className="mt-[0.3em] font-varelaRound text-[1.7rem] font-[800] tracking-[0.1em] text-[#00b596]">
             przedszkole
           </span>
         </div>
@@ -55,29 +55,30 @@ const Header2 = () => (
             else if ((index + 1) % 5 === 0) return { background: '#ffc000', hover: 'hover:text-[#ffc000]' };
           };
           return (
-            <Link
-              key={item}
-              href={
-                item === 'Start'
-                  ? '/start'
-                  : item === 'O nas'
-                    ? '/o-nas'
-                    : item === 'Co jemy?'
-                      ? '/co-jemy'
-                      : item === 'Kadra'
-                        ? '/kadra'
-                        : item === 'Pliki'
-                          ? '/pliki'
-                          : item === 'Rekrutacja'
-                            ? '/rekrutacja'
-                            : item === 'Wirtualny spacer'
-                              ? '/wirtualny-spacer'
-                              : item === 'Zajęcia dodatkowe'
-                                ? '/zajecia-dodatkowe'
-                                : '/start'
-              }
-            >
-              <button className={`${color()?.hover} transition duration-[250ms]`} key={index}>
+            <button className={`${color()?.hover} transition duration-[250ms]`} key={index}>
+              {' '}
+              <Link
+                key={item}
+                href={
+                  item === 'Start'
+                    ? '/start'
+                    : item === 'O nas'
+                      ? '/o-nas'
+                      : item === 'Co jemy?'
+                        ? '/co-jemy'
+                        : item === 'Kadra'
+                          ? '/kadra'
+                          : item === 'Pliki'
+                            ? '/pliki'
+                            : item === 'Rekrutacja'
+                              ? '/rekrutacja'
+                              : item === 'Wirtualny spacer'
+                                ? '/wirtualny-spacer'
+                                : item === 'Zajęcia dodatkowe'
+                                  ? '/zajecia-dodatkowe'
+                                  : '/start'
+                }
+              >
                 <div className="flex flex-col items-center gap-[0.75em]">
                   <div
                     style={{
@@ -88,8 +89,8 @@ const Header2 = () => (
                   ></div>
                   <h2 className="font-baloo text-[20px]">{item}</h2>
                 </div>
-              </button>
-            </Link>
+              </Link>
+            </button>
           );
         },
       )}
