@@ -42,7 +42,7 @@ const Header2 = () => (
       </div>
     </div>
     <div className="mt-[2.9em] h-0">
-      <div className="absolute left-0 h-[1px] w-screen bg-gray-200"></div>
+      <div className="absolute left-0 h-[1px] w-full bg-gray-200"></div>
     </div>
     <div className="mt-[1px] flex w-full justify-between px-9">
       {['Start', 'O nas', 'Co jemy?', 'Kadra', 'Pliki', 'Rekrutacja', 'Wirtualny spacer', 'Zajęcia dodatkowe'].map(
@@ -56,7 +56,6 @@ const Header2 = () => (
           };
           return (
             <button className={`${color()?.hover} transition duration-[250ms]`} key={index}>
-              {' '}
               <Link
                 key={item}
                 href={

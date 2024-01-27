@@ -8,7 +8,7 @@ import ButtonWithSlider from '@/app/components/ButtonWithSlider';
 const HomePage = () => {
   return (
     <main className="flex w-full flex-col">
-      <div className="flex h-[50.5em] w-full flex-col bg-[url('./images/home-slide_img.jpg')] bg-[50%_0%] px-5 sm:px-10">
+      <div className="flex h-[50.5em] w-full flex-col bg-[url('/public/images/home-slide_img.jpg')] bg-[50%_0%] px-5 sm:px-10">
         <div className="flex h-full w-full flex-col items-center justify-center">
           <div className="flex h-0 w-full justify-start xl:w-[69.5em]">
             <Image className="myAnimatedImage1 z-10 h-fit w-fit" src={animatedButterfly} alt="animated butterfly" />

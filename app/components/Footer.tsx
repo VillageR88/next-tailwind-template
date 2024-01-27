@@ -3,7 +3,7 @@ import Icon from '@mdi/react';
 
 const Footer = () => {
   return (
-    <footer className="flex w-full justify-center bg-[#5dba3b] bg-[url('./images/absurdity.png')] px-4 py-8 text-white lg:h-[23em] lg:px-0 lg:py-0">
+    <footer className="flex w-full justify-center bg-[#5dba3b] bg-[url('/public/images/absurdity.png')] px-4 py-8 text-white lg:h-[23em] lg:px-0 lg:py-0">
       <div className="flex h-full w-full flex-col items-center gap-[1.5em] text-[15px] lg:flex-row lg:justify-around lg:gap-0 lg:px-4 xl:w-[82em] xl:justify-center xl:gap-0 xl:px-6">
         <div className="flex h-full flex-col justify-center gap-[1em] lg:gap-[3em] xl:w-1/2">
           <span className="max-w-[27em] text-center lg:w-full lg:whitespace-pre-wrap lg:text-left xl:whitespace-normal">
