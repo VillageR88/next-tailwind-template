@@ -11,6 +11,7 @@ import signsInst from '@/public/images/signsInst.png';
 import ButtonWithSlider from '@/app/components/ButtonWithSlider';
 import { mdiRocketLaunch } from '@mdi/js';
 import Icon from '@mdi/react';
+import color5 from '@/app/components/color5';
 
 export default function Start() {
   return (
@@ -43,14 +44,24 @@ export default function Start() {
             background2="bg-[#50a033]"
           />
         </div>
-        <div>
+        <div className="flex flex-col gap-[1em]">
           <Image className="rounded-[1.2em]" src={image2} alt="image of people" />
           <h2 className="font-baloo text-[36px]">{'Nasza Misja:'}</h2>
-          <ul>
-            <div className="flex gap-3 text-[15px] text-[#777]">
-              <Icon path={mdiRocketLaunch} size={0.8} />
-              <span>test</span>
-            </div>
+          <ul className="flex flex-col gap-3">
+            {[
+              'Jesteśmy przedszkolem rodzinnym',
+              'Każde dziecko jest dla nas ważne',
+              'Dbamy o rodzinną atmosferę',
+              'Stawiamy na szczęśliwe dzieciństwo i na wszechstronny rozwój',
+              'Dbamy by dzieci były zdrowe, bezpieczne, kochane i szanowane',
+              'Stawiamy na aktywny udział Rodziców w życiu placówki',
+              'Pragniemy, aby nasi absolwenci umieli wykazać się kreatywnością, mądrością życiową, otwartością na siebie i innych, wrażliwością na piękno otaczającego świata.',
+            ].map((item, index) => (
+              <li className="flex gap-4" style={{ color: color5({ index })?.background }} key={item}>
+                <Icon path={mdiRocketLaunch} size={0.8} />
+                <span className="w-fit text-[15px] text-[#777]">{item}</span>
+              </li>
+            ))}
           </ul>
         </div>
         <div className="flex h-[30.8em] w-full flex-col items-center justify-center gap-[2em] rounded-[1.2em] bg-[#5dba3b] text-white">
