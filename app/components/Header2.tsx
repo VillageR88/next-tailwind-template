@@ -16,8 +16,8 @@ const Header2 = () => (
           </span>
         </div>
       </button>
-      <div className="sm2:gap-[3em] mt-[2em] grid flex-row items-center justify-center gap-[1em] text-[15px] text-[#777] md:flex xl:pr-8">
-        <div className="sm3:justify-center flex w-full items-center gap-[0.5em] md:w-fit">
+      <div className="mt-[2em] grid flex-row items-center justify-center gap-[1em] text-[15px] text-[#777] sm2:gap-[3em] md:flex xl:pr-8">
+        <div className="flex w-full items-center gap-[0.5em] sm3:justify-center md:w-fit">
           <Icon className="text-[#3a3f38]" path={mdiPhone} size={1.6} />
           <div className="flex flex-col gap-[0.2em]">
             <button className="duration-300 hover:text-[#5255c5]">
@@ -34,7 +34,7 @@ const Header2 = () => (
             <span className="flex whitespace-pre-wrap text-left leading-7">{'11 Listopada 68,\n80-180 Gdańsk'}</span>
           </button>
         </div>
-        <div className="sm3:col-span-2 sm3:justify-center flex w-full gap-[0.5em] md:w-fit">
+        <div className="flex w-full gap-[0.5em] sm3:col-span-2 sm3:justify-center md:w-fit">
           <Icon className="text-[#ff5157]" path={mdiEmailOpenOutline} size={1.6} />
           <button className="duration-300 hover:text-[#5255c5]">
             <span>{'poczta@malyskarb.pl'}</span>

@@ -12,6 +12,9 @@ import ButtonWithSlider from '@/app/components/ButtonWithSlider';
 import { mdiRocketLaunch } from '@mdi/js';
 import Icon from '@mdi/react';
 import color5 from '@/app/components/color5';
+import iconLearnByPlay from '@/public/images/iconLearnByPlay.png';
+import iconEatHealthy from '@/public/images/iconEatHealthy.png';
+import iconQualifiedStaff from '@/public/images/iconQualifiedStaff.png';
 
 export default function Start() {
   return (
@@ -105,6 +108,40 @@ export default function Start() {
               </div>
             </div>
           </div>
+        </div>
+        <div className="mt-24 grid w-full gap-6 sm:grid-cols-2 sm:justify-between lg:flex">
+          {[
+            {
+              icon: iconLearnByPlay,
+              title: 'Nauka przez zabawę',
+              text: 'U nas dzieci się nie nudzą.',
+              background: 'bg-[#5dba3b]',
+            },
+            {
+              icon: iconEatHealthy,
+              title: 'Zdrowe i świeże posiłki',
+              text: 'Specjalistyczna firma kateringowa dostarcza posiłki dzieciom.',
+              background: 'bg-[#ff5157]',
+            },
+            {
+              icon: iconQualifiedStaff,
+              title: 'Wykwalifikowani nauczyciele',
+              text: 'Nasi nauczyciele kochają pracować z dziećmi.',
+              background: 'bg-[#ff8b00]',
+            },
+          ].map((item, index) => (
+            <div key={item.title} className={`${index === 2 && 'sm:col-span-2 '} flex w-full justify-center lg:w-fit`}>
+              <div className="flex w-[16.5em] justify-between gap-4 ">
+                <div className={`h-[5em] w-[5em] flex-shrink-0 rounded-full ${item.background} p-4`}>
+                  <Image height={60} width={60} src={item.icon} alt="icon" />
+                </div>
+                <div className="flex flex-col">
+                  <h4 className="font-baloo text-[20px] text-[#090605]">{item.title}</h4>
+                  <p className="mt-2 text-[15px] text-[#777]">{item.text}</p>
+                </div>
+              </div>
+            </div>
+          ))}
         </div>
       </div>
       <Footer />
