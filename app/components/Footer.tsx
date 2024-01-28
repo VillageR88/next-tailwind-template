@@ -37,14 +37,14 @@ const Footer = () => {
           <span className="mt-[2em] text-center lg:text-left">
             {'Napisz do nas email bądź zadzwoń na jeden z podanych numerów telefonu.'}
           </span>
-          <div className="mt-[2em] grid grid-cols-2 flex-row items-center gap-[1em] md:flex">
-            <div className="flex w-full justify-center gap-[1.5em]  md:w-fit">
+          <div className="sm3:grid-cols-2 mt-[2em] grid flex-row items-center justify-center gap-[1.5em] md:flex">
+            <div className="sm3:justify-center flex w-full gap-[1em] md:w-fit">
               <Icon path={mdiMapMarker} size={1.6} />
               <button className="duration-300 hover:text-[#337ab7]">
                 <span className="flex whitespace-pre-wrap text-left">{'11 Listopada 68,\n80-180 Gdańsk'}</span>
               </button>
             </div>
-            <div className="flex w-full justify-center gap-[1.5em] md:w-fit">
+            <div className="sm3:justify-center flex w-full gap-[1em] md:w-fit">
               <Icon path={mdiPhone} size={1.6} />
               <div className="flex flex-col">
                 <button className="duration-300 hover:text-[#337ab7]">
@@ -55,7 +55,7 @@ const Footer = () => {
                 </button>
               </div>
             </div>
-            <div className="col-span-2 flex w-full justify-center gap-[1.5em] md:w-fit">
+            <div className="sm3:col-span-2 sm3:justify-center flex w-full gap-[1em] md:w-fit">
               <Icon path={mdiEmailOpenOutline} size={1.6} />
               <button className="duration-300 hover:text-[#337ab7]">
                 <span>{'poczta@malyskarb.pl'}</span>

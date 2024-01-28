@@ -8,6 +8,12 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      screens: {
+        sm4: '320px',
+        sm3: '400px',
+        sm2: '480px',
+        sm1: '576px',
+      },
       fontFamily: {
         sans: ['var(--font-sans)'],
         mono: ['var(--font-mono)'],
