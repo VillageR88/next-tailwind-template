@@ -13,13 +13,13 @@ html {
 }
 @layer base {
   h1 {
-    @apply text-[1.96rem] font-medium text-white;
+    @apply sm:text-[1.96rem] text-[1.4rem] font-medium text-white;
   }
   h2 {
-    @apply text-[0.8rem] font-semibold tracking-[0.105em] text-[#939393];
+    @apply sm:text-[0.8rem] text-[0.7rem] font-semibold tracking-[0.105em] text-[#939393];
   }
   .span1 {
-    @apply text-[1.6rem] font-medium text-[black];
+    @apply sm:text-[1.6rem] text-[1.2rem] font-medium text-[black];
   }
  
 }

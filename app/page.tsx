@@ -98,11 +98,11 @@ export default function Home() {
 
   return !isMenuOpen ? (
     (location ?? isMockup) && (
-      <main className="flex min-h-screen flex-col items-center justify-center font-rubik">
+      <main className="flex min-h-[100dvh] flex-col items-center justify-center font-rubik">
         <div className="flex h-[50em] w-full flex-col bg-white">
-          <div className="flex h-full w-full flex-col bg-[url('./images/pattern-bg-desktop.png')] bg-no-repeat">
-            <div className="mt-[1.6em] flex h-[24.5em] w-full flex-col items-center">
-              <h1>IP Address Tracker</h1>
+          <div className="flex h-[20em] sm:h-full w-full flex-col bg-[url('./images/pattern-bg-mobile.png')] bg-cover bg-no-repeat sm:bg-[url('./images/pattern-bg-desktop.png')] sm:bg-auto">
+            <div className="mt-[1.6em] flex h-[40em] w-full flex-col items-center px-5 sm:h-[24.5em] sm:px-0">
+              <h1 className="flex text-center">IP Address Tracker</h1>
               <form
                 id="form"
                 onSubmit={(e) => {
@@ -114,14 +114,14 @@ export default function Home() {
                     setSendRequest(true);
                   }
                 }}
-                className="mt-[1.35em] flex h-[3.65em] w-[34.688em] rounded-[1em] "
+                className="mt-[1.35em] flex h-[3.65em] w-full sm:w-[34.688em] "
               >
                 <input
                   onChange={(e) => {
                     setText(e.target.value);
                   }}
                   value={text}
-                  className="h-full w-full rounded-l-[1em] pl-[1.3em] pr-[2.5em] text-[1.15em] tracking-[-0.008em] outline-none"
+                  className="h-full w-full rounded-l-[0.8em] pl-[1.3em] pr-[2.5em] text-[1.15em] tracking-[-0.008em] outline-none"
                   type="text"
                   placeholder="Search for any IP address or domain"
                 />
@@ -136,41 +136,43 @@ export default function Home() {
                   <Image src={iconArrow as string} alt="Search" />
                 </button>
               </form>
-              <div className="absolute z-10 mt-[10.95em] flex min-h-[10.05em] w-[69.4em] rounded-[1em] bg-white pb-[1em] pl-[2em] ">
-                <div className="flex w-[15.3em] flex-col gap-[0.45em] pt-[2.1em]">
-                  <h2>IP ADDRESS</h2>
-                  <span className="span1">{location ? location.ip : '192.212.174.101'}</span>
-                </div>
-                <div className="flex items-start gap-[2em]">
-                  <div className="mt-[1em] h-[4.7em] w-[1px] self-center bg-[#d3cfcf]"></div>
-                  <div className="flex w-[15.35em] flex-col gap-[0.7em] pr-[1em] pt-[2.1em]">
-                    <h2>LOCATION</h2>
-                    <span className="span1 leading-[1.2em]">
-                      {location ? location.location.country + ', ' + location.location.region : 'US, California'}
-                    </span>
+              <div className="absolute flex w-full justify-center px-1.5">
+                <div className="lg3:flex lg3:w-[69.4em] z-10 mx-4 mt-[8.5em] flex min-h-[10.05em] w-full flex-col  gap-5 rounded-[1em] bg-white py-7 sm:mx-0 sm:mt-[10.95em] sm:grid sm:w-auto sm:grid-cols-2 sm:flex-row sm:gap-0 sm:py-0 sm:pb-[1em] sm:pl-[2em] ">
+                  <div className="flex flex-col text-center sm:w-[15.3em] sm:gap-[0.45em] sm:pt-[2.1em] sm:text-left">
+                    <h2>IP ADDRESS</h2>
+                    <span className="span1 px-4 sm:px-0">{location ? location.ip : '192.212.174.101'}</span>
                   </div>
-                </div>
-                <div className="flex items-start gap-[2em]">
-                  <div className="mt-[1em] h-[4.7em]  w-[1px] self-center bg-[#d3cfcf]"></div>
-                  <div className="flex w-[15.25em] flex-col gap-[0.7em] pr-[1em] pt-[2.1em]">
-                    <h2>TIMEZONE</h2>
-                    <span className="span1 leading-[1.2em]">
-                      {location ? 'UTC ' + location.location.timezone : 'UTC -08:00'}
-                    </span>
+                  <div className="flex justify-center gap-[2em] text-center sm:items-start sm:text-left">
+                    <div className="hidden h-[4.7em] w-[1px] self-center bg-[#d3cfcf] sm:mt-[1em] sm:block"></div>
+                    <div className="flex flex-col sm:w-[15.35em] sm:gap-[0.7em] sm:pr-[1em] sm:pt-[2.1em]">
+                      <h2>LOCATION</h2>
+                      <span className="span1 px-4 leading-[1.2em] sm:px-0">
+                        {location ? location.location.country + ', ' + location.location.region : 'US, California'}
+                      </span>
+                    </div>
                   </div>
-                </div>
-                <div className="flex items-start gap-[2em]">
-                  <div className="mt-[1em] h-[4.7em]  w-[1px] self-center bg-[#d3cfcf]"></div>
-                  <div className="flex w-[12em] flex-col gap-[0.7em] pr-[1em] pt-[2.1em]">
-                    <h2>ISP</h2>
-                    <span className="span1 leading-[1.2em]">
-                      {location ? location.isp : 'Southern California Edison'}
-                    </span>
+                  <div className="flex justify-center gap-[2em] text-center sm:items-start sm:justify-start sm:text-left">
+                    <div className="lg3:block hidden h-[4.7em] w-[1px] self-center bg-[#d3cfcf] sm:mt-[1em]"></div>
+                    <div className="flex flex-col pr-[1em] sm:w-[15.25em] sm:gap-[0.7em] sm:pt-[2.1em]">
+                      <h2>TIMEZONE</h2>
+                      <span className="span1 px-4 leading-[1.2em] sm:px-0">
+                        {location ? 'UTC ' + location.location.timezone : 'UTC -08:00'}
+                      </span>
+                    </div>
+                  </div>
+                  <div className="flex justify-center text-center sm:items-start sm:justify-start sm:gap-[2em] sm:text-left">
+                    <div className="hidden h-[4.7em] w-[1px] self-center bg-[#d3cfcf] sm:mt-[1em] sm:block"></div>
+                    <div className="flex flex-col sm:w-[12em] sm:gap-[0.7em] sm:pr-[1em] sm:pt-[2.1em]">
+                      <h2>ISP</h2>
+                      <span className="span1 px-4 leading-[1.2em] sm:px-0">
+                        {location ? location.isp : 'Southern California Edison'}
+                      </span>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-            <div id="map" className=" h-full w-full">
+            </div>{' '}
+            <div id="map" className="hidden h-full w-full sm:block">
               <MapContainer
                 center={mapCenter}
                 zoom={13}
@@ -189,19 +191,37 @@ export default function Home() {
               </MapContainer>
             </div>
           </div>
+          <div id="map" className="block h-full w-full sm:hidden">
+            <MapContainer
+              center={mapCenter}
+              zoom={13}
+              scrollWheelZoom={false}
+              dragging={false}
+              doubleClickZoom={false}
+              touchZoom={false}
+              zoomControl={false}
+            >
+              <TileLayer
+                attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+              />
+              <Marker icon={customIcon} position={mapCenter}></Marker>
+              <MapUpdater center={mapCenter} />
+            </MapContainer>
+          </div>
         </div>
       </main>
     )
   ) : (
-    <main className="flex min-h-screen flex-col items-center justify-center font-rubik">
-      <div className="flex h-full w-full flex-col">
-        <div className="flex h-full w-full flex-col bg-[url('./images/pattern-bg-desktop.png')] bg-no-repeat">
-          <div className="mt-[1.6em] flex h-[24.5em] w-full flex-col items-center gap-2">
+    <main className="flex min-h-[100dvh] flex-col items-center justify-center font-rubik">
+      <div className="flex h-full w-full flex-col sm:min-w-[45em]">
+        <div className="flex h-full w-full flex-col bg-[url('./images/pattern-bg-mobile.png')] bg-cover bg-center bg-no-repeat sm:bg-[url('./images/pattern-bg-desktop.png')] sm:bg-auto sm:bg-top">
+          <div className="flex h-[24.5em] w-full flex-col items-center justify-center gap-2 sm:mt-[1.6em] sm:justify-start">
             <h1>IP Address Tracker</h1>
             {menuPhase === MenuPhase.initial ? (
               <div className="flex flex-col items-center gap-3 text-white">
-                <span className="text-[1.6rem] font-[500]">{'Chose Variant:'}</span>
-                <div className="flex justify-center gap-5">
+                <span className="text-[1.2rem] font-[500] sm:text-[1.6rem]">{'Chose Variant:'}</span>
+                <div className="flex flex-col justify-center gap-5 sm:flex-row">
                   <button
                     onClick={() => {
                       setIsMenuOpen(false);
@@ -223,8 +243,8 @@ export default function Home() {
               </div>
             ) : menuPhase === MenuPhase.apiSettings ? (
               <div className="flex flex-col items-center gap-3 text-white">
-                <span className="text-[1.6rem] font-[500]">{'API Fetch'}</span>
-                <div className="flex justify-center gap-5">
+                <span className="text-[1.2rem] font-[500] sm:text-[1.6rem]">{'API Fetch'}</span>
+                <div className="flex flex-col justify-center gap-5 sm:flex-row">
                   <button
                     onClick={() => {
                       setMenuPhase(MenuPhase.apiKey);
@@ -245,13 +265,15 @@ export default function Home() {
                 </div>
                 <div className="mt-1">
                   {error && (
-                    <span className="underline decoration-red-600 decoration-2 underline-offset-[3px]">{error}</span>
+                    <span className="flex text-pretty px-4 text-center underline decoration-red-600 decoration-2 underline-offset-[3px]">
+                      {error}
+                    </span>
                   )}
                 </div>
               </div>
             ) : (
               <div className="flex flex-col items-center gap-1 text-white">
-                <span className="text-[1.6rem] font-[500]">{'API Key'}</span>
+                <span className="text-[1.2rem] font-[500] sm:text-[1.6rem]">{'API Key'}</span>
                 <div className="flex justify-center"> </div>
                 <form
                   id="key"
@@ -260,11 +282,13 @@ export default function Home() {
                   }}
                   onKeyDown={(e) => {
                     if (e.key === 'Enter') {
-                      setIp(text);
-                      setSendRequest(true);
+                      setApiKey(text);
+                      localStorage.setItem('apiKey', text);
+                      setMenuPhase(MenuPhase.apiSettings);
+                      setText('');
                     }
                   }}
-                  className="flex h-[3em] w-[34.688em] rounded-[0.6em] text-black"
+                  className="flex h-[3em] text-black sm:w-[34.688em]"
                 >
                   <input
                     onChange={(e) => {
