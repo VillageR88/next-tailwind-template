@@ -2,7 +2,7 @@
 import Image from 'next/image';
 import iconArrow from './images/icon-arrow.svg';
 import { useEffect, useState } from 'react';
-import { MapContainer, TileLayer, Marker } from 'react-leaflet';
+import { MapContainer, TileLayer, Marker, useMap } from 'react-leaflet';
 import { Icon } from 'leaflet';
 
 export default function Home() {
@@ -28,18 +28,20 @@ export default function Home() {
     };
     isp: string;
   }
-
+  // MapUpdater component
+  function MapUpdater({ center }: { center: [number, number] }) {
+    const map = useMap();
+    useEffect(() => {
+      map.panTo(center);
+    }, [center, map]);
+    return null;
+  }
   const [text, setText] = useState('');
   const [ip, setIp] = useState('');
   const [location, setLocation] = useState<locationJSON | null>(null);
   const [sendRequest, setSendRequest] = useState(true);
   const [mapCenter, setMapCenter] = useState<[number, number]>([51.505, -0.09]);
   console.log('Map Center:', mapCenter);
-  useEffect(() => {
-    if (location) {
-      setMapCenter([location.location.lat, location.location.lng]);
-    }
-  }, [location]);
 
   console.log(location);
   useEffect(() => {
@@ -47,8 +49,9 @@ export default function Home() {
       const fetchData = async () => {
         await fetch(`https://geo.ipify.org/api/v2/country,city?apiKey=at_xqRkAKbgy6cRtBa0DgnrGia2novyw&ipAddress=${ip}`)
           .then((res) => res.json())
-          .then((data) => {
-            setLocation(data as locationJSON);
+          .then((data: locationJSON) => {
+            setLocation(data);
+            setMapCenter([data.location.lat, data.location.lng]); // Update the map center
             console.log('Updated Location:', data);
           })
           .catch((err) => {
@@ -150,6 +153,7 @@ export default function Home() {
                   url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                 />
                 <Marker icon={customIcon} position={mapCenter}></Marker>
+                <MapUpdater center={mapCenter} />
               </MapContainer>
             </div>
           </div>
