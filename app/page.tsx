@@ -100,7 +100,7 @@ export default function Home() {
     (location ?? isMockup) && (
       <main className="flex min-h-[100dvh] flex-col items-center justify-center font-rubik">
         <div className="flex h-[50em] w-full flex-col bg-white">
-          <div className="flex h-[20em] sm:h-full w-full flex-col bg-[url('./images/pattern-bg-mobile.png')] bg-cover bg-no-repeat sm:bg-[url('./images/pattern-bg-desktop.png')] sm:bg-auto">
+          <div className="flex h-[20em] w-full flex-col bg-[url('./images/pattern-bg-mobile.png')] bg-cover bg-no-repeat sm:h-full sm:bg-[url('./images/pattern-bg-desktop.png')] sm:bg-auto">
             <div className="mt-[1.6em] flex h-[40em] w-full flex-col items-center px-5 sm:h-[24.5em] sm:px-0">
               <h1 className="flex text-center">IP Address Tracker</h1>
               <form
@@ -214,9 +214,9 @@ export default function Home() {
     )
   ) : (
     <main className="flex min-h-[100dvh] flex-col items-center justify-center font-rubik">
-      <div className="flex h-full w-full flex-col sm:min-w-[45em]">
+      <div className="flex h-full w-full flex-col sm:w-[40em]">
         <div className="flex h-full w-full flex-col bg-[url('./images/pattern-bg-mobile.png')] bg-cover bg-center bg-no-repeat sm:bg-[url('./images/pattern-bg-desktop.png')] sm:bg-auto sm:bg-top">
-          <div className="flex h-[24.5em] w-full flex-col items-center justify-center gap-2 sm:mt-[1.6em] sm:justify-start">
+          <div className="mt-[4em] flex h-[18em] w-full flex-col items-center gap-2 sm:mt-[2.4em] sm:h-[24.5em] sm:justify-start">
             <h1>IP Address Tracker</h1>
             {menuPhase === MenuPhase.initial ? (
               <div className="flex flex-col items-center gap-3 text-white">
