@@ -167,13 +167,11 @@ export default function Home() {
     );
   };
 
-  //const color1HoverSimulation = 'bg-[#fd729c]';
-
   return (
     <main className="flex min-h-screen flex-col items-center justify-center font-rubik">
-      <div className="relative flex h-[50em] w-full justify-between bg-[#FAFAFA]">
-        <div className="absolute inset-0 ml-[6.6em] flex items-center justify-center gap-[7.8em]">
-          <div className="flex h-[31.5em] min-w-[15.45em] items-center justify-center rounded-[2em] bg-[#FFFFFF] px-[0.6em] pb-[0.6em] pt-[0.7em] shadow-2xl">
+      <div className="relative flex h-[57em] w-full justify-between bg-[#FAFAFA] md:h-[50em]">
+        <div className="absolute flex h-full flex-col  items-center justify-center gap-10 px-4 py-10 sm:gap-[3em] md:inset-0 md:ml-[3em] md:flex-row md:gap-[6em] md:px-10 md:py-0 lg:ml-[5em] xl:ml-[6.6em] xl:gap-[7.8em]">
+          <div className="xs:w-auto xs:min-w-[15.45em] flex w-[16em] items-center justify-center rounded-[2em] bg-[#FFFFFF] px-[0.6em] pb-[0.6em] pt-[0.7em] shadow-2xl md:h-[31.5em]">
             <div className="flex h-full w-[99.5%] flex-col items-center justify-center rounded-[1.2em] bg-[#F5F3F8]">
               <div className="flex h-[4.8em] w-full flex-col items-center rounded-[0.3em] rounded-t-[1.2em] bg-gradient-to-r from-[hsl(264,100%,61%)] to-[hsl(293,100%,63%)]">
                 <div className="h-[1.55em] w-[8em] rounded-b-[0.8em] bg-[#FFFFFF]"></div>
@@ -246,18 +244,20 @@ export default function Home() {
               </form>
             </div>
           </div>
-          <div className="flex w-[28em] flex-col gap-[1.1em]">
-            <span className="text-[2.5rem] font-[500] text-[hsl(271,36%,24%)]">{'Simple booking'}</span>
-            <span className="leading-[1.75em] text-[hsl(270,7%,64%)]">
+          <div className="flex flex-col items-center gap-[1.1em] md:w-[28em] md:items-start ">
+            <span className="flex  text-center text-[2.5rem] font-[500] text-[hsl(271,36%,24%)] md:text-left">
+              {'Simple booking'}
+            </span>
+            <span className="flex text-center leading-[1.75em] text-[hsl(270,7%,64%)] md:text-left">
               Stay in touch with our dog walkers through the chat interface. This makes it easy to discuss arrangements
               and make bookings. Once the walk has been completed you can rate your walker and book again all through
               the chat.
             </span>
           </div>
         </div>
-        <div className="ml-[-5.75em] h-[87.5%] w-[32em] rounded-b-full bg-gradient-to-b from-[#CE41FF] to-[hsl(264,100%,61%)] "></div>
+        <div className="ml-[-20em] h-[60%] min-w-[32em] rounded-b-full bg-gradient-to-b from-[#CE41FF] to-[hsl(264,100%,61%)] md:ml-[-5.75em] md:h-[87.5%] "></div>
         <div className="flex flex-col justify-end">
-          <div className="mr-[-11.75em] h-[85.1%] w-[32em] rounded-t-full bg-[#F7F5FA]"></div>
+          <div className="mr-[-11.75em] h-[50%] w-[32em] rounded-t-full bg-[#F7F5FA] md:h-[87.5%]"></div>
         </div>
       </div>
     </main>
