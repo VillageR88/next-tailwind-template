@@ -6,53 +6,135 @@ import avatar from '../public/images/avatar.jpg';
 import dogImage1 from '../public/images/dog-image-1.jpg';
 import dogImage2 from '../public/images/dog-image-2.jpg';
 import dogImage3 from '../public/images/dog-image-3.jpg';
-import { LegacyRef, useEffect, useRef } from 'react';
+import { useEffect, useMemo, useState, useRef } from 'react';
 export default function Home() {
-  const chatRef1 = useRef<HTMLDivElement | null>(null);
-  const chatRef2 = useRef<HTMLDivElement | null>(null);
-  const chatRef3 = useRef<HTMLDivElement | null>(null);
-  const chatRef4 = useRef<HTMLDivElement | null>(null);
-  const chatRef5 = useRef<HTMLDivElement | null>(null);
-  const chatRef6 = useRef<HTMLDivElement | null>(null);
-  const chatRef7 = useRef<HTMLDivElement | null>(null);
-  const chatRef8 = useRef<HTMLDivElement | null>(null);
-  useEffect(() => {
-    if (chatRef1.current) chatRef1.current.classList.remove('invisible');
-  }, []);
+  const [chat1Visible, setChat1Visible] = useState<boolean>(false);
+  const [chat2Visible, setChat2Visible] = useState<boolean>(false);
+  const [chat3Visible, setChat3Visible] = useState<boolean>(false);
+  const [chat4Visible, setChat4Visible] = useState<boolean>(false);
+  const [chat5Visible, setChat5Visible] = useState<boolean>(false);
+  const [chat6Visible, setChat6Visible] = useState<boolean>(false);
+  const [chat7Visible, setChat7Visible] = useState<boolean>(false);
+  const [chat8Visible, setChat8Visible] = useState<boolean>(false);
+  const [shortBreak, setShortBreak] = useState<boolean>(false);
+  const inputRef = useRef<HTMLInputElement | null>(null);
 
-  const ChatTextLeft = ({ text, reference }: { text: string; reference: LegacyRef<HTMLDivElement> | undefined }) => {
+  const [inputText, setInputText] = useState<string>('');
+  const [textState, setTextState] = useState<number>(1);
+  const messageSelected = useMemo(() => {
+    return {
+      1: 'That sounds great. I’d be happy with that.',
+      2: 'Could you send over some pictures of your dog, please?',
+      3: 'Here are a few pictures. She’s a happy girl!',
+      4: 'Can you make it?',
+      5: 'She looks so happy! The time we discussed works. How long shall I take her out for?',
+    };
+  }, []);
+  useEffect(() => {
+    if (inputRef.current) inputRef.current.scrollTo(1000, 0);
+  });
+
+  useEffect(() => {
+    if (shortBreak) {
+      setTimeout(() => {
+        setShortBreak(false);
+      }, 1000);
+      return;
+    }
+    if (textState > 5) {
+      setTimeout(() => {
+        setChat7Visible(true);
+      }, 1500);
+      setTimeout(() => {
+        setChat8Visible(true);
+      }, 2000);
+      setTimeout(() => {
+        setTextState(1);
+        setChat1Visible(false);
+        setChat2Visible(false);
+        setChat3Visible(false);
+        setChat4Visible(false);
+        setChat5Visible(false);
+        setChat6Visible(false);
+        setChat7Visible(false);
+        setChat8Visible(false);
+      }, 6000);
+      return;
+    }
+    const interval = setInterval(() => {
+      if (inputText.length < (messageSelected as unknown as string[])[textState].length) {
+        setInputText((prev: string) => prev + (messageSelected as unknown as string[])[textState][inputText.length]);
+      } else if (textState === 1 && !chat1Visible) {
+        setChat1Visible(true);
+        setInputText('');
+        setTextState(2);
+        setShortBreak(true);
+      } else if (textState === 2 && !chat2Visible) {
+        setChat2Visible(true);
+        setInputText('');
+        setTextState(3);
+        setShortBreak(true);
+      } else if (textState === 3 && !chat3Visible) {
+        setChat3Visible(true);
+        setChat4Visible(true);
+        setInputText('');
+        setTextState(4);
+        setShortBreak(true);
+      } else if (textState === 4 && !chat5Visible) {
+        setChat5Visible(true);
+        setInputText('');
+        setTextState(5);
+        setShortBreak(true);
+      } else if (textState === 5 && !chat6Visible) {
+        setChat6Visible(true);
+        setInputText('');
+        setTextState(6);
+        setShortBreak(true);
+      }
+    }, 70);
+    return () => {
+      clearInterval(interval);
+    };
+  }, [
+    chat1Visible,
+    chat2Visible,
+    chat3Visible,
+    chat5Visible,
+    chat6Visible,
+    inputText.length,
+    messageSelected,
+    shortBreak,
+    textState,
+  ]);
+
+  const ChatTextLeft = ({ text, visibility }: { text: string; visibility: boolean }) => {
     return (
       <div
-        ref={reference}
-        className="invisible mt-[1em] max-w-[16em] self-start rounded-[1em] rounded-bl-[0.6em] bg-[#EDE5F4] px-[1em] py-[0.65em] leading-[1.4em]"
+        className={`${
+          !visibility && 'invisible'
+        } mt-[1em] max-w-[16em] self-start rounded-[1em] rounded-bl-[0.6em] bg-[#EDE5F4] px-[1em] py-[0.65em] leading-[1.4em]`}
       >
         <span className="text-[hsl(276,55%,52%)]">{text}</span>
       </div>
     );
   };
-  const ChatTextRight = ({ text, reference }: { text: string; reference: LegacyRef<HTMLDivElement> | undefined }) => {
+  const ChatTextRight = ({ text, visibility }: { text: string; visibility: boolean }) => {
     return (
       <div
-        ref={reference}
-        className="invisible mt-[1em] max-w-[16em] self-end rounded-[1em] rounded-br-[0.6em] bg-[#FFFFFF] px-[1em] py-[0.65em] leading-[1.4em]"
+        className={`${
+          !visibility && 'invisible'
+        } mt-[1em] max-w-[16em] self-end rounded-[1em] rounded-br-[0.6em] bg-[#FFFFFF] px-[1em] py-[0.65em] leading-[1.4em]`}
       >
         <span className="text-[hsl(240,1%,32%)]">{text}</span>
       </div>
     );
   };
-  const Offer = ({
-    time,
-    price,
-    reference,
-  }: {
-    time: string;
-    price: string;
-    reference: LegacyRef<HTMLDivElement> | undefined;
-  }) => {
+  const Offer = ({ time, price, visibility }: { time: string; price: string; visibility: boolean }) => {
     return (
       <div
-        ref={reference}
-        className="invisible mt-[1em] flex w-[20em] items-center justify-between self-start rounded-[1.5em] rounded-bl-[0.4em] bg-gradient-to-r from-[hsl(293,100%,63%)] to-[hsl(264,100%,61%)] px-[1em] py-[1em] leading-[1.4em]"
+        className={`${
+          !visibility && 'invisible'
+        } mt-[1em] flex w-[20em] items-center justify-between self-start rounded-[1.5em] rounded-bl-[0.4em] bg-gradient-to-r from-[hsl(293,100%,63%)] to-[hsl(264,100%,61%)] px-[1em] py-[1em] leading-[1.4em]`}
       >
         <div className="flex h-[2em] items-center gap-[1em]">
           <div className="h-[1.5em] w-[1.5em] rounded-full border border-[#ed7afc]"></div>
@@ -107,37 +189,31 @@ export default function Home() {
               >
                 <div className="flex select-none flex-col">
                   <div>
-                    <ChatTextLeft
-                      reference={chatRef1}
-                      key={'step1'}
-                      text="That sounds great. I’d be happy with that."
-                    />
+                    <ChatTextLeft visibility={chat1Visible} key={'step1'} text={messageSelected[1]} />
                   </div>
-                  <ChatTextLeft reference={chatRef2} text="Could you send over some pictures of your dog, please?" />
-                  <div ref={chatRef3} className="invisible mt-[2.1em] flex justify-end gap-[0.95em]">
+                  <ChatTextLeft visibility={chat2Visible} text={messageSelected[2]} />
+                  <div className={`${!chat3Visible && 'invisible'} mt-[2.1em] flex justify-end gap-[0.95em]`}>
                     <Image className="rounded-[1.2em]" height={40} src={dogImage1} alt="dog image" />
                     <Image className="rounded-[1.2em]" height={40} src={dogImage2} alt="dog image" />
                     <Image className="rounded-[1.2em]" height={40} src={dogImage3} alt="dog image" />
                   </div>
-                  <ChatTextRight reference={chatRef4} text="Here are a few pictures. She’s a happy girl!" />
-                  <ChatTextRight reference={chatRef5} text="Can you make it?" />
+                  <ChatTextRight visibility={chat4Visible} text={messageSelected[3]} />
+                  <ChatTextRight visibility={chat5Visible} text={messageSelected[4]} />
                   <div className="h-[1.5em]"></div>
-                  <ChatTextLeft
-                    reference={chatRef6}
-                    text="She looks so happy! The time we discussed works. How long shall I take her out for? "
-                  />
-                  <Offer reference={chatRef7} time="30 minutes walk" price="$29" />
-                  <Offer reference={chatRef8} time="1 hour walk" price="$49" />
+                  <ChatTextLeft visibility={chat6Visible} text={messageSelected[5]} />
+                  <Offer visibility={chat7Visible} time="30 minutes walk" price="$29" />
+                  <Offer visibility={chat8Visible} time="1 hour walk" price="$49" />
                 </div>
                 <div className="flex h-[4.5em] items-center justify-between rounded-[4em] bg-white pr-1">
+                  <div className="z-20 h-full w-full select-none"></div>
                   <input
-                    value={''}
-                    disabled
-                    className="text h-full w-full select-none rounded-[4em] pl-5 pr-1 font-rubik text-[0.6rem] placeholder-[hsl(206,6%,79%)] outline-none disabled:bg-white"
+                    ref={inputRef}
+                    value={inputText}
+                    className="absolute z-0 w-[19em] select-none rounded-[4em] pl-5 pr-1 font-rubik text-[0.6rem] placeholder-[hsl(206,6%,79%)] outline-none selection:bg-inherit disabled:bg-white"
                     placeholder="Type a message..."
                     type="text"
                   />
-                  <div className="flex select-none items-center justify-center rounded-full bg-[#3C2553] p-[0.5em]">
+                  <div className="flex select-none items-center justify-center rounded-full bg-[#3C2553] p-[0.5em] ">
                     <Image
                       className="mr-[-1px] select-none"
                       height={21}
