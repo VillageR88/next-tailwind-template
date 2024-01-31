@@ -44,10 +44,10 @@ export default function Home() {
     if (textState > 5) {
       setTimeout(() => {
         setChat7Visible(true);
-      }, 1500);
+      }, 2000);
       setTimeout(() => {
         setChat8Visible(true);
-      }, 2000);
+      }, 3000);
       setTimeout(() => {
         setTextState(1);
         setChat1Visible(false);
@@ -58,9 +58,40 @@ export default function Home() {
         setChat6Visible(false);
         setChat7Visible(false);
         setChat8Visible(false);
-      }, 6000);
+      }, 10000);
       return;
     }
+    if (
+      (inputText.length === 18 && textState === 1) ||
+      (inputText.length === 45 && textState === 2) ||
+      (textState === 5 && (inputText.length === 19 || inputText.length === 48))
+    ) {
+      setTimeout(() => {
+        setInputText((prev: string) => prev + (messageSelected as unknown as string[])[textState][inputText.length]);
+      }, 400);
+      return;
+    }
+
+    if (textState === 3) {
+      setTimeout(() => {
+        setChat3Visible(true);
+        setChat4Visible(true);
+        setInputText('');
+        setTextState(4);
+        setShortBreak(true);
+      }, 5000);
+      return;
+    }
+    if (textState === 4) {
+      setTimeout(() => {
+        setChat5Visible(true);
+        setInputText('');
+        setTextState(5);
+        setShortBreak(true);
+      }, 2000);
+      return;
+    }
+
     const interval = setInterval(() => {
       if (inputText.length < (messageSelected as unknown as string[])[textState].length) {
         setInputText((prev: string) => prev + (messageSelected as unknown as string[])[textState][inputText.length]);
@@ -73,17 +104,6 @@ export default function Home() {
         setChat2Visible(true);
         setInputText('');
         setTextState(3);
-        setShortBreak(true);
-      } else if (textState === 3 && !chat3Visible) {
-        setChat3Visible(true);
-        setChat4Visible(true);
-        setInputText('');
-        setTextState(4);
-        setShortBreak(true);
-      } else if (textState === 4 && !chat5Visible) {
-        setChat5Visible(true);
-        setInputText('');
-        setTextState(5);
         setShortBreak(true);
       } else if (textState === 5 && !chat6Visible) {
         setChat6Visible(true);
@@ -185,7 +205,7 @@ export default function Home() {
               </div>
               <form
                 id="chat"
-                className="flex h-full w-[100.5%] flex-col justify-between rounded-b-[1.2em] bg-[#F5F3F8] px-[1em] pb-[1.3em] pt-[0.5em] text-[0.5rem]"
+                className="flex h-full w-[100.5%] flex-col justify-between rounded-b-[3.2em] bg-[#F5F3F8] px-[1em] pb-[1.3em] pt-[0.5em] text-[0.5rem]"
               >
                 <div className="flex select-none flex-col">
                   <div>
