@@ -1,14 +1,46 @@
 import Image from 'next/image';
 import Chevron_left_font_awesome from '../public/images/Chevron_left_font_awesome.svg';
+import Chevron_right from '../public/images/Feather-arrows-chevron-right.svg';
 import avatar from '../public/images/avatar.jpg';
+import dogImage1 from '../public/images/dog-image-1.jpg';
+import dogImage2 from '../public/images/dog-image-2.jpg';
+import dogImage3 from '../public/images/dog-image-3.jpg';
 export default function Home() {
+  const ChatTextLeft = ({ text }: { text: string }) => {
+    return (
+      <div className="mt-[1em] max-w-[16em] self-start rounded-[1em] rounded-bl-[0.6em] bg-[#EDE5F4] px-[1em] py-[0.65em] leading-[1.4em]">
+        <span className="text-[hsl(276,55%,52%)]">{text}</span>
+      </div>
+    );
+  };
+  const ChatTextRight = ({ text }: { text: string }) => {
+    return (
+      <div className="mt-[1em] max-w-[16em] self-end rounded-[1em] rounded-br-[0.6em] bg-[#FFFFFF] px-[1em] py-[0.65em] leading-[1.4em]">
+        <span className="text-[hsl(271,15%,43%)]">{text}</span>
+      </div>
+    );
+  };
+  const Offer = ({ time, price }: { time: string; price: string }) => {
+    return (
+      <div className="mt-[1em] flex w-[20em] items-center justify-between self-start rounded-[1.5em] rounded-bl-[0.4em] bg-gradient-to-r from-[hsl(293,100%,63%)] to-[hsl(264,100%,61%)] px-[1em] py-[1em] leading-[1.4em]">
+        <div className="flex h-[2em] items-center gap-[1em]">
+          <div className="h-[1.5em] w-[1.5em] rounded-full border border-[#ed7afc]"></div>
+          <span className="text-[0.45rem] text-[#eec8ee]">{time}</span>
+        </div>
+        <div className="mr-[1em] flex items-center">
+          <span className="text-[0.75rem] font-[700] text-[#FFDFFF]">{price}</span>
+        </div>
+      </div>
+    );
+  };
+
   return (
     <main className="flex min-h-screen flex-col items-center justify-center font-rubik">
       <div className="relative flex h-[50em] w-full justify-between bg-[#FAFAFA]">
         <div className="absolute inset-0 ml-[6.6em] flex items-center justify-center gap-[7.8em]">
           <div className="flex h-[31.5em] min-w-[15.45em] items-center justify-center rounded-[2em] bg-[#FFFFFF] px-[0.6em] pb-[0.6em] pt-[0.7em] shadow-2xl">
             <div className="flex h-full w-[99.5%] flex-col items-center justify-center rounded-[1.2em] bg-[#F5F3F8]">
-              <div className="flex h-[4.8em] w-full flex-col items-center rounded-[0.3em] rounded-t-[1.2em] bg-gradient-to-r from-[#8C3AFE] to-[#E044FF]">
+              <div className="flex h-[4.8em] w-full flex-col items-center rounded-[0.3em] rounded-t-[1.2em] bg-gradient-to-r from-[hsl(264,100%,61%)] to-[hsl(293,100%,63%)]">
                 <div className="h-[1.55em] w-[8em] rounded-b-[0.8em] bg-[#FFFFFF]"></div>
                 <div className="flex h-full w-full items-center justify-between pl-2.5 pr-2">
                   <div className="flex items-center gap-1">
@@ -27,26 +59,55 @@ export default function Home() {
                       <span className="text-[0.5rem] text-[#D880FF]">Available to Walk</span>
                     </div>
                   </div>
-                  <button className="flex flex-col gap-[0.05em] p-2">
+                  <button disabled className="flex flex-col gap-[1px] p-2">
                     <div className="rounded bg-[#FFDFFF] p-[1px]"></div>
                     <div className="rounded bg-[#FFDFFF] p-[1px]"></div>
                     <div className="rounded bg-[#FFDFFF] p-[1px]"></div>
                   </button>
                 </div>
               </div>
-              <div className="h-full w-[100.5%] rounded-b-[1.2em] bg-[#F5F3F8]"></div>
+              <form
+                id="chat"
+                className="flex h-full w-[100.5%] flex-col justify-between rounded-b-[1.2em] bg-[#F5F3F8] px-[1em] pb-[1.3em] pt-[0.5em] text-[0.5rem]"
+              >
+                <div className="flex flex-col">
+                  <ChatTextLeft text="That sounds great. I’d be happy with that." />
+                  <ChatTextLeft text="Could you send over some pictures of your dog, please?" />
+                  <div className="mt-[2.1em] flex justify-end gap-[0.95em]">
+                    <Image className="rounded-[1.2em]" height={40} src={dogImage1} alt="dog image" />
+                    <Image className="rounded-[1.2em]" height={40} src={dogImage2} alt="dog image" />
+                    <Image className="rounded-[1.2em]" height={40} src={dogImage3} alt="dog image" />
+                  </div>
+                  <ChatTextRight text="Here are a few pictures. She’s a happy girl!" />
+                  <ChatTextRight text="Can you make it?" />
+                  <div className="h-[1.5em]"></div>
+                  <ChatTextLeft text="She looks so happy! The time we discussed works. How long shall I take her out for? " />
+                  <Offer time="30 minutes walk" price="$29" />
+                  <Offer time="1 hour walk" price="$49" />
+                </div>
+                <div className="flex h-[4.5em] items-center justify-between rounded-[4em] bg-white pr-1">
+                  <input
+                    className="placeholder-[hsl(206,6%,79%)] h-full w-full rounded-[4em] pl-5 pr-1 font-rubik text-[0.6rem] outline-none"
+                    placeholder="Type a message..."
+                    type="text"
+                  />
+                  <div className="flex items-center justify-center rounded-full bg-[#3C2553] p-[0.5em]">
+                    <Image className="mr-[-1px]" height={21} width={19} src={Chevron_right as string} alt="send" />
+                  </div>
+                </div>
+              </form>
             </div>
           </div>
           <div className="flex w-[28em] flex-col gap-[1.1em]">
-            <span className="text-[2.5rem] font-[500] text-[#452E5D]">{'Simple booking'}</span>
-            <span className="leading-[1.75em] text-[#a8a7ad]">
-              {
-                'Stay in touch with our dog walkers through the chat interface. This makes it easy to discuss arrangements and make bookings. Once the walk has been completed you can rate your walker and book again all through the chat.                '
-              }
+            <span className="text-[2.5rem] font-[500] text-[hsl(271,36%,24%)]">{'Simple booking'}</span>
+            <span className="leading-[1.75em] text-[hsl(270,7%,64%)]">
+              Stay in touch with our dog walkers through the chat interface. This makes it easy to discuss arrangements
+              and make bookings. Once the walk has been completed you can rate your walker and book again all through
+              the chat.
             </span>
           </div>
         </div>
-        <div className="ml-[-5.75em] h-[87.5%] w-[32em] rounded-b-full bg-gradient-to-b from-[#CE43FF] to-[#903AFF]"></div>
+        <div className="ml-[-5.75em] h-[87.5%] w-[32em] rounded-b-full bg-gradient-to-b from-[#CE41FF] to-[hsl(264,100%,61%)] "></div>
         <div className="flex flex-col justify-end">
           <div className="mr-[-11.75em] h-[85.1%] w-[32em] rounded-t-full bg-[#F7F5FA]"></div>
         </div>
