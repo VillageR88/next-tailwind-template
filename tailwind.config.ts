@@ -11,6 +11,7 @@ const config: Config = {
       fontFamily: {
         sans: ['var(--font-sans)'],
         mono: ['var(--font-mono)'],
+        leagueSpartan: ['League Spartan', 'sans-serif'],
       },
       colors: {
         // Slate

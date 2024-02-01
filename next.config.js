@@ -4,7 +4,7 @@
  */
 const nextConfig = {
   output: 'export',
-  //images: { unoptimized: true },
+  images: { unoptimized: true },
   trailingSlash: true,
   distDir: 'build',
   reactStrictMode: true,
