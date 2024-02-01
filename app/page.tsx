@@ -71,14 +71,16 @@ export default function Home() {
           </div>
           <ul className="flex h-full w-full flex-col items-center gap-[1.5em]">
             {data.map(
+              //this is a filter that works as any not only as all
+              //
               (x, i) =>
-                (filter.find(
+                (filter.every(
                   (y) =>
                     y === x.role ||
                     y === x.level ||
                     y === x.languages.find((z) => z === y) ||
                     y === x.tools.find((z) => z === y),
-                ) ??
+                ) ||
                   filter.length === 0) && (
                   <li
                     key={i}
