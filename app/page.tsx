@@ -3,8 +3,6 @@ import { useEffect, useState } from 'react';
 import Image from 'next/image';
 
 export default function Home() {
-  const [data, setData] = useState<dataJSON[] | null>(null);
-
   interface dataJSON {
     id: number;
     company: string;
@@ -20,6 +18,10 @@ export default function Home() {
     languages: string[];
     tools: string[];
   }
+
+  const [data, setData] = useState<dataJSON[] | null>(null);
+  const [filter, setFilter] = useState<string[]>([]);
+
   useEffect(() => {
     fetch('data.json')
       .then((res) => res.json())
@@ -36,8 +38,38 @@ export default function Home() {
       <main className="flex min-h-screen flex-col items-center justify-center font-leagueSpartan">
         <div className="h-[9.75em] w-full bg-[hsl(180,29%,50%)] bg-[url('../public/images/bg-header-desktop.svg')]"></div>
         <div className="flex w-full flex-col items-center gap-[2.5em] bg-[#F0FAFB] pb-[7.55em]">
-          <div className="mt-[-2.25em] h-[4.5em] w-[69.37em] rounded-[0.3em] bg-white shadow-lg shadow-[#cae1e4]"></div>
-          <ul className="flex h-full w-full flex-col items-center gap-[1.5em] ">
+          <div
+            className={`${
+              filter.length === 0 && 'invisible'
+            } mt-[-2.25em] flex min-h-[4.5em] w-[69.37em] items-center justify-between rounded-[0.3em] bg-white px-[2.5em] shadow-lg shadow-[#cae1e4]`}
+          >
+            <ul className="flex flex-wrap gap-[1em] py-[1.25em]">
+              {filter.map((x) => (
+                <li className="flex" key={x}>
+                  <div className="rounded-l-[0.3em] bg-[#EEF6F6] px-[0.55em] pb-[0.13em] pt-[0.35em] font-[700] text-[#59A2A3]">
+                    {x}
+                  </div>
+                  <button
+                    onClick={() => {
+                      setFilter(filter.filter((y) => y !== x));
+                    }}
+                    className="flex h-full w-[2em] items-center justify-center rounded-r-[0.3em] bg-[#5FA5A7] hover:bg-[#283B39]"
+                  >
+                    <Image src={'./images/icon-remove.svg' as string} alt="close" width={14} height={14} />
+                  </button>
+                </li>
+              ))}
+            </ul>
+            <button
+              onClick={() => {
+                setFilter([]);
+              }}
+              className="pt-[0.4em] font-[700] text-[#59A2A3] decoration-1 underline-offset-2 hover:underline"
+            >
+              Clear
+            </button>
+          </div>
+          <ul className="flex h-full w-full flex-col items-center gap-[1.5em]">
             {data.map((x, i) => (
               <li
                 key={i}
@@ -83,10 +115,15 @@ export default function Home() {
                 <ul className="mr-[2.5em] flex gap-[0.95em]">
                   {[x.role, x.level, ...x.languages, ...x.tools].map((x, i) => (
                     <button
+                      onClick={() => {
+                        if (!filter.includes(x)) {
+                          setFilter([...filter, x]);
+                        }
+                      }}
                       className="rounded-[0.3em] bg-[#EEF6F6] px-[0.55em] py-[0.15em] font-[700] text-[#59A2A3] hover:bg-[#649A98] hover:text-white"
                       key={i}
                     >
-                      <li className="mt-[0.2em] ">{x}</li>
+                      <li className="mt-[0.2em]">{x}</li>
                     </button>
                   ))}
                 </ul>
