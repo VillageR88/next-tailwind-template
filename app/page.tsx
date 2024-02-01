@@ -39,7 +39,7 @@ export default function Home() {
           {data.map((x, i) => (
             <li
               key={i}
-              className="flex h-[9.5em] w-[69.37em] items-center justify-between bg-[white] shadow-lg shadow-[#cae1e4]"
+              className="flex h-[9.5em] w-[69.37em] items-center justify-between rounded-[0.3em] bg-[white] shadow-lg shadow-[#cae1e4]"
             >
               <div className="flex">
                 <div
@@ -57,7 +57,9 @@ export default function Home() {
                         )}
                       </ul>
                     </div>
-                    <h1 className="text-[1.375rem] font-[700]">{x.position}</h1>
+                    <button className="h-fit w-fit hover:text-[#649A98]">
+                      <h1 className="text-[1.375rem] font-[700]">{x.position}</h1>
+                    </button>
                     <div
                       className={`flex items-center ${
                         i === 0 ? 'gap-[0.92em]' : 'gap-[0.78em]'
@@ -79,7 +81,7 @@ export default function Home() {
               <ul className="mr-[2.5em] flex gap-[0.95em]">
                 {[x.role, x.level, ...x.languages, ...x.tools].map((x, i) => (
                   <button
-                    className="rounded-[0.3em] bg-[#EEF6F6] px-[0.55em] py-[0.15em] font-[700] text-[#59A2A3]"
+                    className="rounded-[0.3em] bg-[#EEF6F6] px-[0.55em] py-[0.15em] font-[700] text-[#59A2A3] hover:bg-[#649A98] hover:text-white"
                     key={i}
                   >
                     <li className="mt-[0.2em] ">{x}</li>
