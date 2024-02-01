@@ -1,19 +1,19 @@
+
 /**
  * @type {import('next').NextConfig}
  */
 const nextConfig = {
   output: 'export',
-
-  // Optional: Change links `/me` -> `/me/` and emit `/me.html` -> `/me/index.html`
+  //images: { unoptimized: true },
   trailingSlash: true,
-
-  // Optional: Prevent automatic `/me` -> `/me/`, instead preserve `href`
-  // skipTrailingSlashRedirect: true,
-
-  // Optional: Change the output directory `out` -> `dist`
   distDir: 'build',
-
   reactStrictMode: true,
+};
+
+if (process.env.NODE_ENV !== 'development') {
+  nextConfig.assetPrefix = '/Frontend_Mentor/static-job-listings-master';
+  nextConfig.basePath = '/Frontend_Mentor/static-job-listings-master';
 }
 
-module.exports = nextConfig
+
+module.exports = nextConfig;
