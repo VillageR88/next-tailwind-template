@@ -37,7 +37,7 @@ export default function Home() {
     data && (
       <main className="flex min-h-screen flex-col items-center justify-center font-leagueSpartan">
         <div className="h-[9.75em] w-full bg-[hsl(180,29%,50%)] bg-[url('../public/images/bg-header-desktop.svg')]"></div>
-        <div className="flex w-full flex-col items-center gap-[2.5em] bg-[#F0FAFB] pb-[7.55em]">
+        <div className="flex min-h-[calc(100vh-9.75em)] w-full flex-col items-center gap-[2.5em] bg-[#F0FAFB] pb-[7.55em]">
           <div
             className={`${
               filter.length === 0 && 'invisible'
