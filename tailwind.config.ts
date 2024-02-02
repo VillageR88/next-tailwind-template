@@ -8,6 +8,10 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      screens: {
+        min800: '800px',
+      },
+
       fontFamily: {
         sans: ['var(--font-sans)'],
         mono: ['var(--font-mono)'],

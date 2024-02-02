@@ -35,13 +35,13 @@ export default function Home() {
 
   return (
     data && (
-      <main className="flex min-h-screen flex-col items-center justify-center font-leagueSpartan">
-        <div className="h-[9.75em] w-full bg-[hsl(180,29%,50%)] bg-[url('../public/images/bg-header-desktop.svg')] bg-top"></div>
-        <div className="flex min-h-[calc(100vh-9.75em)] w-full flex-col items-center gap-[2.5em] bg-[#F0FAFB] px-10 pb-[7.55em]">
+      <main className="flex min-h-[calc(100dvh)] flex-col items-center justify-start font-leagueSpartan">
+        <div className="min800:bg-[url('../public/images/bg-header-desktop.svg')] h-[9.75em] w-full bg-[hsl(180,29%,50%)] bg-[url('../public/images/bg-header-mobile.svg')] bg-top"></div>
+        <div className="min800:min-h-[calc(100vh-9.75em)] flex min-h-[calc(100dvh-9.75em)] w-full flex-col items-center gap-[2.5em] bg-[#F0FAFB] px-6 pb-[7.55em]">
           <filter
             className={`${
               filter.length === 0 && 'invisible'
-            } mt-[-2.25em] flex min-h-[4.5em] w-full items-center justify-between rounded-[0.3em] bg-white px-[2.5em] shadow-lg shadow-[#cae1e4] xl:w-[69.37em]`}
+            } min800:px-[2.5em] mt-[-2.25em] flex min-h-[4.5em] w-full items-center justify-between rounded-[0.3em] bg-white px-5 shadow-lg shadow-[#cae1e4] xl:w-[69.37em]`}
           >
             <ul className="flex flex-wrap gap-[1em] py-[1.25em]">
               {filter.map((x) => (
@@ -69,7 +69,7 @@ export default function Home() {
               Clear
             </button>
           </filter>
-          <ul className="flex w-full flex-col items-center gap-[1.5em] xl:w-[69.37em]">
+          <ul className="min800:gap-[1.5em] min800:mt-0 mt-[1.8em] flex w-full flex-col items-center gap-[3.5em] xl:w-[69.37em]">
             {data.map(
               (x, i) =>
                 (filter.every(
@@ -86,12 +86,18 @@ export default function Home() {
                   >
                     <div className="flex w-full">
                       <div
-                        className={`${!x.featured && 'invisible'} flex w-[0.31em] rounded-l-[1em] bg-[#5DA5A2]`}
+                        className={`${!x.featured && 'invisible'} flex w-[0.33em] rounded-l-[1em] bg-[#5DA5A2]`}
                       ></div>
-                      <div className="flex w-full flex-col items-center justify-between min-[800px]:flex-row">
-                        <div className="flex min-w-fit items-center py-[1.85em]">
-                          <Image className="ml-[2.2em]" src={x.logo} alt="logo" height={88} width={88} />
-                          <div className="ml-[1.5em] flex flex-col gap-[0.1em]">
+                      <div className="min800:ml-0 min800:py-0 min800:flex-row min800:items-center ml-[1em] flex w-full flex-col justify-between py-8">
+                        <div className=" min800:py-[1.85em] min800:min-w-fit min800:flex-row flex flex-col">
+                          <Image
+                            className={`min800:ml-[2.2em] min800:h-[88px] min800:mt-[0.1em] min800:w-[88px] min800:mb-0 mb-[0.7em] mt-[-3.8em] h-[60px] w-[60px]`}
+                            src={x.logo}
+                            alt="logo"
+                            height={88}
+                            width={88}
+                          />
+                          <div className="min800:ml-[1.5em] flex flex-col gap-[0.1em]">
                             <div className="mb-[0.2em] flex gap-[1em]">
                               <h2 className="text-[1.12rem] font-[700] text-[#56A3A2]">{x.company}</h2>
                               <ul className="flex items-center gap-[0.6em] text-[0.9rem] leading-[1.38em] text-white">
@@ -122,8 +128,9 @@ export default function Home() {
                               )}
                             </div>
                           </div>
+                          <div className="min800:hidden my-[1em] h-[1px] w-[90%] bg-[#c5c4c4] "></div>
                         </div>
-                        <ul className="mr-[2.5em] flex h-fit flex-wrap items-center justify-end gap-[0.95em]">
+                        <ul className="min800:justify-end mr-[2.5em] flex h-fit flex-wrap items-center gap-[0.95em]">
                           {[x.role, x.level, ...x.languages, ...x.tools].map((x, i) => (
                             <button
                               onClick={() => {
