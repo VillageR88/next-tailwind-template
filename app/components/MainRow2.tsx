@@ -1,7 +1,7 @@
 import Image from 'next/image';
 const MainRow2 = () => {
   return (
-    <div className="flex min-h-[42.25em] w-full flex-col bg-[#F4F5F7] px-[10.3em] py-[6.2em]">
+    <div className="flex min-h-[42.25em] w-full flex-col bg-[#F4F5F7] py-[6.2em] md:px-[2em] lg:px-[5em] min-[1458px]:px-[10.3em]">
       <div className="flex w-[40em] flex-col">
         <h2 className="scale-y-[105%] pl-[0.03em] text-[2.41rem] font-[300] text-[hsl(233,26%,24%)]">
           Why choose Easybank?
@@ -11,7 +11,7 @@ const MainRow2 = () => {
           before.
         </span>
       </div>
-      <ul className="mt-[4.6em] flex h-full flex-wrap justify-between gap-y-[5em] text-wrap">
+      <ul className="mt-[4.6em] flex h-full flex-wrap justify-around gap-x-[2em] gap-y-[5em] text-wrap min-[900px]:justify-between min-[1458px]:gap-0">
         {[
           {
             image: 'images/icon-online.svg',
