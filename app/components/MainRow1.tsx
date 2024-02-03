@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import RequestInviteButton from './RequestInviteButton';
+import ButtonRequestInvite from './ButtonRequestInvite';
 const MainRow1 = () => {
   return (
     <div className="flex h-[41em] w-full bg-[#FAFAFA]">
@@ -11,7 +11,7 @@ const MainRow1 = () => {
           Take your financial life online. Your Easybank account will be a one-stop-shop for spending, saving,
           budgeting, investing, and much more.
         </span>
-        <RequestInviteButton />
+        <ButtonRequestInvite />
       </div>
       <div className="z-10 flex min-w-[56.6%] items-center justify-start bg-[url('../public/images/bg-intro-desktop.svg')] bg-[0_69%]">
         <Image

@@ -1,9 +1,9 @@
 import Image from 'next/image';
 const MainRow3 = () => {
   return (
-    <div className="flex min-h-[41.215em] w-full flex-col bg-[#FAFAFA] px-[10.3em] pb-[4.9em] pt-[5.2em] md:px-[2em] lg:px-[5em] min-[1458px]:px-[10.3em]">
+    <div className="flex min-h-[41.215em] w-full flex-col bg-[#FAFAFA] pb-[4.9em] pt-[5.2em] md:px-[2em] lg:px-[5em] min-[1458px]:px-[10.3em]">
       <h2 className="scale-y-[105%] pl-[0.03em] text-[2.41rem] font-[300] text-[hsl(233,26%,24%)]">Latest Articles</h2>
-      <ul className="flex flex-wrap justify-around gap-[2em] min-[892px]:justify-between min-[1458px]:gap-0">
+      <ul className="flex flex-wrap justify-around gap-[2em] min-[909px]:justify-between min-[1458px]:gap-0">
         {[
           {
             image: 'images/image-currency.jpg',

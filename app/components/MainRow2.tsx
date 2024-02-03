@@ -11,7 +11,7 @@ const MainRow2 = () => {
           before.
         </span>
       </div>
-      <ul className="mt-[4.6em] flex h-full flex-wrap justify-around gap-x-[2em] gap-y-[5em] text-wrap min-[900px]:justify-between min-[1458px]:gap-0">
+      <ul className="mt-[4.6em] flex h-full flex-wrap justify-around gap-x-[2em] gap-y-[5em] text-wrap min-[916px]:justify-between min-[1458px]:gap-0">
         {[
           {
             image: 'images/icon-online.svg',
