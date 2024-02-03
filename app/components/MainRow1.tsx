@@ -20,6 +20,7 @@ const MainRow1 = () => {
           width={100}
           height={100}
           alt="image of smartphones"
+          priority
         />
       </div>
     </div>
