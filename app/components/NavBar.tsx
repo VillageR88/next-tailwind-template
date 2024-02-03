@@ -11,7 +11,7 @@ const NavBar = () => {
       <Image className="mt-[0.2em]" src={'images/logo.svg'} alt="logo" height={140} width={140} priority />
       <ul className="ml-[1em] flex h-full gap-[1.3em] pt-[1.8em]">
         {['Home', 'About', 'Contact', 'Blog', 'Careers'].map((x) => (
-          <div key={x} className="flex h-full flex-col justify-between">
+          <li key={x} className="flex h-full flex-col justify-between">
             <button
               onMouseEnter={() => {
                 setNavHover(x);
@@ -30,7 +30,7 @@ const NavBar = () => {
                 x === navHover ? 'visible' : 'invisible'
               } h-[0.22em] w-[3.2em] bg-gradient-to-r from-[hsl(136,65%,51%)] to-[hsl(192,70%,51%)]`}
             ></div>
-          </div>
+          </li>
         ))}
       </ul>
       <RequestInviteButton />
