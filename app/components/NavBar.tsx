@@ -3,6 +3,7 @@
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
 import ButtonRequestInvite from './ButtonRequestInvite';
+import ButtonMobileMenu from './ButtonMobileMenu';
 
 const navItems = { Home: 'Home', About: 'About', Contact: 'Contact', Blog: 'Blog', Careers: 'Careers' };
 const NavBar = () => {
@@ -25,7 +26,7 @@ const NavBar = () => {
   }, []);
 
   return (
-    <nav className="z-20 flex h-[5em] w-full items-center justify-between bg-[white] md:px-[2em] lg:px-[5em] min-[1458px]:px-[10.3em]">
+    <nav className="z-20 flex h-[5em] w-full items-center justify-between bg-[white] px-6 md:px-[2em] lg:px-[5em] min-[1458px]:px-[10.3em]">
       <Image className="mt-[0.2em] h-fit w-fit" src={'images/logo.svg'} width={140} height={140} alt="logo" priority />
       {!isMobile && (
         <ul className="ml-[1em] hidden h-full gap-[1.3em] pt-[1.8em] md:flex">
@@ -55,6 +56,7 @@ const NavBar = () => {
         </ul>
       )}
       <ButtonRequestInvite mobileHidden />
+      <ButtonMobileMenu />
     </nav>
   );
 };
