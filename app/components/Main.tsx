@@ -4,7 +4,7 @@ import MainRow3 from './MainRow3';
 
 const Main = () => {
   return (
-    <main className="flex h-full w-full flex-col ">
+    <main className="flex h-full w-full flex-col">
       <MainRow1 />
       <MainRow2 />
       <MainRow3 />

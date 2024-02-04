@@ -21,16 +21,15 @@ const ButtonMobileMenu = () => {
     }
   });
   return (
-    <div>
+    <div className="z-10 block md:hidden">
       <button
         onClick={() => {
           setIsMenuOpen(!isMenuOpen);
         }}
-        className="z-10 block md:hidden"
         aria-label="mobile menu"
       >
         <Image
-          className={`h-fit w-fit self-center ${isMenuOpen && 'mr-1'}`}
+          className={`h-fit w-fit self-center ${isMenuOpen && 'mr-1 mt-2'}`}
           src={isMenuOpen ? 'images/icon-close.svg' : 'images/icon-hamburger.svg'}
           width={20}
           height={20}
