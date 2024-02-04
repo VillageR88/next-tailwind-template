@@ -13,7 +13,7 @@ const Footer = () => {
       <div className="flex flex-col gap-[2em] md:flex-row md:gap-[3em] lg:gap-[5em] xl:gap-[8.2em]">
         <div className="flex flex-col justify-center gap-[2em] md:gap-[3.4em]">
           <Image className="h-fit w-fit" src={'images/logoWhite.svg' as string} alt="logo" width={10} height={10} />
-          <div className="flex h-fit justify-center flex-wrap gap-[0.81em] md:scale-100">
+          <div className="flex h-fit flex-wrap justify-center gap-[0.81em] md:scale-100">
             <ButtonFacebook />
             <ButtonYoutube />
             <ButtonTwitter />
