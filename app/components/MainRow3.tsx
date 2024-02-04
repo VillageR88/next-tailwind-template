@@ -40,7 +40,7 @@ const MainRow3 = () => {
             />
             <div className="mt-[0.2em] flex min-h-[12.1em] w-full flex-col justify-center gap-[0.6em] rounded-b-[0.3em] bg-white pl-[1.52em] pr-[1.3em]">
               <span className="mt-[0.5em] text-[0.6rem] text-[hsl(233,8%,62%)]">{x.byText}</span>
-              <button className="h-fit w-fit scale-y-[105%] text-left text-[0.96rem] leading-[1.2em] text-[hsl(233,26%,24%)] hover:text-[#87DEC3]">
+              <button className="h-fit w-fit scale-y-[105%] text-left text-[0.96rem] leading-[1.2em] text-[hsl(233,26%,24%)] transition hover:text-[#87DEC3]">
                 <h3>{x.h3}</h3>
               </button>
               <span className="text-[0.785rem] leading-[1.5em] text-[hsl(233,8%,62%)]">{x.main}</span>
