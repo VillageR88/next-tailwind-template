@@ -10,10 +10,10 @@
     "lint:fix": "next lint --fix"
   },
   "dependencies": {
+    "my-component-library": "github:VillageR88/my-component-library",
     "next": "^14.0.4",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "my-component-library": "git+https://github.com/VillageR88/my-component-library"
+    "react-dom": "^18.2.0"
   },
   "devDependencies": {
     "@types/node": "^20.10.5",
