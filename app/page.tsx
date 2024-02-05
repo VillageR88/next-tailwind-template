@@ -6,7 +6,6 @@ export default function Home() {
     <div className="flex min-h-screen flex-col items-center justify-center font-beVietnamPro">
       <NavBar />
       <Main />
-      <div className="flex h-[100em] w-full items-center justify-center bg-[#ffffff]"></div>
     </div>
   );
 }
