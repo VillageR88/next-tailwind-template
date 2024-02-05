@@ -1,4 +1,4 @@
-const MainRow1 = () => {
+const MainRow2 = () => {
   const articles = [
     {
       title: 'Track company-wide progress',
@@ -47,4 +47,4 @@ const MainRow1 = () => {
   );
 };
 
-export default MainRow1;
+export default MainRow2;
