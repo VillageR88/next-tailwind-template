@@ -11,6 +11,8 @@ const config: Config = {
       fontFamily: {
         sans: ['var(--font-sans)'],
         mono: ['var(--font-mono)'],
+        //font-family: 'Be Vietnam Pro', sans-serif;
+        beVietnamPro: ['Be Vietnam Pro', 'sans-serif'],
       },
       colors: {
         // Slate
