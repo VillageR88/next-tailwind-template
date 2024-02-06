@@ -31,14 +31,26 @@ const carouselItems = [
 ];
 function MultipleItems() {
   return (
-    <div className="slider-container container">
-      <Slider centerMode dots infinite speed={500} slidesToShow={3} slidesToScroll={3}>
+    <div className="slider-container mt-[4em] w-full">
+      <Slider variableWidth dots infinite speed={500} initialSlide={1} centerMode>
         {carouselItems.map((item, index) => {
           return (
-            <div key={index} className="flex flex-col items-center justify-center">
-              <Image width={20} height={20} src={item.avatar} alt={item.author} className="h-16 w-16 rounded-full" />
-              <p className="mt-4 text-center text-[1.6rem] text-[hsl(233,8%,62%)]">{item.quote}</p>
-              <h3 className="mt-4 text-[1.6rem] font-[700] text-[hsl(233,26%,24%)]">{item.author}</h3>
+            <div key={index} className="flex flex-col items-center justify-center ">
+              <div className="z-50 mb-[-2em] flex justify-center">
+                <Image
+                  width={25}
+                  height={25}
+                  src={item.avatar}
+                  alt={item.author}
+                  className="h-[4.5em] w-[4.5em] rounded-full"
+                />
+              </div>
+              <div className="bg-[#FAFAFA] py-[2.5em]">
+                <h3 className="mt-4 text-center text-[1rem] font-[700] text-[hsl(233,26%,24%)]">{item.author}</h3>
+                <div className="mt-4 flex w-full justify-center text-center text-[1rem] text-[hsl(233,8%,62%)]">
+                  <p className={index !== 2 ? 'w-[28.8em]' : 'w-[29em]'}>{item.quote}</p>
+                </div>
+              </div>
             </div>
           );
         })}

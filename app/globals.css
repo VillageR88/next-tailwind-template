@@ -6,3 +6,8 @@ html {
   /* dark scroll bars */
   /* color-scheme: dark; */
 }
+
+.slick-slide {
+  padding: 0 15px;
+  width: 35.5em;
+}
