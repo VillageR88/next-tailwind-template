@@ -1,5 +1,6 @@
 import Logo from './Logo';
 import ButtonGetStarted from './ButtonGetStarted';
+import ButtonMobileMenu from './ButtonMobileMenu';
 
 const navBarItems = ['Pricing', 'Product', 'About Us', 'Careers', 'Community'];
 const NavBar = () => {
@@ -8,7 +9,7 @@ const NavBar = () => {
       <div className=" mt-[0.65em]">
         <Logo />
       </div>
-      <ul className="mr-[0.6em] flex gap-[2em]">
+      <ul className="mr-[0.6em] hidden gap-[2em] md:flex">
         {navBarItems.map((item, iterator) => (
           <li key={iterator}>
             <button
@@ -20,7 +21,9 @@ const NavBar = () => {
           </li>
         ))}
       </ul>
-      <ButtonGetStarted />
+
+      <ButtonGetStarted hideMobile />
+      <ButtonMobileMenu />
     </nav>
   );
 };
