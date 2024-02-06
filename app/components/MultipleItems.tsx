@@ -55,6 +55,19 @@ function MultipleItems() {
         speed={500}
         initialSlide={1}
         centerMode={!isMobile}
+        appendDots={(dots) => (
+          <div
+            style={{
+              position: 'relative',
+              scale: '0.4',
+              marginTop: '-2em',
+              paddingTop: '1em',
+              paddingBottom: '2em',
+            }}
+          >
+            <ul style={{ margin: '0px' }}> {dots} </ul>
+          </div>
+        )}
       >
         {carouselItems.map((item, index) => {
           return (

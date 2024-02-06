@@ -22,11 +22,19 @@ input {
   }
   li {
     border-radius: 100%;
-    background-color: blue;
+    background-color: transparent;
+    border: 2px solid hsl(12, 88%, 59%);
+    font-size: 10px;
+    line-height: 10px;
   }
 
-  li.slick-active button {
+  li.slick-active {
     border-radius: 100%;
-    background-color: red;
+    background-color: hsl(12, 88%, 59%);
   }
+}
+.slick-dots {
+  display: flex;
+  justify-content: center;
+  width: 50%;
 }
