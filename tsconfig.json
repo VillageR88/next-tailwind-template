@@ -30,7 +30,8 @@
     "**/*.tsx",
     ".next/types/**/*.ts",
     "build/types/**/*.ts",
-    "assets.d.ts"
+    "assets.d.ts",
+    "app/components/MyCarousel.tsx"
   ],
   "exclude": ["node_modules"]
 }
