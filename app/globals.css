@@ -11,3 +11,6 @@ html {
   padding: 0 15px;
   width: 35.5em;
 }
+input {
+  outline: none;
+}
