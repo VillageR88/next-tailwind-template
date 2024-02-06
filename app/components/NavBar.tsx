@@ -13,7 +13,7 @@ const NavBar = () => {
           <li key={iterator}>
             <button
               aria-label={item}
-              className="scale-y-[90%] text-[0.8rem] font-[500] tracking-[-0.01em] text-[hsl(228,39%,23%)] hover:text-[hsl(227,12%,61%)]"
+              className="scale-y-[90%] text-[0.8rem] font-[500] tracking-[-0.01em] text-[hsl(228,39%,23%)] transition hover:text-[hsl(227,12%,61%)]"
             >
               {item}
             </button>

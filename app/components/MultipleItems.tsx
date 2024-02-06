@@ -32,7 +32,7 @@ const carouselItems = [
 function MultipleItems() {
   return (
     <div className="slider-container mt-[4em] w-full">
-      <Slider variableWidth dots infinite speed={500} initialSlide={1} centerMode>
+      <Slider lazyLoad="progressive" variableWidth infinite speed={500} initialSlide={1} centerMode>
         {carouselItems.map((item, index) => {
           return (
             <div key={index} className="flex flex-col items-center justify-center ">
