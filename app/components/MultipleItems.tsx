@@ -1,5 +1,5 @@
 'use client';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Slider from 'react-slick';
 import Image from 'next/image';
 
@@ -30,13 +30,36 @@ const carouselItems = [
   },
 ];
 function MultipleItems() {
+  const [isMobile, setIsMobile] = useState(false);
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth <= 768) {
+        setIsMobile(true);
+      } else {
+        setIsMobile(false);
+      }
+    };
+    handleResize();
+    window.addEventListener('resize', handleResize);
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
   return (
     <div className="slider-container mt-[4em] w-full">
-      <Slider lazyLoad="progressive" variableWidth infinite speed={500} initialSlide={1} centerMode>
+      <Slider
+        dots={isMobile}
+        lazyLoad="progressive"
+        variableWidth={!isMobile}
+        infinite
+        speed={500}
+        initialSlide={1}
+        centerMode={!isMobile}
+      >
         {carouselItems.map((item, index) => {
           return (
             <div key={index} className="flex flex-col items-center justify-center ">
-              <div className="z-50 mb-[-2em] flex justify-center">
+              <div className="mb-[-2em] flex justify-center">
                 <Image
                   width={25}
                   height={25}
@@ -47,8 +70,8 @@ function MultipleItems() {
               </div>
               <div className="bg-[#FAFAFA] py-[2.5em]">
                 <h3 className="mt-4 text-center text-[1rem] font-[700] text-[hsl(233,26%,24%)]">{item.author}</h3>
-                <div className="mt-4 flex w-full justify-center text-center text-[1rem] text-[hsl(233,8%,62%)]">
-                  <p className={index !== 2 ? 'w-[28.8em]' : 'w-[29em]'}>{item.quote}</p>
+                <div className="flex w-full justify-center text-center text-[1rem] text-[hsl(233,8%,62%)] md:mt-4">
+                  <p className={`${index !== 2 ? 'w-[28.8em]' : 'w-[29em]'} px-4 md:px-0`}>{item.quote}</p>
                 </div>
               </div>
             </div>

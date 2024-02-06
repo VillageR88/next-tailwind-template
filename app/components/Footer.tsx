@@ -9,8 +9,8 @@ import Form from './Form';
 const middleButtonsList = ['Home', 'Pricing', 'Products', 'About Us', 'Careers', 'Community', 'Privacy Policy'];
 const Footer = () => {
   return (
-    <footer className="flex h-full w-full flex-col items-center justify-between gap-[2em] bg-[#1E1E26] py-[3em] md:min-h-[11.9em] md:flex-row md:gap-0 md:px-[2em] md:py-[3.65em] lg:px-[5em] min-[1458px]:px-[10.3em]">
-      <div className="flex flex-col gap-[2em] md:flex-row md:gap-[3em] lg:gap-[5em] xl:gap-[8.2em]">
+    <footer className="flex h-full w-full flex-col items-center justify-between gap-[2em] bg-[#1E1E26] py-[3em] md:min-h-[11.9em] md:flex-row md:gap-0 md:px-[2em] md:py-[3.85em] lg:px-[5em] min-[1458px]:px-[10.3em] min-[1458px]:pl-[10.7em]">
+      <div className="flex flex-col gap-[2em] md:flex-row md:gap-[3em] lg:gap-[5em] xl:gap-[7.8em]">
         <div className="flex flex-col justify-center gap-[2em] md:gap-[5.2em]">
           <Logo color="white" />
           <div className="flex h-fit flex-wrap justify-center gap-[0.81em] md:scale-100">
@@ -21,7 +21,7 @@ const Footer = () => {
             <ButtonInstagram />
           </div>
         </div>
-        <div className="grid gap-y-[1em] md:grid-flow-col md:grid-rows-4 md:gap-x-[3em] lg:gap-x-[5em] xl:gap-x-[14em]">
+        <div className="mt-[0.15em] grid gap-y-[0.8em] md:grid-flow-col md:grid-rows-4 md:gap-x-[3em] lg:gap-x-[5em] xl:gap-x-[14em]">
           {middleButtonsList.map((x) => (
             <button
               aria-label={x}

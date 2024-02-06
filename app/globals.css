@@ -11,6 +11,22 @@ html {
   padding: 0 15px;
   width: 35.5em;
 }
+
 input {
   outline: none;
+}
+
+.slick-dots {
+  button {
+    text-indent: -9999px;
+  }
+  li {
+    border-radius: 100%;
+    background-color: blue;
+  }
+
+  li.slick-active button {
+    border-radius: 100%;
+    background-color: red;
+  }
 }
