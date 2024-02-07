@@ -14,8 +14,8 @@ const Form = () => {
     return re.test(email);
   };
   return (
-    <form action="#">
-      <div className="flex h-full w-full gap-[0.5em]">
+    <form className="flex w-full" action="#">
+      <div className="flex h-full w-full flex-wrap gap-[0.5em]">
         <input
           autoComplete="email"
           value={email}
@@ -37,7 +37,7 @@ const Form = () => {
           aria-label="Email"
           placeholder="Updates in your inbox…"
           type="email"
-          className={`w-[15.5em] rounded-[2em] border-red-400 pl-[1.2em] text-[0.8rem] outline outline-1 ${
+          className={`w-full rounded-[2em] border-red-400 py-[0.9em] pl-[1.2em] text-[0.8rem] outline outline-1 min-[250px]:w-[19em] md:w-[15.5em] ${
             emailStatus === EmailStatus.Invalid
               ? 'text-[#df4242] outline-[#df4242]'
               : emailStatus === EmailStatus.Valid && 'outline-[#42dfb0]'
@@ -53,7 +53,7 @@ const Form = () => {
           }}
           aria-label="Go"
           type="button"
-          className="rounded-[2em] bg-[hsl(12,88%,59%)] px-[2em] pb-[0.9em] pt-[1.25em] text-[0.75rem] font-[500] text-[hsl(13,100%,96%)] transition hover:bg-[#F98F75]"
+          className="rounded-[2em] bg-[hsl(12,88%,59%)] px-[2.5em] pb-[0.9em] pt-[1.25em] text-[0.75rem] font-[500] text-[hsl(13,100%,96%)] transition hover:bg-[#F98F75] md:px-[2em]"
         >
           Go
         </button>

@@ -1,6 +1,6 @@
 const Logo = ({ color }: { color?: string }) => {
   return (
-    <svg className="h-fit w-fit" xmlns="http://www.w3.org/2000/svg" width="146" height="24">
+    <svg className="h-fit w-fit self-center" xmlns="http://www.w3.org/2000/svg" width="146" height="24">
       <g fill="none" fillRule="evenodd">
         <path
           fill={color ?? '#242D52'}

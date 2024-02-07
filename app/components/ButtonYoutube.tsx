@@ -1,5 +1,5 @@
 const ButtonYoutube = () => (
-  <button className="scale-125 md:scale-100" aria-label="Youtube">
+  <button className="scale-150 md:scale-100" aria-label="Youtube">
     <svg
       className="fill-[#FFF] transition hover:fill-[hsl(12,88%,59%)]"
       xmlns="http://www.w3.org/2000/svg"
