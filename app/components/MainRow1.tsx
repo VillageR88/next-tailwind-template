@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import ButtonGetStarted from './ButtonGetStarted';
+import Background1b from './Backgrond1b';
 
 const MainRow1 = () => {
   return (
@@ -8,6 +9,8 @@ const MainRow1 = () => {
         <h1 className=" scale-y-[105%] text-[2.3rem] font-[700] leading-[1.16em] text-[hsl(233,26%,24%)] md:text-[2.65rem] lg:text-[2.8rem] xl:text-[3.25rem]">
           Bring everyone together to build better products.
         </h1>
+        <Background1b />
+
         <p className="mb-[2.4em] mt-[2.2em] px-1 tracking-[-0.03em] text-[hsl(233,8%,62%)] md:max-w-[20em] md:px-0 xl:text-[1.05rem]">
           Manage makes it simple for software teams to plan day-to-day tasks while keeping the larger team goals in
           view.
