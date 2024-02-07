@@ -45,7 +45,7 @@ const ButtonMobileMenu = () => {
         />
       </button>
       {isMenuOpen && (
-        <ul className="absolute left-0 top-0 h-full w-full bg-[#3b3e5883] px-6 pt-[10em]">
+        <ul className="absolute left-0 top-0 h-full w-full bg-gradient-to-b from-transparent from-10% to-[#3b3e5883] to-60% px-6 pt-[10em]">
           <div className="flex flex-col items-center gap-[1.5em] rounded-[0.3em] bg-white py-[2em]">
             {Object.values(mobileMenuItems).map((x) => (
               <li key={x}>
