@@ -10,7 +10,7 @@ const MainRow1 = () => {
         <p className="mb-[1.6em] px-1 leading-[1.6em] tracking-[-0.006em] text-[#A5A4A9] md:px-0 xl:text-[1.4rem]">
           Build your brand’s recognition and get detailed insights on how your links are performing.
         </p>
-        <button className="rounded-[2em] bg-[hsl(180,66%,49%)] px-[2.2em] pb-[0.72em] pt-[0.72em] text-[1.2rem] font-[700] text-[white]">
+        <button className="rounded-[2em] bg-[hsl(180,66%,49%)] px-[2.2em] pb-[0.67em] pt-[0.77em] text-[1.2rem] font-[700] text-[white] transition hover:bg-opacity-60">
           Get Started
         </button>
       </div>
