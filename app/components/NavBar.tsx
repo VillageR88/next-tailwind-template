@@ -5,7 +5,7 @@ import ButtonMobileMenu from './ButtonMobileMenu';
 const navBarItems = ['Pricing', 'Product', 'About Us', 'Careers', 'Community'];
 const NavBar = () => {
   return (
-    <nav className="z-20 flex h-[9.9em] w-full items-center justify-between bg-[white] px-6 md:px-[2em] lg:px-[5em] min-[1458px]:px-[10.3em]">
+    <nav className="z-20 flex h-[9.9em] w-full items-center justify-between px-6 md:px-[2em] lg:px-[5em] min-[1458px]:px-[10.3em]">
       <div className=" mt-[0.65em]">
         <Logo />
       </div>

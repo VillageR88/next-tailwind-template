@@ -18,7 +18,7 @@ const MainRow2 = () => {
   ];
 
   return (
-    <div className="flex w-full flex-col gap-[2em] bg-[#FFFFFF] pb-[5em] pt-[3em] md:h-[39.3em] md:flex-row md:gap-0 md:pb-0 md:pr-6">
+    <div className="flex w-full flex-col gap-[2em] pb-[5em] pt-[3em] md:h-[39.3em] md:flex-row md:gap-0 md:pb-0 md:pr-6">
       <div className="mb-[0.4em] flex flex-col items-center justify-start px-6 text-center md:w-[50%] md:items-start md:pl-[2em] md:text-left lg:pl-[5em] xl:pr-[1em] min-[1458px]:pl-[10.3em]">
         <h2 className="mt-[0.3em] scale-x-[103%] scale-y-[105%] text-[1.9rem] font-[700] leading-[1.16em] text-[hsl(233,26%,24%)] md:ml-[0.25em] md:text-[1.85rem] lg:text-[2.1rem] xl:text-[2.25rem]">
           What’s different about Manage?
