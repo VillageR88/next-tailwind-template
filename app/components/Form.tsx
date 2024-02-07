@@ -14,7 +14,7 @@ const Form = () => {
     return re.test(email);
   };
   return (
-    <form className="flex w-full" action="#">
+    <form className="block w-full" action="#">
       <div className="flex h-full w-full flex-wrap gap-[0.5em]">
         <input
           autoComplete="email"
