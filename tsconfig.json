@@ -31,6 +31,6 @@
     ".next/types/**/*.ts",
     "build/types/**/*.ts",
     "assets.d.ts"
-  ],
+, "app/components/DataFetch.js", "app/components/test.js"  ],
   "exclude": ["node_modules"]
 }
