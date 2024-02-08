@@ -1,17 +1,41 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import DataFetch from './DataFetch';
 const Form = () => {
   const [valueToShorten, setValueToShorten] = useState<string>('');
   const [sendRequest, setSendRequest] = useState<boolean>(false);
 
+  interface dataJson {
+    success: boolean;
+    data?: {
+      id: string;
+      url: string;
+      full: string;
+    };
+  }
+
   useEffect(() => {
+    const fetchData = async () => {
+      console.log('fetching data');
+      const requestOptions = {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: `url=${encodeURIComponent(valueToShorten)}`,
+      };
+      await fetch('https://ulvis.net/API/write/post', requestOptions)
+        .then((response) => response.json())
+        .then((data) => {
+          console.log((data as dataJson).data?.url);
+        })
+        .catch((error) => {
+          console.error('Error:', error);
+        });
+    };
     if (sendRequest) {
-      DataFetch(valueToShorten);
+      void fetchData();
       setSendRequest(false);
     }
-  }, [valueToShorten, sendRequest]); // Include 'sendRequest' in the dependency array
+  }, [sendRequest, valueToShorten]);
 
   return (
     <form

@@ -21,6 +21,7 @@ const MainRow1 = () => {
           width={100}
           src={'images/illustration-working.svg' as string}
           alt="illustration"
+          priority
         />
       </div>
     </div>

@@ -1,7 +1,11 @@
 {
   "compilerOptions": {
     "target": "es5",
-    "lib": ["dom", "dom.iterable", "esnext"],
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
     "allowJs": true,
     "skipLibCheck": true,
     "strict": true,
@@ -19,7 +23,9 @@
       }
     ],
     "paths": {
-      "@/*": ["./*"]
+      "@/*": [
+        "./*"
+      ]
     }
   },
   "include": [
@@ -30,7 +36,11 @@
     "**/*.tsx",
     ".next/types/**/*.ts",
     "build/types/**/*.ts",
-    "assets.d.ts"
-, "app/components/DataFetch.js", "app/components/test.js"  ],
-  "exclude": ["node_modules"]
+    "assets.d.ts",
+    "pages/api/dataFetch.js",
+    "app/components/test.js"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
 }

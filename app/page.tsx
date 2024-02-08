@@ -4,7 +4,7 @@ import MainRow2 from './components/MainRow2';
 
 export default function Home() {
   return (
-    <main className="font-poppins flex min-h-screen flex-col items-center justify-center">
+    <main className="flex min-h-screen flex-col items-center justify-center font-poppins">
       <NavBar />
       <MainRow1 />
       <MainRow2 />
