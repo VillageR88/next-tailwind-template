@@ -89,7 +89,27 @@ const Api = () => {
           </button>
         </div>
       </form>
-      <div className="flex h-full w-full flex-col items-center gap-[1em]"></div>
+      <div className="mt-[1.5em] flex h-full w-[77%] flex-col items-center gap-[1em]">
+        {[
+          ['https://www.fronetmentor.io', 'https://rel.inkk4lKyk/'],
+          ['https://www.fronetmentor.io', 'https://rel.inkk4lKyk/'],
+          ['https://www.fronetmentor.io', 'https://rel.inkk4lKyk/'],
+        ].map((item, index) => (
+          <div
+            key={index}
+            className="flex min-h-[4.5em] w-full items-center justify-between gap-[4em] break-all rounded-[0.3em] bg-white pl-[0.75em] pr-[1.5em]"
+          >
+            <div className="flex gap-[0.6em]">
+              <button className="text-[700] text-gray-700">✕</button>
+              <span className="flex text-clip break-words text-[1.25rem] text-[#34313C]">{item[0]}</span>
+            </div>
+            <div className="flex items-center gap-[1.3em]">
+              <span className="text-[1.25rem] text-[hsl(180,66%,49%)]">{item[1]}</span>
+              <button className="h-[2.55em] min-w-[6.4em] rounded-[0.4em] bg-[hsl(180,66%,49%)]"></button>
+            </div>
+          </div>
+        ))}
+      </div>
     </div>
   );
 };
