@@ -1,14 +1,9 @@
 'use client';
 import { useEffect, useState } from 'react';
+import NavBarItemsFirst from './NavBar/NavBarItemsFirst';
+import NavBarItemsSecond from './NavBar/NavBarItemsSecond';
 const ButtonMobileMenu = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const mobileMenuItems = {
-    pricing: 'Pricing',
-    product: 'Product',
-    aboutUs: 'About Us',
-    careers: 'Careers',
-    community: 'Community',
-  };
 
   useEffect(() => {
     const handleResize = () => {
@@ -29,7 +24,7 @@ const ButtonMobileMenu = () => {
   return (
     <div className="block md:hidden">
       <button
-        className="absolute right-6 top-11 z-10 flex justify-center text-[2rem] font-[500] text-[#9D9CA4]"
+        className="absolute right-6 top-[30px] z-10 flex justify-center text-[2rem] font-[500] text-[#9D9CA4]"
         onClick={() => {
           setIsMenuOpen(!isMenuOpen);
         }}
@@ -38,13 +33,11 @@ const ButtonMobileMenu = () => {
         <span>☰</span>
       </button>
       {isMenuOpen && (
-        <ul className="absolute left-0 top-0 h-full w-full bg-gradient-to-b from-transparent from-10% to-[#3b3e5883] to-60% px-6 pt-[10em]">
-          <div className="flex flex-col items-center gap-[1.5em] rounded-[0.3em] bg-white py-[2em]">
-            {Object.values(mobileMenuItems).map((x) => (
-              <li key={x}>
-                <button className="font-[700] text-[hsl(228,39%,23%)]">{x}</button>
-              </li>
-            ))}
+        <ul className="absolute left-0 top-0 h-fit w-full px-6 pt-[6em]">
+          <div className="z-40 flex flex-col items-center gap-[1.5em] rounded-[0.6em] bg-[#3A3053] pb-[2.5em] pt-[2em]">
+            <NavBarItemsFirst forMobile />
+            <div className="h-[1px] w-[84%] bg-[#544A6D]"></div>
+            <NavBarItemsSecond forMobile />
           </div>
         </ul>
       )}
