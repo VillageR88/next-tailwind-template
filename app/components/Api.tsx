@@ -50,7 +50,6 @@ const Api = () => {
       window.removeEventListener('resize', updateIsMobile);
     };
   }, []);
-  console.log('isMobile', isMobile);
 
   useEffect(() => {
     {
@@ -107,7 +106,7 @@ const Api = () => {
   }, [addressList, sendRequest, valueToShorten]);
 
   return (
-    <div className="flex h-full w-full flex-col items-center">
+    <div className="flex h-full w-full flex-col items-center pb-[2em]">
       <form
         className="mt-[-5.25em] flex h-[10.5em] w-[77%] items-center justify-center rounded-[0.6em] bg-[hsl(257,27%,26%)] bg-[url('../public/images/bg-shorten-desktop.svg')] bg-center"
         aria-label="Shorten Link Form"
