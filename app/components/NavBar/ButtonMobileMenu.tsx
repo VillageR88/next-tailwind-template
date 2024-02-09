@@ -1,7 +1,7 @@
 'use client';
 import { useEffect, useState } from 'react';
-import NavBarItemsFirst from './NavBar/NavBarItemsFirst';
-import NavBarItemsSecond from './NavBar/NavBarItemsSecond';
+import NavBarItemsFirst from './NavBarItemsFirst';
+import NavBarItemsSecond from './NavBarItemsSecond';
 const ButtonMobileMenu = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
@@ -33,7 +33,7 @@ const ButtonMobileMenu = () => {
         <span>☰</span>
       </button>
       {isMenuOpen && (
-        <ul className="absolute left-0 top-0 h-fit w-full px-6 pt-[6em]">
+        <ul className="absolute left-0 top-0 h-full w-full px-6 pt-[6em]">
           <div className="z-40 flex flex-col items-center gap-[1.5em] rounded-[0.6em] bg-[#3A3053] pb-[2.5em] pt-[2em]">
             <NavBarItemsFirst forMobile />
             <div className="h-[1px] w-[84%] bg-[#544A6D]"></div>
