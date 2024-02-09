@@ -21,7 +21,7 @@ const MainRow3 = () => {
     },
   ];
   return (
-    <div className="flex h-full w-full flex-col items-center bg-[#F0F1F6] pb-[7em] md:px-[2em] lg:px-[5em] min-[1458px]:px-[10.3em]">
+    <div className="flex h-full w-full flex-col items-center bg-[#F0F1F6] pb-[7.5em] md:px-[2em] lg:px-[5em] min-[1458px]:px-[10.3em]">
       <section className="flex flex-col items-center gap-[0.7em] ">
         <h2 className="text-[2.5rem] font-[700] tracking-[-0.025em] text-[#34313C]">Advanced Statistics</h2>
         <p className="max-w-[30em] text-center text-[1.12rem] leading-8 tracking-[0.008em] text-[#A5A4A9]">
@@ -32,7 +32,7 @@ const MainRow3 = () => {
         <div className="flex h-0 w-full">
           <div className="mt-[15.5em] h-[0.5em] w-full bg-[#2ED1D8]"></div>
         </div>
-        <ul className="mt-[6em] flex w-full justify-center gap-[1.88em]">
+        <ul className="mt-[6.3em] flex w-full justify-center gap-[1.88em]">
           {listItems.map((item, index) => (
             <li
               style={{ marginTop: index * 2.8 + 'em' }}
