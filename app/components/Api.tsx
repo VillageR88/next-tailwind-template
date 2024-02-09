@@ -14,7 +14,6 @@ interface dataJson {
 enum FetchStatus {
   idle,
   pending,
-  resolved,
   rejected,
 }
 
@@ -35,17 +34,13 @@ const Api = () => {
   const [newLink, setNewLink] = useState<[string, string] | null>(null);
   const [fetchStatus, setFetchStatus] = useState<FetchStatus>(FetchStatus.idle);
   const [addressListIndex, setAddressListIndex] = useState<number | null>(null);
-  const [addressList, setAddressList] = useState<[string, string][] | null>(null);
+  const [addressList, setAddressList] = useState<[string, string][]>([]);
   const [errorStatus, setErrorStatus] = useState<ErrorStatus>(ErrorStatus.none);
 
   useEffect(() => {
-    if (addressList === null)
-      setAddressList([
-        ['https://www.fronetmentor.io', 'https://rel.inkk4lKyk/'],
-        ['https://www.froneasdfasdfadstmentor.io', 'https://rel.inkk4lKyk/'],
-        ['https://www.fronetmentor.io', 'https://re12312312l.inkk4lKyk/'],
-      ]);
-  }, [addressList]);
+    const data = localStorage.getItem('shortenedLinks');
+    if (data) setAddressList(JSON.parse(data) as [string, string][]);
+  }, []);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -59,8 +54,14 @@ const Api = () => {
         .then((data: dataJson) => {
           if (data.success) {
             setNewLink([data.data.full, data.data.url]);
-            setFetchStatus(FetchStatus.resolved);
             setErrorStatus(ErrorStatus.none);
+            setAddressList((value) => {
+              const newValue = [...value];
+              newValue.push([data.data.full, data.data.url]);
+              localStorage.setItem('shortenedLinks', JSON.stringify(newValue));
+              setFetchStatus(FetchStatus.idle);
+              return newValue;
+            });
           } else {
             setFetchStatus(FetchStatus.rejected);
             setErrorStatus(ErrorStatus.invalidUrl);
@@ -118,7 +119,7 @@ const Api = () => {
         </div>
       </form>
       <div className="mt-[1.5em] flex h-full w-[77%] flex-col items-center gap-[1em]">
-        {addressList?.map((item, index) => (
+        {addressList.map((item, index) => (
           <div
             key={index}
             className="flex min-h-[4.5em] w-full items-center justify-between gap-[4em] break-all rounded-[0.3em] bg-white pl-[0.75em] pr-[1.5em]"
@@ -127,11 +128,10 @@ const Api = () => {
               <button
                 onClick={() => {
                   setAddressList((value) => {
-                    if (value) {
-                      const newValue = [...value];
-                      newValue.splice(index, 1);
-                      return newValue;
-                    } else return null;
+                    const newValue = [...value];
+                    newValue.splice(index, 1);
+                    localStorage.setItem('shortenedLinks', JSON.stringify(newValue));
+                    return newValue;
                   });
                 }}
                 className="text-[700] text-gray-700"
