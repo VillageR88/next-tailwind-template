@@ -106,7 +106,11 @@ const Api = () => {
   }, [addressList, sendRequest, valueToShorten]);
 
   return (
-    <div className="flex h-full w-full flex-col items-center pb-[2em] md:px-[2em] lg:px-[5em] min-[1458px]:px-[10.3em]">
+    <div
+      className={`${
+        addressList.length > 0 && 'pb-[7.5em]'
+      } flex h-full w-full flex-col items-center  md:px-[2em] lg:px-[5em] min-[1458px]:px-[10.3em]`}
+    >
       <form
         className="mt-[-5.25em] flex h-[10.5em] w-full items-center justify-center rounded-[0.6em] bg-[hsl(257,27%,26%)] bg-[url('../public/images/bg-shorten-desktop.svg')] bg-center"
         aria-label="Shorten Link Form"
@@ -146,7 +150,7 @@ const Api = () => {
           </span>
         </div>
       </form>
-      <div className="mt-[1.5em] flex h-full w-[77%] flex-col items-center gap-[1em]">
+      <div className="mt-[1.5em] flex h-full w-full flex-col items-center gap-[1em]">
         {addressList.map((item, index) => (
           <div
             onMouseEnter={() => {
