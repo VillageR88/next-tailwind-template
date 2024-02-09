@@ -23,6 +23,12 @@ const Api = () => {
   const [sendRequest, setSendRequest] = useState<boolean>(false);
   const [newLink, setNewLink] = useState<[string, string] | null>(null);
   const [fetchStatus, setFetchStatus] = useState<FetchStatus>(FetchStatus.idle);
+  const [addressListIndex, setAddressListIndex] = useState<number | null>(null);
+  const addressList = [
+    ['https://www.fronetmentor.io', 'https://rel.inkk4lKyk/'],
+    ['https://www.fronetmentor.io', 'https://rel.inkk4lKyk/'],
+    ['https://www.fronetmentor.io', 'https://rel.inkk4lKyk/'],
+  ];
   console.log(newLink);
 
   useEffect(() => {
@@ -90,11 +96,7 @@ const Api = () => {
         </div>
       </form>
       <div className="mt-[1.5em] flex h-full w-[77%] flex-col items-center gap-[1em]">
-        {[
-          ['https://www.fronetmentor.io', 'https://rel.inkk4lKyk/'],
-          ['https://www.fronetmentor.io', 'https://rel.inkk4lKyk/'],
-          ['https://www.fronetmentor.io', 'https://rel.inkk4lKyk/'],
-        ].map((item, index) => (
+        {addressList.map((item, index) => (
           <div
             key={index}
             className="flex min-h-[4.5em] w-full items-center justify-between gap-[4em] break-all rounded-[0.3em] bg-white pl-[0.75em] pr-[1.5em]"
@@ -105,7 +107,17 @@ const Api = () => {
             </div>
             <div className="flex items-center gap-[1.3em]">
               <span className="text-[1.25rem] text-[hsl(180,66%,49%)]">{item[1]}</span>
-              <button className="h-[2.55em] min-w-[6.4em] rounded-[0.4em] bg-[hsl(180,66%,49%)]"></button>
+              <button
+                onClick={() => {
+                  setAddressListIndex(index);
+                  void navigator.clipboard.writeText(item[1]);
+                }}
+                className={`${
+                  addressListIndex === index ? 'bg-[#3A3053]' : 'bg-[hsl(180,66%,49%)]'
+                } h-[2.8em] min-w-[7.1em] rounded-[0.4em] pt-[0.1em] text-[0.9rem] font-[700] text-[white]`}
+              >
+                {addressListIndex === index ? 'Copied!' : 'Copy'}
+              </button>
             </div>
           </div>
         ))}
