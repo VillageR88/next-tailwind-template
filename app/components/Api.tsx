@@ -36,17 +36,35 @@ const Api = () => {
   const [fetchStatus, setFetchStatus] = useState<FetchStatus>(FetchStatus.idle);
   const [addressListIndex, setAddressListIndex] = useState<number | null>(null);
   const [addressList, setAddressList] = useState<[string, string][]>([]);
+  const [addressListHoverIndex, setAddressListHoverIndex] = useState<number | null>(null);
   const [errorStatus, setErrorStatus] = useState<ErrorStatus>(ErrorStatus.none);
+  const [isMobile, setIsMobile] = useState<boolean>(false);
 
   useEffect(() => {
+    const updateIsMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    updateIsMobile();
+    window.addEventListener('resize', updateIsMobile);
+    return () => {
+      window.removeEventListener('resize', updateIsMobile);
+    };
+  }, []);
+  console.log('isMobile', isMobile);
+
+  useEffect(() => {
+    {
+      /*
     const mockupData = [
       ['https://www.frontendmentor.io', 'https://ulvis.net/lV5g'],
       ['https://www.frontendmentor.io', 'https://ulvis.net/YjmC'],
       ['https://www.linkedin.com/company/frontend-mentor', 'https://ulvis.net/vftR'],
     ] as [string, string][];
+  */
+    }
     const data = localStorage.getItem('shortenedLinks');
     if (data && data.length > 2) setAddressList(JSON.parse(data) as [string, string][]);
-    else setAddressList(mockupData);
+    //else setAddressList(mockupData);
   }, []);
 
   useEffect(() => {
@@ -132,6 +150,12 @@ const Api = () => {
       <div className="mt-[1.5em] flex h-full w-[77%] flex-col items-center gap-[1em]">
         {addressList.map((item, index) => (
           <div
+            onMouseEnter={() => {
+              setAddressListHoverIndex(index);
+            }}
+            onMouseLeave={() => {
+              setAddressListHoverIndex(null);
+            }}
             key={index}
             className="flex min-h-[4.5em] w-full items-center justify-between gap-[4em] break-all rounded-[0.3em] bg-white pl-[0.75em] pr-[1.5em]"
           >
@@ -145,7 +169,9 @@ const Api = () => {
                     return newValue;
                   });
                 }}
-                className="text-[700] text-gray-700"
+                className={`${
+                  !isMobile && addressListHoverIndex !== index ? 'invisible' : 'visible'
+                } text-[700] text-gray-700`}
               >
                 ✕
               </button>
