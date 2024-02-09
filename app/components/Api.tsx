@@ -24,11 +24,17 @@ const Api = () => {
   const [newLink, setNewLink] = useState<[string, string] | null>(null);
   const [fetchStatus, setFetchStatus] = useState<FetchStatus>(FetchStatus.idle);
   const [addressListIndex, setAddressListIndex] = useState<number | null>(null);
-  const addressList = [
-    ['https://www.fronetmentor.io', 'https://rel.inkk4lKyk/'],
-    ['https://www.fronetmentor.io', 'https://rel.inkk4lKyk/'],
-    ['https://www.fronetmentor.io', 'https://rel.inkk4lKyk/'],
-  ];
+  const [addressList, setAddressList] = useState<[string, string][] | null>(null);
+  useEffect(() => {
+    if (addressList === null)
+      setAddressList([
+        ['https://www.fronetmentor.io', 'https://rel.inkk4lKyk/'],
+        ['https://www.froneasdfasdfadstmentor.io', 'https://rel.inkk4lKyk/'],
+        ['https://www.fronetmentor.io', 'https://re12312312l.inkk4lKyk/'],
+      ]);
+  }, [addressList]);
+
+  console.log(addressList);
   console.log(newLink);
 
   useEffect(() => {
@@ -96,13 +102,26 @@ const Api = () => {
         </div>
       </form>
       <div className="mt-[1.5em] flex h-full w-[77%] flex-col items-center gap-[1em]">
-        {addressList.map((item, index) => (
+        {addressList?.map((item, index) => (
           <div
             key={index}
             className="flex min-h-[4.5em] w-full items-center justify-between gap-[4em] break-all rounded-[0.3em] bg-white pl-[0.75em] pr-[1.5em]"
           >
             <div className="flex gap-[0.6em]">
-              <button className="text-[700] text-gray-700">✕</button>
+              <button
+                onClick={() => {
+                  setAddressList((value) => {
+                    if (value) {
+                      const newValue = [...value];
+                      newValue.splice(index, 1);
+                      return newValue;
+                    } else return null;
+                  });
+                }}
+                className="text-[700] text-gray-700"
+              >
+                ✕
+              </button>
               <span className="flex text-clip break-words text-[1.25rem] text-[#34313C]">{item[0]}</span>
             </div>
             <div className="flex items-center gap-[1.3em]">
@@ -113,8 +132,8 @@ const Api = () => {
                   void navigator.clipboard.writeText(item[1]);
                 }}
                 className={`${
-                  addressListIndex === index ? 'bg-[#3A3053]' : 'bg-[hsl(180,66%,49%)]'
-                } h-[2.8em] min-w-[7.1em] rounded-[0.4em] pt-[0.1em] text-[0.9rem] font-[700] text-[white]`}
+                  addressListIndex === index ? 'bg-[#3A3053]' : 'bg-[hsl(180,66%,49%)] hover:bg-[#9BE3E2]'
+                } h-[2.8em] min-w-[7.1em] rounded-[0.4em] pt-[0.1em] text-[0.9rem] font-[700] text-[white] transition`}
               >
                 {addressListIndex === index ? 'Copied!' : 'Copy'}
               </button>
