@@ -20,26 +20,33 @@ enum FetchStatus {
 enum ErrorStatus {
   none,
   emptyUrl,
+  duplicateUrl,
   invalidUrl,
 }
 const errorStatusMessages = {
   [ErrorStatus.none]: '',
   [ErrorStatus.emptyUrl]: 'Please add a link',
+  [ErrorStatus.duplicateUrl]: 'Link already shortened',
   [ErrorStatus.invalidUrl]: 'Please add a valid link',
 };
 
 const Api = () => {
   const [valueToShorten, setValueToShorten] = useState<string>('');
   const [sendRequest, setSendRequest] = useState<boolean>(false);
-  const [newLink, setNewLink] = useState<[string, string] | null>(null);
   const [fetchStatus, setFetchStatus] = useState<FetchStatus>(FetchStatus.idle);
   const [addressListIndex, setAddressListIndex] = useState<number | null>(null);
   const [addressList, setAddressList] = useState<[string, string][]>([]);
   const [errorStatus, setErrorStatus] = useState<ErrorStatus>(ErrorStatus.none);
 
   useEffect(() => {
+    const mockupData = [
+      ['https://www.frontendmentor.io', 'https://ulvis.net/lV5g'],
+      ['https://www.frontendmentor.io', 'https://ulvis.net/YjmC'],
+      ['https://www.linkedin.com/company/frontend-mentor', 'https://ulvis.net/vftR'],
+    ] as [string, string][];
     const data = localStorage.getItem('shortenedLinks');
-    if (data) setAddressList(JSON.parse(data) as [string, string][]);
+    if (data && data.length > 2) setAddressList(JSON.parse(data) as [string, string][]);
+    else setAddressList(mockupData);
   }, []);
 
   useEffect(() => {
@@ -53,7 +60,6 @@ const Api = () => {
         .then((response) => response.json())
         .then((data: dataJson) => {
           if (data.success) {
-            setNewLink([data.data.full, data.data.url]);
             setErrorStatus(ErrorStatus.none);
             setAddressList((value) => {
               const newValue = [...value];
@@ -72,11 +78,15 @@ const Api = () => {
         });
     };
     if (sendRequest) {
-      void fetchData();
+      if (valueToShorten === '') setErrorStatus(ErrorStatus.emptyUrl);
+      else if (addressList.some((item) => item[0] === valueToShorten)) setErrorStatus(ErrorStatus.duplicateUrl);
+      else {
+        void fetchData();
+        setFetchStatus(FetchStatus.pending);
+      }
       setSendRequest(false);
-      setFetchStatus(FetchStatus.pending);
     }
-  }, [sendRequest, valueToShorten]);
+  }, [addressList, sendRequest, valueToShorten]);
 
   return (
     <div className="flex h-full w-full flex-col items-center">
@@ -94,11 +104,13 @@ const Api = () => {
             }}
             placeholder="Shorten a link here..."
             type="url"
-            className="w-full rounded-[0.5em] pl-[1.6em] pr-[1.6em] pt-[0.16em] text-[1.25rem] disabled:bg-slate-400"
+            className={`${
+              errorStatus && 'outline-3 text-[#cc6b7b] placeholder-[#EAB6BA] outline outline-[#cc6b7b]'
+            } w-full rounded-[0.5em] pl-[1.6em] pr-[1.6em] pt-[0.16em] text-[1.25rem] disabled:bg-slate-400`}
             onKeyDown={(e) => {
               if (e.key === 'Enter') {
-                setSendRequest(true);
                 e.preventDefault();
+                setSendRequest(true);
               }
             }}
           />
@@ -106,8 +118,7 @@ const Api = () => {
             disabled={fetchStatus === FetchStatus.pending}
             onClick={(e) => {
               e.preventDefault();
-              if (valueToShorten === '') setErrorStatus(ErrorStatus.emptyUrl);
-              else setSendRequest(true);
+              setSendRequest(true);
             }}
             className="w-[12.6em] rounded-[0.5em] bg-[hsl(180,66%,49%)] pb-[0.67em] pt-[0.77em] text-[1.2rem] font-[700] text-[white] transition hover:bg-[#9BE3E2] disabled:hover:bg-[hsl(180,66%,49%)]"
           >
