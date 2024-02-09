@@ -109,13 +109,17 @@ const Api = () => {
     <div
       className={`${
         addressList.length > 0 && 'pb-[7.5em]'
-      } flex h-full w-full flex-col items-center  md:px-[2em] lg:px-[5em] min-[1458px]:px-[10.3em]`}
+      } flex h-full w-full flex-col items-center px-6 md:px-[2em] lg:px-[5em] min-[1458px]:px-[10.3em]`}
     >
       <form
-        className="mt-[-5.25em] flex h-[10.5em] w-full items-center justify-center rounded-[0.6em] bg-[hsl(257,27%,26%)] bg-[url('../public/images/bg-shorten-desktop.svg')] bg-center"
+        className="mt-[-5.25em] flex w-full items-center justify-center bg-[hsl(257,27%,26%)] bg-[url('../public/images/bg-shorten-mobile.svg')] bg-right-top bg-no-repeat py-6  md:h-[10.5em]  md:rounded-[0.6em] md:bg-[url('../public/images/bg-shorten-desktop.svg')] md:bg-cover md:bg-center md:py-0"
         aria-label="Shorten Link Form"
       >
-        <div className="flex h-[4em] w-[88.5%] gap-[1.5em]">
+        <div
+          className={`${
+            errorStatus !== ErrorStatus.none ? 'gap-[3.2em]' : 'gap-[1em]'
+          } flex w-full flex-col  px-6 md:h-[4em] md:w-[88.5%] md:flex-row md:gap-[1.5em] md:px-0`}
+        >
           <input
             disabled={fetchStatus === FetchStatus.pending}
             value={valueToShorten}
@@ -127,7 +131,7 @@ const Api = () => {
             type="url"
             className={`${
               errorStatus && 'outline-3 text-[#cc6b7b] placeholder-[#EAB6BA] outline outline-[#cc6b7b]'
-            } w-full rounded-[0.5em] pl-[1.6em] pr-[1.6em] pt-[0.16em] text-[1.25rem] disabled:bg-slate-400`}
+            } h-[3.5em] w-full rounded-[0.3em] px-[0.6em] pt-[0.16em] disabled:bg-slate-400 md:h-full md:rounded-[0.5em] md:px-[1.6em] md:text-[1.25rem]`}
             onKeyDown={(e) => {
               if (e.key === 'Enter') {
                 e.preventDefault();
@@ -141,7 +145,7 @@ const Api = () => {
               e.preventDefault();
               setSendRequest(true);
             }}
-            className="w-[12.6em] rounded-[0.5em] bg-[hsl(180,66%,49%)] pb-[0.67em] pt-[0.77em] text-[1.2rem] font-[700] text-[white] transition hover:bg-[#9BE3E2] disabled:hover:bg-[hsl(180,66%,49%)]"
+            className="rounded-[0.3em] bg-[hsl(180,66%,49%)] pb-[0.67em] pt-[0.77em] text-[1.2rem] font-[700] text-[white] transition hover:bg-[#9BE3E2] disabled:hover:bg-[hsl(180,66%,49%)] md:w-[12.6em] md:rounded-[0.5em]"
           >
             {fetchStatus === FetchStatus.pending ? 'Processing...' : 'Shorten It!'}
           </button>
