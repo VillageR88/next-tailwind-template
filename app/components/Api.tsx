@@ -18,6 +18,17 @@ enum FetchStatus {
   rejected,
 }
 
+enum ErrorStatus {
+  none,
+  emptyUrl,
+  invalidUrl,
+}
+const errorStatusMessages = {
+  [ErrorStatus.none]: '',
+  [ErrorStatus.emptyUrl]: 'Please add a link',
+  [ErrorStatus.invalidUrl]: 'Please add a valid link',
+};
+
 const Api = () => {
   const [valueToShorten, setValueToShorten] = useState<string>('');
   const [sendRequest, setSendRequest] = useState<boolean>(false);
@@ -25,6 +36,8 @@ const Api = () => {
   const [fetchStatus, setFetchStatus] = useState<FetchStatus>(FetchStatus.idle);
   const [addressListIndex, setAddressListIndex] = useState<number | null>(null);
   const [addressList, setAddressList] = useState<[string, string][] | null>(null);
+  const [errorStatus, setErrorStatus] = useState<ErrorStatus>(ErrorStatus.none);
+
   useEffect(() => {
     if (addressList === null)
       setAddressList([
@@ -34,12 +47,8 @@ const Api = () => {
       ]);
   }, [addressList]);
 
-  console.log(addressList);
-  console.log(newLink);
-
   useEffect(() => {
     const fetchData = async () => {
-      console.log('fetching data');
       const requestOptions = {
         method: 'POST',
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
@@ -51,8 +60,10 @@ const Api = () => {
           if (data.success) {
             setNewLink([data.data.full, data.data.url]);
             setFetchStatus(FetchStatus.resolved);
+            setErrorStatus(ErrorStatus.none);
           } else {
             setFetchStatus(FetchStatus.rejected);
+            setErrorStatus(ErrorStatus.invalidUrl);
           }
         })
         .catch((error) => {
@@ -78,6 +89,7 @@ const Api = () => {
             value={valueToShorten}
             onChange={(e) => {
               setValueToShorten(e.target.value);
+              setErrorStatus(ErrorStatus.none);
             }}
             placeholder="Shorten a link here..."
             type="url"
@@ -92,13 +104,17 @@ const Api = () => {
           <button
             disabled={fetchStatus === FetchStatus.pending}
             onClick={(e) => {
-              setSendRequest(true);
               e.preventDefault();
+              if (valueToShorten === '') setErrorStatus(ErrorStatus.emptyUrl);
+              else setSendRequest(true);
             }}
             className="w-[12.6em] rounded-[0.5em] bg-[hsl(180,66%,49%)] pb-[0.67em] pt-[0.77em] text-[1.2rem] font-[700] text-[white] transition hover:bg-[#9BE3E2] disabled:hover:bg-[hsl(180,66%,49%)]"
           >
             {fetchStatus === FetchStatus.pending ? 'Processing...' : 'Shorten It!'}
           </button>
+          <span className="absolute ml-[-0.1em] mt-[4.45em] italic text-[#cc6b7b]">
+            {errorStatusMessages[errorStatus]}
+          </span>
         </div>
       </form>
       <div className="mt-[1.5em] flex h-full w-[77%] flex-col items-center gap-[1em]">
