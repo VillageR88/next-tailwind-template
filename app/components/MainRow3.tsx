@@ -34,27 +34,29 @@ const MainRow3 = () => {
         <div className="flex h-0 w-full justify-center">
           <div className="mt-[15.5em] h-[40em] w-[0.5em] bg-[#2ED1D8] md:h-[0.5em] md:w-full"></div>
         </div>
-        <ul className="mt-[6.3em] flex w-full flex-col justify-center gap-[1.88em] md:flex-row">
-          {listItems.map((item, index) => (
-            <li
-              style={{ marginTop: index * 2.8 + 'em' }}
-              className="flex w-full flex-col items-center gap-[1em] rounded-[0.3em] bg-[white] px-[1.95em] pb-[2.75em] md:h-[27em] md:items-start min-[900px]:h-[23em] min-[1100px]:h-[18em] min-[1458px]:h-fit"
-              key={index}
-            >
-              <div className="mt-[-3em] flex h-[88px] w-[88px] items-center justify-center rounded-full bg-[#3A3053]  text-center md:text-left">
-                <Image
-                  width={index !== 2 ? 40 : 50}
-                  height={index !== 2 ? 40 : 50}
-                  src={item.icon}
-                  alt={item.title}
-                ></Image>
-              </div>
-              <h3 className="mt-[0.8em] text-[1.4rem] font-[700] text-[#34313C]">{item.title}</h3>
-              <p className="scale-y-105 text-center text-[0.93rem] leading-[1.6em] text-[#A5A4A9] md:text-left">
-                {item.description}
-              </p>
-            </li>
-          ))}
+        <ul className="mt-[6.3em] flex w-full flex-col justify-center gap-[6em] md:flex-row md:gap-[1.88em]">
+          {listItems.map((item, index) => {
+            const marginTop = { 0: 'md:mt-0', 1: 'md:mt-[2.8em]', 2: 'md:mt-[5.6em]' }[index];
+            return (
+              <li
+                className={`${marginTop} flex w-full flex-col items-center gap-[1em] rounded-[0.3em] bg-[white] px-[1.95em] pb-[2.75em] md:h-[27em] md:items-start min-[900px]:h-[23em] min-[1100px]:h-[18em] min-[1458px]:h-fit`}
+                key={index}
+              >
+                <div className="mt-[-3em] flex h-[88px] w-[88px] items-center justify-center rounded-full bg-[#3A3053]  text-center md:text-left">
+                  <Image
+                    width={index !== 2 ? 40 : 50}
+                    height={index !== 2 ? 40 : 50}
+                    src={item.icon}
+                    alt={item.title}
+                  ></Image>
+                </div>
+                <h3 className="mt-[0.8em] text-[1.4rem] font-[700] text-[#34313C]">{item.title}</h3>
+                <p className="scale-y-105 text-center text-[0.93rem] leading-[1.6em] text-[#A5A4A9] md:text-left">
+                  {item.description}
+                </p>
+              </li>
+            );
+          })}
         </ul>
       </div>
     </div>
