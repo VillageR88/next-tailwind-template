@@ -9,12 +9,14 @@ const NavBar = () => {
         <ul className="flex gap-[2.85em]">
           {middleItems.map((item, index) => (
             <li key={index}>
-              <button className="text-[0.82rem] font-[400] tracking-[0.11em] hover:text-[#DC6465]">{item}</button>
+              <button className="text-[0.82rem] font-[400] tracking-[0.11em] transition hover:text-[#DC6465]">
+                {item}
+              </button>
             </li>
           ))}
         </ul>
         <button
-          className={`h-[2.8em] w-[8.2em] rounded-[0.3em] bg-[#FB5859] text-[0.82rem] font-[500] tracking-widest text-[white] shadow-[0_3px_5px_4px_#E5EBF8] outline outline-2 outline-[#FB5859] hover:bg-[white] hover:text-[#DC6465] hover:outline-[#DC6465]`}
+          className={`mr-[-0.15em] h-[3em] w-[8.5em] rounded-[0.3em] border-2 border-[#FB5859] bg-[#FB5859] text-[0.82rem] font-[500] tracking-widest text-[white] shadow-[0_3px_5px_4px_#E5EBF8] transition hover:border-[#DC6465] hover:bg-[white] hover:text-[#DC6465]`}
         >
           LOGIN
         </button>
