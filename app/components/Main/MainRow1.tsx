@@ -2,7 +2,7 @@ import Image from 'next/image';
 
 const MainRow1 = () => {
   return (
-    <div className="flex h-full w-full flex-col-reverse gap-[3em] bg-[white] px-2 pb-[1em] md:h-[35.5em] md:flex-row md:gap-0 md:px-0 md:pl-[2em] lg:pl-[5em] min-[1458px]:pl-[10.3em]">
+    <div className="flex h-full w-full flex-col-reverse gap-[3em] bg-[white] px-2 md:h-[35.5em] md:flex-row md:gap-0 md:px-0 md:pl-[2em] lg:pl-[5em] min-[1458px]:pl-[10.3em]">
       <div className="flex h-full w-full flex-col items-center justify-center px-6 text-center md:w-1/2 md:items-start md:px-0 md:pr-[3em] md:text-left lg:pr-[2em]">
         <h1 className="lg:[2.5rem] text-[1.8rem] font-[500] leading-[1.1em]  text-[hsl(229,31%,21%)] md:text-[2.2rem] xl:text-[2.95rem]">
           A Simple Bookmark Manager
