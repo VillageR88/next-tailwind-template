@@ -112,7 +112,7 @@ const Api = () => {
       } flex h-full w-full flex-col items-center px-6 md:px-[2em] lg:px-[5em] min-[1458px]:px-[10.3em]`}
     >
       <form
-        className="mt-[-5.25em] flex w-full items-center justify-center bg-[hsl(257,27%,26%)] bg-[url('../public/images/bg-shorten-mobile.svg')] bg-right-top bg-no-repeat py-6  md:h-[10.5em]  md:rounded-[0.6em] md:bg-[url('../public/images/bg-shorten-desktop.svg')] md:bg-cover md:bg-center md:py-0"
+        className="mt-[-5.25em] flex w-full items-center justify-center rounded-[0.6em] bg-[hsl(257,27%,26%)] bg-[url('../public/images/bg-shorten-mobile.svg')] bg-right-top bg-no-repeat py-6 md:h-[10.5em] md:bg-[url('../public/images/bg-shorten-desktop.svg')] md:bg-cover md:bg-center md:py-0"
         aria-label="Shorten Link Form"
       >
         <div
@@ -149,12 +149,12 @@ const Api = () => {
           >
             {fetchStatus === FetchStatus.pending ? 'Processing...' : 'Shorten It!'}
           </button>
-          <span className="absolute ml-[-0.1em] mt-[4.45em] italic text-[#cc6b7b]">
+          <span className="absolute ml-[-0.1em] mt-[4em] italic text-[#cc6b7b] md:mt-[4.55em]">
             {errorStatusMessages[errorStatus]}
           </span>
         </div>
       </form>
-      <div className="mt-[1.5em] flex h-full w-full flex-col items-center gap-[1em]">
+      <div className="mt-[1.8em] flex h-full w-full flex-col items-center gap-[1.8em] md:mt-[1.5em] md:gap-[1em]">
         {addressList.map((item, index) => (
           <div
             onMouseEnter={() => {
@@ -164,9 +164,9 @@ const Api = () => {
               setAddressListHoverIndex(null);
             }}
             key={index}
-            className="flex min-h-[4.5em] w-full items-center justify-between gap-[4em] break-all rounded-[0.3em] bg-white pl-[0.75em] pr-[1.5em]"
+            className="flex min-h-[4.5em] w-full flex-col justify-between break-all rounded-[0.3em] bg-white py-[1em] md:flex-row md:items-center md:gap-[4em] md:py-0 md:pl-[0.75em] md:pr-[1.5em]"
           >
-            <div className="flex gap-[0.6em]">
+            <div className="flex gap-[0.4em] px-2 md:gap-[0.6em] md:px-0">
               <button
                 onClick={() => {
                   setAddressList((value) => {
@@ -184,8 +184,9 @@ const Api = () => {
               </button>
               <span className="flex text-clip break-words text-[1.25rem] text-[#34313C]">{item[0]}</span>
             </div>
-            <div className="flex items-center gap-[1.3em]">
-              <span className="text-[1.25rem] text-[hsl(180,66%,49%)]">{item[1]}</span>
+            <div className="my-[0.7em] h-[1px] w-full bg-[#cfcdcd] md:hidden"></div>
+            <div className="flex flex-col items-center gap-[0.8em] px-4 md:flex-row md:gap-[1.3em] md:px-0">
+              <span className="w-full text-[1.25rem] text-[hsl(180,66%,49%)]">{item[1]}</span>
               <button
                 onClick={() => {
                   setAddressListIndex(index);
@@ -193,7 +194,7 @@ const Api = () => {
                 }}
                 className={`${
                   addressListIndex === index ? 'bg-[#3A3053]' : 'bg-[hsl(180,66%,49%)] hover:bg-[#9BE3E2]'
-                } h-[2.8em] min-w-[7.1em] rounded-[0.4em] pt-[0.1em] text-[0.9rem] font-[700] text-[white] transition`}
+                } h-[2.8em] w-full min-w-[7.1em] rounded-[0.4em] pt-[0.1em] text-[0.9rem] font-[700] text-[white] transition md:w-fit`}
               >
                 {addressListIndex === index ? 'Copied!' : 'Copy'}
               </button>
