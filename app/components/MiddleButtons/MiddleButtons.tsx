@@ -1,6 +1,6 @@
 const MiddleButtons = ({ title, buttons }: { title: string; buttons: string[] }) => {
   return (
-    <div className="justify-start] mt-[0.15em] flex flex-col gap-[1.3em]">
+    <div className="mt-[0.15em] flex flex-col items-center justify-start gap-[1.3em] text-center md:items-start md:text-left">
       <h4 className="text-[0.95rem] font-[700] text-[hsl(0,0%,98%)]">{title}</h4>
       <ul className="flex flex-col gap-[0.5em]">
         {buttons.map((item, index) => (

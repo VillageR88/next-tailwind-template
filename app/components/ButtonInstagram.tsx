@@ -1,5 +1,5 @@
 const ButtonInstagram = () => (
-  <button className="scale-150 md:scale-[120%]" aria-label="Instagram">
+  <button className="scale-[120%]" aria-label="Instagram">
     <svg
       className="fill-[#FFF] transition hover:fill-[#3BD0CC]"
       xmlns="http://www.w3.org/2000/svg"

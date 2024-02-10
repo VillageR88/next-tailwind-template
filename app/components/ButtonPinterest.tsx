@@ -1,5 +1,5 @@
 const ButtonPinterest = () => (
-  <button className="scale-150 md:scale-[120%]" aria-label="Pinterest">
+  <button className="scale-[120%]" aria-label="Pinterest">
     <svg
       className="fill-[#FFF] transition hover:fill-[#3BD0CC]"
       xmlns="http://www.w3.org/2000/svg"
