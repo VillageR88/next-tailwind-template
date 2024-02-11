@@ -48,6 +48,9 @@ const Carousel = () => {
         {buttons.map((button, index) => {
           return (
             <button
+              onClick={() => {
+                document.querySelector('.slick-dots li:nth-child(' + (index + 1) + ') button')?.click();
+              }}
               key={index}
               className={`${
                 index === 0 ? 'ml-[-2em]' : index === 1 ? 'ml-[5em]' : 'ml-[6em]'
@@ -59,6 +62,7 @@ const Carousel = () => {
         })}
       </div>
       <Slider
+        ref={(slider) => (slider = slider)}
         dots={true}
         infinite
         speed={500}
@@ -75,7 +79,7 @@ const Carousel = () => {
               }}
             >
               <div className="flex flex-col">
-                <ul className="flex h-1 w-[45.7em] justify-center gap-[13.5em]"> {dots} </ul>
+                <ul className="flex h-1 w-[45.7em] justify-center gap-[13.5em] dotsy"> {dots} </ul>
                 <div className="h-[1px] w-full bg-[#ddd8d8]"></div>
               </div>
             </div>
