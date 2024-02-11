@@ -120,7 +120,7 @@ const Carousel = () => {
                     <h3 className="text-center text-[2rem] font-[500] text-[#282D41]">{item.title}</h3>
                     <p className="text-[1.1rem] text-[hsl(229,8%,60%)]">{item.description}</p>
                     <button
-                      className={`mr-[-0.15em] mt-[1.2em] h-[3.7em] w-[8.8em] rounded-[0.3em] border-2 border-[#5266E3] bg-[#5266E3] text-[0.82rem] font-[500] tracking-widest text-[white] shadow-[0_3px_5px_4px_#E5EBF8] transition hover:border-[#DC6465] hover:bg-[white] hover:text-[#DC6465]`}
+                      className={`mr-[-0.15em] mt-[1.2em] h-[3.7em] w-[8.8em] rounded-[0.3em] border-2 border-[#5266E3] bg-[#5266E3] text-[0.82rem] font-[500] tracking-widest text-[white] shadow-[0_3px_5px_4px_#E5EBF8] transition hover:border-[hsl(231,69%,60%)] hover:bg-[white] hover:text-[hsl(231,69%,60%)]`}
                     >
                       More info
                     </button>
