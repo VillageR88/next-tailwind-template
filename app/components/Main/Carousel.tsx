@@ -44,6 +44,7 @@ const Carousel = () => {
       window.removeEventListener('resize', handleResize);
     };
   }, []);
+  console.log(isMobile);
 
   return (
     <div ref={carouselRef} className="slider-container mt-[4em] w-full">
@@ -105,10 +106,17 @@ const Carousel = () => {
             <div key={index} className="mt-[4em]">
               <div className="flex w-full  py-[2.5em]">
                 <div className="flex h-fit w-1/2 items-center justify-end">
-                  <Image className="flex h-fit w-fit " width={100} height={100} src={item.image} alt="image" priority />
+                  <Image
+                    className="mr-[1em] flex h-fit w-fit "
+                    width={100}
+                    height={100}
+                    src={item.image}
+                    alt="image"
+                    priority
+                  />
                 </div>
                 <div className="flex h-[20em] w-1/2 flex-col items-center justify-center rounded-[1em] bg-[#ffffffda]">
-                  <div className="flex h-full w-[30em] flex-col items-start justify-center gap-[1.2em]">
+                  <div className="mr-[4em] mt-[1em] flex h-full w-[27em] flex-col items-start justify-center gap-[1.2em]">
                     <h3 className="text-center text-[2rem] font-[500] text-[#282D41]">{item.title}</h3>
                     <p className="text-[1.1rem] text-[hsl(229,8%,60%)]">{item.description}</p>
                     <button
