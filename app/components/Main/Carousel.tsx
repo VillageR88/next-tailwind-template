@@ -52,7 +52,6 @@ const Carousel = () => {
           return (
             <button
               onClick={() => {
-                setSelectedSlide(index);
                 const element = carouselRef.current?.querySelector(
                   '.slick-dots li:nth-child(' + (index + 1) + ') button',
                 );
@@ -77,6 +76,12 @@ const Carousel = () => {
         speed={500}
         initialSlide={0}
         dotsClass="slick-dots"
+        afterChange={(index) => {
+          setSelectedSlide(index);
+        }}
+        beforeChange={(index) => {
+          setSelectedSlide(index);
+        }}
         appendDots={(dots) => {
           console.log(dots);
           return (
@@ -102,9 +107,16 @@ const Carousel = () => {
                 <div className="flex h-fit w-1/2 items-center justify-end">
                   <Image className="flex h-fit w-fit " width={100} height={100} src={item.image} alt="image" priority />
                 </div>
-                <div className="flex w-1/2 flex-col">
-                  <h3 className="text-center text-[1rem] font-[700] text-[hsl(233,26%,24%)]">{item.title}</h3>
-                  <p className={`w-[29em] px-4 md:px-0`}>{item.description}</p>
+                <div className="flex h-[20em] w-1/2 flex-col items-center justify-center rounded-[1em] bg-[#ffffffda]">
+                  <div className="flex h-full w-[30em] flex-col items-start justify-center gap-[1.2em]">
+                    <h3 className="text-center text-[2rem] font-[500] text-[#282D41]">{item.title}</h3>
+                    <p className="text-[1.1rem] text-[hsl(229,8%,60%)]">{item.description}</p>
+                    <button
+                      className={`mr-[-0.15em] mt-[1.2em] h-[3.7em] w-[8.8em] rounded-[0.3em] border-2 border-[#5266E3] bg-[#5266E3] text-[0.82rem] font-[500] tracking-widest text-[white] shadow-[0_3px_5px_4px_#E5EBF8] transition hover:border-[#DC6465] hover:bg-[white] hover:text-[#DC6465]`}
+                    >
+                      More info
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>

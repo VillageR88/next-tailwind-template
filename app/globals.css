@@ -17,9 +17,8 @@ html {
   padding: 0 12em;
   height: 0.4em;
   transition-timing-function: ease-in-out;
-  transition-duration: 0.15s;
+  transition-duration: 0.8s;
   transition-property: background-color;
-  
 }
 
 .slick-dots li {
