@@ -1,9 +1,12 @@
 'use client';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import Slider from 'react-slick';
 import Image from 'next/image';
 
 const Carousel = () => {
+  const carouselRef = useRef<HTMLDivElement>(null);
+  const [selectedSlide, setSelectedSlide] = useState(0);
+
   const buttons = ['Simple Bookmarking', 'Speedy Searching', 'Easy Sharing'];
   const carouselItems = [
     {
@@ -43,18 +46,24 @@ const Carousel = () => {
   }, []);
 
   return (
-    <div className="slider-container mt-[4em] w-full">
+    <div ref={carouselRef} className="slider-container mt-[4em] w-full">
       <div className="m-0 flex w-full justify-center">
         {buttons.map((button, index) => {
           return (
             <button
               onClick={() => {
-                document.querySelector('.slick-dots li:nth-child(' + (index + 1) + ') button')?.click();
+                setSelectedSlide(index);
+                const element = carouselRef.current?.querySelector(
+                  '.slick-dots li:nth-child(' + (index + 1) + ') button',
+                );
+                if (element instanceof HTMLElement) {
+                  element.click();
+                }
               }}
               key={index}
-              className={`${
-                index === 0 ? 'ml-[-2em]' : index === 1 ? 'ml-[5em]' : 'ml-[6em]'
-              } text-[1.1rem] text-[hsl(229,8%,60%)] hover:text-[#DC6465]`}
+              className={`${index === 0 ? 'ml-[-2em]' : index === 1 ? 'ml-[5em]' : 'ml-[6em]'} text-[1.1rem] ${
+                selectedSlide === index ? 'text-[hsl(229,31%,21%)]' : 'text-[hsl(229,8%,60%)] hover:text-[#DC6465]'
+              }`}
             >
               {button}
             </button>
@@ -79,7 +88,7 @@ const Carousel = () => {
               }}
             >
               <div className="flex flex-col">
-                <ul className="flex h-1 w-[45.7em] justify-center gap-[13.5em] dotsy"> {dots} </ul>
+                <ul className="dotsy flex h-1 w-[45.7em] justify-center gap-[13.5em]"> {dots} </ul>
                 <div className="h-[1px] w-full bg-[#ddd8d8]"></div>
               </div>
             </div>
