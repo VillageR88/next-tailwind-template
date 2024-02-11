@@ -88,7 +88,7 @@ const Carousel = () => {
               }}
             >
               <div className="flex flex-col">
-                <ul className="dotsy flex h-1 w-[45.7em] justify-center gap-[13.5em]"> {dots} </ul>
+                <ul className="flex h-1 w-[45.7em] justify-center gap-[13.5em]"> {dots} </ul>
                 <div className="h-[1px] w-full bg-[#ddd8d8]"></div>
               </div>
             </div>
@@ -98,9 +98,9 @@ const Carousel = () => {
         {carouselItems.map((item, index) => {
           return (
             <div key={index} className="mt-[4em]">
-              <div className="flex w-full bg-[white] py-[2.5em]">
-                <div className="w-1/2">
-                  <Image width={25} height={25} src={item.image} alt="image" className="h-fit w-fit" />
+              <div className="flex w-full  py-[2.5em]">
+                <div className="flex h-fit w-1/2 items-center justify-end">
+                  <Image className="flex h-fit w-fit " width={100} height={100} src={item.image} alt="image" priority />
                 </div>
                 <div className="flex w-1/2 flex-col">
                   <h3 className="text-center text-[1rem] font-[700] text-[hsl(233,26%,24%)]">{item.title}</h3>
@@ -111,6 +111,7 @@ const Carousel = () => {
           );
         })}
       </Slider>
+      <div className="mt-[-23.5em] h-[22em] w-[40em] rounded-r-full bg-[#4D61D0] px-10"> </div>;
     </div>
   );
 };
