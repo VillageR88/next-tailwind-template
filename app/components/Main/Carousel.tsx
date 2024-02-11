@@ -63,7 +63,7 @@ const Carousel = () => {
               key={index}
               className={`${index === 0 ? 'ml-[-2em]' : index === 1 ? 'ml-[5em]' : 'ml-[6em]'} text-[1.1rem] ${
                 selectedSlide === index ? 'text-[hsl(229,31%,21%)]' : 'text-[hsl(229,8%,60%)] hover:text-[#DC6465]'
-              }`}
+              } transition duration-300 ease-in-out`}
             >
               {button}
             </button>
