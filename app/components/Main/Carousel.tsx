@@ -4,6 +4,7 @@ import Slider from 'react-slick';
 import Image from 'next/image';
 
 const Carousel = () => {
+  const buttons = ['Simple Bookmarking', 'Speedy Searching', 'Easy Sharing'];
   const carouselItems = [
     {
       image: './images/illustration-features-tab-1.svg',
@@ -42,30 +43,48 @@ const Carousel = () => {
   }, []);
 
   return (
-    <div className="slider-container mt-[5em] w-full">
+    <div className="slider-container mt-[4em] w-full">
+      <div className="m-0 flex w-full justify-center">
+        {buttons.map((button, index) => {
+          return (
+            <button
+              key={index}
+              className={`${
+                index === 0 ? 'ml-[-2em]' : index === 1 ? 'ml-[5em]' : 'ml-[6em]'
+              } text-[1.1rem] text-[hsl(229,8%,60%)] hover:text-[#DC6465]`}
+            >
+              {button}
+            </button>
+          );
+        })}
+      </div>
       <Slider
         dots={true}
         infinite
         speed={500}
         initialSlide={0}
-        appendDots={(dots) => (
-          <div
-            style={{
-              position: 'relative',
-              scale: '0.4',
-              marginTop: '-2em',
-              paddingTop: '1em',
-              paddingBottom: '2em',
-              bottom: '34em',
-            }}
-          >
-            <ul style={{ margin: '0px' }}> {dots} </ul>
-          </div>
-        )}
+        dotsClass="slick-dots"
+        appendDots={(dots) => {
+          console.log(dots);
+          return (
+            <div
+              style={{
+                bottom: '33.3em',
+                display: 'flex',
+                justifyContent: 'center',
+              }}
+            >
+              <div className="flex flex-col">
+                <ul className="flex h-1 w-[45.7em] justify-center gap-[13.5em]"> {dots} </ul>
+                <div className="h-[1px] w-full bg-[#ddd8d8]"></div>
+              </div>
+            </div>
+          );
+        }}
       >
         {carouselItems.map((item, index) => {
           return (
-            <div key={index}>
+            <div key={index} className="mt-[4em]">
               <div className="flex w-full bg-[white] py-[2.5em]">
                 <div className="w-1/2">
                   <Image width={25} height={25} src={item.image} alt="image" className="h-fit w-fit" />
