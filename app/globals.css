@@ -6,3 +6,29 @@ html {
   /* dark scroll bars */
   /* color-scheme: dark; */
 }
+
+.slick-slide {
+  padding: 0 15px;
+  width: 35.5em;
+}
+
+input {
+  outline: none;
+}
+
+.slick-dots button {
+  text-indent: -9999px;
+}
+
+.slick-dots li {
+  border-radius: 100%;
+  background-color: transparent;
+  border: 2px solid hsl(12, 88%, 59%);
+  font-size: 10px;
+  line-height: 10px;
+}
+
+.slick-dots li.slick-active {
+  border-radius: 100%;
+  background-color: hsl(12, 88%, 59%);
+}
