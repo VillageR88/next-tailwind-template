@@ -63,7 +63,7 @@ const MainRow4 = () => {
         {items.map((item, index) => (
           <li key={index} className="flex w-full flex-col items-center justify-between transition-all">
             <button
-              className="flex h-full w-full items-center justify-between transition hover:text-[#DC6465]"
+              className="z-10 flex h-full w-full items-center justify-between transition hover:text-[#DC6465]"
               onClick={() => {
                 const newQuestionsOpen = [...questionsOpen];
                 newQuestionsOpen[index] = !newQuestionsOpen[index];
@@ -83,7 +83,7 @@ const MainRow4 = () => {
               className={`${
                 questionsOpen[index]
                   ? 'mb-[2em] mt-[2em]  text-[#6b6d74]'
-                  : 'h-0 -translate-y-[100%] scale-y-0 text-[white] '
+                  : 'h-0 -translate-y-[50%] scale-y-0 text-[white] opacity-0'
               } mb-[1em] mr-[-0.3em] scale-y-[105%] transform text-left leading-[2.2em] duration-[0.4s] ease-out`}
             >
               {item.answer}
