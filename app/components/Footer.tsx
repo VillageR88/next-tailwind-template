@@ -1,9 +1,11 @@
 import Logo from './Logo';
 import middleItems from './navAndFooterMiddleItems';
+import ButtonFacebook from './ButtonFacebook';
+import ButtonTwitter from './ButtonTwitter';
 
 const Footer = () => {
   return (
-    <footer className="flex h-[5.5em] w-full items-center bg-[#242946] px-6 md:px-[2em] lg:px-[5em] min-[1458px]:px-[10.3em]">
+    <footer className="flex h-[5.5em] w-full items-center justify-between bg-[#242946] px-6 md:px-[2em] lg:px-[5em] min-[1458px]:px-[10.3em]">
       <div className="flex gap-[4em]">
         <Logo color="white" />
         <ul className="flex gap-[2.8em]">
@@ -15,6 +17,10 @@ const Footer = () => {
             </li>
           ))}
         </ul>
+      </div>
+      <div className="flex gap-[2.7em]">
+        <ButtonFacebook />
+        <ButtonTwitter />
       </div>
     </footer>
   );
