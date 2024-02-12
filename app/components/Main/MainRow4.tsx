@@ -9,7 +9,13 @@ const ImageArrow = ({ open }: { open: boolean }) => {
       width="18"
       height="12"
     >
-      <path fill="none" stroke={open ? '#DC6465' : '#5267DF'} stroke-width="3" d="M1 1l8 8 8-8" />
+      <path
+        className="transition"
+        fill="none"
+        stroke={open ? '#DC6465' : '#5267DF'}
+        stroke-width="3"
+        d="M1 1l8 8 8-8"
+      />
     </svg>
   );
 };
