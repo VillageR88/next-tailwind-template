@@ -82,7 +82,7 @@ const MainRow4 = () => {
             <p
               className={`${
                 questionsOpen[index]
-                  ? 'mb-[2em] mt-[2em] text-[#6b6d74]'
+                  ? 'mb-[2em] mt-[2em]  text-[#6b6d74]'
                   : 'h-0 -translate-y-[100%] scale-y-0 text-[white] '
               } mb-[1em] mr-[-0.3em] scale-y-[105%] transform text-left leading-[2.2em] duration-[0.4s] ease-out`}
             >
