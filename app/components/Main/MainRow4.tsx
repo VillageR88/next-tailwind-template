@@ -50,7 +50,7 @@ const MainRow4 = () => {
     },
   ];
   return (
-    <div className="flex flex-col items-center bg-white pb-[7em] pt-[7em]">
+    <div className="flex flex-col items-center bg-white pb-[9em] pt-[7em]">
       <section className="flex w-full flex-col items-center gap-[1.2em] text-center md:w-[33em]">
         <h2 className="text-[1.98rem] font-[500] text-[hsl(229,31%,21%)]">Frequently Asked Questions</h2>
         <p className="text-[0.92rem] leading-[1.6em] text-[hsl(229,8%,60%)] md:text-[1.13rem]">
@@ -61,7 +61,7 @@ const MainRow4 = () => {
         <div className="h-[1px] w-full bg-[#ddd8d8]"></div>
 
         {items.map((item, index) => (
-          <li key={index} className="flex w-full flex-col items-center justify-between gap-[1.2em]">
+          <li key={index} className="flex w-full flex-col items-center justify-between ">
             <button
               className="flex h-full w-full items-center justify-between transition hover:text-[#DC6465]"
               onClick={() => {
@@ -79,11 +79,14 @@ const MainRow4 = () => {
               </h3>
               <ImageArrow open={questionsOpen[index]} />
             </button>
-            {questionsOpen[index] && (
-              <p className="mr-[-0.3em] mt-[0.5em] scale-y-[105%] text-left leading-[2.2em] text-[#6b6d74]">
-                {item.answer}
-              </p>
-            )}
+            <p
+              className={`${
+                questionsOpen[index] ? 'mb-[2em] mt-[2em] text-[#6b6d74]' : 'invisible h-0 text-[white]'
+              } mb-[1em]  mr-[-0.3em] scale-y-[105%] text-left leading-[2.2em] transition duration-500`}
+            >
+              {item.answer}
+            </p>
+
             <div className="h-[1px] w-full bg-[#ddd8d8]"></div>
           </li>
         ))}
