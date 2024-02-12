@@ -61,7 +61,7 @@ const MainRow4 = () => {
         <div className="h-[1px] w-full bg-[#ddd8d8]"></div>
 
         {items.map((item, index) => (
-          <li key={index} className="flex w-full flex-col items-center justify-between ">
+          <li key={index} className="flex w-full flex-col items-center justify-between transition-all">
             <button
               className="flex h-full w-full items-center justify-between transition hover:text-[#DC6465]"
               onClick={() => {
@@ -81,13 +81,19 @@ const MainRow4 = () => {
             </button>
             <p
               className={`${
-                questionsOpen[index] ? 'mb-[2em] mt-[2em] text-[#6b6d74]' : 'invisible h-0 text-[white]'
-              } mb-[1em]  mr-[-0.3em] scale-y-[105%] text-left leading-[2.2em] transition duration-500`}
+                questionsOpen[index]
+                  ? 'mb-[2em] mt-[2em] text-[#6b6d74]'
+                  : 'h-0 -translate-y-[100%] scale-y-0 text-[white] '
+              } mb-[1em] mr-[-0.3em] scale-y-[105%] transform text-left leading-[2.2em] duration-[0.4s] ease-out`}
             >
               {item.answer}
             </p>
 
-            <div className="h-[1px] w-full bg-[#ddd8d8]"></div>
+            <div
+              className={`${
+                questionsOpen[index] ? '' : ''
+              } h-[1px] w-full  bg-[#ddd8d8] transition duration-500 ease-in-out`}
+            ></div>
           </li>
         ))}
       </ul>
