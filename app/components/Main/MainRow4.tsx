@@ -63,7 +63,7 @@ const MainRow4 = () => {
         {items.map((item, index) => (
           <li key={index} className="flex w-full flex-col items-center justify-between transition-all">
             <button
-              className="z-10 flex h-full w-full items-center justify-between transition-all ease-in-out hover:mr-[2px] hover:w-[100.5%] hover:text-[#DC6465]"
+              className="z-10 flex h-full w-full items-center justify-between transition-all ease-in-out hover:ml-[2px] hover:w-[99.75%] hover:text-[#DC6465]"
               onClick={() => {
                 const newQuestionsOpen = [...questionsOpen];
                 newQuestionsOpen[index] = !newQuestionsOpen[index];
@@ -71,7 +71,7 @@ const MainRow4 = () => {
               }}
             >
               <h3
-                className={`ml-[1px] w-fit text-[1.13rem] text-[hsl(229,31%,21%)] ${
+                className={`m-[1px] w-fit text-[1.13rem] text-[hsl(229,31%,21%)] ${
                   !questionsOpen[index] && 'text-inherit'
                 }`}
               >
