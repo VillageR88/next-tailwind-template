@@ -45,7 +45,7 @@ const MainRow3 = () => {
                 src="./images/bg-dots.svg"
                 alt="background dots"
               />
-              <button className="] mt-[1.7em] w-fit rounded-[0.5em] border-2 border-[hsl(231,69%,60%)] bg-[hsl(231,69%,60%)] px-[2.5em] py-[0.95em] text-[0.9rem] font-[500] text-[white] transition hover:bg-[white] hover:text-[hsl(231,69%,60%)]">
+              <button className="mt-[1.7em] w-fit rounded-[0.5em] border-2 border-[hsl(231,69%,60%)] bg-[hsl(231,69%,60%)] px-[2.5em] py-[0.95em] text-[0.9rem] font-[500] text-[white] transition hover:bg-[white] hover:text-[hsl(231,69%,60%)]">
                 Add & Install Extension
               </button>
             </li>
