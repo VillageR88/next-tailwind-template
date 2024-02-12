@@ -63,7 +63,7 @@ const MainRow4 = () => {
         {items.map((item, index) => (
           <li key={index} className="flex w-full flex-col items-center justify-between transition-all">
             <button
-              className="z-10 flex h-full w-full items-center justify-between transition hover:text-[#DC6465]"
+              className="z-10 flex h-full w-full items-center justify-between transition-all hover:mr-[2px] hover:w-[100.5%] hover:text-[#DC6465]"
               onClick={() => {
                 const newQuestionsOpen = [...questionsOpen];
                 newQuestionsOpen[index] = !newQuestionsOpen[index];
