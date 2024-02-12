@@ -1,11 +1,19 @@
+'use client';
 import Logo from './Logo';
 import middleItems from './navAndFooterMiddleItems';
+import ButtonMobileMenu from './ButtonMobileMenu';
+import { useState } from 'react';
 
 const NavBar = () => {
+  const [menuOpen, setMenuOpen] = useState(false);
   return (
     <nav className="flex h-[6em] w-full items-center justify-between bg-[#FFFFFF] px-6 md:h-[8.5em] md:px-[2em] lg:px-[5em] min-[1458px]:px-[10.3em]">
-      <Logo additionalClasses="ml-[0.4em]" />
-      <div className="mr-[0.1em] flex items-center gap-[3.1em]">
+      {!menuOpen ? (
+        <Logo additionalClasses="ml-[0.4em]" />
+      ) : (
+        <Logo colorCircleFill="#2F354F" colorCircle="white" color="white" additionalClasses="z-20 ml-[0.4em]" />
+      )}
+      <div className="mr-[0.1em] hidden items-center gap-[3.1em] md:flex">
         <ul className="flex gap-[2.85em]">
           {middleItems.map((item, index) => (
             <li key={index}>
@@ -21,6 +29,11 @@ const NavBar = () => {
           LOGIN
         </button>
       </div>
+      <ButtonMobileMenu
+        menuOpen={(val) => {
+          setMenuOpen(val);
+        }}
+      />
     </nav>
   );
 };
