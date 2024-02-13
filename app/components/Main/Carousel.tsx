@@ -109,7 +109,7 @@ const Carousel = () => {
           return (
             <div key={index} className="mt-[4em]">
               <div className="flex w-full flex-col items-center py-[2.5em] md:flex-row">
-                <div className="flex h-fit items-center justify-end md:w-1/2">
+                <div className="flex h-[18em] items-center justify-end md:h-fit md:w-1/2">
                   <Image
                     className="flex h-fit w-fit px-10 md:px-0 lg:mr-[1em]"
                     width={100}
@@ -126,7 +126,7 @@ const Carousel = () => {
                     </h3>
                     <p className="text-[0.9rem] text-[hsl(229,8%,60%)] lg:text-[1.1rem]">{item.description}</p>
                     <button
-                      className={`invisible mr-[-0.15em] mt-[-6em] h-[3.7em] rounded-[0.3em] border-2 border-[#5266E3] bg-[#5266E3] text-[0.82rem] font-[500] tracking-widest text-[white] shadow-[0_3px_5px_4px_#E5EBF8] transition hover:border-[hsl(231,69%,60%)] hover:bg-[white] hover:text-[hsl(231,69%,60%)] md:mt-[1.2em] md:block md:w-[8.8em]`}
+                      className={`invisible mr-[-0.15em] mt-[-6em] h-[3.7em] rounded-[0.3em] border-2 border-[#5266E3] bg-[#5266E3] text-[0.82rem] font-[500] tracking-widest text-[white] shadow-[0_3px_5px_4px_#E5EBF8] hover:border-[hsl(231,69%,60%)] hover:bg-[white]  hover:text-[hsl(231,69%,60%)] md:visible md:mt-[1.2em] md:block md:w-[8.8em] md:transition`}
                     >
                       More info
                     </button>
@@ -137,7 +137,7 @@ const Carousel = () => {
           );
         })}
       </Slider>
-      <div className=" rounded-r-full bg-[#4D61D0] px-10 md:mt-[-23.5em] md:h-[22em] md:w-[40%] xl:w-[40em]"></div>
+      <div className="mt-[-26em] h-[12em] w-[20em] rounded-r-full bg-[#4D61D0] px-10 min-[600px]:mt-[-30.4em] min-[600px]:h-[22em] md:mt-[-20.5em] md:h-[18em] md:w-[40%] lg:mt-[-25em] lg:h-[22em] xl:w-[40em]"></div>
     </div>
   );
 };
