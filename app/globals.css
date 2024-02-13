@@ -19,3 +19,9 @@ html {
   position: absolute;
   left: -2.05em;
 }
+.violetLi li::before {
+  color: #65253f;
+}
+.brownLi li::before {
+  color: #5e3531;
+}

@@ -1,4 +1,5 @@
 import Section1 from './Section1';
+import Section2 from './Section2';
 import Image from 'next/image';
 const Main = () => {
   return (
@@ -17,6 +18,7 @@ const Main = () => {
           optionally filled with your choice of cheese, vegetables, or meats.
         </p>
         <Section1 />
+        <Section2 />
       </div>
     </div>
   );
