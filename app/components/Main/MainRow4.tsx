@@ -81,19 +81,13 @@ const MainRow4 = () => {
             </button>
             <p
               className={`${
-                questionsOpen[index]
-                  ? 'mb-[2em] mt-[2em]  text-[#6b6d74]'
-                  : 'h-0 -translate-y-[50%] scale-y-0 text-[white] opacity-0'
-              } mb-[1em] mr-[-0.3em] scale-y-[105%] transform text-left leading-[2.2em] duration-[0.4s] ease-out`}
+                questionsOpen[index] ? 'mb-[2em] mt-[2em]' : ' h-0 -translate-y-[50%] scale-y-[50%] opacity-0'
+              } mb-[1em] mr-[-0.3em] scale-y-[105%] self-start text-left leading-[2.2em] text-[#6b6d74] duration-[0.4s] ease-out`}
             >
-              {item.answer}
+              {questionsOpen[index] ? item.answer : item.answer.slice(0, 60)}
             </p>
 
-            <div
-              className={`${
-                questionsOpen[index] ? '' : ''
-              } h-[1px] w-full  bg-[#ddd8d8] transition duration-500 ease-in-out`}
-            ></div>
+            <div className={`h-[1px] w-full  bg-[#ddd8d8] transition duration-500 ease-in-out`}></div>
           </li>
         ))}
       </ul>
