@@ -62,6 +62,9 @@ const ButtonMobileMenu = ({ menuOpen }: { menuOpen(val: boolean): void }) => {
               </li>
             ))}
           </div>
+          <button className="h-[2.2em] w-full rounded-[0.3em] text-[1.3rem] font-[400] tracking-[0.1em] text-[white] outline outline-2 outline-white">
+            LOGIN
+          </button>
         </ul>
       )}
       <div className={`absolute ${customHeight ? 'bottom-0' : 'top-10'} left-0 z-10 w-full`}>
