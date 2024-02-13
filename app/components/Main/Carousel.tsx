@@ -48,31 +48,35 @@ const Carousel = () => {
 
   return (
     <div ref={carouselRef} className="slider-container mt-[4em] w-full">
-      <div className="m-0 flex w-full justify-center">
+      <div className="m-0 flex w-full flex-col justify-center md:flex-row">
         {buttons.map((button, index) => {
           return (
-            <button
-              onClick={() => {
-                const element = carouselRef.current?.querySelector(
-                  '.slick-dots li:nth-child(' + (index + 1) + ') button',
-                );
-                if (element instanceof HTMLElement) {
-                  element.click();
-                }
-              }}
-              key={index}
-              className={`${index === 0 ? 'ml-[-2em]' : index === 1 ? 'ml-[5em]' : 'ml-[6em]'} text-[1.1rem] ${
-                selectedSlide === index ? 'text-[hsl(229,31%,21%)]' : 'text-[hsl(229,8%,60%)] md:hover:text-[#DC6465]'
-              } transition duration-300 ease-in-out`}
-            >
-              {button}
-            </button>
+            <div key={index} className="flex flex-col px-10 md:px-0 ">
+              <button
+                onClick={() => {
+                  const element = carouselRef.current?.querySelector(
+                    '.slick-dots li:nth-child(' + (index + 1) + ') button',
+                  );
+                  if (element instanceof HTMLElement) {
+                    element.click();
+                  }
+                }}
+                className={`${
+                  index === 0 ? 'md:ml-[-2em]' : index === 1 ? 'md:ml-[5em]' : 'md:ml-[6em]'
+                } text-[1.1rem] ${
+                  selectedSlide === index ? 'text-[hsl(229,31%,21%)]' : 'text-[hsl(229,8%,60%)] md:hover:text-[#DC6465]'
+                } transition duration-300 ease-in-out`}
+              >
+                {button}
+              </button>
+              <div className="flex h-[1px] w-full bg-[#ddd8d8] md:hidden"></div>
+            </div>
           );
         })}
       </div>
       <Slider
         ref={(slider) => (slider = slider)}
-        dots={true}
+        dots
         infinite
         speed={500}
         initialSlide={0}
@@ -88,13 +92,13 @@ const Carousel = () => {
           return (
             <div
               style={{
-                bottom: '33.3em',
+                bottom: '95%',
                 display: 'flex',
                 justifyContent: 'center',
               }}
             >
               <div className="flex flex-col">
-                <ul className="flex h-1 w-[45.7em] justify-center gap-[13.5em]"> {dots} </ul>
+                <ul className="hidden h-1 justify-center gap-[13.5em] md:flex xl:w-[45.7em]"> {dots} </ul>
                 <div className="h-[1px] w-full bg-[#ddd8d8]"></div>
               </div>
             </div>
@@ -104,10 +108,10 @@ const Carousel = () => {
         {carouselItems.map((item, index) => {
           return (
             <div key={index} className="mt-[4em]">
-              <div className="flex w-full  py-[2.5em]">
-                <div className="flex h-fit w-1/2 items-center justify-end">
+              <div className="flex w-full flex-col items-center py-[2.5em] md:flex-row">
+                <div className="flex h-fit items-center justify-end md:w-1/2">
                   <Image
-                    className="mr-[1em] flex h-fit w-fit "
+                    className="flex h-fit w-fit px-10 md:px-0 lg:mr-[1em]"
                     width={100}
                     height={100}
                     src={item.image}
@@ -115,12 +119,14 @@ const Carousel = () => {
                     priority
                   />
                 </div>
-                <div className="flex h-[20em] w-1/2 flex-col items-center justify-center rounded-[1em] bg-[#ffffffda]">
-                  <div className="mr-[4em] mt-[1em] flex h-full w-[27em] flex-col items-start justify-center gap-[1.2em]">
-                    <h3 className="text-center text-[2rem] font-[500] text-[#282D41]">{item.title}</h3>
-                    <p className="text-[1.1rem] text-[hsl(229,8%,60%)]">{item.description}</p>
+                <div className="mt-[5em] flex flex-col items-center justify-center rounded-[1em] md:mt-0 md:h-[20em] md:w-1/2 md:bg-[#ffffffda]">
+                  <div className="mx:px-0 mt-[1em] flex h-full flex-col items-center justify-center gap-[1.2em] px-6 text-center md:mr-[4em] md:items-start md:text-start lg:w-[27em]">
+                    <h3 className="text-center text-[1.6rem] font-[500] text-[#282D41] md:text-[1.5rem] lg:text-[2rem]">
+                      {item.title}
+                    </h3>
+                    <p className="text-[0.9rem] text-[hsl(229,8%,60%)] lg:text-[1.1rem]">{item.description}</p>
                     <button
-                      className={`mr-[-0.15em] mt-[1.2em] h-[3.7em] w-[8.8em] rounded-[0.3em] border-2 border-[#5266E3] bg-[#5266E3] text-[0.82rem] font-[500] tracking-widest text-[white] shadow-[0_3px_5px_4px_#E5EBF8] transition hover:border-[hsl(231,69%,60%)] hover:bg-[white] hover:text-[hsl(231,69%,60%)]`}
+                      className={`invisible mr-[-0.15em] mt-[-6em] h-[3.7em] rounded-[0.3em] border-2 border-[#5266E3] bg-[#5266E3] text-[0.82rem] font-[500] tracking-widest text-[white] shadow-[0_3px_5px_4px_#E5EBF8] transition hover:border-[hsl(231,69%,60%)] hover:bg-[white] hover:text-[hsl(231,69%,60%)] md:mt-[1.2em] md:block md:w-[8.8em]`}
                     >
                       More info
                     </button>
@@ -131,7 +137,7 @@ const Carousel = () => {
           );
         })}
       </Slider>
-      <div className="mt-[-23.5em] h-[22em] w-[40em] rounded-r-full bg-[#4D61D0] px-10"> </div>;
+      <div className=" rounded-r-full bg-[#4D61D0] px-10 md:mt-[-23.5em] md:h-[22em] md:w-[40%] xl:w-[40em]"></div>
     </div>
   );
 };

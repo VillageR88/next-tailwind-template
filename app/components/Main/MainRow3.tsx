@@ -27,9 +27,9 @@ const MainRow3 = () => {
           prioritize.
         </p>
       </section>
-      <ul className="mt-[3em] flex items-start gap-[2.05em] ">
+      <ul className="mt-[3em] flex flex-col items-start gap-[2.05em] md:flex-row ">
         {items.map((item, index) => {
-          const marginTop = index === 1 ? 'mt-[2.5em]' : index === 2 && 'mt-[5em]';
+          const marginTop = index === 1 ? 'md:mt-[2.5em]' : index === 2 && 'md:mt-[5em]';
           return (
             <li
               className={`${marginTop} flex flex-col items-center justify-center rounded-[1em] pb-[1.5em] pt-[2.9em] shadow-[0_10px_8px_3px_rgb(231,237,249,0.75)]`}
