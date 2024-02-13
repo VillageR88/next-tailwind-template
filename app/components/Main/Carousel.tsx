@@ -48,10 +48,14 @@ const Carousel = () => {
 
   return (
     <div ref={carouselRef} className="slider-container mt-[4em] w-full">
+      <div className="block w-full px-10 md:hidden">
+        <div className="flex h-[1px]  bg-[#ddd8d8] md:hidden"></div>
+      </div>
+
       <div className="m-0 flex w-full flex-col justify-center md:flex-row">
         {buttons.map((button, index) => {
           return (
-            <div key={index} className="flex flex-col px-10 md:px-0 ">
+            <div key={index} className="mt-[1em] flex flex-col gap-[0.7em] px-10 md:mt-0 md:gap-0 md:px-0 ">
               <button
                 onClick={() => {
                   const element = carouselRef.current?.querySelector(
@@ -69,7 +73,14 @@ const Carousel = () => {
               >
                 {button}
               </button>
-              <div className="flex h-[1px] w-full bg-[#ddd8d8] md:hidden"></div>
+              <div className="flex w-full flex-col items-center">
+                <div
+                  className={`${
+                    selectedSlide === index ? 'bg-[#DC6465]' : 'bg-[white]'
+                  } translate block h-[5px] w-[8em] transition-colors md:hidden`}
+                ></div>
+                <div className="flex h-[1px] w-full bg-[#ddd8d8] md:hidden"></div>
+              </div>
             </div>
           );
         })}
@@ -82,9 +93,6 @@ const Carousel = () => {
         initialSlide={0}
         dotsClass="slick-dots"
         afterChange={(index) => {
-          setSelectedSlide(index);
-        }}
-        beforeChange={(index) => {
           setSelectedSlide(index);
         }}
         appendDots={(dots) => {
@@ -107,7 +115,7 @@ const Carousel = () => {
       >
         {carouselItems.map((item, index) => {
           return (
-            <div key={index} className="mt-[4em]">
+            <div key={index} className="md:mt-[4em]">
               <div className="flex w-full flex-col items-center py-[2.5em] md:flex-row">
                 <div className="flex h-[18em] items-center justify-end md:h-fit md:w-1/2">
                   <Image
