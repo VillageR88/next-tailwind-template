@@ -1,7 +1,7 @@
 const ButtonTwitter = () => (
   <button className="scale-[120%]" aria-label="Twitter">
     <svg
-      className="fill-[#FFF] transition hover:fill-[#FB565A]"
+      className="fill-[#FFF] transition md:hover:fill-[#FB565A]"
       xmlns="http://www.w3.org/2000/svg"
       width="21"
       height="18"
