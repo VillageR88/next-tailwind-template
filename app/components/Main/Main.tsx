@@ -1,10 +1,11 @@
 import Section1 from './Section1';
 import Section2 from './Section2';
+import Section3 from './Section3';
 import Image from 'next/image';
 const Main = () => {
   return (
-    <div className="mt-[7.68em] flex w-[46em] flex-col items-center justify-start rounded-[1.5em] bg-white">
-      <div className="flex h-[70em] w-full flex-col items-start justify-start px-[2.5em] pt-[2.5em]">
+    <div className="mb-[7.75em] mt-[7.68em] flex w-[46em] flex-col items-center justify-start rounded-[1.5em] bg-white">
+      <div className="flex h-full w-full flex-col items-start justify-start px-[2.5em] pb-[4em] pt-[2.5em]">
         <Image
           className="h-fit w-fit rounded-[0.7em]"
           src={'./assets/images/image-omelette.jpeg'}
@@ -19,6 +20,8 @@ const Main = () => {
         </p>
         <Section1 />
         <Section2 />
+        <hr className="mt-[1.9em] h-1 w-full" />
+        <Section3 />
       </div>
     </div>
   );

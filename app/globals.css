@@ -25,3 +25,16 @@ html {
 .brownLi li::before {
   color: #5e3531;
 }
+
+.custom-listNumber li {
+  font-weight: 600;
+  left: 2.55em;
+  position: relative;
+}
+
+.custom-listNumber li::before {
+  content: counter(listNumber) '.';
+  counter-increment: listNumber;
+  position: absolute;
+  left: -2em;
+}
