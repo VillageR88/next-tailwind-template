@@ -90,7 +90,7 @@ const Carousel = () => {
             >
               <div className="flex flex-col">
                 <ul className="hidden h-1 justify-center gap-[13.5em] md:flex xl:w-[45.7em]"> {dots} </ul>
-                <div className="h-[1px] w-full bg-[#ddd8d8]"></div>
+                <div className=" h-[1px] w-full bg-[#ddd8d8]"></div>
               </div>
             </div>
           );
@@ -99,8 +99,8 @@ const Carousel = () => {
         {carouselItems.map((item, index) => {
           return (
             <div key={index} className="md:mt-[4em]">
-              <div className="flex w-full flex-col items-center py-[2.5em] md:flex-row">
-                <div className="mt-10 flex h-[18em] items-center justify-end md:h-fit md:w-1/2">
+              <div className="flex w-full flex-col items-center min-[450px]:py-[2.5em] md:flex-row">
+                <div className="mt-20 flex h-[10em] items-center justify-end min-[400px]:h-[18em] md:h-fit md:w-1/2">
                   <Image
                     className="flex h-fit w-fit px-10 md:px-0 lg:mr-[1em]"
                     width={100}
@@ -110,14 +110,14 @@ const Carousel = () => {
                     priority
                   />
                 </div>
-                <div className="mt-[5em] flex flex-col items-center justify-center rounded-[1em] md:mt-0 md:h-[20em] md:w-1/2 md:bg-[#ffffffda]">
-                  <div className="mx:px-0 mt-[1em] flex h-full flex-col items-center justify-center gap-[1.2em] px-7 pt-5 text-center md:mr-[4em] md:items-start md:text-start lg:w-[27em]">
-                    <h3 className="text-center text-[1.65rem]  font-[500] text-[#282D41] md:text-[1.5rem] lg:text-[2rem]">
+                <div className="mt-[5em] flex h-full flex-col items-center justify-center rounded-[1em]  md:mt-0 md:h-[20em] md:w-1/2 md:bg-[#ffffffda]">
+                  <div className="mx:px-0 mt-[0em] flex h-full flex-col items-center justify-center gap-[1.2em] px-7 pt-5 text-center md:mr-[4em] md:items-start md:text-start lg:w-[27em]">
+                    <h3 className="text-center text-[1.65rem] font-[500] text-[#282D41] md:text-[1.5rem] lg:text-[2rem]">
                       {item.title}
                     </h3>
                     <p className="text-[1rem] text-[hsl(229,8%,60%)] lg:text-[1.1rem]">{item.description}</p>
                     <button
-                      className={`invisible mr-[-0.15em] mt-[-6em] h-[3.7em] rounded-[0.3em] border-2 border-[#5266E3] bg-[#5266E3] text-[0.82rem] font-[500] tracking-widest text-[white] shadow-[0_3px_5px_4px_#E5EBF8] hover:border-[hsl(231,69%,60%)] hover:bg-[white]  hover:text-[hsl(231,69%,60%)] md:visible md:mt-[1.2em] md:block md:w-[8.8em] md:transition`}
+                      className={`mr-[-0.15em] mt-[-6em] hidden h-[3.7em] rounded-[0.3em] border-2 border-[#5266E3] bg-[#5266E3] text-[0.82rem] font-[500] tracking-widest text-[white] shadow-[0_3px_5px_4px_#E5EBF8] hover:border-[hsl(231,69%,60%)] hover:bg-[white]  hover:text-[hsl(231,69%,60%)] md:mt-[1.2em] md:block md:w-[8.8em] md:transition`}
                     >
                       More info
                     </button>
@@ -128,7 +128,7 @@ const Carousel = () => {
           );
         })}
       </Slider>
-      <div className="hidden h-[8em] w-[80%] rounded-r-full bg-[#4D61D0] px-10 min-[200px]:mt-[-34em] min-[230px]:block min-[300px]:mt-[-30em] min-[350px]:mt-[-26em] min-[400px]:mt-[-28em] min-[400px]:h-[13em] min-[600px]:mt-[-32.4em] min-[600px]:h-[21em] md:mt-[-20.5em] md:h-[18em] md:w-[40%] lg:mt-[-25em] lg:h-[22em] xl:w-[40em]"></div>
+      <div className="hidden h-[8em] w-[80%] rounded-r-full bg-[#4D61D0] px-10 min-[200px]:mt-[-25em] min-[200px]:mt-[-34em] min-[280px]:block min-[335px]:mt-[-22em] min-[345px]:mt-[-20em] min-[400px]:mt-[-28em] min-[400px]:h-[13em] min-[600px]:mt-[-32.4em] min-[600px]:h-[21em] md:mt-[-20.5em] md:h-[18em] md:w-[40%] lg:mt-[-25em] lg:h-[22em] xl:w-[40em]"></div>
     </div>
   );
 };
