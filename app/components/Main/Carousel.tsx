@@ -79,7 +79,6 @@ const Carousel = () => {
           setSelectedSlide(newIndex);
         }}
         appendDots={(dots) => {
-          console.log(dots);
           return (
             <div
               style={{

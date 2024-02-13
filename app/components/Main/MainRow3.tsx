@@ -37,7 +37,7 @@ const MainRow3 = () => {
               className={`${marginTop} flex flex-col items-center justify-center rounded-[1em] pb-[1.5em] pt-[2.9em] shadow-[0_10px_8px_3px_rgb(231,237,249,0.75)]`}
               key={index}
             >
-              <Image className="h-fit w-fit" height={100} width={100} src={item.logo} alt="logo" />
+              <Image height={90} width={90} src={item.logo} alt="logo" className="h-fit w-fit" />
               <h3 className="mt-[1.4em] text-[1.3rem] font-[500] text-[hsl(229,31%,21%)]">{item.title}</h3>
               <p className="mt-[0.4em] text-[0.95rem] text-[hsl(229,8%,60%)]">{item.description}</p>
               <Image

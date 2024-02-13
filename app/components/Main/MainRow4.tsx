@@ -9,13 +9,7 @@ const ImageArrow = ({ open }: { open: boolean }) => {
       width="18"
       height="12"
     >
-      <path
-        className="transition"
-        fill="none"
-        stroke={open ? '#DC6465' : '#5267DF'}
-        stroke-width="3"
-        d="M1 1l8 8 8-8"
-      />
+      <path className="transition" fill="none" stroke={open ? '#DC6465' : '#5267DF'} strokeWidth="3" d="M1 1l8 8 8-8" />
     </svg>
   );
 };
@@ -65,7 +59,7 @@ const MainRow4 = () => {
     },
   ];
   return (
-    <div className="flex flex-col items-center bg-white px-6 pb-[9em] pt-[7em] md:px-0">
+    <div className="flex flex-col items-center bg-white px-6 pb-[6em] pt-[7em] md:px-0 md:pb-[9em]">
       <section className="flex w-full flex-col items-center gap-[1.7em] text-center md:w-[33em] md:gap-[1.2em]">
         <h2 className="text-[1.98rem] font-[500] leading-[1.2em] text-[hsl(229,31%,21%)]">
           Frequently Asked Questions
@@ -74,7 +68,7 @@ const MainRow4 = () => {
           Here are some of our FAQs. If you have any other questions you’d like answered please feel free to email us.
         </p>
       </section>
-      <ul className="flex flex-col items-center gap-[1.2em] pr-[2em] pt-[3.5em] text-center md:w-[35em]">
+      <ul className="flex w-full flex-col items-center gap-[1.2em] pr-[2em] pt-[3.5em] text-center md:w-[35em]">
         <div className="h-[1px] w-full bg-[#ddd8d8]"></div>
 
         {items.map((item, index) => (
