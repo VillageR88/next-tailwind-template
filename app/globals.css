@@ -6,3 +6,16 @@ html {
   /* dark scroll bars */
   /* color-scheme: dark; */
 }
+
+.custom-list li {
+  left: 2.5em;
+  list-style-type: none;
+  position: relative;
+}
+
+.custom-list li::before {
+  content: '•';
+  scale: 1.4;
+  position: absolute;
+  left: -2.05em;
+}
