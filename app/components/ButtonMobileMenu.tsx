@@ -25,9 +25,11 @@ const ButtonMobileMenu = ({ menuOpen }: { menuOpen(val: boolean): void }) => {
     };
   }, [menuOpen]);
   useEffect(() => {
-    isMenuOpen ? document.body.classList.add('overflow-hidden') : document.body.classList.remove('overflow-hidden');
     if (isMenuOpen) {
+      document.body.classList.add('overflow-hidden');
       window.scrollTo(0, 0);
+    } else {
+      document.body.classList.remove('overflow-hidden');
     }
   });
   return (
@@ -50,7 +52,7 @@ const ButtonMobileMenu = ({ menuOpen }: { menuOpen(val: boolean): void }) => {
       </button>
 
       {isMenuOpen && (
-        <ul className="absolute left-0 top-0 h-full w-full bg-[#252b46ef] px-[2em] pt-[5em]">
+        <ul className="absolute left-0 top-0 h-screen w-full bg-[#252b46ef] px-[2em] pt-[5em]">
           <div className="flex flex-col items-center gap-[1.5em] rounded-[0.3em] py-[2em]">
             <div className="h-[1px] w-full bg-[#4C516C]"></div>
             {mobileMenuItems.map((item) => (
