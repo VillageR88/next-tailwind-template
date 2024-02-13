@@ -8,7 +8,6 @@ export default function Home() {
       <NavBar />
       <Main />
       <Footer></Footer>
-      <div className="h-[1px] w-full bg-white"></div>
     </div>
   );
 }
