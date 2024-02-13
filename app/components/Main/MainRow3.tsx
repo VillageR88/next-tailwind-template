@@ -3,17 +3,17 @@ import Image from 'next/image';
 const MainRow3 = () => {
   const items = [
     {
-      logo: '/images/logo-chrome.svg',
+      logo: './images/logo-chrome.svg',
       title: 'Add to Chrome',
       description: 'Minimum version 62',
     },
     {
-      logo: '/images/logo-firefox.svg',
+      logo: './images/logo-firefox.svg',
       title: 'Add to Firefox',
       description: 'Minimum version 55',
     },
     {
-      logo: '/images/logo-opera.svg',
+      logo: './images/logo-opera.svg',
       title: 'Add to Opera',
       description: 'Minimum version 46',
     },
