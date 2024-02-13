@@ -29,7 +29,7 @@ const MainRow3 = () => {
           prioritize.
         </p>
       </section>
-      <ul className="mt-[3em] flex flex-col items-start gap-[2.05em] md:flex-row ">
+      <ul className="mt-[3em] flex flex-col items-start gap-[3em] md:flex-row md:gap-[2.05em] ">
         {items.map((item, index) => {
           const marginTop = index === 1 ? 'md:mt-[2.5em]' : index === 2 && 'md:mt-[5em]';
           return (
@@ -47,7 +47,7 @@ const MainRow3 = () => {
                 src="./images/bg-dots.svg"
                 alt="background dots"
               />
-              <button className="mt-[1.7em] w-fit rounded-[0.5em] border-2 border-[hsl(231,69%,60%)] bg-[hsl(231,69%,60%)] px-[2.5em] py-[0.95em] text-[0.9rem] font-[500] text-[white] transition hover:bg-[white] hover:text-[hsl(231,69%,60%)]">
+              <button className="mt-[1.7em] w-fit rounded-[0.5em] border-2 border-[hsl(231,69%,60%)] bg-[hsl(231,69%,60%)] px-[2em] py-[0.95em] text-[0.9rem] font-[500] text-[white] transition hover:bg-[white] hover:text-[hsl(231,69%,60%)] md:px-[1em] lg:px-[2.5em]">
                 Add & Install Extension
               </button>
             </li>

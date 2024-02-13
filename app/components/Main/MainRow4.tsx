@@ -1,5 +1,5 @@
 'use client';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 const ImageArrow = ({ open }: { open: boolean }) => {
   return (
@@ -21,6 +21,21 @@ const ImageArrow = ({ open }: { open: boolean }) => {
 };
 
 const MainRow4 = () => {
+  useEffect(() => {
+    const second = () => {
+      if (window.innerWidth <= 768) {
+        setIsMobile(true);
+      } else {
+        setIsMobile(false);
+      }
+    };
+    second();
+    return () => {
+      window.removeEventListener('resize', second);
+    };
+  }, []);
+
+  const [isMobile, setIsMobile] = useState<boolean>(false);
   const [questionsOpen, setQuestionsOpen] = useState<[boolean, boolean, boolean, boolean]>([
     false,
     false,
@@ -50,20 +65,22 @@ const MainRow4 = () => {
     },
   ];
   return (
-    <div className="flex flex-col items-center bg-white pb-[9em] pt-[7em]">
-      <section className="flex w-full flex-col items-center gap-[1.2em] text-center md:w-[33em]">
-        <h2 className="text-[1.98rem] font-[500] text-[hsl(229,31%,21%)]">Frequently Asked Questions</h2>
+    <div className="flex flex-col items-center bg-white px-6 pb-[9em] pt-[7em] md:px-0">
+      <section className="flex w-full flex-col items-center gap-[1.7em] text-center md:w-[33em] md:gap-[1.2em]">
+        <h2 className="text-[1.98rem] font-[500] leading-[1.2em] text-[hsl(229,31%,21%)]">
+          Frequently Asked Questions
+        </h2>
         <p className="text-[0.92rem] leading-[1.6em] text-[hsl(229,8%,60%)] md:text-[1.13rem]">
           Here are some of our FAQs. If you have any other questions you’d like answered please feel free to email us.
         </p>
       </section>
-      <ul className="flex w-[35em] flex-col items-center gap-[1.2em] pr-[2em] pt-[3.5em] text-center">
+      <ul className="flex flex-col items-center gap-[1.2em] pr-[2em] pt-[3.5em] text-center md:w-[35em]">
         <div className="h-[1px] w-full bg-[#ddd8d8]"></div>
 
         {items.map((item, index) => (
           <li key={index} className="flex w-full flex-col items-center justify-between transition-all">
             <button
-              className="z-10 flex h-full w-full items-center justify-between transition-all ease-in-out hover:ml-[2px] hover:w-[99.75%] md:hover:text-[#DC6465]"
+              className="z-10 flex h-full w-full items-center justify-between gap-4 text-left transition-all ease-in-out hover:ml-[2px] hover:w-[99.75%] md:hover:text-[#DC6465]"
               onClick={() => {
                 const newQuestionsOpen = [...questionsOpen];
                 newQuestionsOpen[index] = !newQuestionsOpen[index];
@@ -84,7 +101,7 @@ const MainRow4 = () => {
                 questionsOpen[index] ? 'mb-[2em] mt-[2em]' : ' h-0 -translate-y-[50%] scale-y-[50%] opacity-0'
               } mb-[1em] mr-[-0.3em] scale-y-[105%] self-start text-left leading-[2.2em] text-[#6b6d74] duration-[0.4s] ease-out`}
             >
-              {questionsOpen[index] ? item.answer : item.answer.slice(0, 60)}
+              {questionsOpen[index] ? item.answer : item.answer.slice(0, isMobile ? 30 : 60)}
             </p>
 
             <div className={`h-[1px] w-full  bg-[#ddd8d8] transition duration-500 ease-in-out`}></div>
