@@ -77,7 +77,7 @@ const Carousel = () => {
                 <div
                   className={`${
                     selectedSlide === index ? 'bg-[#DC6465]' : 'bg-[white]'
-                  } translate block h-[5px] w-[8em] transition-colors md:hidden`}
+                  } translate block h-[5px] w-[8em] duration-300 transition md:hidden`}
                 ></div>
                 <div className="flex h-[1px] w-full bg-[#ddd8d8] md:hidden"></div>
               </div>
@@ -92,8 +92,8 @@ const Carousel = () => {
         speed={500}
         initialSlide={0}
         dotsClass="slick-dots"
-        afterChange={(index) => {
-          setSelectedSlide(index);
+        beforeChange={(_, newIndex) => {
+          setSelectedSlide(newIndex);
         }}
         appendDots={(dots) => {
           console.log(dots);
