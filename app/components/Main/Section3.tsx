@@ -36,7 +36,7 @@ const Section3 = () => {
         {articleItems.map((item, index) => (
           <li key={index}>
             <span className="font-[700] text-[hsl(30,10%,34%)]">{item.title}</span>
-            <span className="font-[400] text-[hsl(30,10%,34%)]">{': ' + item.description}</span>
+            <span className="font-[400] text-[hsl(30,10%,34%)]">: {item.description}</span>
           </li>
         ))}
       </ul>
