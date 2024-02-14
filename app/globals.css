@@ -27,14 +27,14 @@ html {
 }
 
 .custom-listNumber li {
-  font-weight: 600;
-  left: 2.55em;
+  font-weight: 700;
+  left: 2.52em;
   position: relative;
+  counter-increment: listNumber;
 }
 
 .custom-listNumber li::before {
   content: counter(listNumber) '.';
-  counter-increment: listNumber;
   position: absolute;
   left: -2em;
 }

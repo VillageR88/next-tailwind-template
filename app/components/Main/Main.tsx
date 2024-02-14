@@ -13,14 +13,13 @@ const Main = () => {
           width={500}
           height={500}
         />
-        <h1 className="font-youngSerif mt-[0.79em] text-[2.5rem] text-[hsl(24,5%,18%)]">Simple Omelette Recipe</h1>
-        <p className="font-outfit mt-[0.8em] text-[hsl(30,10%,34%)]">
+        <h1 className="mt-[0.79em] font-youngSerif text-[2.5rem] text-[hsl(24,5%,18%)]">Simple Omelette Recipe</h1>
+        <p className="mt-[0.8em] font-outfit text-[hsl(30,10%,34%)]">
           An easy and quick dish, perfect for any meal. This classic omelette combines beaten eggs cooked to perfection,
           optionally filled with your choice of cheese, vegetables, or meats.
         </p>
         <Section1 />
         <Section2 />
-        <hr className="mt-[1.9em] h-1 w-full" />
         <Section3 />
       </div>
     </div>
