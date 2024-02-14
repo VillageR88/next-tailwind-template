@@ -6,3 +6,29 @@ html {
   /* dark scroll bars */
   /* color-scheme: dark; */
 }
+
+.headingM {
+  font-family: 'Instrument Sans';
+  font-size: 32px;
+  line-height: 150%;
+  font-weight: 700;
+}
+
+.headingS {
+  font-family: 'Instrument Sans';
+  font-size: 16px;
+  line-height: 150%;
+  font-weight: 700;
+}
+
+.bodyM {
+  font-family: 'Instrument Sans';
+  font-size: 16px;
+  line-height: 150%;
+}
+
+.bodyS {
+  font-family: 'Instrument Sans';
+  font-size: 12px;
+  line-height: 150%;
+}
