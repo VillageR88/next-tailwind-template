@@ -6,7 +6,7 @@ const FormLogin = () => {
           Email address
         </label>
         <input
-          className="inputField h-full w-full rounded-[8px] bg-[url('../public/assets/images/icon-email.svg')] bg-[length:16px_16px] bg-[16px_center] bg-no-repeat pl-[44px]"
+          className="textField h-full w-full rounded-[8px] bg-[url('../public/assets/images/icon-email.svg')] bg-[length:16px_16px] bg-[16px_center] bg-no-repeat pl-[44px]"
           placeholder="e.g. alex@email.com"
           type="email"
           name="email"
@@ -20,7 +20,7 @@ const FormLogin = () => {
           Password
         </label>
         <input
-          className="inputField h-full w-full rounded-[8px] bg-[url('../public/assets/images/icon-password.svg')] bg-[length:16px_16px] bg-[16px_center] bg-no-repeat pl-[44px]"
+          className="textField h-full w-full rounded-[8px] bg-[url('../public/assets/images/icon-password.svg')] bg-[length:16px_16px] bg-[16px_center] bg-no-repeat pl-[44px]"
           placeholder="Enter your password"
           type="password"
           name="password"
@@ -29,7 +29,7 @@ const FormLogin = () => {
           required
         />
       </div>
-      <button className="headingS h-[46px] w-full rounded-[8px] bg-[#633CFF] text-white" type="submit">
+      <button className="buttonPrimary headingS h-[46px] w-full rounded-[8px] text-white" type="submit">
         Login
       </button>
       <div className="bodyM flex justify-center gap-1">
