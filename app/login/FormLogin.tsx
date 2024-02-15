@@ -6,7 +6,7 @@ const FormLogin = () => {
           Email address
         </label>
         <input
-          className="h-full w-full rounded-[8px] bg-[url('../public/assets/images/icon-email.svg')] bg-[length:16px_16px] bg-[16px_center] bg-no-repeat pl-[44px] outline outline-1 outline-[#D9D9D9] focus:outline-[#633CFF]"
+          className="inputField h-full w-full rounded-[8px] bg-[url('../public/assets/images/icon-email.svg')] bg-[length:16px_16px] bg-[16px_center] bg-no-repeat pl-[44px]"
           placeholder="e.g. alex@email.com"
           type="email"
           name="email"
@@ -20,7 +20,7 @@ const FormLogin = () => {
           Password
         </label>
         <input
-          className="h-full w-full rounded-[8px] bg-[url('../public/assets/images/icon-password.svg')] bg-[length:16px_16px] bg-[16px_center] bg-no-repeat pl-[44px] outline outline-1 outline-[#D9D9D9] focus:outline-[#633CFF]"
+          className="inputField h-full w-full rounded-[8px] bg-[url('../public/assets/images/icon-password.svg')] bg-[length:16px_16px] bg-[16px_center] bg-no-repeat pl-[44px]"
           placeholder="Enter your password"
           type="password"
           name="password"
