@@ -28,9 +28,14 @@ const FormLogin = () => {
           aria-required="true"
           required
         />
-      </div>{' '}
-      <button type="submit">Login</button>
-      <span>text</span>
+      </div>
+      <button className="headingS h-[46px] w-full rounded-[8px] bg-[#633CFF] text-white" type="submit">
+        Login
+      </button>
+      <div className="bodyM flex justify-center gap-1">
+        <span className="text-[#737373]">Don&rsquo;t have an account?</span>
+        <span className="text-[#633CFF]">Create account</span>
+      </div>
     </form>
   );
 };
