@@ -32,15 +32,15 @@ const FormCreateAccount = () => {
         />
       </div>
       <div className="flex h-[70px] flex-col justify-between gap-[4px]">
-        <label className="bodyS h-[18px]" htmlFor="password">
+        <label className="bodyS h-[18px]" htmlFor="passwordConfirm">
           Confirm password
         </label>
         <input
           className={`textField h-full w-full bg-[url('../public/assets/images/icon-password.svg')] bg-[length:16px_16px] bg-[16px_center] bg-no-repeat pl-[44px]`}
           placeholder="At least 8 characters"
-          type="password"
-          name="password"
-          id="password"
+          type="passwordConfirm"
+          name="passwordConfirm"
+          id="passwordConfirm"
           aria-required="true"
           required
         />

@@ -47,6 +47,10 @@ html {
   box-shadow: 0 0px 30px 0 rgba(0, 0, 0, 0.19);
 }
 
+.textField.textFieldError {
+  outline-color: #ff0000;
+}
+
 .buttonPrimary {
   background-color: rgb(99 60 255);
   border-radius: 8px;

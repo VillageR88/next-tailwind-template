@@ -11,6 +11,7 @@ export default function Login() {
           height={10}
           src={'../assets/images/logo-devlinks-large.svg' as string}
           alt="devlinks logo"
+          priority
         />
         <div className="flex h-[482px] w-full flex-col justify-between rounded-[12px] bg-[white] px-[40px] py-[40px]">
           <section className="flex h-[80px] w-full flex-col justify-between">
