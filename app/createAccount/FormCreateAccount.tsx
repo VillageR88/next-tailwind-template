@@ -45,7 +45,7 @@ const FormCreateAccount = () => {
           required
         />
       </div>
-      <span>Pass...</span>
+      <span className="bodyS text-[#737373]">Password must contain at least 8 characters</span>
       <button className="buttonPrimary headingS h-[46px] w-full text-white" type="submit">
         Create new account
       </button>
