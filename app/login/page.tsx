@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import FormLogin from './FormLogin';
 
 const Login = () => {
   return (
@@ -16,7 +17,7 @@ const Login = () => {
             <h1 className="headingM">Login</h1>
             <p className="bodyM text-[#737373]">Add your details below to get back into the app</p>
           </section>
-          <div className="h-[282px] w-full">DIV2</div>
+          <FormLogin />
         </div>
       </div>
     </div>
