@@ -1,10 +1,10 @@
 import Image from 'next/image';
-import FormLogin from './FormLogin';
+import FormCreateAccount from './FormCreateAccount';
 
 const Login = () => {
   return (
     <div className="flex min-h-screen flex-col items-center justify-center bg-[#FAFAFA]">
-      <div className="flex h-[573px] w-[476px] flex-col items-center justify-between ">
+      <div className="flex h-[618px] w-[476px] flex-col items-center justify-between ">
         <Image
           className="h-fit w-fit"
           width={10}
@@ -14,10 +14,10 @@ const Login = () => {
         />
         <div className="flex h-[482px] w-full flex-col justify-between rounded-[12px] bg-[white] px-[40px] py-[40px]">
           <section className="flex h-[80px] w-full flex-col justify-between">
-            <h1 className="headingM">Login</h1>
-            <p className="bodyM text-[#737373]">Add your details below to get back into the app</p>
+            <h1 className="headingM">Create account</h1>
+            <p className="bodyM text-[#737373]">Let’s get you started sharing your links!</p>
           </section>
-          <FormLogin />
+          <FormCreateAccount />
         </div>
       </div>
     </div>
