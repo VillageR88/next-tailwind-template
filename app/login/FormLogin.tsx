@@ -81,6 +81,11 @@ const FormLogin = () => {
             setPasswordStatus(Status.Typing);
           }}
         />
+        {passwordStatus !== Status.Typing && (
+          <div className="pointer-events-none absolute z-10 mt-[2.15em] flex w-[24em] max-w-full justify-end">
+            <span className="bodyS self-end bg-white px-2 py-1 text-[#FF3939]">{status[passwordStatus]}</span>
+          </div>
+        )}
       </div>
       <button className="buttonPrimary headingS h-[46px] w-full text-white" type="submit">
         Login
