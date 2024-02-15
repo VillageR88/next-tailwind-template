@@ -20,7 +20,7 @@ const FormLogin = () => {
           Password
         </label>
         <input
-          className="textField h-full w-full bg-[url('../public/assets/images/icon-password.svg')] bg-[length:16px_16px] bg-[16px_center] bg-no-repeat pl-[44px]"
+          className={`textField h-full w-full bg-[url('../public/assets/images/icon-password.svg')] bg-[length:16px_16px] bg-[16px_center] bg-no-repeat pl-[44px]`}
           placeholder="Enter your password"
           type="password"
           name="password"
