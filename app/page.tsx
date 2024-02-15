@@ -1,9 +1,15 @@
-import Login from './login/page';
+'use client';
+import { useEffect } from 'react';
+import { useRouter } from 'next/router';
 
-export default function Home() {
-  return (
-    <div className="flex min-h-screen flex-col items-center justify-center bg-[#FAFAFA] font-instrumentSans">
-      <Login />
-    </div>
-  );
-}
+const HomePage = () => {
+  const router = useRouter();
+
+  useEffect(() => {
+    void router.push('/login');
+  }, [router]);
+
+  return null;
+};
+
+export default HomePage;

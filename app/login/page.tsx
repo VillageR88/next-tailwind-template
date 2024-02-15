@@ -1,9 +1,9 @@
 import Image from 'next/image';
 import FormLogin from './FormLogin';
 
-const Login = () => {
+export default function Login() {
   return (
-    <div className="flex min-h-screen flex-col items-center justify-center bg-[#FAFAFA]">
+    <div className="flex min-h-screen flex-col items-center justify-center bg-[#FAFAFA] font-instrumentSans">
       <div className="flex h-[573px] w-[476px] flex-col items-center justify-between ">
         <Image
           className="h-fit w-fit"
@@ -22,6 +22,4 @@ const Login = () => {
       </div>
     </div>
   );
-};
-
-export default Login;
+}
