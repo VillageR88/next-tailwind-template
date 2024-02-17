@@ -30,7 +30,9 @@ const Links = () => {
           </div>
         </div>
         <div className="h-[95px} flex w-full items-center justify-end">
-          <button className="buttonPrimary h-[46px] w-[91px]">Save</button>
+          <button disabled className="buttonPrimary h-[46px] w-[91px]">
+            Save
+          </button>
         </div>
       </div>
     </div>

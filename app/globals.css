@@ -57,7 +57,11 @@ html {
   color: #ffffff;
 }
 
-.buttonPrimary:active {
+.buttonPrimary:disabled {
+  opacity: 0.25;
+}
+
+.buttonPrimary:active:not(:disabled) {
   background-color: #beadff;
 }
 
