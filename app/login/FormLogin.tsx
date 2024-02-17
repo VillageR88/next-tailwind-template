@@ -3,6 +3,7 @@ import supabase from '../lib/supabaseClient';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 
 const FormLogin = () => {
   const router = useRouter();
@@ -15,6 +16,9 @@ const FormLogin = () => {
 
       if (!error) {
         router.push('/links');
+      } else {
+        setEmailStatus(Status.InvalidLoginCredentials);
+        setPasswordStatus(Status.InvalidLoginCredentials);
       }
     } catch (error) {
       console.log('error', error);
@@ -24,11 +28,13 @@ const FormLogin = () => {
   enum Status {
     Empty,
     CheckAgain,
+    InvalidLoginCredentials,
     Typing,
   }
   const status = {
     [Status.Empty]: "Can't be empty",
     [Status.CheckAgain]: 'Please check again',
+    [Status.InvalidLoginCredentials]: 'Invalid login credentials',
   };
 
   const [emailValue, setEmailValue] = useState<string>('');
@@ -58,25 +64,34 @@ const FormLogin = () => {
         <label className="bodyS h-[18px]" htmlFor="email">
           Email address
         </label>
-        <input
-          value={emailValue}
-          onChange={(e) => {
-            setEmailValue(e.target.value);
-          }}
-          className={`${
-            emailStatus !== Status.Typing && 'textFieldError'
-          } textField bodyM h-full w-full bg-[url('../public/assets/images/icon-email.svg')] bg-[length:16px_16px] bg-[16px_center] bg-no-repeat pl-[44px] pr-[2em]`}
-          placeholder="e.g. alex@email.com"
-          type="email"
-          name="email"
-          id="email"
-          aria-required="true"
-          required
-          onKeyDown={() => {
-            setEmailStatus(Status.Typing);
-            setPasswordStatus(Status.Typing);
-          }}
-        />
+        <div className="flex h-full w-full items-center">
+          <Image
+            className="z-10 ml-[1em] mr-[-2em] h-fit w-fit"
+            src="/assets/images/icon-email.svg"
+            alt="email"
+            width={16}
+            height={16}
+          />
+          <input
+            value={emailValue}
+            onChange={(e) => {
+              setEmailValue(e.target.value);
+            }}
+            className={`${
+              emailStatus !== Status.Typing && 'textFieldError'
+            } textField bodyM h-full w-full bg-[length:16px_16px] bg-[16px_center] bg-no-repeat pl-[44px] pr-[2em]`}
+            placeholder="e.g. alex@email.com"
+            type="email"
+            name="email"
+            id="email"
+            aria-required="true"
+            required
+            onKeyDown={() => {
+              setEmailStatus(Status.Typing);
+              setPasswordStatus(Status.Typing);
+            }}
+          />
+        </div>
         {emailStatus !== Status.Typing && (
           <div className="pointer-events-none absolute z-10 mt-[2.15em] flex w-[24em] max-w-full justify-end">
             <span className="bodyS self-end bg-white px-2 py-1 text-[#FF3939]">{status[emailStatus]}</span>
@@ -87,24 +102,33 @@ const FormLogin = () => {
         <label className="bodyS h-[18px]" htmlFor="password">
           Password
         </label>
-        <input
-          value={passwordValue}
-          onChange={(e) => {
-            setPasswordValue(e.target.value);
-          }}
-          className={`${
-            passwordStatus !== Status.Typing && 'textFieldError'
-          } textField bodyM h-full w-full bg-[url('../public/assets/images/icon-password.svg')] bg-[length:16px_16px] bg-[16px_center] bg-no-repeat pl-[44px]`}
-          placeholder="Enter your password"
-          type="password"
-          name="password"
-          id="password"
-          aria-required="true"
-          required
-          onKeyDown={() => {
-            setPasswordStatus(Status.Typing);
-          }}
-        />
+        <div className="flex h-full w-full items-center">
+          <Image
+            className="z-10 ml-[1em] mr-[-2em] h-fit w-fit"
+            src="/assets/images/icon-password.svg"
+            alt="email"
+            width={16}
+            height={16}
+          />
+          <input
+            value={passwordValue}
+            onChange={(e) => {
+              setPasswordValue(e.target.value);
+            }}
+            className={`${
+              passwordStatus !== Status.Typing && 'textFieldError'
+            } textField bodyM h-full w-full bg-[length:16px_16px] bg-[16px_center] bg-no-repeat pl-[44px]`}
+            placeholder="Enter your password"
+            type="password"
+            name="password"
+            id="password"
+            aria-required="true"
+            required
+            onKeyDown={() => {
+              setPasswordStatus(Status.Typing);
+            }}
+          />
+        </div>
         {passwordStatus !== Status.Typing && (
           <div className="pointer-events-none absolute z-10 mt-[2.15em] flex w-[24em] max-w-full justify-end">
             <span className="bodyS self-end bg-white px-2 py-1 text-[#FF3939]">{status[passwordStatus]}</span>
