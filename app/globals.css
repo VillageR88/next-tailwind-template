@@ -64,6 +64,7 @@ html {
   border-radius: 8px;
   color: #633cff;
   border: 1px solid #633cff;
+  font-weight: 600;
 }
 
 .buttonSecondary:active {

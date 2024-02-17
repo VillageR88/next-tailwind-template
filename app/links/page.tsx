@@ -47,7 +47,7 @@ export default function Links() {
                 }}
                 className={`${
                   middleSection === MiddleButtons.Links && 'active'
-                } tabs flex h-[46px] w-[130px] items-center justify-center gap-[8px]`}
+                } tabs flex h-[46px] w-[122px] items-center justify-center gap-[8px]`}
               >
                 <IconLink />
                 <span className="headingS">Links</span>
@@ -68,8 +68,8 @@ export default function Links() {
           </div>
         </nav>
         <main className="flex h-[858px] w-full flex-row items-center justify-between">
-          <div className="h-full w-[41%] rounded-[12px] bg-white"></div>
-          <div className="h-full w-[57.3%] rounded-[12px] bg-white"></div>
+          <div className="h-full w-[40.3%] rounded-[12px] bg-white"></div>
+          <div className="h-full w-[58%] rounded-[12px] bg-white"></div>
         </main>
       </div>
     )
