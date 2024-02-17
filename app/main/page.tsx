@@ -69,11 +69,11 @@ export default function Main() {
             <button className="headingS buttonSecondary h-[46px] w-[114px]">Preview</button>
           </div>
         </nav>
-        <main className="flex h-[858px] w-full flex-row justify-between pb-[24px]">
-          <div className="flex h-full w-[40.3%] items-center justify-center rounded-[12px] bg-white">
+        <main className="flex h-[858px] w-full flex-row justify-between">
+          <div className="flex h-[834px] w-[40.3%] items-center justify-center rounded-[12px] bg-white">
             <Phone />
           </div>
-          <div className="h-full w-[58%] rounded-[12px] bg-white">
+          <div className="h-[834px] w-[58%] rounded-[12px] bg-white">
             <Links />
           </div>
         </main>
