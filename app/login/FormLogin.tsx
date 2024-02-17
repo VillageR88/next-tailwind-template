@@ -1,8 +1,26 @@
 'use client';
+import supabase from '../lib/supabaseClient';
+import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import Link from 'next/link';
 
 const FormLogin = () => {
+  const router = useRouter();
+  const handleSubmit = async () => {
+    try {
+      const { error } = await supabase.auth.signInWithPassword({
+        email: emailValue,
+        password: passwordValue,
+      });
+
+      if (!error) {
+        router.push('/links');
+      }
+    } catch (error) {
+      console.log('error', error);
+    }
+  };
+
   enum Status {
     Empty,
     CheckAgain,
@@ -19,6 +37,12 @@ const FormLogin = () => {
   const [passwordStatus, setPasswordStatus] = useState<Status>(Status.Typing);
   return (
     <form
+      onSubmit={(e) => {
+        e.preventDefault();
+        handleSubmit().catch((error) => {
+          console.error('Failed to sign in:', error);
+        });
+      }}
       onInvalid={(e) => {
         const value = e.target as HTMLInputElement;
         if (value.id === 'email')
