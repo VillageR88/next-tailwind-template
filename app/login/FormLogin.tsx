@@ -15,7 +15,7 @@ const FormLogin = () => {
       });
 
       if (!error) {
-        router.push('/links');
+        router.push('/main');
       } else {
         setEmailStatus(Status.InvalidLoginCredentials);
         setPasswordStatus(Status.InvalidLoginCredentials);

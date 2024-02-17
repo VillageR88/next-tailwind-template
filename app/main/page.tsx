@@ -7,7 +7,7 @@ import IconLink from '../components/IconLink';
 import IconProfile from '../components/IconProfile';
 import Phone from './Phone';
 
-export default function Links() {
+export default function Main() {
   enum MiddleButtons {
     Links,
     ProfileDetails,
