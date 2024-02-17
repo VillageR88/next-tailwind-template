@@ -61,8 +61,12 @@ html {
   opacity: 0.25;
 }
 
-.buttonPrimary:active:not(:disabled) {
-  background-color: #beadff;
+.buttonPrimary:hover:not(:disabled) {
+  background-color: #8c6bff;
+}
+
+.buttonPrimary:hover {
+  cursor: pointer;
 }
 
 .buttonSecondary {
@@ -70,6 +74,10 @@ html {
   color: #633cff;
   border: 1px solid #633cff;
   font-weight: 600;
+}
+
+.buttonSecondary:disabled {
+  opacity: 0.25;
 }
 
 .buttonSecondary:active {
