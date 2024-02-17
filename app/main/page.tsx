@@ -6,6 +6,7 @@ import Image from 'next/image';
 import IconLink from '../components/IconLink';
 import IconProfile from '../components/IconProfile';
 import Phone from './Phone';
+import Links from './Links';
 
 export default function Main() {
   enum MiddleButtons {
@@ -72,7 +73,9 @@ export default function Main() {
           <div className="flex h-full w-[40.3%] items-center justify-center rounded-[12px] bg-white">
             <Phone />
           </div>
-          <div className="h-full w-[58%] rounded-[12px] bg-white"></div>
+          <div className="h-full w-[58%] rounded-[12px] bg-white">
+            <Links />
+          </div>
         </main>
       </div>
     )
