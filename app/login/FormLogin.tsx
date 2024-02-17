@@ -135,7 +135,7 @@ const FormLogin = () => {
           </div>
         )}
       </div>
-      <button className="buttonPrimary headingS h-[46px] w-full text-white" type="submit">
+      <button className="buttonPrimary headingS h-[46px] w-full" type="submit">
         Login
       </button>
       <div className="bodyM flex justify-center gap-1">

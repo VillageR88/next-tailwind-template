@@ -1,3 +1,4 @@
+import Image from 'next/image';
 const Links = () => {
   return (
     <div className="flex h-full w-full flex-col p-[40px]">
@@ -6,11 +7,32 @@ const Links = () => {
           <h1 className="headingM text-[#333333]">Customize your links</h1>
           <p className="text-[#737373]">Add/edit/remove links below and then share all your profiles with the world!</p>
         </div>
-        <div className="flex h-[539px] w-full flex-col">
+        <div className="flex h-[539px] w-full flex-col justify-between">
           <button className="buttonSecondary h-[46px] w-full">+ Add new link</button>
+          <div className="h-[469px] w-full rounded-[16px] bg-[#FAFAFA] px-[20px] py-[62.5px]">
+            <section className="flex h-full w-full flex-col items-center justify-between">
+              <Image
+                className="h-fit w-[250px]"
+                src={'../assets/images/illustration-empty.svg'}
+                alt="links"
+                width={100}
+                height={100}
+                priority
+              />
+              <div className="flex h-[144px] w-[488px] flex-col items-center justify-between text-center">
+                <h2 className="headingM text-[#333333]">Let’s get you started</h2>
+                <p className="bodyM text-[#737373]">
+                  Use the “Add new link” button to get started. Once you have more than one link, you can reorder and
+                  edit them. We’re here to help you share your profiles with everyone!
+                </p>
+              </div>
+            </section>
+          </div>
+        </div>
+        <div className="h-[95px} flex w-full items-center justify-end">
+          <button className="buttonPrimary h-[46px] w-[91px]">Save</button>
         </div>
       </div>
-      <div className="h-[95px] w-full">DOWN</div>
     </div>
   );
 };
