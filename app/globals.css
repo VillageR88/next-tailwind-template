@@ -60,6 +60,40 @@ html {
   background-color: #beadff;
 }
 
+.buttonSecondary {
+  border-radius: 8px;
+  color: #633cff;
+  border: 1px solid #633cff;
+}
+
+.buttonSecondary:active {
+  background-color: #efebff;
+}
+
+.tabs {
+  border-radius: 8px;
+  fill: #737373;
+}
+
+.tabs.active {
+  background-color: #f5f5f5;
+}
+
+.tabs > * {
+  fill: #737373;
+  color: #737373;
+  font-weight: 600;
+}
+
+.tabs:hover > * {
+  fill: #633cff;
+  color: #633cff;
+}
+
+.tabs:hover {
+  color: #633cff;
+}
+
 input:-webkit-autofill,
 input:-webkit-autofill:hover,
 input:-webkit-autofill:focus,
