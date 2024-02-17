@@ -76,22 +76,27 @@ html {
   fill: #737373;
 }
 
-.tabs.active {
-  background-color: #f5f5f5;
-}
-
 .tabs > * {
   fill: #737373;
   color: #737373;
   font-weight: 600;
 }
 
-.tabs:hover > * {
+.tabs.active {
+  background-color: #f5f5f5;
+}
+
+.tabs.active > * {
   fill: #633cff;
   color: #633cff;
 }
 
 .tabs:hover {
+  color: #633cff;
+}
+
+.tabs:hover > * {
+  fill: #633cff;
   color: #633cff;
 }
 
