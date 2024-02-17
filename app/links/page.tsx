@@ -4,7 +4,8 @@ import { useEffect, useState } from 'react';
 import supabase from '../lib/supabaseClient';
 import Image from 'next/image';
 import IconLink from '../components/IconLink';
-import IconProfile from '../components/iconProfile';
+import IconProfile from '../components/IconProfile';
+import Phone from './Phone';
 
 export default function Links() {
   enum MiddleButtons {
@@ -68,7 +69,9 @@ export default function Links() {
           </div>
         </nav>
         <main className="flex h-[858px] w-full flex-row items-center justify-between">
-          <div className="h-full w-[40.3%] rounded-[12px] bg-white"></div>
+          <div className="flex h-full w-[40.3%] items-center justify-center rounded-[12px] bg-white">
+            <Phone />
+          </div>
           <div className="h-full w-[58%] rounded-[12px] bg-white"></div>
         </main>
       </div>
