@@ -52,6 +52,11 @@ const Links = () => {
       }
     }
   };
+  const listAvailable = () => {
+    return Object.values(SocialMedia).filter((item) => !links.find((link) => link.title === item)?.title);
+  };
+  console.log(listAvailable());
+  console.log(links);
 
   return (
     <div className="flex h-full w-full flex-col items-center justify-center ">
@@ -146,7 +151,21 @@ const Links = () => {
                     </div>
                     <div>
                       <div className="h-0">
-                        {listOpen === item.title && <div className="relative h-[20em] w-full bg-red-500"></div>}
+                        {listOpen === item.title && (
+                          <ul className="relative flex h-[20em] w-full flex-col bg-white">
+                            {Object.values(SocialMedia).map((item, index) => (
+                              <li className="text-black" key={index}>
+                                <button
+                                  className={`list ${listOpen.includes(item) && 'listActive'}`}
+                                  //disabled={listOpen.includes(item) ? false : true} -> this to active for later
+                                  disabled={listAvailable().includes(item) ? false : true}
+                                >
+                                  {item}
+                                </button>
+                              </li>
+                            ))}
+                          </ul>
+                        )}
                       </div>
                       <div className="flex h-[70px] w-full flex-col justify-between">
                         <label className="bodyS">Link</label>

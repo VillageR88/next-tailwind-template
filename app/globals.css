@@ -113,6 +113,14 @@ html {
   color: #633cff;
 }
 
+.list:disabled:not(.listActive) {
+  color: gray;
+}
+
+.listActive {
+  color: #633cff;
+}
+
 input:-webkit-autofill,
 input:-webkit-autofill:hover,
 input:-webkit-autofill:focus,
