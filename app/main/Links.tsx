@@ -29,6 +29,7 @@ interface Link {
 
 const Links = () => {
   const router = useRouter();
+  const [draggable, setDraggable] = useState<boolean>(false);
   const [links, setLinks] = useState<Link[]>([]);
   const [listOpen, setListOpen] = useState<SocialMedia | null>(null);
   useEffect(() => {
@@ -55,8 +56,6 @@ const Links = () => {
   const listAvailable = () => {
     return Object.values(SocialMedia).filter((item) => !links.find((link) => link.title === item)?.title);
   };
-  console.log(listAvailable());
-  console.log(links);
 
   return (
     <div className="flex h-full w-full flex-col items-center justify-center ">
@@ -89,13 +88,39 @@ const Links = () => {
               {links.map((item, index) => {
                 return (
                   <form
+                    onDragStart={(e) => {
+                      e.dataTransfer.setData('text/plain', index.toString());
+                      e.dataTransfer.effectAllowed = 'move';
+                    }}
+                    onDragOver={(e) => {
+                      e.preventDefault();
+                    }}
+                    onDrop={(e) => {
+                      e.preventDefault();
+                      const from = Number(e.dataTransfer.getData('text/plain'));
+                      const to = index;
+                      const newLinks = [...links];
+                      const item = newLinks.splice(from, 1)[0];
+                      newLinks.splice(to, 0, item);
+                      setLinks(newLinks);
+                    }}
+                    draggable={draggable}
                     key={index}
                     className="flex min-h-[228px] w-full flex-col gap-[12px] rounded-[8px] bg-[#FAFAFA] p-[20px]"
                   >
                     <div className="flex h-[24px] items-center justify-between">
                       <div className="flex gap-[8px]">
-                        <button type="button">
+                        <button
+                          onMouseEnter={() => {
+                            setDraggable(true);
+                          }}
+                          onMouseLeave={() => {
+                            setDraggable(false);
+                          }}
+                          type="button"
+                        >
                           <Image
+                            draggable={false}
                             className="h-fit w-[12px]"
                             width={10}
                             height={10}
@@ -129,6 +154,7 @@ const Links = () => {
                       >
                         <div className="flex items-center gap-[12px]">
                           <Image
+                            draggable={false}
                             className="h-[16px] w-[16px]"
                             width={10}
                             height={10}
@@ -153,14 +179,18 @@ const Links = () => {
                       <div className="h-0">
                         {listOpen === item.title && (
                           <ul className="relative flex h-[20em] w-full flex-col bg-white">
-                            {Object.values(SocialMedia).map((item, index) => (
-                              <li className="text-black" key={index}>
+                            {Object.values(SocialMedia).map((itemSocialMedia, indexOfSocialMedia) => (
+                              <li className="text-black" key={indexOfSocialMedia}>
                                 <button
-                                  className={`list ${listOpen.includes(item) && 'listActive'}`}
-                                  //disabled={listOpen.includes(item) ? false : true} -> this to active for later
-                                  disabled={listAvailable().includes(item) ? false : true}
+                                  onClick={() => {
+                                    const newLinks = [...links];
+                                    newLinks[index].title = itemSocialMedia;
+                                    setLinks(newLinks);
+                                  }}
+                                  className={`list ${listOpen.includes(itemSocialMedia) && 'listActive'}`}
+                                  disabled={listAvailable().includes(itemSocialMedia) ? false : true}
                                 >
-                                  {item}
+                                  {itemSocialMedia}
                                 </button>
                               </li>
                             ))}
