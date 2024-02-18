@@ -68,44 +68,81 @@ const Links = () => {
           {links.length === 0 ? (
             <StartDiv />
           ) : (
-            <div className="flex h-[469px] w-full flex-col gap-[24px] overflow-scroll">
+            <div className="flex h-[469px] w-full flex-col gap-[24px] overflow-auto">
               {links.map((item, index) => {
                 return (
-                  <div key={index} className="flex min-h-[228px] w-full flex-col rounded-[12px] bg-[#FAFAFA] p-[20px]">
+                  <form
+                    key={index}
+                    className="flex min-h-[228px] w-full flex-col gap-[12px] rounded-[8px] bg-[#FAFAFA] p-[20px]"
+                  >
                     <div className="flex h-[24px] items-center justify-between">
-                      <div>
-                        <span className="headingS">{item.title}</span>
+                      <div className="flex gap-[8px]">
+                        <button type="button">
+                          <Image
+                            className="h-fit w-[12px]"
+                            width={10}
+                            height={10}
+                            src={'/assets/images/icon-drag-and-drop.svg'}
+                            alt="drag and drop"
+                          />
+                        </button>
+                        <h2 className="font-[700] text-[#737373]">{'Link #' + (index + 1)}</h2>
                       </div>
                       <button
+                        type="button"
                         onClick={() => {
                           const newLinks = [...links];
                           newLinks.splice(index, 1);
                           setLinks(newLinks);
                         }}
-                        className=" h-[46px] w-[91px]"
+                        className="bodyM h-[24px] w-[61px] text-[#737373]"
                       >
                         Remove
                       </button>
                     </div>
-                    <Image
-                      className="h-[16px] w-[16px]"
-                      width={10}
-                      height={10}
-                      src={`/assets/images/icon-${item.title.toLowerCase().replace(' ', '-').replace('.', '')}.svg`}
-                      alt={item.title}
-                    />
-                    <input
-                      type="text"
-                      placeholder="https://"
-                      value={item.url}
-                      onChange={(e) => {
-                        const newLinks = [...links];
-                        newLinks[index].url = e.target.value;
-                        setLinks(newLinks);
-                      }}
-                      className="inputText h-[46px] w-[300px] rounded-[12px] border-[1px] border-[#D9D9D9] px-[16px]"
-                    />
-                  </div>
+                    <div className="flex h-[70px] w-full flex-col justify-between">
+                      <label className="bodyS">Platform</label>
+                      <button
+                        type="button"
+                        className="textField flex h-[48px] w-full items-center justify-between rounded-[8px] bg-white p-[16px]"
+                      >
+                        <div className="flex items-center gap-[12px]">
+                          <Image
+                            className="h-[16px] w-[16px]"
+                            width={10}
+                            height={10}
+                            src={`/assets/images/icon-${item.title
+                              .toLowerCase()
+                              .replace(' ', '-')
+                              .replace('.', '')}.svg`}
+                            alt={item.title}
+                          />
+                          <span className="headingS">{item.title}</span>
+                        </div>
+                        <Image
+                          className="h-[10px] w-[14px]"
+                          width={10}
+                          height={10}
+                          src={'/assets/images/icon-chevron-down.svg'}
+                          alt="edit"
+                        />
+                      </button>
+                    </div>
+                    <div className="flex h-[70px] w-full flex-col justify-between">
+                      <label className="bodyS">Link</label>
+                      <input
+                        type="text"
+                        placeholder="https://"
+                        value={item.url}
+                        onChange={(e) => {
+                          const newLinks = [...links];
+                          newLinks[index].url = e.target.value;
+                          setLinks(newLinks);
+                        }}
+                        className="textField h-[48px] w-full rounded-[8px] border-[1px] border-[#D9D9D9] px-[16px]"
+                      />
+                    </div>
+                  </form>
                 );
               })}
             </div>
