@@ -68,22 +68,32 @@ const Links = () => {
           {links.length === 0 ? (
             <StartDiv />
           ) : (
-            <div className="flex h-[469px] w-full flex-col">
+            <div className="flex h-[469px] w-full flex-col gap-[24px] overflow-scroll">
               {links.map((item, index) => {
                 return (
-                  <div
-                    key={index}
-                    className="flex h-[64px] w-full items-center justify-between rounded-[12px] bg-[#FAFAFA] px-[20px]"
-                  >
-                    <div className="flex h-full w-[80px] items-center justify-between">
-                      <Image
-                        width={16}
-                        height={16}
-                        src={`/assets/images/icon-${item.title.toLowerCase().replace(' ', '-').replace('.', '')}.svg`}
-                        alt={item.title}
-                      />
-                      <span className="headingS">{item.title}</span>
+                  <div key={index} className="flex min-h-[228px] w-full flex-col rounded-[12px] bg-[#FAFAFA] p-[20px]">
+                    <div className="flex h-[24px] items-center justify-between">
+                      <div>
+                        <span className="headingS">{item.title}</span>
+                      </div>
+                      <button
+                        onClick={() => {
+                          const newLinks = [...links];
+                          newLinks.splice(index, 1);
+                          setLinks(newLinks);
+                        }}
+                        className=" h-[46px] w-[91px]"
+                      >
+                        Remove
+                      </button>
                     </div>
+                    <Image
+                      className="h-[16px] w-[16px]"
+                      width={10}
+                      height={10}
+                      src={`/assets/images/icon-${item.title.toLowerCase().replace(' ', '-').replace('.', '')}.svg`}
+                      alt={item.title}
+                    />
                     <input
                       type="text"
                       placeholder="https://"
@@ -95,16 +105,6 @@ const Links = () => {
                       }}
                       className="inputText h-[46px] w-[300px] rounded-[12px] border-[1px] border-[#D9D9D9] px-[16px]"
                     />
-                    <button
-                      onClick={() => {
-                        const newLinks = [...links];
-                        newLinks.splice(index, 1);
-                        setLinks(newLinks);
-                      }}
-                      className="buttonSecondary h-[46px] w-[91px]"
-                    >
-                      Remove
-                    </button>
                   </div>
                 );
               })}
