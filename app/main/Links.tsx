@@ -79,7 +79,7 @@ const Links = () => {
                       <Image
                         width={16}
                         height={16}
-                        src={`/assets/images/icon-${item.title.toLowerCase()}.svg`}
+                        src={`/assets/images/icon-${item.title.toLowerCase().replace(' ', '-').replace('.', '')}.svg`}
                         alt={item.title}
                       />
                       <span className="headingS">{item.title}</span>
