@@ -1,5 +1,5 @@
 'use client';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import Image from 'next/image';
 import StartDiv from '../components/StartDiv';
 import supabase from '../lib/supabaseClient';
@@ -202,6 +202,7 @@ const Links = () => {
                                   onClick={() => {
                                     const newLinks = [...links];
                                     newLinks[index].title = itemSocialMedia;
+                                    newLinks[index].url = '';
                                     setLinks(newLinks);
                                   }}
                                   className={`list ${listOpen.includes(itemSocialMedia) && 'listActive'}`}
