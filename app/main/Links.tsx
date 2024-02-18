@@ -29,9 +29,12 @@ const Links = () => {
           >
             Log Out
           </button>
-          <button disabled className="buttonPrimary h-[46px] w-[91px]">
-            Save
-          </button>
+          <div className="flex gap-[18px]">
+            <button className="buttonSecondary headingS h-[46px] w-[91px]">Cancel</button>
+            <button disabled className="buttonPrimary headingS h-[46px] w-[91px]">
+              Save
+            </button>
+          </div>
         </div>
       </div>
     </div>
