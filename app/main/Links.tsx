@@ -1,5 +1,5 @@
 'use client';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import StartDiv from '../components/StartDiv';
 import supabase from '../lib/supabaseClient';
@@ -30,6 +30,18 @@ interface Link {
 const Links = () => {
   const router = useRouter();
   const [links, setLinks] = useState<Link[]>([]);
+  const [listOpen, setListOpen] = useState<SocialMedia | null>(null);
+  useEffect(() => {
+    const handleClick = () => {
+      setListOpen(null);
+    };
+    document.addEventListener('click', handleClick);
+
+    return () => {
+      document.removeEventListener('click', handleClick);
+    };
+  }, [listOpen]);
+
   const titleAvailable = () => {
     for (const i in SocialMedia) {
       if (links.some((item) => item.title === SocialMedia[i as keyof typeof SocialMedia])) {
@@ -103,6 +115,10 @@ const Links = () => {
                     <div className="flex h-[70px] w-full flex-col justify-between">
                       <label className="bodyS">Platform</label>
                       <button
+                        onClick={() => {
+                          if (listOpen === item.title) setListOpen(null);
+                          else setListOpen(item.title);
+                        }}
                         type="button"
                         className="textField flex h-[48px] w-full items-center justify-between rounded-[8px] bg-white p-[16px]"
                       >
@@ -128,19 +144,24 @@ const Links = () => {
                         />
                       </button>
                     </div>
-                    <div className="flex h-[70px] w-full flex-col justify-between">
-                      <label className="bodyS">Link</label>
-                      <input
-                        type="text"
-                        placeholder="https://"
-                        value={item.url}
-                        onChange={(e) => {
-                          const newLinks = [...links];
-                          newLinks[index].url = e.target.value;
-                          setLinks(newLinks);
-                        }}
-                        className="textField h-[48px] w-full rounded-[8px] border-[1px] border-[#D9D9D9] px-[16px]"
-                      />
+                    <div>
+                      <div className="h-0">
+                        {listOpen === item.title && <div className="relative h-[20em] w-full bg-red-500"></div>}
+                      </div>
+                      <div className="flex h-[70px] w-full flex-col justify-between">
+                        <label className="bodyS">Link</label>
+                        <input
+                          type="text"
+                          placeholder="https://"
+                          value={item.url}
+                          onChange={(e) => {
+                            const newLinks = [...links];
+                            newLinks[index].url = e.target.value;
+                            setLinks(newLinks);
+                          }}
+                          className="textField h-[48px] w-full rounded-[8px] border-[1px] border-[#D9D9D9] px-[16px]"
+                        />
+                      </div>
                     </div>
                   </form>
                 );
