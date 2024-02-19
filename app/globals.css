@@ -62,12 +62,12 @@ html {
   color: #ffffff;
 }
 
-.buttonPrimary:disabled {
-  opacity: 0.25;
+.buttonPrimary:active:not(:disabled) {
+  background-color: #beadff;
 }
 
-.buttonPrimary:active:not(:disabled) {
-  background-color: #8c6bff;
+.buttonPrimary:disabled {
+  opacity: 0.25;
 }
 
 .buttonPrimary:hover {
@@ -81,12 +81,12 @@ html {
   font-weight: 600;
 }
 
-.buttonSecondary:disabled {
-  opacity: 0.25;
-}
-
 .buttonSecondary:active {
   background-color: #efebff;
+}
+
+.buttonSecondary:disabled {
+  opacity: 0.25;
 }
 
 .tabs {
