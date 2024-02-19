@@ -47,15 +47,11 @@ export default function Main() {
   }, [userAuth, userEmail]);
 
   return fetchLinks.length === 0 ? (
-    <div className="flex min-h-screen flex-col items-center justify-center ">
+    <div className={`flex min-h-screen flex-col items-center justify-center`}>
       <RotatingLines width="180" strokeColor="cornflowerblue" ariaLabel="loading" />
     </div>
   ) : (
-    <div
-      className={`${
-        fetchLinks.length > 0 ? 'opacity-100' : 'opacity-0'
-      } flex min-h-screen flex-col items-center justify-center transition duration-1000`}
-    >
+    <div className={`flex min-h-screen flex-col items-center justify-center transition duration-1000`}>
       <nav className="flex h-[126px] w-full flex-col items-center justify-center">
         <div className="flex h-[78px] w-full items-center justify-between rounded-[12px] bg-white pl-[24px] pr-[16px]">
           <Image
