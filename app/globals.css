@@ -34,21 +34,22 @@ html {
 }
 
 .textField {
-  outline: true;
-  outline-style: solid;
-  outline-width: 1px;
-  outline-color: #d9d9d9;
+  outline: none;
+  border: true;
+  border-style: solid;
+  border-width: 1px;
+  border-color: #d9d9d9;
   border-radius: 8px;
 }
 
 .textField:focus {
   caret-color: #633cff;
-  outline-color: #633cff;
+  border-color: #633cff;
   box-shadow: 0 0px 30px 0 rgba(0, 0, 0, 0.19);
 }
 
 .textField.textFieldError {
-  outline-color: #ff0000;
+  border-color: #ff0000;
 }
 
 .buttonPrimary {

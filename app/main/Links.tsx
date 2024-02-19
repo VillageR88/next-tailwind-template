@@ -202,11 +202,11 @@ const Links = ({
                       </button>
                     </div>
                     <div>
-                      <div className="h-0">
+                      <div className="h-0 w-full">
                         {listOpen === item.title && (
-                          <ul className="relative flex h-[20em] w-full flex-col bg-white">
+                          <ul className="relative flex h-[686px] w-full flex-col gap-[12px] bg-white py-[12px]">
                             {Object.values(SocialMedia).map((itemSocialMedia, indexOfSocialMedia) => (
-                              <li className="text-black" key={indexOfSocialMedia}>
+                              <li className="flex flex-col gap-[12px] text-black" key={indexOfSocialMedia}>
                                 <button
                                   onClick={() => {
                                     const newLinks = [...links];
@@ -217,11 +217,12 @@ const Links = ({
                                   className={`list ${listOpen.includes(itemSocialMedia) && 'listActive'}`}
                                   disabled={listAvailable().includes(itemSocialMedia) ? false : true}
                                 >
-                                  <div className="flex items-center *:fill-current">
-                                    {accessSocialIcons[itemSocialMedia as keyof typeof accessSocialIcons]}
+                                  <div className="flex h-[24px] items-center *:fill-current">
+                                    {accessSocialIcons[itemSocialMedia]}
                                     <span>{itemSocialMedia}</span>
                                   </div>
                                 </button>
+                                <hr />
                               </li>
                             ))}
                           </ul>
@@ -238,7 +239,7 @@ const Links = ({
                             newLinks[index].url = e.target.value;
                             setLinks(newLinks);
                           }}
-                          className="textField h-[48px] w-full rounded-[8px] border-[1px] border-[#D9D9D9] px-[16px]"
+                          className="textField h-[48px] w-full rounded-[8px]  px-[16px]"
                         />
                       </div>
                     </div>
