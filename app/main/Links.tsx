@@ -7,35 +7,7 @@ import supabase from '../lib/supabaseClient';
 import SocialMedia from '../lib/enumSocialMedia';
 import Link from '../lib/interfaceLink';
 import urlPlaceholders from '../lib/urlPlaceholders';
-import Github from '../components/socialIcons/Github';
-import FrontendMentor from '../components/socialIcons/FrontendMentor';
-import Twitter from '../components/socialIcons/Twitter';
-import LinkedIn from '../components/socialIcons/LinkedIn';
-import Youtube from '../components/socialIcons/Youtube';
-import Facebook from '../components/socialIcons/Facebook';
-import Twitch from '../components/socialIcons/Twitch';
-import DevTo from '../components/socialIcons/DevTo';
-import Codewars from '../components/socialIcons/Codewars';
-import FreeCodeCamp from '../components/socialIcons/FreeCodeCamp';
-import GitLab from '../components/socialIcons/GitLab';
-import Hashnode from '../components/socialIcons/Hashnode';
-import StackOverflow from '../components/socialIcons/StackOverflow';
-
-const socialIconsAccess = {
-  Github: <Github />,
-  'Frontend Mentor': <FrontendMentor />,
-  Twitter: <Twitter />,
-  LinkedIn: <LinkedIn />,
-  Youtube: <Youtube />,
-  Facebook: <Facebook />,
-  Twitch: <Twitch />,
-  'Dev.to': <DevTo />,
-  Codewars: <Codewars />,
-  freeCodeCamp: <FreeCodeCamp />,
-  GitLab: <GitLab />,
-  Hashnode: <Hashnode />,
-  'Stack Overflow': <StackOverflow />,
-};
+import accessSocialIcons from '../lib/accessSocialIcons';
 
 const Links = ({
   passSocialInfoToMain,
@@ -246,7 +218,7 @@ const Links = ({
                                   disabled={listAvailable().includes(itemSocialMedia) ? false : true}
                                 >
                                   <div className="flex items-center *:fill-current">
-                                    {socialIconsAccess[itemSocialMedia as keyof typeof socialIconsAccess]}
+                                    {accessSocialIcons[itemSocialMedia as keyof typeof accessSocialIcons]}
                                     <span>{itemSocialMedia}</span>
                                   </div>
                                 </button>
