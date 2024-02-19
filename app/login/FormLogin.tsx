@@ -79,7 +79,7 @@ const FormLogin = () => {
             }}
             className={`${
               emailStatus !== Status.Typing && 'textFieldError'
-            } textField bodyM h-full w-full bg-[length:16px_16px] bg-[16px_center] bg-no-repeat pl-[44px] pr-[2em]`}
+            } textField bodyM h-full w-full pl-[44px] pr-[2em]`}
             placeholder="e.g. alex@email.com"
             type="email"
             name="email"
@@ -117,7 +117,7 @@ const FormLogin = () => {
             }}
             className={`${
               passwordStatus !== Status.Typing && 'textFieldError'
-            } textField bodyM h-full w-full bg-[url('../public/assets/images/icon-password.svg')] bg-[length:16px_16px] bg-[16px_center] bg-no-repeat pl-[44px]`}
+            } textField bodyM h-full w-full pl-[44px]`}
             placeholder="Enter your password"
             type="password"
             name="password"

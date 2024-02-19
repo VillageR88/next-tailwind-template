@@ -176,7 +176,7 @@ const Links = ({
                           else setListOpen(item.title);
                         }}
                         type="button"
-                        className="textField flex h-[48px] w-full items-center justify-between rounded-[8px] bg-white p-[16px]"
+                        className="textField textFieldEnhancedFocus flex h-[48px] w-full items-center justify-between rounded-[8px] bg-white p-[16px]"
                       >
                         <div className="flex items-center gap-[12px]">
                           <Image
@@ -241,7 +241,7 @@ const Links = ({
                             newLinks[index].url = e.target.value;
                             setLinks(newLinks);
                           }}
-                          className="textField h-[48px] w-full rounded-[8px] px-[16px] text-[#333333]"
+                          className="textField textFieldEnhancedFocus h-[48px] w-full rounded-[8px] px-[16px] text-[#333333]"
                         />
                       </div>
                     </div>

@@ -45,7 +45,11 @@ html {
 .textField:focus {
   caret-color: #633cff;
   border-color: #633cff;
-  box-shadow: 0 0px 30px 0 rgba(0, 0, 0, 0.19);
+  box-shadow: 0 0px 20px 8px rgba(99, 60, 255, 0.1);
+}
+
+.textFieldEnhancedFocus:focus {
+  box-shadow: 0 0px 40px 0 rgba(99, 60, 255, 0.25);
 }
 
 .textField.textFieldError {
@@ -129,5 +133,4 @@ input:-webkit-autofill:active {
   -webkit-background-clip: text;
   -webkit-text-fill-color: black;
   transition: background-color 5000s ease-in-out 0s;
-  box-shadow: inset 0 0 20px 20px transparent;
 }
