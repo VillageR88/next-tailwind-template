@@ -232,17 +232,20 @@ const Links = ({
                       </div>
                       <div className="flex h-[70px] w-full flex-col justify-between">
                         <label className="bodyS text-[#333333]">Link</label>
-                        <input
-                          type="text"
-                          placeholder={urlPlaceholders[item.title as keyof typeof urlPlaceholders]}
-                          value={item.url}
-                          onChange={(e) => {
-                            const newLinks = [...links];
-                            newLinks[index].url = e.target.value;
-                            setLinks(newLinks);
-                          }}
-                          className="textField textFieldEnhancedFocus h-[48px] w-full rounded-[8px] px-[16px] text-[#333333]"
-                        />
+                        <div className="w-full items-center gap-[12px]">
+                          <input
+                            content="/assets/images/icon-link.svg"
+                            type="text"
+                            placeholder={urlPlaceholders[item.title as keyof typeof urlPlaceholders]}
+                            value={item.url}
+                            onChange={(e) => {
+                              const newLinks = [...links];
+                              newLinks[index].url = e.target.value;
+                              setLinks(newLinks);
+                            }}
+                            className="textField textFieldEnhancedFocus h-[48px] w-full rounded-[8px] bg-[url('/assets/images/icon-link.svg')] bg-[16px] bg-no-repeat pl-[44px] pr-[16px] text-[#333333]"
+                          />
+                        </div>
                       </div>
                     </div>
                   </form>
