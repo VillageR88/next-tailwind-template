@@ -16,6 +16,7 @@ export default function Main() {
   const [middleSection, setMiddleSection] = useState<MiddleButtons>(MiddleButtons.Links);
   const [userAuth, setUserAuth] = useState<boolean>(false);
   const router = useRouter();
+  const [socialInfo, setSocialInfo] = useState<string[]>([]);
 
   useEffect(() => {
     const checkUser = async () => {
@@ -71,10 +72,14 @@ export default function Main() {
         </nav>
         <main className="flex h-[858px] w-full flex-row justify-between">
           <div className="flex h-[834px] w-[40.3%] items-center justify-center rounded-[12px] bg-white">
-            <Phone />
+            <Phone socialInfo={socialInfo} />
           </div>
           <div className="h-[834px] w-[58%] rounded-[12px] bg-white">
-            <Links />
+            <Links
+              passSocialInfoToMain={(value) => {
+                if (value) setSocialInfo(value);
+              }}
+            />
           </div>
         </main>
       </div>

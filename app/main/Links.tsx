@@ -1,5 +1,5 @@
 'use client';
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import StartDiv from '../components/StartDiv';
 import supabase from '../lib/supabaseClient';
@@ -44,11 +44,19 @@ interface Link {
   url: string;
 }
 
-const Links = () => {
+const Links = ({ passSocialInfoToMain }: { passSocialInfoToMain(arg0?: string[]): void }) => {
   const router = useRouter();
   const [draggable, setDraggable] = useState<boolean>(false);
   const [links, setLinks] = useState<Link[]>([]);
   const [listOpen, setListOpen] = useState<SocialMedia | null>(null);
+  useEffect(() => {
+    passSocialInfoToMain(
+      links.map((item) => {
+        return item.title;
+      }),
+    );
+  }, [links, passSocialInfoToMain]);
+
   useEffect(() => {
     const handleClick = () => {
       setListOpen(null);
