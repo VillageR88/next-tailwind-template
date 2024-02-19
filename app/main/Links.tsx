@@ -283,6 +283,7 @@ const Links = ({
               Cancel
             </button>
             <button
+              disabled={links === linksInitialRef}
               onClick={() => {
                 setSave(true);
               }}
