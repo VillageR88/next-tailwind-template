@@ -4,22 +4,8 @@ import Image from 'next/image';
 import StartDiv from '../components/StartDiv';
 import supabase from '../lib/supabaseClient';
 import { useRouter } from 'next/navigation';
-
-enum SocialMedia {
-  github = 'Github',
-  frontendMentor = 'Frontend Mentor',
-  twitter = 'Twitter',
-  linkedIn = 'LinkedIn',
-  youtube = 'Youtube',
-  facebook = 'Facebook',
-  twitch = 'Twitch',
-  devTo = 'Dev.to',
-  codewars = 'Codewars',
-  freeCodeCamp = 'freeCodeCamp',
-  gitLab = 'GitLab',
-  hashnode = 'Hashnode',
-  stackOverflow = 'Stack Overflow',
-}
+import SocialMedia from '../components/enumSocialMedia';
+import Link from '../components/interfaceLink';
 
 const typicalUsername = 'johnappleseed';
 const urlPlaceholders = {
@@ -38,20 +24,30 @@ const urlPlaceholders = {
   'Stack Overflow': `https://stackoverflow.com/users/${typicalUsername}`,
 };
 
-interface Link {
-  id: number;
-  title: SocialMedia;
-  url: string;
-}
-
-const Links = ({ passSocialInfoToMain }: { passSocialInfoToMain(arg0?: string[]): void }) => {
+const Links = ({
+  passSocialInfoToMain,
+  userEmail,
+  fetchLinks,
+}: {
+  passSocialInfoToMain(arg0?: string[]): void;
+  userEmail: string | undefined;
+  fetchLinks: Link[];
+}) => {
+  const [save, setSave] = useState<boolean>(false);
   const router = useRouter();
   const [draggable, setDraggable] = useState<boolean>(false);
+  const [linksInitialRef, setLinksInitialRef] = useState<Link[]>([]);
   const [links, setLinks] = useState<Link[]>([]);
   const [listOpen, setListOpen] = useState<SocialMedia | null>(null);
   const titlesFromLinks = useMemo(() => {
     return links.map((item) => item.title);
   }, [links]);
+
+  useEffect(() => {
+    setLinks(fetchLinks);
+    setLinksInitialRef(fetchLinks);
+  }, [fetchLinks]);
+
   useEffect(() => {
     passSocialInfoToMain(titlesFromLinks);
   }, [passSocialInfoToMain, titlesFromLinks]);
@@ -66,6 +62,27 @@ const Links = ({ passSocialInfoToMain }: { passSocialInfoToMain(arg0?: string[])
       document.removeEventListener('click', handleClick);
     };
   }, [listOpen]);
+
+  useEffect(() => {
+    if (save) {
+      setLinksInitialRef(links);
+      const updateData = async () => {
+        const { data, error } = await supabase
+          .from('linkSharingAppData')
+          .update({ linksJSON: links })
+          .eq('email', userEmail)
+          .select();
+        if (error) {
+          console.error(error);
+        } else {
+          console.log(data);
+        }
+      };
+
+      void updateData();
+      setSave(false);
+    }
+  }, [links, save, userEmail]);
 
   const titleAvailable = () => {
     for (const i in SocialMedia) {
@@ -257,8 +274,20 @@ const Links = ({ passSocialInfoToMain }: { passSocialInfoToMain(arg0?: string[])
             Log Out
           </button>
           <div className="flex gap-[18px]">
-            <button className="buttonSecondary headingS h-[46px] w-[91px]">Cancel</button>
-            <button disabled className="buttonPrimary headingS h-[46px] w-[91px]">
+            <button
+              onClick={() => {
+                setLinks(linksInitialRef);
+              }}
+              className="buttonSecondary headingS h-[46px] w-[91px]"
+            >
+              Cancel
+            </button>
+            <button
+              onClick={() => {
+                setSave(true);
+              }}
+              className="buttonPrimary headingS h-[46px] w-[91px]"
+            >
               Save
             </button>
           </div>
