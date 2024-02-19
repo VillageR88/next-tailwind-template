@@ -1,5 +1,5 @@
 'use client';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import Image from 'next/image';
 import StartDiv from '../components/StartDiv';
 import supabase from '../lib/supabaseClient';
@@ -49,13 +49,12 @@ const Links = ({ passSocialInfoToMain }: { passSocialInfoToMain(arg0?: string[])
   const [draggable, setDraggable] = useState<boolean>(false);
   const [links, setLinks] = useState<Link[]>([]);
   const [listOpen, setListOpen] = useState<SocialMedia | null>(null);
+  const titlesFromLinks = useMemo(() => {
+    return links.map((item) => item.title);
+  }, [links]);
   useEffect(() => {
-    passSocialInfoToMain(
-      links.map((item) => {
-        return item.title;
-      }),
-    );
-  }, [links, passSocialInfoToMain]);
+    passSocialInfoToMain(titlesFromLinks);
+  }, [passSocialInfoToMain, titlesFromLinks]);
 
   useEffect(() => {
     const handleClick = () => {
@@ -193,8 +192,8 @@ const Links = ({ passSocialInfoToMain }: { passSocialInfoToMain(arg0?: string[])
                         </div>
                         <Image
                           className="h-[10px] w-[14px]"
-                          width={10}
-                          height={10}
+                          width={5}
+                          height={5}
                           src={'/assets/images/icon-chevron-down.svg'}
                           alt="edit"
                         />
