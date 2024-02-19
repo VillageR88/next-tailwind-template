@@ -169,7 +169,7 @@ const Links = ({
                       </button>
                     </div>
                     <div className="flex h-[70px] w-full flex-col justify-between">
-                      <label className="bodyS">Platform</label>
+                      <label className="bodyS text-[#333333]">Platform</label>
                       <button
                         onClick={() => {
                           if (listOpen === item.title) setListOpen(null);
@@ -190,7 +190,7 @@ const Links = ({
                               .replace('.', '')}.svg`}
                             alt={item.title}
                           />
-                          <span className="headingS">{item.title}</span>
+                          <span className="headingS text-[#333333]">{item.title}</span>
                         </div>
                         <Image
                           className="h-[10px] w-[14px]"
@@ -204,9 +204,9 @@ const Links = ({
                     <div>
                       <div className="h-0 w-full">
                         {listOpen === item.title && (
-                          <ul className="relative flex h-[686px] w-full flex-col gap-[12px] bg-white py-[12px]">
+                          <ul className="relative flex h-fit w-full flex-col gap-[12px] rounded-[8px] border-[1px] border-[#D9D9D9] bg-white px-[16px] py-[12px]">
                             {Object.values(SocialMedia).map((itemSocialMedia, indexOfSocialMedia) => (
-                              <li className="flex flex-col gap-[12px] text-black" key={indexOfSocialMedia}>
+                              <li className="flex flex-col gap-[12px] text-[#333333]" key={indexOfSocialMedia}>
                                 <button
                                   onClick={() => {
                                     const newLinks = [...links];
@@ -217,19 +217,21 @@ const Links = ({
                                   className={`list ${listOpen.includes(itemSocialMedia) && 'listActive'}`}
                                   disabled={listAvailable().includes(itemSocialMedia) ? false : true}
                                 >
-                                  <div className="flex h-[24px] items-center *:fill-current">
+                                  <div className="flex h-[24px] items-center gap-[12px] *:fill-current">
                                     {accessSocialIcons[itemSocialMedia]}
-                                    <span>{itemSocialMedia}</span>
+                                    <p className="headingS">{itemSocialMedia}</p>
                                   </div>
                                 </button>
-                                <hr />
+                                {indexOfSocialMedia !== itemSocialMedia.length - 2 && (
+                                  <hr className="border-[#D9D9D9]" />
+                                )}
                               </li>
                             ))}
                           </ul>
                         )}
                       </div>
                       <div className="flex h-[70px] w-full flex-col justify-between">
-                        <label className="bodyS">Link</label>
+                        <label className="bodyS text-[#333333]">Link</label>
                         <input
                           type="text"
                           placeholder={urlPlaceholders[item.title as keyof typeof urlPlaceholders]}
@@ -239,7 +241,7 @@ const Links = ({
                             newLinks[index].url = e.target.value;
                             setLinks(newLinks);
                           }}
-                          className="textField h-[48px] w-full rounded-[8px]  px-[16px]"
+                          className="textField h-[48px] w-full rounded-[8px] px-[16px] text-[#333333]"
                         />
                       </div>
                     </div>

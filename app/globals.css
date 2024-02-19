@@ -115,7 +115,7 @@ html {
 }
 
 .list:disabled:not(.listActive) {
-  color: gray;
+  opacity: 0.25;
 }
 
 .listActive {
