@@ -1,27 +1,16 @@
 'use client';
 import { useState, useEffect, useMemo } from 'react';
+import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 import StartDiv from '../components/StartDiv';
 import supabase from '../lib/supabaseClient';
-import { useRouter } from 'next/navigation';
-import SocialMedia from '../components/enumSocialMedia';
-import Link from '../components/interfaceLink';
+import SocialMedia from '../lib/enumSocialMedia';
+import Link from '../lib/interfaceLink';
+import urlPlaceholders from '../lib/urlPlaceholders';
+import Github from '../components/socialIcons/Github';
 
-const typicalUsername = 'johnappleseed';
-const urlPlaceholders = {
-  Github: `https://www.github.com/${typicalUsername}`,
-  'Frontend Mentor': `https://www.frontendmentor.io/profile/${typicalUsername}`,
-  Twitter: `https://www.twitter.com/${typicalUsername}`,
-  LinkedIn: `https://www.linkedin.com/in/${typicalUsername}`,
-  Youtube: `https://www.youtube.com/user/${typicalUsername}`,
-  Facebook: `https://www.facebook.com/${typicalUsername}`,
-  Twitch: `https://www.twitch.tv/${typicalUsername}`,
-  'Dev.to': `https://dev.to/${typicalUsername}`,
-  Codewars: `https://www.codewars.com/users/${typicalUsername}`,
-  freeCodeCamp: `https://www.freecodecamp.org/${typicalUsername}`,
-  GitLab: `https://gitlab.com/${typicalUsername}`,
-  Hashnode: `https://hashnode.com/@${typicalUsername}`,
-  'Stack Overflow': `https://stackoverflow.com/users/${typicalUsername}`,
+const socialIconsAccess = {
+  Github: <Github />,
 };
 
 const Links = ({
@@ -33,8 +22,8 @@ const Links = ({
   userEmail: string | undefined;
   fetchLinks: Link[];
 }) => {
-  const [save, setSave] = useState<boolean>(false);
   const router = useRouter();
+  const [save, setSave] = useState<boolean>(false);
   const [draggable, setDraggable] = useState<boolean>(false);
   const [linksInitialRef, setLinksInitialRef] = useState<Link[]>([]);
   const [links, setLinks] = useState<Link[]>([]);
@@ -232,7 +221,10 @@ const Links = ({
                                   className={`list ${listOpen.includes(itemSocialMedia) && 'listActive'}`}
                                   disabled={listAvailable().includes(itemSocialMedia) ? false : true}
                                 >
-                                  {itemSocialMedia}
+                                  <div className="flex items-center *:fill-current">
+                                    {socialIconsAccess[itemSocialMedia as keyof typeof socialIconsAccess]}
+                                    <span>{itemSocialMedia}</span>
+                                  </div>
                                 </button>
                               </li>
                             ))}

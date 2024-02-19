@@ -7,7 +7,7 @@ import IconLink from '../components/IconLink';
 import IconProfile from '../components/IconProfile';
 import Phone from './Phone';
 import Links from './Links';
-import Link from '../components/interfaceLink';
+import Link from '../lib/interfaceLink';
 import { RotatingLines } from 'react-loader-spinner';
 
 export default function Main() {
