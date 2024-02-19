@@ -61,7 +61,7 @@ html {
   opacity: 0.25;
 }
 
-.buttonPrimary:hover:not(:disabled) {
+.buttonPrimary:active:not(:disabled) {
   background-color: #8c6bff;
 }
 
