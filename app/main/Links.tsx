@@ -1,5 +1,5 @@
 'use client';
-import { useState, useEffect, useMemo } from 'react';
+import { useState, useEffect, useMemo, useRef } from 'react';
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 import StartDiv from '../components/StartDiv';
@@ -18,6 +18,7 @@ const Links = ({
   userEmail: string | undefined;
   fetchLinks: Link[];
 }) => {
+  const ref = useRef<HTMLButtonElement>(null);
   const router = useRouter();
   const [save, setSave] = useState<boolean>(false);
   const [draggable, setDraggable] = useState<boolean>(false);
@@ -68,6 +69,12 @@ const Links = ({
       setSave(false);
     }
   }, [links, save, userEmail]);
+
+  useEffect(() => {
+    if (listOpen === null) {
+      ref.current?.blur();
+    }
+  }, [listOpen]);
 
   const titleAvailable = () => {
     for (const i in SocialMedia) {
@@ -169,11 +176,17 @@ const Links = ({
                       </button>
                     </div>
                     <div className="flex h-[70px] w-full flex-col justify-between">
-                      <label className="bodyS text-[#333333]">Platform</label>
+                      <label htmlFor={'platform' + index} className="bodyS text-[#333333]">
+                        Platform
+                      </label>
                       <button
+                        name={'platform' + index}
+                        id={'platform' + index}
+                        ref={listOpen !== item.title ? ref : undefined}
                         onClick={() => {
-                          if (listOpen === item.title) setListOpen(null);
-                          else setListOpen(item.title);
+                          if (listOpen === item.title) {
+                            setListOpen(null);
+                          } else setListOpen(item.title);
                         }}
                         type="button"
                         className="textField textFieldEnhancedFocus flex h-[48px] w-full items-center justify-between rounded-[8px] bg-white p-[16px]"
@@ -231,9 +244,13 @@ const Links = ({
                         )}
                       </div>
                       <div className="flex h-[70px] w-full flex-col justify-between">
-                        <label className="bodyS text-[#333333]">Link</label>
+                        <label htmlFor={'url' + index} className="bodyS text-[#333333]">
+                          Link
+                        </label>
                         <div className="w-full items-center gap-[12px]">
                           <input
+                            id={'url' + index}
+                            name={'url' + index}
                             content="/assets/images/icon-link.svg"
                             type="text"
                             placeholder={urlPlaceholders[item.title as keyof typeof urlPlaceholders]}
