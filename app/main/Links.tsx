@@ -22,16 +22,16 @@ const Links = ({
   const router = useRouter();
   const [save, setSave] = useState<boolean>(false);
   const [draggable, setDraggable] = useState<boolean>(false);
-  const [linksInitialRef, setLinksInitialRef] = useState<Link[]>([]);
   const [links, setLinks] = useState<Link[]>([]);
+  const [linksInitial, setLinksInitial] = useState<Link[]>([]);
   const [listOpen, setListOpen] = useState<SocialMedia | null>(null);
   const titlesFromLinks = useMemo(() => {
     return links.map((item) => item.title);
   }, [links]);
 
   useEffect(() => {
-    setLinks(fetchLinks);
-    setLinksInitialRef([...fetchLinks].map((item) => ({ ...item })));
+    setLinks([...fetchLinks].map((item) => ({ ...item })));
+    setLinksInitial([...fetchLinks].map((item) => ({ ...item })));
   }, [fetchLinks]);
 
   useEffect(() => {
@@ -51,7 +51,6 @@ const Links = ({
 
   useEffect(() => {
     if (save) {
-      setLinksInitialRef(links);
       const updateData = async () => {
         const { data, error } = await supabase
           .from('linkSharingAppData')
@@ -222,6 +221,11 @@ const Links = ({
                                 <button
                                   onClick={() => {
                                     const newLinks = [...links];
+                                    newLinks.map((link) => {
+                                      if (link.title === itemSocialMedia) {
+                                        link.title = item.title;
+                                      }
+                                    });
                                     newLinks[index].title = itemSocialMedia;
                                     newLinks[index].url = '';
                                     setLinks(newLinks);
@@ -286,14 +290,14 @@ const Links = ({
           <div className="flex gap-[18px]">
             <button
               onClick={() => {
-                setLinks([...linksInitialRef.map((item) => ({ ...item }))]);
+                setLinks([...fetchLinks].map((item) => ({ ...item })));
               }}
               className="buttonSecondary headingS h-[46px] w-[91px]"
             >
               Cancel
             </button>
             <button
-              disabled={links === linksInitialRef}
+              disabled={JSON.stringify(links) === JSON.stringify(linksInitial)}
               onClick={() => {
                 setSave(true);
               }}
