@@ -9,6 +9,16 @@ import Link from '../lib/interfaceLink';
 import urlPlaceholders from '../lib/urlPlaceholders';
 import accessSocialIcons from '../lib/accessSocialIcons';
 
+enum Phase {
+  goodOrTyping,
+  empty,
+  checkAgain,
+}
+const errorMessages = {
+  [Phase.empty]: `Can't be empty`,
+  [Phase.checkAgain]: 'Check again',
+};
+
 const Links = ({
   passSocialInfoToMain,
   userEmail,
@@ -21,8 +31,10 @@ const Links = ({
   const ref = useRef<HTMLButtonElement>(null);
   const router = useRouter();
   const [save, setSave] = useState<boolean>(false);
+  const [checkInputs, setCheckInputs] = useState<boolean>(false);
   const [draggable, setDraggable] = useState<boolean>(false);
   const [links, setLinks] = useState<Link[]>([]);
+  const [linksErrorInfo, setLinksErrorInfo] = useState<Phase[]>([]);
   const [linksInitial, setLinksInitial] = useState<Link[]>([]);
   const [listOpen, setListOpen] = useState<SocialMedia | null>(null);
   const titlesFromLinks = useMemo(() => {
@@ -48,6 +60,27 @@ const Links = ({
       document.removeEventListener('click', handleClick);
     };
   }, [listOpen]);
+
+  useEffect(() => {
+    if (checkInputs) {
+      const check = () => {
+        const errorInfo: Phase[] = [];
+        for (const link of links) {
+          if (link.url === '') errorInfo.push(Phase.empty);
+          else if (
+            !link.url.match(
+              /^(https?:\/\/)?((([a-z\d]([a-z\d-]*[a-z\d])*)\.)+[a-z]{2,}|((\d{1,3}\.){3}\d{1,3}))(\/[-a-z\d%_.~+]*)*(\?[;&a-z\d%_.~+=-]*)?(\#[-a-z\d_]*)?$/i,
+            )
+          )
+            errorInfo.push(Phase.checkAgain);
+          else errorInfo.push(Phase.goodOrTyping);
+        }
+        setLinksErrorInfo(errorInfo);
+        setCheckInputs(false);
+      };
+      check();
+    }
+  }, [checkInputs, links]);
 
   useEffect(() => {
     if (save) {
@@ -121,6 +154,10 @@ const Links = ({
               {links.map((item, index) => {
                 return (
                   <form
+                    onSubmit={(e) => {
+                      e.preventDefault();
+                      setCheckInputs(true);
+                    }}
                     onDragStart={(e) => {
                       e.dataTransfer.setData('text/plain', index.toString());
                       e.dataTransfer.effectAllowed = 'move';
@@ -253,6 +290,16 @@ const Links = ({
                         </label>
                         <div className="w-full items-center gap-[12px]">
                           <input
+                            onKeyDown={() => {
+                              if (linksErrorInfo[index] === Phase.goodOrTyping) return;
+                              const newLinksErrorInfo = [...linksErrorInfo];
+                              setLinksErrorInfo(
+                                newLinksErrorInfo.map((item, indexItem) => {
+                                  if (indexItem === index) return Phase.goodOrTyping;
+                                  return item;
+                                }),
+                              );
+                            }}
                             id={'url' + index}
                             name={'url' + index}
                             content="/assets/images/icon-link.svg"
@@ -264,8 +311,18 @@ const Links = ({
                               newLinks[index].url = e.target.value;
                               setLinks(newLinks);
                             }}
-                            className="textField textFieldEnhancedFocus h-[48px] w-full rounded-[8px] bg-[url('/assets/images/icon-link.svg')] bg-[16px] bg-no-repeat pl-[44px] pr-[16px] text-[#333333]"
+                            className={`${
+                              (linksErrorInfo[index] === Phase.empty || linksErrorInfo[index] === Phase.checkAgain) &&
+                              'textFieldError'
+                            } textField textFieldEnhancedFocus h-[48px] w-full rounded-[8px] bg-[url('/assets/images/icon-link.svg')] bg-[16px] bg-no-repeat pl-[44px] pr-[16px] text-[#333333]`}
                           />
+                          {linksErrorInfo[index] !== Phase.goodOrTyping && (
+                            <div className="flex h-0 w-full justify-end">
+                              <span className="bodyS mr-[16px] mt-[-32px] text-[#FF3939]">
+                                {errorMessages[linksErrorInfo[index] as keyof typeof errorMessages]}
+                              </span>
+                            </div>
+                          )}
                         </div>
                       </div>
                     </div>
@@ -300,7 +357,7 @@ const Links = ({
             <button
               disabled={JSON.stringify(links) === JSON.stringify(linksInitial)}
               onClick={() => {
-                setSave(true);
+                setCheckInputs(true);
               }}
               className="buttonPrimary headingS h-[46px] w-[91px]"
             >
