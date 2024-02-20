@@ -180,7 +180,6 @@ const Links = ({
                         Platform
                       </label>
                       <button
-                        name={'platform' + index}
                         id={'platform' + index}
                         ref={listOpen !== item.title ? ref : undefined}
                         onClick={() => {
