@@ -79,11 +79,13 @@ const Links = ({
         setCheckInputs(false);
       };
       check();
+      setSave(true);
     }
   }, [checkInputs, links]);
 
   useEffect(() => {
     if (save) {
+      if (linksErrorInfo.some((x: number) => x !== 0)) return;
       const updateData = async () => {
         const { data, error } = await supabase
           .from('linkSharingAppData')
@@ -96,12 +98,11 @@ const Links = ({
           console.log(data);
         }
       };
-
       void updateData();
       setLinksInitial([...links].map((item) => ({ ...item })));
-      setSave(false);
     }
-  }, [links, save, userEmail]);
+    setSave(false);
+  }, [links, linksErrorInfo, save, userEmail]);
 
   useEffect(() => {
     if (listOpen === null) {
@@ -122,7 +123,6 @@ const Links = ({
   const listAvailable = () => {
     return Object.values(SocialMedia).filter((item) => !links.find((link) => link.title === item)?.title);
   };
-
   return (
     <div className="flex h-full w-full flex-col items-center justify-center ">
       <div className="flex h-[739px] w-full flex-col justify-between p-[40px]">

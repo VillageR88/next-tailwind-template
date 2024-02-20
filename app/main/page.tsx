@@ -21,6 +21,7 @@ export default function Main() {
   const [socialInfo, setSocialInfo] = useState<string[]>([]);
   const [userEmail, setUserEmail] = useState<string | undefined>(undefined);
   const [fetchLinks, setFetchLinks] = useState<Link[]>([]);
+  const [preloadComplete, setPreloadComplete] = useState<boolean>(false);
 
   useEffect(() => {
     const checkUser = async () => {
@@ -41,12 +42,13 @@ export default function Main() {
     const fetchData = async () => {
       const { data } = await supabase.from('linkSharingAppData').select('linksJSON').eq('email', userEmail);
       data && setFetchLinks(data[0].linksJSON as Link[]);
+      setPreloadComplete(true);
     };
 
     void fetchData();
-  }, [userAuth, userEmail]);
+  }, [preloadComplete, userAuth, userEmail]);
 
-  return fetchLinks.length === 0 ? (
+  return !preloadComplete ? (
     <div className={`flex min-h-screen flex-col items-center justify-center`}>
       <RotatingLines width="180" strokeColor="cornflowerblue" ariaLabel="loading" />
     </div>
