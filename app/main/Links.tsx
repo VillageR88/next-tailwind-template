@@ -31,7 +31,7 @@ const Links = ({
 
   useEffect(() => {
     setLinks(fetchLinks);
-    setLinksInitialRef(fetchLinks);
+    setLinksInitialRef([...fetchLinks].map((item) => ({ ...item })));
   }, [fetchLinks]);
 
   useEffect(() => {
@@ -286,7 +286,7 @@ const Links = ({
           <div className="flex gap-[18px]">
             <button
               onClick={() => {
-                setLinks(linksInitialRef);
+                setLinks([...linksInitialRef.map((item) => ({ ...item }))]);
               }}
               className="buttonSecondary headingS h-[46px] w-[91px]"
             >
