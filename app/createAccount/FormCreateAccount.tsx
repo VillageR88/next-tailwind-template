@@ -1,6 +1,11 @@
+'use client';
+import supabase from '../lib/supabaseClient';
+import { useRouter } from 'next/navigation';
+import { useState } from 'react';
 import Link from 'next/link';
 
 const FormCreateAccount = () => {
+  const router = useRouter();
   return (
     <form className="flex h-[418px] w-full flex-col justify-between">
       <div className="flex h-[70px] flex-col justify-between gap-[4px]">
@@ -38,7 +43,7 @@ const FormCreateAccount = () => {
         <input
           className={`textField h-full w-full bg-[url('../public/assets/images/icon-password.svg')] bg-[length:16px_16px] bg-[16px_center] bg-no-repeat pl-[44px]`}
           placeholder="At least 8 characters"
-          type="passwordConfirm"
+          type="password"
           name="passwordConfirm"
           id="passwordConfirm"
           aria-required="true"

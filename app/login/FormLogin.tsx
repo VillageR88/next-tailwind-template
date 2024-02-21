@@ -4,6 +4,8 @@ import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
+import Status from '../lib/email/enumStatus';
+import status from '../lib/email/accessStatus';
 
 const FormLogin = () => {
   const router = useRouter();
@@ -23,18 +25,6 @@ const FormLogin = () => {
     } catch (error) {
       console.log('error', error);
     }
-  };
-
-  enum Status {
-    Empty,
-    CheckAgain,
-    InvalidLoginCredentials,
-    Typing,
-  }
-  const status = {
-    [Status.Empty]: "Can't be empty",
-    [Status.CheckAgain]: 'Please check again',
-    [Status.InvalidLoginCredentials]: 'Invalid login credentials',
   };
 
   const [emailValue, setEmailValue] = useState<string>('');
