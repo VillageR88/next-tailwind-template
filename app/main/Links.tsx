@@ -39,7 +39,6 @@ const Links = ({
   const [linksErrorInfo, setLinksErrorInfo] = useState<Phase[]>([]);
   const [linksInitial, setLinksInitial] = useState<Link[]>([]);
   const [listOpen, setListOpen] = useState<SocialMedia | null>(null);
-  console.log('save', save);
   const memorizedLinks = useMemo(() => {
     return links;
   }, [links]);
