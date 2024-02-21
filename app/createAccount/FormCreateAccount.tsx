@@ -1,7 +1,7 @@
 'use client';
 import supabase from '../lib/supabaseClient';
 import { useRouter } from 'next/navigation';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import Status from '../lib/email/enumStatus';
@@ -9,15 +9,25 @@ import status from '../lib/email/accessStatus';
 
 const FormCreateAccount = () => {
   const router = useRouter();
-
   const [emailValue, setEmailValue] = useState<string>('');
   const [passwordValue, setPasswordValue] = useState<string>('');
+  const [passwordConfirmValue, setPasswordConfirmValue] = useState<string>('');
   const [emailStatus, setEmailStatus] = useState<Status>(Status.Typing);
   const [passwordStatus, setPasswordStatus] = useState<Status>(Status.Typing);
+  const [passwordConfirmStatus, setPasswordConfirmStatus] = useState<Status>(Status.Typing);
+  useEffect(() => {
+    if (passwordValue === passwordConfirmValue) {
+      setPasswordConfirmStatus(Status.Typing);
+    }
+  }, [passwordValue, passwordConfirmValue]);
+
   return (
     <form
       onSubmit={(e) => {
         e.preventDefault();
+        if (passwordValue !== passwordConfirmValue) {
+          setPasswordConfirmStatus(Status.CheckAgain);
+        }
         //handleSubmit().catch((error) => {
         //  console.error('Failed to sign in:', error);
         //});
@@ -25,9 +35,7 @@ const FormCreateAccount = () => {
       onInvalid={(e) => {
         const value = e.target as HTMLInputElement;
         if (value.id === 'email') if (value.validity.valueMissing) setEmailStatus(Status.Empty);
-        //else setEmailStatus(Status.CheckAgain);
         if (value.id === 'password') if (value.validity.valueMissing) setPasswordStatus(Status.Empty);
-        //else setPasswordStatus(Status.CheckAgain);
       }}
       className="flex h-[418px] w-full flex-col justify-between"
     >
@@ -111,15 +119,38 @@ const FormCreateAccount = () => {
         <label className="bodyS h-[18px]" htmlFor="passwordConfirm">
           Confirm password
         </label>
-        <input
-          className={`textField h-full w-full bg-[url('../public/assets/images/icon-password.svg')] bg-[length:16px_16px] bg-[16px_center] bg-no-repeat pl-[44px]`}
-          placeholder="At least 8 characters"
-          type="password"
-          name="passwordConfirm"
-          id="passwordConfirm"
-          aria-required="true"
-          required
-        />
+        <div className="flex h-full w-full items-center">
+          <Image
+            className="z-10 ml-[1em] mr-[-2em] h-fit w-fit"
+            src="/assets/images/icon-password.svg"
+            alt="email"
+            width={16}
+            height={16}
+          />
+          <input
+            value={passwordConfirmValue}
+            onChange={(e) => {
+              setPasswordConfirmValue(e.target.value);
+            }}
+            className={`${
+              passwordConfirmStatus !== Status.Typing && 'textFieldError'
+            } textField bodyM h-full w-full pl-[44px]`}
+            placeholder="At least 8 characters"
+            type="password"
+            name="passwordConfirm"
+            id="passwordConfirm"
+            aria-required="true"
+            required
+            onKeyDown={() => {
+              setPasswordConfirmStatus(Status.Typing);
+            }}
+          />
+        </div>
+        {passwordConfirmStatus !== Status.Typing && (
+          <div className="pointer-events-none absolute z-10 mt-[2.15em] flex w-[24em] max-w-full justify-end">
+            <span className="bodyS self-end bg-white px-2 py-1 text-[#FF3939]">{status[passwordConfirmStatus]}</span>
+          </div>
+        )}
       </div>
       <span className="bodyS text-[#737373]">Password must contain at least 8 characters</span>
       <button className="buttonPrimary headingS h-[46px] w-full text-white" type="submit">
