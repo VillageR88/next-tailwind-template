@@ -15,29 +15,50 @@ const FormCreateAccount = () => {
   const [emailStatus, setEmailStatus] = useState<Status>(Status.Typing);
   const [passwordStatus, setPasswordStatus] = useState<Status>(Status.Typing);
   const [passwordConfirmStatus, setPasswordConfirmStatus] = useState<Status>(Status.Typing);
+  const [submit, setSubmit] = useState<boolean>(false);
   useEffect(() => {
     if (passwordValue === passwordConfirmValue) {
       setPasswordConfirmStatus(Status.Typing);
     }
   }, [passwordValue, passwordConfirmValue]);
-  const handleSubmit = async () => {
-    if (passwordStatus === Status.Typing && emailStatus === Status.Typing && passwordConfirmStatus === Status.Typing) {
-      return null;
+  useEffect(() => {
+    if (submit) {
+      const handleSubmit = async () => {
+        if (
+          passwordStatus === Status.Typing &&
+          emailStatus === Status.Typing &&
+          passwordConfirmStatus === Status.Typing
+        ) {
+          try {
+            console.log('run');
+            const { error } = await supabase.auth.signUp({
+              email: emailValue,
+              password: passwordValue,
+            });
+            if (!error) router.push('/main');
+            else {
+              setEmailStatus(Status.InvalidLoginCredentials);
+              setPasswordStatus(Status.InvalidLoginCredentials);
+            }
+          } catch (error) {
+            console.log('error', error);
+          }
+        }
+      };
+      handleSubmit().catch((error) => {
+        console.error('Failed to create account:', error);
+      });
+      setSubmit(false);
     }
-  };
+  }, [emailStatus, emailValue, passwordConfirmStatus, passwordStatus, passwordValue, router, submit]);
 
   return (
     <form
       onSubmit={(e) => {
         e.preventDefault();
-        if (passwordValue.length < 8) {
-          setPasswordStatus(Status.CheckAgain);
-        } else if (passwordValue !== passwordConfirmValue) {
-          setPasswordConfirmStatus(Status.CheckAgain);
-        }
-        handleSubmit().catch((error) => {
-          console.error('Failed to create account:', error);
-        });
+        if (passwordValue.length < 8) setPasswordStatus(Status.CheckAgain);
+        else if (passwordValue !== passwordConfirmValue) setPasswordConfirmStatus(Status.CheckAgain);
+        else setSubmit(true);
       }}
       onInvalid={(e) => {
         const value = e.target as HTMLInputElement;
