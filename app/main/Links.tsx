@@ -24,7 +24,7 @@ const Links = ({
   userEmail,
   fetchLinks,
 }: {
-  passSocialInfoToMain(arg0?: string[]): void;
+  passSocialInfoToMain(arg0?: Link[]): void;
   userEmail: string | undefined;
   fetchLinks: Link[];
 }) => {
@@ -37,8 +37,8 @@ const Links = ({
   const [linksErrorInfo, setLinksErrorInfo] = useState<Phase[]>([]);
   const [linksInitial, setLinksInitial] = useState<Link[]>([]);
   const [listOpen, setListOpen] = useState<SocialMedia | null>(null);
-  const titlesFromLinks = useMemo(() => {
-    return links.map((item) => item.title);
+  const memorizedLinks = useMemo(() => {
+    return links;
   }, [links]);
 
   useEffect(() => {
@@ -47,8 +47,8 @@ const Links = ({
   }, [fetchLinks]);
 
   useEffect(() => {
-    passSocialInfoToMain(titlesFromLinks);
-  }, [passSocialInfoToMain, titlesFromLinks]);
+    passSocialInfoToMain(memorizedLinks);
+  }, [passSocialInfoToMain, memorizedLinks]);
 
   useEffect(() => {
     const handleClick = () => {

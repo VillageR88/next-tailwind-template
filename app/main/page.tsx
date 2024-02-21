@@ -18,7 +18,7 @@ export default function Main() {
   const [middleSection, setMiddleSection] = useState<MiddleButtons>(MiddleButtons.Links);
   const [userAuth, setUserAuth] = useState<boolean>(false);
   const router = useRouter();
-  const [socialInfo, setSocialInfo] = useState<string[]>([]);
+  const [socialInfo, setSocialInfo] = useState<Link[]>([]);
   const [userEmail, setUserEmail] = useState<string | undefined>(undefined);
   const [fetchLinks, setFetchLinks] = useState<Link[]>([]);
   const [preloadComplete, setPreloadComplete] = useState<boolean>(false);

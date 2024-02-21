@@ -1,4 +1,6 @@
 import Image from 'next/image';
+import Link from '../lib/interfaceLink';
+import arrowRight from '@/public/assets/images/icon-arrow-right.svg';
 
 const dataColors = {
   Github: ['/assets/images/icon-githubWhite.svg', 'bg-[#1A1A1A]'],
@@ -16,7 +18,8 @@ const dataColors = {
   'Stack Overflow': ['/assets/images/icon-stack-overflowWhite.svg', 'bg-[#EC7100]'],
 };
 
-const Phone = ({ socialInfo }: { socialInfo?: string[] }) => {
+const Phone = ({ socialInfo }: { socialInfo?: Link[] }) => {
+  console.log(socialInfo, 'socialInfo');
   return (
     <div className="flex h-[631px] w-[307px] flex-col items-center justify-center bg-[url('/assets/images/illustration-phone-mockup.svg')] bg-center bg-no-repeat pt-[10px]">
       <div className="mr-[1px] flex h-[514px] w-[238px] flex-col justify-between">
@@ -24,26 +27,33 @@ const Phone = ({ socialInfo }: { socialInfo?: string[] }) => {
         <div className="flex h-[300px] w-full flex-col">
           <ul className="flex h-fit w-full flex-col gap-[20px] overflow-auto bg-white">
             {socialInfo?.map((item, index) => (
-              <li
-                key={index}
-                className={`min-h-[44px] w-full rounded-[8px] ${dataColors[item as keyof typeof dataColors][1]}`}
-              >
-                <div
-                  className={`bodyS flex h-full w-full items-center ${
-                    item !== 'Frontend Mentor' ? 'text-[white]' : 'rounded-[8px] border border-[#D9D9D9] text-[333333]'
-                  }`}
+              <li key={index} className={`min-h-[44px] w-full rounded-[8px] ${dataColors[item.title][1]}`}>
+                <button
+                  onClick={() => {
+                    void navigator.clipboard.writeText(item.url);
+                  }}
+                  className="flex h-full w-full items-center px-[16px]"
                 >
-                  <Image
-                    color="inherit"
-                    src={dataColors[item as keyof typeof dataColors][0]}
-                    alt={item}
-                    width={10}
-                    height={10}
-                    className="ml-[16px] mr-[16px] h-[16px] w-[16px] fill-inherit text-inherit"
-                  />
+                  <div
+                    className={` flex h-full w-full items-center ${
+                      (item.title as keyof typeof dataColors) !== 'Frontend Mentor'
+                        ? 'text-[white]'
+                        : 'rounded-[8px] border border-[#D9D9D9] text-[333333]'
+                    }`}
+                  >
+                    <Image
+                      color="inherit"
+                      src={dataColors[item.title as keyof typeof dataColors][0]}
+                      alt={item.title}
+                      width={10}
+                      height={10}
+                      className="mr-[16px] h-[16px] w-[16px] fill-inherit text-inherit"
+                    />
 
-                  <span>{item}</span>
-                </div>
+                    <span className="bodyS">{item.title}</span>
+                  </div>
+                  <Image className="h-fit w-fit" height={5} width={5} alt="arrow right" src={arrowRight as string} />
+                </button>
               </li>
             ))}
           </ul>
