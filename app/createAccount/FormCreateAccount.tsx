@@ -56,6 +56,7 @@ const FormCreateAccount = () => {
             name="email"
             id="email"
             aria-required="true"
+            autoComplete="email"
             required
             onKeyDown={() => {
               setEmailStatus(Status.Typing);
