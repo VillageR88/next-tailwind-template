@@ -41,7 +41,8 @@ export default function Main() {
     if (!userAuth) return;
     const fetchData = async () => {
       const { data } = await supabase.from('linkSharingAppData').select('linksJSON').eq('email', userEmail);
-      data && setFetchLinks(data[0].linksJSON as Link[]);
+      console.log(data);
+      if (data && data.length > 0) setFetchLinks(data[0].linksJSON as Link[]);
       setPreloadComplete(true);
     };
 

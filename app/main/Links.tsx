@@ -89,8 +89,7 @@ const Links = ({
       const updateData = async () => {
         const { data, error } = await supabase
           .from('linkSharingAppData')
-          .update({ linksJSON: links })
-          .eq('email', userEmail)
+          .upsert({ email: userEmail, linksJSON: links }, { onConflict: 'email' })
           .select();
         if (error) {
           console.error(error);
