@@ -20,17 +20,24 @@ const FormCreateAccount = () => {
       setPasswordConfirmStatus(Status.Typing);
     }
   }, [passwordValue, passwordConfirmValue]);
+  const handleSubmit = async () => {
+    if (passwordStatus === Status.Typing && emailStatus === Status.Typing && passwordConfirmStatus === Status.Typing) {
+      return null;
+    }
+  };
 
   return (
     <form
       onSubmit={(e) => {
         e.preventDefault();
-        if (passwordValue !== passwordConfirmValue) {
+        if (passwordValue.length < 8) {
+          setPasswordStatus(Status.CheckAgain);
+        } else if (passwordValue !== passwordConfirmValue) {
           setPasswordConfirmStatus(Status.CheckAgain);
         }
-        //handleSubmit().catch((error) => {
-        //  console.error('Failed to sign in:', error);
-        //});
+        handleSubmit().catch((error) => {
+          console.error('Failed to create account:', error);
+        });
       }}
       onInvalid={(e) => {
         const value = e.target as HTMLInputElement;

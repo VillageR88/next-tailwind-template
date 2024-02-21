@@ -9,6 +9,10 @@ import status from '../lib/email/accessStatus';
 
 const FormLogin = () => {
   const router = useRouter();
+  const [emailValue, setEmailValue] = useState<string>('');
+  const [passwordValue, setPasswordValue] = useState<string>('');
+  const [emailStatus, setEmailStatus] = useState<Status>(Status.Typing);
+  const [passwordStatus, setPasswordStatus] = useState<Status>(Status.Typing);
   const handleSubmit = async () => {
     try {
       const { error } = await supabase.auth.signInWithPassword({
@@ -26,11 +30,6 @@ const FormLogin = () => {
       console.log('error', error);
     }
   };
-
-  const [emailValue, setEmailValue] = useState<string>('');
-  const [passwordValue, setPasswordValue] = useState<string>('');
-  const [emailStatus, setEmailStatus] = useState<Status>(Status.Typing);
-  const [passwordStatus, setPasswordStatus] = useState<Status>(Status.Typing);
   return (
     <form
       onSubmit={(e) => {
