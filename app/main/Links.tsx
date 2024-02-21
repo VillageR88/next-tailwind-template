@@ -8,7 +8,6 @@ import SocialMedia from '../lib/enumSocialMedia';
 import Link from '../lib/interfaceLink';
 import urlPlaceholders from '../lib/urlPlaceholders';
 import accessSocialIcons from '../lib/accessSocialIcons';
-import iconChangesSaved from '@/public/assets/images/icon-changes-saved.svg';
 
 enum Phase {
   goodOrTyping,
@@ -22,9 +21,11 @@ const errorMessages = {
 
 const Links = ({
   passSocialInfoToMain,
+  passSavePopUp,
   userEmail,
   fetchLinks,
 }: {
+  passSavePopUp(): void;
   passSocialInfoToMain(arg0?: Link[]): void;
   userEmail: string | undefined;
   fetchLinks: Link[];
@@ -32,7 +33,6 @@ const Links = ({
   const ref = useRef<HTMLButtonElement>(null);
   const router = useRouter();
   const [save, setSave] = useState<boolean>(false);
-  const [popUpBottom, setPopUpBottom] = useState<boolean>(false);
   const [checkInputs, setCheckInputs] = useState<boolean>(false);
   const [draggable, setDraggable] = useState<boolean>(false);
   const [links, setLinks] = useState<Link[]>([]);
@@ -96,7 +96,7 @@ const Links = ({
 
   useEffect(() => {
     if (save && !linksErrorInfo.some((x: number) => x !== 0)) {
-      setPopUpBottom(true);
+      passSavePopUp();
       const updateData = async () => {
         const { data, error } = await supabase
           .from('linkSharingAppData')
@@ -113,17 +113,6 @@ const Links = ({
     }
     setSave(false);
   }, [links, linksErrorInfo, save, userEmail]);
-
-  useEffect(() => {
-    if (popUpBottom) {
-      const timer = setTimeout(() => {
-        setPopUpBottom(false);
-      }, 4000);
-      return () => {
-        clearTimeout(timer);
-      };
-    }
-  }, [popUpBottom]);
 
   useEffect(() => {
     if (listOpen === null) {
@@ -384,18 +373,6 @@ const Links = ({
             >
               Save
             </button>
-          </div>
-        </div>
-      </div>
-      <div
-        className={`${
-          popUpBottom ? 'opacity-100' : 'opacity-0'
-        } pointer-events-none flex h-0 w-screen transition-opacity duration-[1000ms] ease-in-out`}
-      >
-        <div className="absolute left-0 flex h-[56px] w-screen justify-center ">
-          <div className="mt-[-72px] flex h-full w-[406px] items-center justify-center gap-[8px]  rounded-[12px] bg-[#333333]">
-            <Image height={20} width={20} src={iconChangesSaved as string} alt="changes saved" />
-            <span className="headingS text-[#FAFAFA]">Your changes have been successfully saved!</span>
           </div>
         </div>
       </div>

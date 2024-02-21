@@ -9,6 +9,7 @@ import Phone from './Phone';
 import Links from './Links';
 import Link from '../lib/interfaceLink';
 import { RotatingLines } from 'react-loader-spinner';
+import iconChangesSaved from '@/public/assets/images/icon-changes-saved.svg';
 
 export default function Main() {
   enum MiddleButtons {
@@ -22,6 +23,7 @@ export default function Main() {
   const [userEmail, setUserEmail] = useState<string | undefined>(undefined);
   const [fetchLinks, setFetchLinks] = useState<Link[]>([]);
   const [preloadComplete, setPreloadComplete] = useState<boolean>(false);
+  const [popUpBottom, setPopUpBottom] = useState<boolean>(false);
 
   useEffect(() => {
     const checkUser = async () => {
@@ -47,6 +49,17 @@ export default function Main() {
 
     void fetchData();
   }, [preloadComplete, userAuth, userEmail]);
+
+  useEffect(() => {
+    if (popUpBottom) {
+      const timer = setTimeout(() => {
+        setPopUpBottom(false);
+      }, 4000);
+      return () => {
+        clearTimeout(timer);
+      };
+    }
+  }, [popUpBottom]);
 
   return !preloadComplete ? (
     <div className={`flex min-h-screen flex-col items-center justify-center`}>
@@ -97,6 +110,9 @@ export default function Main() {
         </div>
         <div className="h-[834px] w-[58%] rounded-[12px] bg-white">
           <Links
+            passSavePopUp={() => {
+              setPopUpBottom(true);
+            }}
             fetchLinks={fetchLinks}
             userEmail={userEmail}
             passSocialInfoToMain={(value) => {
@@ -105,6 +121,18 @@ export default function Main() {
           />
         </div>
       </main>
+      <div
+        className={`${
+          popUpBottom ? 'opacity-100' : 'opacity-0'
+        } pointer-events-none flex h-0 w-screen transition-opacity duration-[1000ms] ease-in-out`}
+      >
+        <div className="absolute left-0 flex h-[56px] w-screen justify-center ">
+          <div className="mt-[-100px] flex h-full w-[406px] items-center justify-center gap-[8px]  rounded-[12px] bg-[#333333]">
+            <Image height={20} width={20} src={iconChangesSaved as string} alt="changes saved" />
+            <span className="headingS text-[#FAFAFA]">Your changes have been successfully saved!</span>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }
