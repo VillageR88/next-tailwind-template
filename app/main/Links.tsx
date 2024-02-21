@@ -39,6 +39,7 @@ const Links = ({
   const [linksErrorInfo, setLinksErrorInfo] = useState<Phase[]>([]);
   const [linksInitial, setLinksInitial] = useState<Link[]>([]);
   const [listOpen, setListOpen] = useState<SocialMedia | null>(null);
+  console.log('save', save);
   const memorizedLinks = useMemo(() => {
     return links;
   }, [links]);
@@ -95,9 +96,8 @@ const Links = ({
   }, [checkInputs, links]);
 
   useEffect(() => {
-    if (save) {
+    if (save && !linksErrorInfo.some((x: number) => x !== 0)) {
       setPopUpBottom(true);
-      if (linksErrorInfo.some((x: number) => x !== 0)) return;
       const updateData = async () => {
         const { data, error } = await supabase
           .from('linkSharingAppData')
@@ -119,7 +119,7 @@ const Links = ({
     if (popUpBottom) {
       const timer = setTimeout(() => {
         setPopUpBottom(false);
-      }, 5000);
+      }, 4000);
       return () => {
         clearTimeout(timer);
       };
@@ -391,7 +391,7 @@ const Links = ({
       <div
         className={`${
           popUpBottom ? 'opacity-100' : 'opacity-0'
-        } flex h-0 w-screen transition-opacity duration-[1000ms] ease-in-out`}
+        } pointer-events-none flex h-0 w-screen transition-opacity duration-[1000ms] ease-in-out`}
       >
         <div className="absolute left-0 flex h-[56px] w-screen justify-center ">
           <div className="mt-[-72px] flex h-full w-[406px] items-center justify-center gap-[8px]  rounded-[12px] bg-[#333333]">
