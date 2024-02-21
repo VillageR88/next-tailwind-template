@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import Link from '../lib/interfaceLink';
-import arrowRight from '@/public/assets/images/icon-arrow-right.svg';
+import ArrowRight from '../components/ArrowRight';
 
 const dataColors = {
   Github: ['/assets/images/icon-githubWhite.svg', 'bg-[#1A1A1A]'],
@@ -31,15 +31,13 @@ const Phone = ({ socialInfo }: { socialInfo?: Link[] }) => {
                   onClick={() => {
                     void navigator.clipboard.writeText(item.url);
                   }}
-                  className="flex h-full w-full items-center px-[16px]"
+                  className={` ${
+                    (item.title as keyof typeof dataColors) !== 'Frontend Mentor'
+                      ? 'text-[white] *:fill-[white]'
+                      : 'rounded-[8px] border border-[#D9D9D9] text-[#333333] *:fill-[#737373]'
+                  } flex h-full w-full items-center px-[16px]`}
                 >
-                  <div
-                    className={` flex h-full w-full items-center ${
-                      (item.title as keyof typeof dataColors) !== 'Frontend Mentor'
-                        ? 'text-[white]'
-                        : 'rounded-[8px] border border-[#D9D9D9] text-[333333]'
-                    }`}
-                  >
+                  <div className={`flex h-full w-full items-center`}>
                     <Image
                       color="inherit"
                       src={dataColors[item.title as keyof typeof dataColors][0]}
@@ -51,7 +49,7 @@ const Phone = ({ socialInfo }: { socialInfo?: Link[] }) => {
 
                     <span className="bodyS">{item.title}</span>
                   </div>
-                  <Image className="h-fit w-fit" height={5} width={5} alt="arrow right" src={arrowRight as string} />
+                  <ArrowRight />
                 </button>
               </li>
             ))}

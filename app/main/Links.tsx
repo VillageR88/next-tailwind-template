@@ -8,6 +8,7 @@ import SocialMedia from '../lib/enumSocialMedia';
 import Link from '../lib/interfaceLink';
 import urlPlaceholders from '../lib/urlPlaceholders';
 import accessSocialIcons from '../lib/accessSocialIcons';
+import iconChangesSaved from '@/public/assets/images/icon-changes-saved.svg';
 
 enum Phase {
   goodOrTyping,
@@ -31,6 +32,7 @@ const Links = ({
   const ref = useRef<HTMLButtonElement>(null);
   const router = useRouter();
   const [save, setSave] = useState<boolean>(false);
+  const [popUpBottom, setPopUpBottom] = useState<boolean>(false);
   const [checkInputs, setCheckInputs] = useState<boolean>(false);
   const [draggable, setDraggable] = useState<boolean>(false);
   const [links, setLinks] = useState<Link[]>([]);
@@ -54,10 +56,19 @@ const Links = ({
     const handleClick = () => {
       setListOpen(null);
     };
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') {
+        setListOpen(null);
+      }
+    };
+
     document.addEventListener('click', handleClick);
+    document.addEventListener('keydown', handleKeyDown);
 
     return () => {
       document.removeEventListener('click', handleClick);
+      document.removeEventListener('keydown', handleKeyDown);
     };
   }, [listOpen]);
 
@@ -85,6 +96,7 @@ const Links = ({
 
   useEffect(() => {
     if (save) {
+      setPopUpBottom(true);
       if (linksErrorInfo.some((x: number) => x !== 0)) return;
       const updateData = async () => {
         const { data, error } = await supabase
@@ -102,6 +114,17 @@ const Links = ({
     }
     setSave(false);
   }, [links, linksErrorInfo, save, userEmail]);
+
+  useEffect(() => {
+    if (popUpBottom) {
+      const timer = setTimeout(() => {
+        setPopUpBottom(false);
+      }, 5000);
+      return () => {
+        clearTimeout(timer);
+      };
+    }
+  }, [popUpBottom]);
 
   useEffect(() => {
     if (listOpen === null) {
@@ -362,6 +385,18 @@ const Links = ({
             >
               Save
             </button>
+          </div>
+        </div>
+      </div>
+      <div
+        className={`${
+          popUpBottom ? 'opacity-100' : 'opacity-0'
+        } flex h-0 w-screen transition-opacity duration-[1000ms] ease-in-out`}
+      >
+        <div className="absolute left-0 flex h-[56px] w-screen justify-center ">
+          <div className="mt-[-72px] flex h-full w-[406px] items-center justify-center gap-[8px]  rounded-[12px] bg-[#333333]">
+            <Image height={20} width={20} src={iconChangesSaved as string} alt="changes saved" />
+            <span className="headingS text-[#FAFAFA]">Your changes have been successfully saved!</span>
           </div>
         </div>
       </div>
