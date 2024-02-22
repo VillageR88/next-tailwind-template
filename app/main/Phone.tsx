@@ -18,7 +18,13 @@ const dataColors = {
   'Stack Overflow': ['/assets/images/icon-stack-overflowWhite.svg', 'bg-[#EC7100]'],
 };
 
-const Phone = ({ socialInfo }: { socialInfo?: Link[] }) => {
+const Phone = ({
+  socialInfo,
+  passCopiedToClipboardPopUp,
+}: {
+  socialInfo?: Link[];
+  passCopiedToClipboardPopUp(): void;
+}) => {
   return (
     <div className="flex h-[631px] w-[307px] flex-col items-center justify-center bg-[url('/assets/images/illustration-phone-mockup.svg')] bg-center bg-no-repeat pt-[10px]">
       <div className="mr-[1px] flex h-[514px] w-[238px] flex-col justify-between">
@@ -30,6 +36,7 @@ const Phone = ({ socialInfo }: { socialInfo?: Link[] }) => {
                 <button
                   onClick={() => {
                     void navigator.clipboard.writeText(item.url);
+                    passCopiedToClipboardPopUp();
                   }}
                   className={` ${
                     (item.title as keyof typeof dataColors) !== 'Frontend Mentor'

@@ -1,6 +1,6 @@
 'use client';
 import { useRouter } from 'next/navigation';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import supabase from '../lib/supabaseClient';
 import Image from 'next/image';
 import IconLink from '../components/IconLink';
@@ -38,6 +38,7 @@ export default function Main() {
   const [fetchLinks, setFetchLinks] = useState<Link[]>([]);
   const [preloadComplete, setPreloadComplete] = useState<boolean>(false);
   const [popUpBottom, setPopUpBottom] = useState<boolean>(false);
+  const [resetTimer, setResetTimer] = useState(false);
   const [popUpMessage, setPopUpMessage] = useState<PopupMessage>(PopupMessage.ChangesSaved);
 
   useEffect(() => {
@@ -61,20 +62,23 @@ export default function Main() {
       if (data && data.length > 0) setFetchLinks(data[0].linksJSON as Link[]);
       setPreloadComplete(true);
     };
-
     void fetchData();
   }, [preloadComplete, userAuth, userEmail]);
 
   useEffect(() => {
-    if (popUpBottom) {
-      const timer = setTimeout(() => {
-        setPopUpBottom(false);
-      }, 4000);
-      return () => {
-        clearTimeout(timer);
-      };
-    }
-  }, [popUpBottom]);
+    const timeout = setTimeout(() => {
+      setPopUpBottom(false);
+    }, 3000);
+
+    return () => {
+      clearTimeout(timeout);
+    };
+  }, [resetTimer]);
+
+  const handleReset = () => {
+    setPopUpBottom(true);
+    setResetTimer((prevState) => !prevState);
+  };
 
   return !preloadComplete ? (
     <div className={`flex min-h-screen flex-col items-center justify-center`}>
@@ -121,11 +125,19 @@ export default function Main() {
       </nav>
       <main className="flex h-[858px] w-full flex-row justify-between">
         <div className="flex h-[834px] w-[40.3%] items-center justify-center rounded-[12px] bg-white">
-          <Phone socialInfo={socialInfo} />
+          <Phone
+            passCopiedToClipboardPopUp={() => {
+              handleReset();
+              setPopUpBottom(true);
+              setPopUpMessage(PopupMessage.LinkCopied);
+            }}
+            socialInfo={socialInfo}
+          />
         </div>
         <div className="h-[834px] w-[58%] rounded-[12px] bg-white">
           <Links
             passSavePopUp={() => {
+              handleReset();
               setPopUpBottom(true);
               setPopUpMessage(PopupMessage.ChangesSaved);
             }}
@@ -144,7 +156,13 @@ export default function Main() {
       >
         <div className="absolute left-0 flex h-[56px] w-screen justify-center ">
           <div className="mt-[-100px] flex h-full w-[406px] items-center justify-center gap-[8px]  rounded-[12px] bg-[#333333]">
-            <Image height={20} width={20} src={popupMessages[popUpMessage].image} alt="changes saved" />
+            <Image
+              className="h-[20px] w-[20px]"
+              height={10}
+              width={10}
+              src={popupMessages[popUpMessage].image}
+              alt="changes saved"
+            />
             <span className="headingS text-[#FAFAFA]">{popupMessages[popUpMessage].message}</span>
           </div>
         </div>
