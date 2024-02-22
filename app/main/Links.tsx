@@ -24,11 +24,13 @@ const Links = ({
   passSavePopUp,
   userEmail,
   fetchLinks,
+  visible,
 }: {
   passSavePopUp(): void;
   passSocialInfoToMain(arg0?: Link[]): void;
   userEmail: string | undefined;
   fetchLinks: Link[];
+  visible: boolean;
 }) => {
   const ref = useRef<HTMLButtonElement>(null);
   const refs = useRef<HTMLInputElement[]>([]);
@@ -144,9 +146,9 @@ const Links = ({
   };
   const listAvailable = () => {
     return Object.values(SocialMedia).filter((item) => !links.find((link) => link.title === item)?.title);
-  };
+  };DS5ibanez2@
   return (
-    <div className="flex h-full w-full flex-col items-center justify-center ">
+    <div className={`${visible ? 'block' : 'hidden'} flex h-full w-full flex-col items-center justify-center`}>
       <div className="flex h-[739px] w-full flex-col justify-between p-[40px]">
         <div className="flex h-[80px] w-full flex-col justify-between">
           <h1 id="ted" className="headingM text-[#333333]">

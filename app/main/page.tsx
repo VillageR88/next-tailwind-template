@@ -1,6 +1,6 @@
 'use client';
 import { useRouter } from 'next/navigation';
-import { useCallback, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import supabase from '../lib/supabaseClient';
 import Image from 'next/image';
 import IconLink from '../components/IconLink';
@@ -8,6 +8,7 @@ import IconProfile from '../components/IconProfile';
 import Phone from './Phone';
 import Links from './Links';
 import Link from '../lib/interfaceLink';
+import ProfileDetails from './ProfileDetails';
 import { RotatingLines } from 'react-loader-spinner';
 
 export default function Main() {
@@ -134,8 +135,10 @@ export default function Main() {
             socialInfo={socialInfo}
           />
         </div>
-        <div className="h-[834px] w-[58%] rounded-[12px] bg-white">
+        <div className="h-[834px] w-[58%] rounded-[12px] bg-white transition-all">
+          <ProfileDetails visible={middleSection === MiddleButtons.ProfileDetails} />
           <Links
+            visible={middleSection === MiddleButtons.Links}
             passSavePopUp={() => {
               handleReset();
               setPopUpBottom(true);
