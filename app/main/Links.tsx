@@ -81,6 +81,14 @@ const Links = ({
       const check = () => {
         const errorInfo: Phase[] = [];
         for (const link of links) {
+          setLinks((prev) => {
+            const deepCopy = [...prev].map((item) => ({ ...item }));
+            deepCopy.map((item) => {
+              item.url = item.url.toLowerCase();
+            });
+            return deepCopy;
+          });
+
           if (link.url === '') errorInfo.push(Phase.empty);
           else if (
             !link.url.match(
