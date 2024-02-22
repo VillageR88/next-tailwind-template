@@ -9,13 +9,27 @@ import Phone from './Phone';
 import Links from './Links';
 import Link from '../lib/interfaceLink';
 import { RotatingLines } from 'react-loader-spinner';
-import iconChangesSaved from '@/public/assets/images/icon-changes-saved.svg';
 
 export default function Main() {
   enum MiddleButtons {
     Links,
     ProfileDetails,
   }
+  enum PopupMessage {
+    ChangesSaved,
+    LinkCopied,
+  }
+  const popupMessages = {
+    [PopupMessage.ChangesSaved]: {
+      image: '../assets/images/icon-changes-saved.svg' as string,
+      message: 'Your changes have been successfully saved!',
+    },
+    [PopupMessage.LinkCopied]: {
+      image: '../assets/images/icon-link-copied-to-clipboard.svg' as string,
+      message: 'Link copied to clipboard!',
+    },
+  };
+
   const [middleSection, setMiddleSection] = useState<MiddleButtons>(MiddleButtons.Links);
   const [userAuth, setUserAuth] = useState<boolean>(false);
   const router = useRouter();
@@ -24,6 +38,7 @@ export default function Main() {
   const [fetchLinks, setFetchLinks] = useState<Link[]>([]);
   const [preloadComplete, setPreloadComplete] = useState<boolean>(false);
   const [popUpBottom, setPopUpBottom] = useState<boolean>(false);
+  const [popUpMessage, setPopUpMessage] = useState<PopupMessage>(PopupMessage.ChangesSaved);
 
   useEffect(() => {
     const checkUser = async () => {
@@ -112,6 +127,7 @@ export default function Main() {
           <Links
             passSavePopUp={() => {
               setPopUpBottom(true);
+              setPopUpMessage(PopupMessage.ChangesSaved);
             }}
             fetchLinks={fetchLinks}
             userEmail={userEmail}
@@ -128,8 +144,8 @@ export default function Main() {
       >
         <div className="absolute left-0 flex h-[56px] w-screen justify-center ">
           <div className="mt-[-100px] flex h-full w-[406px] items-center justify-center gap-[8px]  rounded-[12px] bg-[#333333]">
-            <Image height={20} width={20} src={iconChangesSaved as string} alt="changes saved" />
-            <span className="headingS text-[#FAFAFA]">Your changes have been successfully saved!</span>
+            <Image height={20} width={20} src={popupMessages[popUpMessage].image} alt="changes saved" />
+            <span className="headingS text-[#FAFAFA]">{popupMessages[popUpMessage].message}</span>
           </div>
         </div>
       </div>

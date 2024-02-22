@@ -31,6 +31,7 @@ const Links = ({
   fetchLinks: Link[];
 }) => {
   const ref = useRef<HTMLButtonElement>(null);
+  const refs = useRef<HTMLInputElement[]>([]);
   const router = useRouter();
   const [save, setSave] = useState<boolean>(false);
   const [checkInputs, setCheckInputs] = useState<boolean>(false);
@@ -60,6 +61,9 @@ const Links = ({
     const handleKeyDown = (event: KeyboardEvent) => {
       if (event.key === 'Escape') {
         setListOpen(null);
+        refs.current.forEach((item) => {
+          item.blur();
+        });
       }
     };
 
@@ -112,7 +116,7 @@ const Links = ({
       setLinksInitial([...links].map((item) => ({ ...item })));
     }
     setSave(false);
-  }, [links, linksErrorInfo, save, userEmail]);
+  }, [links, linksErrorInfo, passSavePopUp, save, userEmail]);
 
   useEffect(() => {
     if (listOpen === null) {
@@ -137,7 +141,9 @@ const Links = ({
     <div className="flex h-full w-full flex-col items-center justify-center ">
       <div className="flex h-[739px] w-full flex-col justify-between p-[40px]">
         <div className="flex h-[80px] w-full flex-col justify-between">
-          <h1 className="headingM text-[#333333]">Customize your links</h1>
+          <h1 id="ted" className="headingM text-[#333333]">
+            Customize your links
+          </h1>
           <p className="text-[#737373]">Add/edit/remove links below and then share all your profiles with the world!</p>
         </div>
         <div className="flex h-[539px] w-full flex-col justify-between">
@@ -300,6 +306,7 @@ const Links = ({
                         </label>
                         <div className="w-full items-center gap-[12px]">
                           <input
+                            ref={(el) => (el !== null ? (refs.current[index] = el) : null)}
                             onKeyDown={() => {
                               if (linksErrorInfo[index] === Phase.goodOrTyping) return;
                               const newLinksErrorInfo = [...linksErrorInfo];
