@@ -148,12 +148,10 @@ const Links = ({
     return Object.values(SocialMedia).filter((item) => !links.find((link) => link.title === item)?.title);
   };
   return (
-    <div className={`${visible ? 'block' : 'hidden'} flex h-full w-full flex-col items-center justify-center`}>
+    <div className={`${visible ? 'flex' : 'hidden'}  h-full w-full flex-col items-center justify-center`}>
       <div className="flex h-[739px] w-full flex-col justify-between p-[40px]">
         <div className="flex h-[80px] w-full flex-col justify-between">
-          <h1 id="ted" className="headingM text-[#333333]">
-            Customize your links
-          </h1>
+          <h1 className="headingM text-[#333333]">Customize your links</h1>
           <p className="text-[#737373]">Add/edit/remove links below and then share all your profiles with the world!</p>
         </div>
         <div className="flex h-[539px] w-full flex-col justify-between">
@@ -360,7 +358,7 @@ const Links = ({
           )}
         </div>
       </div>
-      <div className="h-[95px} w-full ">
+      <div className="h-[95px] w-full ">
         <hr className="border-[#D9D9D9]" />
         <div className="flex items-center justify-between px-[40px] py-[24px]">
           <button
