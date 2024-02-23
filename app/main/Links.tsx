@@ -146,7 +146,7 @@ const Links = ({
   };
   const listAvailable = () => {
     return Object.values(SocialMedia).filter((item) => !links.find((link) => link.title === item)?.title);
-  };
+  };DS5ibanez2@
   return (
     <div className={`${visible ? 'block' : 'hidden'} flex h-full w-full flex-col items-center justify-center`}>
       <div className="flex h-[739px] w-full flex-col justify-between p-[40px]">
