@@ -27,7 +27,20 @@ const ProfileDetails = ({ visible }: { visible: boolean }) => {
               <span className="bodyS w-[215px]">Image must be below 1024x1024px. Use PNG or JPG format.</span>
             </div>
           </div>
-          <div className="h-[208px] w-full rounded-[12px] bg-[#FAFAFA]"></div>
+          <form className="flex h-[208px] w-full flex-col justify-between rounded-[12px] bg-[#FAFAFA] p-[20px]">
+            <div className="flex h-[48px] w-full items-center justify-between">
+              <label className="text-[#737373]">First name*</label>
+              <input className="textField bodyM h-full w-[432px] px-[16px]" type="text" />
+            </div>
+            <div className="flex h-[48px] w-full items-center justify-between">
+              <label className="text-[#737373]">Last name*</label>
+              <input className="textField bodyM h-full w-[432px] px-[16px]" type="text" />
+            </div>
+            <div className="flex h-[48px] w-full items-center justify-between">
+              <label className="text-[#737373]">Email</label>
+              <input className="textField bodyM h-full w-[432px] px-[16px]" type="email" />
+            </div>
+          </form>
         </div>
       </div>
       <div className="h-[95px] w-full ">
