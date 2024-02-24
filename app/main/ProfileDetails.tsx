@@ -2,9 +2,26 @@ import Image from 'next/image';
 import iconUploadImage from '@/public/assets/images/icon-upload-image.svg';
 import supabase from '../lib/supabaseClient';
 import { useRouter } from 'next/navigation';
+import { useEffect, useRef } from 'react';
 
 const ProfileDetails = ({ visible }: { visible: boolean }) => {
   const router = useRouter();
+  const refs = useRef<HTMLInputElement[]>([]);
+  useEffect(() => {
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') {
+        refs.current.forEach((item) => {
+          item.blur();
+        });
+      }
+    };
+
+    document.addEventListener('keydown', handleKeyDown);
+
+    return () => {
+      document.removeEventListener('keydown', handleKeyDown);
+    };
+  }, []);
 
   return (
     <div className={`${visible ? 'flex' : 'hidden'}  h-full w-full flex-col items-center justify-center`}>
@@ -37,19 +54,34 @@ const ProfileDetails = ({ visible }: { visible: boolean }) => {
               <label htmlFor="firstName" className="text-[#737373]">
                 First name*
               </label>
-              <input id="firstName" className="textField bodyM h-full w-[432px] px-[16px]" type="text" />
+              <input
+                ref={(el) => (el !== null ? (refs.current[0] = el) : null)}
+                id="firstName"
+                className="textField bodyM h-full w-[432px] px-[16px]"
+                type="text"
+              />
             </div>
             <div className="flex h-[48px] w-full items-center justify-between">
               <label htmlFor="lastName" className="text-[#737373]">
                 Last name*
               </label>
-              <input id="lastName" className="textField bodyM h-full w-[432px] px-[16px]" type="text" />
+              <input
+                ref={(el) => (el !== null ? (refs.current[1] = el) : null)}
+                id="lastName"
+                className="textField bodyM h-full w-[432px] px-[16px]"
+                type="text"
+              />
             </div>
             <div className="flex h-[48px] w-full items-center justify-between">
               <label htmlFor="email" className="text-[#737373]">
                 Email
               </label>
-              <input id="email" className="textField bodyM h-full w-[432px] px-[16px]" type="email" />
+              <input
+                ref={(el) => (el !== null ? (refs.current[2] = el) : null)}
+                id="email"
+                className="textField bodyM h-full w-[432px] px-[16px]"
+                type="text"
+              />
             </div>
           </form>
         </div>
