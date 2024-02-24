@@ -38,9 +38,11 @@ const Phone = ({
       <div className="mr-[1px] flex h-[514px] w-[238px] flex-col justify-between">
         <div className="flex h-[177px] w-full flex-col items-center justify-between">
           <Image
-            className={imageSource ? 'visible rounded-full outline outline-4 outline-violet-600' : 'invisible'}
-            height={96}
-            width={96}
+            className={
+              imageSource ? 'visible h-[96px] w-[96px] rounded-full outline outline-4 outline-violet-600' : 'invisible'
+            }
+            height={10}
+            width={10}
             src={imageSource ?? ''}
             alt="profile image"
           />
