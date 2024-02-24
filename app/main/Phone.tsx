@@ -21,14 +21,24 @@ const dataColors = {
 const Phone = ({
   socialInfo,
   passCopiedToClipboardPopUp,
+  imageSource,
 }: {
   socialInfo?: Link[];
   passCopiedToClipboardPopUp(): void;
+  imageSource: string | null;
 }) => {
   return (
     <div className="flex h-[631px] w-[307px] flex-col items-center justify-center bg-[url('/assets/images/illustration-phone-mockup.svg')] bg-center bg-no-repeat pt-[10px]">
       <div className="mr-[1px] flex h-[514px] w-[238px] flex-col justify-between">
-        <div className="h-[158px] w-full"></div>
+        <div className="flex h-[158px] w-full flex-col items-center">
+          <Image
+            className={imageSource ? 'visible rounded-full outline outline-4 outline-violet-600' : 'invisible'}
+            height={96}
+            width={96}
+            src={imageSource ?? ''}
+            alt="profile image"
+          />
+        </div>
         <div className="flex h-[300px] w-full flex-col">
           <ul className="flex h-fit w-full flex-col gap-[20px] overflow-auto bg-white">
             {socialInfo?.map((item, index) => (

@@ -41,6 +41,7 @@ export default function Main() {
   const [popUpBottom, setPopUpBottom] = useState<boolean>(false);
   const [resetTimer, setResetTimer] = useState(false);
   const [popUpMessage, setPopUpMessage] = useState<PopupMessage>(PopupMessage.ChangesSaved);
+  const [imageUrl, setImageUrl] = useState<string | null>(null);
 
   useEffect(() => {
     const checkUser = async () => {
@@ -127,6 +128,7 @@ export default function Main() {
       <main className="flex h-[858px] w-full flex-row justify-between">
         <div className="flex h-[834px] w-[40.3%] items-center justify-center rounded-[12px] bg-white">
           <Phone
+            imageSource={imageUrl}
             passCopiedToClipboardPopUp={() => {
               handleReset();
               setPopUpBottom(true);
@@ -136,7 +138,12 @@ export default function Main() {
           />
         </div>
         <div className="h-[834px] w-[58%] rounded-[12px] bg-white transition-all">
-          <ProfileDetails visible={middleSection === MiddleButtons.ProfileDetails} />
+          <ProfileDetails
+            passImageUrl={(value) => {
+              setImageUrl(value);
+            }}
+            visible={middleSection === MiddleButtons.ProfileDetails}
+          />
           <Links
             visible={middleSection === MiddleButtons.Links}
             passSavePopUp={() => {
