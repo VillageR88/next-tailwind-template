@@ -3,7 +3,19 @@ import { useRouter } from 'next/navigation';
 import { useEffect, useRef, useState } from 'react';
 import IconUpload from '../components/iconUpload';
 
-const ProfileDetails = ({ visible, passImageUrl }: { visible: boolean; passImageUrl(arg0: string): void }) => {
+const ProfileDetails = ({
+  visible,
+  passImageUrl,
+  passFirstName,
+  passLastName,
+  passEmail,
+}: {
+  visible: boolean;
+  passImageUrl(arg0: string): void;
+  passFirstName(arg0: string): void;
+  passLastName(arg0: string): void;
+  passEmail(arg0: string): void;
+}) => {
   enum InputState {
     emptyError,
     typingOrValid,
@@ -52,16 +64,22 @@ const ProfileDetails = ({ visible, passImageUrl }: { visible: boolean; passImage
                 onClick={() => {
                   const fileInput = document.createElement('input');
                   fileInput.type = 'file';
-                  //also resolution max 1024x1024
-
                   fileInput.accept = 'image/png, image/jpeg';
                   fileInput.onchange = (e) => {
                     const file = (e.target as HTMLInputElement).files?.[0];
                     if (file) {
                       const reader = new FileReader();
                       reader.onloadend = () => {
-                        setProfileImage(reader.result as string);
-                        passImageUrl(reader.result as string);
+                        const img = new Image();
+                        img.src = reader.result as string;
+                        img.onload = () => {
+                          if (img.width > 1024 || img.height > 1024) {
+                            alert('Image resolution exceeds 1024x1024');
+                          } else {
+                            setProfileImage(reader.result as string);
+                            passImageUrl(reader.result as string);
+                          }
+                        };
                       };
                       reader.readAsDataURL(file);
                     }

@@ -30,7 +30,7 @@ const Phone = ({
   return (
     <div className="flex h-[631px] w-[307px] flex-col items-center justify-center bg-[url('/assets/images/illustration-phone-mockup.svg')] bg-center bg-no-repeat pt-[10px]">
       <div className="mr-[1px] flex h-[514px] w-[238px] flex-col justify-between">
-        <div className="flex h-[158px] w-full flex-col items-center">
+        <div className="flex h-[177px] w-full flex-col items-center justify-between">
           <Image
             className={imageSource ? 'visible rounded-full outline outline-4 outline-violet-600' : 'invisible'}
             height={96}
@@ -38,6 +38,10 @@ const Phone = ({
             src={imageSource ?? ''}
             alt="profile image"
           />
+          <div className="flex h-[56px] w-full flex-col items-center bg-white">
+            <h2 className="font-instrumentSans text-[18px] font-semibold leading-[150%] text-[#333333]">Ben Wright</h2>
+            <p className="font-instrumentSans text-[14px] leading-[150%] text-[#737373]">ben@example.com</p>
+          </div>
         </div>
         <div className="flex h-[300px] w-full flex-col">
           <ul className="flex h-fit w-full flex-col gap-[20px] overflow-auto bg-white">
