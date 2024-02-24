@@ -1,6 +1,11 @@
 import Image from 'next/image';
 import iconUploadImage from '@/public/assets/images/icon-upload-image.svg';
+import supabase from '../lib/supabaseClient';
+import { useRouter } from 'next/navigation';
+
 const ProfileDetails = ({ visible }: { visible: boolean }) => {
+  const router = useRouter();
+
   return (
     <div className={`${visible ? 'flex' : 'hidden'}  h-full w-full flex-col items-center justify-center`}>
       <div className="flex h-[739px] w-full flex-col justify-start gap-[40px] p-[40px]">
@@ -21,7 +26,7 @@ const ProfileDetails = ({ visible }: { visible: boolean }) => {
                     src={iconUploadImage as string}
                     alt="iconUploadImage"
                   />
-                  <span className="headingS text-[#633CFF]">+ Upload Image</span>
+                  <span className="headingS font-[600] text-[#633CFF]">+ Upload Image</span>
                 </div>
               </button>
               <span className="bodyS w-[215px]">Image must be below 1024x1024px. Use PNG or JPG format.</span>
@@ -46,10 +51,20 @@ const ProfileDetails = ({ visible }: { visible: boolean }) => {
       <div className="h-[95px] w-full ">
         <hr className="border-[#D9D9D9]" />
         <div className="flex items-center justify-between px-[40px] py-[24px]">
-          <button>BUTTON</button>
+          <button
+            onClick={() => {
+              void supabase.auth.signOut();
+              router.replace('/login');
+            }}
+            className="buttonSecondary headingS h-[46px] w-[91px] font-[500]"
+          >
+            Log Out
+          </button>
           <div className="flex gap-[18px]">
-            <button className="buttonSecondary headingS h-[46px] w-[91px]">BUTTON</button>
-            <button className="buttonPrimary headingS h-[46px] w-[91px]">BUTTON</button>
+            <button className="buttonSecondary headingS h-[46px] w-[91px] font-[500]">Cancel</button>
+            <button disabled className="buttonPrimary headingS h-[46px] w-[91px] font-[500]">
+              Save
+            </button>
           </div>
         </div>
       </div>

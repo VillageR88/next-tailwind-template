@@ -263,7 +263,7 @@ const Links = ({
                               .replace('.', '')}.svg`}
                             alt={item.title}
                           />
-                          <span className="headingS text-[#333333]">{item.title}</span>
+                          <span className="headingS font-[500] text-[#333333]">{item.title}</span>
                         </div>
                         <Image
                           className="h-[10px] w-[14px]"
@@ -297,7 +297,7 @@ const Links = ({
                                 >
                                   <div className="flex h-[24px] items-center gap-[12px] *:fill-current">
                                     {accessSocialIcons[itemSocialMedia]}
-                                    <p className="headingS">{itemSocialMedia}</p>
+                                    <p className="headingS font-[500]">{itemSocialMedia}</p>
                                   </div>
                                 </button>
                                 {indexOfSocialMedia !== itemSocialMedia.length - 2 && (
@@ -366,7 +366,7 @@ const Links = ({
               void supabase.auth.signOut();
               router.replace('/login');
             }}
-            className="buttonSecondary headingS h-[46px] w-[91px]"
+            className="buttonSecondary headingS h-[46px] w-[91px] font-[500]"
           >
             Log Out
           </button>
@@ -375,7 +375,7 @@ const Links = ({
               onClick={() => {
                 setLinks([...linksInitial].map((item) => ({ ...item })));
               }}
-              className="buttonSecondary headingS h-[46px] w-[91px]"
+              className="buttonSecondary headingS h-[46px] w-[91px] font-[500]"
             >
               Cancel
             </button>
@@ -384,7 +384,7 @@ const Links = ({
               onClick={() => {
                 setCheckInputs(true);
               }}
-              className="buttonPrimary headingS h-[46px] w-[91px]"
+              className="buttonPrimary headingS h-[46px] w-[91px] font-[500]"
             >
               Save
             </button>
