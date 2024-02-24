@@ -1,17 +1,21 @@
-import Image from 'next/image';
-import iconUploadImage from '@/public/assets/images/icon-upload-image.svg';
 import supabase from '../lib/supabaseClient';
 import { useRouter } from 'next/navigation';
 import { useEffect, useRef, useState } from 'react';
+import IconUpload from '../components/iconUpload';
 
 const ProfileDetails = ({ visible }: { visible: boolean }) => {
   enum InputState {
     emptyError,
     typingOrValid,
   }
+  const profileImageStatus = {
+    uploadImage: 'Upload Image',
+    changeImage: 'Change Image',
+  };
   const error = "Can't be empty";
   const router = useRouter();
   const refs = useRef<HTMLInputElement[]>([]);
+  const [profileImage, setProfileImage] = useState<string | null>(null);
   const [firstName, setFirstName] = useState<string>('');
   const [firstNameState, setFirstNameState] = useState<InputState>(InputState.typingOrValid);
   const [lastName, setLastName] = useState<string>('');
@@ -44,16 +48,49 @@ const ProfileDetails = ({ visible }: { visible: boolean }) => {
           <div className="flex h-[233px] w-full items-center justify-between rounded-[12px] bg-[#FAFAFA] p-[20px]">
             <span className="bodyM text-[#737373]">Profile picture</span>
             <div className="flex h-full w-[432px] items-center justify-between">
-              <button className="flex h-full w-[193px] items-center justify-center rounded-[12px] bg-[#EFEBFF]">
-                <div className="flex h-[72px] w-[116px] flex-col items-center justify-between">
-                  <Image
-                    className="h-[40px] w-[40px]"
-                    width={10}
-                    height={10}
-                    src={iconUploadImage as string}
-                    alt="iconUploadImage"
-                  />
-                  <span className="headingS font-[600] text-[#633CFF]">+ Upload Image</span>
+              <button
+                onClick={() => {
+                  const fileInput = document.createElement('input');
+                  fileInput.type = 'file';
+                  fileInput.accept = 'image/png, image/jpeg';
+                  fileInput.onchange = (e) => {
+                    const file = (e.target as HTMLInputElement).files?.[0];
+                    if (file) {
+                      const reader = new FileReader();
+                      reader.onloadend = () => {
+                        const img = new Image();
+                        img.src = reader.result as string;
+                        img.onload = () => {
+                          if (img.width > 1024 || img.height > 1024) {
+                            alert('Image resolution exceeds 1024x1024px');
+                          } else {
+                            setProfileImage(reader.result as string);
+                          }
+                        };
+                      };
+                      reader.readAsDataURL(file);
+                    }
+                  };
+                  fileInput.click();
+                }}
+                style={
+                  profileImage
+                    ? {
+                        backgroundImage: `
+                        linear-gradient(0deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+                        url(${profileImage})`,
+                      }
+                    : {}
+                }
+                className={`flex h-full w-[193px] items-center justify-center rounded-[12px] bg-[#EFEBFF] bg-cover ${
+                  profileImage ? '*:fill-white *:text-white' : '*:fill-[#633CFF] *:text-[#633CFF]'
+                }`}
+              >
+                <div className="flex h-[72px] w-[116px] flex-col items-center justify-between *:fill-current *:text-current">
+                  <IconUpload />
+                  <span className="headingS font-[600]">
+                    {profileImage ? profileImageStatus.changeImage : profileImageStatus.uploadImage}
+                  </span>
                 </div>
               </button>
               <span className="bodyS w-[215px]">Image must be below 1024x1024px. Use PNG or JPG format.</span>
