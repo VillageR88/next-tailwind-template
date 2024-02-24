@@ -60,45 +60,61 @@ const ProfileDetails = ({ visible }: { visible: boolean }) => {
             </div>
           </div>
           <form className="flex h-[208px] w-full flex-col justify-between rounded-[12px] bg-[#FAFAFA] p-[20px]">
-            <div className="flex h-[48px] w-full items-center justify-between">
-              <label htmlFor="firstName" className="text-[#737373]">
-                First name*
-              </label>
-              <input
-                value={firstName}
-                onChange={(e) => {
-                  setFirstName(e.target.value);
-                }}
-                onKeyDown={() => {
-                  setFirstNameState(InputState.typingOrValid);
-                }}
-                ref={(el) => (el !== null ? (refs.current[0] = el) : null)}
-                id="firstName"
-                className={`${
-                  firstNameState === InputState.emptyError && 'textFieldError'
-                } textField bodyM h-full w-[432px] px-[16px]`}
-                type="text"
-              />
+            <div className="flex h-[48px] w-full flex-col items-center justify-between">
+              <div className="flex h-full w-full items-center justify-between">
+                <label htmlFor="firstName" className="text-[#737373]">
+                  First name*
+                </label>
+                <input
+                  value={firstName}
+                  onChange={(e) => {
+                    setFirstName(e.target.value);
+                  }}
+                  onKeyDown={() => {
+                    setFirstNameState(InputState.typingOrValid);
+                  }}
+                  ref={(el) => (el !== null ? (refs.current[0] = el) : null)}
+                  id="firstName"
+                  className={`${
+                    firstNameState === InputState.emptyError && 'textFieldError'
+                  } textField bodyM h-full w-[432px] px-[16px]`}
+                  type="text"
+                  placeholder="e.g. John"
+                />
+              </div>
+              {firstNameState === InputState.emptyError && (
+                <div className="flex h-0 w-full justify-end">
+                  <span className="bodyS mr-[16px] mt-[-32px] text-[#FF3939]">{error}</span>
+                </div>
+              )}
             </div>
-            <div className="flex h-[48px] w-full items-center justify-between">
-              <label htmlFor="lastName" className="text-[#737373]">
-                Last name*
-              </label>
-              <input
-                value={lastName}
-                onChange={(e) => {
-                  setLastName(e.target.value);
-                }}
-                onKeyDown={() => {
-                  setLastNameState(InputState.typingOrValid);
-                }}
-                ref={(el) => (el !== null ? (refs.current[1] = el) : null)}
-                id="lastName"
-                className={`${
-                  lastNameState === InputState.emptyError && 'textFieldError'
-                } textField bodyM h-full w-[432px] px-[16px]`}
-                type="text"
-              />
+            <div className="flex h-[48px] w-full flex-col items-center justify-between">
+              <div className="flex h-full w-full items-center justify-between">
+                <label htmlFor="lastName" className="text-[#737373]">
+                  Last name*
+                </label>
+                <input
+                  value={lastName}
+                  onChange={(e) => {
+                    setLastName(e.target.value);
+                  }}
+                  onKeyDown={() => {
+                    setLastNameState(InputState.typingOrValid);
+                  }}
+                  ref={(el) => (el !== null ? (refs.current[1] = el) : null)}
+                  id="lastName"
+                  className={`${
+                    lastNameState === InputState.emptyError && 'textFieldError'
+                  } textField bodyM h-full w-[432px] px-[16px]`}
+                  type="text"
+                  placeholder="e.g. Appleseed"
+                />
+              </div>
+              {lastNameState === InputState.emptyError && (
+                <div className="flex h-0 w-full justify-end">
+                  <span className="bodyS mr-[16px] mt-[-32px] text-[#FF3939]">{error}</span>
+                </div>
+              )}
             </div>
             <div className="flex h-[48px] w-full items-center justify-between">
               <label htmlFor="email" className="text-[#737373]">
@@ -113,6 +129,7 @@ const ProfileDetails = ({ visible }: { visible: boolean }) => {
                 id="email"
                 className="textField bodyM h-full w-[432px] px-[16px]"
                 type="text"
+                placeholder="e.g. email@example.com"
               />
             </div>
           </form>
