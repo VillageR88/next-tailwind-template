@@ -1,7 +1,7 @@
 'use client';
 import supabase from '../lib/supabaseClient';
 import { useRouter } from 'next/navigation';
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import Status from '../lib/email/enumStatus';
@@ -13,6 +13,7 @@ const FormLogin = () => {
   const [passwordValue, setPasswordValue] = useState<string>('');
   const [emailStatus, setEmailStatus] = useState<Status>(Status.Typing);
   const [passwordStatus, setPasswordStatus] = useState<Status>(Status.Typing);
+  const refs = useRef<HTMLInputElement[]>([]);
   const handleSubmit = async () => {
     try {
       const { error } = await supabase.auth.signInWithPassword({
@@ -30,6 +31,21 @@ const FormLogin = () => {
       console.log('error', error);
     }
   };
+  useEffect(() => {
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') {
+        refs.current.forEach((item) => {
+          item.blur();
+        });
+      }
+    };
+
+    document.addEventListener('keydown', handleKeyDown);
+
+    return () => {
+      document.removeEventListener('keydown', handleKeyDown);
+    };
+  }, []);
   return (
     <form
       onSubmit={(e) => {
@@ -62,6 +78,7 @@ const FormLogin = () => {
             height={16}
           />
           <input
+            ref={(el) => (el !== null ? (refs.current[0] = el) : null)}
             value={emailValue}
             onChange={(e) => {
               setEmailValue(e.target.value);
@@ -101,6 +118,7 @@ const FormLogin = () => {
             height={16}
           />
           <input
+            ref={(el) => (el !== null ? (refs.current[1] = el) : null)}
             value={passwordValue}
             onChange={(e) => {
               setPasswordValue(e.target.value);

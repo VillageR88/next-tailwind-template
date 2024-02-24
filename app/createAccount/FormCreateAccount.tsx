@@ -1,7 +1,7 @@
 'use client';
 import supabase from '../lib/supabaseClient';
 import { useRouter } from 'next/navigation';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import Status from '../lib/email/enumStatus';
@@ -16,6 +16,8 @@ const FormCreateAccount = () => {
   const [passwordStatus, setPasswordStatus] = useState<Status>(Status.Typing);
   const [passwordConfirmStatus, setPasswordConfirmStatus] = useState<Status>(Status.Typing);
   const [submit, setSubmit] = useState<boolean>(false);
+  const refs = useRef<HTMLInputElement[]>([]);
+
   useEffect(() => {
     if (passwordValue === passwordConfirmValue) {
       setPasswordConfirmStatus(Status.Typing);
@@ -51,6 +53,21 @@ const FormCreateAccount = () => {
       setSubmit(false);
     }
   }, [emailStatus, emailValue, passwordConfirmStatus, passwordStatus, passwordValue, router, submit]);
+  useEffect(() => {
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') {
+        refs.current.forEach((item) => {
+          item.blur();
+        });
+      }
+    };
+
+    document.addEventListener('keydown', handleKeyDown);
+
+    return () => {
+      document.removeEventListener('keydown', handleKeyDown);
+    };
+  }, []);
 
   return (
     <form
@@ -80,6 +97,7 @@ const FormCreateAccount = () => {
             height={16}
           />
           <input
+            ref={(el) => (el !== null ? (refs.current[0] = el) : null)}
             value={emailValue}
             onChange={(e) => {
               setEmailValue(e.target.value);
@@ -119,6 +137,7 @@ const FormCreateAccount = () => {
             height={16}
           />
           <input
+            ref={(el) => (el !== null ? (refs.current[1] = el) : null)}
             value={passwordValue}
             onChange={(e) => {
               setPasswordValue(e.target.value);
@@ -156,6 +175,7 @@ const FormCreateAccount = () => {
             height={16}
           />
           <input
+            ref={(el) => (el !== null ? (refs.current[2] = el) : null)}
             value={passwordConfirmValue}
             onChange={(e) => {
               setPasswordConfirmValue(e.target.value);
