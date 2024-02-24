@@ -36,25 +36,31 @@ const Phone = ({
   return (
     <div className="flex h-[631px] w-[307px] flex-col items-center justify-center bg-[url('/assets/images/illustration-phone-mockup.svg')] bg-center bg-no-repeat pt-[10px]">
       <div className="mr-[1px] flex h-[514px] w-[238px] flex-col justify-between">
-        <div className="flex h-[177px] w-full flex-col items-center justify-between">
-          <Image
-            className={
-              imageSource ? 'visible h-[96px] w-[96px] rounded-full outline outline-4 outline-violet-600' : 'invisible'
-            }
-            height={10}
-            width={10}
-            src={imageSource ?? ''}
-            alt="profile image"
-          />
+        <div
+          className={`flex min-h-[177px] w-full flex-col items-center ${
+            imageSource ? 'justify-between' : 'justify-end'
+          }`}
+        >
+          {imageSource && (
+            <Image
+              className="h-[96px] w-[96px] rounded-full outline outline-4 outline-violet-600"
+              height={10}
+              width={10}
+              src={imageSource}
+              alt="profile image"
+            />
+          )}
           <div
             className={`${
               firstName.concat(lastName, email).length > 0 ? 'visible' : 'invisible'
-            } flex h-[56px] w-full flex-col items-center bg-white`}
+            } flex min-h-[56px] w-full flex-col items-center justify-center bg-white text-center`}
           >
-            <h2 className="font-instrumentSans text-[18px] font-semibold leading-[150%] text-[#333333]">
+            <h2 className="line-clamp-2 max-w-full break-words font-instrumentSans text-[18px] font-semibold leading-[150%] text-[#333333]">
               {firstName.concat(' ', lastName).trim()}
             </h2>
-            <p className="font-instrumentSans text-[14px] leading-[150%] text-[#737373]">{email}</p>
+            <p className="line-clamp-2 max-w-full break-all font-instrumentSans text-[14px] leading-[150%] text-[#737373]">
+              {email}
+            </p>
           </div>
         </div>
         <div className="flex h-[300px] w-full flex-col">
