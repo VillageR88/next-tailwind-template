@@ -119,6 +119,7 @@ const ProfileDetails = ({
                   value={firstName}
                   onChange={(e) => {
                     setFirstName(e.target.value);
+                    passFirstName(e.target.value);
                   }}
                   onKeyDown={() => {
                     setFirstNameState(InputState.typingOrValid);
@@ -147,6 +148,7 @@ const ProfileDetails = ({
                   value={lastName}
                   onChange={(e) => {
                     setLastName(e.target.value);
+                    passLastName(e.target.value);
                   }}
                   onKeyDown={() => {
                     setLastNameState(InputState.typingOrValid);
@@ -174,6 +176,7 @@ const ProfileDetails = ({
                 value={email}
                 onChange={(e) => {
                   setEmail(e.target.value);
+                  passEmail(e.target.value);
                 }}
                 ref={(el) => (el !== null ? (refs.current[2] = el) : null)}
                 id="email"

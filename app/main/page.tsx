@@ -42,6 +42,9 @@ export default function Main() {
   const [resetTimer, setResetTimer] = useState(false);
   const [popUpMessage, setPopUpMessage] = useState<PopupMessage>(PopupMessage.ChangesSaved);
   const [imageUrl, setImageUrl] = useState<string | null>(null);
+  const [firstName, setFirstName] = useState<string>('');
+  const [lastName, setLastName] = useState<string>('');
+  const [email, setEmail] = useState<string>('');
 
   useEffect(() => {
     const checkUser = async () => {
@@ -128,6 +131,9 @@ export default function Main() {
       <main className="flex h-[858px] w-full flex-row justify-between">
         <div className="flex h-[834px] w-[40.3%] items-center justify-center rounded-[12px] bg-white">
           <Phone
+            firstName={firstName}
+            lastName={lastName}
+            email={email}
             imageSource={imageUrl}
             passCopiedToClipboardPopUp={() => {
               handleReset();
@@ -141,6 +147,15 @@ export default function Main() {
           <ProfileDetails
             passImageUrl={(value) => {
               setImageUrl(value);
+            }}
+            passFirstName={(value) => {
+              setFirstName(value);
+            }}
+            passLastName={(value) => {
+              setLastName(value);
+            }}
+            passEmail={(value) => {
+              setEmail(value);
             }}
             visible={middleSection === MiddleButtons.ProfileDetails}
           />

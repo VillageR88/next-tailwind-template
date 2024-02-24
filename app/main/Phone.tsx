@@ -22,10 +22,16 @@ const Phone = ({
   socialInfo,
   passCopiedToClipboardPopUp,
   imageSource,
+  firstName,
+  lastName,
+  email,
 }: {
   socialInfo?: Link[];
   passCopiedToClipboardPopUp(): void;
   imageSource: string | null;
+  firstName: string;
+  lastName: string;
+  email: string;
 }) => {
   return (
     <div className="flex h-[631px] w-[307px] flex-col items-center justify-center bg-[url('/assets/images/illustration-phone-mockup.svg')] bg-center bg-no-repeat pt-[10px]">
@@ -38,9 +44,15 @@ const Phone = ({
             src={imageSource ?? ''}
             alt="profile image"
           />
-          <div className="flex h-[56px] w-full flex-col items-center bg-white">
-            <h2 className="font-instrumentSans text-[18px] font-semibold leading-[150%] text-[#333333]">Ben Wright</h2>
-            <p className="font-instrumentSans text-[14px] leading-[150%] text-[#737373]">ben@example.com</p>
+          <div
+            className={`${
+              firstName.concat(lastName, email).length > 0 ? 'visible' : 'invisible'
+            } flex h-[56px] w-full flex-col items-center bg-white`}
+          >
+            <h2 className="font-instrumentSans text-[18px] font-semibold leading-[150%] text-[#333333]">
+              {firstName.concat(' ', lastName).trim()}
+            </h2>
+            <p className="font-instrumentSans text-[14px] leading-[150%] text-[#737373]">{email}</p>
           </div>
         </div>
         <div className="flex h-[300px] w-full flex-col">
