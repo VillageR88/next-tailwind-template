@@ -2,11 +2,21 @@ import Image from 'next/image';
 import iconUploadImage from '@/public/assets/images/icon-upload-image.svg';
 import supabase from '../lib/supabaseClient';
 import { useRouter } from 'next/navigation';
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 const ProfileDetails = ({ visible }: { visible: boolean }) => {
+  enum InputState {
+    emptyError,
+    typingOrValid,
+  }
+  const error = "Can't be empty";
   const router = useRouter();
   const refs = useRef<HTMLInputElement[]>([]);
+  const [firstName, setFirstName] = useState<string>('');
+  const [firstNameState, setFirstNameState] = useState<InputState>(InputState.typingOrValid);
+  const [lastName, setLastName] = useState<string>('');
+  const [lastNameState, setLastNameState] = useState<InputState>(InputState.typingOrValid);
+  const [email, setEmail] = useState<string>('');
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
       if (event.key === 'Escape') {
@@ -55,9 +65,18 @@ const ProfileDetails = ({ visible }: { visible: boolean }) => {
                 First name*
               </label>
               <input
+                value={firstName}
+                onChange={(e) => {
+                  setFirstName(e.target.value);
+                }}
+                onKeyDown={() => {
+                  setFirstNameState(InputState.typingOrValid);
+                }}
                 ref={(el) => (el !== null ? (refs.current[0] = el) : null)}
                 id="firstName"
-                className="textField bodyM h-full w-[432px] px-[16px]"
+                className={`${
+                  firstNameState === InputState.emptyError && 'textFieldError'
+                } textField bodyM h-full w-[432px] px-[16px]`}
                 type="text"
               />
             </div>
@@ -66,9 +85,18 @@ const ProfileDetails = ({ visible }: { visible: boolean }) => {
                 Last name*
               </label>
               <input
+                value={lastName}
+                onChange={(e) => {
+                  setLastName(e.target.value);
+                }}
+                onKeyDown={() => {
+                  setLastNameState(InputState.typingOrValid);
+                }}
                 ref={(el) => (el !== null ? (refs.current[1] = el) : null)}
                 id="lastName"
-                className="textField bodyM h-full w-[432px] px-[16px]"
+                className={`${
+                  lastNameState === InputState.emptyError && 'textFieldError'
+                } textField bodyM h-full w-[432px] px-[16px]`}
                 type="text"
               />
             </div>
@@ -77,6 +105,10 @@ const ProfileDetails = ({ visible }: { visible: boolean }) => {
                 Email
               </label>
               <input
+                value={email}
+                onChange={(e) => {
+                  setEmail(e.target.value);
+                }}
                 ref={(el) => (el !== null ? (refs.current[2] = el) : null)}
                 id="email"
                 className="textField bodyM h-full w-[432px] px-[16px]"
@@ -100,7 +132,17 @@ const ProfileDetails = ({ visible }: { visible: boolean }) => {
           </button>
           <div className="flex gap-[18px]">
             <button className="buttonSecondary headingS h-[46px] w-[91px] font-[500]">Cancel</button>
-            <button disabled className="buttonPrimary headingS h-[46px] w-[91px] font-[500]">
+            <button
+              onClick={() => {
+                if (firstName === '') {
+                  setFirstNameState(InputState.emptyError);
+                }
+                if (lastName === '') {
+                  setLastNameState(InputState.emptyError);
+                }
+              }}
+              className="buttonPrimary headingS h-[46px] w-[91px] font-[500]"
+            >
               Save
             </button>
           </div>
