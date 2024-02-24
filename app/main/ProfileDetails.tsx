@@ -1,3 +1,5 @@
+import Image from 'next/image';
+import iconUploadImage from '@/public/assets/images/icon-upload-image.svg';
 const ProfileDetails = ({ visible }: { visible: boolean }) => {
   return (
     <div className={`${visible ? 'flex' : 'hidden'}  h-full w-full flex-col items-center justify-center`}>
@@ -7,7 +9,24 @@ const ProfileDetails = ({ visible }: { visible: boolean }) => {
           <p className="text-[#737373]">Add your details to create a personal touch to your profile.</p>
         </div>
         <div className="flex h-[465px] w-full flex-col justify-between">
-          <div className="h-[233px] w-full rounded-[12px] bg-[#FAFAFA]"></div>
+          <div className="flex h-[233px] w-full items-center justify-between rounded-[12px] bg-[#FAFAFA] p-[20px]">
+            <span className="bodyM text-[#737373]">Profile picture</span>
+            <div className="flex h-full w-[432px] items-center justify-between">
+              <button className="flex h-full w-[193px] items-center justify-center rounded-[12px] bg-[#EFEBFF]">
+                <div className="flex h-[72px] w-[116px] flex-col items-center justify-between">
+                  <Image
+                    className="h-[40px] w-[40px]"
+                    width={10}
+                    height={10}
+                    src={iconUploadImage as string}
+                    alt="iconUploadImage"
+                  />
+                  <span className="headingS text-[#633CFF]">+ Upload Image</span>
+                </div>
+              </button>
+              <span className="bodyS w-[215px]">Image must be below 1024x1024px. Use PNG or JPG format.</span>
+            </div>
+          </div>
           <div className="h-[208px] w-full rounded-[12px] bg-[#FAFAFA]"></div>
         </div>
       </div>
