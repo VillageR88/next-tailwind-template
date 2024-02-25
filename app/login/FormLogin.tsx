@@ -7,7 +7,7 @@ import Image from 'next/image';
 import Status from '../lib/email/enumStatus';
 import status from '../lib/email/accessStatus';
 
-const FormLogin = () => {
+const FormLogin = ({ passLoadingState }: { passLoadingState(arg0: boolean): void }) => {
   const router = useRouter();
   const [emailValue, setEmailValue] = useState<string>('');
   const [passwordValue, setPasswordValue] = useState<string>('');
@@ -15,6 +15,7 @@ const FormLogin = () => {
   const [passwordStatus, setPasswordStatus] = useState<Status>(Status.Typing);
   const refs = useRef<HTMLInputElement[]>([]);
   const handleSubmit = async () => {
+    passLoadingState(true);
     try {
       const { error } = await supabase.auth.signInWithPassword({
         email: emailValue,
@@ -23,9 +24,11 @@ const FormLogin = () => {
 
       if (!error) {
         router.push('/main');
+        false;
       } else {
         setEmailStatus(Status.InvalidLoginCredentials);
         setPasswordStatus(Status.InvalidLoginCredentials);
+        passLoadingState(false);
       }
     } catch (error) {
       console.log('error', error);

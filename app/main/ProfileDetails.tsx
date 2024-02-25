@@ -51,7 +51,7 @@ const ProfileDetails = ({
   }, []);
   const handleSendToServer = async (file: File) => {
     if (!userEmail) return;
-    const { error } = await supabase.storage.from('avatars').upload(userEmail, file, {
+    const { error } = await supabase.storage.from('linksharingappdata.avatars').upload(userEmail, file, {
       upsert: true,
     });
     if (error) {
