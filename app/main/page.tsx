@@ -1,6 +1,7 @@
 'use client';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
+import { RotatingLines } from 'react-loader-spinner';
 import supabase from '../lib/supabaseClient';
 import Image from 'next/image';
 import IconLink from '../components/IconLink';
@@ -8,35 +9,20 @@ import IconProfile from '../components/IconProfile';
 import Phone from './Phone';
 import Links from './Links';
 import Link from '../lib/interfaceLink';
+import Profile from '../lib/interfaceProfile';
 import ProfileDetails from './ProfileDetails';
-import { RotatingLines } from 'react-loader-spinner';
+import MiddleButtons from '../lib/enumMiddleButtons';
+import PopupMessage from '../lib/enumPopupMessage';
+import popupMessages from '../lib/popupMessages';
 
 export default function Main() {
-  enum MiddleButtons {
-    Links,
-    ProfileDetails,
-  }
-  enum PopupMessage {
-    ChangesSaved,
-    LinkCopied,
-  }
-  const popupMessages = {
-    [PopupMessage.ChangesSaved]: {
-      image: '../assets/images/icon-changes-saved.svg' as string,
-      message: 'Your changes have been successfully saved!',
-    },
-    [PopupMessage.LinkCopied]: {
-      image: '../assets/images/icon-link-copied-to-clipboard.svg' as string,
-      message: 'Link copied to clipboard!',
-    },
-  };
-
   const [middleSection, setMiddleSection] = useState<MiddleButtons>(MiddleButtons.Links);
   const [userAuth, setUserAuth] = useState<boolean>(false);
   const router = useRouter();
   const [socialInfo, setSocialInfo] = useState<Link[]>([]);
   const [userEmail, setUserEmail] = useState<string | undefined>(undefined);
   const [fetchLinks, setFetchLinks] = useState<Link[]>([]);
+  const [fetchProfile, setFetchProfile] = useState<Profile | null>(null);
   const [preloadComplete, setPreloadComplete] = useState<boolean>(false);
   const [popUpBottom, setPopUpBottom] = useState<boolean>(false);
   const [resetTimer, setResetTimer] = useState(false);
@@ -63,8 +49,20 @@ export default function Main() {
   useEffect(() => {
     if (!userAuth) return;
     const fetchData = async () => {
-      const { data } = await supabase.from('linkSharingAppData').select('linksJSON').eq('email', userEmail);
-      if (data && data.length > 0) setFetchLinks(data[0].linksJSON as Link[]);
+      const { data } = await supabase
+        .from('linkSharingAppData')
+        .select('linksJSON, profileJSON')
+        .eq('email', userEmail);
+      if (data && data.length > 0) {
+        setFetchLinks(data[0].linksJSON as Link[]);
+        setFetchProfile(data[0].profileJSON as Profile);
+        if (data[0].profileJSON) {
+          setFirstName((data[0].profileJSON as Profile).firstName);
+          setLastName((data[0].profileJSON as Profile).lastName);
+          setEmail((data[0].profileJSON as Profile).email);
+        }
+      }
+
       setPreloadComplete(true);
     };
     void fetchData();
@@ -145,6 +143,7 @@ export default function Main() {
         </div>
         <div className="h-[834px] w-[58%] rounded-[12px] bg-white transition-all">
           <ProfileDetails
+            fetchProfile={fetchProfile}
             passImageUrl={(value) => {
               setImageUrl(value);
             }}

@@ -2,10 +2,12 @@ import supabase from '../lib/supabaseClient';
 import { useRouter } from 'next/navigation';
 import { useEffect, useMemo, useRef, useState } from 'react';
 import IconUpload from '../components/IconUpload';
+import Profile from '../lib/interfaceProfile';
 
 const ProfileDetails = ({
   visible,
   userEmail,
+  fetchProfile,
   passImageUrl,
   passFirstName,
   passLastName,
@@ -13,6 +15,7 @@ const ProfileDetails = ({
 }: {
   visible: boolean;
   userEmail: string | undefined;
+  fetchProfile: Profile | null;
   passImageUrl(arg0: string): void;
   passFirstName(arg0: string): void;
   passLastName(arg0: string): void;
@@ -37,13 +40,9 @@ const ProfileDetails = ({
   const [email, setEmail] = useState<string>('');
   const [emailState, setEmailState] = useState<InputState>(InputState.typingOrValid);
   const [tryUpsert, setTryUpsert] = useState<boolean>(false);
-  interface profileJSON {
-    firstName: string;
-    lastName: string;
-    email: string;
-  }
+
   const profileJSONData = useMemo(() => {
-    const profileJSONData: profileJSON = {
+    const profileJSONData: Profile = {
       firstName: firstName,
       lastName: lastName,
       email: email,
@@ -103,6 +102,14 @@ const ProfileDetails = ({
       console.log('Error uploading image: ', error);
     }
   };
+
+  useEffect(() => {
+    if (fetchProfile) {
+      setFirstName(fetchProfile.firstName);
+      setLastName(fetchProfile.lastName);
+      setEmail(fetchProfile.email);
+    }
+  }, [fetchProfile]);
 
   return (
     <div className={`${visible ? 'flex' : 'hidden'}  h-full w-full flex-col items-center justify-center`}>

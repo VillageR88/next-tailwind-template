@@ -1,8 +1,7 @@
-interface Profile {
-  pictureUrl: string;
+interface ProfileJSON {
   firstName: string;
   lastName: string;
   email: string;
 }
 
-export default Profile;
+export default ProfileJSON;
