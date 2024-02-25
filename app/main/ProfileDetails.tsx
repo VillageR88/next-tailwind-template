@@ -1,6 +1,6 @@
 import supabase from '../lib/supabaseClient';
 import { useRouter } from 'next/navigation';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import IconUpload from '../components/IconUpload';
 
 const ProfileDetails = ({
@@ -19,14 +19,14 @@ const ProfileDetails = ({
   passEmail(arg0: string): void;
 }) => {
   enum InputState {
-    emptyError,
+    invalid,
     typingOrValid,
   }
   const profileImageStatus = {
     uploadImage: 'Upload Image',
     changeImage: 'Change Image',
   };
-  const error = "Can't be empty";
+  const error = { empty: "Can't be empty", invalid: 'Invalid' };
   const router = useRouter();
   const refs = useRef<HTMLInputElement[]>([]);
   const [profileImageUrl, setProfileImageUrl] = useState<string | null>(null);
@@ -35,6 +35,26 @@ const ProfileDetails = ({
   const [lastName, setLastName] = useState<string>('');
   const [lastNameState, setLastNameState] = useState<InputState>(InputState.typingOrValid);
   const [email, setEmail] = useState<string>('');
+  const [emailState, setEmailState] = useState<InputState>(InputState.typingOrValid);
+  const [tryUpsert, setTryUpsert] = useState<boolean>(false);
+  interface profileJSON {
+    firstName: string;
+    lastName: string;
+    email: string;
+  }
+  const profileJSONData = useMemo(() => {
+    const profileJSONData: profileJSON = {
+      firstName: firstName,
+      lastName: lastName,
+      email: email,
+    };
+    return profileJSONData;
+  }, [email, firstName, lastName]);
+
+  const handleEmailValidation = (email: string) => {
+    const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+    return emailRegex.test(email);
+  };
 
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
@@ -49,6 +69,31 @@ const ProfileDetails = ({
       document.removeEventListener('keydown', handleKeyDown);
     };
   }, []);
+  useEffect(() => {
+    if (tryUpsert) {
+      if (
+        firstNameState === InputState.typingOrValid &&
+        lastNameState === InputState.typingOrValid &&
+        emailState === InputState.typingOrValid
+      ) {
+        console.log(profileJSONData);
+        const updateData = async () => {
+          console.log('upserting');
+          const { data, error } = await supabase
+            .from('linkSharingAppData')
+            .upsert({ email: userEmail, profileJSON: profileJSONData }, { onConflict: 'email' })
+            .select();
+          if (error) {
+            console.error(error);
+          } else {
+            console.log(data);
+          }
+        };
+        void updateData();
+      }
+      setTryUpsert(false);
+    }
+  }, [InputState.typingOrValid, emailState, firstNameState, lastNameState, profileJSONData, tryUpsert, userEmail]);
   const handleSendToServer = async (file: File) => {
     if (!userEmail) return;
     const { error } = await supabase.storage.from('linksharingappdata.avatars').upload(userEmail, file, {
@@ -139,15 +184,15 @@ const ProfileDetails = ({
                   ref={(el) => (el !== null ? (refs.current[0] = el) : null)}
                   id="firstName"
                   className={`${
-                    firstNameState === InputState.emptyError && 'textFieldError'
+                    firstNameState === InputState.invalid && 'textFieldError'
                   } textField bodyM h-full w-[432px] px-[16px]`}
                   type="text"
                   placeholder="e.g. John"
                 />
               </div>
-              {firstNameState === InputState.emptyError && (
+              {firstNameState === InputState.invalid && (
                 <div className="flex h-0 w-full justify-end">
-                  <span className="bodyS mr-[16px] mt-[-32px] text-[#FF3939]">{error}</span>
+                  <span className="bodyS mr-[16px] mt-[-32px] text-[#FF3939]">{error.empty}</span>
                 </div>
               )}
             </div>
@@ -168,34 +213,46 @@ const ProfileDetails = ({
                   ref={(el) => (el !== null ? (refs.current[1] = el) : null)}
                   id="lastName"
                   className={`${
-                    lastNameState === InputState.emptyError && 'textFieldError'
+                    lastNameState === InputState.invalid && 'textFieldError'
                   } textField bodyM h-full w-[432px] px-[16px]`}
                   type="text"
                   placeholder="e.g. Appleseed"
                 />
               </div>
-              {lastNameState === InputState.emptyError && (
+              {lastNameState === InputState.invalid && (
                 <div className="flex h-0 w-full justify-end">
-                  <span className="bodyS mr-[16px] mt-[-32px] text-[#FF3939]">{error}</span>
+                  <span className="bodyS mr-[16px] mt-[-32px] text-[#FF3939]">{error.empty}</span>
                 </div>
               )}
             </div>
-            <div className="flex h-[48px] w-full items-center justify-between">
-              <label htmlFor="email" className="text-[#737373]">
-                Email
-              </label>
-              <input
-                value={email}
-                onChange={(e) => {
-                  setEmail(e.target.value);
-                  passEmail(e.target.value);
-                }}
-                ref={(el) => (el !== null ? (refs.current[2] = el) : null)}
-                id="email"
-                className="textField bodyM h-full w-[432px] px-[16px]"
-                type="text"
-                placeholder="e.g. email@example.com"
-              />
+            <div className="flex h-[48px] w-full flex-col items-center justify-between">
+              <div className="flex h-full w-full items-center justify-between">
+                <label htmlFor="someEmail" className="text-[#737373]">
+                  Email
+                </label>
+                <input
+                  value={email}
+                  onChange={(e) => {
+                    setEmail(e.target.value);
+                    passEmail(e.target.value);
+                  }}
+                  onKeyDown={() => {
+                    setEmailState(InputState.typingOrValid);
+                  }}
+                  ref={(el) => (el !== null ? (refs.current[2] = el) : null)}
+                  id="someEmail"
+                  className={`${
+                    emailState === InputState.invalid && 'textFieldError'
+                  } textField bodyM h-full w-[432px] px-[16px]`}
+                  type="email"
+                  placeholder="e.g. email@example.com"
+                />
+              </div>
+              {emailState === InputState.invalid && (
+                <div className="flex h-0 w-full justify-end">
+                  <span className="bodyS mr-[16px] mt-[-32px] text-[#FF3939]">{error.invalid}</span>
+                </div>
+              )}
             </div>
           </form>
         </div>
@@ -217,14 +274,15 @@ const ProfileDetails = ({
             <button
               onClick={() => {
                 if (firstName === '') {
-                  setFirstNameState(InputState.emptyError);
+                  setFirstNameState(InputState.invalid);
                 }
                 if (lastName === '') {
-                  setLastNameState(InputState.emptyError);
+                  setLastNameState(InputState.invalid);
                 }
-                if (firstName !== '' && lastName !== '') {
-                  //subabase send JSON to backend
+                if (!handleEmailValidation(email) && email !== '') {
+                  setEmailState(InputState.invalid);
                 }
+                setTryUpsert(true);
               }}
               className="buttonPrimary headingS h-[46px] w-[91px] font-[500]"
             >
