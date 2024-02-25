@@ -57,9 +57,9 @@ export default function Main() {
         if (data && data.length > 0) {
           if (data[0].linksJSON) {
             setFetchLinks(data[0].linksJSON as Link[]);
-            setFetchProfile(data[0].profileJSON as Profile);
           }
           if (data[0].profileJSON) {
+            setFetchProfile(data[0].profileJSON as Profile);
             setFirstName((data[0].profileJSON as Profile).firstName);
             setLastName((data[0].profileJSON as Profile).lastName);
             setEmail((data[0].profileJSON as Profile).email);
