@@ -43,7 +43,7 @@ const Phone = ({
         >
           {imageSource && (
             <Image
-              className="h-[96px] w-[96px] rounded-full outline outline-4 outline-violet-600"
+              className="h-[96px] w-[96px] rounded-full outline outline-4 outline-[#633cff]"
               height={10}
               width={10}
               src={imageSource}

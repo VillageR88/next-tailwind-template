@@ -158,6 +158,7 @@ export default function Main() {
               setEmail(value);
             }}
             visible={middleSection === MiddleButtons.ProfileDetails}
+            userEmail={userEmail}
           />
           <Links
             visible={middleSection === MiddleButtons.Links}

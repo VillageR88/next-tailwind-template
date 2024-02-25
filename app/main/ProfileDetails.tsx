@@ -1,16 +1,18 @@
 import supabase from '../lib/supabaseClient';
 import { useRouter } from 'next/navigation';
 import { useEffect, useRef, useState } from 'react';
-import IconUpload from '../components/iconUpload';
+import IconUpload from '../components/IconUpload';
 
 const ProfileDetails = ({
   visible,
+  userEmail,
   passImageUrl,
   passFirstName,
   passLastName,
   passEmail,
 }: {
   visible: boolean;
+  userEmail: string | undefined;
   passImageUrl(arg0: string): void;
   passFirstName(arg0: string): void;
   passLastName(arg0: string): void;
@@ -27,12 +29,13 @@ const ProfileDetails = ({
   const error = "Can't be empty";
   const router = useRouter();
   const refs = useRef<HTMLInputElement[]>([]);
-  const [profileImage, setProfileImage] = useState<string | null>(null);
+  const [profileImageUrl, setProfileImageUrl] = useState<string | null>(null);
   const [firstName, setFirstName] = useState<string>('');
   const [firstNameState, setFirstNameState] = useState<InputState>(InputState.typingOrValid);
   const [lastName, setLastName] = useState<string>('');
   const [lastNameState, setLastNameState] = useState<InputState>(InputState.typingOrValid);
   const [email, setEmail] = useState<string>('');
+
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
       if (event.key === 'Escape') {
@@ -41,13 +44,20 @@ const ProfileDetails = ({
         });
       }
     };
-
     document.addEventListener('keydown', handleKeyDown);
-
     return () => {
       document.removeEventListener('keydown', handleKeyDown);
     };
   }, []);
+  const handleSendToServer = async (file: File) => {
+    if (!userEmail) return;
+    const { error } = await supabase.storage.from('avatars').upload(userEmail, file, {
+      upsert: true,
+    });
+    if (error) {
+      console.log('Error uploading image: ', error);
+    }
+  };
 
   return (
     <div className={`${visible ? 'flex' : 'hidden'}  h-full w-full flex-col items-center justify-center`}>
@@ -68,6 +78,8 @@ const ProfileDetails = ({
                   fileInput.onchange = (e) => {
                     const file = (e.target as HTMLInputElement).files?.[0];
                     if (file) {
+                      //const extension = file.name.split('.').pop();
+                      void handleSendToServer(file);
                       const reader = new FileReader();
                       reader.onloadend = () => {
                         const img = new Image();
@@ -76,7 +88,7 @@ const ProfileDetails = ({
                           if (img.width > 1024 || img.height > 1024) {
                             alert('Image resolution exceeds 1024x1024');
                           } else {
-                            setProfileImage(reader.result as string);
+                            setProfileImageUrl(reader.result as string);
                             passImageUrl(reader.result as string);
                           }
                         };
@@ -87,22 +99,22 @@ const ProfileDetails = ({
                   fileInput.click();
                 }}
                 style={
-                  profileImage
+                  profileImageUrl
                     ? {
                         backgroundImage: `
                         linear-gradient(0deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
-                        url(${profileImage})`,
+                        url(${profileImageUrl})`,
                       }
                     : {}
                 }
                 className={`flex h-full w-[193px] items-center justify-center rounded-[12px] bg-[#EFEBFF] bg-cover ${
-                  profileImage ? '*:fill-white *:text-white' : '*:fill-[#633CFF] *:text-[#633CFF]'
+                  profileImageUrl ? '*:fill-white *:text-white' : '*:fill-[#633CFF] *:text-[#633CFF]'
                 }`}
               >
                 <div className="flex h-[72px] w-[116px] flex-col items-center justify-between *:fill-current *:text-current">
                   <IconUpload />
                   <span className="headingS font-[600]">
-                    {profileImage ? profileImageStatus.changeImage : profileImageStatus.uploadImage}
+                    {profileImageUrl ? profileImageStatus.changeImage : profileImageStatus.uploadImage}
                   </span>
                 </div>
               </button>
@@ -209,6 +221,9 @@ const ProfileDetails = ({
                 }
                 if (lastName === '') {
                   setLastNameState(InputState.emptyError);
+                }
+                if (firstName !== '' && lastName !== '') {
+                  //subabase send JSON to backend
                 }
               }}
               className="buttonPrimary headingS h-[46px] w-[91px] font-[500]"
