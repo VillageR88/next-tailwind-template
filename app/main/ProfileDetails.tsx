@@ -70,14 +70,13 @@ const ProfileDetails = ({
   }, []);
   useEffect(() => {
     if (tryUpsert) {
+      console.log('tryUpsert', tryUpsert);
       if (
         firstNameState === InputState.typingOrValid &&
         lastNameState === InputState.typingOrValid &&
         emailState === InputState.typingOrValid
       ) {
-        console.log(profileJSONData);
         const updateData = async () => {
-          console.log('upserting');
           const { data, error } = await supabase
             .from('linkSharingAppData')
             .upsert({ email: userEmail, profileJSON: profileJSONData }, { onConflict: 'email' })
@@ -95,11 +94,22 @@ const ProfileDetails = ({
   }, [InputState.typingOrValid, emailState, firstNameState, lastNameState, profileJSONData, tryUpsert, userEmail]);
   const handleSendToServer = async (file: File) => {
     if (!userEmail) return;
-    const { error } = await supabase.storage.from('linksharingappdata.avatars').upload(userEmail, file, {
+    const timeStamp = new Date().getTime();
+    const fileName = `${userEmail}-${timeStamp}`;
+    const { error } = await supabase.storage.from('linksharingappdata.avatars').upload(fileName, file, {
       upsert: true,
     });
     if (error) {
       console.log('Error uploading image: ', error);
+    }
+    const imageURL = supabase.storage.from('linksharingappdata.avatars').getPublicUrl(fileName);
+    //imageURL.data;
+    const { error: error2 } = await supabase
+      .from('linkSharingAppData')
+      .upsert({ email: userEmail, avatarUrl: imageURL.data.publicUrl }, { onConflict: 'email' })
+      .select();
+    if (error2) {
+      console.error(error2);
     }
   };
 
