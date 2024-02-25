@@ -47,30 +47,30 @@ export default function Main() {
   }, [router]);
 
   useEffect(() => {
-    if (!userAuth) return;
-    if (!userEmail) return;
-    const fetchData = async () => {
-      const { data } = await supabase
-        .from('linkSharingAppData')
-        .select('linksJSON, profileJSON, avatarUrl')
-        .eq('email', userEmail);
-      if (data && data.length > 0) {
-        if (data[0].linksJSON) {
-          setFetchLinks(data[0].linksJSON as Link[]);
-          setFetchProfile(data[0].profileJSON as Profile);
+    if (userAuth && userEmail) {
+      void supabase.from('linkSharingAppData').upsert([{ email: userEmail }]);
+      const fetchData = async () => {
+        const { data } = await supabase
+          .from('linkSharingAppData')
+          .select('linksJSON, profileJSON, avatarUrl')
+          .eq('email', userEmail);
+        if (data && data.length > 0) {
+          if (data[0].linksJSON) {
+            setFetchLinks(data[0].linksJSON as Link[]);
+            setFetchProfile(data[0].profileJSON as Profile);
+          }
+          if (data[0].profileJSON) {
+            setFirstName((data[0].profileJSON as Profile).firstName);
+            setLastName((data[0].profileJSON as Profile).lastName);
+            setEmail((data[0].profileJSON as Profile).email);
+          }
+          if (data[0].avatarUrl) setImageUrl(data[0].avatarUrl as string);
         }
-        if (data[0].profileJSON) {
-          setFirstName((data[0].profileJSON as Profile).firstName);
-          setLastName((data[0].profileJSON as Profile).lastName);
-          setEmail((data[0].profileJSON as Profile).email);
-        }
-        if (data[0].avatarUrl) setImageUrl(data[0].avatarUrl as string);
-      } else setPreloadComplete(true);
-    };
-    void fetchData();
-    return () => {
-      setPreloadComplete(true);
-    };
+      };
+      void fetchData().finally(() => {
+        setPreloadComplete(true);
+      });
+    }
   }, [email, preloadComplete, userAuth, userEmail]);
 
   useEffect(() => {
