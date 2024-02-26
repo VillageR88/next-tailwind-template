@@ -91,11 +91,11 @@ export default function Main() {
   return (
     <div
       className={`${
-        !preloadComplete ? 'max-h-[90vh] overflow-hidden' : 'min-h-screen'
+        !preloadComplete ? 'container fixed h-screen overflow-hidden' : 'min-h-screen'
       } flex flex-col items-center justify-center transition duration-1000`}
     >
       {!preloadComplete && (
-        <div className={`mt-[10em] flex h-[100vh]  flex-col items-center justify-center`}>
+        <div className={`flex h-full w-full flex-col items-center justify-center`}>
           <RotatingLines width="180" strokeColor="cornflowerblue" ariaLabel="loading" />
         </div>
       )}
