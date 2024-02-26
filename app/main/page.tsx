@@ -91,7 +91,7 @@ export default function Main() {
   return (
     <div
       className={`${
-        !preloadComplete ? 'container fixed h-screen overflow-hidden' : 'min-h-screen'
+        !preloadComplete ? 'container static h-screen overflow-hidden' : 'min-h-screen'
       } flex flex-col items-center justify-center transition duration-1000`}
     >
       {!preloadComplete && (
