@@ -79,13 +79,13 @@ const Phone = ({
                 >
                   <div className={`flex h-full w-full items-center`}>
                     <Image
+                      priority
                       color="inherit"
                       src={dataColors[item.title as keyof typeof dataColors][0]}
                       alt={item.title}
                       width={10}
                       height={10}
                       className="mr-[16px] h-[16px] w-[16px] fill-inherit text-inherit"
-                      priority
                     />
 
                     <span className="bodyS">{item.title}</span>

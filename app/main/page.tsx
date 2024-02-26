@@ -28,7 +28,6 @@ export default function Main() {
   const [resetTimer, setResetTimer] = useState(false);
   const [popUpMessage, setPopUpMessage] = useState<PopupMessage>(PopupMessage.ChangesSaved);
   const [imageUrl, setImageUrl] = useState<string | null>(null);
-  const [email, setEmail] = useState<string>('');
 
   useEffect(() => {
     const checkUser = async () => {
@@ -54,12 +53,12 @@ export default function Main() {
           .eq('email', userEmail);
         if (data && data.length > 0) {
           if (data[0].linksJSON) {
-            setFetchLinks(data[0].linksJSON as Link[]);
-            setFetchLinksInitial(data[0].linksJSON as Link[]);
+            const value = data[0].linksJSON as Link[];
+            setFetchLinks(value);
+            setFetchLinksInitial([...value].map((link) => ({ ...link })));
           }
           if (data[0].profileJSON) {
             setFetchProfile(data[0].profileJSON as Profile);
-            setEmail((data[0].profileJSON as Profile).email);
           }
           if (data[0].avatarUrl) setImageUrl(data[0].avatarUrl as string);
         }
@@ -68,7 +67,7 @@ export default function Main() {
         setPreloadComplete(true);
       });
     }
-  }, [email, preloadComplete, userAuth, userEmail]);
+  }, [preloadComplete, userAuth, userEmail]);
 
   useEffect(() => {
     const timeout = setTimeout(() => {

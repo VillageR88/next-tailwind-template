@@ -113,10 +113,10 @@ const Links = ({
         }
       };
       void updateData();
-      setFetchLinksInitial([...fetchLinks].map((item) => ({ ...item })));
+                setFetchLinks([...fetchLinksInitial].map((item) => ({ ...item })));
     }
     setSave(false);
-  }, [fetchLinks, linksErrorInfo, passSavePopUp, save, setFetchLinksInitial, userEmail]);
+  }, [save, linksErrorInfo, fetchLinks, userEmail, passSavePopUp, setFetchLinksInitial]);
 
   useEffect(() => {
     if (listOpen === null) {
@@ -243,6 +243,7 @@ const Links = ({
                       >
                         <div className="flex items-center gap-[12px]">
                           <Image
+                            priority
                             draggable={false}
                             className="h-[16px] w-[16px]"
                             width={10}
@@ -256,6 +257,7 @@ const Links = ({
                           <span className="headingS font-[500] text-[#333333]">{item.title}</span>
                         </div>
                         <Image
+                          priority
                           className="h-[10px] w-[14px]"
                           width={5}
                           height={5}
