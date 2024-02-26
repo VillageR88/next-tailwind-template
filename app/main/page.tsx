@@ -88,13 +88,22 @@ export default function Main() {
     setResetTimer((prevState) => !prevState);
   };
 
-  return !preloadComplete ? (
-    <div className={`flex min-h-screen flex-col items-center justify-center`}>
-      <RotatingLines width="180" strokeColor="cornflowerblue" ariaLabel="loading" />
-    </div>
-  ) : (
-    <div className={`flex min-h-screen flex-col items-center justify-center transition duration-1000`}>
-      <nav className="flex h-[126px] w-full flex-col items-center justify-center">
+  return (
+    <div
+      className={`${
+        !preloadComplete ? 'max-h-[90vh] overflow-hidden' : 'min-h-screen'
+      } flex flex-col items-center justify-center transition duration-1000`}
+    >
+      {!preloadComplete && (
+        <div className={`mt-[10em] flex h-[100vh]  flex-col items-center justify-center`}>
+          <RotatingLines width="180" strokeColor="cornflowerblue" ariaLabel="loading" />
+        </div>
+      )}
+      <nav
+        className={`${
+          preloadComplete ? 'opacity-100 transition duration-300' : 'max-h-0 opacity-0'
+        } flex h-[126px] w-full flex-col items-center justify-center `}
+      >
         <div className="flex h-[78px] w-full items-center justify-between rounded-[12px] bg-white pl-[24px] pr-[16px]">
           <Image
             className="h-fit w-[146px]"
@@ -102,7 +111,6 @@ export default function Main() {
             height={16}
             src={'../assets/images/logo-devlinks-large.svg' as string}
             alt="devlinks logo"
-            priority
           />
           <div className="flex gap-[16px]">
             <button
@@ -131,8 +139,16 @@ export default function Main() {
           <button className="headingS buttonSecondary h-[46px] w-[114px]">Preview</button>
         </div>
       </nav>
-      <main className="flex h-[858px] w-full flex-row justify-between">
-        <div className="flex h-[834px] w-[40.3%] items-center justify-center rounded-[12px] bg-white">
+      <main
+        className={`${
+          preloadComplete ? 'opacity-100 transition duration-300' : 'max-h-0 opacity-0'
+        } flex h-[858px] w-full flex-row justify-between`}
+      >
+        <div
+          className={`${
+            preloadComplete ? 'opacity-100 transition duration-300' : 'max-h-0 opacity-0'
+          } flex h-[834px] w-[40.3%] items-center justify-center rounded-[12px] bg-white`}
+        >
           <Phone
             firstName={firstName}
             lastName={lastName}
@@ -180,9 +196,9 @@ export default function Main() {
         </div>
       </main>
       <div
-        className={`${
-          popUpBottom ? 'opacity-100' : 'opacity-0'
-        } pointer-events-none flex h-0 w-screen transition-opacity duration-[1000ms] ease-in-out`}
+        className={`${popUpBottom ? 'opacity-100' : 'opacity-0'} pointer-events-none ${
+          preloadComplete ? 'duration-300' : 'max-h-0'
+        } flex h-0 w-screen transition-opacity duration-[1000ms] ease-in-out`}
       >
         <div className="absolute left-0 flex h-[56px] w-screen justify-center ">
           <div className="mt-[-100px] flex h-full w-[406px] items-center justify-center gap-[8px]  rounded-[12px] bg-[#333333]">
