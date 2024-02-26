@@ -1,6 +1,5 @@
 'use client';
-import { useState, useEffect, useRef } from 'react';
-import { Dispatch, SetStateAction } from 'react';
+import { useState, useEffect, useRef, SetStateAction } from 'react';
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 import StartDiv from '../components/StartDiv';
@@ -32,9 +31,9 @@ const Links = ({
   passSavePopUp(): void;
   userEmail: string | undefined;
   fetchLinks: Link[];
-  setFetchLinks: Dispatch<SetStateAction<Link[]>>;
+  setFetchLinks: (links: SetStateAction<Link[]>) => void;
   fetchLinksInitial: Link[];
-  setFetchLinksInitial: Dispatch<SetStateAction<Link[]>>;
+  setFetchLinksInitial: (links: SetStateAction<Link[]>) => void;
   visible: boolean;
 }) => {
   const ref = useRef<HTMLButtonElement>(null);
@@ -73,15 +72,15 @@ const Links = ({
     if (checkInputs) {
       const check = () => {
         const errorInfo: Phase[] = [];
-        for (const link of fetchLinks) {
-          setFetchLinks((prev) => {
-            const deepCopy = [...prev].map((item) => ({ ...item }));
-            deepCopy.map((item) => {
-              item.url = item.url.toLowerCase();
-            });
-            return deepCopy;
+        setFetchLinks((prev) => {
+          const deepCopy = [...prev].map((item) => ({ ...item }));
+          deepCopy.map((item) => {
+            item.url = item.url.toLowerCase();
           });
+          return deepCopy;
+        });
 
+        for (const link of fetchLinks) {
           if (link.url === '') errorInfo.push(Phase.empty);
           else if (
             !link.url.match(
