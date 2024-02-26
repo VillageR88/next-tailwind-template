@@ -1,6 +1,6 @@
 import supabase from '../lib/supabaseClient';
 import { useRouter } from 'next/navigation';
-import { useEffect, useMemo, useRef, useState } from 'react';
+import { Dispatch, SetStateAction, useEffect, useRef, useState } from 'react';
 import IconUpload from '../components/IconUpload';
 import Profile from '../lib/interfaceProfile';
 
@@ -8,18 +8,14 @@ const ProfileDetails = ({
   visible,
   userEmail,
   fetchProfile,
+  setFetchProfile,
   passImageUrl,
-  passFirstName,
-  passLastName,
-  passEmail,
 }: {
   visible: boolean;
   userEmail: string | undefined;
   fetchProfile: Profile | null;
+  setFetchProfile: Dispatch<SetStateAction<Profile | null>>;
   passImageUrl(arg0: string): void;
-  passFirstName(arg0: string): void;
-  passLastName(arg0: string): void;
-  passEmail(arg0: string): void;
 }) => {
   enum InputState {
     invalid,
@@ -41,14 +37,13 @@ const ProfileDetails = ({
   const [emailState, setEmailState] = useState<InputState>(InputState.typingOrValid);
   const [tryUpsert, setTryUpsert] = useState<boolean>(false);
 
-  const profileJSONData = useMemo(() => {
-    const profileJSONData: Profile = {
+  useEffect(() => {
+    setFetchProfile({
       firstName: firstName,
       lastName: lastName,
       email: email,
-    };
-    return profileJSONData;
-  }, [email, firstName, lastName]);
+    });
+  }, [email, firstName, lastName, setFetchProfile]);
 
   const handleEmailValidation = (email: string) => {
     const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
@@ -79,7 +74,7 @@ const ProfileDetails = ({
         const updateData = async () => {
           const { data, error } = await supabase
             .from('linkSharingAppData')
-            .upsert({ email: userEmail, profileJSON: profileJSONData }, { onConflict: 'email' })
+            .upsert({ email: userEmail, profileJSON: fetchProfile }, { onConflict: 'email' })
             .select();
           if (error) {
             console.error(error);
@@ -91,7 +86,7 @@ const ProfileDetails = ({
       }
       setTryUpsert(false);
     }
-  }, [InputState.typingOrValid, emailState, firstNameState, lastNameState, profileJSONData, tryUpsert, userEmail]);
+  }, [InputState.typingOrValid, emailState, fetchProfile, firstNameState, lastNameState, tryUpsert, userEmail]);
   const handleSendToServer = async (file: File) => {
     if (!userEmail) return;
     const timeStamp = new Date().getTime();
@@ -193,7 +188,6 @@ const ProfileDetails = ({
                   value={firstName}
                   onChange={(e) => {
                     setFirstName(e.target.value);
-                    passFirstName(e.target.value);
                   }}
                   onKeyDown={() => {
                     setFirstNameState(InputState.typingOrValid);
@@ -222,7 +216,6 @@ const ProfileDetails = ({
                   value={lastName}
                   onChange={(e) => {
                     setLastName(e.target.value);
-                    passLastName(e.target.value);
                   }}
                   onKeyDown={() => {
                     setLastNameState(InputState.typingOrValid);
@@ -251,7 +244,6 @@ const ProfileDetails = ({
                   value={email}
                   onChange={(e) => {
                     setEmail(e.target.value);
-                    passEmail(e.target.value);
                   }}
                   onKeyDown={() => {
                     setEmailState(InputState.typingOrValid);

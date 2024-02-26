@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import Link from '../lib/interfaceLink';
+import Profile from '../lib/interfaceProfile';
 import ArrowRight from '../components/ArrowRight';
 
 const dataColors = {
@@ -20,18 +21,14 @@ const dataColors = {
 
 const Phone = ({
   fetchLinks,
+  fetchProfile,
   passCopiedToClipboardPopUp,
   imageSource,
-  firstName,
-  lastName,
-  email,
 }: {
   fetchLinks?: Link[];
+  fetchProfile?: Profile | null;
   passCopiedToClipboardPopUp(): void;
   imageSource: string | null;
-  firstName: string;
-  lastName: string;
-  email: string;
 }) => {
   return (
     <div className="flex h-[631px] w-[307px] flex-col items-center justify-center bg-[url('/assets/images/illustration-phone-mockup.svg')] bg-center bg-no-repeat pt-[10px]">
@@ -52,14 +49,16 @@ const Phone = ({
           )}
           <div
             className={`${
-              firstName.concat(lastName, email).length > 0 ? 'visible' : 'invisible'
+              fetchProfile && fetchProfile.firstName.concat(fetchProfile.lastName, fetchProfile.email).length > 0
+                ? 'visible'
+                : 'invisible'
             } flex min-h-[56px] w-full flex-col items-center justify-center bg-white text-center`}
           >
             <h2 className="line-clamp-2 max-w-full break-words font-instrumentSans text-[18px] font-semibold leading-[150%] text-[#333333]">
-              {firstName.concat(' ', lastName).trim()}
+              {fetchProfile?.firstName.concat(' ', fetchProfile.lastName).trim()}
             </h2>
             <p className="line-clamp-2 max-w-full break-all font-instrumentSans text-[14px] leading-[150%] text-[#737373]">
-              {email}
+              {fetchProfile?.email}
             </p>
           </div>
         </div>
@@ -86,6 +85,7 @@ const Phone = ({
                       width={10}
                       height={10}
                       className="mr-[16px] h-[16px] w-[16px] fill-inherit text-inherit"
+                      priority
                     />
 
                     <span className="bodyS">{item.title}</span>

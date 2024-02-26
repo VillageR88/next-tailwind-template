@@ -28,8 +28,6 @@ export default function Main() {
   const [resetTimer, setResetTimer] = useState(false);
   const [popUpMessage, setPopUpMessage] = useState<PopupMessage>(PopupMessage.ChangesSaved);
   const [imageUrl, setImageUrl] = useState<string | null>(null);
-  const [firstName, setFirstName] = useState<string>('');
-  const [lastName, setLastName] = useState<string>('');
   const [email, setEmail] = useState<string>('');
 
   useEffect(() => {
@@ -61,8 +59,6 @@ export default function Main() {
           }
           if (data[0].profileJSON) {
             setFetchProfile(data[0].profileJSON as Profile);
-            setFirstName((data[0].profileJSON as Profile).firstName);
-            setLastName((data[0].profileJSON as Profile).lastName);
             setEmail((data[0].profileJSON as Profile).email);
           }
           if (data[0].avatarUrl) setImageUrl(data[0].avatarUrl as string);
@@ -151,9 +147,7 @@ export default function Main() {
           } flex h-[834px] w-[40.3%] items-center justify-center rounded-[12px] bg-white`}
         >
           <Phone
-            firstName={firstName}
-            lastName={lastName}
-            email={email}
+            fetchProfile={fetchProfile}
             imageSource={imageUrl}
             passCopiedToClipboardPopUp={() => {
               handleReset();
@@ -169,15 +163,7 @@ export default function Main() {
             passImageUrl={(value) => {
               setImageUrl(value);
             }}
-            passFirstName={(value) => {
-              setFirstName(value);
-            }}
-            passLastName={(value) => {
-              setLastName(value);
-            }}
-            passEmail={(value) => {
-              setEmail(value);
-            }}
+            setFetchProfile={setFetchProfile}
             visible={middleSection === MiddleButtons.ProfileDetails}
             userEmail={userEmail}
           />

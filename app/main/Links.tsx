@@ -1,5 +1,5 @@
 'use client';
-import { useState, useEffect, useRef, SetStateAction } from 'react';
+import { useState, useEffect, useRef, Dispatch, SetStateAction } from 'react';
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 import StartDiv from '../components/StartDiv';
@@ -31,9 +31,9 @@ const Links = ({
   passSavePopUp(): void;
   userEmail: string | undefined;
   fetchLinks: Link[];
-  setFetchLinks: (links: SetStateAction<Link[]>) => void;
+  setFetchLinks: Dispatch<SetStateAction<Link[]>>;
   fetchLinksInitial: Link[];
-  setFetchLinksInitial: (links: SetStateAction<Link[]>) => void;
+  setFetchLinksInitial: Dispatch<SetStateAction<Link[]>>;
   visible: boolean;
 }) => {
   const ref = useRef<HTMLButtonElement>(null);
