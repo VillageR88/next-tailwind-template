@@ -1,5 +1,6 @@
 'use client';
-import { useState, useEffect, useMemo, useRef } from 'react';
+import { useState, useEffect, useRef } from 'react';
+import { Dispatch, SetStateAction } from 'react';
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 import StartDiv from '../components/StartDiv';
@@ -20,16 +21,20 @@ const errorMessages = {
 };
 
 const Links = ({
-  passSocialInfoToMain,
   passSavePopUp,
   userEmail,
   fetchLinks,
+  setFetchLinks,
+  fetchLinksInitial,
+  setFetchLinksInitial,
   visible,
 }: {
   passSavePopUp(): void;
-  passSocialInfoToMain(arg0?: Link[]): void;
   userEmail: string | undefined;
   fetchLinks: Link[];
+  setFetchLinks: Dispatch<SetStateAction<Link[]>>;
+  fetchLinksInitial: Link[];
+  setFetchLinksInitial: Dispatch<SetStateAction<Link[]>>;
   visible: boolean;
 }) => {
   const ref = useRef<HTMLButtonElement>(null);
@@ -38,22 +43,8 @@ const Links = ({
   const [save, setSave] = useState<boolean>(false);
   const [checkInputs, setCheckInputs] = useState<boolean>(false);
   const [draggable, setDraggable] = useState<boolean>(false);
-  const [links, setLinks] = useState<Link[]>([]);
   const [linksErrorInfo, setLinksErrorInfo] = useState<Phase[]>([]);
-  const [linksInitial, setLinksInitial] = useState<Link[]>([]);
   const [listOpen, setListOpen] = useState<SocialMedia | null>(null);
-  const memorizedLinks = useMemo(() => {
-    return links;
-  }, [links]);
-
-  useEffect(() => {
-    setLinks([...fetchLinks].map((item) => ({ ...item })));
-    setLinksInitial([...fetchLinks].map((item) => ({ ...item })));
-  }, [fetchLinks]);
-
-  useEffect(() => {
-    passSocialInfoToMain(memorizedLinks);
-  }, [passSocialInfoToMain, memorizedLinks]);
 
   useEffect(() => {
     const handleClick = () => {
@@ -82,8 +73,8 @@ const Links = ({
     if (checkInputs) {
       const check = () => {
         const errorInfo: Phase[] = [];
-        for (const link of links) {
-          setLinks((prev) => {
+        for (const link of fetchLinks) {
+          setFetchLinks((prev) => {
             const deepCopy = [...prev].map((item) => ({ ...item }));
             deepCopy.map((item) => {
               item.url = item.url.toLowerCase();
@@ -106,7 +97,7 @@ const Links = ({
       check();
       setSave(true);
     }
-  }, [checkInputs, links]);
+  }, [checkInputs, fetchLinks, setFetchLinks]);
 
   useEffect(() => {
     if (save && !linksErrorInfo.some((x: number) => x !== 0)) {
@@ -114,7 +105,7 @@ const Links = ({
       const updateData = async () => {
         const { data, error } = await supabase
           .from('linkSharingAppData')
-          .upsert({ email: userEmail, linksJSON: links }, { onConflict: 'email' })
+          .upsert({ email: userEmail, linksJSON: fetchLinks }, { onConflict: 'email' })
           .select();
         if (error) {
           console.error(error);
@@ -123,10 +114,10 @@ const Links = ({
         }
       };
       void updateData();
-      setLinksInitial([...links].map((item) => ({ ...item })));
+      setFetchLinksInitial([...fetchLinks].map((item) => ({ ...item })));
     }
     setSave(false);
-  }, [links, linksErrorInfo, passSavePopUp, save, userEmail]);
+  }, [fetchLinks, linksErrorInfo, passSavePopUp, save, setFetchLinksInitial, userEmail]);
 
   useEffect(() => {
     if (listOpen === null) {
@@ -136,8 +127,8 @@ const Links = ({
 
   const titleAvailable = () => {
     for (const i in SocialMedia) {
-      if (links.some((item) => item.title === SocialMedia[i as keyof typeof SocialMedia])) {
-        if (links.length === Object.keys(SocialMedia).length) break;
+      if (fetchLinks.some((item) => item.title === SocialMedia[i as keyof typeof SocialMedia])) {
+        if (fetchLinks.length === Object.keys(SocialMedia).length) break;
         continue;
       } else {
         return SocialMedia[i as keyof typeof SocialMedia];
@@ -145,7 +136,7 @@ const Links = ({
     }
   };
   const listAvailable = () => {
-    return Object.values(SocialMedia).filter((item) => !links.find((link) => link.title === item)?.title);
+    return Object.values(SocialMedia).filter((item) => !fetchLinks.find((link) => link.title === item)?.title);
   };
   return (
     <div className={`${visible ? 'flex' : 'hidden'}  h-full w-full flex-col items-center justify-center`}>
@@ -159,9 +150,9 @@ const Links = ({
             onClick={() => {
               const newTitle = titleAvailable();
               if (!newTitle) return;
-              setLinks(
-                links.concat({
-                  id: links.length + 1,
+              setFetchLinks(
+                fetchLinks.concat({
+                  id: fetchLinks.length + 1,
                   title: newTitle,
                   url: '',
                 }),
@@ -171,11 +162,11 @@ const Links = ({
           >
             + Add new link
           </button>
-          {links.length === 0 ? (
+          {fetchLinks.length === 0 ? (
             <StartDiv />
           ) : (
             <div className="flex h-[469px] w-full flex-col gap-[24px] overflow-auto">
-              {links.map((item, index) => {
+              {fetchLinks.map((item, index) => {
                 return (
                   <form
                     onSubmit={(e) => {
@@ -193,10 +184,10 @@ const Links = ({
                       e.preventDefault();
                       const from = Number(e.dataTransfer.getData('text/plain'));
                       const to = index;
-                      const newLinks = [...links];
+                      const newLinks = [...fetchLinks];
                       const item = newLinks.splice(from, 1)[0];
                       newLinks.splice(to, 0, item);
-                      setLinks(newLinks);
+                      setFetchLinks(newLinks);
                     }}
                     draggable={draggable}
                     key={index}
@@ -227,9 +218,9 @@ const Links = ({
                       <button
                         type="button"
                         onClick={() => {
-                          const newLinks = [...links];
+                          const newLinks = [...fetchLinks];
                           newLinks.splice(index, 1);
-                          setLinks(newLinks);
+                          setFetchLinks(newLinks);
                         }}
                         className="bodyM h-[24px] w-[61px] text-[#737373]"
                       >
@@ -282,7 +273,7 @@ const Links = ({
                               <li className="flex flex-col gap-[12px] text-[#333333]" key={indexOfSocialMedia}>
                                 <button
                                   onClick={() => {
-                                    const newLinks = [...links];
+                                    const newLinks = [...fetchLinks];
                                     newLinks.map((link) => {
                                       if (link.title === itemSocialMedia) {
                                         link.title = item.title;
@@ -290,7 +281,7 @@ const Links = ({
                                     });
                                     newLinks[index].title = itemSocialMedia;
                                     newLinks[index].url = '';
-                                    setLinks(newLinks);
+                                    setFetchLinks(newLinks);
                                   }}
                                   className={`list ${listOpen.includes(itemSocialMedia) && 'listActive'}`}
                                   disabled={listAvailable().includes(itemSocialMedia) ? false : true}
@@ -332,9 +323,9 @@ const Links = ({
                             placeholder={urlPlaceholders[item.title as keyof typeof urlPlaceholders]}
                             value={item.url}
                             onChange={(e) => {
-                              const newLinks = [...links];
+                              const newLinks = [...fetchLinks];
                               newLinks[index].url = e.target.value;
-                              setLinks(newLinks);
+                              setFetchLinks(newLinks);
                             }}
                             className={`${
                               (linksErrorInfo[index] === Phase.empty || linksErrorInfo[index] === Phase.checkAgain) &&
@@ -373,14 +364,14 @@ const Links = ({
           <div className="flex gap-[18px]">
             <button
               onClick={() => {
-                setLinks([...linksInitial].map((item) => ({ ...item })));
+                setFetchLinks([...fetchLinksInitial].map((item) => ({ ...item })));
               }}
               className="buttonSecondary headingS h-[46px] w-[91px] font-[500]"
             >
               Cancel
             </button>
             <button
-              disabled={JSON.stringify(links) === JSON.stringify(linksInitial)}
+              disabled={JSON.stringify(fetchLinks) === JSON.stringify(fetchLinksInitial)}
               onClick={() => {
                 setCheckInputs(true);
               }}

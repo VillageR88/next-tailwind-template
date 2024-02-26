@@ -19,9 +19,9 @@ export default function Main() {
   const [middleSection, setMiddleSection] = useState<MiddleButtons>(MiddleButtons.Links);
   const [userAuth, setUserAuth] = useState<boolean>(false);
   const router = useRouter();
-  const [socialInfo, setSocialInfo] = useState<Link[]>([]);
   const [userEmail, setUserEmail] = useState<string | undefined>(undefined);
   const [fetchLinks, setFetchLinks] = useState<Link[]>([]);
+  const [fetchLinksInitial, setFetchLinksInitial] = useState<Link[]>([]);
   const [fetchProfile, setFetchProfile] = useState<Profile | null>(null);
   const [preloadComplete, setPreloadComplete] = useState<boolean>(false);
   const [popUpBottom, setPopUpBottom] = useState<boolean>(false);
@@ -57,6 +57,7 @@ export default function Main() {
         if (data && data.length > 0) {
           if (data[0].linksJSON) {
             setFetchLinks(data[0].linksJSON as Link[]);
+            setFetchLinksInitial(data[0].linksJSON as Link[]);
           }
           if (data[0].profileJSON) {
             setFetchProfile(data[0].profileJSON as Profile);
@@ -159,7 +160,7 @@ export default function Main() {
               setPopUpBottom(true);
               setPopUpMessage(PopupMessage.LinkCopied);
             }}
-            socialInfo={socialInfo}
+            fetchLinks={fetchLinks}
           />
         </div>
         <div className="h-[834px] w-[58%] rounded-[12px] bg-white transition-all">
@@ -181,17 +182,17 @@ export default function Main() {
             userEmail={userEmail}
           />
           <Links
+            fetchLinks={fetchLinks}
+            setFetchLinks={setFetchLinks}
+            fetchLinksInitial={fetchLinksInitial}
+            setFetchLinksInitial={setFetchLinksInitial}
             visible={middleSection === MiddleButtons.Links}
             passSavePopUp={() => {
               handleReset();
               setPopUpBottom(true);
               setPopUpMessage(PopupMessage.ChangesSaved);
             }}
-            fetchLinks={fetchLinks}
             userEmail={userEmail}
-            passSocialInfoToMain={(value) => {
-              if (value) setSocialInfo(value);
-            }}
           />
         </div>
       </main>

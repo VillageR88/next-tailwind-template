@@ -19,14 +19,14 @@ const dataColors = {
 };
 
 const Phone = ({
-  socialInfo,
+  fetchLinks,
   passCopiedToClipboardPopUp,
   imageSource,
   firstName,
   lastName,
   email,
 }: {
-  socialInfo?: Link[];
+  fetchLinks?: Link[];
   passCopiedToClipboardPopUp(): void;
   imageSource: string | null;
   firstName: string;
@@ -65,7 +65,7 @@ const Phone = ({
         </div>
         <div className="flex h-[300px] w-full flex-col">
           <ul className="flex h-fit w-full flex-col gap-[20px] overflow-auto bg-white">
-            {socialInfo?.map((item, index) => (
+            {fetchLinks?.map((item, index) => (
               <li key={index} className={`min-h-[44px] w-full rounded-[8px] ${dataColors[item.title][1]}`}>
                 <button
                   onClick={() => {
