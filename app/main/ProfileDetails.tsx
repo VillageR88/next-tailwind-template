@@ -5,6 +5,7 @@ import IconUpload from '../components/IconUpload';
 import Profile from '../lib/interfaceProfile';
 
 const ProfileDetails = ({
+  passSavePopUp,
   visible,
   userEmail,
   fetchProfile,
@@ -14,6 +15,7 @@ const ProfileDetails = ({
   profileImageUrl,
   setProfileImageUrl,
 }: {
+  passSavePopUp(): void;
   visible: boolean;
   userEmail: string | undefined;
   fetchProfile: Profile | null;
@@ -57,25 +59,23 @@ const ProfileDetails = ({
   }, []);
   useEffect(() => {
     if (tryUpsert) {
-      console.log('tryUpsert', tryUpsert);
       if (
         firstNameState === InputState.typingOrValid &&
         lastNameState === InputState.typingOrValid &&
         emailState === InputState.typingOrValid
       ) {
         const updateData = async () => {
-          const { data, error } = await supabase
+          const { error } = await supabase
             .from('linkSharingAppData')
             .upsert({ email: userEmail, profileJSON: fetchProfile }, { onConflict: 'email' })
             .select();
           if (error) {
             console.error(error);
-          } else {
-            console.log(data);
           }
         };
         void updateData();
         setFetchProfileInitial({ ...fetchProfile } as Profile);
+        passSavePopUp();
       }
       setTryUpsert(false);
     }
@@ -85,6 +85,7 @@ const ProfileDetails = ({
     fetchProfile,
     firstNameState,
     lastNameState,
+    passSavePopUp,
     setFetchProfileInitial,
     tryUpsert,
     userEmail,

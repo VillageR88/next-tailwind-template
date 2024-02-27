@@ -169,6 +169,11 @@ export default function Main() {
             setProfileImageUrl={setImageUrl}
             visible={middleSection === MiddleButtons.ProfileDetails}
             userEmail={userEmail}
+            passSavePopUp={() => {
+              handleReset();
+              setPopUpBottom(true);
+              setPopUpMessage(PopupMessage.ChangesSaved);
+            }}
           />
           <Links
             fetchLinks={fetchLinks}
