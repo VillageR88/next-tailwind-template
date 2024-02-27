@@ -14,6 +14,7 @@ import ProfileDetails from './ProfileDetails';
 import MiddleButtons from '../lib/enumMiddleButtons';
 import PopupMessage from '../lib/enumPopupMessage';
 import popupMessages from '../lib/popupMessages';
+import MainView from '../lib/main/enumMainView';
 
 export default function Main() {
   const [middleSection, setMiddleSection] = useState<MiddleButtons>(MiddleButtons.Links);
@@ -29,6 +30,7 @@ export default function Main() {
   const [resetTimer, setResetTimer] = useState(false);
   const [popUpMessage, setPopUpMessage] = useState<PopupMessage>(PopupMessage.ChangesSaved);
   const [imageUrl, setImageUrl] = useState<string | null>(null);
+  const [mainView, setMainView] = useState<MainView>(MainView.Editor);
 
   useEffect(() => {
     const checkUser = async () => {
@@ -98,98 +100,142 @@ export default function Main() {
           <RotatingLines width="180" strokeColor="cornflowerblue" ariaLabel="loading" />
         </div>
       )}
-      <nav
-        className={`${
-          preloadComplete ? 'opacity-100 transition duration-300' : 'max-h-0 opacity-0'
-        } flex h-[126px] w-full flex-col items-center justify-center `}
-      >
-        <div className="flex h-[78px] w-full items-center justify-between rounded-[12px] bg-white pl-[24px] pr-[16px]">
-          <Image
-            className="h-fit w-[146px]"
-            width={16}
-            height={16}
-            src={'../assets/images/logo-devlinks-large.svg' as string}
-            alt="devlinks logo"
-          />
-          <div className="flex gap-[16px]">
-            <button
-              onClick={() => {
-                setMiddleSection(MiddleButtons.Links);
-              }}
+      {mainView === MainView.Editor ? (
+        <>
+          <nav
+            className={`${
+              preloadComplete ? 'opacity-100 transition duration-300' : 'max-h-0 opacity-0'
+            } flex h-[126px] w-full flex-col items-center justify-center `}
+          >
+            <div className="flex h-[78px] w-full items-center justify-between rounded-[12px] bg-white pl-[24px] pr-[16px]">
+              <Image
+                className="h-fit w-[146px]"
+                width={16}
+                height={16}
+                src={'../assets/images/logo-devlinks-large.svg' as string}
+                alt="devlinks logo"
+              />
+              <div className="flex gap-[16px]">
+                <button
+                  onClick={() => {
+                    setMiddleSection(MiddleButtons.Links);
+                  }}
+                  className={`${
+                    middleSection === MiddleButtons.Links && 'active'
+                  } tabs flex h-[46px] w-[122px] items-center justify-center gap-[8px] transition`}
+                >
+                  <IconLink />
+                  <span className="headingS">Links</span>
+                </button>
+                <button
+                  onClick={() => {
+                    setMiddleSection(MiddleButtons.ProfileDetails);
+                  }}
+                  className={`${
+                    middleSection === MiddleButtons.ProfileDetails && 'active'
+                  } tabs flex h-[46px] w-[187px] items-center justify-center gap-[8px]`}
+                >
+                  <IconProfile />
+                  <span className="headingS">Profile Details</span>
+                </button>
+              </div>
+              <button
+                onClick={() => {
+                  setMainView(MainView.Preview);
+                }}
+                className="headingS buttonSecondary h-[46px] w-[114px]"
+              >
+                Preview
+              </button>
+            </div>
+          </nav>
+          <main
+            className={`${
+              preloadComplete ? 'opacity-100 transition duration-300' : 'max-h-0 opacity-0'
+            } flex h-[858px] w-full flex-row justify-between`}
+          >
+            <div
               className={`${
-                middleSection === MiddleButtons.Links && 'active'
-              } tabs flex h-[46px] w-[122px] items-center justify-center gap-[8px] transition`}
+                preloadComplete ? 'opacity-100 transition duration-300' : 'max-h-0 opacity-0'
+              } flex h-[834px] w-[40.3%] items-center justify-center rounded-[12px] bg-white`}
             >
-              <IconLink />
-              <span className="headingS">Links</span>
-            </button>
-            <button
-              onClick={() => {
-                setMiddleSection(MiddleButtons.ProfileDetails);
-              }}
-              className={`${
-                middleSection === MiddleButtons.ProfileDetails && 'active'
-              } tabs flex h-[46px] w-[187px] items-center justify-center gap-[8px]`}
-            >
-              <IconProfile />
-              <span className="headingS">Profile Details</span>
-            </button>
+              <Phone
+                fetchProfile={fetchProfile}
+                imageSource={imageUrl}
+                passCopiedToClipboardPopUp={() => {
+                  handleReset();
+                  setPopUpBottom(true);
+                  setPopUpMessage(PopupMessage.LinkCopied);
+                }}
+                fetchLinks={fetchLinks}
+              />
+            </div>
+            <div className="h-[834px] w-[58%] rounded-[12px] bg-white transition-all">
+              <ProfileDetails
+                fetchProfile={fetchProfile}
+                setFetchProfile={setFetchProfile}
+                fetchProfileInitial={fetchProfileInitial}
+                setFetchProfileInitial={setFetchProfileInitial}
+                profileImageUrl={imageUrl}
+                setProfileImageUrl={setImageUrl}
+                visible={middleSection === MiddleButtons.ProfileDetails}
+                userEmail={userEmail}
+                passSavePopUp={() => {
+                  handleReset();
+                  setPopUpBottom(true);
+                  setPopUpMessage(PopupMessage.ChangesSaved);
+                }}
+              />
+              <Links
+                fetchLinks={fetchLinks}
+                setFetchLinks={setFetchLinks}
+                fetchLinksInitial={fetchLinksInitial}
+                setFetchLinksInitial={setFetchLinksInitial}
+                visible={middleSection === MiddleButtons.Links}
+                passSavePopUp={() => {
+                  handleReset();
+                  setPopUpBottom(true);
+                  setPopUpMessage(PopupMessage.ChangesSaved);
+                }}
+                userEmail={userEmail}
+              />
+            </div>
+          </main>
+        </>
+      ) : (
+        <>
+          <div className="h-0 w-full">
+            <div className="-z-10 h-[357px] w-full bg-[#633CFF]"></div>
           </div>
-          <button className="headingS buttonSecondary h-[46px] w-[114px]">Preview</button>
-        </div>
-      </nav>
-      <main
-        className={`${
-          preloadComplete ? 'opacity-100 transition duration-300' : 'max-h-0 opacity-0'
-        } flex h-[858px] w-full flex-row justify-between`}
-      >
-        <div
-          className={`${
-            preloadComplete ? 'opacity-100 transition duration-300' : 'max-h-0 opacity-0'
-          } flex h-[834px] w-[40.3%] items-center justify-center rounded-[12px] bg-white`}
-        >
-          <Phone
-            fetchProfile={fetchProfile}
-            imageSource={imageUrl}
-            passCopiedToClipboardPopUp={() => {
-              handleReset();
-              setPopUpBottom(true);
-              setPopUpMessage(PopupMessage.LinkCopied);
-            }}
-            fetchLinks={fetchLinks}
-          />
-        </div>
-        <div className="h-[834px] w-[58%] rounded-[12px] bg-white transition-all">
-          <ProfileDetails
-            fetchProfile={fetchProfile}
-            setFetchProfile={setFetchProfile}
-            fetchProfileInitial={fetchProfileInitial}
-            setFetchProfileInitial={setFetchProfileInitial}
-            profileImageUrl={imageUrl}
-            setProfileImageUrl={setImageUrl}
-            visible={middleSection === MiddleButtons.ProfileDetails}
-            userEmail={userEmail}
-            passSavePopUp={() => {
-              handleReset();
-              setPopUpBottom(true);
-              setPopUpMessage(PopupMessage.ChangesSaved);
-            }}
-          />
-          <Links
-            fetchLinks={fetchLinks}
-            setFetchLinks={setFetchLinks}
-            fetchLinksInitial={fetchLinksInitial}
-            setFetchLinksInitial={setFetchLinksInitial}
-            visible={middleSection === MiddleButtons.Links}
-            passSavePopUp={() => {
-              handleReset();
-              setPopUpBottom(true);
-              setPopUpMessage(PopupMessage.ChangesSaved);
-            }}
-            userEmail={userEmail}
-          />
-        </div>
-      </main>
+          <div className="flex h-0 w-full justify-center">
+            <div className="mt-[208px] h-[569px] w-[349px] rounded-[24px] bg-white"></div>
+          </div>
+          <nav className={`flex h-[126px] w-full flex-col items-center justify-center p-[24px]`}>
+            <div className="flex h-[78px] w-full items-center justify-between rounded-[12px] bg-white pl-[24px] pr-[16px]">
+              <button
+                onClick={() => {
+                  setMainView(MainView.Editor);
+                }}
+                className="headingS buttonSecondary h-[46px] w-[159px]"
+              >
+                Back to Editor
+              </button>
+              <button
+                onClick={() => {
+                  void navigator.clipboard.writeText('TODO');
+                  handleReset();
+                  setPopUpBottom(true);
+                  setPopUpMessage(PopupMessage.LinkCopied);
+                }}
+                className="headingS buttonPrimary h-[46px] w-[133px] font-[500]"
+              >
+                Share Link
+              </button>
+            </div>
+          </nav>
+          <main className="h-[858px]">blabla</main>
+        </>
+      )}
       <div
         className={`${popUpBottom ? 'opacity-100' : 'opacity-0'} pointer-events-none ${
           preloadComplete ? 'flex duration-300' : 'hidden'
