@@ -23,6 +23,7 @@ export default function Main() {
   const [fetchLinks, setFetchLinks] = useState<Link[]>([]);
   const [fetchLinksInitial, setFetchLinksInitial] = useState<Link[]>([]);
   const [fetchProfile, setFetchProfile] = useState<Profile | null>(null);
+  const [fetchProfileInitial, setFetchProfileInitial] = useState<Profile | null>(null);
   const [preloadComplete, setPreloadComplete] = useState<boolean>(false);
   const [popUpBottom, setPopUpBottom] = useState<boolean>(false);
   const [resetTimer, setResetTimer] = useState(false);
@@ -58,7 +59,9 @@ export default function Main() {
             setFetchLinksInitial([...value].map((link) => ({ ...link })));
           }
           if (data[0].profileJSON) {
-            setFetchProfile(data[0].profileJSON as Profile);
+            const value = data[0].profileJSON as Profile;
+            setFetchProfile(value);
+            setFetchProfileInitial({ ...value });
           }
           if (data[0].avatarUrl) setImageUrl(data[0].avatarUrl as string);
         }
@@ -87,7 +90,7 @@ export default function Main() {
   return (
     <div
       className={`${
-        !preloadComplete ? 'container static h-screen overflow-hidden' : 'min-h-screen'
+        !preloadComplete ? 'h-screen overflow-hidden' : 'min-h-screen'
       } flex flex-col items-center justify-center transition duration-1000`}
     >
       {!preloadComplete && (
@@ -159,9 +162,11 @@ export default function Main() {
         <div className="h-[834px] w-[58%] rounded-[12px] bg-white transition-all">
           <ProfileDetails
             fetchProfile={fetchProfile}
+            setFetchProfile={setFetchProfile}
+            fetchProfileInitial={fetchProfileInitial}
+            setFetchProfileInitial={setFetchProfileInitial}
             profileImageUrl={imageUrl}
             setProfileImageUrl={setImageUrl}
-            setFetchProfile={setFetchProfile}
             visible={middleSection === MiddleButtons.ProfileDetails}
             userEmail={userEmail}
           />

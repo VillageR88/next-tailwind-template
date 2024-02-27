@@ -9,6 +9,8 @@ const ProfileDetails = ({
   userEmail,
   fetchProfile,
   setFetchProfile,
+  fetchProfileInitial,
+  setFetchProfileInitial,
   profileImageUrl,
   setProfileImageUrl,
 }: {
@@ -16,6 +18,8 @@ const ProfileDetails = ({
   userEmail: string | undefined;
   fetchProfile: Profile | null;
   setFetchProfile: Dispatch<SetStateAction<Profile | null>>;
+  fetchProfileInitial: Profile | null;
+  setFetchProfileInitial: Dispatch<SetStateAction<Profile | null>>;
   profileImageUrl: string | null;
   setProfileImageUrl: Dispatch<SetStateAction<string | null>>;
 }) => {
@@ -30,27 +34,14 @@ const ProfileDetails = ({
   const error = { empty: "Can't be empty", invalid: 'Invalid' };
   const router = useRouter();
   const refs = useRef<HTMLInputElement[]>([]);
-  const [firstName, setFirstName] = useState<string>('');
   const [firstNameState, setFirstNameState] = useState<InputState>(InputState.typingOrValid);
-  const [lastName, setLastName] = useState<string>('');
   const [lastNameState, setLastNameState] = useState<InputState>(InputState.typingOrValid);
-  const [email, setEmail] = useState<string>('');
   const [emailState, setEmailState] = useState<InputState>(InputState.typingOrValid);
   const [tryUpsert, setTryUpsert] = useState<boolean>(false);
-
-  useEffect(() => {
-    setFetchProfile({
-      firstName: firstName,
-      lastName: lastName,
-      email: email,
-    });
-  }, [email, firstName, lastName, setFetchProfile]);
-
   const handleEmailValidation = (email: string) => {
     const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
     return emailRegex.test(email);
   };
-
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
       if (event.key === 'Escape') {
@@ -108,14 +99,6 @@ const ProfileDetails = ({
       console.error(error2);
     }
   };
-
-  useEffect(() => {
-    if (fetchProfile) {
-      setFirstName(fetchProfile.firstName);
-      setLastName(fetchProfile.lastName);
-      setEmail(fetchProfile.email);
-    }
-  }, [fetchProfile]);
 
   return (
     <div className={`${visible ? 'flex' : 'hidden'}  h-full w-full flex-col items-center justify-center`}>
@@ -185,9 +168,9 @@ const ProfileDetails = ({
                   First name*
                 </label>
                 <input
-                  value={firstName}
+                  value={fetchProfile?.firstName}
                   onChange={(e) => {
-                    setFirstName(e.target.value);
+                    setFetchProfile({ ...fetchProfile, firstName: e.target.value } as Profile);
                   }}
                   onKeyDown={() => {
                     setFirstNameState(InputState.typingOrValid);
@@ -213,9 +196,9 @@ const ProfileDetails = ({
                   Last name*
                 </label>
                 <input
-                  value={lastName}
+                  value={fetchProfile?.lastName}
                   onChange={(e) => {
-                    setLastName(e.target.value);
+                    setFetchProfile({ ...fetchProfile, lastName: e.target.value } as Profile);
                   }}
                   onKeyDown={() => {
                     setLastNameState(InputState.typingOrValid);
@@ -241,9 +224,9 @@ const ProfileDetails = ({
                   Email
                 </label>
                 <input
-                  value={email}
+                  value={fetchProfile?.email}
                   onChange={(e) => {
-                    setEmail(e.target.value);
+                    setFetchProfile({ ...fetchProfile, email: e.target.value } as Profile);
                   }}
                   onKeyDown={() => {
                     setEmailState(InputState.typingOrValid);
@@ -279,16 +262,23 @@ const ProfileDetails = ({
             Log Out
           </button>
           <div className="flex gap-[18px]">
-            <button className="buttonSecondary headingS h-[46px] w-[91px] font-[500]">Cancel</button>
             <button
               onClick={() => {
-                if (firstName === '') {
+                setFetchProfile({ ...fetchProfileInitial } as Profile);
+              }}
+              className="buttonSecondary headingS h-[46px] w-[91px] font-[500]"
+            >
+              Cancel
+            </button>
+            <button
+              onClick={() => {
+                if (fetchProfile?.firstName === '') {
                   setFirstNameState(InputState.invalid);
                 }
-                if (lastName === '') {
+                if (fetchProfile?.lastName === '') {
                   setLastNameState(InputState.invalid);
                 }
-                if (!handleEmailValidation(email) && email !== '') {
+                if (fetchProfile && !handleEmailValidation(fetchProfile.email) && fetchProfile.email !== '') {
                   setEmailState(InputState.invalid);
                 }
                 setTryUpsert(true);

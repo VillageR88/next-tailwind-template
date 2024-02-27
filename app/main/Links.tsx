@@ -113,10 +113,19 @@ const Links = ({
         }
       };
       void updateData();
-                setFetchLinks([...fetchLinksInitial].map((item) => ({ ...item })));
+      setFetchLinksInitial([...fetchLinksInitial].map((item) => ({ ...item })));
     }
     setSave(false);
-  }, [save, linksErrorInfo, fetchLinks, userEmail, passSavePopUp, setFetchLinksInitial]);
+  }, [
+    fetchLinks,
+    fetchLinksInitial,
+    linksErrorInfo,
+    passSavePopUp,
+    save,
+    setFetchLinks,
+    setFetchLinksInitial,
+    userEmail,
+  ]);
 
   useEffect(() => {
     if (listOpen === null) {
