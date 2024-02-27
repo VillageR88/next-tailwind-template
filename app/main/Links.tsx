@@ -113,7 +113,7 @@ const Links = ({
         }
       };
       void updateData();
-      setFetchLinksInitial([...fetchLinksInitial].map((item) => ({ ...item })));
+      setFetchLinksInitial([...fetchLinks].map((item) => ({ ...item })));
     }
     setSave(false);
   }, [

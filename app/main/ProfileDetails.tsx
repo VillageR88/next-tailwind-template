@@ -75,10 +75,20 @@ const ProfileDetails = ({
           }
         };
         void updateData();
+        setFetchProfileInitial({ ...fetchProfile } as Profile);
       }
       setTryUpsert(false);
     }
-  }, [InputState.typingOrValid, emailState, fetchProfile, firstNameState, lastNameState, tryUpsert, userEmail]);
+  }, [
+    InputState.typingOrValid,
+    emailState,
+    fetchProfile,
+    firstNameState,
+    lastNameState,
+    setFetchProfileInitial,
+    tryUpsert,
+    userEmail,
+  ]);
   const handleSendToServer = async (file: File) => {
     if (!userEmail) return;
     const timeStamp = new Date().getTime();
@@ -271,6 +281,7 @@ const ProfileDetails = ({
               Cancel
             </button>
             <button
+              disabled={JSON.stringify(fetchProfile) === JSON.stringify(fetchProfileInitial)}
               onClick={() => {
                 if (fetchProfile?.firstName === '') {
                   setFirstNameState(InputState.invalid);
