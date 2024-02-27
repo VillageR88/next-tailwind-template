@@ -18,10 +18,10 @@ const ProfileDetails = ({
   passSavePopUp(): void;
   visible: boolean;
   userEmail: string | undefined;
-  fetchProfile: Profile | null;
-  setFetchProfile: Dispatch<SetStateAction<Profile | null>>;
-  fetchProfileInitial: Profile | null;
-  setFetchProfileInitial: Dispatch<SetStateAction<Profile | null>>;
+  fetchProfile?: Profile;
+  setFetchProfile: Dispatch<SetStateAction<Profile | undefined>>;
+  fetchProfileInitial?: Profile;
+  setFetchProfileInitial: Dispatch<SetStateAction<Profile | undefined>>;
   profileImageUrl?: string;
   setProfileImageUrl: Dispatch<SetStateAction<string | undefined>>;
 }) => {

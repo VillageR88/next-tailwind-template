@@ -24,8 +24,8 @@ export default function Main() {
   const [userEmail, setUserEmail] = useState<string | undefined>(undefined);
   const [fetchLinks, setFetchLinks] = useState<Link[]>([]);
   const [fetchLinksInitial, setFetchLinksInitial] = useState<Link[]>([]);
-  const [fetchProfile, setFetchProfile] = useState<Profile | null>(null);
-  const [fetchProfileInitial, setFetchProfileInitial] = useState<Profile | null>(null);
+  const [fetchProfile, setFetchProfile] = useState<Profile | undefined>(undefined);
+  const [fetchProfileInitial, setFetchProfileInitial] = useState<Profile | undefined>(undefined);
   const [preloadComplete, setPreloadComplete] = useState<boolean>(false);
   const [popUpBottom, setPopUpBottom] = useState<boolean>(false);
   const [resetTimer, setResetTimer] = useState(false);
@@ -205,7 +205,15 @@ export default function Main() {
         </>
       ) : (
         <>
-          <Preview fetchProfile={fetchProfile} imageSource={imageUrl ? imageUrl : undefined} />
+          <Preview
+            passCopiedToClipboardPopUp={() => {
+              handleReset();
+              setPopUpBottom(true);
+              setPopUpMessage(PopupMessage.LinkCopied);
+            }}
+            fetchProfile={fetchProfile}
+            imageSource={imageUrl ? imageUrl : undefined}
+          />
           <nav className={`flex h-[126px] w-full flex-col items-center justify-center p-[24px]`}>
             <div className="flex h-[78px] w-full items-center justify-between rounded-[12px] bg-white pl-[24px] pr-[16px]">
               <button
