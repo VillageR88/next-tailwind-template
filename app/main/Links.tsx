@@ -18,7 +18,6 @@ const errorMessages = {
   [Phase.empty]: `Can't be empty`,
   [Phase.checkAgain]: 'Check again',
 };
-
 const Links = ({
   passSavePopUp,
   userEmail,
@@ -44,7 +43,7 @@ const Links = ({
   const [draggable, setDraggable] = useState<boolean>(false);
   const [linksErrorInfo, setLinksErrorInfo] = useState<Phase[]>([]);
   const [listOpen, setListOpen] = useState<SocialMedia | null>(null);
-
+  const noChange = JSON.stringify(fetchLinks) === JSON.stringify(fetchLinksInitial);
   useEffect(() => {
     const handleClick = () => {
       setListOpen(null);
@@ -179,7 +178,7 @@ const Links = ({
                   <form
                     onSubmit={(e) => {
                       e.preventDefault();
-                      setCheckInputs(true);
+                      !noChange && setCheckInputs(true);
                     }}
                     onDragStart={(e) => {
                       e.dataTransfer.setData('text/plain', index.toString());
@@ -382,7 +381,7 @@ const Links = ({
               Cancel
             </button>
             <button
-              disabled={JSON.stringify(fetchLinks) === JSON.stringify(fetchLinksInitial)}
+              disabled={noChange}
               onClick={() => {
                 setCheckInputs(true);
               }}

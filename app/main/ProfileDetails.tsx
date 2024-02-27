@@ -17,7 +17,7 @@ const ProfileDetails = ({
 }: {
   passSavePopUp(): void;
   visible: boolean;
-  userEmail: string | undefined;
+  userEmail?: string;
   fetchProfile?: Profile;
   setFetchProfile: Dispatch<SetStateAction<Profile | undefined>>;
   fetchProfileInitial?: Profile;
@@ -90,6 +90,18 @@ const ProfileDetails = ({
     tryUpsert,
     userEmail,
   ]);
+  const handleUpsert = (): void => {
+    if (fetchProfile?.firstName === '') {
+      setFirstNameState(InputState.invalid);
+    }
+    if (fetchProfile?.lastName === '') {
+      setLastNameState(InputState.invalid);
+    }
+    if (fetchProfile && !handleEmailValidation(fetchProfile.email) && fetchProfile.email !== '') {
+      setEmailState(InputState.invalid);
+    }
+    setTryUpsert(true);
+  };
   const handleSendToServer = async (file: File) => {
     if (!userEmail) return;
     const timeStamp = new Date().getTime();
@@ -172,7 +184,14 @@ const ProfileDetails = ({
               <span className="bodyS w-[215px]">Image must be below 1024x1024px. Use PNG or JPG format.</span>
             </div>
           </div>
-          <form className="flex h-[208px] w-full flex-col justify-between rounded-[12px] bg-[#FAFAFA] p-[20px]">
+          <form
+            onSubmit={(e) => {
+              console.log('submit');
+              e.preventDefault();
+              handleUpsert();
+            }}
+            className="flex h-[208px] w-full flex-col justify-between rounded-[12px] bg-[#FAFAFA] p-[20px]"
+          >
             <div className="flex h-[48px] w-full flex-col items-center justify-between">
               <div className="flex h-full w-full items-center justify-between">
                 <label htmlFor="firstName" className="text-[#737373]">
@@ -284,16 +303,7 @@ const ProfileDetails = ({
             <button
               disabled={JSON.stringify(fetchProfile) === JSON.stringify(fetchProfileInitial)}
               onClick={() => {
-                if (fetchProfile?.firstName === '') {
-                  setFirstNameState(InputState.invalid);
-                }
-                if (fetchProfile?.lastName === '') {
-                  setLastNameState(InputState.invalid);
-                }
-                if (fetchProfile && !handleEmailValidation(fetchProfile.email) && fetchProfile.email !== '') {
-                  setEmailState(InputState.invalid);
-                }
-                setTryUpsert(true);
+                handleUpsert();
               }}
               className="buttonPrimary headingS h-[46px] w-[91px] font-[500]"
             >
