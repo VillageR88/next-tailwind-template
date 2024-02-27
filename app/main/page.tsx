@@ -159,9 +159,8 @@ export default function Main() {
         <div className="h-[834px] w-[58%] rounded-[12px] bg-white transition-all">
           <ProfileDetails
             fetchProfile={fetchProfile}
-            passImageUrl={(value) => {
-              setImageUrl(value);
-            }}
+            profileImageUrl={imageUrl}
+            setProfileImageUrl={setImageUrl}
             setFetchProfile={setFetchProfile}
             visible={middleSection === MiddleButtons.ProfileDetails}
             userEmail={userEmail}

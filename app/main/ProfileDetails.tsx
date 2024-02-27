@@ -9,13 +9,15 @@ const ProfileDetails = ({
   userEmail,
   fetchProfile,
   setFetchProfile,
-  passImageUrl,
+  profileImageUrl,
+  setProfileImageUrl,
 }: {
   visible: boolean;
   userEmail: string | undefined;
   fetchProfile: Profile | null;
   setFetchProfile: Dispatch<SetStateAction<Profile | null>>;
-  passImageUrl(arg0: string): void;
+  profileImageUrl: string | null;
+  setProfileImageUrl: Dispatch<SetStateAction<string | null>>;
 }) => {
   enum InputState {
     invalid,
@@ -28,7 +30,6 @@ const ProfileDetails = ({
   const error = { empty: "Can't be empty", invalid: 'Invalid' };
   const router = useRouter();
   const refs = useRef<HTMLInputElement[]>([]);
-  const [profileImageUrl, setProfileImageUrl] = useState<string | null>(null);
   const [firstName, setFirstName] = useState<string>('');
   const [firstNameState, setFirstNameState] = useState<InputState>(InputState.typingOrValid);
   const [lastName, setLastName] = useState<string>('');
@@ -146,7 +147,6 @@ const ProfileDetails = ({
                             alert('Image resolution exceeds 1024x1024');
                           } else {
                             setProfileImageUrl(reader.result as string);
-                            passImageUrl(reader.result as string);
                           }
                         };
                       };
