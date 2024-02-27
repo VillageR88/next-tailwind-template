@@ -15,6 +15,7 @@ import MiddleButtons from '../lib/enumMiddleButtons';
 import PopupMessage from '../lib/enumPopupMessage';
 import popupMessages from '../lib/popupMessages';
 import MainView from '../lib/main/enumMainView';
+import Preview from '../components/Preview';
 
 export default function Main() {
   const [middleSection, setMiddleSection] = useState<MiddleButtons>(MiddleButtons.Links);
@@ -29,7 +30,7 @@ export default function Main() {
   const [popUpBottom, setPopUpBottom] = useState<boolean>(false);
   const [resetTimer, setResetTimer] = useState(false);
   const [popUpMessage, setPopUpMessage] = useState<PopupMessage>(PopupMessage.ChangesSaved);
-  const [imageUrl, setImageUrl] = useState<string | null>(null);
+  const [imageUrl, setImageUrl] = useState<string | undefined>(undefined);
   const [mainView, setMainView] = useState<MainView>(MainView.Editor);
 
   useEffect(() => {
@@ -176,7 +177,7 @@ export default function Main() {
                 setFetchProfile={setFetchProfile}
                 fetchProfileInitial={fetchProfileInitial}
                 setFetchProfileInitial={setFetchProfileInitial}
-                profileImageUrl={imageUrl}
+                profileImageUrl={imageUrl ? imageUrl : undefined}
                 setProfileImageUrl={setImageUrl}
                 visible={middleSection === MiddleButtons.ProfileDetails}
                 userEmail={userEmail}
@@ -204,12 +205,7 @@ export default function Main() {
         </>
       ) : (
         <>
-          <div className="h-0 w-full">
-            <div className="-z-10 h-[357px] w-full bg-[#633CFF]"></div>
-          </div>
-          <div className="flex h-0 w-full justify-center">
-            <div className="mt-[208px] h-[569px] w-[349px] rounded-[24px] bg-white"></div>
-          </div>
+          <Preview fetchProfile={fetchProfile} imageSource={imageUrl ? imageUrl : undefined} />
           <nav className={`flex h-[126px] w-full flex-col items-center justify-center p-[24px]`}>
             <div className="flex h-[78px] w-full items-center justify-between rounded-[12px] bg-white pl-[24px] pr-[16px]">
               <button
@@ -233,7 +229,7 @@ export default function Main() {
               </button>
             </div>
           </nav>
-          <main className="h-[858px]">blabla</main>
+          <div className="h-[858px]"></div>
         </>
       )}
       <div

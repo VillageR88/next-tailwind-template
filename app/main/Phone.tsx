@@ -28,7 +28,7 @@ const Phone = ({
   fetchLinks?: Link[];
   fetchProfile?: Profile | null;
   passCopiedToClipboardPopUp(): void;
-  imageSource: string | null;
+  imageSource?: string;
 }) => {
   return (
     <div className="flex h-[631px] w-[307px] flex-col items-center justify-center bg-[url('/assets/images/illustration-phone-mockup.svg')] bg-center bg-no-repeat pt-[10px]">

@@ -22,8 +22,8 @@ const ProfileDetails = ({
   setFetchProfile: Dispatch<SetStateAction<Profile | null>>;
   fetchProfileInitial: Profile | null;
   setFetchProfileInitial: Dispatch<SetStateAction<Profile | null>>;
-  profileImageUrl: string | null;
-  setProfileImageUrl: Dispatch<SetStateAction<string | null>>;
+  profileImageUrl?: string;
+  setProfileImageUrl: Dispatch<SetStateAction<string | undefined>>;
 }) => {
   enum InputState {
     invalid,
