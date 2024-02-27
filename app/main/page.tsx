@@ -206,6 +206,7 @@ export default function Main() {
       ) : (
         <>
           <Preview
+            fetchLinks={fetchLinks}
             passCopiedToClipboardPopUp={() => {
               handleReset();
               setPopUpBottom(true);

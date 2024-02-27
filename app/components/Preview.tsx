@@ -15,6 +15,24 @@ const Preview = ({
   fetchLinks?: Link[];
   passCopiedToClipboardPopUp(): void;
 }) => {
+  const caseLengthAbove = (length: number): boolean => {
+    if (fetchProfile) {
+      if (fetchProfile.firstName) return fetchProfile.firstName.length > length;
+      if (fetchProfile.lastName) return fetchProfile.lastName.length > length;
+    }
+    return false;
+  };
+  const conditionalTextSize = caseLengthAbove(20)
+    ? 'text-[1rem]'
+    : caseLengthAbove(16)
+      ? 'text-[1.2rem]'
+      : caseLengthAbove(14)
+        ? 'text-[1.5rem]'
+        : caseLengthAbove(11)
+          ? 'text-[1.7rem]'
+          : 'headingM';
+
+  fetchProfile && fetchProfile.firstName.length < 20;
   return (
     <main className="w-full">
       <div className="h-0 w-full">
@@ -24,7 +42,7 @@ const Preview = ({
         <div className="mt-[208px] flex h-[569px] w-[349px] items-center justify-center rounded-[24px] bg-white">
           <div className="flex h-[473px] w-[237px] flex-col justify-between">
             <div
-              className={`flex min-h-[209px] w-full flex-col items-center ${
+              className={`flex min-h-[209px] w-full flex-col items-center gap-2 ${
                 imageSource ? 'justify-between' : 'justify-end'
               }`}
             >
@@ -44,8 +62,10 @@ const Preview = ({
                     : 'invisible'
                 } flex min-h-[80px] w-full flex-col items-center justify-center bg-white text-center`}
               >
-                <h2 className="headingM line-clamp-2 max-w-full break-words font-instrumentSans font-semibold text-[#333333]">
-                  {fetchProfile?.firstName.concat(' ', fetchProfile.lastName).trim()}
+                <h2
+                  className={`${conditionalTextSize} line-clamp-2 max-w-full break-words font-instrumentSans font-semibold text-[#333333]`}
+                >
+                  {fetchProfile?.firstName.concat(' ', fetchProfile.lastName || '').trim()}
                 </h2>
                 <p className="bodyM line-clamp-2 max-w-full break-all font-instrumentSans leading-[150%] text-[#737373]">
                   {fetchProfile?.email}
@@ -55,7 +75,7 @@ const Preview = ({
             <div className="flex h-[208px] w-full flex-col">
               <ul className="flex h-fit w-full flex-col gap-[20px] overflow-auto bg-white">
                 {fetchLinks?.map((item, index) => (
-                  <li key={index} className={`min-h-[44px] w-full rounded-[8px] ${dataColors[item.title][1]}`}>
+                  <li key={index} className={`min-h-[56px] w-full rounded-[8px] ${dataColors[item.title][1]}`}>
                     <button
                       onClick={() => {
                         void navigator.clipboard.writeText(item.url);
@@ -75,7 +95,7 @@ const Preview = ({
                           alt={item.title}
                           width={10}
                           height={10}
-                          className="mr-[16px] h-[16px] w-[16px] fill-inherit text-inherit"
+                          className="mr-[16px] h-[20px] w-[20px] fill-inherit text-inherit"
                         />
 
                         <span className="bodyS">{item.title}</span>
