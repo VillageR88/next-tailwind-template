@@ -213,6 +213,7 @@ const Links = ({
                           type="button"
                         >
                           <Image
+                            priority
                             draggable={false}
                             className="h-fit w-[12px]"
                             width={10}
@@ -331,7 +332,7 @@ const Links = ({
                             content="/assets/images/icon-link.svg"
                             type="text"
                             placeholder={urlPlaceholders[item.title as keyof typeof urlPlaceholders]}
-                            value={item.url}
+                            value={fetchLinks[index].url}
                             onChange={(e) => {
                               const newLinks = [...fetchLinks];
                               newLinks[index].url = e.target.value;

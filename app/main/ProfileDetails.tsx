@@ -178,7 +178,7 @@ const ProfileDetails = ({
                   First name*
                 </label>
                 <input
-                  value={fetchProfile?.firstName}
+                  value={fetchProfile ? fetchProfile.firstName : ''}
                   onChange={(e) => {
                     setFetchProfile({ ...fetchProfile, firstName: e.target.value } as Profile);
                   }}
@@ -206,7 +206,7 @@ const ProfileDetails = ({
                   Last name*
                 </label>
                 <input
-                  value={fetchProfile?.lastName}
+                  value={fetchProfile ? fetchProfile.lastName : ''}
                   onChange={(e) => {
                     setFetchProfile({ ...fetchProfile, lastName: e.target.value } as Profile);
                   }}
@@ -234,7 +234,7 @@ const ProfileDetails = ({
                   Email
                 </label>
                 <input
-                  value={fetchProfile?.email}
+                  value={fetchProfile ? fetchProfile.email : ''}
                   onChange={(e) => {
                     setFetchProfile({ ...fetchProfile, email: e.target.value } as Profile);
                   }}
