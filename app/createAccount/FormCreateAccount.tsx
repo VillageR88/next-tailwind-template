@@ -17,7 +17,7 @@ const FormCreateAccount = ({ passLoadingState }: { passLoadingState(arg0: boolea
   const [passwordStatus, setPasswordStatus] = useState<Status>(Status.Typing);
   const [passwordConfirmStatus, setPasswordConfirmStatus] = useState<Status>(Status.Typing);
   const [submit, setSubmit] = useState<boolean>(false);
-  const [showModal, setShowModal] = useState(false);
+  const [showModal, setShowModal] = useState<boolean>(false);
   const refs = useRef<HTMLInputElement[]>([]);
 
   useEffect(() => {
