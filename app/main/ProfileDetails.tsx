@@ -40,6 +40,7 @@ const ProfileDetails = ({
   const [lastNameState, setLastNameState] = useState<InputState>(InputState.typingOrValid);
   const [emailState, setEmailState] = useState<InputState>(InputState.typingOrValid);
   const [tryUpsert, setTryUpsert] = useState<boolean>(false);
+  const noChange = JSON.stringify(fetchProfile) === JSON.stringify(fetchProfileInitial);
   const handleEmailValidation = (email: string) => {
     const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
     return emailRegex.test(email);
@@ -186,9 +187,8 @@ const ProfileDetails = ({
           </div>
           <form
             onSubmit={(e) => {
-              console.log('submit');
+              //This doesn't work and I don't know why, but i leave it here for safety
               e.preventDefault();
-              handleUpsert();
             }}
             className="flex h-[208px] w-full flex-col justify-between rounded-[12px] bg-[#FAFAFA] p-[20px]"
           >
@@ -202,15 +202,17 @@ const ProfileDetails = ({
                   onChange={(e) => {
                     setFetchProfile({ ...fetchProfile, firstName: e.target.value } as Profile);
                   }}
-                  onKeyDown={() => {
+                  onKeyDown={(e) => {
                     setFirstNameState(InputState.typingOrValid);
+                    if (e.key === 'Enter') {
+                      !noChange && handleUpsert();
+                    }
                   }}
                   ref={(el) => (el !== null ? (refs.current[0] = el) : null)}
                   id="firstName"
                   className={`${
                     firstNameState === InputState.invalid && 'textFieldError'
                   } textField bodyM h-full w-[432px] px-[16px]`}
-                  type="text"
                   placeholder="e.g. John"
                 />
               </div>
@@ -230,15 +232,17 @@ const ProfileDetails = ({
                   onChange={(e) => {
                     setFetchProfile({ ...fetchProfile, lastName: e.target.value } as Profile);
                   }}
-                  onKeyDown={() => {
+                  onKeyDown={(e) => {
                     setLastNameState(InputState.typingOrValid);
+                    if (e.key === 'Enter') {
+                      !noChange && handleUpsert();
+                    }
                   }}
                   ref={(el) => (el !== null ? (refs.current[1] = el) : null)}
                   id="lastName"
                   className={`${
                     lastNameState === InputState.invalid && 'textFieldError'
                   } textField bodyM h-full w-[432px] px-[16px]`}
-                  type="text"
                   placeholder="e.g. Appleseed"
                 />
               </div>
@@ -258,15 +262,17 @@ const ProfileDetails = ({
                   onChange={(e) => {
                     setFetchProfile({ ...fetchProfile, email: e.target.value } as Profile);
                   }}
-                  onKeyDown={() => {
+                  onKeyDown={(e) => {
                     setEmailState(InputState.typingOrValid);
+                    if (e.key === 'Enter') {
+                      !noChange && handleUpsert();
+                    }
                   }}
                   ref={(el) => (el !== null ? (refs.current[2] = el) : null)}
                   id="someEmail"
                   className={`${
                     emailState === InputState.invalid && 'textFieldError'
                   } textField bodyM h-full w-[432px] px-[16px]`}
-                  type="email"
                   placeholder="e.g. email@example.com"
                 />
               </div>
@@ -301,7 +307,7 @@ const ProfileDetails = ({
               Cancel
             </button>
             <button
-              disabled={JSON.stringify(fetchProfile) === JSON.stringify(fetchProfileInitial)}
+              disabled={noChange}
               onClick={() => {
                 handleUpsert();
               }}
