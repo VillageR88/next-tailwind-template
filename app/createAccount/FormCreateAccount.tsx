@@ -6,8 +6,9 @@ import Link from 'next/link';
 import Image from 'next/image';
 import Status from '../lib/email/enumStatus';
 import status from '../lib/email/accessStatus';
+import Modal from '../components/Modal';
 
-const FormCreateAccount = () => {
+const FormCreateAccount = ({ passLoadingState }: { passLoadingState(arg0: boolean): void }) => {
   const router = useRouter();
   const [emailValue, setEmailValue] = useState<string>('');
   const [passwordValue, setPasswordValue] = useState<string>('');
@@ -16,6 +17,7 @@ const FormCreateAccount = () => {
   const [passwordStatus, setPasswordStatus] = useState<Status>(Status.Typing);
   const [passwordConfirmStatus, setPasswordConfirmStatus] = useState<Status>(Status.Typing);
   const [submit, setSubmit] = useState<boolean>(false);
+  const [showModal, setShowModal] = useState(false);
   const refs = useRef<HTMLInputElement[]>([]);
 
   useEffect(() => {
@@ -30,29 +32,28 @@ const FormCreateAccount = () => {
           passwordStatus === Status.Typing &&
           emailStatus === Status.Typing &&
           passwordConfirmStatus === Status.Typing
-        ) {
-          try {
-            console.log('run');
-            const { error } = await supabase.auth.signUp({
-              email: emailValue,
-              password: passwordValue,
-            });
-            if (!error) router.push('/main');
-            else {
-              setEmailStatus(Status.InvalidLoginCredentials);
-              setPasswordStatus(Status.InvalidLoginCredentials);
-            }
-          } catch (error) {
-            console.log('error', error);
+        )
+          passLoadingState(true);
+        {
+          const { error } = await supabase.auth.signUp({
+            email: emailValue,
+            password: passwordValue,
+          });
+
+          if (!error) router.push('/main');
+          else {
+            setEmailStatus(Status.InvalidLoginCredentials);
+            setPasswordStatus(Status.InvalidLoginCredentials);
+            passLoadingState(false);
+            console.error('error', error);
+            setShowModal(true);
           }
         }
       };
-      handleSubmit().catch((error) => {
-        console.error('Failed to create account:', error);
-      });
+      void handleSubmit();
       setSubmit(false);
     }
-  }, [emailStatus, emailValue, passwordConfirmStatus, passwordStatus, passwordValue, router, submit]);
+  }, [emailStatus, emailValue, passLoadingState, passwordConfirmStatus, passwordStatus, passwordValue, router, submit]);
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
       if (event.key === 'Escape') {
@@ -84,6 +85,7 @@ const FormCreateAccount = () => {
       }}
       className="flex h-[418px] w-full flex-col justify-between"
     >
+      <Modal showModal={showModal} setShowModal={setShowModal} emailValue={emailValue} />
       <div className="flex h-[70px] flex-col justify-between gap-[4px]">
         <label className="bodyS h-[18px]" htmlFor="email">
           Email address
