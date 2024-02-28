@@ -134,7 +134,7 @@ const ProfileDetails = ({
         <div className="flex h-[465px] w-full flex-col justify-between">
           <div className="flex h-[233px] w-full items-center justify-between rounded-[12px] bg-[#FAFAFA] p-[20px]">
             <span className="bodyM text-[#737373]">Profile picture</span>
-            <div className="flex h-full w-[432px] items-center justify-between">
+            <div className="flex h-full w-[344px] flex-col items-center justify-between sm:flex-row xl:w-[432px]">
               <button
                 onClick={() => {
                   const fileInput = document.createElement('input');
@@ -185,7 +185,9 @@ const ProfileDetails = ({
                   </span>
                 </div>
               </button>
-              <span className="bodyS w-[215px]">Image must be below 1024x1024px. Use PNG or JPG format.</span>
+              <span className="bodyS w-[127px] xl:w-[215px]">
+                Image must be below 1024x1024px. Use PNG or JPG format.
+              </span>
             </div>
           </div>
           <form
@@ -215,7 +217,7 @@ const ProfileDetails = ({
                   id="firstName"
                   className={`${
                     firstNameState === InputState.invalid && 'textFieldError'
-                  } textField bodyM h-full w-[432px] px-[16px]`}
+                  } textField bodyM h-full w-[344px] px-[16px] xl:w-[432px]`}
                   placeholder="e.g. John"
                 />
               </div>
@@ -245,7 +247,7 @@ const ProfileDetails = ({
                   id="lastName"
                   className={`${
                     lastNameState === InputState.invalid && 'textFieldError'
-                  } textField bodyM h-full w-[432px] px-[16px]`}
+                  } textField bodyM h-full w-[344px] px-[16px] xl:w-[432px]`}
                   placeholder="e.g. Appleseed"
                 />
               </div>
@@ -275,7 +277,7 @@ const ProfileDetails = ({
                   id="someEmail"
                   className={`${
                     emailState === InputState.invalid && 'textFieldError'
-                  } textField bodyM h-full w-[432px] px-[16px]`}
+                  } textField bodyM h-full w-[344px] px-[16px] xl:w-[432px]`}
                   placeholder="e.g. email@example.com"
                 />
               </div>
