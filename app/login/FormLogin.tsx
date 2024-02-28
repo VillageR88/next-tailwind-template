@@ -76,7 +76,7 @@ const FormLogin = ({ passLoadingState }: { passLoadingState(arg0: boolean): void
             if (value.validity.valueMissing) setPasswordStatus(Status.Empty);
             else setPasswordStatus(Status.CheckAgain);
         }}
-        className="flex h-[282px] w-full flex-col justify-between"
+        className="flex h-[306px] w-full flex-col justify-between sm:h-[282px]"
       >
         <div className="flex h-[70px] flex-col justify-between gap-[4px]">
           <label className="bodyS h-[18px]" htmlFor="email">
@@ -159,7 +159,7 @@ const FormLogin = ({ passLoadingState }: { passLoadingState(arg0: boolean): void
         <button className="buttonPrimary headingS h-[46px] w-full" type="submit">
           Login
         </button>
-        <div className="bodyM flex justify-center gap-1">
+        <div className="bodyM flex flex-col items-center justify-center gap-1 sm:flex-row">
           <span className="text-[#737373]">Don&rsquo;t have an account?</span>
           <Link href={'/createAccount'}>
             <span className="text-[#633CFF]">Create account</span>
