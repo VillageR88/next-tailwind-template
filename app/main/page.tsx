@@ -94,7 +94,7 @@ export default function Main() {
     <div
       className={`${
         !preloadComplete ? 'h-screen overflow-hidden' : 'min-h-screen'
-      } flex flex-col items-center justify-center px-[24px] transition duration-1000`}
+      } flex flex-col items-center justify-center gap-[16px] transition duration-1000 sm:gap-0`}
     >
       {!preloadComplete && (
         <div className={`flex h-full w-full flex-col items-center justify-center`}>
@@ -106,27 +106,34 @@ export default function Main() {
           <nav
             className={`${
               preloadComplete ? 'opacity-100 transition duration-300' : 'max-h-0 opacity-0'
-            } flex h-[126px] w-full flex-col items-center justify-center `}
+            } flex w-full flex-col items-center justify-center sm:h-[126px]`}
           >
             <div className="flex h-[78px] w-full items-center justify-between rounded-[12px] bg-white pl-[24px] pr-[16px]">
               <Image
-                className="h-fit w-[146px]"
+                className="hidden h-fit w-[146px] sm:block"
                 width={16}
                 height={16}
                 src={'../assets/images/logo-devlinks-large.svg' as string}
                 alt="devlinks logo"
               />
-              <div className="flex gap-[16px]">
+              <Image
+                className="block h-fit w-[32px] sm:hidden"
+                width={16}
+                height={16}
+                src={'../assets/images/logo-devlinks-small.svg' as string}
+                alt="devlinks logo"
+              />
+              <div className="flex lg:gap-[16px]">
                 <button
                   onClick={() => {
                     setMiddleSection(MiddleButtons.Links);
                   }}
                   className={`${
                     middleSection === MiddleButtons.Links && 'active'
-                  } tabs flex h-[46px] w-[122px] items-center justify-center gap-[8px] transition`}
+                  } tabs flex h-[46px] w-[74px] items-center justify-center gap-[8px] transition sm:w-[122px]`}
                 >
                   <IconLink />
-                  <span className="headingS">Links</span>
+                  <span className="headingS hidden sm:block">Links</span>
                 </button>
                 <button
                   onClick={() => {
@@ -134,26 +141,33 @@ export default function Main() {
                   }}
                   className={`${
                     middleSection === MiddleButtons.ProfileDetails && 'active'
-                  } tabs flex h-[46px] w-[187px] items-center justify-center gap-[8px]`}
+                  } tabs flex h-[46px] w-[74px] items-center justify-center gap-[8px] sm:w-[187px]`}
                 >
                   <IconProfile />
-                  <span className="headingS">Profile Details</span>
+                  <span className="headingS hidden sm:block">Profile Details</span>
                 </button>
               </div>
               <button
                 onClick={() => {
                   setMainView(MainView.Preview);
                 }}
-                className="headingS buttonSecondary h-[46px] w-[114px]"
+                className="headingS buttonSecondary flex h-[42px] w-[52px] items-center justify-center sm:h-[46px] sm:w-[114px]"
               >
-                Preview
+                <span className="hidden sm:block">Preview</span>
+                <Image
+                  className="block sm:hidden"
+                  height={20}
+                  width={20}
+                  src={'../assets/images/icon-preview-header.svg' as string}
+                  alt="preview"
+                />
               </button>
             </div>
           </nav>
           <main
             className={`${
               preloadComplete ? 'opacity-100 transition duration-300' : 'max-h-0 opacity-0'
-            } flex h-[858px] w-full flex-row justify-between`}
+            } flex h-[858px] w-full flex-row justify-between px-[16px] sm:px-[24px]`}
           >
             <div
               className={`${
