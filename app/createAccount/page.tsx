@@ -7,9 +7,9 @@ import { useState } from 'react';
 export default function CreateAccount() {
   const [loadingState, setLoadingState] = useState<boolean>(false);
   return (
-    <div className="flex min-h-screen flex-col items-center justify-center bg-[#FAFAFA]">
+    <div className="flex min-h-screen flex-col items-center justify-center bg-white p-[32px] sm:bg-[#FAFAFA]">
       {loadingState && <RotatingLines width="180" strokeColor="cornflowerblue" ariaLabel="loading" />}
-      <div className={`${loadingState ? 'hidden' : 'flex'} h-[709px] w-[476px] flex-col items-center justify-between`}>
+      <div className={`${loadingState ? 'hidden' : 'flex'} h-[709px] flex-col justify-between sm:items-center`}>
         <Image
           className="h-fit w-fit"
           width={10}
@@ -18,7 +18,7 @@ export default function CreateAccount() {
           alt="devlinks logo"
           priority
         />
-        <div className="flex h-[618px] w-full flex-col justify-between rounded-[12px] bg-[white] px-[40px] py-[40px]">
+        <div className="flex h-[550px] w-full flex-col justify-between rounded-[12px] bg-[white] sm:h-[618px] sm:px-[40px] sm:py-[40px]">
           <section className="flex h-[80px] w-full flex-col justify-between">
             <h1 className="headingM">Create account</h1>
             <p className="bodyM text-[#737373]">Let’s get you started sharing your links!</p>

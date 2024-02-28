@@ -86,7 +86,7 @@ const FormCreateAccount = ({ passLoadingState }: { passLoadingState(arg0: boolea
           if (value.id === 'email') if (value.validity.valueMissing) setEmailStatus(Status.Empty);
           if (value.id === 'password') if (value.validity.valueMissing) setPasswordStatus(Status.Empty);
         }}
-        className="flex h-[418px] w-full flex-col justify-between"
+        className="flex h-[442px] w-full flex-col justify-between sm:h-[418px]"
       >
         <div className="flex h-[70px] flex-col justify-between gap-[4px]">
           <label className="bodyS h-[18px]" htmlFor="email">
@@ -208,7 +208,7 @@ const FormCreateAccount = ({ passLoadingState }: { passLoadingState(arg0: boolea
         <button className="buttonPrimary headingS h-[46px] w-full text-white" type="submit">
           Create new account
         </button>
-        <div className="bodyM flex justify-center gap-1">
+        <div className="bodyM flex flex-col items-center justify-center gap-1 sm:flex-row">
           <span className="text-[#737373]">Already have an account?</span>
           <Link href={'/login'}>
             <span className="text-[#633CFF]">Login</span>
