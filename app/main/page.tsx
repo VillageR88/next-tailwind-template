@@ -167,12 +167,12 @@ export default function Main() {
           <main
             className={`${
               preloadComplete ? 'opacity-100 transition duration-300' : 'max-h-0 opacity-0'
-            } flex h-[858px] w-full flex-row justify-between px-[16px] sm:px-[24px]`}
+            } flex h-full w-full flex-row justify-between px-[16px] sm:h-[858px] sm:px-[24px]`}
           >
             <div
               className={`${
                 preloadComplete ? 'opacity-100 transition duration-300' : 'max-h-0 opacity-0'
-              } hidden h-[834px] w-full items-center justify-center rounded-[12px] bg-white lg:flex lg:w-[40.3%]`}
+              } hidden h-full w-full items-center justify-center rounded-[12px] bg-white sm:h-[834px] lg:flex lg:w-[40.3%]`}
             >
               <Phone
                 fetchProfile={fetchProfile}
@@ -185,7 +185,7 @@ export default function Main() {
                 fetchLinks={fetchLinks}
               />
             </div>
-            <div className="h-[834px] w-full rounded-[12px] bg-white transition-all lg:w-[58%]">
+            <div className="h-full w-full rounded-[12px] bg-white transition-all sm:h-[834px] lg:w-[58%]">
               <ProfileDetails
                 fetchProfile={fetchProfile}
                 setFetchProfile={setFetchProfile}

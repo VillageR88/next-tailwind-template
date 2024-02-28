@@ -146,13 +146,13 @@ const Links = ({
     return Object.values(SocialMedia).filter((item) => !fetchLinks.find((link) => link.title === item)?.title);
   };
   return (
-    <div className={`${visible ? 'flex' : 'hidden'}  h-full w-full flex-col items-center justify-center`}>
-      <div className="flex h-[739px] w-full flex-col justify-between p-[40px]">
-        <div className="flex h-[80px] w-full flex-col justify-between">
+    <div className={`${visible ? 'flex' : 'hidden'} h-full w-full flex-col items-center justify-center`}>
+      <div className="flex h-full w-full flex-col justify-between gap-[40px] p-[24px] sm:h-[739px] sm:p-[40px]">
+        <div className="flex h-full w-full flex-col justify-between gap-[8px] sm:h-[80px] sm:gap-0">
           <h1 className="headingM text-[#333333]">Customize your links</h1>
           <p className="text-[#737373]">Add/edit/remove links below and then share all your profiles with the world!</p>
         </div>
-        <div className="flex h-[539px] w-full flex-col justify-between">
+        <div className="flex h-full w-full flex-col justify-between gap-[24px] sm:h-[539px]">
           <button
             onClick={() => {
               const newTitle = titleAvailable();
@@ -165,7 +165,7 @@ const Links = ({
                 }),
               );
             }}
-            className="buttonSecondary h-[46px] w-full"
+            className="buttonSecondary min-h-[46px] w-full"
           >
             + Add new link
           </button>
@@ -361,22 +361,22 @@ const Links = ({
       </div>
       <div className="h-[95px] w-full ">
         <hr className="border-[#D9D9D9]" />
-        <div className="flex items-center justify-between px-[40px] py-[24px]">
+        <div className="flex flex-col-reverse items-center justify-between gap-[18px] px-[40px] py-[24px] sm:flex-row">
           <button
             onClick={() => {
               void supabase.auth.signOut();
               router.replace('/login');
             }}
-            className="buttonSecondary headingS h-[46px] w-[91px] font-[500]"
+            className="buttonSecondary headingS h-[46px] w-full font-[500] sm:w-[91px]"
           >
             Log Out
           </button>
-          <div className="flex gap-[18px]">
+          <div className="flex w-full flex-col-reverse gap-[18px] sm:w-fit sm:flex-row">
             <button
               onClick={() => {
                 setFetchLinks([...fetchLinksInitial].map((item) => ({ ...item })));
               }}
-              className="buttonSecondary headingS h-[46px] w-[91px] font-[500]"
+              className="buttonSecondary headingS h-[46px] w-full font-[500] sm:w-[91px]"
             >
               Cancel
             </button>
@@ -385,7 +385,7 @@ const Links = ({
               onClick={() => {
                 setCheckInputs(true);
               }}
-              className="buttonPrimary headingS h-[46px] w-[91px] font-[500]"
+              className="buttonPrimary headingS h-[46px] w-full font-[500] sm:w-[91px]"
             >
               Save
             </button>
