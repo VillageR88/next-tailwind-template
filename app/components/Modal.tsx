@@ -12,9 +12,11 @@ const Modal = ({
   setShowModal: Dispatch<SetStateAction<boolean>>;
 }) => {
   const handlePasswordReset = async () => {
-    const { error } = await supabase.auth.resetPasswordForEmail(emailValue);
+    const { data, error } = await supabase.auth.resetPasswordForEmail(emailValue);
     if (error) {
       console.log('error', error);
+    } else {
+      console.log('data', data);
     }
   };
 
@@ -43,6 +45,7 @@ const Modal = ({
             type="button"
             className="buttonPrimary h-9 w-20"
             onClick={() => {
+              void handlePasswordReset();
               alert(
                 'Password reset link will be sent to your email. Please check your email. Due to server limitations, time to receive the email may vary. Thank you!',
               );

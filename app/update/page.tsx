@@ -7,13 +7,12 @@ import supabase from '../lib/supabaseClient';
 import { useRouter } from 'next/navigation';
 import status from '../lib/email/accessStatus';
 
-export default function Login({ passLoadingState }: { passLoadingState(arg0: boolean): void }) {
+export default function Login() {
   const refs = useRef<HTMLInputElement[]>([]);
   const router = useRouter();
   const [loadingState, setLoadingState] = useState<boolean>(false);
   const [passwordValue, setPasswordValue] = useState<string>('');
   const [passwordConfirmValue, setPasswordConfirmValue] = useState<string>('');
-  const [emailStatus, setEmailStatus] = useState<Status>(Status.Typing);
   const [passwordStatus, setPasswordStatus] = useState<Status>(Status.Typing);
   const [passwordConfirmStatus, setPasswordConfirmStatus] = useState<Status>(Status.Typing);
   const [submit, setSubmit] = useState<boolean>(false);
@@ -26,11 +25,12 @@ export default function Login({ passLoadingState }: { passLoadingState(arg0: boo
       setSubmit(true);
     }
   };
+
   useEffect(() => {
     if (submit) {
-      supabase.auth.onAuthStateChange(async (event, session) => {
+      supabase.auth.onAuthStateChange(async (event) => {
         if (event == 'PASSWORD_RECOVERY') {
-          passLoadingState(true);
+          setLoadingState(true);
           const newPassword = passwordValue;
           const { data, error } = await supabase.auth.updateUser({ password: newPassword });
           if (data.user) {
@@ -39,14 +39,14 @@ export default function Login({ passLoadingState }: { passLoadingState(arg0: boo
           }
           if (error) {
             setPasswordStatus(Status.InvalidLoginCredentials);
-            passLoadingState(false);
+            setLoadingState(false);
             alert('There was an error updating your password.');
           }
         }
       });
       setSubmit(false);
     }
-  }, [passLoadingState, passwordValue, router, submit]);
+  }, [passwordValue, router, submit]);
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
       if (event.key === 'Escape') {
@@ -85,6 +85,7 @@ export default function Login({ passLoadingState }: { passLoadingState(arg0: boo
           <form
             onSubmit={(e) => {
               e.preventDefault();
+              console.log('submit');
               handleSubmit();
             }}
             className="flex h-[282px] w-full flex-col justify-between"
@@ -168,7 +169,13 @@ export default function Login({ passLoadingState }: { passLoadingState(arg0: boo
               )}
             </div>
             <span className="bodyS text-[#737373]">Password must contain at least 8 characters</span>
-            <button className="buttonPrimary headingS h-[46px] w-full" type="submit">
+            <button
+              onClick={() => {
+                handleSubmit();
+              }}
+              className="buttonPrimary headingS h-[46px] w-full"
+              type="submit"
+            >
               Change Password
             </button>
             <div className="bodyM flex justify-center gap-1"></div>
