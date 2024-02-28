@@ -9,11 +9,13 @@ const Preview = ({
   fetchProfile,
   fetchLinks,
   passCopiedToClipboardPopUp,
+  preloadComplete,
 }: {
   imageSource?: string;
   fetchProfile?: Profile | null;
   fetchLinks?: Link[];
   passCopiedToClipboardPopUp(): void;
+  preloadComplete?: boolean;
 }) => {
   const caseLengthAbove = (length: number): boolean => {
     if (fetchProfile) {
@@ -34,7 +36,7 @@ const Preview = ({
 
   fetchProfile && fetchProfile.firstName.length < 20;
   return (
-    <main className="w-full">
+    <main className={`${!preloadComplete && preloadComplete !== undefined && 'hidden'} w-full`}>
       <div className="h-0 w-full">
         <div className="-z-10 h-[357px] w-full bg-[#633CFF]"></div>
       </div>

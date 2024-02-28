@@ -28,6 +28,7 @@ export default function Login() {
 
   useEffect(() => {
     if (submit) {
+      console.log('submitNow');
       supabase.auth.onAuthStateChange(async (event) => {
         if (event == 'PASSWORD_RECOVERY') {
           setLoadingState(true);
@@ -42,9 +43,9 @@ export default function Login() {
             setLoadingState(false);
             alert('There was an error updating your password.');
           }
+          setSubmit(false);
         }
       });
-      setSubmit(false);
     }
   }, [passwordValue, router, submit]);
   useEffect(() => {
