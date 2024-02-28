@@ -8,7 +8,7 @@ import PopupMessage from '../lib/enumPopupMessage';
 import Image from 'next/image';
 import popupMessages from '../lib/popupMessages';
 import supabase from '../lib/supabaseClient';
-
+import { useSearchParams } from 'next/navigation';
 const SharePage = () => {
   const [fetchLinks, setFetchLinks] = useState<Link[]>([]);
   const [fetchProfile, setFetchProfile] = useState<Profile | undefined>(undefined);
@@ -17,6 +17,8 @@ const SharePage = () => {
   const [popUpMessage, setPopUpMessage] = useState<PopupMessage>(PopupMessage.ChangesSaved);
   const [resetTimer, setResetTimer] = useState(false);
   const [imageUrl, setImageUrl] = useState<string | undefined>(undefined);
+  const searchParams = useSearchParams();
+  const userEmail = searchParams.get('userEmail');
 
   useEffect(() => {
     void supabase.from('linkSharingAppData').upsert([{ email: userEmail }]);
@@ -40,7 +42,7 @@ const SharePage = () => {
     void fetchData().finally(() => {
       setPreloadComplete(true);
     });
-  }, [preloadComplete]);
+  }, [preloadComplete, userEmail]);
 
   useEffect(() => {
     const timeout = setTimeout(() => {
@@ -80,10 +82,9 @@ const SharePage = () => {
           fetchProfile={fetchProfile}
           imageSource={imageUrl ? imageUrl : undefined}
         />
-        <div className={`flex h-[126px] w-full flex-col items-center justify-center p-[24px]`}></div>
-        <div className="h-[858px]"></div>
+        <div className={`flex h-[126px] w-screen flex-col items-center justify-center p-[24px]`}></div>
+        <div className="pointer-events-none h-[858px] w-full"></div>
       </div>
-
       <div
         className={`${popUpBottom ? 'opacity-100' : 'opacity-0'} pointer-events-none ${
           preloadComplete ? 'flex duration-300' : 'hidden'
@@ -92,6 +93,7 @@ const SharePage = () => {
         <div className="absolute left-0 flex h-[56px] w-screen justify-center ">
           <div className="mt-[-100px] flex h-full w-[406px] items-center justify-center gap-[8px]  rounded-[12px] bg-[#333333]">
             <Image
+              priority
               className="h-[20px] w-[20px]"
               height={10}
               width={10}

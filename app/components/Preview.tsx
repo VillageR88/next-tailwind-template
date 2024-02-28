@@ -50,6 +50,7 @@ const Preview = ({
             >
               {imageSource && (
                 <Image
+                  priority
                   className="h-[96px] w-[96px] rounded-full outline outline-4 outline-[#633cff]"
                   height={10}
                   width={10}

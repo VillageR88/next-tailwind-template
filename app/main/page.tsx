@@ -227,7 +227,9 @@ export default function Main() {
               </button>
               <button
                 onClick={() => {
-                  void navigator.clipboard.writeText('TODO');
+                  const url = window.location.href.replace('main', 'share').concat(`?userEmail=${userEmail}`);
+
+                  void navigator.clipboard.writeText(url);
                   handleReset();
                   setPopUpBottom(true);
                   setPopUpMessage(PopupMessage.LinkCopied);
