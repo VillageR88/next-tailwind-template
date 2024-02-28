@@ -290,22 +290,22 @@ const ProfileDetails = ({
       </div>
       <div className="h-[95px] w-full ">
         <hr className="border-[#D9D9D9]" />
-        <div className="flex items-center justify-between px-[40px] py-[24px]">
+        <div className="flex flex-col-reverse items-center justify-between gap-[18px] px-[40px] py-[24px] sm:flex-row">
           <button
             onClick={() => {
               void supabase.auth.signOut();
               router.replace('/login');
             }}
-            className="buttonSecondary headingS h-[46px] w-[91px] font-[500]"
+            className="buttonSecondary headingS h-[46px] w-full font-[500] sm:w-[91px]"
           >
             Log Out
           </button>
-          <div className="flex gap-[18px]">
+          <div className="flex w-full flex-col-reverse gap-[18px] sm:w-fit sm:flex-row">
             <button
               onClick={() => {
                 setFetchProfile({ ...fetchProfileInitial } as Profile);
               }}
-              className="buttonSecondary headingS h-[46px] w-[91px] font-[500]"
+              className="buttonSecondary headingS h-[46px] w-full font-[500] sm:w-[91px]"
             >
               Cancel
             </button>
@@ -314,7 +314,7 @@ const ProfileDetails = ({
               onClick={() => {
                 handleUpsert();
               }}
-              className="buttonPrimary headingS h-[46px] w-[91px] font-[500]"
+              className="buttonPrimary headingS h-[46px] w-full font-[500] sm:w-[91px]"
             >
               Save
             </button>
