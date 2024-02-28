@@ -9,7 +9,11 @@ export default function CreateAccount() {
   return (
     <div className="flex min-h-screen flex-col items-center justify-center bg-white p-[32px] sm:bg-[#FAFAFA]">
       {loadingState && <RotatingLines width="180" strokeColor="cornflowerblue" ariaLabel="loading" />}
-      <div className={`${loadingState ? 'hidden' : 'flex'} h-[709px] flex-col justify-between sm:items-center`}>
+      <div
+        className={`${
+          loadingState ? 'hidden' : 'flex'
+        } w-full flex-col justify-between gap-[64px] sm:h-[709px] sm:w-[476px] sm:items-center sm:gap-0`}
+      >
         <Image
           className="h-fit w-fit"
           width={10}

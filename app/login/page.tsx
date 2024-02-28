@@ -12,7 +12,7 @@ export default function Login() {
       <div
         className={`${
           loadingState ? 'hidden' : 'flex'
-        } flex h-[644px] flex-col gap-[64px] sm:h-[573px] sm:items-center sm:justify-between sm:gap-0`}
+        } flex h-[644px] w-full flex-col gap-[64px] sm:h-[573px] sm:w-[476px] sm:items-center sm:justify-between sm:gap-0`}
       >
         <Image
           className="self h-fit w-fit"

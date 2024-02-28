@@ -64,10 +64,12 @@ export default function Login() {
     };
   }, []);
   return (
-    <div className="flex min-h-screen flex-col items-center justify-center bg-[#FAFAFA] font-instrumentSans">
+    <div className="flex min-h-screen flex-col items-center justify-center bg-white p-[32px] font-instrumentSans sm:bg-[#FAFAFA]">
       {loadingState && <RotatingLines width="180" strokeColor="cornflowerblue" ariaLabel="loading" />}
       <div
-        className={`${loadingState ? 'hidden' : 'flex'} flex h-[573px] w-[476px] flex-col items-center justify-between`}
+        className={`${
+          loadingState ? 'hidden' : 'flex'
+        } flex w-full flex-col justify-between gap-[60px] sm:h-[573px] sm:w-[476px] sm:items-center sm:gap-0`}
       >
         <Image
           className="h-fit w-fit"
@@ -78,7 +80,7 @@ export default function Login() {
           priority
         />
 
-        <div className="flex h-[482px] w-full flex-col justify-between rounded-[12px] bg-[white] px-[40px] py-[40px]">
+        <div className="flex w-full flex-col justify-between gap-[24px] rounded-[12px] bg-[white] sm:h-[482px] sm:gap-0 sm:px-[40px] sm:py-[40px]">
           <section className="flex h-[80px] w-full flex-col justify-between">
             <h1 className="headingM">Password Recovery</h1>
             <p className="bodyM text-[#737373]">Please enter new password.</p>
