@@ -140,10 +140,10 @@ const ProfileDetails = ({
                   const fileInput = document.createElement('input');
                   fileInput.type = 'file';
                   fileInput.accept = 'image/png, image/jpeg';
+                  fileInput.setAttribute('max-size', '2097152');
                   fileInput.onchange = (e) => {
                     const file = (e.target as HTMLInputElement).files?.[0];
                     if (file) {
-                      //const extension = file.name.split('.').pop();
                       void handleSendToServer(file);
                       const reader = new FileReader();
                       reader.onloadend = () => {
@@ -152,6 +152,9 @@ const ProfileDetails = ({
                         img.onload = () => {
                           if (img.width > 1024 || img.height > 1024) {
                             alert('Image resolution exceeds 1024x1024');
+                          } else if (file.size > 2097152) alert('Image size exceeds 2MB');
+                          else if (file.type !== 'image/png' && file.type !== 'image/jpeg') {
+                            alert('Invalid file format');
                           } else {
                             setProfileImageUrl(reader.result as string);
                           }
