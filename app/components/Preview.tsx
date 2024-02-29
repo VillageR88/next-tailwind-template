@@ -10,12 +10,14 @@ const Preview = ({
   fetchLinks,
   passCopiedToClipboardPopUp,
   preloadComplete,
+  alternateMargin,
 }: {
   imageSource?: string;
   fetchProfile?: Profile | null;
   fetchLinks?: Link[];
   passCopiedToClipboardPopUp(): void;
   preloadComplete?: boolean;
+  alternateMargin?: boolean;
 }) => {
   const caseLengthAbove = (length: number): boolean => {
     if (fetchProfile) {
@@ -36,12 +38,16 @@ const Preview = ({
 
   fetchProfile && fetchProfile.firstName.length < 20;
   return (
-    <main className={`${!preloadComplete && preloadComplete !== undefined && 'hidden'} w-full px-2`}>
+    <main className={`${!preloadComplete && preloadComplete !== undefined && 'hidden'} w-full px-2 sm:px-0`}>
       <div className="h-0 w-full">
         <div className="-z-10 h-[357px] w-full sm:bg-[#633CFF]"></div>
       </div>
       <div className="flex h-0 w-full justify-center">
-        <div className="mt-[80px] flex h-[569px] w-[349px] items-center justify-center rounded-[24px] bg-white sm:mt-[208px]">
+        <div
+          className={`${
+            alternateMargin && 'mt-[80px]'
+          } flex h-[569px] w-[349px] items-center justify-center rounded-[24px] bg-white sm:mt-[208px]`}
+        >
           <div className="flex h-[473px] w-full max-w-[237px] flex-col justify-between">
             <div
               className={`flex min-h-[209px] w-full flex-col items-center gap-2 ${

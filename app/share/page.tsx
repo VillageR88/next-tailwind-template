@@ -63,7 +63,8 @@ const SharePage = () => {
     <div
       className={`${
         !preloadComplete ? 'h-screen overflow-hidden' : 'min-h-screen'
-      } flex flex-col items-center justify-center transition duration-1000`}
+      } } flex flex-col items-center gap-[16px] bg-[white] transition duration-1000 sm:justify-center sm:gap-0
+      sm:bg-inherit`}
     >
       {!preloadComplete && (
         <div className={`flex h-full w-full flex-col items-center justify-center`}>
@@ -82,8 +83,8 @@ const SharePage = () => {
           fetchProfile={fetchProfile}
           imageSource={imageUrl ? imageUrl : undefined}
         />
-        <div className={`flex h-[126px] w-screen flex-col items-center justify-center p-[24px]`}></div>
-        <div className="pointer-events-none h-[858px] w-full"></div>
+        <div className={`flex w-screen flex-col items-center justify-center sm:h-[126px] sm:p-[24px]`}></div>
+        <div className="pointer-events-none h-screen w-full sm:h-[858px]"></div>
       </div>
       <div
         className={`${popUpBottom ? 'opacity-100' : 'opacity-0'} pointer-events-none ${
