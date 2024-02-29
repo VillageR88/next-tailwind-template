@@ -203,6 +203,10 @@ const Links = ({
                     <div className="flex h-[24px] items-center justify-between">
                       <div className="flex gap-[8px]">
                         <button
+                          onTouchStart={(e) => {
+                            e.preventDefault();
+                            setDraggable(true);
+                          }}
                           onMouseEnter={() => {
                             setDraggable(true);
                           }}
@@ -214,7 +218,7 @@ const Links = ({
                           <Image
                             priority
                             draggable={false}
-                            className="h-fit w-[12px]"
+                            className=" pointer-events-none h-fit w-[12px] sm:pointer-events-auto"
                             width={10}
                             height={10}
                             src={'../assets/images/icon-drag-and-drop.svg'}
