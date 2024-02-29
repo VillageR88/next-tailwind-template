@@ -18,7 +18,7 @@ export default function Login() {
           className="self h-fit w-fit"
           width={10}
           height={10}
-          src={'../public/assets/images/logo-devlinks-large.svg' as string}
+          src={'../assets/images/logo-devlinks-large.svg' as string}
           alt="devlinks logo"
           priority
         />
