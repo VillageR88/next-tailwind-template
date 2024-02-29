@@ -223,7 +223,7 @@ const ProfileDetails = ({
               </div>
               {firstNameState === InputState.invalid && (
                 <div className="flex h-0 w-full justify-end">
-                  <span className="bodyS mr-[16px] mt-[-32px] text-[#FF3939]">{error.empty}</span>
+                  <span className="bodyS mr-[16px] mt-[-32px] h-fit bg-white text-[#FF3939]">{error.empty}</span>
                 </div>
               )}
             </div>
@@ -253,7 +253,7 @@ const ProfileDetails = ({
               </div>
               {lastNameState === InputState.invalid && (
                 <div className="flex h-0 w-full justify-end">
-                  <span className="bodyS mr-[16px] mt-[-32px] text-[#FF3939]">{error.empty}</span>
+                  <span className="bodyS mr-[16px] mt-[-32px] h-fit bg-white text-[#FF3939]">{error.empty}</span>
                 </div>
               )}
             </div>

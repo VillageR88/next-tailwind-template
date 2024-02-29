@@ -126,7 +126,7 @@ export default function Login() {
                 />
               </div>
               {passwordStatus !== Status.Typing && (
-                <div className="pointer-events-none absolute z-10 mt-[2.15em] flex w-[24em] max-w-full justify-end">
+                <div className="pointer-events-none absolute right-10 z-10 mt-[2.15em] flex w-screen max-w-full justify-end sm:right-auto sm:w-[24em]">
                   <span className="bodyS self-end bg-white px-2 py-1 text-[#FF3939]">{status[passwordStatus]}</span>
                 </div>
               )}
@@ -164,7 +164,7 @@ export default function Login() {
                 />
               </div>
               {passwordConfirmStatus !== Status.Typing && (
-                <div className="pointer-events-none absolute z-10 mt-[2.15em] flex w-[24em] max-w-full justify-end">
+                <div className="pointer-events-none absolute right-10 z-10 mt-[2.15em] flex w-screen max-w-full justify-end sm:right-auto sm:w-[24em]">
                   <span className="bodyS self-end bg-white px-2 py-1 text-[#FF3939]">
                     {status[passwordConfirmStatus]}
                   </span>

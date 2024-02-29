@@ -347,8 +347,8 @@ const Links = ({
                             } textField textFieldEnhancedFocus h-[48px] w-full rounded-[8px] bg-[url('../public/assets/images/icon-link.svg')] bg-[16px] bg-no-repeat pl-[44px] pr-[16px] text-[#333333]`}
                           />
                           {linksErrorInfo[index] !== Phase.goodOrTyping && (
-                            <div className="flex h-0 w-full justify-end">
-                              <span className="bodyS mr-[16px] mt-[-32px] text-[#FF3939]">
+                            <div className="flex h-0 w-full justify-end ">
+                              <span className="bodyS mr-[16px] mt-[-32px] h-fit bg-white px-2 text-[#FF3939] sm:px-0">
                                 {errorMessages[linksErrorInfo[index] as keyof typeof errorMessages]}
                               </span>
                             </div>
