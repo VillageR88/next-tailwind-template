@@ -340,7 +340,7 @@ const Links = ({
                             className={`${
                               (linksErrorInfo[index] === Phase.empty || linksErrorInfo[index] === Phase.checkAgain) &&
                               'textFieldError'
-                            } textField textFieldEnhancedFocus h-[48px] w-full rounded-[8px] bg-[url('../assets/images/icon-link.svg')] bg-[16px] bg-no-repeat pl-[44px] pr-[16px] text-[#333333]`}
+                            } textField textFieldEnhancedFocus h-[48px] w-full rounded-[8px] bg-[url('../public/assets/images/icon-link.svg')] bg-[16px] bg-no-repeat pl-[44px] pr-[16px] text-[#333333]`}
                           />
                           {linksErrorInfo[index] !== Phase.goodOrTyping && (
                             <div className="flex h-0 w-full justify-end">
