@@ -89,12 +89,11 @@ const SharePage = () => {
       <div
         className={`${popUpBottom ? 'opacity-100' : 'opacity-0'} pointer-events-none ${
           preloadComplete ? 'flex duration-300' : 'hidden'
-        }  h-0 w-screen transition-opacity duration-[1000ms] ease-in-out`}
+        }  absolute bottom-10 flex h-screen w-screen items-end justify-center transition-opacity duration-[1000ms] ease-in-out`}
       >
-        <div className="absolute left-0 flex h-[56px] w-screen justify-center ">
-          <div className="mt-[-100px] flex h-full w-[406px] items-center justify-center gap-[8px]  rounded-[12px] bg-[#333333]">
+        <div className="flex  h-fit w-screen justify-center px-4 sm:inset-0  sm:py-0 ">
+          <div className="flex h-full w-full max-w-[406px] items-center justify-center gap-[8px] rounded-[12px] bg-[#333333] py-4 ">
             <Image
-              priority
               className="h-[20px] w-[20px]"
               height={10}
               width={10}
