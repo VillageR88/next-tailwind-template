@@ -32,17 +32,17 @@ const Preview = ({
         ? 'text-[1.5rem]'
         : caseLengthAbove(11)
           ? 'text-[1.7rem]'
-          : 'headingM';
+          : 'headingM2';
 
   fetchProfile && fetchProfile.firstName.length < 20;
   return (
-    <main className={`${!preloadComplete && preloadComplete !== undefined && 'hidden'} w-full`}>
+    <main className={`${!preloadComplete && preloadComplete !== undefined && 'hidden'} w-full px-2`}>
       <div className="h-0 w-full">
-        <div className="-z-10 h-[357px] w-full bg-[#633CFF]"></div>
+        <div className="-z-10 h-[357px] w-full sm:bg-[#633CFF]"></div>
       </div>
       <div className="flex h-0 w-full justify-center">
-        <div className="mt-[208px] flex h-[569px] w-[349px] items-center justify-center rounded-[24px] bg-white">
-          <div className="flex h-[473px] w-[237px] flex-col justify-between">
+        <div className="mt-[80px] flex h-[569px] w-[349px] items-center justify-center rounded-[24px] bg-white sm:mt-[208px]">
+          <div className="flex h-[473px] w-full max-w-[237px] flex-col justify-between">
             <div
               className={`flex min-h-[209px] w-full flex-col items-center gap-2 ${
                 imageSource ? 'justify-between' : 'justify-end'
@@ -51,7 +51,7 @@ const Preview = ({
               {imageSource && (
                 <Image
                   priority
-                  className="h-[96px] w-[96px] rounded-full outline outline-4 outline-[#633cff]"
+                  className="h-[104px] w-[104px] rounded-full outline outline-4 outline-[#633cff] sm:h-[96px] sm:w-[96px]"
                   height={10}
                   width={10}
                   src={imageSource}

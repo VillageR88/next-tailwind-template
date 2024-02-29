@@ -359,15 +359,15 @@ const Links = ({
           )}
         </div>
       </div>
-      <div className="h-[95px] w-full ">
+      <div className="h-full w-full sm:h-[95px]">
         <hr className="border-[#D9D9D9]" />
-        <div className="flex flex-col-reverse items-center justify-between gap-[18px] px-[40px] py-[24px] sm:flex-row">
+        <div className="flex flex-col-reverse items-center justify-between gap-[18px] px-[16px] py-[24px] sm:flex-row">
           <button
             onClick={() => {
               void supabase.auth.signOut();
               router.replace('/login');
             }}
-            className="buttonSecondary headingS h-[46px] w-full font-[500] sm:w-[91px]"
+            className="buttonSecondary headingS min-h-[46px] w-full font-[500] sm:w-[91px]"
           >
             Log Out
           </button>
@@ -376,7 +376,7 @@ const Links = ({
               onClick={() => {
                 setFetchLinks([...fetchLinksInitial].map((item) => ({ ...item })));
               }}
-              className="buttonSecondary headingS h-[46px] w-full font-[500] sm:w-[91px]"
+              className="buttonSecondary headingS min-h-[46px] w-full font-[500] sm:w-[91px]"
             >
               Cancel
             </button>
@@ -385,7 +385,7 @@ const Links = ({
               onClick={() => {
                 setCheckInputs(true);
               }}
-              className="buttonPrimary headingS h-[46px] w-full font-[500] sm:w-[91px]"
+              className="buttonPrimary headingS min-h-[46px] w-full font-[500] sm:w-[91px]"
             >
               Save
             </button>

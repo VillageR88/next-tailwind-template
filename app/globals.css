@@ -14,16 +14,33 @@ html {
   font-weight: 700;
 }
 
-@media (max-width: 768px) {
-  .headingM {
-    font-size: 24px;
-  }
+.headingM2 {
+  font-family: 'Instrument Sans';
+  font-size: 32px;
+  line-height: 150%;
+  font-weight: 700;
 }
 
 .headingS {
   font-family: 'Instrument Sans';
   font-size: 16px;
   line-height: 150%;
+}
+
+.alternate1 {
+  font-size: 16px;
+}
+
+@media (max-width: 768px) {
+  .headingM {
+    font-size: 24px;
+  }
+}
+
+@media (max-width: 640px) {
+  .alternate1 {
+    font-size: 12px;
+  }
 }
 
 .bodyM {

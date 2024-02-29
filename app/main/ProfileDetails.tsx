@@ -126,15 +126,15 @@ const ProfileDetails = ({
 
   return (
     <div className={`${visible ? 'flex' : 'hidden'}  h-full w-full flex-col items-center justify-center`}>
-      <div className="flex h-[739px] w-full flex-col justify-start gap-[40px] p-[40px]">
+      <div className="flex h-full w-full flex-col justify-start gap-[40px] p-[24px] sm:h-[739px] sm:p-[40px]">
         <div className="flex h-[80px] w-full flex-col justify-between">
           <h1 className="headingM text-[#333333]">Profile Details</h1>
           <p className="text-[#737373]">Add your details to create a personal touch to your profile.</p>
         </div>
-        <div className="flex h-[465px] w-full flex-col justify-between">
-          <div className="flex h-[233px] w-full items-center justify-between rounded-[12px] bg-[#FAFAFA] p-[20px]">
+        <div className="flex h-full w-full flex-col justify-between gap-[24px] sm:h-[465px]">
+          <div className="flex w-full flex-col justify-between gap-[16px] rounded-[12px] bg-[#FAFAFA] p-[20px] sm:h-[233px] sm:flex-row sm:items-center">
             <span className="bodyM text-[#737373]">Profile picture</span>
-            <div className="flex h-full w-[344px] flex-col items-center justify-between sm:flex-row xl:w-[432px]">
+            <div className="flex h-full w-[344px] flex-col justify-between gap-[16px] sm:flex-row sm:items-center xl:w-[432px]">
               <button
                 onClick={() => {
                   const fileInput = document.createElement('input');
@@ -174,7 +174,7 @@ const ProfileDetails = ({
                       }
                     : {}
                 }
-                className={`flex h-full w-[193px] items-center justify-center rounded-[12px] bg-[#EFEBFF] bg-cover ${
+                className={`flex h-[100px] max-h-[193px] w-[100px] max-w-[193px] items-center justify-center rounded-[12px] bg-[#EFEBFF] bg-cover min-[300px]:h-[193px] min-[300px]:w-[193px] ${
                   profileImageUrl ? '*:fill-white *:text-white' : '*:fill-[#633CFF] *:text-[#633CFF]'
                 }`}
               >
@@ -195,11 +195,11 @@ const ProfileDetails = ({
               //This doesn't work and I don't know why, but i leave it here for safety
               e.preventDefault();
             }}
-            className="flex h-[208px] w-full flex-col justify-between rounded-[12px] bg-[#FAFAFA] p-[20px]"
+            className="flex h-full w-full flex-col justify-between gap-[12px] rounded-[12px] bg-[#FAFAFA] p-[20px] sm:h-[208px]"
           >
-            <div className="flex h-[48px] w-full flex-col items-center justify-between">
-              <div className="flex h-full w-full items-center justify-between">
-                <label htmlFor="firstName" className="text-[#737373]">
+            <div className="flex h-full w-full flex-col items-center justify-between sm:h-[48px]">
+              <div className="flex h-full w-full flex-col justify-between gap-[4px] sm:flex-row sm:items-center">
+                <label htmlFor="firstName" className="alternate1 text-[#737373]">
                   First name*
                 </label>
                 <input
@@ -217,7 +217,7 @@ const ProfileDetails = ({
                   id="firstName"
                   className={`${
                     firstNameState === InputState.invalid && 'textFieldError'
-                  } textField bodyM h-full w-[344px] px-[16px] xl:w-[432px]`}
+                  } textField bodyM h-[48px] w-full px-[16px] sm:h-full sm:w-[344px] xl:w-[432px]`}
                   placeholder="e.g. John"
                 />
               </div>
@@ -227,9 +227,9 @@ const ProfileDetails = ({
                 </div>
               )}
             </div>
-            <div className="flex h-[48px] w-full flex-col items-center justify-between">
-              <div className="flex h-full w-full items-center justify-between">
-                <label htmlFor="lastName" className="text-[#737373]">
+            <div className="flex w-full flex-col items-center justify-between sm:h-[48px]">
+              <div className="flex h-full w-full flex-col justify-between gap-[4px] sm:flex-row sm:items-center">
+                <label htmlFor="lastName" className="alternate1 text-[#737373]">
                   Last name*
                 </label>
                 <input
@@ -247,7 +247,7 @@ const ProfileDetails = ({
                   id="lastName"
                   className={`${
                     lastNameState === InputState.invalid && 'textFieldError'
-                  } textField bodyM h-full w-[344px] px-[16px] xl:w-[432px]`}
+                  } textField bodyM h-[48px] w-full px-[16px] sm:h-full sm:w-[344px] xl:w-[432px]`}
                   placeholder="e.g. Appleseed"
                 />
               </div>
@@ -257,9 +257,9 @@ const ProfileDetails = ({
                 </div>
               )}
             </div>
-            <div className="flex h-[48px] w-full flex-col items-center justify-between">
-              <div className="flex h-full w-full items-center justify-between">
-                <label htmlFor="someEmail" className="text-[#737373]">
+            <div className="flex w-full flex-col items-center justify-between sm:h-[48px]">
+              <div className="flex h-full w-full flex-col justify-between gap-[4px] sm:flex-row sm:items-center">
+                <label htmlFor="someEmail" className="alternate1 text-[#737373]">
                   Email
                 </label>
                 <input
@@ -277,7 +277,7 @@ const ProfileDetails = ({
                   id="someEmail"
                   className={`${
                     emailState === InputState.invalid && 'textFieldError'
-                  } textField bodyM h-full w-[344px] px-[16px] xl:w-[432px]`}
+                  } textField bodyM h-[48px] w-full px-[16px] sm:h-full sm:w-[344px] xl:w-[432px]`}
                   placeholder="e.g. email@example.com"
                 />
               </div>
@@ -290,15 +290,15 @@ const ProfileDetails = ({
           </form>
         </div>
       </div>
-      <div className="h-[95px] w-full ">
+      <div className="h-full w-full sm:h-[95px]">
         <hr className="border-[#D9D9D9]" />
-        <div className="flex flex-col-reverse items-center justify-between gap-[18px] px-[40px] py-[24px] sm:flex-row">
+        <div className="flex flex-col-reverse items-center justify-between gap-[18px] px-[16px] py-[24px] sm:flex-row">
           <button
             onClick={() => {
               void supabase.auth.signOut();
               router.replace('/login');
             }}
-            className="buttonSecondary headingS h-[46px] w-full font-[500] sm:w-[91px]"
+            className="buttonSecondary headingS min-h-[46px] w-full font-[500] sm:w-[91px]"
           >
             Log Out
           </button>
@@ -307,7 +307,7 @@ const ProfileDetails = ({
               onClick={() => {
                 setFetchProfile({ ...fetchProfileInitial } as Profile);
               }}
-              className="buttonSecondary headingS h-[46px] w-full font-[500] sm:w-[91px]"
+              className="buttonSecondary headingS min-h-[46px] w-full font-[500] sm:w-[91px]"
             >
               Cancel
             </button>
@@ -316,7 +316,7 @@ const ProfileDetails = ({
               onClick={() => {
                 handleUpsert();
               }}
-              className="buttonPrimary headingS h-[46px] w-full font-[500] sm:w-[91px]"
+              className="buttonPrimary headingS min-h-[46px] w-full font-[500] sm:w-[91px]"
             >
               Save
             </button>

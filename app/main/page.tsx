@@ -94,7 +94,9 @@ export default function Main() {
     <div
       className={`${
         !preloadComplete ? 'h-screen overflow-hidden' : 'min-h-screen'
-      } flex flex-col items-center justify-center gap-[16px] transition duration-1000 sm:gap-0`}
+      } flex flex-col items-center gap-[16px] transition duration-1000 sm:justify-center sm:gap-0 ${
+        mainView === MainView.Preview && 'bg-[white] sm:bg-inherit'
+      }`}
     >
       {!preloadComplete && (
         <div className={`flex h-full w-full flex-col items-center justify-center`}>
@@ -229,8 +231,8 @@ export default function Main() {
             fetchProfile={fetchProfile}
             imageSource={imageUrl ? imageUrl : undefined}
           />
-          <nav className={`flex h-[126px] w-full flex-col items-center justify-center p-[24px]`}>
-            <div className="flex h-[78px] w-full items-center justify-between rounded-[12px] bg-white pl-[24px] pr-[16px]">
+          <nav className={`flex w-full flex-col items-center justify-center sm:h-[126px] sm:p-[24px]`}>
+            <div className="flex w-full items-center justify-between gap-[16px] rounded-[12px] bg-white pl-[24px] pr-[16px] sm:h-[78px]">
               <button
                 onClick={() => {
                   setMainView(MainView.Editor);
@@ -248,13 +250,13 @@ export default function Main() {
                   setPopUpBottom(true);
                   setPopUpMessage(PopupMessage.LinkCopied);
                 }}
-                className="headingS buttonPrimary h-[46px] w-[133px] font-[500]"
+                className="headingS buttonPrimary h-[46px] w-[159px] font-[500] sm:w-[133px]"
               >
                 Share Link
               </button>
             </div>
           </nav>
-          <div className="h-[858px]"></div>
+          <div className="sm:h-[858px]"></div>
         </>
       )}
       <div
