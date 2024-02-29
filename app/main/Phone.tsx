@@ -16,7 +16,7 @@ const Phone = ({
   imageSource?: string;
 }) => {
   return (
-    <div className="flex h-[631px] w-[307px] flex-col items-center justify-center bg-[url('/assets/images/illustration-phone-mockup.svg')] bg-center bg-no-repeat pt-[10px]">
+    <div className="flex h-[631px] w-[307px] flex-col items-center justify-center bg-[url('../assets/images/illustration-phone-mockup.svg')] bg-center bg-no-repeat pt-[10px]">
       <div className="mr-[1px] flex h-[514px] w-[238px] flex-col justify-between">
         <div
           className={`flex min-h-[177px] w-full flex-col items-center ${

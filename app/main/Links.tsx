@@ -217,7 +217,7 @@ const Links = ({
                             className="h-fit w-[12px]"
                             width={10}
                             height={10}
-                            src={'/assets/images/icon-drag-and-drop.svg'}
+                            src={'../assets/images/icon-drag-and-drop.svg'}
                             alt="drag and drop"
                           />
                         </button>
@@ -257,7 +257,7 @@ const Links = ({
                             className="h-[16px] w-[16px]"
                             width={10}
                             height={10}
-                            src={`/assets/images/icon-${item.title
+                            src={`../assets/images/icon-${item.title
                               .toLowerCase()
                               .replace(' ', '-')
                               .replace('.', '')}.svg`}
@@ -270,7 +270,7 @@ const Links = ({
                           className="h-[10px] w-[14px]"
                           width={5}
                           height={5}
-                          src={'/assets/images/icon-chevron-down.svg'}
+                          src={'../assets/images/icon-chevron-down.svg'}
                           alt="edit"
                         />
                       </button>
@@ -328,7 +328,7 @@ const Links = ({
                             }}
                             id={'url' + index}
                             name={'url' + index}
-                            content="/assets/images/icon-link.svg"
+                            content="../assets/images/icon-link.svg"
                             type="text"
                             placeholder={urlPlaceholders[item.title as keyof typeof urlPlaceholders]}
                             value={fetchLinks[index].url}
@@ -340,7 +340,7 @@ const Links = ({
                             className={`${
                               (linksErrorInfo[index] === Phase.empty || linksErrorInfo[index] === Phase.checkAgain) &&
                               'textFieldError'
-                            } textField textFieldEnhancedFocus h-[48px] w-full rounded-[8px] bg-[url('/assets/images/icon-link.svg')] bg-[16px] bg-no-repeat pl-[44px] pr-[16px] text-[#333333]`}
+                            } textField textFieldEnhancedFocus h-[48px] w-full rounded-[8px] bg-[url('../assets/images/icon-link.svg')] bg-[16px] bg-no-repeat pl-[44px] pr-[16px] text-[#333333]`}
                           />
                           {linksErrorInfo[index] !== Phase.goodOrTyping && (
                             <div className="flex h-0 w-full justify-end">

@@ -95,7 +95,7 @@ const FormCreateAccount = ({ passLoadingState }: { passLoadingState(arg0: boolea
           <div className="flex h-full w-full items-center">
             <Image
               className="z-10 ml-[1em] mr-[-2em] h-fit w-fit"
-              src="/assets/images/icon-email.svg"
+              src="../assets/images/icon-email.svg"
               alt="email"
               width={16}
               height={16}
@@ -135,7 +135,7 @@ const FormCreateAccount = ({ passLoadingState }: { passLoadingState(arg0: boolea
           <div className="flex h-full w-full items-center">
             <Image
               className="z-10 ml-[1em] mr-[-2em] h-fit w-fit"
-              src="/assets/images/icon-password.svg"
+              src="../assets/images/icon-password.svg"
               alt="email"
               width={16}
               height={16}
@@ -173,7 +173,7 @@ const FormCreateAccount = ({ passLoadingState }: { passLoadingState(arg0: boolea
           <div className="flex h-full w-full items-center">
             <Image
               className="z-10 ml-[1em] mr-[-2em] h-fit w-fit"
-              src="/assets/images/icon-password.svg"
+              src="../assets/images/icon-password.svg"
               alt="email"
               width={16}
               height={16}
