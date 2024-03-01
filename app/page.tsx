@@ -24,7 +24,10 @@ export default function Home() {
           <ul className="flex h-full w-full flex-col items-center justify-start gap-[16px]">
             {socials.map((item, index) => (
               <li className="h-full w-full" key={index}>
-                <button className="flex h-[45px] w-full select-none items-center justify-center rounded-[8px] bg-[#333333] text-white transition hover:bg-[hsl(75,94%,57%)] hover:text-[hsl(0,0%,8%)]">
+                <button
+                  aria-label={item}
+                  className="flex h-[45px] w-full select-none items-center justify-center rounded-[8px] bg-[#333333] text-white transition hover:bg-[hsl(75,94%,57%)] hover:text-[hsl(0,0%,8%)]"
+                >
                   <span className="text-[14px] font-[600]">{item}</span>
                 </button>
               </li>
