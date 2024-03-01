@@ -4,7 +4,7 @@ export default function Home() {
   const socials = ['GitHub', 'Frontend Mentor', 'LinkedIn', 'Twitter', 'Instagram'];
   return (
     <main className="flex min-h-[100dvh] flex-col items-center justify-center sm:min-h-screen ">
-      <div className="flex h-[100dvh] w-full items-center justify-center bg-[#141414] px-4 py-10 sm:h-[60em] sm:px-0">
+      <div className="flex min-h-[100dvh] w-full items-center justify-center bg-[#141414] px-4 py-10 sm:h-[60em] sm:px-0">
         <div className="mb-[0.1em] flex w-full max-w-[22em] flex-col items-center justify-start gap-[24px] rounded-[12px] bg-[#1F1F1F] px-[24px] pb-[24px] pt-[24px] sm:min-h-[610px] sm:w-[24em] sm:max-w-full sm:px-[40px] sm:pt-[40px]">
           <section className="flex min-h-[218px] flex-col items-center text-center">
             <Image
