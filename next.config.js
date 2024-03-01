@@ -11,8 +11,8 @@ const nextConfig = {
 };
 
 if (process.env.NODE_ENV !== 'development') {
-  //nextConfig.assetPrefix = '/Frontend_Mentor/easybank-landing-page-master';
-  //nextConfig.basePath = '/Frontend_Mentor/easybank-landing-page-master';
+  nextConfig.assetPrefix = '/Frontend_Mentor/social-links-profile-main';
+  nextConfig.basePath = '/Frontend_Mentor/social-links-profile-main';
 }
 
 
