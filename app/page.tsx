@@ -21,7 +21,7 @@ export default function Home() {
         alt="background image"
         priority
       />
-      <div className="flex min-h-[calc(100vh-320px)] w-full items-start justify-center bg-[hsl(275,100%,97%)] pb-[24px]">
+      <div className="flex min-h-[calc(100vh-320px)] w-full items-start justify-center bg-[hsl(275,100%,97%)] pb-[40px]">
         <div className="mt-[-152px] min-h-fit w-[600px] rounded-[15px] bg-white px-[40px] py-[20px] pt-[32px]">
           <section className="flex items-center gap-[24px]">
             <Image className="h-fit w-[41px]" width={40} height={41} src={iconStar as string} alt="star icon" />

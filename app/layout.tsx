@@ -41,8 +41,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           .map((font) => font.variable)
           .join(' ')
           .concat(' ')
-          .concat('bg-[#0E0E0E]')}
+          .concat('bg-[hsl(275,100%,97%)]')}
       >
+        <div className="h-0">
+          <div className="h-[320px] bg-[hsl(292,42%,14%)]"></div>
+        </div>
         <div className="ml-auto mr-auto max-w-[90em] overflow-x-clip font-sans">{children}</div>
       </body>
     </html>
