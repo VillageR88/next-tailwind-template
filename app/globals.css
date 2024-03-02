@@ -6,3 +6,9 @@ html {
   /* dark scroll bars */
   /* color-scheme: dark; */
 }
+
+h1 {
+  @apply text-[3.5rem];
+  @apply font-bold;
+  @apply text-[hsl(292,42%,14%)];
+}

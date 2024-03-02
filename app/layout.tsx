@@ -32,7 +32,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
         {/* eslint-disable-next-line @next/next/no-page-custom-font*/}
         <link
-          href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@300;400;700&display=swap"
+          href="https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap"
           rel="stylesheet"
         />
       </head>
