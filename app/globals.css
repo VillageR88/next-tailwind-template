@@ -8,7 +8,18 @@ html {
 }
 
 h1 {
-  @apply text-[3.5rem];
+  @apply sm:text-[3.5rem] text-[2rem];
   @apply font-bold;
   @apply text-[hsl(292,42%,14%)];
+}
+
+h2 {
+  @apply sm:text-[1.1rem] text-[1rem];
+  @apply text-[hsl(292,42%,14%)];
+  @apply hover:text-inherit;
+}
+
+p {
+  @apply sm:text-[1rem] text-[0.875rem];
+  @apply text-[hsl(292,16%,49%)];
 }
