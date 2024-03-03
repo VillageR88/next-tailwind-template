@@ -32,17 +32,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
         {/* eslint-disable-next-line @next/next/no-page-custom-font*/}
         <link
-          href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@300;400;700&display=swap"
           rel="stylesheet"
+          href="https://fonts.googleapis.com/css2?family=Fraunces:wght@100;200;300;400;500;600;700;800;900&family=Manrope:wght@100;200;300;400;500;600;700;800;900&display=swap"
         />
       </head>
-      <body
-        className={[fontSans, fontMono]
-          .map((font) => font.variable)
-          .join(' ')
-          .concat(' ')
-          .concat('bg-[#0E0E0E]')}
-      >
+      <body className={[fontSans, fontMono].map((font) => font.variable).join(' ')}>
         <div className="ml-auto mr-auto max-w-[90em] overflow-x-clip font-sans">{children}</div>
       </body>
     </html>
