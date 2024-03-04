@@ -1,7 +1,11 @@
+import Facebook from '../components/Facebook';
+import Twitter from '../components/Twitter';
+import Instagram from '../components/Instagram';
+
 const socialMedia = [
-  { name: 'facebook', src: '../assets/images/icon-facebook.svg' },
-  { name: 'twitter', src: '../assets/images/icon-twitter.svg' },
-  { name: 'instagram', src: '../assets/images/icon-instagram.svg' },
+  { name: 'facebook', src: Facebook },
+  { name: 'twitter', src: Twitter },
+  { name: 'instagram', src: Instagram },
 ];
 
 export default socialMedia;
