@@ -12,7 +12,9 @@ const MainSection2 = () => (
           Hi, I&apos;m Louis Graham, the founder of the company. Book a demo call with me to become a beta tester for
           our app and kickstart your company. Apply for access below and I&apos;ll be in touch to schedule a call.
         </p>
-        <button className="primaryDefault h-[61px] w-[190px] text-[18px] font-[600]">Apply for access</button>
+        <button className="primaryDefault h-[61px] w-[190px] text-[18px] font-[600] transition">
+          Apply for access
+        </button>
       </section>
       <div className="flex h-0 justify-end">
         <Image
