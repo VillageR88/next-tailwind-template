@@ -16,6 +16,7 @@ const config: Config = {
       },
       colors: {
         eucalyptus: '#44FFA1',
+        darkPurple: '#24053E',
         // Slate
         // 'accent-brand-800': '#1e293b',
         // 'accent-brand-700': '#334155',

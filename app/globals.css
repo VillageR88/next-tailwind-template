@@ -6,3 +6,15 @@ html {
   /* dark scroll bars */
   color-scheme: dark;
 }
+
+.headingL {
+  @apply font-fraunces text-[80px] font-[500] leading-[80px];
+}
+
+.primaryDefault {
+  @apply bg-eucalyptus text-darkPurple;
+}
+
+.primaryDefault:hover {
+  @apply bg-darkPurple text-eucalyptus border-eucalyptus border-2;
+}
