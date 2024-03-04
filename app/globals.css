@@ -20,8 +20,12 @@ html {
   color-scheme: dark;
 }
 
-.headingL {
+.HeadingL {
   @apply font-[Fraunces144] text-[80px] font-[500] leading-[80px];
+}
+
+.HeadingM {
+  @apply font-[Fraunces144] text-[56px] font-[500] leading-[64px];
 }
 
 .Body {
