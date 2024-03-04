@@ -8,6 +8,7 @@
   font-weight: 500;
   font-style: normal;
 }
+
 @font-face {
   font-family: 'Manrope';
   src: url('../public/assets/fonts/manrope/static/Manrope-Regular.ttf') format('truetype');
@@ -21,7 +22,7 @@ html {
 }
 
 .HeadingL {
-  @apply font-[Fraunces144] text-[80px] font-[500] leading-[80px];
+  @apply font-[Fraunces144] font-[500] leading-[50px] md:leading-[60px] lg:leading-[80px] text-[50px] md:text-[60px] lg:text-[80px];
 }
 
 .HeadingM {
