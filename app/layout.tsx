@@ -28,13 +28,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"></link>
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png"></link>
         <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"></link>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
-        {/* eslint-disable-next-line @next/next/no-page-custom-font*/}
-        <link
-          rel="stylesheet"
-          href="https://fonts.googleapis.com/css2?family=Fraunces:wght@100;200;300;400;500;600;700;800;900&family=Manrope:wght@100;200;300;400;500;600;700;800;900&display=swap"
-        />
       </head>
       <body className={[fontSans, fontMono].map((font) => font.variable).join(' ')}>
         <div className="ml-auto mr-auto max-w-[90em] overflow-x-clip font-sans">{children}</div>

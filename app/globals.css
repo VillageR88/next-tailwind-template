@@ -2,13 +2,30 @@
 @tailwind components;
 @tailwind utilities;
 
+@font-face {
+  font-family: 'Fraunces144';
+  src: url('../public/assets/fonts/fraunces/static/Fraunces_144pt-SemiBold.ttf') format('truetype');
+  font-weight: 500;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Manrope';
+  src: url('../public/assets/fonts/manrope/static/Manrope-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+}
+
 html {
   /* dark scroll bars */
   color-scheme: dark;
 }
 
 .headingL {
-  @apply font-fraunces text-[80px] font-[500] leading-[80px];
+  @apply font-[Fraunces144] text-[80px] font-[500] leading-[80px];
+}
+
+.Body {
+  @apply font-[Manrope] text-[18px] font-[500] leading-[32px];
 }
 
 .primaryDefault {
@@ -16,5 +33,5 @@ html {
 }
 
 .primaryDefault:hover {
-  @apply bg-darkPurple text-eucalyptus border-eucalyptus border-2;
+  @apply border-2 border-eucalyptus bg-darkPurple text-eucalyptus;
 }
