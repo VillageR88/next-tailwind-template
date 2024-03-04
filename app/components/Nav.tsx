@@ -24,7 +24,7 @@ const Nav = () => (
     </div>
     <div className="flex h-0 w-full items-start justify-center">
       <Image
-        className="mt-[389px] h-[184px] max-h-full w-[320px] max-w-full md:mt-[392px] md:h-[296px] md:w-[514px] md:pl-0 md:pr-0 lg:mt-[454px] lg:h-[441px] lg:w-[767px]"
+        className="mt-[389px] h-[184px] max-h-fit w-[320px] max-w-fit md:mt-[392px] md:h-[296px] md:w-[514px] md:pl-0 md:pr-0 lg:mt-[454px] lg:h-[441px] lg:w-[767px]"
         width={767}
         height={441}
         src={imageHero}

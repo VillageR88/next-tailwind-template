@@ -22,7 +22,7 @@ html {
 }
 
 .HeadingL {
-  @apply font-[Fraunces144] font-[500] leading-[50px] md:leading-[60px] lg:leading-[80px] text-[50px] md:text-[60px] lg:text-[80px];
+  @apply font-[Fraunces144] text-[50px] font-[500] leading-[50px] md:text-[60px] md:leading-[60px] lg:text-[80px] lg:leading-[80px];
 }
 
 .HeadingM {
@@ -30,7 +30,7 @@ html {
 }
 
 .Body {
-  @apply font-[Manrope] text-[18px] font-[500] leading-[32px];
+  @apply font-[Manrope] text-[16px] font-[500] leading-[28px] lg:text-[18px] lg:leading-[32px];
 }
 
 .primaryDefault {
