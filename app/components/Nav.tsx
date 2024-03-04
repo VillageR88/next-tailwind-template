@@ -14,7 +14,6 @@ const Nav = () => (
         src={bgPattern1 as string}
         alt="background pattern"
       />
-      <Image className="mt-[454px]" width={767} height={441} src={imageHero} alt="background pattern" />
       <Image
         className="mr-[-48px] mt-[314px]"
         width={174}
@@ -22,6 +21,9 @@ const Nav = () => (
         src={bgPattern2 as string}
         alt="background pattern"
       />
+    </div>
+    <div className="flex h-0 w-full items-start justify-center">
+      <Image className="mt-[454px]" width={767} height={441} src={imageHero} alt="background pattern" />
     </div>
     <div className="flex w-full justify-between">
       <Image className="ml-[165px] mt-[58px]" width={97} height={26} src={logoLight as string} alt="logo" />
