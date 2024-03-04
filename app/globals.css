@@ -26,7 +26,11 @@ html {
 }
 
 .HeadingM {
-  @apply font-[Fraunces144] text-[56px] font-[500] leading-[64px];
+  @apply font-[Fraunces144] text-[32px] font-[500] leading-[48px] lg:text-[48px] lg:leading-[56px] xl:text-[56px] xl:leading-[64px];
+}
+
+.HeadingM2 {
+  @apply font-[Fraunces144] text-[32px] md:text-[48px] font-[500] leading-[48px] lg:text-[48px] lg:leading-[56px] xl:text-[56px] xl:leading-[64px];
 }
 
 .Body {
