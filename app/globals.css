@@ -2,6 +2,14 @@
 @tailwind components;
 @tailwind utilities;
 
+.HeadingXL {
+  @apply text-[56px] font-bold leading-[70px];
+}
+
+.BodyM {
+  @apply text-[18px] leading-[28px];
+}
+
 html {
   /* dark scroll bars */
   /* color-scheme: dark; */
