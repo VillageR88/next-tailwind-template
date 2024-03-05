@@ -3,7 +3,7 @@ import itemsList from '../lib/itemList';
 
 const MainSection2 = () => (
   <div className="h-[888px] w-full bg-gradient-to-b from-white to-[#F0F1FF]">
-    <ul className="grid min-h-[748px] w-full grid-cols-3 flex-col gap-x-[30px] gap-y-[56px] px-[165px]">
+    <ul className="grid min-h-[748px] w-full grid-cols-3 flex-col gap-x-[30px] gap-y-[56px] pl-[39px] pr-[40px] lg:pl-[80px] lg:pr-[80px] xl:px-[165px]">
       {itemsList.map((item, index) =>
         index > 0 ? (
           <li key={index} className="flex h-[346px] w-full max-w-[350px] flex-col">
