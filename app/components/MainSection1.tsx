@@ -12,7 +12,7 @@ const MainSection1 = () => (
         Get Started
       </button>
     </div>
-    <div className="pointer-events-none mt-[-160px] h-[937px] w-[992px] bg-[url('../public/assets/images/image-hero-tablet.webp')] bg-no-repeat min-[640px]:mr-[-100px] min-[700px]:mr-[-250px] min-[740px]:mr-[-300px] min-[770px]:mr-[-400px] min-[820px]:mr-[-500px] min-[860px]:mr-[-580px] lg:bg-[url('../public/assets/images/image-hero-desktop.webp')] min-[1024px]:mr-[-50px] min-[1100px]:mr-[-200px] min-[1200px]:mr-[-300px] xl:mr-[-280px] xl:mt-[-230px]"></div>
+    <div className="pointer-events-none mt-[-160px] h-[730px] w-[992px] bg-[url('../public/assets/images/image-hero-tablet.webp')] bg-no-repeat min-[640px]:mr-[-100px] min-[700px]:mr-[-250px] min-[740px]:mr-[-300px] min-[770px]:mr-[-400px] min-[820px]:mr-[-500px] min-[860px]:mr-[-580px] lg:h-[937px] lg:bg-[url('../public/assets/images/image-hero-desktop.webp')] min-[1024px]:mr-[-50px] min-[1100px]:mr-[-200px] min-[1200px]:mr-[-300px] xl:mr-[-280px] xl:mt-[-230px]"></div>
   </div>
 );
 
