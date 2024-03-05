@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import logoDark from '@/public/assets/logo-dark.svg';
+import logoDark from '@/public/assets/images/logo-dark.svg';
 
 const Nav = () => (
   <nav className="flex w-full items-center justify-between">
