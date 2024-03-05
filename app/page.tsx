@@ -1,7 +1,9 @@
+import Nav from './components/Nav';
+
 export default function Home() {
   return (
-    <main className="flex min-h-screen flex-col items-center justify-center">
-      <div className="flex h-[50em] w-full items-center justify-center bg-blue-400"></div>
-    </main>
+    <div className="font-plusJakartaSans flex min-h-screen flex-col items-center justify-start bg-white">
+      <Nav />
+    </div>
   );
 }
