@@ -3,7 +3,15 @@
 @tailwind utilities;
 
 .HeadingXL {
-  @apply text-[56px] font-bold leading-[70px];
+  @apply text-[56px] font-extrabold leading-[70px];
+}
+
+.HeadingM {
+  @apply text-[32px] font-extrabold leading-[40px];
+}
+
+.HeadingS {
+  @apply text-[24px] font-extrabold leading-[28px];
 }
 
 .BodyM {
