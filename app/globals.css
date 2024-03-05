@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 .HeadingXL {
-  @apply text-[56px] font-extrabold leading-[70px];
+  @apply font-extrabold leading-[51px] md:text-[40px] md:leading-[70px] xl:text-[56px];
 }
 
 .HeadingM {
