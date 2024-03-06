@@ -1,5 +1,5 @@
 const Section1 = () => (
-  <section className="z-10 mt-[127px] flex w-full flex-col gap-[40px] pr-[460px] md:ml-[33px] lg:ml-[100px] xl:ml-[166px] xl:pr-[540px]">
+  <section className="z-10 mt-[127px] flex w-full flex-col gap-[40px] md:ml-[33px] md:pr-[400px] lg:ml-[100px] lg:pr-[480px] xl:ml-[166px] xl:pr-[540px]">
     <h1 className="w-full max-w-[1015px] text-[64px] font-bold leading-[64px] text-[#191826] xl:text-[88px] xl:leading-[88px]">
       We make your music sound extraordinary.
     </h1>
