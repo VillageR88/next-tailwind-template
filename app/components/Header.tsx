@@ -17,7 +17,13 @@ const Header = () => (
     <div className="flex h-0 w-full items-start justify-start">
       <Image className="ml-[-50px] mt-[-50px] scale-x-125 scale-y-125" src={bgMainDesktop} alt="background pattern" />
     </div>
-    <Image className="z-10 ml-[166px] mt-[62px]" width={147} height={33} src={logo as string} alt="logo" />
+    <Image
+      className="z-10 mt-[62px] md:ml-[33px] lg:ml-[100px] xl:ml-[166px]"
+      width={147}
+      height={33}
+      src={logo as string}
+      alt="logo"
+    />
   </header>
 );
 
