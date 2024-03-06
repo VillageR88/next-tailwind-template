@@ -1,6 +1,8 @@
 import Image from 'next/image';
 import logo from '@/public/assets/images/logo.svg';
 import bgMainDesktop from '@/public/assets/images/bg-main-desktop.png';
+import bgMainTablet from '@/public/assets/images/bg-main-tablet.png';
+import bgMainMobile from '@/public/assets/images/bg-main-mobile.png';
 import bgPattern1 from '@/public/assets/images/bg-pattern-1.svg';
 
 const Header = () => (
@@ -15,7 +17,16 @@ const Header = () => (
       />
     </div>
     <div className="flex h-0 w-full items-start justify-start">
-      <Image className="ml-[-50px] mt-[-50px] scale-x-125 scale-y-125" src={bgMainDesktop} alt="background pattern" />
+      <Image
+        className="ml-[-50px] mt-[-50px] hidden scale-x-125 scale-y-125 lg:block"
+        src={bgMainDesktop}
+        alt="background pattern"
+      />
+      <Image
+        className="ml-[-20px] mt-[-130px] block scale-x-[250%] scale-y-100 lg:hidden"
+        src={bgMainTablet}
+        alt="background pattern"
+      />
     </div>
     <Image
       className="z-10 mt-[62px] md:ml-[33px] lg:ml-[100px] xl:ml-[166px]"
