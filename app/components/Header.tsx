@@ -7,7 +7,7 @@ const Header = () => (
   <header>
     <div className="flex h-0 w-full justify-end">
       <Image
-        className=" mt-[-40px] h-fit w-fit z-10"
+        className=" z-10 mt-[-40px] h-fit w-fit"
         width={312}
         height={468}
         src={bgPattern1 as string}
