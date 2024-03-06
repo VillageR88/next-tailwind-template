@@ -3,19 +3,19 @@
 @tailwind utilities;
 
 .HeadingXL {
-  @apply font-extrabold leading-[51px] text-[40px] xl:leading-[70px] xl:text-[56px];
+  @apply text-[40px] font-extrabold leading-[51px] xl:text-[56px] xl:leading-[70px];
 }
 
 .HeadingM {
-  @apply text-[32px] font-extrabold leading-[40px];
+  @apply text-[24px] font-extrabold leading-[32px] lg:text-[32px] lg:leading-[40px];
 }
 
 .HeadingS {
-  @apply text-[24px] font-extrabold leading-[28px];
+  @apply sm:text-[24px] text-[20px] font-extrabold sm:leading-[28px];
 }
 
 .BodyM {
-  @apply xl:text-[18px] text-[16px] leading-[28px];
+  @apply text-[16px] leading-[28px] xl:text-[18px];
 }
 
 html {
