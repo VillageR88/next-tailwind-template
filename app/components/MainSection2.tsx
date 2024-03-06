@@ -5,7 +5,7 @@ import iconAndroid from '@/public/assets/images/icon-android.svg';
 
 const Section2 = () => (
   <div className="z-10 mt-[230px] flex justify-center md:px-[33px] lg:px-[100px] xl:mt-[321px] xl:px-[165px]">
-    <div className="flex w-full max-w-[375px] flex-col items-center justify-between rounded-[12px] bg-[#191826] bg-[url('../public/assets/images/bg-pattern-2.svg')] bg-[43.1%_0%] bg-no-repeat sm:min-w-[375px] md:h-[600px] md:max-w-full md:flex-row md:items-stretch md:bg-[43.1%_-30%]">
+    <div className="flex w-full max-w-[450px] flex-col items-center justify-between rounded-[12px] bg-[#191826] bg-[url('../public/assets/images/bg-pattern-2.svg')] bg-[43.1%_0%] bg-no-repeat sm:min-w-[375px] md:h-[600px] md:max-w-full md:flex-row md:items-stretch md:bg-[43.1%_-30%]">
       <Image
         className="mt-[-138px] h-[430px] w-[208px] md:ml-[64px] md:h-[556px] md:w-[270px] xl:ml-[110px] xl:mt-[-213px] xl:h-[642px] xl:w-[312px]"
         width={369}
