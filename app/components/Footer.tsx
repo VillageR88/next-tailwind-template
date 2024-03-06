@@ -1,5 +1,8 @@
 import Image from 'next/image';
 import logo from '@/public/assets/images/logo.svg';
+import Facebook from './Facebook';
+import Instagram from './Instagram';
+import Twitter from './Twitter';
 
 const Footer = () => (
   <footer className="mt-[202px] flex w-full justify-between px-[165px] pb-[91px]">
@@ -10,7 +13,11 @@ const Footer = () => (
         <span className="font-bold">equalizer@example.com</span>
       </span>
     </div>
-    <div className="flex items-center">ICONS</div>
+    <div className="flex items-center justify-between gap-[20px]">
+      <Facebook />
+      <Instagram />
+      <Twitter />
+    </div>
   </footer>
 );
 
