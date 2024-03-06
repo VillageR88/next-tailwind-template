@@ -15,7 +15,7 @@ const Header = () => (
       />
     </div>
     <div className="flex h-0 w-full items-start justify-start">
-      <Image src={bgMainDesktop} alt="background pattern" />
+      <Image className="mt-[-100px]" src={bgMainDesktop} alt="background pattern" />
     </div>
     <Image className="ml-[312px] mt-[62px]" width={147} height={33} src={logo as string} alt="logo" />
   </header>
