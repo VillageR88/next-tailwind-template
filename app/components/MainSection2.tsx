@@ -1,5 +1,7 @@
 import Image from 'next/image';
 import illustrationApp from '@/public/assets/images/illustration-app.png';
+import iconApple from '@/public/assets/images/icon-apple.svg';
+import iconAndroid from '@/public/assets/images/icon-android.svg';
 
 const Section2 = () => (
   <div className="z-10 mt-[321px] px-[165px]">
@@ -23,8 +25,17 @@ const Section2 = () => (
           <span className="text-[65px] font-bold leading-[52px]">$4</span>
           <span className="text-[20px] leading-[32px]">/ month</span>
         </div>
-        <button className="mt-[46px] h-[61px] w-[333px] rounded-[12px] bg-[#66E2DC]"></button>
-        <button className="mt-[16px] h-[61px] w-[333px] rounded-[12px] bg-[#FFB964]"></button>
+        <button
+          aria-label="apple IOS Download"
+          className="mt-[46px] flex h-[61px] w-[333px] items-center justify-center gap-[8px] rounded-[12px] bg-[#191826] transition hover:bg-[#66E2DC]"
+        >
+          <Image width={18} height={20} src={iconApple as string} alt="apple icon" />
+          <span className="mt-1 text-[18px] font-bold leading-[32px] text-[#FCFAF9]">iOS Download</span>
+        </button>
+        <button className="mt-[16px] flex h-[61px] w-[333px] items-center justify-center gap-[8px] rounded-[12px] bg-[#FCFAF9] transition hover:bg-[#FFB964]">
+          <Image width={17} height={20} src={iconAndroid as string} alt="android icon" />
+          <span className="mt-1 text-[18px] font-bold leading-[32px] text-[#191826]">Android Download</span>
+        </button>
       </div>
     </div>
   </div>
