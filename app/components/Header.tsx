@@ -9,7 +9,7 @@ const Header = () => (
   <header>
     <div className="flex h-0 w-full justify-end">
       <Image
-        className=" z-10 mr-[-40px] mt-[-40px] h-[400px] w-[266px] lg:mr-0 lg:h-fit lg:w-fit "
+        className="z-10 mr-[-40px] mt-[-40px] hidden h-[400px] w-[266px] md:block lg:mr-0 lg:h-fit lg:w-fit "
         width={312}
         height={468}
         src={bgPattern1 as string}
@@ -29,7 +29,7 @@ const Header = () => (
       />
     </div>
     <Image
-      className="z-10 mt-[62px] md:ml-[33px] lg:ml-[100px] xl:ml-[166px]"
+      className="z-10 ml-[24px] mt-[40px] md:ml-[33px] md:mt-[62px] lg:ml-[100px] xl:ml-[166px]"
       width={147}
       height={33}
       src={logo as string}
