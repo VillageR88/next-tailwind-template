@@ -28,7 +28,7 @@ const Header = () => (
         alt="background pattern"
       />
       <Image
-        className="mt-[-200px] block w-fit min-[400px]:ml-[150px] ml-[100px] min-[450px]:ml-[200px] sm:ml-[300px] md:hidden"
+        className="ml-[100px] mt-[-200px] block w-fit min-[400px]:ml-[150px] min-[450px]:ml-[200px] sm:ml-[300px] md:hidden"
         src={bgMainMobile}
         alt="background pattern"
       />
