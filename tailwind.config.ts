@@ -11,6 +11,7 @@ const config: Config = {
       fontFamily: {
         sans: ['var(--font-sans)'],
         mono: ['var(--font-mono)'],
+        chivo: ['Chivo', 'sans-serif'],
       },
       colors: {
         // Slate
