@@ -1,3 +1,4 @@
+'use client';
 import Image from 'next/image';
 import logo from '../public/assets/images/desktop/logo.svg';
 
@@ -23,6 +24,23 @@ export default function Home() {
                     Upload your audio to Pod with a single click. We’ll then distribute your podcast to Spotify, Apple
                     Podcasts, Google Podcasts, Pocket Casts and more!
                   </p>
+                  <form
+                    onSubmit={(e) => {
+                      e.preventDefault();
+                    }}
+                    action="submit"
+                    id="emailForm"
+                    className="mt-[40px] flex h-[56px] w-[427px] items-center justify-between rounded-[28px] bg-[#2C344B] pr-[5px]"
+                  >
+                    <input
+                      placeholder="Email address"
+                      className="size-full rounded-l-[28px] bg-transparent pl-[32px] pr-[12px] text-[14px] font-[700] leading-[28px] text-white outline-none placeholder:text-gray-400"
+                      type="email"
+                    />
+                    <button className="h-[46px] min-w-[162px] rounded-[28px] bg-[#54E6AF] text-[14px] font-[700] leading-[28px] text-[#121725] transition duration-150 hover:bg-[#B3FFE2]">
+                      Request Access
+                    </button>
+                  </form>
                 </div>
               </div>
             </div>
