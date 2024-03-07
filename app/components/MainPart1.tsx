@@ -1,40 +1,32 @@
 import Image from 'next/image';
 import heroLeft from '@/public/assets/images/desktop/image-hero-left.png';
 import heroRight from '@/public/assets/images/desktop/image-hero-right.png';
+import heroSmall from '@/public/assets/images/tablet/image-hero.png';
+import MainPart1MiddleDiv from './MainPart1MiddleDiv';
 import Numerator from './Numerator';
 
 const MainPart1 = () => (
-  <div className="flex w-[calc(100%+64px)] flex-col items-center">
-    <div className="flex w-full justify-center gap-[88px]">
-      <Image className="self-start pt-[61px]" width={394} height={303} src={heroLeft} alt="avatars of people" />
-      <div className="flex h-[304px] w-[540px] flex-col gap-[32px] pt-[108px] ">
-        <section className="flex flex-col items-center gap-[34px]">
-          <h1 className="max-w-[445px] text-center text-[64px] font-[900] leading-[64px] text-[#28283D] drop-shadow-[0_4px_2px_rgba(0,0,0,0.25)]">
-            Group Chat for Everyone
-          </h1>
-          <p className="max-w-[540px] text-center text-[18px] leading-[26px]">
-            Meet makes it easy to connect with others face-to-face virtually and collaborate across any device.
-          </p>
-        </section>
-        <div className="flex justify-center gap-[16px]">
-          <button
-            aria-label="Download ver v1.3 button"
-            className="flex h-[58px] w-[193px] items-center justify-center gap-[4px] rounded-[29px] bg-[#4D96A9] text-[16px] font-[900] leading-[26px] transition hover:bg-[#71C0D4]"
-          >
-            <span className="text-white">Download</span>
-            <span className="text-[#8FE3F9]">v1.3</span>
-          </button>
-          <button
-            aria-label="What is it? button"
-            className="h-[58px] w-[139px] rounded-[29px] bg-[#855FB1] text-[16px] font-[900] leading-[26px] text-white transition hover:bg-[#B18BDD]"
-          >
-            What is it?
-          </button>
-        </div>
-      </div>
-      <Image className="self-end pt-[116px]" width={394} height={303} src={heroRight} alt="avatars of people" />
+  <div className="flex min-h-full min-w-[calc(100%+64px)]  flex-col items-center">
+    <div className="flex w-full justify-center gap-[32px] xl:gap-[88px]">
+      <Image
+        className="hidden self-end pt-[61px] md:block xl:self-start"
+        width={394}
+        height={303}
+        src={heroLeft}
+        alt="avatars of people"
+      />
+      <MainPart1MiddleDiv additionalClass="xl:flex hidden pt-[108px]" />
+      <Image
+        className="hidden self-end pt-[116px] md:block"
+        width={394}
+        height={303}
+        src={heroRight}
+        alt="avatars of people"
+      />
     </div>
-    <Numerator number={1} additionalClass="mt-[110px]" />
+    <Image className="block pt-[54px] md:hidden" width={820} height={303} src={heroSmall} alt="avatars of people" />
+    <MainPart1MiddleDiv additionalClass="xl:hidden flex pt-[72px]" />
+    <Numerator number={1} additionalClass="relative xl:mt-[110px] mt-[80]px]" />
   </div>
 );
 
