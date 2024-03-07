@@ -25,7 +25,7 @@ const MainPart2 = () => (
         </p>
       </section>
     </div>
-    <Numerator number={2} additionalClass="mt-[72px]" />
+    <Numerator number={2} additionalClass="mt-[72px] z-10" />
   </div>
 );
 
