@@ -11,5 +11,15 @@
   "[typescript]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
-  "cSpell.words": ["headlessui", "heroicons", "lato", "tabler", "tailwindcss", "unoptimized", "webp"]
+  "cSpell.words": [
+    "headlessui",
+    "heroicons",
+    "lato",
+    "tabler",
+    "tailwindcss",
+    "unoptimized",
+    "videocall",
+    "Videochatting",
+    "webp"
+  ]
 }
