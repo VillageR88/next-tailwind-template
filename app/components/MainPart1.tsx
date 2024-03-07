@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import heroLeft from '@/public/assets/images/desktop/image-hero-left.png';
 import heroRight from '@/public/assets/images/desktop/image-hero-right.png';
+import Numerator from './Numerator';
 
 const MainPart1 = () => (
   <div className="flex w-[calc(100%+64px)] flex-col items-center">
@@ -33,12 +34,7 @@ const MainPart1 = () => (
       </div>
       <Image className="self-end pt-[116px]" width={394} height={303} src={heroRight} alt="avatars of people" />
     </div>
-    <div className="mt-[110px] flex h-[140px] w-[56px] flex-col items-center">
-      <div className="h-[84px] w-[1px] bg-[#D8D8D8]"></div>
-      <div className="border-1 flex h-[56px] w-[56px] items-center justify-center rounded-full border border-[#D8D8D8] text-[16px] font-[900] leading-[26px] text-[#87879D]">
-        01
-      </div>
-    </div>
+    <Numerator number={1} additionalClass="mt-[110px]" />
   </div>
 );
 
