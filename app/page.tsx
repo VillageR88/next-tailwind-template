@@ -22,22 +22,18 @@ export default function Home() {
 
   return (
     <main className="flex min-h-screen flex-col items-center justify-center font-chivo">
-      <div className="flex min-h-[900px] w-full items-center justify-end bg-[#121725]">
-        <div className="h-[640px] w-[1275px]  bg-[url('../public/assets/images/desktop/image-host.jpg')] bg-[length:888px_100%] bg-right bg-no-repeat">
-          <div className="flex h-[640px] flex-col items-start justify-between">
+      <div className="flex min-h-[900px] w-full items-center justify-end bg-[#121725] pl-[39px]">
+        <div className="h-[767px] w-[1275px] bg-[url('../public/assets/images/tablet/image-host.jpg')] bg-[length:491px_100%] bg-right  bg-no-repeat lg:h-[640px] lg:bg-[url('../public/assets/images/desktop/image-host.jpg')] lg:bg-[length:888px_100%]">
+          <div className="flex h-[767px] flex-col items-start justify-between lg:h-[640px]">
             <Image className="mt-[-28px]" src={logo as string} width={135} height={56} alt="pod logo" />
             <div className="size-0">
-              <div className="mt-[-509px] flex h-[509px] w-[732px] items-end bg-[#121725]">
+              <div className="mt-[-508px] flex h-[509px] w-[635px] items-end bg-[#121725] lg:w-[732px]">
                 <div className="h-[421px] w-[665px]">
-                  <h1 className="flex h-[124px] w-[665px] flex-col justify-between">
-                    <span className="text-[52px] font-[100] leading-[62px] text-[#54E6AF]">
-                      {'Publish your podcasts'.toUpperCase()}
-                    </span>
-                    <span className="text-[52px] font-[100] leading-[62px] text-[#FFFFFF]">
-                      {'Everywhere.'.toUpperCase()}
-                    </span>
+                  <h1 className="flex h-[112px] w-[665px] flex-col justify-between text-[48px] font-[100] leading-[56px] lg:h-[124px] lg:text-[52px] lg:leading-[62px]">
+                    <span className="text-[#54E6AF]">{'Publish your podcasts'.toUpperCase()}</span>
+                    <span className="text-[#FFFFFF]">{'Everywhere.'.toUpperCase()}</span>
                   </h1>
-                  <p className="mt-[24px] h-[84px] w-[445px] text-[18px] font-[100] leading-[28px] text-[#C2CBE5]">
+                  <p className="mt-[31px] h-[84px] w-[445px] text-[18px] font-[100] leading-[28px] text-[#C2CBE5] lg:mt-[24px]">
                     Upload your audio to Pod with a single click. We’ll then distribute your podcast to Spotify, Apple
                     Podcasts, Google Podcasts, Pocket Casts and more!
                   </p>
@@ -92,7 +88,7 @@ export default function Home() {
               </div>
             </div>
           </div>
-          <div className="mt-[-52px] flex h-[104px] w-full justify-end">
+          <div className="mt-[153px] flex h-[104px] w-full lg:mt-[-52px] lg:justify-end">
             <Image width={232} height={104} src={bgPatternDots as string} alt="background pattern" />
           </div>
         </div>
