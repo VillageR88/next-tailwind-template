@@ -4,36 +4,28 @@ import logo from '../public/assets/images/desktop/logo.svg';
 import bgPatternDots from '../public/assets/images/desktop/bg-pattern-dots.svg';
 import socialIcons from './lib/socialIcons';
 import validateEmail from './lib/validateEmail';
+import EmailStatus from './lib/enumEmailStatus';
+import emailStatus from './lib/emailStatus';
 import { useState } from 'react';
 
 export default function Home() {
-  enum EmailStatus {
-    valid,
-    invalid,
-    typing,
-  }
-  const emailStatus = {
-    [EmailStatus.valid]: { text: 'Thank you!', color: 'text-[#54E6AF]' },
-    [EmailStatus.invalid]: { text: 'Oops! Please check your email', color: 'text-[#FB3E3E]' },
-    [EmailStatus.typing]: { text: '', color: 'text-transparent' },
-  };
   const [email, setEmail] = useState<string>('');
   const [emailState, setEmailState] = useState<EmailStatus>(EmailStatus.typing);
 
   return (
-    <main className="flex min-h-screen flex-col items-center justify-center font-chivo">
-      <div className="flex min-h-[900px] w-full items-center justify-end bg-[#121725] pl-[39px]">
-        <div className="h-[767px] w-[1275px] bg-[url('../public/assets/images/tablet/image-host.jpg')] bg-[length:491px_100%] bg-right  bg-no-repeat xl:h-[640px] xl:bg-[url('../public/assets/images/desktop/image-host.jpg')] xl:bg-[length:888px_100%]">
-          <div className="flex h-[767px] flex-col items-start justify-between xl:h-[640px]">
-            <Image className="mt-[-28px]" src={logo as string} width={135} height={56} alt="pod logo" />
-            <div className="size-0">
-              <div className="mt-[-508px] flex h-[509px] w-[635px] items-end bg-[#121725] xl:w-[732px]">
-                <div className="h-[421px] w-[665px]">
-                  <h1 className="flex h-[112px] w-[665px] flex-col justify-between text-[48px] font-[100] leading-[56px] xl:h-[124px] xl:text-[52px] xl:leading-[62px]">
+    <main className="flex min-h-[100dvh] flex-col items-center justify-center font-chivo md:min-h-screen">
+      <div className="flex w-full items-center justify-end bg-[#121725] px-[24px] md:min-h-[900px] md:pl-[39px] md:pr-0">
+        <div className="w-full bg-right bg-no-repeat md:h-[767px] md:w-[1275px] md:bg-[url('../public/assets/images/tablet/image-host.jpg')] md:bg-[length:491px_100%] xl:h-[640px] xl:bg-[url('../public/assets/images/desktop/image-host.jpg')] xl:bg-[length:888px_100%]">
+          <div className="flex flex-col items-center justify-between md:h-[767px] md:items-start xl:h-[640px]">
+            <Image className="md:mt-[-28px]" src={logo as string} width={135} height={56} alt="pod logo" />
+            <div className="w-full text-center md:size-0 md:text-left">
+              <div className="flex w-full max-w-[635px] items-end bg-[#121725] md:mt-[-508px] md:h-[509px] xl:w-[732px]">
+                <div className="w-full max-w-[665px] md:h-[421px]">
+                  <h1 className="flex w-full max-w-[665px] flex-col justify-between text-[48px] font-[100] leading-[56px] sm:w-[665px] md:h-[112px] xl:h-[124px] xl:text-[52px] xl:leading-[62px]">
                     <span className="text-[#54E6AF]">{'Publish your podcasts'.toUpperCase()}</span>
                     <span className="text-[#FFFFFF]">{'Everywhere.'.toUpperCase()}</span>
                   </h1>
-                  <p className="mt-[31px] h-[84px] w-[445px] text-[18px] font-[100] leading-[28px] text-[#C2CBE5] xl:mt-[24px]">
+                  <p className="mt-[31px] w-full text-[18px] font-[100] leading-[28px] text-[#C2CBE5] sm:w-[445px] md:h-[84px] md:max-w-[445px] xl:mt-[24px]">
                     Upload your audio to Pod with a single click. We’ll then distribute your podcast to Spotify, Apple
                     Podcasts, Google Podcasts, Pocket Casts and more!
                   </p>
@@ -49,10 +41,13 @@ export default function Home() {
                       }}
                       action="submit"
                       id="emailForm"
-                      className="mt-[40px] flex h-[56px] w-[427px] items-center justify-between rounded-[28px] bg-[#2C344B] pr-[5px]"
+                      className="mt-[40px] flex h-[56px] items-center justify-between rounded-[28px] bg-[#2C344B] pr-[5px] md:w-[427px]"
                     >
                       <input
                         value={email}
+                        onKeyDown={() => {
+                          setEmailState(EmailStatus.typing);
+                        }}
                         onChange={(e) => {
                           setEmail(e.target.value);
                           setEmailState(EmailStatus.typing);
@@ -70,10 +65,10 @@ export default function Home() {
                         </button>
                       </div>
                     </form>
-                    <div className="ml-[32px] mt-[8px] h-0">
+                    <div className="ml-[32px] mt-[8px] h-0 text-[12px]">
                       <span className={emailStatus[emailState].color}>{emailStatus[emailState].text}</span>
                     </div>
-                    <ul className="mt-[64px] flex h-[29px] w-[536px] items-center">
+                    <ul className="mt-[64px] flex h-[29px] items-center md:w-[536px]">
                       {socialIcons.map((icon, index) => (
                         <li
                           key={index}
@@ -88,7 +83,7 @@ export default function Home() {
               </div>
             </div>
           </div>
-          <div className="mt-[153px] flex h-[104px] w-full xl:mt-[-52px] xl:justify-end">
+          <div className="mt-[153px] hidden h-[104px] w-full md:flex xl:mt-[-52px] xl:justify-end">
             <Image width={232} height={104} src={bgPatternDots as string} alt="background pattern" />
           </div>
         </div>
