@@ -1,6 +1,7 @@
 'use client';
 import Image from 'next/image';
 import logo from '../public/assets/images/desktop/logo.svg';
+import socialIcons from './lib/socialIcons';
 
 export default function Home() {
   return (
@@ -47,11 +48,22 @@ export default function Home() {
                     <div className="ml-[32px] mt-[8px] h-0">
                       <span className="text-[#FB3E3E] ">Oops! Please check your email</span>
                     </div>
+                    <ul className="mt-[64px] flex h-[29px] w-[536px] items-center">
+                      {socialIcons.map((icon, index) => (
+                        <li
+                          key={index}
+                          className={`${index === 0 ? 'mr-[40px]' : index === 1 ? 'mr-[41px]' : index === 2 && 'mr-[27px]'} inline-block`}
+                        >
+                          <Image src={icon.src} alt={icon.alt} />
+                        </li>
+                      ))}
+                    </ul>
                   </div>
                 </div>
               </div>
             </div>
           </div>
+          <div className="flex h-0 w-full justify-end"></div>
         </div>
       </div>
     </div>
