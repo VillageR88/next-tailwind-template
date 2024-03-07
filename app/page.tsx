@@ -3,8 +3,23 @@ import Image from 'next/image';
 import logo from '../public/assets/images/desktop/logo.svg';
 import bgPatternDots from '../public/assets/images/desktop/bg-pattern-dots.svg';
 import socialIcons from './lib/socialIcons';
+import validateEmail from './lib/validateEmail';
+import { useState } from 'react';
 
 export default function Home() {
+  enum EmailStatus {
+    valid,
+    invalid,
+    typing,
+  }
+  const emailStatus = {
+    [EmailStatus.valid]: { text: 'Thank you!', color: 'text-[#54E6AF]' },
+    [EmailStatus.invalid]: { text: 'Oops! Please check your email', color: 'text-[#FB3E3E]' },
+    [EmailStatus.typing]: { text: '', color: 'text-transparent' },
+  };
+  const [email, setEmail] = useState<string>('');
+  const [emailState, setEmailState] = useState<EmailStatus>(EmailStatus.typing);
+
   return (
     <main className="flex min-h-screen flex-col items-center justify-center font-chivo">
       <div className="flex min-h-[900px] w-full items-center justify-end bg-[#121725]">
@@ -30,15 +45,25 @@ export default function Home() {
                     <form
                       onSubmit={(e) => {
                         e.preventDefault();
+                        if (validateEmail(email)) {
+                          setEmailState(EmailStatus.valid);
+                        } else {
+                          setEmailState(EmailStatus.invalid);
+                        }
                       }}
                       action="submit"
                       id="emailForm"
                       className="mt-[40px] flex h-[56px] w-[427px] items-center justify-between rounded-[28px] bg-[#2C344B] pr-[5px]"
                     >
                       <input
+                        value={email}
+                        onChange={(e) => {
+                          setEmail(e.target.value);
+                          setEmailState(EmailStatus.typing);
+                        }}
                         placeholder="Email address"
-                        className="size-full rounded-l-[28px] bg-transparent pl-[32px] pr-[12px] text-[14px] font-[700] leading-[28px] text-white outline-none placeholder:text-gray-400"
-                        type="email"
+                        className={`${emailStatus[emailState].color} size-full rounded-l-[28px] bg-transparent pl-[32px] pr-[12px] text-[14px] font-[700] leading-[28px] text-white outline-none placeholder:text-gray-400`}
+                        type="text"
                       />
                       <div className="flex flex-col">
                         <button
@@ -50,7 +75,7 @@ export default function Home() {
                       </div>
                     </form>
                     <div className="ml-[32px] mt-[8px] h-0">
-                      <span className={`hidden text-[#FB3E3E]`}>Oops! Please check your email</span>
+                      <span className={emailStatus[emailState].color}>{emailStatus[emailState].text}</span>
                     </div>
                     <ul className="mt-[64px] flex h-[29px] w-[536px] items-center">
                       {socialIcons.map((icon, index) => (
