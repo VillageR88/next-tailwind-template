@@ -1,11 +1,12 @@
 'use client';
 import Image from 'next/image';
 import logo from '../public/assets/images/desktop/logo.svg';
+import bgPatternDots from '../public/assets/images/desktop/bg-pattern-dots.svg';
 import socialIcons from './lib/socialIcons';
 
 export default function Home() {
   return (
-    <div className="flex min-h-screen flex-col items-center justify-center font-chivo">
+    <main className="flex min-h-screen flex-col items-center justify-center font-chivo">
       <div className="flex min-h-[900px] w-full items-center justify-end bg-[#121725]">
         <div className="h-[640px] w-[1275px]  bg-[url('../public/assets/images/desktop/image-host.jpg')] bg-[length:888px_100%] bg-right bg-no-repeat">
           <div className="flex h-[640px] flex-col items-start justify-between">
@@ -40,13 +41,16 @@ export default function Home() {
                         type="email"
                       />
                       <div className="flex flex-col">
-                        <button className="h-[46px] min-w-[162px] rounded-[28px] bg-[#54E6AF] text-[14px] font-[700] leading-[28px] text-[#121725] transition duration-150 hover:bg-[#B3FFE2]">
+                        <button
+                          aria-label="Request Access"
+                          className="h-[46px] min-w-[162px] rounded-[28px] bg-[#54E6AF] text-[14px] font-[700] leading-[28px] text-[#121725] transition duration-150 hover:bg-[#B3FFE2]"
+                        >
                           Request Access
                         </button>
                       </div>
                     </form>
                     <div className="ml-[32px] mt-[8px] h-0">
-                      <span className="text-[#FB3E3E] ">Oops! Please check your email</span>
+                      <span className={`hidden text-[#FB3E3E]`}>Oops! Please check your email</span>
                     </div>
                     <ul className="mt-[64px] flex h-[29px] w-[536px] items-center">
                       {socialIcons.map((icon, index) => (
@@ -63,9 +67,11 @@ export default function Home() {
               </div>
             </div>
           </div>
-          <div className="flex h-0 w-full justify-end"></div>
+          <div className="mt-[-52px] flex h-[104px] w-full justify-end">
+            <Image width={232} height={104} src={bgPatternDots as string} alt="background pattern" />
+          </div>
         </div>
       </div>
-    </div>
+    </main>
   );
 }
