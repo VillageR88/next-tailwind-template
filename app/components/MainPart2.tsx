@@ -4,7 +4,7 @@ import Numerator from './Numerator';
 
 const MainPart2 = () => (
   <div className="mt-[64px] flex h-full w-full flex-col items-center px-[24px] md:mt-[67px] xl:mt-[64px]">
-    <ul className="min-[400px]-min-w-[200px] min-[400px]-min-h-[200px] grid h-[605px] w-[151px] gap-[11px] min-[400px]:h-[310px] min-[400px]:w-full min-[400px]:max-w-[327px] min-[400px]:grid-cols-2 md:h-[156px] md:min-h-[156px] md:min-w-[689px] md:max-w-[689px] md:grid-cols-4 xl:h-[242px] xl:max-w-[1110px] xl:gap-[30px]">
+    <ul className="min-[380px]-min-w-[200px] min-[380px]-min-h-[200px] grid h-[605px] w-[151px] gap-[11px] min-[380px]:h-[310px] min-[380px]:w-full min-[380px]:max-w-[327px] min-[380px]:grid-cols-2 md:h-[156px] md:min-h-[156px] md:min-w-[689px] md:max-w-[689px] md:grid-cols-4 xl:h-[242px] xl:max-w-[1110px] xl:gap-[30px]">
       {images.map((image, index) => (
         <li key={index} className="relative h-full w-full">
           <Image src={image.src} alt={image.alt} fill className="max-w-[255px] rounded-[8px]" />
