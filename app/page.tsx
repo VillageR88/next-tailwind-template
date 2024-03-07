@@ -17,19 +17,19 @@ export default function Home() {
       <div className="flex w-full items-center justify-end bg-[#121725] px-[24px] md:min-h-[900px] md:pl-[39px] md:pr-0">
         <div className="w-full bg-right bg-no-repeat md:h-[767px] md:w-[1275px] md:bg-[url('../public/assets/images/tablet/image-host.jpg')] md:bg-[length:491px_100%] xl:h-[640px] xl:bg-[url('../public/assets/images/desktop/image-host.jpg')] xl:bg-[length:888px_100%]">
           <div className="flex flex-col items-center justify-between md:h-[767px] md:items-start xl:h-[640px]">
-            <Image className="md:mt-[-28px]" src={logo as string} width={135} height={56} alt="pod logo" />
+            <Image className="mt-[62px] md:mt-[-28px]" src={logo as string} width={135} height={56} alt="pod logo" />
             <div className="w-full text-center md:size-0 md:text-left">
-              <div className="flex w-full max-w-[635px] items-end bg-[#121725] md:mt-[-508px] md:h-[509px] xl:w-[732px]">
-                <div className="w-full max-w-[665px] md:h-[421px]">
-                  <h1 className="flex w-full max-w-[665px] flex-col justify-between text-[48px] font-[100] leading-[56px] sm:w-[665px] md:h-[112px] xl:h-[124px] xl:text-[52px] xl:leading-[62px]">
+              <div className="flex w-full items-end bg-[#121725] md:mt-[-508px] md:h-[509px] md:max-w-[635px] xl:w-[732px]">
+                <div className="flex w-full flex-col items-center md:block md:h-[421px] md:max-w-[665px]">
+                  <h1 className="mt-[57px] flex w-full flex-col justify-between text-[26px] font-[100] leading-[38px] sm:w-[665px] md:mt-0 md:h-[112px] md:max-w-[665px] md:text-[48px] md:leading-[56px] xl:h-[124px] xl:text-[52px] xl:leading-[62px]">
                     <span className="text-[#54E6AF]">{'Publish your podcasts'.toUpperCase()}</span>
                     <span className="text-[#FFFFFF]">{'Everywhere.'.toUpperCase()}</span>
                   </h1>
-                  <p className="mt-[31px] w-full text-[18px] font-[100] leading-[28px] text-[#C2CBE5] sm:w-[445px] md:h-[84px] md:max-w-[445px] xl:mt-[24px]">
+                  <p className="mt-[16px] w-full text-[15px] font-[100] leading-[25px] text-[#C2CBE5] sm:w-[445px] md:mt-[31px] md:h-[84px] md:max-w-[445px] md:text-[18px] md:leading-[28px] xl:mt-[24px]">
                     Upload your audio to Pod with a single click. We’ll then distribute your podcast to Spotify, Apple
                     Podcasts, Google Podcasts, Pocket Casts and more!
                   </p>
-                  <div className="flex flex-col">
+                  <div className="flex flex-col-reverse md:flex-col">
                     <form
                       onSubmit={(e) => {
                         e.preventDefault();
@@ -68,7 +68,7 @@ export default function Home() {
                     <div className="ml-[32px] mt-[8px] h-0 text-[12px]">
                       <span className={emailStatus[emailState].color}>{emailStatus[emailState].text}</span>
                     </div>
-                    <ul className="mt-[64px] flex h-[29px] items-center md:w-[536px]">
+                    <ul className="mt-[33px] flex h-[29px] items-center md:mt-[100px] md:w-[536px] min-[1100px]:mt-[64px]">
                       {socialIcons.map((icon, index) => (
                         <li
                           key={index}
