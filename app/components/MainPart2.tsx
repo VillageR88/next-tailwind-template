@@ -19,7 +19,7 @@ const MainPart2 = () => (
         <h2 className="max-w-[445px] text-[40px] font-[900] leading-[44px] text-[#28283D]">
           Smarter meetings, all in one place
         </h2>
-        <p className="max-w-[330px] text-[16px] font-medium leading-[26px] text-[#87879D] md:max-w-full xl:max-w-[525px] xl:text-[18px]">
+        <p className="max-w-[325px] text-[16px] font-medium leading-[26px] text-[#87879D] md:max-w-full xl:max-w-[525px] xl:text-[18px]">
           Send messages, share files, show your screen, and record your meetings — all in one workspace. Control who can
           join with invite-only team access, data encryption, and data export.
         </p>

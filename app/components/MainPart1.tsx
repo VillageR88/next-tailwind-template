@@ -7,7 +7,7 @@ import Numerator from './Numerator';
 
 const MainPart1 = () => (
   <div className="flex min-h-full min-w-[calc(100%+64px)] flex-col items-center sm:px-0">
-    <div className="flex w-full justify-center gap-[32px] xl:gap-[88px]">
+    <div className="flex w-full justify-center gap-[32px] xl:gap-[20px] min-[1420px]:gap-[88px]">
       <Image
         className="hidden self-end pt-[61px] md:block xl:self-start"
         width={394}
