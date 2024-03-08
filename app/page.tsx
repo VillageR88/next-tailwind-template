@@ -14,7 +14,7 @@ export default function Home() {
 
   return (
     <main className="flex min-h-[100dvh] flex-col items-center justify-center bg-[url('../public/assets/images/tablet/image-host.jpg')] bg-cover font-chivo md:min-h-screen md:bg-none">
-      <div className="flex min-h-[100dvh] w-full items-center justify-end bg-[#121725] bg-opacity-90 px-[24px] py-6 md:h-fit md:min-h-[900px] md:bg-[#121725] md:bg-transparent md:pl-[39px] md:pr-0">
+      <div className="flex min-h-[100dvh] w-full items-center justify-end bg-[#121725]/90 px-[24px] py-6 md:h-fit md:min-h-[900px] md:bg-transparent md:pl-[39px] md:pr-0">
         <div className="w-full bg-right bg-no-repeat md:h-[767px] md:w-[1275px] md:bg-[url('../public/assets/images/tablet/image-host.jpg')] md:bg-[length:491px_100%] xl:h-[640px] xl:bg-[url('../public/assets/images/desktop/image-host.jpg')] xl:bg-[length:888px_100%]">
           <div className="flex flex-col items-center justify-between md:h-[767px] md:items-start xl:h-[640px]">
             <Image className="md:mt-[-28px]" src={logo as string} width={135} height={56} alt="pod logo" />
@@ -56,7 +56,7 @@ export default function Home() {
                         className={`${emailStatus[emailState].color} size-full h-[46px] w-full rounded-[28px] bg-[#2C344B] pl-[32px] pr-[12px] text-[14px] font-[700] leading-[28px] text-white outline-none placeholder:text-gray-400 md:rounded-l-[28px] md:bg-transparent`}
                         type="text"
                       />
-                      <div className="m ml-[32px] block h-0 w-[200px] pb-[5px] pt-[2px] text-[12px] md:hidden">
+                      <div className="ml-[32px] block h-0 w-[200px] pb-[5px] pt-[2px] text-[12px] md:hidden">
                         <span className={emailStatus[emailState].color}>{emailStatus[emailState].text}</span>
                       </div>
                       <div className="flex flex-col">
