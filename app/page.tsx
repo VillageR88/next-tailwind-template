@@ -14,7 +14,7 @@ export default function Home() {
 
   return (
     <main className="flex min-h-[100dvh] flex-col items-center justify-center bg-[url('../public/assets/images/tablet/image-host.jpg')] bg-cover font-chivo md:min-h-screen md:bg-none">
-      <div className="flex min-h-[100dvh] w-full items-center justify-end bg-[#121725]/90 px-[24px] py-6 md:h-fit md:min-h-[900px] md:bg-transparent md:pl-[39px] md:pr-0">
+      <div className="flex min-h-[100dvh] w-full items-center justify-end bg-[#121725]/90 px-[24px] py-6 md:h-fit md:items-stretch md:bg-transparent md:py-0 md:pl-[39px] md:pr-0  xl:min-h-[100dvh]  xl:items-center xl:py-2">
         <div className="w-full bg-right bg-no-repeat md:h-[767px] md:w-[1275px] md:bg-[url('../public/assets/images/tablet/image-host.jpg')] md:bg-[length:491px_100%] xl:h-[640px] xl:bg-[url('../public/assets/images/desktop/image-host.jpg')] xl:bg-[length:888px_100%]">
           <div className="flex flex-col items-center justify-between md:h-[767px] md:items-start xl:h-[640px]">
             <Image className="md:mt-[50px] xl:mt-[-28px]" src={logo as string} width={135} height={56} alt="pod logo" />
