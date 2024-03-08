@@ -17,7 +17,7 @@ export default function Home() {
       <div className="flex min-h-[100dvh] w-full items-center justify-end bg-[#121725]/90 px-[24px] py-6 md:h-fit md:min-h-[900px] md:bg-transparent md:pl-[39px] md:pr-0">
         <div className="w-full bg-right bg-no-repeat md:h-[767px] md:w-[1275px] md:bg-[url('../public/assets/images/tablet/image-host.jpg')] md:bg-[length:491px_100%] xl:h-[640px] xl:bg-[url('../public/assets/images/desktop/image-host.jpg')] xl:bg-[length:888px_100%]">
           <div className="flex flex-col items-center justify-between md:h-[767px] md:items-start xl:h-[640px]">
-            <Image className="md:mt-[-28px]" src={logo as string} width={135} height={56} alt="pod logo" />
+            <Image className="md:mt-[50px] xl:mt-[-28px]" src={logo as string} width={135} height={56} alt="pod logo" />
             <div className="w-full text-center md:size-0 md:text-left">
               <div className="flex w-full items-end md:mt-[-508px] md:h-[509px] md:max-w-[635px] md:bg-[#121725] xl:w-[732px]">
                 <div className="flex w-full flex-col items-center md:block md:h-[421px] md:max-w-[665px]">
