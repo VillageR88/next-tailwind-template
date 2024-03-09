@@ -31,19 +31,16 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
         {/* eslint-disable-next-line @next/next/no-page-custom-font*/}
-        <link
-          href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@300;400;700&display=swap"
-          rel="stylesheet"
-        />
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet" />
       </head>
       <body
         className={[fontSans, fontMono]
           .map((font) => font.variable)
           .join(' ')
           .concat(' ')
-          .concat('bg-[#0E0E0E]')}
+          .concat('bg-[#FFFFFF]')}
       >
-        <div className="ml-auto mr-auto max-w-[90em] overflow-x-clip font-sans">{children}</div>
+        <div className="mx-auto max-w-[90em] overflow-x-clip font-sans">{children}</div>
       </body>
     </html>
   );
