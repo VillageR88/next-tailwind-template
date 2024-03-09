@@ -1,6 +1,6 @@
 'use client';
 import { useState } from 'react';
-import RadioButton from './radioButton';
+import RadioButton from './RadioButton';
 
 const MainForm = () => {
   const [selected, setSelected] = useState<1 | 2>(1);
