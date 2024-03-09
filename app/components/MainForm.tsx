@@ -54,6 +54,7 @@ const MainForm = () => {
           </div>
         </div>
       </div>
+      <div className="h-[166px] max-w-[500px] rounded-l-[16px] rounded-r-[200px] bg-gradient-to-r from-[#345FF6] to-[#587DFF]"></div>
     </form>
   );
 };
