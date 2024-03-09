@@ -2,8 +2,13 @@
 @tailwind components;
 @tailwind utilities;
 
-.Heading {
+.Heading1 {
   @apply text-[64px] font-semibold leading-[110%] -tracking-[0.05em];
+}
+
+.Heading2 {
+  @apply text-[24px] font-semibold leading-[110%] -tracking-[0.05em];
+
 }
 
 .Body {
