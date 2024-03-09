@@ -8,11 +8,14 @@
 
 .Heading2 {
   @apply text-[24px] font-semibold leading-[110%] -tracking-[0.05em];
-
 }
 
-.Body {
+.Body1 {
   @apply text-[16px] leading-[150%];
+}
+
+.Body2 {
+  @apply text-[14px] leading-[150%];
 }
 
 html {
