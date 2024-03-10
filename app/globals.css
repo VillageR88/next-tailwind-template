@@ -7,6 +7,10 @@
 }
 
 .Heading2 {
+  @apply text-[48px] font-semibold leading-[110%] -tracking-[0.05em];
+}
+
+.Heading3 {
   @apply text-[24px] font-semibold leading-[110%] -tracking-[0.05em];
 }
 

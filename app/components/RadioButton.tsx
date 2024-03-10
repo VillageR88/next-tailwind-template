@@ -1,24 +1,28 @@
 import { Dispatch, SetStateAction } from 'react';
+enum System {
+  Metric = 1,
+  Imperial = 2,
+}
 
 const RadioButton = ({
   id,
-  selected,
-  setSelected,
+  system,
+  setSystem,
 }: {
-  id: 1 | 2;
-  selected: 1 | 2;
-  setSelected: Dispatch<SetStateAction<1 | 2>>;
+  id: System;
+  system: System;
+  setSystem: Dispatch<SetStateAction<1 | 2>>;
 }) => {
   return (
     <button
       onClick={() => {
-        setSelected(id);
+        setSystem(id);
       }}
       type="button"
-      className={`${id === selected ? 'bg-[#D8E2E7]' : 'border border-[#D8E2E7] hover:border-[#345FF6]'} flex size-[31px] items-center justify-center rounded-full transition-all`}
+      className={`${id === system ? 'bg-[#D8E2E7]' : 'border border-[#D8E2E7] hover:border-[#345FF6]'} flex size-[31px] items-center justify-center rounded-full transition-all`}
     >
       <div
-        className={`${id !== selected ? 'opacity-0' : 'opacity-100'} z-10 size-[15px] rounded-full bg-[#345FF6] transition`}
+        className={`${id !== system ? 'opacity-0' : 'opacity-100'} z-10 size-[15px] rounded-full bg-[#345FF6] transition`}
       ></div>
     </button>
   );

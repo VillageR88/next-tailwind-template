@@ -4,24 +4,38 @@ import RadioButton from './RadioButton';
 import bMIPreProcessor from '../lib/bMIPreProcessor';
 
 const MainForm = () => {
-  const [selected, setSelected] = useState<1 | 2>(1);
+  enum System {
+    Metric = 1,
+    Imperial = 2,
+  }
+  const [system, setSystem] = useState<System>(System.Metric);
   const [height, setHeight] = useState<string>('');
   const [weight, setWeight] = useState<string>('');
-  console.log('height', height);
 
+  const calculateBMI = () => {
+    if (system === System.Imperial) {
+      const heightInInches = Number(height);
+      const weightInLbs = Number(weight);
+      return ((weightInLbs / (heightInInches * heightInInches)) * 703).toFixed(1);
+    } else {
+      const heightInMeters = Number(height) / 100;
+      const weightInKg = Number(weight);
+      return (weightInKg / (heightInMeters * heightInMeters)).toFixed(1);
+    }
+  };
   return (
     <form
       id="MainForm"
       className=" ml-[-266px] mt-[166px] flex max-h-[484px] w-[564px] flex-col gap-[32px] rounded-[16px] bg-white  p-[32px] shadow-[10px_25px_50px_5px_rgba(179,211,241,0.3)]"
     >
-      <h2 className="Heading2">Enter your details below</h2>
+      <h2 className="Heading3">Enter your details below</h2>
       <div className="flex h-[31px] justify-between gap-[24px]">
         <div className="flex w-1/2 items-center gap-[18px]">
-          <RadioButton id={1} selected={selected} setSelected={setSelected} />
+          <RadioButton id={System.Metric} system={system} setSystem={setSystem} />
           <span className="Body1 font-bold text-[#253347]">Metric</span>
         </div>
         <div className="flex w-1/2 items-center gap-[18px]">
-          <RadioButton id={2} selected={selected} setSelected={setSelected} />
+          <RadioButton id={System.Imperial} system={system} setSystem={setSystem} />
           <span className="Body1 font-bold text-[#253347]">Imperial</span>
         </div>
       </div>
@@ -37,13 +51,13 @@ const MainForm = () => {
                 setHeight(bMIPreProcessor(e));
               }}
               id="height"
-              className="Heading2 h-[69px] w-full rounded-[12px] border border-[#D8E2E7] pl-[24px] pr-[100px] text-[#253347] outline-none transition placeholder:text-opacity-25 focus:border-[#345FF6]"
+              className="Heading3 h-[69px] w-full rounded-[12px] border border-[#D8E2E7] pl-[24px] pr-[100px] text-[#253347] outline-none transition placeholder:text-opacity-25 focus:border-[#345FF6]"
               min={0}
               max={300}
               placeholder="0"
             />
             <div className="flex h-full w-0 items-center">
-              <span className="Heading2 ml-[-58px] text-[#345FF6]">cm</span>
+              <span className="Heading3 ml-[-58px] text-[#345FF6]">cm</span>
             </div>
           </div>
         </div>
@@ -58,20 +72,31 @@ const MainForm = () => {
                 setWeight(bMIPreProcessor(e));
               }}
               id="height"
-              className="Heading2 h-[69px] w-full rounded-[12px] border border-[#D8E2E7] pl-[24px] pr-[100px] text-[#253347] outline-none transition placeholder:text-opacity-25 focus:border-[#345FF6]"
+              className="Heading3 h-[69px] w-full rounded-[12px] border border-[#D8E2E7] pl-[24px] pr-[100px] text-[#253347] outline-none transition placeholder:text-opacity-25 focus:border-[#345FF6]"
               min={0}
               max={300}
               placeholder="0"
             />
             <div className="flex h-full w-0 items-center">
-              <span className="Heading2 ml-[-58px] text-[#345FF6] transition">kg</span>
+              <span className="Heading3 ml-[-58px] text-[#345FF6] transition">kg</span>
             </div>
           </div>
         </div>
       </div>
-      <div className="flex h-[130px] max-w-[500px] flex-col justify-between rounded-l-[16px] rounded-r-[200px] bg-gradient-to-r from-[#345FF6] to-[#587DFF] p-[32px]">
-        <h2 className="Heading2 text-white">Welcome!</h2>
-        <p className="Body2 text-white">Enter your height and weight and you’ll see your BMI result here</p>
+      <div className="flex min-h-[130px] max-w-[500px] justify-between rounded-l-[16px] rounded-r-[200px] bg-gradient-to-r from-[#345FF6] to-[#587DFF] p-[32px] text-white">
+        {height && weight ? (
+          <div className="flex justify-between">
+            <div className="flex h-[102px] flex-col justify-between">
+              <h2 className="Body1 font-bold">Your BMI is...</h2>
+              <p className="Heading1">{calculateBMI()}</p>
+            </div>
+          </div>
+        ) : (
+          <div className="flex flex-col justify-between">
+            <h2 className="Heading3">Welcome!</h2>
+            <p className="Body2">Enter your height and weight and you’ll see your BMI result here</p>
+          </div>
+        )}
       </div>
     </form>
   );
