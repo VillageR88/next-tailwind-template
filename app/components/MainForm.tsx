@@ -1,10 +1,12 @@
 'use client';
 import { useState } from 'react';
 import RadioButton from './RadioButton';
+import bMIPreProcessor from '../lib/bMIPreProcessor';
 
 const MainForm = () => {
   const [selected, setSelected] = useState<1 | 2>(1);
   const [height, setHeight] = useState<string>('');
+  const [weight, setWeight] = useState<string>('');
   console.log('height', height);
 
   return (
@@ -32,16 +34,7 @@ const MainForm = () => {
             <input
               value={height}
               onChange={(e) => {
-                let newValue = e.target.value;
-                newValue = newValue
-                  .replace(/[^0-9.,]/g, '') // Remove non-numeric characters
-                  .replace(',', '.') // Replace comma with dot
-                  .replace(/(^[.,]+)/g, '') // Remove leading dots or commas
-                  .replace(/(^0+)/g, '') // Remove leading zeros
-                  .replace(/(\..*)\./g, '$1') // Remove multiple dots
-                  .replace(/(\.\d{2})./g, '$1'); // Allow only 2 decimal places
-                if (newValue.length > 3 && !newValue.includes('.')) return; // Allow only 3 digits before the dot
-                setHeight(newValue);
+                setHeight(bMIPreProcessor(e));
               }}
               id="height"
               className="Heading2 h-[69px] w-full rounded-[12px] border border-[#D8E2E7] pl-[24px] pr-[100px] text-[#253347] outline-none transition placeholder:text-opacity-25 focus:border-[#345FF6]"
@@ -60,13 +53,14 @@ const MainForm = () => {
           </label>
           <div className="flex">
             <input
-              // please use text instead of number and only numbers
-              type="text"
-              inputMode="numeric"
-              // i want only numbers from 0 to 9 no other characters
-              pattern="[0-9]*"
-              id="weight"
-              className="Heading2 h-[69px] w-full rounded-[12px] border border-[#D8E2E7] pl-[24px] pr-[100px] text-[#253347] outline-none placeholder:text-opacity-25 focus:border-[#345FF6]"
+              value={weight}
+              onChange={(e) => {
+                setWeight(bMIPreProcessor(e));
+              }}
+              id="height"
+              className="Heading2 h-[69px] w-full rounded-[12px] border border-[#D8E2E7] pl-[24px] pr-[100px] text-[#253347] outline-none transition placeholder:text-opacity-25 focus:border-[#345FF6]"
+              min={0}
+              max={300}
               placeholder="0"
             />
             <div className="flex h-full w-0 items-center">
