@@ -2,18 +2,15 @@
 import { useState } from 'react';
 import RadioButton from './RadioButton';
 import bMIPreProcessor from '../lib/bMIPreProcessor';
+import MeasureSystem from '../lib/measureSystem';
 
 const MainForm = () => {
-  enum System {
-    Metric = 1,
-    Imperial = 2,
-  }
-  const [system, setSystem] = useState<System>(System.Metric);
+  const [system, setSystem] = useState<MeasureSystem>(MeasureSystem.Metric);
   const [height, setHeight] = useState<string>('');
   const [weight, setWeight] = useState<string>('');
 
   const calculateBMI = () => {
-    if (system === System.Imperial) {
+    if (system === MeasureSystem.Imperial) {
       const heightInInches = Number(height);
       const weightInLbs = Number(weight);
       return ((weightInLbs / (heightInInches * heightInInches)) * 703).toFixed(1);
@@ -31,11 +28,11 @@ const MainForm = () => {
       <h2 className="Heading3">Enter your details below</h2>
       <div className="flex h-[31px] justify-between gap-[24px]">
         <div className="flex w-1/2 items-center gap-[18px]">
-          <RadioButton id={System.Metric} system={system} setSystem={setSystem} />
+          <RadioButton id={MeasureSystem.Metric} system={system} setSystem={setSystem} />
           <span className="Body1 font-bold text-[#253347]">Metric</span>
         </div>
         <div className="flex w-1/2 items-center gap-[18px]">
-          <RadioButton id={System.Imperial} system={system} setSystem={setSystem} />
+          <RadioButton id={MeasureSystem.Imperial} system={system} setSystem={setSystem} />
           <span className="Body1 font-bold text-[#253347]">Imperial</span>
         </div>
       </div>

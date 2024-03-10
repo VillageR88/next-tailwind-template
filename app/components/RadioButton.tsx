@@ -1,17 +1,14 @@
 import { Dispatch, SetStateAction } from 'react';
-enum System {
-  Metric = 1,
-  Imperial = 2,
-}
+import MeasureSystem from '../lib/measureSystem';
 
 const RadioButton = ({
   id,
   system,
   setSystem,
 }: {
-  id: System;
-  system: System;
-  setSystem: Dispatch<SetStateAction<1 | 2>>;
+  id: MeasureSystem;
+  system: MeasureSystem;
+  setSystem: Dispatch<SetStateAction<MeasureSystem>>;
 }) => {
   return (
     <button
