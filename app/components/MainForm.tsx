@@ -44,7 +44,7 @@ const MainForm = () => {
                 setHeight(newValue);
               }}
               id="height"
-              className="Heading2 h-[69px] w-full rounded-[12px] border border-[#D8E2E7] pl-[24px] pr-[100px] text-[#253347] outline-none placeholder:text-opacity-25 focus:border-[#345FF6]"
+              className="Heading2 h-[69px] w-full rounded-[12px] border border-[#D8E2E7] pl-[24px] pr-[100px] text-[#253347] outline-none transition placeholder:text-opacity-25 focus:border-[#345FF6]"
               min={0}
               max={300}
               placeholder="0"
@@ -70,7 +70,7 @@ const MainForm = () => {
               placeholder="0"
             />
             <div className="flex h-full w-0 items-center">
-              <span className="Heading2 ml-[-58px] text-[#345FF6]">kg</span>
+              <span className="Heading2 ml-[-58px] text-[#345FF6] transition">kg</span>
             </div>
           </div>
         </div>
