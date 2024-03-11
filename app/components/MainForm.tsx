@@ -17,6 +17,10 @@ const MainForm = () => {
     setHeightFt((Number(heightFt) + Math.floor(Number(heightIn) / 12)).toString());
     setHeightIn((Number(heightIn) % 12).toString());
   }
+  if (Number(weightLbs) >= 14) {
+    setWeightSt((Number(weightSt) + Math.floor(Number(weightLbs) / 14)).toString());
+    setWeightLbs((Number(weightLbs) % 14).toString());
+  }
 
   console.log('height', height);
   const convertMeasures = () => {
@@ -169,7 +173,7 @@ const MainForm = () => {
                 <input
                   value={weightSt}
                   onChange={(e) => {
-                    //setHeight(bMIPreProcessor(e));
+                    setWeightSt(bMIPreProcessor(e));
                   }}
                   id="weight"
                   className="Heading3 h-[69px] w-full rounded-[12px] border border-[#D8E2E7] pl-[24px] pr-[100px] text-[#253347] outline-none transition placeholder:text-opacity-25 focus:border-[#345FF6]"
@@ -185,7 +189,7 @@ const MainForm = () => {
                 <input
                   value={weightLbs}
                   onChange={(e) => {
-                    //setHeight(bMIPreProcessor(e));
+                    setWeightLbs(bMIPreProcessor(e));
                   }}
                   id="weight2"
                   className="Heading3 h-[69px] w-full rounded-[12px] border border-[#D8E2E7] pl-[24px] pr-[100px] text-[#253347] outline-none transition placeholder:text-opacity-25 focus:border-[#345FF6]"
