@@ -84,7 +84,7 @@ const MainForm = () => {
             <div className="flex w-full gap-[24px]">
               <div className="flex w-1/2">
                 <input
-                  value={height}
+                  value={height.split('.')[0]}
                   onChange={(e) => {
                     //setHeight(bMIPreProcessor(e));
                   }}
@@ -100,11 +100,11 @@ const MainForm = () => {
               </div>
               <div className="flex w-1/2">
                 <input
-                  value={height}
+                  value={height.split('.')[1]}
                   onChange={(e) => {
                     //setHeight(bMIPreProcessor(e));
                   }}
-                  id="height"
+                  id="height2"
                   className="Heading3 h-[69px] w-full rounded-[12px] border border-[#D8E2E7] pl-[24px] pr-[100px] text-[#253347] outline-none transition placeholder:text-opacity-25 focus:border-[#345FF6]"
                   min={0}
                   max={300}
@@ -164,7 +164,7 @@ const MainForm = () => {
                   onChange={(e) => {
                     //setHeight(bMIPreProcessor(e));
                   }}
-                  id="weight"
+                  id="weight2"
                   className="Heading3 h-[69px] w-full rounded-[12px] border border-[#D8E2E7] pl-[24px] pr-[100px] text-[#253347] outline-none transition placeholder:text-opacity-25 focus:border-[#345FF6]"
                   min={0}
                   max={300}
