@@ -9,6 +9,9 @@ const MainForm = () => {
   const [height, setHeight] = useState<string>('');
   const [heightFt, setHeightFt] = useState<string>('');
   const [heightIn, setHeightIn] = useState<string>('');
+  const [weight, setWeight] = useState<string>('');
+  const [weightSt, setWeightSt] = useState<string>('');
+  const [weightLbs, setWeightLbs] = useState<string>('');
 
   if (Number(heightIn) >= 12) {
     setHeightFt((Number(heightFt) + Math.floor(Number(heightIn) / 12)).toString());
@@ -16,18 +19,21 @@ const MainForm = () => {
   }
 
   console.log('height', height);
-  const [weight, setWeight] = useState<string>('');
   const convertMeasures = () => {
     if (system === MeasureSystem.Metric) {
       let imperial;
-      if (weight) setWeight((Number(weight) * 0.157473044).toFixed(2));
+      if (weight) {
+        imperial = (Number(weight) * 2.20462).toFixed(2);
+        setWeightSt(Math.floor(Number(imperial) / 14).toString());
+        setWeightLbs((Number(imperial) - Math.floor(Number(imperial) / 14) * 14).toFixed(2).split('.')[0]);
+      }
       if (height) {
         imperial = (Number(height) * 0.032808399).toFixed(2);
         setHeightFt(imperial.split('.')[0]);
         setHeightIn(((Number(imperial.split('.')[1]) * 12) / 100).toString());
       }
     } else {
-      if (weight) setWeight((Number(weight) / 0.157473044).toFixed(2));
+      if (weightSt || weightLbs) setWeight((Number(weightSt) * 6.35029 + Number(weightLbs) * 0.453592).toFixed(2));
       if (heightIn || heightFt)
         setHeight((Number(heightFt) / 0.032808399 + Number(heightIn) * 0.0254 * 100).toFixed(2));
     }
@@ -39,8 +45,8 @@ const MainForm = () => {
       return (weightMetric / Math.pow(Number(heightMetric), 2)).toFixed(1);
     } else {
       const heightImperial = Number(heightFt) * 12 + Number(heightIn);
-      const weightImperial = Number(weight);
-      return ((weightImperial / Math.pow(heightImperial, 2)) * 703).toFixed(1);
+      const weightImperial = Number(weightSt) * 14 + Number(weightLbs);
+      return ((weightImperial * 703) / Math.pow(heightImperial, 2)).toFixed(1) || '0';
     }
   };
   return (
@@ -161,7 +167,7 @@ const MainForm = () => {
             <div className="flex w-full gap-[24px]">
               <div className="flex w-1/2">
                 <input
-                  value={weight}
+                  value={weightSt}
                   onChange={(e) => {
                     //setHeight(bMIPreProcessor(e));
                   }}
@@ -177,7 +183,7 @@ const MainForm = () => {
               </div>
               <div className="flex w-1/2">
                 <input
-                  value={weight}
+                  value={weightLbs}
                   onChange={(e) => {
                     //setHeight(bMIPreProcessor(e));
                   }}
