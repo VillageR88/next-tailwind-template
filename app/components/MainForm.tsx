@@ -2,7 +2,8 @@
 import { useState } from 'react';
 import RadioButton from './RadioButton';
 import bMIPreProcessor from '../lib/bMIPreProcessor';
-import MeasureSystem from '../lib/measureSystem';
+import MeasureSystem from '../lib/enumMeasureSystem';
+import WeightStages from '../lib/enumWeightStages';
 
 const MainForm = () => {
   const [system, setSystem] = useState<MeasureSystem>(MeasureSystem.Metric);
@@ -12,7 +13,6 @@ const MainForm = () => {
   const [weight, setWeight] = useState<string>('');
   const [weightSt, setWeightSt] = useState<string>('');
   const [weightLbs, setWeightLbs] = useState<string>('');
-
   if (Number(heightIn) >= 12) {
     setHeightFt((Number(heightFt) + Math.floor(Number(heightIn) / 12)).toString());
     setHeightIn((Number(heightIn) % 12).toString());
@@ -21,8 +21,6 @@ const MainForm = () => {
     setWeightSt((Number(weightSt) + Math.floor(Number(weightLbs) / 14)).toString());
     setWeightLbs((Number(weightLbs) % 14).toString());
   }
-
-  console.log('height', height);
   const convertMeasures = () => {
     if (system === MeasureSystem.Metric) {
       let imperial;
@@ -42,17 +40,38 @@ const MainForm = () => {
         setHeight((Number(heightFt) / 0.032808399 + Number(heightIn) * 0.0254 * 100).toFixed(2));
     }
   };
+  const getWeightStage = () => {
+    const bmi = calculateBMI();
+    if (bmi === '< 18.5') return WeightStages.underweight;
+    else if (Number(bmi) >= 18.5 && Number(bmi) < 24.9) return WeightStages.healthyWeight;
+    else if (Number(bmi) >= 25 && Number(bmi) < 29.9) return WeightStages.overweight;
+    else return WeightStages.obese;
+  };
   const calculateBMI = () => {
     if (system === MeasureSystem.Metric) {
       const heightMetric = Number(height) / 100;
       const weightMetric = Number(weight);
-      return (weightMetric / Math.pow(Number(heightMetric), 2)).toFixed(1);
+      const result = (weightMetric / Math.pow(Number(heightMetric), 2)).toFixed(1);
+      if (Number(result) >= 30) return '> 30';
+      else if (Number(result) <= 18.5) return '< 18.5';
+      return result;
     } else {
       const heightImperial = Number(heightFt) * 12 + Number(heightIn);
       const weightImperial = Number(weightSt) * 14 + Number(weightLbs);
       return ((weightImperial * 703) / Math.pow(heightImperial, 2)).toFixed(1) || '0';
     }
   };
+  const idealWeightRange = () => {
+    if (system === MeasureSystem.Metric)
+      return `${(18.5 * Math.pow(Number(height) / 100, 2)).toFixed(1)}kgs - ${(24.9 * Math.pow(Number(height) / 100, 2)).toFixed(1)}kgs`;
+    else
+      return `${Math.floor((18.5 * Math.pow(Number(heightFt) * 12 + Number(heightIn), 2)) / 703 / 14)}st ${Math.floor(
+        ((18.5 * Math.pow(Number(heightFt) * 12 + Number(heightIn), 2)) / 703) % 14,
+      )}lbs - ${Math.floor((24.9 * Math.pow(Number(heightFt) * 12 + Number(heightIn), 2)) / 703 / 14)}st ${Math.floor(
+        ((24.9 * Math.pow(Number(heightFt) * 12 + Number(heightIn), 2)) / 703) % 14,
+      )}lbs`;
+  };
+
   return (
     <form
       id="MainForm"
@@ -206,11 +225,18 @@ const MainForm = () => {
         </div>
       </div>
       <div className="flex min-h-[130px] max-w-[500px] justify-between rounded-l-[16px] rounded-r-[200px] bg-gradient-to-r from-[#345FF6] to-[#587DFF] p-[32px] text-white">
-        {height && weight ? (
-          <div className="flex justify-between">
+        {(height && weight && system === MeasureSystem.Metric) ||
+        ((heightFt || heightIn) && (weightSt || weightLbs) && system === MeasureSystem.Imperial) ? (
+          <div className="flex w-full justify-between">
             <div className="flex h-[102px] flex-col justify-between">
               <h2 className="Body1 font-bold">Your BMI is...</h2>
               <p className="Heading1">{calculateBMI()}</p>
+            </div>
+            <div className="w-[206px]">
+              <span className="Body2">
+                Your BMI suggests you’re <span>{getWeightStage()}</span>. Your ideal weight is between{' '}
+                <span className="font-bold">{idealWeightRange()}</span>
+              </span>
             </div>
           </div>
         ) : (
