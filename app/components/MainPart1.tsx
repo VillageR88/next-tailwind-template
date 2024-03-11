@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import logo from '@/public/assets/images/logo.svg';
-import MainForm from './MainForm';
+import MainForm from './MainPart1Form';
 
 const MainPart1 = () => (
   <div className="flex min-h-[737px] w-full max-w-[1276px] items-start justify-between self-start">
