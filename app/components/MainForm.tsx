@@ -86,7 +86,10 @@ const MainForm = () => {
                 <input
                   value={height.split('.')[0]}
                   onChange={(e) => {
-                    setHeight(bMIPreProcessor(e) + '.' + height.split('.')[1]);
+                    e.target.value = e.target.value.replace(/[^0-9]/g, '');
+                    e.target.value = e.target.value.slice(0, 2);
+                    if (height.includes('.')) setHeight(e.target.value + '.' + height.split('.')[1]);
+                    else setHeight(e.target.value);
                   }}
                   id="height"
                   className="Heading3 h-[69px] w-full rounded-[12px] border border-[#D8E2E7] pl-[24px] pr-[100px] text-[#253347] outline-none transition placeholder:text-opacity-25 focus:border-[#345FF6]"
@@ -100,9 +103,10 @@ const MainForm = () => {
               </div>
               <div className="flex w-1/2">
                 <input
-                  value={height.split('.')[1]?.replace(/^0/, '')}
+                  value={height.includes('.') ? ((Number(height) % 1) * 12).toFixed(2).toString() : ''}
                   onChange={(e) => {
-                    setHeight(height.split('.')[0] + '.' + Number(bMIPreProcessor(e)));
+                    e.target.value = e.target.value.replace(/[^0-9]/g, '');
+                    e.target.value = e.target.value.slice(0, 2);
                   }}
                   id="height2"
                   className="Heading3 h-[69px] w-full rounded-[12px] border border-[#D8E2E7] pl-[24px] pr-[100px] text-[#253347] outline-none transition placeholder:text-opacity-25 focus:border-[#345FF6]"
