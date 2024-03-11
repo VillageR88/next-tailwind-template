@@ -3,6 +3,8 @@ import curvedLineRight from '@/public/assets/images/pattern-curved-line-right.sv
 import iconGender from '@/public/assets/images/icon-gender.svg';
 import iconAge from '@/public/assets/images/icon-age.svg';
 import iconMuscle from '@/public/assets/images/icon-muscle.svg';
+import iconPregnancy from '@/public/assets/images/icon-pregnancy.svg';
+import iconRace from '@/public/assets/images/icon-race.svg';
 const items = {
   gender: {
     image: iconGender as string,
@@ -21,6 +23,18 @@ const items = {
     title: 'Muscle',
     description:
       "BMI may misclassify muscular individuals as overweight or obese, as it doesn't differentiate muscle from fat.",
+  },
+  pregnancy: {
+    image: iconPregnancy as string,
+    title: 'Pregnancy',
+    description:
+      'Expectant mothers experience weight gain due to their growing baby. Maintaining a healthy pre-pregnancy BMI is advisable to minimise health risks for both mother and child.',
+  },
+  race: {
+    image: iconRace as string,
+    title: 'Race',
+    description:
+      'Certain health concerns may affect individuals of some Black and Asian origins at lower BMIs than others. To learn more, it is advised to discuss this with your GP or practice nurse.',
   },
 };
 
@@ -78,6 +92,20 @@ const MainPart4 = () => (
           title={items.muscle.title}
           image={items.muscle.image}
           description={items.muscle.description}
+        />
+      </div>
+      <div className="mr-[199px] mt-[24px] flex gap-[32px]">
+        <Block
+          additionalClass="h-[232px]"
+          title={items.pregnancy.title}
+          image={items.pregnancy.image}
+          description={items.pregnancy.description}
+        />
+        <Block
+          additionalClass="h-[232px]"
+          title={items.race.title}
+          image={items.race.image}
+          description={items.race.description}
         />
       </div>
     </div>
