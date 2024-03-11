@@ -7,14 +7,29 @@ import MeasureSystem from '../lib/measureSystem';
 const MainForm = () => {
   const [system, setSystem] = useState<MeasureSystem>(MeasureSystem.Metric);
   const [height, setHeight] = useState<string>('');
+  const [heightFt, setHeightFt] = useState<string>('');
+  const [heightIn, setHeightIn] = useState<string>('');
+
+  if (Number(heightIn) >= 12) {
+    setHeightFt((Number(heightFt) + Math.floor(Number(heightIn) / 12)).toString());
+    setHeightIn((Number(heightIn) % 12).toString());
+  }
+
+  console.log('height', height);
   const [weight, setWeight] = useState<string>('');
   const convertMeasures = () => {
     if (system === MeasureSystem.Metric) {
+      let imperial;
       if (weight) setWeight((Number(weight) * 0.157473044).toFixed(2));
-      if (height) setHeight((Number(height) * 0.032808399).toFixed(2));
+      if (height) {
+        imperial = (Number(height) * 0.032808399).toFixed(2);
+        setHeightFt(imperial.split('.')[0]);
+        setHeightIn(((Number(imperial.split('.')[1]) * 12) / 100).toString());
+      }
     } else {
       if (weight) setWeight((Number(weight) / 0.157473044).toFixed(2));
-      if (height) setHeight((Number(height) / 0.032808399).toFixed(2));
+      if (heightIn || heightFt)
+        setHeight((Number(heightFt) / 0.032808399 + Number(heightIn) * 0.0254 * 100).toFixed(2));
     }
   };
   const calculateBMI = () => {
@@ -23,9 +38,9 @@ const MainForm = () => {
       const weightMetric = Number(weight);
       return (weightMetric / Math.pow(Number(heightMetric), 2)).toFixed(1);
     } else {
-      const heightImperial = Number(height) * 0.3048;
-      const weightImperial = Number(weight) * 6.35029;
-      return (weightImperial / Math.pow(Number(heightImperial), 2)).toFixed(1);
+      const heightImperial = Number(heightFt) * 12 + Number(heightIn);
+      const weightImperial = Number(weight);
+      return ((weightImperial / Math.pow(heightImperial, 2)) * 703).toFixed(1);
     }
   };
   return (
@@ -84,12 +99,11 @@ const MainForm = () => {
             <div className="flex w-full gap-[24px]">
               <div className="flex w-1/2">
                 <input
-                  value={height.split('.')[0]}
+                  value={heightFt}
                   onChange={(e) => {
                     e.target.value = e.target.value.replace(/[^0-9]/g, '');
                     e.target.value = e.target.value.slice(0, 2);
-                    if (height.includes('.')) setHeight(e.target.value + '.' + height.split('.')[1]);
-                    else setHeight(e.target.value);
+                    setHeightFt(bMIPreProcessor(e));
                   }}
                   id="height"
                   className="Heading3 h-[69px] w-full rounded-[12px] border border-[#D8E2E7] pl-[24px] pr-[100px] text-[#253347] outline-none transition placeholder:text-opacity-25 focus:border-[#345FF6]"
@@ -103,10 +117,9 @@ const MainForm = () => {
               </div>
               <div className="flex w-1/2">
                 <input
-                  value={height.includes('.') ? ((Number(height) % 1) * 12).toFixed(2).toString() : ''}
+                  value={heightIn}
                   onChange={(e) => {
-                    e.target.value = e.target.value.replace(/[^0-9]/g, '');
-                    e.target.value = e.target.value.slice(0, 2);
+                    setHeightIn(bMIPreProcessor(e));
                   }}
                   id="height2"
                   className="Heading3 h-[69px] w-full rounded-[12px] border border-[#D8E2E7] pl-[24px] pr-[100px] text-[#253347] outline-none transition placeholder:text-opacity-25 focus:border-[#345FF6]"
