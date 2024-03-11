@@ -100,7 +100,7 @@ const MainForm = () => {
               </div>
               <div className="flex w-1/2">
                 <input
-                  value={height.split('.')[1]}
+                  value={height.split('.')[1]?.replace(/^0/, '')}
                   onChange={(e) => {
                     //setHeight(bMIPreProcessor(e));
                   }}
