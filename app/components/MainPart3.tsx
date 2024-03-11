@@ -29,9 +29,9 @@ const MainPart3 = () => (
     <ul className="mt-[72px] flex h-[234px] w-full max-w-[1159px] justify-center gap-[32px]">
       {listItems.map((item, index) => (
         <li key={index} className="flex h-[234px] w-[365px] flex-col">
-          <Image src={item.image} alt="icon-eating" />
-          <h3 className="mt-[24px] text-[24px] font-bold leading-[28px] text-[#1E2A32]">{item.title}</h3>
-          <p className="mt-[16px] text-[16px] leading-[24px] text-[#1E2A32]">{item.description}</p>
+          <Image width={64} height={64} src={item.image} alt="icon-eating" />
+          <h3 className="Heading3 mt-[45px] text-[#253347]">{item.title}</h3>
+          <p className="Body1 mt-[24px] text-[#5E6E85]">{item.description}</p>
         </li>
       ))}
     </ul>
