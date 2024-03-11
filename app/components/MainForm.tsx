@@ -20,9 +20,15 @@ const MainForm = () => {
   };
 
   const calculateBMI = () => {
-    const heightInMeters = Number(height) / 100;
-    const weightInKg = Number(weight);
-    return (weightInKg / (heightInMeters * heightInMeters)).toFixed(1);
+    if (system === MeasureSystem.Metric) {
+      const heightInMeters = Number(height) / 100;
+      const weightInKg = Number(weight);
+      return (weightInKg / (heightInMeters * heightInMeters)).toFixed(1);
+    } else {
+      const heightInInches = Number(height);
+      const weightInLbs = Number(weight);
+      return ((weightInLbs / (heightInInches * heightInInches)) * 703).toFixed(1);
+    }
   };
   return (
     <form
