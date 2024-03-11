@@ -9,75 +9,169 @@ const MainForm = () => {
   const [height, setHeight] = useState<string>('');
   const [weight, setWeight] = useState<string>('');
 
-  const calculateBMI = () => {
-    if (system === MeasureSystem.Imperial) {
-      const heightInInches = Number(height);
-      const weightInLbs = Number(weight);
-      return ((weightInLbs / (heightInInches * heightInInches)) * 703).toFixed(1);
+  const convertMeasures = () => {
+    if (system === MeasureSystem.Metric) {
+      setWeight((Number(weight) * 2.20462).toFixed(2));
+      setHeight((Number(height) * 0.393701).toFixed(2));
     } else {
-      const heightInMeters = Number(height) / 100;
-      const weightInKg = Number(weight);
-      return (weightInKg / (heightInMeters * heightInMeters)).toFixed(1);
+      setWeight((Number(weight) / 2.20462).toFixed(2));
+      setHeight((Number(height) / 0.393701).toFixed(2));
     }
+  };
+
+  const calculateBMI = () => {
+    const heightInMeters = Number(height) / 100;
+    const weightInKg = Number(weight);
+    return (weightInKg / (heightInMeters * heightInMeters)).toFixed(1);
   };
   return (
     <form
       id="MainForm"
-      className=" ml-[-266px] mt-[166px] flex max-h-[484px] w-[564px] flex-col gap-[32px] rounded-[16px] bg-white  p-[32px] shadow-[10px_25px_50px_5px_rgba(179,211,241,0.3)]"
+      className=" ml-[-266px] mt-[166px] flex min-h-full w-[564px] flex-col gap-[32px] rounded-[16px] bg-white  p-[32px] shadow-[10px_25px_50px_5px_rgba(179,211,241,0.3)]"
     >
       <h2 className="Heading3">Enter your details below</h2>
       <div className="flex h-[31px] justify-between gap-[24px]">
         <div className="flex w-1/2 items-center gap-[18px]">
-          <RadioButton id={MeasureSystem.Metric} system={system} setSystem={setSystem} />
+          <RadioButton
+            id={MeasureSystem.Metric}
+            system={system}
+            setSystem={setSystem}
+            convertMeasures={convertMeasures}
+          />
           <span className="Body1 font-bold text-[#253347]">Metric</span>
         </div>
         <div className="flex w-1/2 items-center gap-[18px]">
-          <RadioButton id={MeasureSystem.Imperial} system={system} setSystem={setSystem} />
+          <RadioButton
+            id={MeasureSystem.Imperial}
+            system={system}
+            setSystem={setSystem}
+            convertMeasures={convertMeasures}
+          />
           <span className="Body1 font-bold text-[#253347]">Imperial</span>
         </div>
       </div>
-      <div className="flex h-[98px] w-full gap-[24px]">
-        <div className="flex w-1/2 flex-col justify-between">
+      <div
+        className={`flex ${system === MeasureSystem.Metric ? 'h-[98px] flex-row' : 'h-[220px] flex-col'} w-full gap-[24px]`}
+      >
+        <div
+          className={`flex ${system === MeasureSystem.Metric ? 'w-1/2' : 'w-full'} h-[98px] flex-col justify-between`}
+        >
           <label className="Body2 text-[#5E6E85]" htmlFor="height">
             Height
           </label>
-          <div className="flex">
-            <input
-              value={height}
-              onChange={(e) => {
-                setHeight(bMIPreProcessor(e));
-              }}
-              id="height"
-              className="Heading3 h-[69px] w-full rounded-[12px] border border-[#D8E2E7] pl-[24px] pr-[100px] text-[#253347] outline-none transition placeholder:text-opacity-25 focus:border-[#345FF6]"
-              min={0}
-              max={300}
-              placeholder="0"
-            />
-            <div className="flex h-full w-0 items-center">
-              <span className="Heading3 ml-[-58px] text-[#345FF6]">cm</span>
+          {system === MeasureSystem.Metric ? (
+            <div className="flex">
+              <input
+                value={height}
+                onChange={(e) => {
+                  setHeight(bMIPreProcessor(e));
+                }}
+                id="height"
+                className="Heading3 h-[69px] w-full rounded-[12px] border border-[#D8E2E7] pl-[24px] pr-[100px] text-[#253347] outline-none transition placeholder:text-opacity-25 focus:border-[#345FF6]"
+                min={0}
+                max={300}
+                placeholder="0"
+              />
+              <div className="flex h-full w-0 items-center">
+                <span className="Heading3 ml-[-58px] text-[#345FF6]">cm</span>
+              </div>
             </div>
-          </div>
+          ) : (
+            <div className="flex w-full gap-[24px]">
+              <div className="flex w-1/2">
+                <input
+                  value={height}
+                  onChange={(e) => {
+                    //setHeight(bMIPreProcessor(e));
+                  }}
+                  id="height"
+                  className="Heading3 h-[69px] w-full rounded-[12px] border border-[#D8E2E7] pl-[24px] pr-[100px] text-[#253347] outline-none transition placeholder:text-opacity-25 focus:border-[#345FF6]"
+                  min={0}
+                  max={300}
+                  placeholder="0"
+                />
+                <div className="flex h-full w-0 items-center">
+                  <span className="Heading3 ml-[-40px] text-[#345FF6]">ft</span>
+                </div>
+              </div>
+              <div className="flex w-1/2">
+                <input
+                  value={height}
+                  onChange={(e) => {
+                    //setHeight(bMIPreProcessor(e));
+                  }}
+                  id="height"
+                  className="Heading3 h-[69px] w-full rounded-[12px] border border-[#D8E2E7] pl-[24px] pr-[100px] text-[#253347] outline-none transition placeholder:text-opacity-25 focus:border-[#345FF6]"
+                  min={0}
+                  max={300}
+                  placeholder="0"
+                />
+                <div className="flex h-full w-0 items-center">
+                  <span className="Heading3 ml-[-43px] text-[#345FF6]">in</span>
+                </div>
+              </div>
+            </div>
+          )}
         </div>
-        <div className="flex w-1/2 flex-col justify-between">
+        <div
+          className={`flex ${system === MeasureSystem.Metric ? 'w-1/2' : 'w-full'} h-[98px] flex-col justify-between`}
+        >
           <label className="Body2 text-[#5E6E85]" htmlFor="weight">
             Weight
           </label>
-          <div className="flex">
-            <input
-              value={weight}
-              onChange={(e) => {
-                setWeight(bMIPreProcessor(e));
-              }}
-              id="height"
-              className="Heading3 h-[69px] w-full rounded-[12px] border border-[#D8E2E7] pl-[24px] pr-[100px] text-[#253347] outline-none transition placeholder:text-opacity-25 focus:border-[#345FF6]"
-              min={0}
-              max={300}
-              placeholder="0"
-            />
-            <div className="flex h-full w-0 items-center">
-              <span className="Heading3 ml-[-58px] text-[#345FF6] transition">kg</span>
+          {system === MeasureSystem.Metric ? (
+            <div className="flex">
+              <input
+                value={weight}
+                onChange={(e) => {
+                  setWeight(bMIPreProcessor(e));
+                }}
+                id="weight"
+                className="Heading3 h-[69px] w-full rounded-[12px] border border-[#D8E2E7] pl-[24px] pr-[100px] text-[#253347] outline-none transition placeholder:text-opacity-25 focus:border-[#345FF6]"
+                min={0}
+                max={300}
+                placeholder="0"
+              />
+              <div className="flex h-full w-0 items-center">
+                <span className="Heading3 ml-[-58px] text-[#345FF6] transition">kg</span>
+              </div>
             </div>
-          </div>
+          ) : (
+            <div className="flex w-full gap-[24px]">
+              <div className="flex w-1/2">
+                <input
+                  value={weight}
+                  onChange={(e) => {
+                    //setHeight(bMIPreProcessor(e));
+                  }}
+                  id="weight"
+                  className="Heading3 h-[69px] w-full rounded-[12px] border border-[#D8E2E7] pl-[24px] pr-[100px] text-[#253347] outline-none transition placeholder:text-opacity-25 focus:border-[#345FF6]"
+                  min={0}
+                  max={300}
+                  placeholder="0"
+                />
+                <div className="flex h-full w-0 items-center">
+                  <span className="Heading3 ml-[-44px] text-[#345FF6]">st</span>
+                </div>
+              </div>
+              <div className="flex w-1/2">
+                <input
+                  value={weight}
+                  onChange={(e) => {
+                    //setHeight(bMIPreProcessor(e));
+                  }}
+                  id="weight"
+                  className="Heading3 h-[69px] w-full rounded-[12px] border border-[#D8E2E7] pl-[24px] pr-[100px] text-[#253347] outline-none transition placeholder:text-opacity-25 focus:border-[#345FF6]"
+                  min={0}
+                  max={300}
+                  placeholder="0"
+                />
+                <div className="flex h-full w-0 items-center">
+                  <span className="Heading3 ml-[-55px] text-[#345FF6]">lbs</span>
+                </div>
+              </div>
+            </div>
+          )}
         </div>
       </div>
       <div className="flex min-h-[130px] max-w-[500px] justify-between rounded-l-[16px] rounded-r-[200px] bg-gradient-to-r from-[#345FF6] to-[#587DFF] p-[32px] text-white">
