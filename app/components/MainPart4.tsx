@@ -1,6 +1,8 @@
 import Image from 'next/image';
+import curvedLineRight from '@/public/assets/images/pattern-curved-line-right.svg';
 import iconGender from '@/public/assets/images/icon-gender.svg';
 import iconAge from '@/public/assets/images/icon-age.svg';
+import iconMuscle from '@/public/assets/images/icon-muscle.svg';
 const items = {
   gender: {
     image: iconGender as string,
@@ -13,6 +15,12 @@ const items = {
     title: 'Age',
     description:
       'In aging individuals, increased body fat and muscle loss may cause BMI to underestimate body fat content.',
+  },
+  muscle: {
+    image: iconMuscle as string,
+    title: 'Muscle',
+    description:
+      "BMI may misclassify muscular individuals as overweight or obese, as it doesn't differentiate muscle from fat.",
   },
 };
 
@@ -50,17 +58,26 @@ const MainPart4 = () => (
     </div>
     <div className="flex h-[704px] w-[961px] flex-col items-end">
       <Block
-        additionalClass={'h-[232px]'}
+        additionalClass={'h-[232px] mr-[99px]'}
         title={items.gender.title}
         image={items.gender.image}
         description={items.gender.description}
       />
+      <div className="h-0 w-full">
+        <Image className="ml-[-35px] mt-[19px]" src={curvedLineRight as string} alt="pattern" />
+      </div>
       <div className="mt-[32px] flex gap-[32px]">
         <Block
           additionalClass={'h-[184px]'}
           title={items.age.title}
           image={items.age.image}
           description={items.age.description}
+        />
+        <Block
+          additionalClass={'h-[184px]'}
+          title={items.muscle.title}
+          image={items.muscle.image}
+          description={items.muscle.description}
         />
       </div>
     </div>
