@@ -8,17 +8,15 @@ const MainForm = () => {
   const [system, setSystem] = useState<MeasureSystem>(MeasureSystem.Metric);
   const [height, setHeight] = useState<string>('');
   const [weight, setWeight] = useState<string>('');
-
   const convertMeasures = () => {
     if (system === MeasureSystem.Metric) {
-      setWeight((Number(weight) * 2.20462).toFixed(2));
-      setHeight((Number(height) * 0.393701).toFixed(2));
+      if (weight) setWeight((Number(weight) * 0.157473044).toFixed(2));
+      if (height) setHeight((Number(height) * 0.032808399).toFixed(2));
     } else {
-      setWeight((Number(weight) / 2.20462).toFixed(2));
-      setHeight((Number(height) / 0.393701).toFixed(2));
+      if (weight) setWeight((Number(weight) / 0.157473044).toFixed(2));
+      if (height) setHeight((Number(height) / 0.032808399).toFixed(2));
     }
   };
-
   const calculateBMI = () => {
     if (system === MeasureSystem.Metric) {
       const heightInMeters = Number(height) / 100;
