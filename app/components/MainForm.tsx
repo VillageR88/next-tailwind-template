@@ -19,13 +19,13 @@ const MainForm = () => {
   };
   const calculateBMI = () => {
     if (system === MeasureSystem.Metric) {
-      const heightInMeters = Number(height) / 100;
-      const weightInKg = Number(weight);
-      return (weightInKg / (heightInMeters * heightInMeters)).toFixed(1);
+      const heightMetric = Number(height) / 100;
+      const weightMetric = Number(weight);
+      return (weightMetric / Math.pow(Number(heightMetric), 2)).toFixed(1);
     } else {
-      const heightInInches = Number(height);
-      const weightInLbs = Number(weight);
-      return ((weightInLbs / (heightInInches * heightInInches)) * 703).toFixed(1);
+      const heightImperial = Number(height) * 0.3048;
+      const weightImperial = Number(weight) * 6.35029;
+      return (weightImperial / Math.pow(Number(heightImperial), 2)).toFixed(1);
     }
   };
   return (
@@ -86,7 +86,7 @@ const MainForm = () => {
                 <input
                   value={height.split('.')[0]}
                   onChange={(e) => {
-                    //setHeight(bMIPreProcessor(e));
+                    setHeight(bMIPreProcessor(e) + '.' + height.split('.')[1]);
                   }}
                   id="height"
                   className="Heading3 h-[69px] w-full rounded-[12px] border border-[#D8E2E7] pl-[24px] pr-[100px] text-[#253347] outline-none transition placeholder:text-opacity-25 focus:border-[#345FF6]"
@@ -102,7 +102,7 @@ const MainForm = () => {
                 <input
                   value={height.split('.')[1]?.replace(/^0/, '')}
                   onChange={(e) => {
-                    //setHeight(bMIPreProcessor(e));
+                    setHeight(height.split('.')[0] + '.' + Number(bMIPreProcessor(e)));
                   }}
                   id="height2"
                   className="Heading3 h-[69px] w-full rounded-[12px] border border-[#D8E2E7] pl-[24px] pr-[100px] text-[#253347] outline-none transition placeholder:text-opacity-25 focus:border-[#345FF6]"
