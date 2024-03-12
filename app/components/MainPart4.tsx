@@ -50,7 +50,7 @@ const Block = ({
   additionalClass: string;
 }) => (
   <div
-    className={` ${additionalClass} w-fit max-w-fit flex-col rounded-[16px] p-[32px] shadow-[10px_25px_50px_5px_rgba(179,211,241,0.3)] lg:w-[365px] lg:justify-between`}
+    className={`${additionalClass} w-fit flex-col rounded-[16px] p-[32px] shadow-[10px_25px_50px_5px_rgba(179,211,241,0.3)] lg:w-[365px] lg:justify-between`}
   >
     <div className="flex items-center gap-[16px]">
       <Image width={32} height={32} src={image} alt={title} />
@@ -61,7 +61,7 @@ const Block = ({
 );
 
 const MainPart4 = () => (
-  <div className="mt-[96px] flex min-h-[963px] w-full max-w-[1160px] flex-col items-center justify-between pr-6 lg:mt-[120px] lg:min-h-[704px] lg:flex-row lg:items-start min-[1200px]:p-0">
+  <div className="mt-[96px] flex min-h-[963px] w-full max-w-[1160px] flex-col items-center lg:mt-[120px] lg:min-h-[704px] lg:flex-row lg:items-start lg:justify-between lg:pr-6 min-[1200px]:p-0">
     <div className="flex min-h-[139px] max-w-[686px] flex-col items-center justify-between pl-10 text-center lg:mr-[-365px] lg:min-h-[160px] lg:max-w-[564px] lg:items-start lg:gap-6 lg:text-start min-[1200px]:min-h-[184px] xl:pl-0">
       <h2 className="Heading2 text-[#253347]">Limitations of BMI</h2>
       <p className="Body1 text-[#5E6E85]">
@@ -108,7 +108,7 @@ const MainPart4 = () => (
           description={items.race.description}
         />
       </div>
-      <div className="flex min-h-[768px] max-w-[686px] flex-col items-center lg:hidden">
+      <div className="mt-[56px] flex min-h-[768px] max-w-[686px] flex-col items-center gap-[24px] lg:hidden">
         <div className="flex min-h-[232px] gap-[16px]">
           <Block
             additionalClass={'flex'}
@@ -123,6 +123,26 @@ const MainPart4 = () => (
             description={items.age.description}
           />
         </div>
+        <div className="flex min-h-[256px] gap-[16px]">
+          <Block
+            additionalClass={'flex'}
+            title={items.muscle.title}
+            image={items.muscle.image}
+            description={items.muscle.description}
+          />
+          <Block
+            additionalClass={'flex'}
+            title={items.pregnancy.title}
+            image={items.pregnancy.image}
+            description={items.pregnancy.description}
+          />
+        </div>
+        <Block
+          additionalClass={'flex max-w-[365px] min-h-[232px]'}
+          title={items.race.title}
+          image={items.race.image}
+          description={items.race.description}
+        />
       </div>
     </div>
   </div>

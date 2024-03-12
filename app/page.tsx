@@ -5,7 +5,7 @@ import MainPart4 from './components/MainPart4';
 
 export default function Home() {
   return (
-    <main className="flex min-h-screen flex-col items-center justify-start pb-[120px] font-inter">
+    <main className="flex min-h-screen flex-col items-center justify-start pb-[96px] font-inter lg:pb-[120px]">
       <MainPart1 />
       <MainPart2 />
       <MainPart3 />

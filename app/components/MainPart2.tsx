@@ -22,7 +22,7 @@ const MainPart2 = () => (
         alt="Image of a man eating sushi"
         priority
       />
-      <div className="mt-[131px] flex h-fit min-h-[342px] w-[311px] flex-col justify-between gap-[32px] min-[1200px]:mt-[184px] min-[1200px]:min-h-[309px] min-[1200px]:w-[465px]">
+      <div className="mt-[35px] flex h-fit min-h-[342px] w-[311px] flex-col justify-between gap-[32px] min-[1100px]:mt-[131px] min-[1200px]:mt-[184px] min-[1200px]:min-h-[309px] min-[1200px]:w-[465px]">
         <h2 className="Heading2 text-[#253347]">What your BMI result means</h2>
         <p className="Body1 text-[#5E6E85]">
           {
