@@ -26,7 +26,7 @@ const listItems = [
 
 const MainPart3 = () => (
   <div className="mt-[96px] flex min-h-[402px] w-full justify-center rounded-[35px] bg-gradient-to-br from-transparent via-[rgba(214,252,254,0.2)] to-[rgba(214,230,254,0.3)] px-[24px]">
-    <ul className="mt-[72px] flex h-[234px] w-full max-w-[1159px] justify-center gap-[32px]">
+    <ul className="mt-[72px] flex h-[234px] w-full max-w-[1159px] justify-center gap-[32px] pl-6 xl:pl-0">
       {listItems.map((item, index) => (
         <li key={index} className="flex h-[234px] w-[365px] flex-col">
           <Image width={64} height={64} src={item.image} alt="icon-eating" />

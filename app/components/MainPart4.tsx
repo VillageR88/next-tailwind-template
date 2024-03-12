@@ -62,7 +62,7 @@ const Block = ({
 
 const MainPart4 = () => (
   <div className="mt-[120px] flex min-h-[704px] w-full max-w-[1160px] justify-between">
-    <div className="mr-[-365px] flex h-[184px] w-[564px] flex-col justify-between">
+    <div className="mr-[-365px] flex h-[184px] w-[564px] flex-col justify-between pl-10 xl:pl-0">
       <h2 className="Heading2 text-[#253347]">Limitations of BMI</h2>
       <p className="Body1 text-[#5E6E85]">
         Although BMI is often a practical indicator of healthy weight, it is not suited for every person. Specific

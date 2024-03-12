@@ -5,10 +5,16 @@ import curvedLineLeft from '@/public/assets/images/pattern-curved-line-left.svg'
 const MainPart2 = () => (
   <div className="flex size-full flex-col items-center">
     <div className=" flex h-0 w-full max-w-[1160px] justify-end pr-[27px]">
-      <Image className="mt-[13px] size-fit" width={85} height={200} src={curvedLineLeft as string} alt="pattern" />
+      <Image
+        className="mt-[13px] h-[200px] w-[85px]"
+        width={85}
+        height={200}
+        src={curvedLineLeft as string}
+        alt="pattern"
+      />
     </div>
-    <div className=" mt-[65px] flex min-h-[533px] w-full max-w-[1160px] justify-between">
-      <Image height={533} width={564} src={imageMan} alt="Image of a man eating sushi" />
+    <div className=" mt-[65px] flex min-h-[533px] w-full max-w-[1080px] justify-between xl:max-w-[1160px]">
+      <Image height={533} width={564} src={imageMan} alt="Image of a man eating sushi" priority />
       <div className="mt-[184px] flex h-[309px] w-[465px] flex-col justify-between">
         <h2 className="Heading2 text-[#253347]">What your BMI result means</h2>
         <p className="Body1 text-[#5E6E85]">

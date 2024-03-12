@@ -75,7 +75,7 @@ const MainForm = () => {
   return (
     <form
       id="MainForm"
-      className=" ml-[-266px] mt-[166px] flex min-h-full w-[564px] flex-col gap-[32px] rounded-[16px] bg-white  p-[32px] shadow-[10px_25px_50px_5px_rgba(179,211,241,0.3)]"
+      className="ml-[-400px] mr-4 mt-[166px] flex min-h-full w-[564px] flex-col gap-[32px] rounded-[16px] bg-white  p-[32px] shadow-[10px_25px_50px_5px_rgba(179,211,241,0.3)] xl:mr-0 min-[1400px]:ml-[-266px]"
     >
       <h2 className="Heading3">Enter your details below</h2>
       <div className="flex h-[31px] justify-between gap-[24px]">
