@@ -61,7 +61,7 @@ const Block = ({
 );
 
 const MainPart4 = () => (
-  <div className="mt-[120px] flex min-h-[704px] w-full max-w-[1160px] justify-between">
+  <div className="mt-[120px] flex min-h-[704px] w-full max-w-[1160px] justify-between pr-8 min-[1200px]:p-0">
     <div className="mr-[-365px] flex h-[184px] w-[564px] flex-col justify-between pl-10 xl:pl-0">
       <h2 className="Heading2 text-[#253347]">Limitations of BMI</h2>
       <p className="Body1 text-[#5E6E85]">
@@ -77,7 +77,7 @@ const MainPart4 = () => (
         image={items.gender.image}
         description={items.gender.description}
       />
-      <div className="h-0 w-full">
+      <div className="hidden h-0 w-full min-[1100px]:block">
         <Image className="ml-[-35px] mt-[19px]" src={curvedLineRight as string} alt="pattern" />
       </div>
       <div className="mt-[32px] flex gap-[32px]">
