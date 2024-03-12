@@ -50,7 +50,7 @@ const Block = ({
   additionalClass: string;
 }) => (
   <div
-    className={`${additionalClass} w-fit flex-col rounded-[16px] p-[32px] shadow-[10px_25px_50px_5px_rgba(179,211,241,0.3)] lg:w-[365px] lg:justify-between`}
+    className={`${additionalClass} w-fit flex-col rounded-[16px] p-[32px] shadow-[10px_10px_30px_5px_rgba(179,211,241,0.3)] lg:w-[365px] lg:justify-between lg:shadow-[10px_25px_50px_5px_rgba(179,211,241,0.3)]`}
   >
     <div className="flex items-center gap-[16px]">
       <Image width={32} height={32} src={image} alt={title} />
@@ -62,7 +62,7 @@ const Block = ({
 
 const MainPart4 = () => (
   <div className="mt-[96px] flex min-h-[963px] w-full max-w-[1160px] flex-col items-center lg:mt-[120px] lg:min-h-[704px] lg:flex-row lg:items-start lg:justify-between lg:pr-6 min-[1200px]:p-0">
-    <div className="flex min-h-[139px] max-w-[686px] flex-col items-center justify-between pl-10 text-center lg:mr-[-365px] lg:min-h-[160px] lg:max-w-[564px] lg:items-start lg:gap-6 lg:text-start min-[1200px]:min-h-[184px] xl:pl-0">
+    <div className="flex min-h-[139px] max-w-[327px] flex-col items-center justify-between gap-[32px] text-center md:max-w-[686px] md:gap-0 md:pl-10 lg:mr-[-365px] lg:min-h-[160px] lg:max-w-[564px] lg:items-start lg:gap-6 lg:text-start min-[1200px]:min-h-[184px] xl:pl-0">
       <h2 className="Heading2 text-[#253347]">Limitations of BMI</h2>
       <p className="Body1 text-[#5E6E85]">
         Although BMI is often a practical indicator of healthy weight, it is not suited for every person. Specific
@@ -70,7 +70,7 @@ const MainPart4 = () => (
         to use.
       </p>
     </div>
-    <div className="flex h-[704px] w-[961px] flex-col items-center lg:items-end">
+    <div className="flex min-h-[704px] max-w-[327px] flex-col items-center md:max-w-[961px] lg:items-end">
       <Block
         additionalClass={'h-[232px] mr-[99px] lg:flex hidden'}
         title={items.gender.title}
@@ -109,7 +109,7 @@ const MainPart4 = () => (
         />
       </div>
       <div className="mt-[56px] flex min-h-[768px] max-w-[686px] flex-col items-center gap-[24px] lg:hidden">
-        <div className="flex min-h-[232px] gap-[16px]">
+        <div className="flex min-h-[232px] flex-col gap-[16px] md:flex-row">
           <Block
             additionalClass={'flex'}
             title={items.gender.title}
@@ -123,7 +123,7 @@ const MainPart4 = () => (
             description={items.age.description}
           />
         </div>
-        <div className="flex min-h-[256px] gap-[16px]">
+        <div className="flex min-h-[256px] flex-col gap-[16px] md:flex-row">
           <Block
             additionalClass={'flex'}
             title={items.muscle.title}
