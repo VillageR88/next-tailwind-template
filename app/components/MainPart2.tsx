@@ -13,16 +13,16 @@ const MainPart2 = () => (
         alt="pattern"
       />
     </div>
-    <div className="ml-[-116px] mt-[65px] flex min-h-[411px] w-full max-w-[841px] justify-between gap-8 min-[1200px]:ml-0 min-[1200px]:min-h-[533px] min-[1200px]:max-w-[1080px] xl:max-w-[1160px]">
+    <div className="mt-[65px] flex min-h-[411px] w-full max-w-[841px] flex-col items-center justify-between gap-8 md:ml-[-116px] md:flex-row md:items-start min-[1200px]:ml-0 min-[1200px]:min-h-[533px] min-[1200px]:max-w-[1080px] xl:max-w-[1160px]">
       <Image
-        className="h-[411px] w-[435px] min-[1200px]:h-[533px] min-[1200px]:w-[564px]"
+        className="size-fit sm:max-h-[533px] sm:max-w-[564px]"
         height={533}
         width={564}
         src={imageMan}
         alt="Image of a man eating sushi"
         priority
       />
-      <div className="mt-[35px] flex h-fit min-h-[342px] w-[311px] flex-col justify-between gap-[32px] min-[1100px]:mt-[131px] min-[1200px]:mt-[184px] min-[1200px]:min-h-[309px] min-[1200px]:w-[465px]">
+      <div className="mt-[35px] flex h-fit min-h-[342px] max-w-[328px] flex-col justify-between gap-[32px] md:max-w-[311px] min-[1200px]:mt-[184px] min-[1200px]:min-h-[309px] min-[1200px]:w-[465px]">
         <h2 className="Heading2 text-[#253347]">What your BMI result means</h2>
         <p className="Body1 text-[#5E6E85]">
           {

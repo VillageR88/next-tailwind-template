@@ -232,7 +232,7 @@ const MainForm = () => {
               <h2 className="Body1 font-bold">Your BMI is...</h2>
               <p className="Heading1">{calculateBMI()}</p>
             </div>
-            <div className="w-[206px] md:mt-0 mt-[24px]">
+            <div className="mt-[24px] w-[206px] md:mt-0">
               <span className="Body2">
                 Your BMI suggests you’re <span>{getWeightStage()}</span>. Your ideal weight is between{' '}
                 <span className="font-bold">{idealWeightRange()}</span>
