@@ -26,12 +26,17 @@ const listItems = [
 
 const MainPart3 = () => (
   <div className="mt-[96px] flex min-h-[402px] w-full justify-center rounded-[35px] bg-gradient-to-br from-transparent via-[rgba(214,252,254,0.2)] to-[rgba(214,230,254,0.3)] px-[24px]">
-    <ul className="mt-[72px] flex h-[234px] w-full max-w-[1159px] justify-center gap-[32px] pl-6 lg:gap-[40px] lg:pr-6 xl:px-0">
+    <ul className="mt-[60px] flex w-full max-w-[768px] flex-col justify-center gap-[32px] pl-6 lg:mt-[72px] lg:min-h-[234px] lg:max-w-[1159px] lg:flex-row lg:gap-[40px] lg:pr-6 xl:px-0">
       {listItems.map((item, index) => (
-        <li key={index} className="flex h-[234px] w-[365px] flex-col">
+        <li
+          key={index}
+          className="flex min-h-[234px] max-w-[686px] flex-row items-center gap-[40px] lg:max-w-[365px] lg:flex-col lg:items-start lg:gap-0"
+        >
           <Image width={64} height={64} src={item.image} alt="icon-eating" />
-          <h3 className="Heading3 mt-[45px] text-[#253347]">{item.title}</h3>
-          <p className="Body1 mt-[24px] text-[#5E6E85]">{item.description}</p>
+          <div className="flex max-h-[101px] flex-col justify-between gap-[24px] lg:max-h-[125px] lg:gap-0">
+            <h3 className="Heading3 text-[#253347] lg:mt-[45px]">{item.title}</h3>
+            <p className="Body1 text-[#5E6E85] lg:mt-[24px]">{item.description}</p>
+          </div>
         </li>
       ))}
     </ul>
