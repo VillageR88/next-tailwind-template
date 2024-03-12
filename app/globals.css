@@ -6,12 +6,6 @@
   @apply text-[64px] font-semibold leading-[110%] -tracking-[0.05em];
 }
 
-@media (max-width: 1200px) {
-  .Heading1 {
-    @apply text-[48px] font-semibold leading-[110%] -tracking-[0.05em];
-  }
-}
-
 .Heading2 {
   @apply text-[48px] font-semibold leading-[110%] -tracking-[0.05em];
 }
@@ -32,6 +26,16 @@
   @apply text-[14px] leading-[150%];
 }
 
+@media (max-width: 1200px) {
+  .Heading1 {
+    @apply text-[48px] font-semibold leading-[110%] -tracking-[0.05em];
+  }
+
+  .Heading2 {
+    @apply text-[32px] font-semibold leading-[110%] -tracking-[0.05em];
+  }
+}
+
 html {
   /* dark scroll bars */
   /* color-scheme: dark; */
@@ -45,6 +49,6 @@ input::-webkit-inner-spin-button {
 }
 
 /* Firefox */
-input[type=number] {
+input[type='number'] {
   -moz-appearance: textfield;
 }
