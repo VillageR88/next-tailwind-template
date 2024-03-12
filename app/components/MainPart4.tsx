@@ -50,19 +50,19 @@ const Block = ({
   additionalClass: string;
 }) => (
   <div
-    className={`flex ${additionalClass} w-[365px] flex-col justify-between rounded-[16px] p-[32px] shadow-[10px_25px_50px_5px_rgba(179,211,241,0.3)]`}
+    className={` ${additionalClass} w-fit max-w-fit flex-col rounded-[16px] p-[32px] shadow-[10px_25px_50px_5px_rgba(179,211,241,0.3)] lg:w-[365px] lg:justify-between`}
   >
     <div className="flex items-center gap-[16px]">
       <Image width={32} height={32} src={image} alt={title} />
       <h3 className="Heading4 text-[#253347]">{title}</h3>
     </div>
-    <p className="Body1 text-[#5E6E85]">{description}</p>
+    <p className="Body1 mt-[16px] text-[#5E6E85] lg:mt-0">{description}</p>
   </div>
 );
 
 const MainPart4 = () => (
-  <div className="mt-[120px] flex min-h-[704px] w-full max-w-[1160px] justify-between pr-6 min-[1200px]:p-0">
-    <div className="mr-[-365px] flex h-[160px] w-[564px] flex-col justify-between pl-10 lg:gap-6 min-[1200px]:h-[184px] xl:pl-0">
+  <div className="mt-[96px] flex min-h-[963px] w-full max-w-[1160px] flex-col items-center justify-between pr-6 lg:mt-[120px] lg:min-h-[704px] lg:flex-row lg:items-start min-[1200px]:p-0">
+    <div className="flex min-h-[139px] max-w-[686px] flex-col items-center justify-between pl-10 text-center lg:mr-[-365px] lg:min-h-[160px] lg:max-w-[564px] lg:items-start lg:gap-6 lg:text-start min-[1200px]:min-h-[184px] xl:pl-0">
       <h2 className="Heading2 text-[#253347]">Limitations of BMI</h2>
       <p className="Body1 text-[#5E6E85]">
         Although BMI is often a practical indicator of healthy weight, it is not suited for every person. Specific
@@ -70,9 +70,9 @@ const MainPart4 = () => (
         to use.
       </p>
     </div>
-    <div className="flex h-[704px] w-[961px] flex-col items-end">
+    <div className="flex h-[704px] w-[961px] flex-col items-center lg:items-end">
       <Block
-        additionalClass={'h-[232px] mr-[99px]'}
+        additionalClass={'h-[232px] mr-[99px] lg:flex hidden'}
         title={items.gender.title}
         image={items.gender.image}
         description={items.gender.description}
@@ -80,33 +80,49 @@ const MainPart4 = () => (
       <div className="hidden h-0 w-full min-[1100px]:block">
         <Image className="ml-[-35px] mt-[19px]" src={curvedLineRight as string} alt="pattern" />
       </div>
-      <div className="mt-[32px] flex gap-[32px]">
+      <div className="mt-[32px] hidden gap-[32px] lg:flex">
         <Block
-          additionalClass={'h-[184px]'}
+          additionalClass={'flex h-[184px]'}
           title={items.age.title}
           image={items.age.image}
           description={items.age.description}
         />
         <Block
-          additionalClass={'h-[184px]'}
+          additionalClass={'flex h-[184px]'}
           title={items.muscle.title}
           image={items.muscle.image}
           description={items.muscle.description}
         />
       </div>
-      <div className="mr-[199px] mt-[24px] flex gap-[32px]">
+      <div className="mr-[199px] mt-[24px] hidden gap-[32px] lg:flex">
         <Block
-          additionalClass="h-[232px]"
+          additionalClass="flex h-[232px]"
           title={items.pregnancy.title}
           image={items.pregnancy.image}
           description={items.pregnancy.description}
         />
         <Block
-          additionalClass="h-[232px]"
+          additionalClass="flex h-[232px]"
           title={items.race.title}
           image={items.race.image}
           description={items.race.description}
         />
+      </div>
+      <div className="flex min-h-[768px] max-w-[686px] flex-col items-center lg:hidden">
+        <div className="flex min-h-[232px] gap-[16px]">
+          <Block
+            additionalClass={'flex'}
+            title={items.gender.title}
+            image={items.gender.image}
+            description={items.gender.description}
+          />
+          <Block
+            additionalClass={'flex'}
+            title={items.age.title}
+            image={items.age.image}
+            description={items.age.description}
+          />
+        </div>
       </div>
     </div>
   </div>
