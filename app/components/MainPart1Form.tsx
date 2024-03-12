@@ -75,7 +75,7 @@ const MainForm = () => {
   return (
     <form
       id="MainForm"
-      className="mr-4 mt-[-286px] flex min-h-full w-[564px] flex-col gap-[32px] self-center rounded-[16px] bg-white p-[32px] shadow-[10px_25px_50px_5px_rgba(179,211,241,0.3)] min-[1200px]:ml-[-400px]  min-[1200px]:mt-[166px] min-[1200px]:self-auto min-[1300px]:mr-0 min-[1400px]:ml-[-266px]"
+      className="mt-[-169px] flex min-h-full max-w-[328px] flex-col gap-[32px] self-center rounded-[16px] bg-white p-[32px] shadow-[10px_25px_50px_5px_rgba(179,211,241,0.3)] md:mr-4 md:mt-[-286px] md:md:max-w-[686px] min-[1200px]:ml-[-400px] min-[1200px]:mt-[166px] min-[1200px]:max-w-[564px] min-[1200px]:self-auto min-[1300px]:mr-0 min-[1400px]:ml-[-266px]"
     >
       <h2 className="Heading3">Enter your details below</h2>
       <div className="flex h-[31px] justify-between gap-[24px]">
@@ -99,10 +99,10 @@ const MainForm = () => {
         </div>
       </div>
       <div
-        className={`flex ${system === MeasureSystem.Metric ? 'h-[98px] flex-row' : 'h-[220px] flex-col'} w-full gap-[24px]`}
+        className={`flex ${system === MeasureSystem.Metric ? 'min-h-[98px] flex-col md:flex-row' : 'h-[220px] flex-col'} w-full gap-[24px]`}
       >
         <div
-          className={`flex ${system === MeasureSystem.Metric ? 'w-1/2' : 'w-full'} h-[98px] flex-col justify-between`}
+          className={`flex ${system === MeasureSystem.Metric ? 'w-full md:w-1/2' : 'w-full'} h-[98px] flex-col justify-between`}
         >
           <label className="Body2 text-[#5E6E85]" htmlFor="height">
             Height
@@ -164,7 +164,7 @@ const MainForm = () => {
           )}
         </div>
         <div
-          className={`flex ${system === MeasureSystem.Metric ? 'w-1/2' : 'w-full'} h-[98px] flex-col justify-between`}
+          className={`flex ${system === MeasureSystem.Metric ? 'w-full md:w-1/2' : 'w-full'} h-[98px] flex-col justify-between`}
         >
           <label className="Body2 text-[#5E6E85]" htmlFor="weight">
             Weight
@@ -224,11 +224,11 @@ const MainForm = () => {
           )}
         </div>
       </div>
-      <div className="flex min-h-[130px] max-w-[500px] justify-between rounded-l-[16px] rounded-r-[200px] bg-gradient-to-r from-[#345FF6] to-[#587DFF] p-[32px] text-white">
+      <div className="flex min-h-[130px] justify-between rounded-[16px] bg-gradient-to-r from-[#345FF6] to-[#587DFF] p-[32px] text-white md:rounded-r-[200px]">
         {(height && weight && system === MeasureSystem.Metric) ||
         ((heightFt || heightIn) && (weightSt || weightLbs) && system === MeasureSystem.Imperial) ? (
-          <div className="flex w-full justify-between">
-            <div className="flex h-[102px] flex-col justify-between">
+          <div className="flex w-full items-center justify-between">
+            <div className="flex flex-col justify-between md:h-[85px] min-[1200px]:h-[102px] ">
               <h2 className="Body1 font-bold">Your BMI is...</h2>
               <p className="Heading1">{calculateBMI()}</p>
             </div>
