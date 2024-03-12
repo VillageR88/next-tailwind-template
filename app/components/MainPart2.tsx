@@ -13,7 +13,7 @@ const MainPart2 = () => (
         alt="pattern"
       />
     </div>
-    <div className=" mt-[65px] flex min-h-[533px] w-full max-w-[1080px] justify-between xl:max-w-[1160px]">
+    <div className="mt-[65px] flex min-h-[533px] w-full max-w-[1080px] justify-between xl:max-w-[1160px]">
       <Image height={533} width={564} src={imageMan} alt="Image of a man eating sushi" priority />
       <div className="mt-[184px] flex h-[309px] w-[465px] flex-col justify-between">
         <h2 className="Heading2 text-[#253347]">What your BMI result means</h2>
