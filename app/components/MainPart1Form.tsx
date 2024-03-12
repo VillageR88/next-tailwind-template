@@ -135,7 +135,7 @@ const MainForm = () => {
                     setHeightFt(bMIPreProcessor(e));
                   }}
                   id="height"
-                  className="Heading3 h-[69px] w-full rounded-[12px] border border-[#D8E2E7] pl-[24px] pr-[100px] text-[#253347] outline-none transition placeholder:text-opacity-25 focus:border-[#345FF6]"
+                  className="Heading3 h-[69px] w-full rounded-[12px] border border-[#D8E2E7] pl-[24px] text-[#253347] outline-none transition placeholder:text-opacity-25 focus:border-[#345FF6] md:pr-[100px]"
                   min={0}
                   max={300}
                   placeholder="0"
@@ -151,7 +151,7 @@ const MainForm = () => {
                     setHeightIn(bMIPreProcessor(e));
                   }}
                   id="height2"
-                  className="Heading3 h-[69px] w-full rounded-[12px] border border-[#D8E2E7] pl-[24px] pr-[100px] text-[#253347] outline-none transition placeholder:text-opacity-25 focus:border-[#345FF6]"
+                  className="Heading3 h-[69px] w-full rounded-[12px] border border-[#D8E2E7] pl-[24px] text-[#253347] outline-none transition placeholder:text-opacity-25 focus:border-[#345FF6] md:pr-[100px]"
                   min={0}
                   max={300}
                   placeholder="0"
@@ -177,7 +177,7 @@ const MainForm = () => {
                   setWeight(bMIPreProcessor(e));
                 }}
                 id="weight"
-                className="Heading3 h-[69px] w-full rounded-[12px] border border-[#D8E2E7] pl-[24px] pr-[100px] text-[#253347] outline-none transition placeholder:text-opacity-25 focus:border-[#345FF6]"
+                className="Heading3 h-[69px] w-full rounded-[12px] border border-[#D8E2E7] pl-[24px] text-[#253347] outline-none transition placeholder:text-opacity-25 focus:border-[#345FF6] md:pr-[100px]"
                 min={0}
                 max={300}
                 placeholder="0"
@@ -195,7 +195,7 @@ const MainForm = () => {
                     setWeightSt(bMIPreProcessor(e));
                   }}
                   id="weight"
-                  className="Heading3 h-[69px] w-full rounded-[12px] border border-[#D8E2E7] pl-[24px] pr-[100px] text-[#253347] outline-none transition placeholder:text-opacity-25 focus:border-[#345FF6]"
+                  className="Heading3 h-[69px] w-full rounded-[12px] border border-[#D8E2E7] pl-[24px] text-[#253347] outline-none transition placeholder:text-opacity-25 focus:border-[#345FF6] md:pr-[100px]"
                   min={0}
                   max={300}
                   placeholder="0"
@@ -211,7 +211,7 @@ const MainForm = () => {
                     setWeightLbs(bMIPreProcessor(e));
                   }}
                   id="weight2"
-                  className="Heading3 h-[69px] w-full rounded-[12px] border border-[#D8E2E7] pl-[24px] pr-[100px] text-[#253347] outline-none transition placeholder:text-opacity-25 focus:border-[#345FF6]"
+                  className="Heading3 h-[69px] w-full rounded-[12px] border border-[#D8E2E7] pl-[24px] text-[#253347] outline-none transition placeholder:text-opacity-25 focus:border-[#345FF6] md:pr-[100px]"
                   min={0}
                   max={300}
                   placeholder="0"
