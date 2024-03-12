@@ -224,15 +224,15 @@ const MainForm = () => {
           )}
         </div>
       </div>
-      <div className="flex min-h-[130px] justify-between rounded-[16px] bg-gradient-to-r from-[#345FF6] to-[#587DFF] p-[32px] text-white md:rounded-r-[200px]">
+      <div className="flex  justify-between rounded-[16px] bg-gradient-to-r from-[#345FF6] to-[#587DFF] p-[32px] text-white md:min-h-[130px] md:rounded-r-[200px]">
         {(height && weight && system === MeasureSystem.Metric) ||
         ((heightFt || heightIn) && (weightSt || weightLbs) && system === MeasureSystem.Imperial) ? (
-          <div className="flex w-full items-center justify-between">
-            <div className="flex flex-col justify-between md:h-[85px] min-[1200px]:h-[102px] ">
+          <div className="flex w-full flex-col justify-between md:flex-row md:items-center">
+            <div className="flex flex-col justify-between gap-[8px] md:h-[85px] md:gap-0 min-[1200px]:h-[102px] ">
               <h2 className="Body1 font-bold">Your BMI is...</h2>
               <p className="Heading1">{calculateBMI()}</p>
             </div>
-            <div className="w-[206px]">
+            <div className="w-[206px] md:mt-0 mt-[24px]">
               <span className="Body2">
                 Your BMI suggests you’re <span>{getWeightStage()}</span>. Your ideal weight is between{' '}
                 <span className="font-bold">{idealWeightRange()}</span>
@@ -242,7 +242,7 @@ const MainForm = () => {
         ) : (
           <div className="flex flex-col justify-between">
             <h2 className="Heading3">Welcome!</h2>
-            <p className="Body2">Enter your height and weight and you’ll see your BMI result here</p>
+            <p className="Body2 mt-[18px]">Enter your height and weight and you’ll see your BMI result here</p>
           </div>
         )}
       </div>
