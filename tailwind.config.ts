@@ -15,7 +15,7 @@ const config: Config = {
       },
       colors: {
         black: '#030303',
-        mediumBrown: '7A746E',
+        mediumBrown: '#7A746E',
         lightCream: '#FFF7F0',
         galacticBlue: '#755CDE',
         summerYellow: '#F6A560',

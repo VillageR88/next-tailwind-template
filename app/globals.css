@@ -7,6 +7,14 @@ html {
   /* color-scheme: dark; */
 }
 
+.HeadingL {
+  @apply text-[56px] font-bold leading-[70px];
+}
+
+.BodyM {
+  @apply text-[18px] font-medium leading-[28px];
+}
+
 * {
   /* transition-property: color, background, border; */
   transition-property: all;
