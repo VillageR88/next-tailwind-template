@@ -8,7 +8,7 @@ html {
 }
 
 .HeadingL {
-  @apply text-[56px] font-bold leading-[70px];
+  @apply xl:text-[56px] md:text-[44px] text-[36px] font-bold xl:leading-[70px];
 }
 
 .HeadingM {
@@ -20,7 +20,7 @@ html {
 }
 
 .BodyM {
-  @apply text-[18px] font-medium leading-[28px];
+  @apply md:text-[18px] text-[16px] font-medium md:leading-[28px] leading-[26px];
 }
 
 .slick-dots button {
