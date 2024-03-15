@@ -12,6 +12,7 @@ export default function Home() {
       <MainPart2 />
       <MainPart3 />
       <MainPart4 />
+      <MainBar additionalClass="mt-[56px]" />
     </main>
   );
 }
