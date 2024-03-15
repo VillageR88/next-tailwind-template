@@ -12,7 +12,7 @@ html {
 }
 
 .HeadingM {
-  @apply text-[40px] font-bold leading-[51px];
+  @apply text-[32px] font-bold leading-[40px] xl:text-[40px] xl:leading-[51px];
 }
 
 .HeadingS {

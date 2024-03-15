@@ -37,13 +37,13 @@ const Carousel = () => {
   ];
 
   return (
-    <div ref={carouselRef} className="mt-[56px] w-[1700px]">
+    <div ref={carouselRef} className="mt-[56px] w-[850px] md:w-[1700px]">
       <Slider slidesToShow={3} speed={500} initialSlide={1}>
         {carouselItems.map((item, index) => {
           return (
             <div className="outline-none" key={index}>
               <Image
-                className="min-h-[360px] min-w-[540px] rounded-[10px]"
+                className="min-h-[180px] min-w-[270px] scale-[95%] rounded-[10px] md:min-h-[360px] md:md:min-w-[540px] md:scale-100"
                 width={540}
                 height={360}
                 src={item.image}
