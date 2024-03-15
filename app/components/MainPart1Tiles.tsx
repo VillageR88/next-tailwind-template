@@ -1,6 +1,8 @@
+import Tile1 from './Tile1';
+
 const MainPart1Tiles = () => (
   <div className="mt-[80px] flex max-w-[1110px] flex-wrap justify-center gap-[24px]">
-    <div className="h-[364px] w-[354px] rounded-[8px] bg-galacticBlue"></div>
+    <Tile1 />
     <div className="grid h-[364px] w-[354px] grid-cols-2 gap-[24px]">
       <div className="h-[182px] w-[164px] rounded-[8px] bg-summerYellow"></div>
       <div className="h-[182px] w-[164px] rounded-[8px] bg-pink"></div>
