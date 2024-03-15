@@ -1,8 +1,8 @@
 import Carousel from './Carousel';
 
 const MainPart3 = () => (
-  <div className="flex size-full flex-col items-center">
-    <h2>MainPart3</h2>
+  <div className="mt-[88px] flex size-full flex-col items-center">
+    <h2 className="HeadingS">My Work</h2>
     <Carousel />
   </div>
 );
