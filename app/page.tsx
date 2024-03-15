@@ -1,5 +1,5 @@
 import MainBar from './components/MainBar';
-import MainPart1 from './MainPart1';
+import MainPart1 from './components/MainPart1';
 
 export default function Home() {
   return (
