@@ -30,19 +30,20 @@ const Carousel = () => {
   ];
 
   return (
-    <div ref={carouselRef} className="mt-[4em] size-full">
-      <Slider infinite slidesToShow={3} speed={500} initialSlide={1}>
+    <div ref={carouselRef} className="mt-[4em] w-[1700px]">
+      <Slider slidesToShow={3} speed={500} initialSlide={1}>
         {carouselItems.map((item, index) => {
           return (
-            <Image
-              key={index}
-              className="rounded-[10px]"
-              width={540}
-              height={360}
-              src={item.image}
-              alt="image"
-              priority
-            />
+            <div className="outline-none" key={index}>
+              <Image
+                className="min-h-[360px] min-w-[540px] rounded-[10px]"
+                width={540}
+                height={360}
+                src={item.image}
+                alt="image"
+                priority
+              />
+            </div>
           );
         })}
       </Slider>
