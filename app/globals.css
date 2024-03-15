@@ -8,11 +8,11 @@ html {
 }
 
 .HeadingL {
-  @apply xl:text-[56px] md:text-[44px] text-[36px] font-bold xl:leading-[70px];
+  @apply text-[36px] font-bold md:text-[44px] xl:text-[56px] xl:leading-[70px];
 }
 
 .HeadingM {
-  @apply text-[32px] font-bold leading-[40px] xl:text-[40px] xl:leading-[51px];
+  @apply text-[26px] font-bold leading-[40px] md:text-[32px] xl:text-[40px] xl:leading-[51px];
 }
 
 .HeadingS {
@@ -20,7 +20,7 @@ html {
 }
 
 .BodyM {
-  @apply md:text-[18px] text-[16px] font-medium md:leading-[28px] leading-[26px];
+  @apply text-[16px] font-medium leading-[26px] md:text-[18px] md:leading-[28px];
 }
 
 .slick-dots button {

@@ -37,7 +37,7 @@ const Carousel = () => {
   ];
 
   return (
-    <div ref={carouselRef} className="mt-[56px] w-[850px] md:w-[1700px]">
+    <div ref={carouselRef} className="mt-[32px] w-[850px] md:mt-[56px] md:w-[1700px]">
       <Slider slidesToShow={3} speed={500} initialSlide={1}>
         {carouselItems.map((item, index) => {
           return (
@@ -54,7 +54,7 @@ const Carousel = () => {
           );
         })}
       </Slider>
-      <div className="mt-[56px] flex w-full justify-center gap-[16px]">
+      <div className="mt-[22px] flex w-full justify-center gap-[16px] md:mt-[56px]">
         <button
           aria-label="Previous Slide"
           className="flex size-[56px] items-center justify-center rounded-full bg-black transition hover:bg-galacticBlue"

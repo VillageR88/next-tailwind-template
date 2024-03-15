@@ -3,7 +3,7 @@ import imageAmy from '@/public/assets/images/image-amy.webp';
 import Button1And2 from './Button1And2';
 
 const MainPart2 = () => (
-  <div className="mt-[120px] flex w-full max-w-[772px] flex-col items-center justify-between gap-[40px] transition-all duration-300 ease-in-out md:ml-[-53px] md:flex-row md:gap-[69px] xl:ml-0 xl:max-w-[1110px] xl:gap-[125px]">
+  <div className="mt-[100px] flex w-full max-w-[772px] flex-col items-center justify-between gap-[40px] transition-all duration-300 ease-in-out md:ml-[-53px] md:mt-[120px] md:flex-row md:gap-[69px] xl:ml-0 xl:max-w-[1110px] xl:gap-[125px]">
     <Image
       className="size-[300px] md:size-[364px] xl:size-[445px]"
       width={445}
