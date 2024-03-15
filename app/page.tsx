@@ -1,6 +1,7 @@
 import MainBar from './components/MainBar';
 import MainPart1 from './components/MainPart1';
 import MainPart2 from './components/MainPart2';
+import MainPart3 from './components/MainPart3';
 
 export default function Home() {
   return (
@@ -8,6 +9,7 @@ export default function Home() {
       <MainBar />
       <MainPart1 />
       <MainPart2 />
+      <MainPart3 />
     </main>
   );
 }

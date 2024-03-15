@@ -19,9 +19,7 @@ html {
   @apply text-[18px] font-medium leading-[28px];
 }
 
-* {
-  /* transition-property: color, background, border; */
-  transition-property: all;
-  transition-duration: 0.2s;
-  transition-timing-function: ease-in-out;
+.slick-dots button {
+  text-indent: -9999px;
+  padding: 0 16em;
 }
