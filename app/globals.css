@@ -11,6 +11,10 @@ html {
   @apply text-[56px] font-bold leading-[70px];
 }
 
+.HeadingM {
+  @apply text-[40px] font-bold leading-[51px];
+}
+
 .BodyM {
   @apply text-[18px] font-medium leading-[28px];
 }
