@@ -26,7 +26,7 @@ const MainPart1 = () => (
         </p>
       </section>
       <button className="relative flex h-[61px] w-full max-w-[256px] items-center justify-center rounded-[6px] bg-darkBlue bg-gradient-to-br text-[18px] font-bold leading-[32px] tracking-[-0.18px] text-creamWhite transition *:opacity-0 hover:opacity-100 *:hover:opacity-100 ">
-        <div className="absolute flex size-full items-center justify-center rounded-[6px] bg-gradient-to-br from-linear1 via-linear2 to-linear3">
+        <div className="absolute flex size-full items-center justify-center rounded-[6px] bg-gradient-to-br from-linear1 via-linear2 to-linear3 transition">
           Request Beta Access
         </div>
         Request Beta Access
