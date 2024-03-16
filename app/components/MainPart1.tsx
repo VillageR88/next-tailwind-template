@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import imageHeroDesktop from '@/public/assets/images/image-hero-portrait.webp';
+import imageHeroDesktop from '@/public/assets/images/image-hero-portrait@2x.webp';
 import patternLine1 from '@/public/assets/images/pattern-curved-line-1.svg';
 
 const itemsRightSide = [

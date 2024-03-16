@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import imageJeremyLarge from '@/public/assets/images/image-jeremy-large.webp';
+import imageJeremyLarge from '@/public/assets/images/image-jeremy-large@2x.webp';
 import pattern2 from '@/public/assets/images/pattern-curved-line-2.svg';
 
 const MainPart2 = () => (
