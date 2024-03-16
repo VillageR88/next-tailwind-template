@@ -1,8 +1,20 @@
 import Image from 'next/image';
 import imageHeroDesktop from '@/public/assets/images/image-hero-portrait.webp';
+import patternLine1 from '@/public/assets/images/pattern-curved-line-1.svg';
+
+const itemsRightSide = [
+  { number: '2K+', text: 'COMPANIES' },
+  { number: '8', text: 'LANGUAGES' },
+  { number: '1.2M', text: 'LEADS' },
+];
 
 const MainPart1 = () => (
   <div className="mt-[67px] flex size-full max-h-[600px] max-w-[1110px]">
+    <div className="size-0">
+      <div className="absolute ml-[289px] mt-[45px] size-full">
+        <Image width={287} height={36} src={patternLine1 as string} alt="pattern" />
+      </div>
+    </div>
     <div className="z-10 mt-[103px] flex h-[405px] w-full max-w-[635px] flex-col gap-[52px]">
       <section className="flex flex-col gap-[40px]">
         <h1 className="text-[72px] leading-[78px] text-darkBlue">
@@ -21,6 +33,14 @@ const MainPart1 = () => (
       </button>
     </div>
     <Image className="ml-[-161px] size-full max-h-[600px] max-w-[350px]" src={imageHeroDesktop} alt="hero element" />
+    <div className="ml-[96px] mt-[106px] flex h-[375px] w-full max-w-[190px] flex-col gap-[63px]">
+      {itemsRightSide.map((item) => (
+        <section key={item.text} className="flex flex-col gap-[1px]">
+          <h2 className="text-[48px] font-bold leading-[56px] text-darkBlue">{item.number}</h2>
+          <p className="HeadingS text-grey">{item.text}</p>
+        </section>
+      ))}
+    </div>
   </div>
 );
 

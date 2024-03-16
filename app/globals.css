@@ -11,6 +11,10 @@ html {
   @apply text-[16px] leading-[32px] tracking-[0px];
 }
 
+.HeadingS {
+  @apply text-[16px] leading-[26px] tracking-[2.5px];
+}
+
 * {
   /* transition-property: color, background, border; */
   transition-property: all;
