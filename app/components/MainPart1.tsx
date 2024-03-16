@@ -11,7 +11,7 @@ const itemsRightSide = [
 const MainPart1 = () => (
   <div className="mt-[67px] flex size-full max-h-[600px] max-w-[1110px]">
     <div className="size-0">
-      <div className="absolute ml-[289px] mt-[45px] size-full">
+      <div className="absolute ml-[289px] mt-[45px] size-fit">
         <Image width={287} height={36} src={patternLine1 as string} alt="pattern" />
       </div>
     </div>
