@@ -11,8 +11,20 @@ html {
   @apply text-[16px] leading-[32px] tracking-[0px];
 }
 
+.HeadingL {
+  @apply text-[48px] font-bold leading-[56px] tracking-[0.5px];
+}
+
+.HeadingM {
+  @apply text-[18px] font-bold leading-[32px] tracking-[0.2px];
+}
+
 .HeadingS {
   @apply text-[16px] leading-[26px] tracking-[2.5px];
+}
+
+.Quote {
+  @apply text-[20px] leading-[35px] tracking-[0px];
 }
 
 * {
