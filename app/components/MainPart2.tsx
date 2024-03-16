@@ -3,7 +3,7 @@ import imageJeremyLarge from '@/public/assets/images/image-jeremy-large.webp';
 import pattern2 from '@/public/assets/images/pattern-curved-line-2.svg';
 
 const MainPart2 = () => (
-  <div className="mt-[199px] flex h-[545px] w-full max-w-[1109px] rounded-[15px] bg-darkBlue">
+  <div className="z-10 mt-[199px] flex h-[545px] w-full max-w-[1109px] rounded-[15px] bg-darkBlue">
     <Image className="ml-[112px] mt-[-55px]" height={600} width={375} src={imageJeremyLarge} alt="image of Jeremy" />
     <Image className="ml-[30px] mt-[161px] size-fit" width={64} height={52} src={pattern2 as string} alt="pattern" />
     <section className="ml-[52px] mt-[88px] flex h-[369px] w-[350px] flex-col gap-[40px]">

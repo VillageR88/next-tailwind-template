@@ -27,6 +27,10 @@ html {
   @apply text-[20px] leading-[35px] tracking-[0px];
 }
 
+.Footer {
+  @apply text-[15px] leading-[32px] tracking-[0px];
+}
+
 * {
   /* transition-property: color, background, border; */
   transition-property: all;
