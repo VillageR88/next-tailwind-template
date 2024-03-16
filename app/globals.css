@@ -35,9 +35,3 @@ html {
   @apply text-[15px] leading-[32px] tracking-[0px];
 }
 
-* {
-  /* transition-property: color, background, border; */
-  transition-property: all;
-  transition-duration: 0.2s;
-  transition-timing-function: ease-in-out;
-}

@@ -9,7 +9,7 @@ const items = [
 ];
 
 const MainPart1 = () => (
-  <div className="mt-[67px] flex size-full max-h-[482px] flex-col items-center xl:max-h-[600px] xl:max-w-[1110px] xl:flex-row xl:items-stretch">
+  <div className="mt-[67px] flex size-full max-h-[482px] flex-col items-center transition-all *:transition-all xl:max-h-[600px] xl:max-w-[1110px] xl:flex-row xl:items-stretch">
     <div className="flex justify-between">
       <div className="size-0">
         <div className="absolute ml-[223px] mt-[42px] size-fit xl:ml-[289px] xl:mt-[45px]">
