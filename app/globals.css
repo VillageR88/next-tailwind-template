@@ -7,6 +7,10 @@ html {
   /* color-scheme: dark; */
 }
 
+.Body {
+  @apply text-[16px] leading-[32px] tracking-[0px];
+}
+
 * {
   /* transition-property: color, background, border; */
   transition-property: all;
