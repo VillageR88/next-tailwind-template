@@ -9,12 +9,12 @@ const items = [
 ];
 
 const MainPart1 = () => (
-  <div className="mt-[67px] flex size-full max-h-[482px] flex-col items-center transition-all *:transition-all xl:max-h-[600px] xl:max-w-[1110px] xl:flex-row xl:items-stretch">
-    <div className="flex justify-between">
+  <div className="mt-[67px] flex size-full h-full max-w-[343px] flex-col items-center transition-all duration-500 md:h-[990px] md:max-h-[482px] md:max-w-[689px] xl:h-[600px] xl:max-w-[1110px] xl:flex-row xl:items-stretch">
+    <div className="flex size-full flex-col justify-between md:flex-row">
       <div className="size-0">
-        <div className="absolute ml-[223px] mt-[42px] size-fit xl:ml-[289px] xl:mt-[45px]">
+        <div className="absolute ml-[154px] mt-[42px] size-fit md:ml-[223px] xl:ml-[289px] xl:mt-[45px]">
           <Image
-            className="h-[29px] w-[231px] xl:h-[36px] xl:w-[287px]"
+            className="h-[19px] w-[151px] md:h-[29px] md:w-[231px] xl:h-[36px] xl:w-[287px]"
             width={287}
             height={36}
             src={patternLine1 as string}
@@ -38,15 +38,11 @@ const MainPart1 = () => (
           Request Beta Access
         </button>
       </div>
-      <Image
-        className="ml-[-78px] size-full max-h-[482px] max-w-[281px] xl:ml-[-161px] xl:max-h-[600px] xl:max-w-[350px]"
-        src={imageHeroDesktop}
-        alt="hero element"
-      />
+      <div className="mt-[38px] size-full h-[240px] w-[343px] bg-[url('/assets/images/image-hero-landscape@2x.webp')] bg-cover md:ml-[-165px] md:mt-0 md:h-[482px] md:w-[281px] md:bg-[url('/assets/images/image-hero-portrait@2x.webp')] xl:ml-[-161px] xl:h-[600px] xl:w-[350px]"></div>
     </div>
-    <div className="mt-[106px] flex h-[375px] w-full max-w-[190px] flex-row justify-center gap-[63px] xl:ml-[96px] xl:flex-col">
+    <div className="mt-[16px] flex h-[375px] w-full max-w-[190px] flex-col justify-center gap-[32px] md:mt-[106px] md:flex-row md:gap-[63px] xl:ml-[96px] xl:flex-col">
       {items.map((item) => (
-        <section key={item.text} className="flex flex-col gap-[1px]">
+        <section key={item.text} className="flex flex-col items-center gap-[1px] xl:items-stretch">
           <h2 className="text-[48px] font-bold leading-[56px] text-darkBlue">{item.number}</h2>
           <p className="HeadingS text-grey">{item.text}</p>
         </section>

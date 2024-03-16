@@ -3,7 +3,7 @@ import imageJeremyLarge from '@/public/assets/images/image-jeremy-large@2x.webp'
 import pattern2 from '@/public/assets/images/pattern-curved-line-2.svg';
 
 const MainPart2 = () => (
-  <div className="z-10 mt-[calc(273px+181px+10px)] flex h-[684px] w-full max-w-[689px] flex-col items-center rounded-[15px] bg-darkBlue xl:mt-[199px] xl:h-[545px] xl:max-w-[1109px] xl:flex-row xl:items-stretch">
+  <div className="z-10 mt-[210px] flex h-[748px] w-full max-w-[375px] flex-col items-center rounded-[15px] bg-darkBlue transition-all duration-500 md:mt-[calc(273px+181px+10px)] md:h-[684px] md:max-w-[689px] xl:mt-[199px] xl:h-[545px] xl:max-w-[1109px] xl:flex-row xl:items-stretch">
     <div className="relative mt-[-181px] h-[402px] w-[252px] xl:ml-[112px] xl:mt-[-55px] xl:h-[600px] xl:w-[375px]">
       <Image className="size-full" fill src={imageJeremyLarge} alt="image of Jeremy" />
     </div>
@@ -14,7 +14,7 @@ const MainPart2 = () => (
       src={pattern2 as string}
       alt="pattern"
     />
-    <section className="mt-[37px] flex h-[282px] w-[573px] flex-col gap-[40px] text-center xl:ml-[52px] xl:mt-[88px] xl:h-[369px] xl:w-[350px] xl:text-start">
+    <section className="mt-[37px] flex h-[282px] max-w-[343px] flex-col gap-[40px] text-center md:w-[573px] xl:ml-[52px] xl:mt-[88px] xl:h-[369px] xl:w-[350px] xl:text-start">
       <h2 className="text-[40px] leading-[48px] tracking-[-0.5px] text-creamWhite xl:text-[48px] xl:leading-[56px]">
         It just <span className="HeadingL">works.</span>
       </h2>

@@ -20,12 +20,12 @@ const socialItems = [
 ];
 
 const Footer = () => (
-  <div className="mt-[-265px] flex w-full justify-center bg-cream">
-    <footer className=" flex min-h-[464px] w-full max-w-[689px] items-end justify-center xl:max-w-[1440px]">
-      <div className="mb-[72px] flex h-[32px] w-full max-w-[1109px] items-center justify-between">
+  <footer className="mt-[-134px] flex w-full justify-center bg-cream md:mt-[-265px]">
+    <div className=" flex min-h-[420px] w-full max-w-[689px] items-end justify-center md:min-h-[464px] xl:max-w-[1440px]">
+      <div className="mb-[80px] flex w-full max-w-[1109px] flex-col items-center justify-between gap-[33px] md:mb-[72px] md:h-[32px] md:flex-row md:gap-0">
         <Image className="mt-[-6px] leading-[-0.44px]" width={81} height={32} src={logo as string} alt="Company Logo" />
         <p className="Footer text-grey">Copyright - Suite</p>
-        <div className="flex h-[20px] w-[116px] items-center justify-between">
+        <div className="flex w-[116px] items-center justify-between md:h-[20px]">
           {socialItems.map((item) => (
             <button key={item.name} className="transition hover:opacity-50">
               <Image className="size-fit" width={20} height={20} src={item.icon} alt={`${item.name} icon`} />
@@ -33,8 +33,8 @@ const Footer = () => (
           ))}
         </div>
       </div>
-    </footer>
-  </div>
+    </div>
+  </footer>
 );
 
 export default Footer;
