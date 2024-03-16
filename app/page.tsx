@@ -1,7 +1,9 @@
+import Main from '@/app/components/Main';
+
 export default function Home() {
   return (
-    <main className="flex min-h-screen flex-col items-center justify-center">
-      <div className="flex h-[50em] w-full items-center justify-center bg-blue-400"></div>
-    </main>
+    <div className="flex min-h-screen flex-col items-center justify-start pt-[50px] font-epilogue">
+      <Main />
+    </div>
   );
 }

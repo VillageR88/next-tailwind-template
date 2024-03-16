@@ -11,12 +11,16 @@ const config: Config = {
       fontFamily: {
         sans: ['var(--font-sans)'],
         mono: ['var(--font-mono)'],
+        epilogue: ['Epilogue', 'sans-serif'],
       },
       colors: {
-        // Slate
-        // 'accent-brand-800': '#1e293b',
-        // 'accent-brand-700': '#334155',
-        // 'accent-brand-600': '#475569',
+        darkBlue: '#172339',
+        grey: '#49566D',
+        cream: '#F3EDE7',
+        creamWhite: '#FAF8F6',
+        linear1: '#A060FF',
+        linear2: '#CB30E3',
+        linear3: '#FFA84E',
       },
     },
   },
