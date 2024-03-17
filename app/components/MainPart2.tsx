@@ -1,10 +1,18 @@
 import Image from 'next/image';
 import imageJeremyLarge from '@/public/assets/images/image-jeremy-large@2x.webp';
 import pattern2 from '@/public/assets/images/pattern-curved-line-2.svg';
+import patternBlur from '@/public/assets/images/pattern-blur.svg';
 
 const MainPart2 = () => (
   <div className="z-10 mt-[210px] flex min-h-[748px] w-full max-w-[375px]  flex-col items-center rounded-[15px] bg-darkBlue pb-[64px] transition-all duration-500 md:mt-[calc(273px+181px+10px)] md:min-h-[684px] md:max-w-[689px] xl:mt-[199px] xl:min-h-[545px] xl:max-w-[1109px] xl:flex-row xl:items-stretch xl:pb-0">
     <div className="relative mt-[-181px] min-h-[402px] w-[252px] xl:ml-[112px] xl:mt-[-55px] xl:min-h-[600px] xl:w-[375px]">
+      <Image
+        className=" ml-[5px] mt-[140px] scale-[170%] xl:ml-[30px] xl:mt-[240px] xl:scale-[200%]"
+        width={294}
+        height={294}
+        src={patternBlur as string}
+        alt="blur effect"
+      />
       <Image className="size-full" fill src={imageJeremyLarge} alt="image of Jeremy" priority />
     </div>
     <Image
