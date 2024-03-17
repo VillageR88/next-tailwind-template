@@ -1,5 +1,4 @@
 import Image from 'next/image';
-import imageHeroDesktop from '@/public/assets/images/image-hero-portrait@2x.webp';
 import patternLine1 from '@/public/assets/images/pattern-curved-line-1.svg';
 
 const items = [
@@ -38,7 +37,7 @@ const MainPart1 = () => (
           Request Beta Access
         </button>
       </div>
-      <div className="mt-[38px] size-full h-[240px] w-[343px] self-center bg-[url('/assets/images/image-hero-landscape@2x.webp')] bg-cover md:ml-[-165px] md:mt-0 md:h-[482px] md:w-[281px] md:bg-[url('/assets/images/image-hero-portrait@2x.webp')] xl:ml-[-161px] xl:h-[600px] xl:w-[350px]"></div>
+      <div className="mt-[38px] size-full h-[240px] w-[343px] self-center bg-[url('../public/assets/images/image-hero-landscape@2x.webp')] bg-cover md:ml-[-165px] md:mt-0 md:h-[482px] md:w-[281px] md:bg-[url('../public/assets/images/image-hero-portrait@2x.webp')] xl:ml-[-161px] xl:h-[600px] xl:w-[350px]"></div>
     </div>
     <div className="mt-[16px] flex h-[375px] w-full max-w-[190px] flex-col justify-center gap-[32px] md:mt-[106px] md:flex-row md:gap-[63px] xl:ml-[96px] xl:flex-col">
       {items.map((item) => (
