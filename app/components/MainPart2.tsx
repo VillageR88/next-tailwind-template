@@ -5,7 +5,7 @@ import pattern2 from '@/public/assets/images/pattern-curved-line-2.svg';
 const MainPart2 = () => (
   <div className="z-10 mt-[210px] flex min-h-[748px] w-full max-w-[375px]  flex-col items-center rounded-[15px] bg-darkBlue pb-[64px] transition-all duration-500 md:mt-[calc(273px+181px+10px)] md:min-h-[684px] md:max-w-[689px] xl:mt-[199px] xl:min-h-[545px] xl:max-w-[1109px] xl:flex-row xl:items-stretch xl:pb-0">
     <div className="relative mt-[-181px] min-h-[402px] w-[252px] xl:ml-[112px] xl:mt-[-55px] xl:min-h-[600px] xl:w-[375px]">
-      <Image className="size-full" fill src={imageJeremyLarge} alt="image of Jeremy" />
+      <Image className="size-full" fill src={imageJeremyLarge} alt="image of Jeremy" priority />
     </div>
     <Image
       className="mt-[40px] size-fit min-h-[40px] w-[49px] xl:ml-[30px] xl:mt-[161px] xl:min-h-[52px] xl:w-[64px]"
