@@ -3,7 +3,10 @@ import { useEffect, useState } from 'react';
 import Loading from 'react-simple-loading';
 export default function Home() {
   const [text, setText] = useState<AdviceSlip | null>(null);
+  const [awaitingText, setAwaitingText] = useState<AdviceSlip | null>(null);
   const [clicked, setClicked] = useState<boolean>(false);
+  const [loading, setLoading] = useState<boolean>(false);
+
   const dataJson = 'https://api.adviceslip.com/advice';
   interface AdviceSlip {
     slip: {
@@ -13,20 +16,48 @@ export default function Home() {
   }
 
   useEffect(() => {
-    fetch(dataJson)
-      .then((response) => response.json() as Promise<AdviceSlip>)
-      .then((data) => {
-        setText(data);
-      })
-      .catch((error) => {
-        console.error('Error fetching data:', error);
-      });
-  }, [clicked]);
+    if (text === null)
+      fetch(dataJson)
+        .then((response) => response.json() as Promise<AdviceSlip>)
+        .then((data) => {
+          setText(data);
+        })
+        .catch((error) => {
+          console.error('Error fetching data:', error);
+        });
+  }, [text]);
 
-  return text ? (
+  useEffect(() => {
+    setTimeout(() => {
+      if (text?.slip.advice === awaitingText?.slip.advice) {
+        fetch(dataJson)
+          .then((response) => response.json() as Promise<AdviceSlip>)
+          .then((data) => {
+            setAwaitingText(data);
+          })
+          .catch((error) => {
+            console.error('Error fetching data:', error);
+          });
+      }
+    }, 1000);
+  }, [awaitingText, clicked, loading, text]);
+
+  useEffect(() => {
+    if (clicked && text?.slip.advice !== awaitingText?.slip.advice) {
+      setText(awaitingText);
+      setLoading(false);
+      setClicked(false);
+    } else if (clicked && text?.slip.advice === awaitingText?.slip.advice) {
+      setLoading(true);
+    }
+  }, [awaitingText, clicked, text?.slip.advice]);
+
+  return !loading && text ? (
     <main className="flex min-h-[100dvh] w-full flex-col items-center justify-center px-4 py-10 font-manrope md:min-h-screen">
       <div className="flex min-h-[20.7em] w-full flex-col items-center justify-center gap-6 rounded-[1em] bg-darkGrayishBlue text-center md:w-[33.7em] ">
-        <span className="pt-6 text-[0.8rem] font-[600] tracking-[0.35em] text-neonGreen">ADVICE #{text.slip.id}</span>
+        <span className="mt-6 pt-6 text-[0.8rem] font-[600] tracking-[0.35em] text-neonGreen">
+          ADVICE #{text.slip.id}
+        </span>
         <span className="px-4 text-[1.7rem] font-[700] leading-[1.4em]  text-lightCyan md:px-14">
           {text.slip.advice}
         </span>
@@ -49,7 +80,7 @@ export default function Home() {
               </g>
             </g>
           </svg>
-          <svg className="w-[4.8em]" width="295" height="16" xmlns="http://www.w3.org/2000/svg">
+          <svg className="mb-8 w-[4.8em]" width="295" height="16" xmlns="http://www.w3.org/2000/svg">
             <g fill="none" fillRule="evenodd">
               <path fill="#4F5D74" d="M0 8h122v1H0zM173 8h122v1H173z" />
               <g transform="translate(138)" fill="#CEE3E9">
@@ -73,7 +104,7 @@ export default function Home() {
       </div>
       <div
         onClick={() => {
-          setClicked(!clicked);
+          setClicked(true);
         }}
         className="mt-[-2em] flex items-center justify-center rounded-full bg-neonGreen p-5 hover:cursor-pointer hover:shadow-t-aura hover:shadow-emerald-400"
       >
@@ -86,8 +117,8 @@ export default function Home() {
       </div>
     </main>
   ) : (
-    <div className="h-screen w-screen text-white">
-      <Loading color={'firebrick'} stroke={'10px'} size={'100px'} />
+    <div className="flex min-h-[100dvh] w-full items-center justify-center md:min-h-screen">
+      <Loading color={'green'} stroke={'10px'} size={'100px'} />
     </div>
   );
 }
