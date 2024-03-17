@@ -24,7 +24,7 @@ export default function Home() {
   }, [clicked]);
 
   return text ? (
-    <main className="md:0 flex h-screen w-full flex-col items-center justify-center px-4 font-manrope md:min-h-screen">
+    <main className="flex min-h-[100dvh] w-full flex-col items-center justify-center px-4 py-10 font-manrope md:min-h-screen">
       <div className="flex min-h-[20.7em] w-full flex-col items-center justify-center gap-6 rounded-[1em] bg-darkGrayishBlue text-center md:w-[33.7em] ">
         <span className="pt-6 text-[0.8rem] font-[600] tracking-[0.35em] text-neonGreen">ADVICE #{text.slip.id}</span>
         <span className="px-4 text-[1.7rem] font-[700] leading-[1.4em]  text-lightCyan md:px-14">

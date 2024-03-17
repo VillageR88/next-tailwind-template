@@ -34,7 +34,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap" rel="stylesheet" />
       </head>
       <body className={`bg-darkBlue ${[fontSans, fontMono].map((font) => font.variable).join(' ')}`}>
-        <div className="ml-auto mr-auto max-w-7xl overflow-x-clip font-sans">{children}</div>
+        <div className="mx-auto max-w-7xl overflow-x-clip font-sans">{children}</div>
       </body>
     </html>
   );
