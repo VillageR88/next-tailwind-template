@@ -106,7 +106,7 @@ export default function Home() {
         onClick={() => {
           setClicked(true);
         }}
-        className="mt-[-2em] flex items-center justify-center rounded-full bg-neonGreen p-5 hover:cursor-pointer hover:shadow-t-aura hover:shadow-emerald-400"
+        className="hover:shadow-t-aura2 mt-[-2em] flex items-center justify-center rounded-full bg-neonGreen p-5 hover:cursor-pointer hover:shadow-emerald-400"
       >
         <svg width="24" height="24" xmlns="http://www.w3.org/2000/svg">
           <path
