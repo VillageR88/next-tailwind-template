@@ -9,13 +9,13 @@ const LeafletMap = () => {
     iconSize: [66, 88],
     iconAnchor: [33, 88],
 
-    popupAnchor: [0, -40],
+    popupAnchor: [0, -70],
     attribution: 'Leaflet',
   });
 
   return (
     <div className="size-full duration-1000 ease-in-out hover:saturate-100">
-      <MapContainer center={[41.4805, -71.3109]} zoom={16} style={{ height: '100%', width: '100%' }}>
+      <MapContainer center={[41.4805, -71.3109]} zoom={16} className="relative z-10 size-full">
         <TileLayer
           className="saturate-0"
           attribution={'&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'}
