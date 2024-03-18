@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import logoLight from '@/public/assets/images/logo-light.svg';
+import Facebook from './Facebook';
 
 const Footer = () => (
   <footer className="mt-[180px] flex min-h-[244px] w-full items-center justify-center bg-almostBlack">
@@ -10,6 +11,9 @@ const Footer = () => (
           The Modern Art Gallery is free to all visitors and open seven days a week from 8am to 9pm. Find us at 99 King
           Street, Newport, USA.
         </p>
+      </div>
+      <div className="h-[20px] w-[100px]">
+        <Facebook />
       </div>
     </div>
   </footer>

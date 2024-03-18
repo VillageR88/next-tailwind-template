@@ -18,13 +18,13 @@ const Button1And2 = ({ type }: { type: 1 | 2 }) => {
     },
   };
   return (
-    <button className={`group ${typeItems[type].direction} flex h-[72px] w-[260px] transition`}>
+    <button className={`group ${typeItems[type].direction} flex h-[72px] w-[260px]`}>
       <div
-        className={`flex h-full w-[204px] items-center justify-center bg-almostBlack font-bigShouldersDisplay text-[20px] font-extrabold tracking-[3.64px] text-white group-hover:bg-gold`}
+        className={`flex h-full w-[204px] items-center justify-center bg-almostBlack font-bigShouldersDisplay text-[20px] font-extrabold tracking-[3.64px] text-white transition group-hover:bg-gold`}
       >
         {typeItems[type].text}
       </div>
-      <div className={`flex h-full w-[56px] items-center justify-center bg-gold group-hover:bg-almostBlack`}>
+      <div className={`flex h-full w-[56px] items-center justify-center bg-gold transition group-hover:bg-almostBlack`}>
         <Image width={8} height={24} src={typeItems[type].arrow} alt="arrow right" />
       </div>
     </button>

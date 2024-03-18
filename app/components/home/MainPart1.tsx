@@ -1,4 +1,4 @@
-import Button1And2 from '../Button1and2';
+import Button1And2 from '@/app/components/Button1And2';
 
 const MainPart1 = () => (
   <div className="flex size-full h-[800px] w-full max-w-[1275px]">
