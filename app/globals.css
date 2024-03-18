@@ -11,8 +11,16 @@ html {
   @apply font-bigShouldersDisplay text-[96px] font-black leading-[88px];
 }
 
+.HeadingL {
+  @apply font-bigShouldersDisplay text-[70px] font-black leading-[70px];
+}
+
 .HeadingM {
   @apply font-bigShouldersDisplay text-[60px] font-black leading-[60px];
+}
+
+.HeadingS {
+  @apply font-bigShouldersDisplay text-[36px] font-black leading-[36px];
 }
 
 .BodyM {
