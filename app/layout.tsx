@@ -29,10 +29,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png"></link>
         <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"></link>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="use-credentials" />
         {/* eslint-disable-next-line @next/next/no-page-custom-font*/}
         <link
-          href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@300;400;700&display=swap"
+          href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@100..900&family=Outfit:wght@100..900&display=swap"
           rel="stylesheet"
         />
       </head>
