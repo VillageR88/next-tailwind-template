@@ -2,7 +2,7 @@ import Image from 'next/image';
 import arrowRight from '@/public/assets/images/icon-arrow-right.svg';
 import arrowLeft from '@/public/assets/images/icon-arrow-left.svg';
 
-const Button1and2 = ({ type }: { type: 1 | 2 }) => {
+const Button1And2 = ({ type }: { type: 1 | 2 }) => {
   const typeItems = {
     1: {
       text: 'OUR LOCATION',
@@ -31,4 +31,4 @@ const Button1and2 = ({ type }: { type: 1 | 2 }) => {
   );
 };
 
-export default Button1and2;
+export default Button1And2;

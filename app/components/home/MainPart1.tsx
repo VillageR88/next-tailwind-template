@@ -1,4 +1,4 @@
-import Button1and2 from '../Button1and2';
+import Button1And2 from '../Button1and2';
 
 const MainPart1 = () => (
   <div className="flex size-full h-[800px] w-full max-w-[1275px]">
@@ -13,7 +13,7 @@ const MainPart1 = () => (
         The arts in the collection of the Modern Art Gallery all started from a spark of inspiration. Will these pieces
         inspire you? Visit us and find out.
       </p>
-      <Button1and2 type={1} />
+      <Button1And2 type={1} />
     </div>
   </div>
 );
