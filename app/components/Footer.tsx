@@ -5,7 +5,7 @@ import Facebook from './Facebook';
 import Instagram from './Instagram';
 import Twitter from './Twitter';
 
-const Footer = ({ type }: { type: 1 | 2 }) => {
+const Footer = ({ type, additionalClass }: { type: 1 | 2; additionalClass?: string }) => {
   const typeItems = {
     1: {
       backgroundColor: 'bg-almostBlack',
@@ -24,7 +24,7 @@ const Footer = ({ type }: { type: 1 | 2 }) => {
   };
   return (
     <footer
-      className={`mt-[180px] flex min-h-[244px] w-full items-center justify-center ${typeItems[type].backgroundColor}`}
+      className={`${additionalClass} flex min-h-[244px] w-full items-center justify-center ${typeItems[type].backgroundColor}`}
     >
       <div className="flex size-full max-w-[1110px] justify-between">
         <div className="flex h-[84px] w-[730px] items-start justify-between">

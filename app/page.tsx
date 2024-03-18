@@ -5,7 +5,7 @@ export default function Home() {
   return (
     <div className="flex min-h-screen flex-col items-center justify-start">
       <Main />
-      <Footer type={1} />
+      <Footer type={1} additionalClass="mt-[180px]" />
     </div>
   );
 }

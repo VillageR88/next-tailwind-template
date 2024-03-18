@@ -1,4 +1,5 @@
 import Button1And2 from '@/app/components/Button1And2';
+import Link from 'next/link';
 
 const MainPart1 = () => (
   <div className="flex size-full h-[800px] w-full max-w-[1275px]">
@@ -13,7 +14,9 @@ const MainPart1 = () => (
         The arts in the collection of the Modern Art Gallery all started from a spark of inspiration. Will these pieces
         inspire you? Visit us and find out.
       </p>
-      <Button1And2 type={1} />
+      <Link href="/location">
+        <Button1And2 type={1} />
+      </Link>
     </div>
   </div>
 );
