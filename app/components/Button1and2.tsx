@@ -25,7 +25,7 @@ const Button1And2 = ({ type }: { type: 1 | 2 }) => {
         {typeItems[type].text}
       </div>
       <div className={`flex h-full w-[56px] items-center justify-center bg-gold transition group-hover:bg-almostBlack`}>
-        <Image width={8} height={24} src={typeItems[type].arrow} alt="arrow right" />
+        <Image className="h-auto w-[9px]" width={8} height={24} src={typeItems[type].arrow} alt="arrow right" />
       </div>
     </button>
   );
