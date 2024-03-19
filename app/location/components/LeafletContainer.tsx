@@ -7,7 +7,7 @@ const LeafletContainer = () => {
     ssr: false,
   });
   return (
-    <div className="h-[calc(100dvh-842px)] w-screen md:h-[calc(100dvh-764px)] lg:h-[calc(100dvh-792px)]">
+    <div className="h-[600px] min-h-[calc(100dvh-842px)] w-screen md:min-h-[calc(100dvh-764px)] lg:min-h-[calc(100dvh-792px)]">
       <div className="relative z-20 h-0 w-full">
         <div className="ml-[80px] lg:ml-[156px]">
           <Link href="/">
