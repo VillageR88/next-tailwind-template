@@ -34,7 +34,7 @@ const Footer = ({ type, additionalClass }: { type: 1 | 2; additionalClass?: stri
             King Street, Newport, USA.
           </p>
         </div>
-        <div className="flex h-[20px] w-[100px] justify-between">
+        <div className="flex h-[20px] w-[100px] min-w-[90px] justify-between">
           <Facebook hoverFill={typeItems[type].hoverFill} fill={typeItems[type].fill} />
           <Instagram hoverFill={typeItems[type].hoverFill} fill={typeItems[type].fill} />
           <Twitter hoverFill={typeItems[type].hoverFill} fill={typeItems[type].fill} />
