@@ -1,4 +1,4 @@
-import Button1And2 from '@/app/components/Button1And2';
+import Button1and2 from '@/app/components/Button1and2';
 import Link from 'next/link';
 
 const MainPart1 = () => (
@@ -21,7 +21,7 @@ const MainPart1 = () => (
           pieces inspire you? Visit us and find out.
         </p>
         <Link href="/location">
-          <Button1And2 type={1} />
+          <Button1and2 type={1} />
         </Link>
       </div>
     </div>
