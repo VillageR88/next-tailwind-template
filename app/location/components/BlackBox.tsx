@@ -1,10 +1,10 @@
 const BlackBox = () => (
-  <div className="flex min-h-[548px] w-full max-w-[1440px] justify-center bg-almostBlack">
-    <div className="mt-[104px] flex min-h-[316px] w-full max-w-[1110px] justify-between">
-      <div className="h-fit max-w-[350px]">
+  <div className="flex min-h-[520px] w-full max-w-[1440px] justify-center bg-almostBlack px-[40px] lg:min-h-[548px]">
+    <div className="mt-[104px] flex min-h-[316px] w-full  max-w-[1040px] justify-between xl:max-w-[1110px]">
+      <div className="h-fit max-w-[223px] xl:max-w-[350px]">
         <h1 className="HeadingL text-white">OUR LOCATION</h1>
       </div>
-      <div className="flex h-[316px] w-full max-w-[540px] flex-col justify-between gap-[32px]">
+      <div className="flex h-[316px] w-full max-w-[398px] flex-col justify-between gap-[32px] lg:max-w-[540px]">
         <div className="flex min-h-[156px] w-full max-w-[445px] flex-col gap-[24px]">
           <h2 className="HeadingS text-gold">99 King Street</h2>
           <p className="BodyM whitespace-pre-wrap text-white">{'Newport\nRI 02840\nUnited States of America'}</p>

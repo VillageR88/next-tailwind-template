@@ -5,7 +5,7 @@ import Link from 'next/link';
 const LeafletContainer = () => (
   <div className="size-full">
     <div className="relative z-20 h-0 w-full">
-      <div className="ml-[156px]">
+      <div className="ml-[80px] lg:ml-[156px]">
         <Link href="/">
           <Button1And2 type={2} />
         </Link>

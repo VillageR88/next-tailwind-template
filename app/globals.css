@@ -12,7 +12,7 @@ html {
 }
 
 .HeadingL {
-  @apply font-bigShouldersDisplay text-[70px] font-black leading-[70px];
+  @apply font-bigShouldersDisplay text-[55px] xl:text-[70px] leading-[50px] font-black xl:leading-[70px];
 }
 
 .HeadingM {
