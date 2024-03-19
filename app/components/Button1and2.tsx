@@ -18,9 +18,9 @@ const Button1And2 = ({ type }: { type: 1 | 2 }) => {
     },
   };
   return (
-    <button className={`group ${typeItems[type].direction} flex h-[72px] w-[260px]`}>
+    <button className={`group ${typeItems[type].direction} flex h-[72px] w-full max-w-[260px]`}>
       <div
-        className={`flex h-full w-[204px] items-center justify-center bg-almostBlack font-bigShouldersDisplay text-[20px] font-extrabold tracking-[3.64px] text-white transition group-hover:bg-gold`}
+        className={`flex size-full max-w-[204px] items-center justify-center bg-almostBlack font-bigShouldersDisplay text-[20px] font-extrabold tracking-[3.64px] text-white transition group-hover:bg-gold`}
       >
         {typeItems[type].text}
       </div>
