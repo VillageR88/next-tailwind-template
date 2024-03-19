@@ -14,7 +14,7 @@ const LeafletMap = () => {
   });
 
   return (
-    <div className="size-full duration-1000 ease-in-out hover:saturate-100">
+    <div className="h-[calc(100dvh-842px)] w-screen duration-1000 ease-in-out hover:saturate-100 md:h-[calc(100dvh-764px)] lg:h-[calc(100dvh-792px)]">
       <MapContainer center={[41.4805, -71.3109]} zoom={16} className="relative z-10 size-full">
         <TileLayer
           className="saturate-0"
