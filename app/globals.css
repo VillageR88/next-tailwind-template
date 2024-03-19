@@ -16,7 +16,7 @@ html {
 }
 
 .HeadingM {
-  @apply font-bigShouldersDisplay text-[60px] font-black leading-[60px];
+  @apply font-bigShouldersDisplay lg:text-[60px] text-[50px] font-black leading-[45px] lg:leading-[60px];
 }
 
 .HeadingS {
@@ -24,7 +24,7 @@ html {
 }
 
 .BodyM {
-  @apply font-outfit text-[22px] font-light leading-[32px];
+  @apply font-outfit lg:text-[22px] text-[18px] font-light leading-[28px] lg:leading-[32px];
 }
 
 .BodyS {
