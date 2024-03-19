@@ -26,10 +26,10 @@ const Footer = ({ type, additionalClass }: { type: 1 | 2; additionalClass?: stri
     <footer
       className={`${additionalClass} flex min-h-[244px] w-full items-center justify-center ${typeItems[type].backgroundColor}`}
     >
-      <div className="flex size-full max-w-[1110px] justify-between">
-        <div className="flex h-[84px] w-[730px] items-start justify-between">
-          <Image width={160} height={58} src={typeItems[type].logo} alt="logo" />
-          <p className={`BodyS h-[84px] w-[430px] ${typeItems[type].textColor}`}>
+      <div className="flex size-full max-w-[1110px] justify-between gap-24 px-[40px] xl:px-0">
+        <div className="flex h-[84px] w-full max-w-[550px] items-start justify-between xl:max-w-[730px]">
+          <Image className="h-[58px] w-[160px]" width={160} height={58} src={typeItems[type].logo} alt="logo" />
+          <p className={`BodyS h-[84px] max-w-[290px] xl:max-w-[430px] ${typeItems[type].textColor}`}>
             The Modern Art Gallery is free to all visitors and open seven days a week from 8am to 9pm. Find us at 99
             King Street, Newport, USA.
           </p>
