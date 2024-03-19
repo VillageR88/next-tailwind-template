@@ -1,7 +1,7 @@
 const MainPart2 = () => (
   <div className="mt-[120px] flex  w-full max-w-[1110px] flex-col gap-[30px] self-center px-4 md:h-[1131px] md:px-8 xl:px-0">
     <div className="flex min-h-[400px] w-full flex-col-reverse items-center justify-between gap-6 md:flex-row xl:gap-0">
-      <div className="flex min-h-[160px] max-w-[480px] flex-col justify-between gap-6 md:h-[299px] md:max-w-[223px] md:gap-0 lg:h-[280px] lg:max-w-[350px]">
+      <div className="flex min-h-[160px] max-w-[620px] flex-col justify-between gap-6 md:h-[299px] md:max-w-[223px] md:gap-0 lg:h-[280px] lg:max-w-[350px]">
         <h2 className="HeadingM whitespace-pre-wrap text-almostBlack md:whitespace-normal">
           {'Your Day\nat the Gallery'.toUpperCase()}
         </h2>
