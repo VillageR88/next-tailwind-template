@@ -12,11 +12,11 @@ html {
 }
 
 .HeadingL {
-  @apply font-bigShouldersDisplay text-[55px] xl:text-[70px] leading-[50px] font-black xl:leading-[70px];
+  @apply font-bigShouldersDisplay text-[55px] font-black leading-[50px] xl:text-[70px] xl:leading-[70px];
 }
 
 .HeadingM {
-  @apply font-bigShouldersDisplay lg:text-[60px] text-[50px] font-black leading-[45px] lg:leading-[60px];
+  @apply font-bigShouldersDisplay text-[50px] font-black leading-[45px] lg:text-[60px] lg:leading-[60px];
 }
 
 .HeadingS {
@@ -24,11 +24,9 @@ html {
 }
 
 .BodyM {
-  @apply font-outfit lg:text-[22px] text-[18px] font-light leading-[28px] lg:leading-[32px];
+  @apply font-outfit text-[18px] font-light leading-[28px] lg:text-[22px] lg:leading-[32px];
 }
 
 .BodyS {
   @apply font-outfit text-[18px] font-light leading-[28px];
 }
-
-
