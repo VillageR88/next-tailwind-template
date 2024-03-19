@@ -24,12 +24,12 @@ const Footer = ({ type, additionalClass }: { type: 1 | 2; additionalClass?: stri
   };
   return (
     <footer
-      className={`${additionalClass} flex min-h-[244px] w-full items-center justify-center ${typeItems[type].backgroundColor}`}
+      className={`${additionalClass} flex size-full min-h-[336px] items-center justify-center md:min-h-[244px] ${typeItems[type].backgroundColor}`}
     >
-      <div className="flex size-full max-w-[1110px] justify-between gap-24 px-[40px] xl:px-0">
-        <div className="flex h-[84px] w-full max-w-[550px] items-start justify-between xl:max-w-[730px]">
+      <div className="flex size-full max-w-[1110px] flex-col justify-between gap-[38px] px-[40px] py-[48px] md:flex-row md:py-0 xl:px-0">
+        <div className="flex size-full min-h-[84px] max-w-[550px] flex-col items-start justify-between gap-[38px] md:flex-row xl:max-w-[730px]">
           <Image className="h-[58px] w-[160px]" width={160} height={58} src={typeItems[type].logo} alt="logo" />
-          <p className={`BodyS h-[84px] max-w-[290px] xl:max-w-[430px] ${typeItems[type].textColor}`}>
+          <p className={`BodyS min-h-[84px] max-w-[290px] xl:max-w-[430px] ${typeItems[type].textColor}`}>
             The Modern Art Gallery is free to all visitors and open seven days a week from 8am to 9pm. Find us at 99
             King Street, Newport, USA.
           </p>

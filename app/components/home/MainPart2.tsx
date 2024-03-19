@@ -10,14 +10,14 @@ const MainPart2 = () => (
           their creative process.
         </p>
       </div>
-      <div className="h-[400px] w-full max-w-[635px] bg-[url('../public/assets/images/mobile/image-grid-1@2x.jpg')] bg-cover bg-center min-[520px]:bg-[url('../public/assets/images/desktop/image-grid-1@2x.jpg')]"></div>
+      <div className="h-[320px] w-full max-w-[635px] bg-[url('../public/assets/images/mobile/image-grid-1@2x.jpg')] bg-cover bg-center min-[480px]:bg-[url('../public/assets/images/desktop/image-grid-1@2x.jpg')] md:h-[400px]"></div>
     </div>
-    <div className="flex min-h-[720px] w-full justify-between gap-6 xl:gap-0">
-      <div className="h-full w-[635px] bg-[url('../public/assets/images/tablet/image-grid-2@2x.jpg')] bg-cover bg-center min-[950px]:bg-[url('../public/assets/images/desktop/image-grid-2@2x.jpg')]"></div>
-      <div className="flex h-full w-[445px] flex-col justify-between gap-[30px]">
-        <div className="h-[313px] w-full bg-[url('../public/assets/images/tablet/image-grid-3@2x.jpg')] bg-cover bg-center lg:bg-[url('../public/assets/images/desktop/image-grid-3@2x.jpg')]"></div>
-        <div className="flex h-[377px] w-full gap-[32px] bg-almostBlack px-[47px] py-[64px] text-white">
-          <div className="flex h-[248px] w-[223px] flex-col justify-between lg:w-[350px]">
+    <div className="flex min-h-[720px] w-full flex-col items-center justify-between gap-6 md:flex-row xl:gap-0">
+      <div className="min-h-[480px] w-full max-w-[635px] bg-[url('../public/assets/images/mobile/image-grid-2@2x.jpg')] bg-cover bg-center md:min-h-full md:bg-[url('../public/assets/images/tablet/image-grid-2@2x.jpg')] min-[950px]:bg-[url('../public/assets/images/desktop/image-grid-2@2x.jpg')]"></div>
+      <div className="flex size-full max-w-[640px] flex-col justify-between gap-[30px] md:max-w-[445px]">
+        <div className="h-[313px] w-full bg-[url('../public/assets/images/mobile/image-grid-3@2x.jpg')] bg-cover bg-center md:bg-[url('../public/assets/images/tablet/image-grid-3@2x.jpg')] lg:bg-[url('../public/assets/images/desktop/image-grid-3@2x.jpg')]"></div>
+        <div className="flex min-h-[377px] w-full gap-[32px] bg-almostBlack px-[47px] py-[64px] text-white">
+          <div className="flex min-h-[248px] w-[223px] flex-col justify-between lg:w-[350px]">
             <h2 className="HeadingM">COME & BE INSPIRED</h2>
             <p className="BodyM">
               We’re excited to welcome you to our gallery and see how our collections influence you.
