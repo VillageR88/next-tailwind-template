@@ -33,3 +33,4 @@ const LeafletMap = () => {
 };
 
 export default LeafletMap;
+//  if (typeof window !== 'undefined') return;
