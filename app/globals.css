@@ -8,7 +8,7 @@ html {
 }
 
 h1 {
-  @apply text-[56px] font-black leading-[56px] text-[#162542];
+  @apply text-[48px] font-black leading-[48px] text-[#162542] lg:text-[56px] lg:leading-[56px];
 }
 
 h2 {
