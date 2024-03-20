@@ -33,13 +33,16 @@ const items = [
 
 const MainPart4 = () => (
   <div className="flex w-full justify-center px-10">
-    <div className="mt-[168px] flex min-h-[323px] w-full max-w-[1110px] grid-cols-2 flex-col items-center justify-between gap-[30px] gap-y-[72px] sm:grid lg:grid-cols-4">
+    <div className="sm2:grid mt-[168px] flex min-h-[323px] w-full max-w-[1110px] grid-cols-2 flex-col items-center justify-between gap-[30px] gap-y-[72px] lg:grid-cols-4">
       {items.map((item, index) => (
-        <div key={index} className="flex size-full max-w-[281px] flex-col items-center gap-[48px] sm:items-start">
+        <div
+          key={index}
+          className="sm2:max-w-[281px] sm2:items-start flex size-full max-w-[460px] flex-col items-center gap-[48px]"
+        >
           <div className="flex h-[65px] w-[64px] items-center justify-center rounded-[16px] bg-[#F16718]">
             <Image className="size-fit" src={item.image} alt={item.title} />
           </div>
-          <section className="flex flex-col items-center gap-[24px] text-center sm:items-start sm:text-start">
+          <section className="sm2:items-start sm2:text-start flex flex-col items-center gap-[24px] text-center">
             <h3 className="mt-[27px] max-w-[200px] lg:max-w-full">{item.title}</h3>
             <p>{item.description}</p>
           </section>
