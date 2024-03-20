@@ -11,6 +11,7 @@ const config: Config = {
       fontFamily: {
         sans: ['var(--font-sans)'],
         mono: ['var(--font-mono)'],
+        barlow: ['Barlow', 'sans-serif'],
       },
       colors: {
         // Slate
