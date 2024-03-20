@@ -36,12 +36,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           rel="stylesheet"
         />
       </head>
-      <body
-        className={[fontSans, fontMono]
-          .map((font) => font.variable)
-          .join(' ')
-          .concat(' ')}
-      >
+      <body className={[fontSans, fontMono].map((font) => font.variable).join(' ')}>
         <div className="mx-auto overflow-x-clip font-sans">{children}</div>
       </body>
     </html>

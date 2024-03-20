@@ -8,16 +8,19 @@ html {
 }
 
 h1 {
-  @apply text-[56px] leading-[56px] font-black text-[#162542];
+  @apply text-[56px] font-black leading-[56px] text-[#162542];
 }
 
 h2 {
-  @apply text-[32px] leading-[36px] font-black text-[#162542];
+  @apply text-[32px] font-black leading-[36px] text-[#162542];
 }
 
-p{
-  @apply text-[16px] leading-[26px] font-medium text-[#7B8BAD];
+h3 {
+  @apply text-[24px] font-black leading-[28px] text-[#162542];
+}
 
+p {
+  @apply text-[16px] font-medium leading-[26px] text-[#7B8BAD];
 }
 
 span {

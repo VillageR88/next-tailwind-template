@@ -1,7 +1,7 @@
 const MainPart3 = () => (
   <div className=" mt-[30px] min-h-[480px] w-full max-w-[1110px]">
     <div className="ml-[-285px] flex h-full max-w-[1395px] gap-[125px]">
-      <div className="flex min-h-[480px] w-full max-w-[1015px] justify-between">
+      <div className="flex min-h-[480px] w-full max-w-[1015px] justify-between gap-[30px]">
         <div className="size-full max-h-[240px] max-w-[255px] rounded-[20px] bg-[#E8EFF2]"></div>
         <div className="size-full max-w-[255px] rounded-[20px] bg-[#F16718]">
           <div className="size-full rounded-[20px] bg-[url('../public/assets/images/desktop/image-phone-and-keyboard.jpg')] bg-cover opacity-80 mix-blend-multiply"></div>
