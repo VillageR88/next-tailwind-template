@@ -5,7 +5,7 @@ import MainPart4 from './MainPart4';
 import Footer from './Footer';
 
 const Main = () => (
-  <div className="flex size-full flex-col items-center pb-[39px] pt-[55px]">
+  <div className="flex size-full flex-col items-center pb-[50px] pt-[23px] sm2:pb-[39px] sm2:pt-[55px]">
     <MainPart1 />
     <MainPart2 />
     <MainPart3 />

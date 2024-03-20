@@ -8,7 +8,7 @@ const MainPart3 = () => (
         </div>
         <div className="size-full min-w-[220px] rounded-[20px] bg-[url('../public/assets/images/mobile/image-glass-and-keyboard.jpg')] bg-cover min-[540px]:bg-[0_-50px] sm2:bg-[url('../public/assets/images/desktop/image-glass-and-keyboard.jpg')] sm2:bg-[0_-30px] md:min-w-[420px] md:bg-[0_-50px] lg:max-w-[480px] lg:bg-center"></div>
       </div>
-      <div className="mt-[75px] flex w-full flex-col items-center justify-between gap-[24px] text-center sm2:flex-row sm2:gap-[70px] sm2:pr-8 sm2:text-start lg:mt-[112px] lg:min-h-[108px] lg:max-w-[255px] lg:flex-col lg:justify-stretch  lg:gap-[50px]">
+      <div className="mt-[75px] flex w-full flex-col items-center justify-between gap-[24px] px-6 pr-0 text-center sm2:flex-row sm2:gap-[70px] sm2:px-0 sm2:pr-8 sm2:text-start lg:mt-[112px] lg:min-h-[108px] lg:max-w-[255px] lg:flex-col lg:justify-stretch  lg:gap-[50px]">
         <h2 className="w-full max-w-[255px] sm2:max-w-[320px] lg:max-w-[255px]">
           {'mechanical wireless Keyboard'.toUpperCase()}
         </h2>
