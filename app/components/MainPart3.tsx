@@ -8,7 +8,7 @@ const MainPart3 = () => (
         </div>
         <div className="size-full rounded-[20px] bg-[url('../public/assets/images/desktop/image-glass-and-keyboard.jpg')] bg-cover sm:bg-[0_-30px] md:min-w-[420px] md:bg-[0_-50px] lg:max-w-[480px] lg:bg-center"></div>
       </div>
-      <div className="mt-[112px] flex min-h-[108px] w-full justify-between sm:gap-[70px] lg:min-h-[312px] lg:max-w-[255px] lg:flex-col lg:justify-stretch  lg:gap-[50px]">
+      <div className="mt-[112px] flex min-h-[108px] w-full flex-col items-center justify-between text-center sm:flex-row sm:gap-[70px] sm:text-start lg:min-h-[312px] lg:max-w-[255px] lg:flex-col lg:justify-stretch  lg:gap-[50px]">
         <h2 className="w-full max-w-[320px] lg:max-w-[255px]">{'mechanical wireless Keyboard'.toUpperCase()}</h2>
         <p className="max-w-[570px] lg:max-w-[255px]">
           The Typemaster keyboard boasts top-notch build and practical design. It offers a wide variety of switches and
