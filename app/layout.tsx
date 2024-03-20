@@ -42,7 +42,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           .join(' ')
           .concat(' ')}
       >
-        <div className="mx-auto max-w-[90em] overflow-x-clip font-sans">{children}</div>
+        <div className="mx-auto overflow-x-clip font-sans">{children}</div>
       </body>
     </html>
   );

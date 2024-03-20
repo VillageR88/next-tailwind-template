@@ -7,6 +7,19 @@ html {
   /* color-scheme: dark; */
 }
 
+h1 {
+  @apply text-[56px] leading-[56px] font-black text-[#162542];
+}
+
+p{
+  @apply text-[16px] leading-[26px] font-medium text-[#7B8BAD];
+
+}
+
+span {
+  @apply text-[16px] leading-[26px] text-[#7B8BAD];
+}
+
 * {
   /* transition-property: color, background, border; */
   transition-property: all;
