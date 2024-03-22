@@ -11,12 +11,11 @@ const config: Config = {
       fontFamily: {
         sans: ['var(--font-sans)'],
         mono: ['var(--font-mono)'],
+        roboto: ['Roboto', 'sans-serif'],
+        robotoFlex: ['Roboto Flex', 'sans-serif'],
       },
       colors: {
-        // Slate
-        // 'accent-brand-800': '#1e293b',
-        // 'accent-brand-700': '#334155',
-        // 'accent-brand-600': '#475569',
+        gray1: '#121212',
       },
     },
   },
