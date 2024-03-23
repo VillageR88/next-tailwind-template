@@ -6,3 +6,16 @@ html {
   /* dark scroll bars */
   /* color-scheme: dark; */
 }
+table {
+  @apply w-full border-white bg-[#1f1f1f] text-left;
+}
+caption {
+  @apply pb-2 pl-1 text-left text-[18px] font-bold text-white;
+}
+th,
+td {
+  @apply border border-double border-[#6c6b6b] p-[10px] text-white;
+}
+th {
+  @apply bg-[#2f2f2f];
+}

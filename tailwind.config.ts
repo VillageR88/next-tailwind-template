@@ -13,6 +13,8 @@ const config: Config = {
         mono: ['var(--font-mono)'],
         roboto: ['Roboto', 'sans-serif'],
         robotoFlex: ['Roboto Flex', 'sans-serif'],
+        instrumentSans: ['Instrument Sans', 'sans-serif'],
+        materialSymbolsOutlined: ['Material Symbols Outlined', 'sans-serif'],
       },
       colors: {
         gray1: '#121212',
