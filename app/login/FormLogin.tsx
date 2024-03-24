@@ -7,7 +7,13 @@ const FormLogin = () => {
             <span className="font-materialSymbolsOutlined">email</span>
             <span>Email</span>
           </label>
-          <button className="text-[14px] text-[orange] transition hover:brightness-[117%]">Create new account</button>
+          <button
+            type="button"
+            className="flex items-center gap-[6px] text-[14px] text-[orange] transition hover:brightness-[117%]"
+          >
+            <span className="font-materialSymbolsOutlined text-[16px]">person_add</span>
+            <span>Create new account</span>
+          </button>
         </div>
         <div>
           <input placeholder="example@domain.com" className="w-full" id="email" type="email" />
@@ -19,7 +25,13 @@ const FormLogin = () => {
             <span className="font-materialSymbolsOutlined">lock</span>
             <span>Password</span>
           </label>
-          <button className="text-[14px] text-[orange] transition hover:brightness-[117%]">Remind my password</button>
+          <button
+            type="button"
+            className="flex items-center gap-[6px] text-[14px] text-[orange] transition hover:brightness-[117%]"
+          >
+            <span className="font-materialSymbolsOutlined text-[16px]">psychology_alt</span>
+            <span>Remind my password</span>
+          </button>
         </div>
         <input placeholder="Enter your password" id="password" type="password" />
       </div>
