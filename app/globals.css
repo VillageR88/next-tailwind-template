@@ -21,5 +21,13 @@ th {
 }
 
 h1 {
-  @apply text-[#f1f1f1] text-4xl font-medium;
+  @apply text-4xl font-medium text-[#f1f1f1];
+}
+
+label {
+  @apply text-lg font-medium text-[#f1f1f1];
+}
+
+input {
+  @apply rounded-[6px] border border-double border-[#6c6b6b] bg-[#1C1C1C] p-2 text-white;
 }
