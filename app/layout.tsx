@@ -1,19 +1,5 @@
 import './globals.css';
 import type { Metadata } from 'next';
-import { Inter, Source_Code_Pro } from 'next/font/google';
-
-const fontSans = Inter({
-  subsets: ['latin'],
-  display: 'block',
-  variable: '--font-sans',
-});
-
-const fontMono = Source_Code_Pro({
-  weight: ['400', '700'],
-  subsets: ['latin'],
-  display: 'block',
-  variable: '--font-mono',
-});
 
 export const metadata: Metadata = {
   title: 'My App',
@@ -36,13 +22,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           rel="stylesheet"
         />
       </head>
-      <body
-        className={[fontSans, fontMono]
-          .map((font) => font.variable)
-          .join(' ')
-          .concat(' ')
-          .concat('bg-[#161616]')}
-      >
+      <body className={'bg-[#161616]'}>
         <div className="mx-auto overflow-x-clip font-sans">{children}</div>
       </body>
     </html>
