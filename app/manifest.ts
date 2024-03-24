@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { MetadataRoute } from 'next';
-import { metadata } from './layout';
+import { metadata } from './metadata';
 
 export default function manifest(): MetadataRoute.Manifest {
   return {
