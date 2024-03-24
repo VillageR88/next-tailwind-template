@@ -36,7 +36,7 @@ const FormLogin = () => {
         <input placeholder="Enter your password" id="password" type="password" />
       </div>
       <button
-        className="mt-1.5 flex h-[45px] w-full items-center justify-center rounded-[6px] bg-gradient-to-b from-[#edb43a] to-[#9a6502] text-[16px] font-extrabold tracking-[1px] text-white  transition hover:brightness-[118%]"
+        className="mt-1.5 flex h-[45px] w-full items-center justify-center rounded-[6px] bg-gradient-to-b from-[orange] to-[#9a6502] text-[16px] font-extrabold tracking-[1px] text-white  transition hover:brightness-[118%]"
         type="button"
       >
         Login
