@@ -19,3 +19,7 @@ td {
 th {
   @apply bg-[#2f2f2f];
 }
+
+h1 {
+  @apply text-[#f1f1f1] text-4xl font-medium;
+}
