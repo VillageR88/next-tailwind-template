@@ -31,3 +31,11 @@ label {
 input {
   @apply rounded-[6px] border border-double border-[#6c6b6b] bg-[#1C1C1C] p-2 text-white;
 }
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  -webkit-box-shadow: 0 0 0 30px #1c1c1c inset;
+  -webkit-text-fill-color: white;
+}
