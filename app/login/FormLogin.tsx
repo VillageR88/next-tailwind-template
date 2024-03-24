@@ -1,6 +1,36 @@
+'use client';
+import { FormEvent } from 'react';
+import { useRouter } from 'next/navigation';
+
 const FormLogin = () => {
+  const router = useRouter();
+  async function handleSubmit(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    console.log('event', event);
+    const formData = new FormData(event.currentTarget);
+    const email = formData.get('email');
+    const password = formData.get('password');
+
+    const response = await fetch('/api/auth/login', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email, password }),
+    });
+
+    if (response.ok) {
+      router.push('/');
+    } else {
+      console.log('response', response);
+      console.error('Login failed');
+    }
+  }
   return (
-    <form className="flex size-full flex-col gap-6">
+    <form
+      onSubmit={(e) => {
+        void handleSubmit(e);
+      }}
+      className="flex size-full flex-col gap-6"
+    >
       <div className="flex flex-col gap-2">
         <div className="flex justify-between px-1">
           <label className="flex w-fit items-center gap-2" htmlFor="email">
@@ -37,7 +67,7 @@ const FormLogin = () => {
       </div>
       <button
         className="mt-1.5 flex h-[45px] w-full items-center justify-center rounded-[6px] bg-gradient-to-b from-[orange] to-[#9a6502] text-[16px] font-extrabold tracking-[1px] text-white  transition hover:brightness-[118%]"
-        type="button"
+        type="submit"
       >
         Login
       </button>
