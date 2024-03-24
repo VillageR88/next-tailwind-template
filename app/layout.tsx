@@ -1,20 +1,16 @@
-'use client';
-
 import './globals.css';
-import { SessionProvider } from 'next-auth/react';
+import type { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'My App',
+  applicationName: 'My App',
+  description: 'My App',
+} as const;
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
       <head>
-        <meta charSet="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <meta name="description" content={'My App'} />
-        <title>{'My App'}</title>
-        <meta name="apple-mobile-web-app-title" content="My App" />
-        <meta name="application-name" content="My App" />
-        <link rel="manifest" href="/manifest.webmanifest"></link>
-
         <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"></link>
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png"></link>
         <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"></link>
@@ -27,9 +23,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         />
       </head>
       <body className={'bg-[#161616]'}>
-        <div className="mx-auto overflow-x-clip font-sans">
-          <SessionProvider>{children}</SessionProvider>
-        </div>
+        <div className="mx-auto overflow-x-clip font-sans">{children}</div>
       </body>
     </html>
   );
