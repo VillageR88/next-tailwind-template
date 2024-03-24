@@ -6,22 +6,28 @@ const FormLogin = () => {
   const router = useRouter();
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    console.log('event', event);
     const formData = new FormData(event.currentTarget);
     const email = formData.get('email');
     const password = formData.get('password');
 
-    const response = await fetch('/api/auth/login', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ email, password }),
-    });
+    const response = await fetch(
+      'https://serverexpress1-production.up.railway.app/',
 
+      {
+        mode: 'cors',
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email, password }),
+      },
+    );
     if (response.ok) {
-      router.push('/');
+      const { token } = (await response.json()) as { token: string };
+      localStorage.setItem('token', token);
+      router.push('/dashboard');
     } else {
-      console.log('response', response);
-      console.error('Login failed');
+      console.error('response', response);
     }
   }
   return (
