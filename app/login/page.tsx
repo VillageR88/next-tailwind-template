@@ -8,8 +8,10 @@ export default function Login() {
         <header className="flex w-full justify-start">
           <Logo />
         </header>
-        <main className="mt-[10px] flex h-[482px] w-full flex-col gap-[48px] rounded-[6px] border border-[#313131] bg-[#232323] px-8 py-10">
-          <h1>Login</h1>
+        <main className="mt-[10px] flex min-h-full w-full flex-col gap-[48px] rounded-[6px] border border-[#313131] bg-[#232323] px-8 pb-14 pt-10">
+          <div className="flex h-full items-start">
+            <h1 className="leading-[32px]">Login</h1>
+          </div>
           <div className="size-full">
             <FormLogin />
           </div>
