@@ -1,6 +1,7 @@
 'use client';
 import { FormEvent, useState } from 'react';
 import { useRouter } from 'next/navigation';
+console.log('token', localStorage.getItem('token'));
 
 const FormLogin = () => {
   const [email, setEmail] = useState<string>('');
@@ -18,6 +19,12 @@ const FormLogin = () => {
       });
       console.log(response);
       if (response.ok) {
+        const { token } = (await response.json()) as { token: string };
+        if (!token) {
+          console.error('Failed to log in', response);
+          return;
+        }
+        localStorage.setItem('token', token);
         router.push('/');
       } else {
         console.error('Failed to log in', response);
@@ -88,10 +95,11 @@ const FormLogin = () => {
         />
       </div>
       <button
-        className="mt-1.5 flex h-[45px] w-full items-center justify-center rounded-[6px] bg-gradient-to-b from-[orange] to-[#9a6502] text-[16px] font-extrabold tracking-[1px] text-white  transition hover:brightness-[118%]"
+        className="mt-1.5 flex h-[45px] w-full items-center justify-center gap-[2px] rounded-[6px] bg-gradient-to-b from-[orange] to-[#9a6502] text-[16px] font-extrabold tracking-[1px] text-white  transition hover:brightness-[118%]"
         type="submit"
       >
-        Login
+        <span>Login</span>
+        <span className="font-materialSymbolsOutlined">login</span>
       </button>
     </form>
   );
