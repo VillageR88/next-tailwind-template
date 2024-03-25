@@ -72,8 +72,8 @@ const FormLogin = () => {
             type="button"
             className="flex items-center gap-[6px] text-[14px] text-[orange] transition hover:brightness-[117%]"
           >
-            <span className="font-materialSymbolsOutlined text-[16px]">psychology_alt</span>
-            <span>Remind my password</span>
+            <span className="font-materialSymbolsOutlined text-[16px]">lock_reset</span>
+            <span>Reset my password</span>
           </button>
         </div>
         <input
