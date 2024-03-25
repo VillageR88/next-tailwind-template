@@ -1,33 +1,29 @@
 'use client';
-import { FormEvent } from 'react';
+import { FormEvent, useState } from 'react';
 import { useRouter } from 'next/navigation';
 
 const FormLogin = () => {
+  const [email, setEmail] = useState<string>('');
+  const [password, setPassword] = useState<string>('');
   const router = useRouter();
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    const formData = new FormData(event.currentTarget);
-    const email = formData.get('email');
-    const password = formData.get('password');
-
-    const response = await fetch(
-      'https://serverexpress1-production.up.railway.app/',
-
-      {
-        mode: 'cors',
+    try {
+      const response = await fetch('https://serverexpress1-production.up.railway.app/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({ email, password }),
-      },
-    );
-    if (response.ok) {
-      const { token } = (await response.json()) as { token: string };
-      localStorage.setItem('token', token);
-      router.push('/dashboard');
-    } else {
-      console.error('response', response);
+      });
+      console.log(response);
+      if (response.ok) {
+        router.push('/');
+      } else {
+        console.error('Failed to log in', response);
+      }
+    } catch (error) {
+      console.error(error);
     }
   }
   return (
@@ -52,7 +48,16 @@ const FormLogin = () => {
           </button>
         </div>
         <div>
-          <input placeholder="example@domain.com" className="w-full" id="email" type="email" />
+          <input
+            value={email}
+            onChange={(e) => {
+              setEmail(e.target.value);
+            }}
+            placeholder="example@domain.com"
+            className="w-full"
+            id="email"
+            type="email"
+          />
         </div>
       </div>
       <div className="flex flex-col gap-2">
@@ -69,7 +74,15 @@ const FormLogin = () => {
             <span>Remind my password</span>
           </button>
         </div>
-        <input placeholder="Enter your password" id="password" type="password" />
+        <input
+          value={password}
+          onChange={(e) => {
+            setPassword(e.target.value);
+          }}
+          placeholder="Enter your password"
+          id="password"
+          type="password"
+        />
       </div>
       <button
         className="mt-1.5 flex h-[45px] w-full items-center justify-center rounded-[6px] bg-gradient-to-b from-[orange] to-[#9a6502] text-[16px] font-extrabold tracking-[1px] text-white  transition hover:brightness-[118%]"
