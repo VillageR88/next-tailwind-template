@@ -23,11 +23,14 @@ const Navbar = () => {
               localStorage.removeItem('token');
               router.push('/login');
             }}
-            className="button2"
+            className="button2 group"
             type="submit"
           >
-            <span>Log out</span>
-            <span className="font-materialSymbolsOutlined">login</span>
+            <div className="group-hover: flex size-full items-center justify-center rounded-[6px] bg-[#1C1C1C]/0 transition group-hover:bg-[#1C1C1C]/100">
+              <span>Log out</span>
+
+              <span className="font-materialSymbolsOutlined">login</span>
+            </div>
           </button>
         </div>
       </div>
