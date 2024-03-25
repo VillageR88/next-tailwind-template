@@ -11,11 +11,25 @@ const Navbar = () => {
         <Logo />
         <div className="flex gap-4">
           <button
+            className="flex h-[40px] w-[110px] items-center justify-center gap-[2px] rounded-[6px] border border-[white] bg-gradient-to-b text-[16px] font-extrabold tracking-[1px] text-white transition hover:border-[orange] hover:text-[orange] hover:brightness-[118%]"
+            type="button"
+          >
+            <span>Save</span>
+            <span className="font-materialSymbolsOutlined">save</span>
+          </button>
+          <button
+            className="flex h-[40px] w-[110px] items-center justify-center gap-[2px] rounded-[6px] border border-[white] bg-gradient-to-b text-[16px] font-extrabold tracking-[1px] text-white transition hover:border-[orange] hover:text-[orange] hover:brightness-[118%]"
+            type="button"
+          >
+            <span>Revert</span>
+            <span className="font-materialSymbolsOutlined">undo</span>
+          </button>
+          <button
             onClick={() => {
               localStorage.removeItem('token');
               router.push('/login');
             }}
-            className="flex h-[40px] w-[110px] items-center justify-center gap-[2px] rounded-[6px] bg-gradient-to-b from-[orange] to-[#b97b08] text-[16px] font-extrabold tracking-[1px] text-white transition hover:brightness-[118%]"
+            className="flex h-[40px] w-[110px] items-center justify-center gap-[2px] rounded-[6px] border border-[white] bg-gradient-to-b text-[16px] font-extrabold tracking-[1px] text-white transition hover:border-[orange] hover:text-[orange] hover:brightness-[118%]"
             type="submit"
           >
             <span>Log out</span>
