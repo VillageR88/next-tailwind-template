@@ -28,6 +28,7 @@ const FormLogin = () => {
   }
   return (
     <form
+      id="form-login"
       onSubmit={(e) => {
         void handleSubmit(e);
       }}
@@ -50,6 +51,7 @@ const FormLogin = () => {
         <div>
           <input
             value={email}
+            autoComplete="email"
             onChange={(e) => {
               setEmail(e.target.value);
             }}
@@ -76,6 +78,7 @@ const FormLogin = () => {
         </div>
         <input
           value={password}
+          autoComplete="current-password"
           onChange={(e) => {
             setPassword(e.target.value);
           }}
