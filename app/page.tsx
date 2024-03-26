@@ -1,9 +1,12 @@
 'use client';
+
 import { useEffect, useState, createContext } from 'react';
 import { useRouter } from 'next/navigation';
+
 import Navbar from './home/Navbar';
 import Main from './home/Main';
 import { CollectionGroup } from '@/app/lib/interfaces';
+
 export const DataContext = createContext<{
   dataContext: null | CollectionGroup;
   setDataContext: React.Dispatch<React.SetStateAction<null | CollectionGroup>>;
@@ -11,10 +14,12 @@ export const DataContext = createContext<{
   dataContext: null,
   setDataContext: () => null,
 });
+
 export default function Home() {
   const [token, setToken] = useState<string | null>(null);
   const [dataContext, setDataContext] = useState<null | CollectionGroup>(null);
   const router = useRouter();
+
   useEffect(() => {
     const tokenTemp = localStorage.getItem('token');
     if (!tokenTemp) {
@@ -48,6 +53,7 @@ export default function Home() {
       void handleLoadCollectionGroup();
     }
   }, [token]);
+
   return (
     token && (
       <div className="flex min-h-screen w-full flex-col items-center justify-start font-instrumentSans">
