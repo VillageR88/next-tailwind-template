@@ -18,11 +18,11 @@ html {
 }
 
 .button2 {
-  @apply flex h-[44px] min-w-[110px] items-center justify-center gap-[2px] rounded-[6px] border-[orange] hover:border-[#FFC300] bg-inherit bg-opacity-0 bg-gradient-to-b from-[orange] to-[#b97b08] text-[16px] font-extrabold tracking-[1px] transition hover:border hover:bg-transparent;
+  @apply flex h-[44px] min-w-[110px] items-center justify-center overflow-hidden gap-[2px] rounded-[6px] border-[#636262] bg-gradient-to-b from-[orange] to-[#b97b08]  text-[16px] font-extrabold tracking-[1px] transition hover:border;
 }
 
 .button2Inner {
-  @apply flex size-full items-center justify-center rounded-[6px] bg-[#1C1C1C]/0 text-white transition group-hover:bg-[#232323]/100 group-hover:text-[#FFC300];
+  @apply flex size-full items-center justify-center  bg-[#1C1C1C]/0 text-white transition group-hover:bg-[#232323]/100 group-hover:text-[#FFC300];
 }
 
 h1 {
