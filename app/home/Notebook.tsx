@@ -1,12 +1,12 @@
-import { useState } from 'react';
-import { CollectionGroup } from '../lib/interfaces';
+import { useContext } from 'react';
+import { DataContext } from '../page';
 
 const Notebook = () => {
-  const [myCollections, setMyCollections] = useState<CollectionGroup | null>(null);
+  const context = useContext(DataContext);
 
   return (
     <div className="flex flex-col gap-8 ">
-      {myCollections?.collections.map((collection) => (
+      {context.dataContext?.collections.map((collection) => (
         <div
           className="flex flex-col gap-[6px] rounded-[6px] border border-[#313131] bg-[#232323] px-3 py-4"
           key={collection.id}
