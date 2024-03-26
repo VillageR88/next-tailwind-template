@@ -44,12 +44,9 @@ const FormLogin = () => {
             <span className="font-materialSymbolsOutlined">email</span>
             <span>Email</span>
           </label>
-          <button
-            type="button"
-            className="flex items-center gap-[6px] text-[14px] text-[orange] transition hover:brightness-[117%]"
-          >
+          <button type="button" className="group flex items-center gap-[6px] text-[14px] text-[orange] transition">
             <span className="font-materialSymbolsOutlined text-[16px]">person_add</span>
-            <span>Create new account</span>
+            <span className="group-hover:underline">Create new account</span>
           </button>
         </div>
         <input
@@ -70,12 +67,9 @@ const FormLogin = () => {
             <span className="font-materialSymbolsOutlined">lock</span>
             <span>Password</span>
           </label>
-          <button
-            type="button"
-            className="flex items-center gap-[6px] text-[14px] text-[orange] transition hover:brightness-[117%]"
-          >
+          <button type="button" className="group flex items-center gap-[6px] text-[14px] text-[orange] transition">
             <span className="font-materialSymbolsOutlined text-[16px]">lock_reset</span>
-            <span>Reset my password</span>
+            <span className="group-hover:underline">Reset my password</span>
           </button>
         </div>
         <input
