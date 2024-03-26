@@ -1,20 +1,5 @@
 import { useState } from 'react';
-
-interface Note {
-  id: number;
-  title: string;
-  description: string;
-}
-
-interface Collection {
-  id: number;
-  title: string;
-  Notes: Note[];
-}
-
-interface CollectionGroup {
-  collections: Collection[];
-}
+import { CollectionGroup } from '../lib/interfaces';
 
 const Notebook = () => {
   const [myCollections, setMyCollections] = useState<CollectionGroup | null>(null);
