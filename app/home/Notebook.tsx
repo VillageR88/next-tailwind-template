@@ -1,3 +1,5 @@
+import { useState } from 'react';
+
 interface Note {
   id: number;
   title: string;
@@ -14,47 +16,12 @@ interface CollectionGroup {
   collections: Collection[];
 }
 
-const Table = () => {
-  const mockupJSON: CollectionGroup = {
-    collections: [
-      {
-        id: 1,
-        title: 'Collection 1',
-        Notes: [
-          {
-            id: 1,
-            title: 'Note 1',
-            description: 'Description 1',
-          },
-          {
-            id: 2,
-            title: 'Note 2',
-            description: 'Description 2',
-          },
-        ],
-      },
-      {
-        id: 2,
-        title: 'Collection B',
-        Notes: [
-          {
-            id: 3,
-            title: 'Note A',
-            description: 'Description A',
-          },
-          {
-            id: 4,
-            title: 'Note B',
-            description: 'Description B',
-          },
-        ],
-      },
-    ],
-  };
+const Notebook = () => {
+  const [myCollections, setMyCollections] = useState<CollectionGroup | null>(null);
 
   return (
     <div className="flex flex-col gap-8 ">
-      {mockupJSON.collections.map((collection) => (
+      {myCollections?.collections.map((collection) => (
         <div
           className="flex flex-col gap-[6px] rounded-[6px] border border-[#313131] bg-[#232323] px-3 py-4"
           key={collection.id}
@@ -75,4 +42,4 @@ const Table = () => {
     </div>
   );
 };
-export default Table;
+export default Notebook;
