@@ -52,19 +52,17 @@ const FormLogin = () => {
             <span>Create new account</span>
           </button>
         </div>
-        <div>
-          <input
-            value={email}
-            autoComplete="email"
-            onChange={(e) => {
-              setEmail(e.target.value);
-            }}
-            placeholder="example@domain.com"
-            className="w-full"
-            id="email"
-            type="email"
-          />
-        </div>
+        <input
+          value={email}
+          autoComplete="email"
+          onChange={(e) => {
+            setEmail(e.target.value);
+          }}
+          placeholder="example@domain.com"
+          className="w-full"
+          id="email"
+          type="email"
+        />
       </div>
       <div className="flex flex-col gap-2">
         <div className="flex justify-between px-1">
