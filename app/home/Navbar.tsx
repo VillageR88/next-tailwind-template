@@ -26,7 +26,7 @@ const Navbar = () => {
             className="button2 group"
             type="submit"
           >
-            <div className="group-hover: flex size-full items-center justify-center rounded-[6px] bg-[#1C1C1C]/0 text-white transition hover:text-[orange] group-hover:bg-[#1C1C1C]/100">
+            <div className="button2Inner">
               <span>Log out</span>
 
               <span className="font-materialSymbolsOutlined">login</span>

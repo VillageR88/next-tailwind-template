@@ -91,12 +91,11 @@ const FormLogin = () => {
           type="password"
         />
       </div>
-      <button
-        className="mt-1.5 flex h-[45px] w-full items-center justify-center gap-[2px] rounded-[6px] bg-gradient-to-b from-[orange] to-[#b97b08] text-[16px] font-extrabold tracking-[1px] text-white transition hover:brightness-[118%]"
-        type="submit"
-      >
-        <span>Login</span>
-        <span className="font-materialSymbolsOutlined">login</span>
+      <button className="button2 group size-full" type="submit">
+        <div className="button2Inner">
+          <span>Login</span>
+          <span className="font-materialSymbolsOutlined">login</span>
+        </div>
       </button>
     </form>
   );
