@@ -22,15 +22,11 @@ html {
 }
 
 .button2Inner {
-  @apply flex size-full items-center justify-center rounded-[6px] bg-[#1C1C1C]/0 text-white transition group-hover:bg-[#1C1C1C]/100 group-hover:text-[orange];
+  @apply flex size-full items-center justify-center rounded-[6px] bg-[#1C1C1C]/0 text-white transition group-hover:bg-[#2e2515]/100 group-hover:text-[orange];
 }
 
-.inner1 {
-  @apply group-hover:bg-[#232323]/100;
-}
-
-.inner2 {
-  @apply group-hover:bg-[#1C1C1C]/100;
+{
+  @apply text-[#2e2515];
 }
 
 h1 {

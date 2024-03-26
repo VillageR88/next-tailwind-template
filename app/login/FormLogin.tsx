@@ -92,7 +92,7 @@ const FormLogin = () => {
         />
       </div>
       <button className="button2 group size-full" type="submit">
-        <div className="button2Inner inner1">
+        <div className="button2Inner">
           <span>Login</span>
           <span className="font-materialSymbolsOutlined">login</span>
         </div>

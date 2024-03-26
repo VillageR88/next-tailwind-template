@@ -26,7 +26,7 @@ const Navbar = () => {
             className="button2 group"
             type="submit"
           >
-            <div className="button2Inner inner2">
+            <div className="button2Inner">
               <span>Log out</span>
 
               <span className="font-materialSymbolsOutlined">login</span>
