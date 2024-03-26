@@ -3,8 +3,8 @@ import Logo from '../components/Logo';
 
 export default function Login() {
   return (
-    <div className="flex min-h-screen w-full flex-col items-center justify-center px-8 font-instrumentSans">
-      <div className="flex w-full max-w-[500px] flex-col items-center justify-between ">
+    <div className="flex min-h-screen w-full flex-col items-center justify-center px-8 py-10 font-instrumentSans">
+      <div className="flex w-full max-w-[500px] flex-col items-center justify-between gap-3 ">
         <header className="flex w-full justify-start">
           <Logo />
         </header>

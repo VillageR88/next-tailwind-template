@@ -6,7 +6,7 @@ const Navbar = () => {
   const router = useRouter();
 
   return (
-    <nav className="flex w-full justify-center border-b border-[#313131] bg-[#1C1C1C] px-8 py-2">
+    <nav className="flex w-full justify-center border-b border-[#313131] bg-[#1C1C1C] px-8 py-4">
       <div className="flex size-full max-w-[90em] items-center justify-between">
         <Logo />
         <div className="flex gap-4">

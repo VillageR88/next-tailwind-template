@@ -60,7 +60,6 @@ export default function Home() {
           <Navbar />
           <Main />
         </DataContext.Provider>
-        <footer className="h-[200px] w-full bg-[#161616]"></footer>
       </div>
     )
   );

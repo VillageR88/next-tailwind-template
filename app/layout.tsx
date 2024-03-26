@@ -22,7 +22,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           rel="stylesheet"
         />
       </head>
-      <body className={'bg-[#161616]'}>
+      <body className={'bg-[#1C1C1C]'}>
         <div className="mx-auto overflow-x-clip font-sans">{children}</div>
       </body>
     </html>
