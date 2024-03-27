@@ -5,7 +5,7 @@ const Notebook = () => {
   const context = useContext(DataContext);
 
   return (
-    <div className="flex flex-col gap-8 ">
+    <div className="flex max-w-4xl w-full flex-col gap-8 ">
       {context.dataContext?.collections.map((collection) => (
         <div
           className="flex flex-col gap-[6px] rounded-[6px] border border-[#313131] bg-[#232323] px-3 py-4"
