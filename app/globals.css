@@ -26,7 +26,15 @@ html {
 }
 
 h1 {
-  @apply text-[34px] font-medium text-white;
+  @apply text-4xl font-medium text-white;
+}
+
+h2 {
+  @apply text-3xl font-medium text-white;
+}
+
+h3 {
+  @apply text-2xl font-medium text-white;
 }
 
 label {
