@@ -47,9 +47,12 @@ const FormLogin = ({ setLoading }: { setLoading: Dispatch<SetStateAction<boolean
             <span className="font-materialSymbolsOutlined">email</span>
             <span>Email</span>
           </label>
-          <button type="button" className="group flex items-center gap-[6px] text-[14px] text-[orange] transition">
-            <span className="font-materialSymbolsOutlined text-[16px]">person_add</span>
-            <span className="group-hover:underline">Create new account</span>
+          <button type="button" className="group flex items-center gap-[6px] text-[14px] text-[orange]">
+            <span className="mt-[-2px] font-materialSymbolsOutlined text-[16px]">person_add</span>
+            <div className="flex flex-col">
+              <span className="leading-[13px]">Create new account</span>
+              <div className="h-[1px] w-full transition group-hover:bg-[orange]"></div>
+            </div>
           </button>
         </div>
         <input
@@ -70,9 +73,12 @@ const FormLogin = ({ setLoading }: { setLoading: Dispatch<SetStateAction<boolean
             <span className="font-materialSymbolsOutlined">lock</span>
             <span>Password</span>
           </label>
-          <button type="button" className="group flex items-center gap-[6px] text-[14px] text-[orange] transition">
+          <button type="button" className="group flex items-center gap-[6px] text-[14px] text-[orange]">
             <span className="font-materialSymbolsOutlined text-[16px]">lock_reset</span>
-            <span className="group-hover:underline">Reset my password</span>
+            <div className="flex flex-col">
+              <span className="leading-[13px]">Reset my password</span>
+              <div className="h-[1px] w-full transition group-hover:bg-[orange]"></div>
+            </div>
           </button>
         </div>
         <input
