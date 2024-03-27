@@ -58,12 +58,12 @@ export default function Home() {
   }, [token]);
 
   return loading ? (
-    <div className="flex min-h-screen w-full flex-col items-center justify-center font-instrumentSans">
+    <div className="flex min-h-[100dvh] w-full flex-col items-center justify-center font-instrumentSans md:min-h-screen">
       <RotatingLines width="200" strokeColor="orange" />
     </div>
   ) : (
     token && (
-      <div className="flex min-h-screen w-full flex-col items-center justify-start font-instrumentSans">
+      <div className="flex min-h-[100dvh] w-full flex-col items-center justify-start font-instrumentSans md:min-h-screen">
         <DataContext.Provider value={{ dataContext, setDataContext }}>
           <Navbar />
           <Main />

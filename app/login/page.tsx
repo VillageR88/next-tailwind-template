@@ -10,7 +10,7 @@ export default function Login() {
   const [loading, setLoading] = useState(false);
 
   return (
-    <div className="flex min-h-screen w-full flex-col items-center justify-center px-8 py-10 font-instrumentSans">
+    <div className="flex md:min-h-screen min-h-[100dvh] w-full flex-col items-center justify-center px-8 py-10 font-instrumentSans">
       {loading ? (
         <RotatingLines width="200" strokeColor="orange" />
       ) : (
