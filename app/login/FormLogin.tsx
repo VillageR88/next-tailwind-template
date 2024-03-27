@@ -1,13 +1,13 @@
 'use client';
-import { FormEvent, useState } from 'react';
+import { Dispatch, SetStateAction, useState } from 'react';
 import { useRouter } from 'next/navigation';
 
-const FormLogin = () => {
+const FormLogin = ({ setLoading }: { setLoading: Dispatch<SetStateAction<boolean>> }) => {
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const router = useRouter();
-  async function handleSubmit(event: FormEvent<HTMLFormElement>) {
-    event.preventDefault();
+  async function handleSubmit() {
+    setLoading(true);
     try {
       const response = await fetch('https://serverexpress1-production.up.railway.app/login', {
         method: 'POST',
@@ -29,12 +29,14 @@ const FormLogin = () => {
     } catch (error) {
       console.error(error);
     }
+    setLoading(false);
   }
   return (
     <form
       id="form-login"
       onSubmit={(e) => {
-        void handleSubmit(e);
+        e.preventDefault();
+        void handleSubmit();
       }}
       className="flex size-full flex-col gap-6"
     >
