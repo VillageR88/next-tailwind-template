@@ -2,6 +2,11 @@
 import { Dispatch, SetStateAction, useState } from 'react';
 import { useRouter } from 'next/navigation';
 
+enum ErrorType {
+  failedLogin = 'Verify your email and password, then try again',
+  errorOccurred = 'An error occurred. Try again later',
+}
+
 const FormLogin = ({ setLoading }: { setLoading: Dispatch<SetStateAction<boolean>> }) => {
   const [email, setEmail] = useState<string>('');
   const [errorGlobal, setErrorGlobal] = useState<string>('');
@@ -26,12 +31,12 @@ const FormLogin = ({ setLoading }: { setLoading: Dispatch<SetStateAction<boolean
       } else {
         setLoading(false);
         console.error('Failed to log in', response);
-        setErrorGlobal('Check your email and password and try again.');
+        setErrorGlobal(ErrorType.failedLogin);
       }
     } catch (error) {
       console.error(error);
       setLoading(false);
-      setErrorGlobal('An error occurred. Try again later.');
+      setErrorGlobal(ErrorType.errorOccurred);
     }
   }
   return (
@@ -50,7 +55,7 @@ const FormLogin = ({ setLoading }: { setLoading: Dispatch<SetStateAction<boolean
             <span>Email</span>
           </label>
           <button type="button" className="group flex items-center gap-[6px] text-[14px] text-[orange]">
-            <span className="font-materialSymbolsOutlined mt-[-2px] text-[16px]">person_add</span>
+            <span className="mt-[-2px] font-materialSymbolsOutlined text-[16px]">person_add</span>
             <div className="flex flex-col">
               <span className="leading-[13px]">Create new account</span>
               <div className="h-[1px] w-full transition group-hover:bg-[orange]"></div>
@@ -105,8 +110,8 @@ const FormLogin = ({ setLoading }: { setLoading: Dispatch<SetStateAction<boolean
             <span className="font-materialSymbolsOutlined">login</span>
           </div>
         </button>
-        <div className="flex justify-center h-0">
-          <span className="mt-[12px] text-[#ff3333] text-sm">{errorGlobal}</span>
+        <div className="flex h-0 justify-center">
+          <span className="mt-[16px] px-1 text-sm text-[#ff3333]">{errorGlobal}</span>
         </div>
       </div>
     </form>
