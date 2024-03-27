@@ -11,11 +11,10 @@ const Navbar = () => {
   return (
     <nav className="flex w-full justify-center border-b border-[#313131] bg-[#1C1C1C] px-8 py-4">
       <div className="flex size-full max-w-[90em] items-center justify-between">
-        <Logo alternate/>
+        <Logo alternate />
         <div className="flex gap-4">
-         
           <button
-            disabled={context.dataContext === context.initialDataContext.current}
+            disabled={context.checkSame()}
             className="button1 flex"
             type="button"
           >
@@ -23,7 +22,7 @@ const Navbar = () => {
             <span className="font-materialSymbolsOutlined">save</span>
           </button>
           <button
-            disabled={context.dataContext === context.initialDataContext.current}
+            disabled={context.checkSame()}
             className="button1 flex"
             type="button"
           >

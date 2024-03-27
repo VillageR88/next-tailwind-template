@@ -44,7 +44,7 @@ const FormLogin = ({ setLoading }: { setLoading: Dispatch<SetStateAction<boolean
       id="form-login"
       onSubmit={(e) => {
         e.preventDefault();
-        handleSubmit();
+        void handleSubmit();
       }}
       className="flex size-full flex-col gap-6"
     >
@@ -57,8 +57,8 @@ const FormLogin = ({ setLoading }: { setLoading: Dispatch<SetStateAction<boolean
           <button type="button" className="group flex items-center gap-[6px] text-[14px] text-[orange]">
             <span className="mt-[-2px] font-materialSymbolsOutlined text-[16px]">person_add</span>
             <div className="flex flex-col">
-              <span className="leading-[13px] md:block hidden">Create new account</span>
-              <span className="leading-[13px] md:hidden block">new account</span>
+              <span className="hidden leading-[13px] md:block">Create new account</span>
+              <span className="block leading-[13px] md:hidden">new account</span>
 
               <div className="h-[1px] w-full transition group-hover:bg-[orange]"></div>
             </div>
@@ -87,8 +87,8 @@ const FormLogin = ({ setLoading }: { setLoading: Dispatch<SetStateAction<boolean
           <button type="button" className="group flex items-center gap-[6px] text-[14px] text-[orange]">
             <span className="font-materialSymbolsOutlined text-[16px]">lock_reset</span>
             <div className="flex flex-col">
-              <span className="leading-[13px] md:block hidden">Reset my password</span>
-              <span className="leading-[1px] md:hidden block">reset</span>
+              <span className="hidden leading-[13px] md:block">Reset my password</span>
+              <span className="block leading-[1px] md:hidden">reset</span>
               <div className="h-[1px] w-full transition group-hover:bg-[orange]"></div>
             </div>
           </button>

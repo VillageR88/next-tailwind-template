@@ -11,11 +11,11 @@ import { CollectionGroup } from '@/app/lib/interfaces';
 export const DataContext = createContext<{
   dataContext: null | CollectionGroup;
   setDataContext: React.Dispatch<React.SetStateAction<null | CollectionGroup>>;
-  initialDataContext: MutableRefObject<CollectionGroup | null>;
+  checkSame(): boolean;
 }>({
   dataContext: null,
   setDataContext: () => null,
-  initialDataContext: { current: null},
+  checkSame: () => true,
 });
 
 export default function Home() {
@@ -24,6 +24,7 @@ export default function Home() {
   const [dataContext, setDataContext] = useState<null | CollectionGroup>(null);
   const initialDataContext = useRef<null | CollectionGroup>(null);
   const router = useRouter();
+  const checkSame = () => dataContext === initialDataContext.current;
 
   useEffect(() => {
     const tokenTemp = localStorage.getItem('token');
@@ -68,7 +69,7 @@ export default function Home() {
   ) : (
     token && (
       <div className="flex min-h-[100dvh] w-full flex-col items-center justify-start font-instrumentSans md:min-h-screen">
-        <DataContext.Provider value={{ dataContext, setDataContext, initialDataContext }}>
+        <DataContext.Provider value={{ dataContext, setDataContext, checkSame }}>
           <Navbar />
           <Main />
         </DataContext.Provider>
