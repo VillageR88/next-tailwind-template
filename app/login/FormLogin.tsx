@@ -24,12 +24,13 @@ const FormLogin = ({ setLoading }: { setLoading: Dispatch<SetStateAction<boolean
           router.push('/');
         }
       } else {
+        setLoading(false);
         console.error('Failed to log in', response);
       }
     } catch (error) {
       console.error(error);
+      setLoading(false);
     }
-    setLoading(false);
   }
   return (
     <form
