@@ -3,7 +3,7 @@ import { Dispatch, SetStateAction, useState } from 'react';
 import { useRouter } from 'next/navigation';
 
 enum ErrorType {
-  failedLogin = 'Verify your email and password, then try again',
+  failedLogin = 'Verify your email and password.',
   errorOccurred = 'An error occurred. Try again later',
 }
 
@@ -57,7 +57,9 @@ const FormLogin = ({ setLoading }: { setLoading: Dispatch<SetStateAction<boolean
           <button type="button" className="group flex items-center gap-[6px] text-[14px] text-[orange]">
             <span className="mt-[-2px] font-materialSymbolsOutlined text-[16px]">person_add</span>
             <div className="flex flex-col">
-              <span className="leading-[13px]">Create new account</span>
+              <span className="leading-[13px] md:block hidden">Create new account</span>
+              <span className="leading-[13px] md:hidden block">new account</span>
+
               <div className="h-[1px] w-full transition group-hover:bg-[orange]"></div>
             </div>
           </button>
@@ -85,7 +87,8 @@ const FormLogin = ({ setLoading }: { setLoading: Dispatch<SetStateAction<boolean
           <button type="button" className="group flex items-center gap-[6px] text-[14px] text-[orange]">
             <span className="font-materialSymbolsOutlined text-[16px]">lock_reset</span>
             <div className="flex flex-col">
-              <span className="leading-[13px]">Reset my password</span>
+              <span className="leading-[13px] md:block hidden">Reset my password</span>
+              <span className="leading-[1px] md:hidden block">reset</span>
               <div className="h-[1px] w-full transition group-hover:bg-[orange]"></div>
             </div>
           </button>

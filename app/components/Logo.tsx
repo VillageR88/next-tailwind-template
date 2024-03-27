@@ -1,9 +1,11 @@
-const Logo = () => (
-  <span className="flex items-center gap-2">
-    <span className="font-materialSymbolsOutlined text-[50px] leading-[2.5rem] text-[orange]">edit_note</span>
-    <div>
-      <span className="text-4xl font-bold text-[orange]">My</span>
-      <span className="text-4xl font-medium text-white">Notebook</span>
+const Logo = ({ alternate }: { alternate?: boolean }) => (
+  <span className="flex items-start gap-2">
+    <span className={`${alternate ? 'text-[40px]' : 'text-[45px]'} font-materialSymbolsOutlined leading-[2.5rem] text-[orange] md:text-[50px]`}>
+      edit_note
+    </span>
+    <div className="flex">
+      <span className={`${alternate ? 'md:block hidden' : 'text-3xl'} font-bold text-[orange] md:text-4xl`}>My</span>
+      <span className={`${alternate ? 'md:block hidden' : 'text-3xl'} font-medium text-white md:text-4xl`}>Notebook</span>
     </div>
   </span>
 );
