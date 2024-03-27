@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState, createContext } from 'react';
+import { useEffect, useState, createContext, useRef, MutableRefObject } from 'react';
 import { useRouter } from 'next/navigation';
 
 import { RotatingLines } from 'react-loader-spinner';
@@ -11,15 +11,18 @@ import { CollectionGroup } from '@/app/lib/interfaces';
 export const DataContext = createContext<{
   dataContext: null | CollectionGroup;
   setDataContext: React.Dispatch<React.SetStateAction<null | CollectionGroup>>;
+  initialDataContext: MutableRefObject<CollectionGroup | null>;
 }>({
   dataContext: null,
   setDataContext: () => null,
+  initialDataContext: { current: null},
 });
 
 export default function Home() {
   const [loading, setLoading] = useState(false);
   const [token, setToken] = useState<string | null>(null);
   const [dataContext, setDataContext] = useState<null | CollectionGroup>(null);
+  const initialDataContext = useRef<null | CollectionGroup>(null);
   const router = useRouter();
 
   useEffect(() => {
@@ -44,6 +47,7 @@ export default function Home() {
         if (response.ok) {
           const data = (await response.json()) as CollectionGroup;
           setDataContext(data);
+          initialDataContext.current = data;
         } else {
           console.error('Failed to load collection group', response);
         }
@@ -64,7 +68,7 @@ export default function Home() {
   ) : (
     token && (
       <div className="flex min-h-[100dvh] w-full flex-col items-center justify-start font-instrumentSans md:min-h-screen">
-        <DataContext.Provider value={{ dataContext, setDataContext }}>
+        <DataContext.Provider value={{ dataContext, setDataContext, initialDataContext }}>
           <Navbar />
           <Main />
         </DataContext.Provider>
