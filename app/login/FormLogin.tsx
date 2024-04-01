@@ -16,7 +16,6 @@ enum ErrorType {
 const FormLogin = ({ setLoading }: { setLoading: Dispatch<SetStateAction<boolean>> }) => {
   const [email, setEmail] = useState<string>('');
   const [errorGlobal, setErrorGlobal] = useState<string>('');
-  console.log(errorGlobal);
   const [password, setPassword] = useState<string>('');
   const router = useRouter();
   async function handleSubmit() {
@@ -29,7 +28,6 @@ const FormLogin = ({ setLoading }: { setLoading: Dispatch<SetStateAction<boolean
         },
         body: JSON.stringify({ email, password }),
       });
-      console.log(response);
       if (response.ok) {
         const { token } = (await response.json()) as { token: string };
         localStorage.setItem('token', token);
@@ -56,8 +54,8 @@ const FormLogin = ({ setLoading }: { setLoading: Dispatch<SetStateAction<boolean
     >
       <div className="flex flex-col gap-2">
         <div className="flex justify-between px-1">
-          <label className="flex w-fit gap-2" htmlFor="email">
-            <Image height={18} width={18} src={imageEmail as string} alt="email" />
+          <label className="flex w-fit items-center gap-2" htmlFor="email">
+            <Image className="size-[18px]" width={18} height={18} src={imageEmail as string} alt="email" />
             <span>Email</span>
           </label>
           <button type="button" className="group flex items-center gap-[6px] text-[14px] text-[orange]">
@@ -86,7 +84,7 @@ const FormLogin = ({ setLoading }: { setLoading: Dispatch<SetStateAction<boolean
       <div className="flex flex-col gap-2">
         <div className="flex justify-between px-1">
           <label className="flex w-fit items-center gap-[6px]" htmlFor="password">
-            <Image width={18} height={18} src={imageLock as string} alt="password" />
+            <Image className="size-[18px]" width={18} height={18} src={imageLock as string} alt="password" />
             <span>Password</span>
           </label>
           <button type="button" className="group flex items-center gap-[6px] text-[14px] text-[orange]">
