@@ -13,6 +13,8 @@ export default function Home() {
   const token = useRef<string | null>(null);
   const [dataContext, setDataContext] = useState<null | CollectionGroup>(null);
   const initialDataContext = useRef<null | CollectionGroup>(null);
+  console.log(dataContext?.collections);
+  console.log(initialDataContext.current?.collections);
   const router = useRouter();
   useEffect(() => {
     const tokenTemp = localStorage.getItem('token');
