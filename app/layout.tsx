@@ -16,7 +16,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"></link>
       </head>
       <body className={'bg-[#1C1C1C]'}>
-        <div className="mx-auto overflow-x-clip font-sans">{children}</div>
+        <div className="mx-auto overflow-x-clip font-instrumentSans">{children}</div>
       </body>
     </html>
   );

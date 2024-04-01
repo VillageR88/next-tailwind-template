@@ -7,18 +7,17 @@
   src: url('/assets/fonts/instrumentSans/InstrumentSans-VariableFont_wdth,wght.ttf') format('truetype');
 }
 
-
 html {
   /* dark scroll bars */
   /* color-scheme: dark; */
 }
 
 .button1 {
-  @apply  h-[44px] w-[50px] items-center justify-center gap-[2px] rounded-[6px] border border-[#636262] bg-gradient-to-b text-[16px] font-extrabold tracking-[1px] text-white transition disabled:opacity-25 md:w-[110px];
+  @apply h-[44px] w-[50px] items-center justify-center gap-[2px] rounded-[6px] border border-[#636262] bg-gradient-to-b fill-white text-[16px] font-extrabold tracking-[1px] text-white transition disabled:opacity-25 md:w-[110px];
 }
 
 .button1:not([disabled]):hover {
-  @apply hover:border-[orange] hover:text-[orange];
+  @apply fill-[orange] hover:border-[orange] hover:text-[orange];
 }
 
 .button1:disabled:hover {
@@ -30,11 +29,11 @@ html {
 }
 
 .button2Inner {
-  @apply flex size-full items-center justify-center bg-[#1C1C1C]/0 text-white fill-white transition group-hover:fill-[orange] group-hover:bg-[#232323]/100 group-hover:text-[orange];
+  @apply flex size-full items-center justify-center bg-[#1C1C1C]/0 fill-white text-white transition group-hover:bg-[#232323]/100 group-hover:fill-[orange] group-hover:text-[orange];
 }
 
 h1 {
-  @apply md:text-4xl text-3xl font-medium text-white;
+  @apply text-3xl font-medium text-white md:text-4xl;
 }
 
 h2 {
@@ -46,7 +45,7 @@ h3 {
 }
 
 label {
-  @apply md:text-[16px] text-[14px] font-medium text-white;
+  @apply text-[14px] font-medium text-white md:text-[16px];
 }
 
 input {

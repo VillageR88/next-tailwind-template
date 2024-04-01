@@ -3,6 +3,8 @@ import Logo from '../components/Logo';
 import { useRouter } from 'next/navigation';
 import { useContext } from 'react';
 import DataContext from '@/app/home/DataContext';
+import IconSave from '../components/IconSave';
+import IconUndo from '../components/IconUndo';
 
 const Navbar = () => {
   const router = useRouter();
@@ -15,11 +17,11 @@ const Navbar = () => {
         <div className="flex gap-4">
           <button disabled={context.checkSame()} className="button1 flex" type="button">
             <span className="hidden md:block">Save</span>
-            <span className="font-materialSymbolsOutlined">save</span>
+            <IconSave />
           </button>
           <button disabled={context.checkSame()} className="button1 flex" type="button">
             <span className="hidden md:block">Revert</span>
-            <span className="font-materialSymbolsOutlined">undo</span>
+            <IconUndo />
           </button>
           <button
             onClick={() => {
