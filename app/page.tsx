@@ -2,7 +2,6 @@
 
 import { useEffect, useState, useRef } from 'react';
 import { useRouter } from 'next/navigation';
-
 import { RotatingLines } from 'react-loader-spinner';
 import Navbar from './home/Navbar';
 import Main from './home/Main';
@@ -11,18 +10,17 @@ import DataContext from './home/DataContext';
 
 export default function Home() {
   const [loading, setLoading] = useState(false);
-  const [token, setToken] = useState<string | null>(null);
+  const token = useRef<string | null>(null);
   const [dataContext, setDataContext] = useState<null | CollectionGroup>(null);
   const initialDataContext = useRef<null | CollectionGroup>(null);
   const router = useRouter();
   const checkSame = () => dataContext === initialDataContext.current;
-
   useEffect(() => {
     const tokenTemp = localStorage.getItem('token');
     if (!tokenTemp) {
       router.push('/login');
     } else {
-      setToken(tokenTemp);
+      token.current = tokenTemp;
     }
   }, [router]);
 
@@ -33,7 +31,7 @@ export default function Home() {
         const response = await fetch('https://serverexpress1-production.up.railway.app/', {
           method: 'GET',
           headers: {
-            Authorization: `Bearer ${token}`,
+            Authorization: `Bearer ${token.current}`,
           },
         });
         if (response.ok) {
@@ -48,7 +46,7 @@ export default function Home() {
       }
       setLoading(false);
     };
-    if (token) {
+    if (token.current) {
       void handleLoadCollectionGroup();
     }
   }, [token]);
@@ -58,7 +56,7 @@ export default function Home() {
       <RotatingLines width="200" strokeColor="orange" />
     </div>
   ) : (
-    token && (
+    token.current !== null && (
       <div className="flex min-h-[100dvh] w-full flex-col items-center justify-start md:min-h-screen">
         <DataContext.Provider value={{ dataContext, setDataContext, checkSame }}>
           <Navbar />
