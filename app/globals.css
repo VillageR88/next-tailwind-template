@@ -25,7 +25,7 @@ html {
 }
 
 .button2 {
-  @apply flex h-[44px] min-w-[50px] items-center justify-center gap-[2px] overflow-hidden rounded-[6px] border-[orange] bg-gradient-to-b from-[orange] to-[#b97b08] text-[16px] font-extrabold tracking-[1px] transition hover:border md:min-w-[110px];
+  @apply flex h-[44px] min-w-[50px] items-center justify-center overflow-hidden rounded-[6px] border-[orange] bg-gradient-to-b from-[orange] to-[#b97b08] text-[16px] font-extrabold tracking-[1px] transition hover:border md:min-w-[110px];
 }
 
 .button2Inner {

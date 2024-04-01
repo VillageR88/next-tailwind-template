@@ -113,7 +113,7 @@ const FormLogin = ({ setLoading }: { setLoading: Dispatch<SetStateAction<boolean
       </div>
       <div className="flex flex-col">
         <button className="button2 group size-full" type="submit">
-          <div className="button2Inner">
+          <div className="button2Inner gap-[2px]">
             <span>Login</span>
             <IconLogin />
           </div>

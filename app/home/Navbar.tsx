@@ -5,6 +5,7 @@ import { useContext } from 'react';
 import DataContext from '@/app/home/DataContext';
 import IconSave from '../components/IconSave';
 import IconUndo from '../components/IconUndo';
+import IconLogout from '../components/IconLogout';
 
 const Navbar = () => {
   const router = useRouter();
@@ -31,9 +32,9 @@ const Navbar = () => {
             className="button2 group"
             type="submit"
           >
-            <div className="button2Inner">
+            <div className="button2Inner gap-[3px]">
               <span className="hidden md:block">Log out</span>
-              <span className="font-materialSymbolsOutlined">login</span>
+              <IconLogout />
             </div>
           </button>
         </div>
