@@ -9,10 +9,8 @@ const config: Config = {
   theme: {
     extend: {
       fontFamily: {
-        sans: ['var(--font-sans)'],
-        mono: ['var(--font-mono)'],
-        roboto: ['Roboto', 'sans-serif'],
-        robotoFlex: ['Roboto Flex', 'sans-serif'],
+        //sans: ['var(--font-sans)'],
+        //mono: ['var(--font-mono)'],
         instrumentSans: ['Instrument Sans', 'sans-serif'],
         materialSymbolsOutlined: ['Material Symbols Outlined', 'sans-serif'],
       },

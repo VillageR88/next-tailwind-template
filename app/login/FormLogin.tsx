@@ -1,6 +1,12 @@
 'use client';
 import { Dispatch, SetStateAction, useState } from 'react';
 import { useRouter } from 'next/navigation';
+import Image from 'next/image';
+import imageEmail from '@/public/assets/images/mail_FILL0_wght400_GRAD0_opsz24.svg';
+import imageLock from '@/public/assets/images/lock_FILL0_wght400_GRAD0_opsz24.svg';
+import imagePersonAdd from '@/public/assets/images/person_add_FILL0_wght400_GRAD0_opsz24.svg';
+import imageLockReset from '@/public/assets/images/lock_reset_FILL0_wght400_GRAD0_opsz24.svg';
+import IconLogin from '../components/IconLogin';
 
 enum ErrorType {
   failedLogin = 'Verify your email and password.',
@@ -50,16 +56,15 @@ const FormLogin = ({ setLoading }: { setLoading: Dispatch<SetStateAction<boolean
     >
       <div className="flex flex-col gap-2">
         <div className="flex justify-between px-1">
-          <label className="flex w-fit items-center gap-2" htmlFor="email">
-            <span className="font-materialSymbolsOutlined">email</span>
+          <label className="flex w-fit gap-2" htmlFor="email">
+            <Image height={18} width={18} src={imageEmail as string} alt="email" />
             <span>Email</span>
           </label>
           <button type="button" className="group flex items-center gap-[6px] text-[14px] text-[orange]">
-            <span className="mt-[-2px] font-materialSymbolsOutlined text-[16px]">person_add</span>
+            <Image height={18} width={18} src={imagePersonAdd as string} alt="add account" />
             <div className="flex flex-col">
               <span className="hidden leading-[13px] md:block">Create new account</span>
               <span className="block leading-[13px] md:hidden">new account</span>
-
               <div className="h-[1px] w-full transition group-hover:bg-[orange]"></div>
             </div>
           </button>
@@ -81,11 +86,11 @@ const FormLogin = ({ setLoading }: { setLoading: Dispatch<SetStateAction<boolean
       <div className="flex flex-col gap-2">
         <div className="flex justify-between px-1">
           <label className="flex w-fit items-center gap-[6px]" htmlFor="password">
-            <span className="font-materialSymbolsOutlined">lock</span>
+            <Image width={18} height={18} src={imageLock as string} alt="password" />
             <span>Password</span>
           </label>
           <button type="button" className="group flex items-center gap-[6px] text-[14px] text-[orange]">
-            <span className="font-materialSymbolsOutlined text-[16px]">lock_reset</span>
+            <Image width={18} height={18} src={imageLockReset as string} alt="reset password" />
             <div className="flex flex-col">
               <span className="hidden leading-[13px] md:block">Reset my password</span>
               <span className="block leading-[1px] md:hidden">reset</span>
@@ -110,7 +115,7 @@ const FormLogin = ({ setLoading }: { setLoading: Dispatch<SetStateAction<boolean
         <button className="button2 group size-full" type="submit">
           <div className="button2Inner">
             <span>Login</span>
-            <span className="font-materialSymbolsOutlined">login</span>
+            <IconLogin />
           </div>
         </button>
         <div className="flex h-0 justify-center">

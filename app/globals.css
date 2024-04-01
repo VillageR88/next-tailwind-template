@@ -2,6 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
+@font-face {
+  font-family: 'InstrumentSans';
+  src: url('/assets/fonts/instrumentSans/InstrumentSans-VariableFont_wdth,wght.ttf') format('truetype');
+}
+
+
 html {
   /* dark scroll bars */
   /* color-scheme: dark; */
@@ -24,7 +30,7 @@ html {
 }
 
 .button2Inner {
-  @apply flex size-full items-center justify-center bg-[#1C1C1C]/0 text-white transition group-hover:bg-[#232323]/100 group-hover:text-[orange];
+  @apply flex size-full items-center justify-center bg-[#1C1C1C]/0 text-white fill-white transition group-hover:fill-[orange] group-hover:bg-[#232323]/100 group-hover:text-[orange];
 }
 
 h1 {

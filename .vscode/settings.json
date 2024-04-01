@@ -12,13 +12,16 @@
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "cSpell.words": [
+    "fontsource",
     "headlessui",
     "heroicons",
     "lato",
+    "opsz",
     "roboto",
     "tabler",
     "tailwindcss",
     "unoptimized",
-    "webp"
+    "webp",
+    "wght"
   ]
 }
