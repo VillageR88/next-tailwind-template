@@ -1,13 +1,18 @@
-import { useContext } from 'react';
+import { useContext, useRef } from 'react';
 import DataContext from '@/app/home/DataContext';
 
 const Notebook = () => {
+  const dragRef = useRef<HTMLDivElement>(null);
   const context = useContext(DataContext);
 
   return (
     <div className="flex w-full max-w-4xl flex-col gap-8 ">
       {context.dataContext?.collections.map((collection) => (
         <div
+          ref={dragRef}
+          draggable
+          //create Drag and drop and include context.setDataContext
+
           className="flex flex-col gap-[6px] rounded-[6px] border border-[#313131] bg-[#232323] px-3 py-4"
           key={collection.id}
         >

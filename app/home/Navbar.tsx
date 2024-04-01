@@ -16,11 +16,22 @@ const Navbar = () => {
       <div className="flex size-full max-w-[90em] items-center justify-between">
         <Logo alternate />
         <div className="flex gap-4">
-          <button disabled={context.checkSame()} className="button1 flex" type="button">
+          <button
+            disabled={context.dataContext === context.initialDataContext.current}
+            className="button1 flex"
+            type="button"
+          >
             <span className="hidden md:block">Save</span>
             <IconSave />
           </button>
-          <button disabled={context.checkSame()} className="button1 flex" type="button">
+          <button
+            onClick={() => {
+              context.setDataContext(context.initialDataContext.current);
+            }}
+            disabled={context.dataContext === context.initialDataContext.current}
+            className="button1 flex"
+            type="button"
+          >
             <span className="hidden md:block">Revert</span>
             <IconUndo />
           </button>

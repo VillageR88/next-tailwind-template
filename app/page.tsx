@@ -14,7 +14,6 @@ export default function Home() {
   const [dataContext, setDataContext] = useState<null | CollectionGroup>(null);
   const initialDataContext = useRef<null | CollectionGroup>(null);
   const router = useRouter();
-  const checkSame = () => dataContext === initialDataContext.current;
   useEffect(() => {
     const tokenTemp = localStorage.getItem('token');
     if (!tokenTemp) {
@@ -58,7 +57,7 @@ export default function Home() {
   ) : (
     token.current !== null && (
       <div className="flex min-h-[100dvh] w-full flex-col items-center justify-start md:min-h-screen">
-        <DataContext.Provider value={{ dataContext, setDataContext, checkSame }}>
+        <DataContext.Provider value={{ dataContext, setDataContext, initialDataContext }}>
           <Navbar />
           <Main />
         </DataContext.Provider>
