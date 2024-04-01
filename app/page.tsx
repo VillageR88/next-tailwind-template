@@ -1,20 +1,13 @@
 'use client';
 
-import { useEffect, useState, createContext, useRef } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { useRouter } from 'next/navigation';
 
 import { RotatingLines } from 'react-loader-spinner';
 import Navbar from './home/Navbar';
 import Main from './home/Main';
 import { CollectionGroup } from '@/app/lib/interfaces';
-
-export const DataContext = createContext(
-  {} as {
-    dataContext: null | CollectionGroup;
-    setDataContext: React.Dispatch<React.SetStateAction<null | CollectionGroup>>;
-    checkSame(): boolean;
-  },
-);
+import DataContext from './home/DataContext';
 
 export default function Home() {
   const [loading, setLoading] = useState(false);
@@ -74,7 +67,4 @@ export default function Home() {
       </div>
     )
   );
-}
-function checkSame() {
-  throw new Error('Function not implemented.');
 }

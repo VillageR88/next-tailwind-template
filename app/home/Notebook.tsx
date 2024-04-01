@@ -1,5 +1,5 @@
 import { useContext } from 'react';
-import { DataContext } from '../page';
+import DataContext from '@/app/home/DataContext';
 
 const Notebook = () => {
   const context = useContext(DataContext);
