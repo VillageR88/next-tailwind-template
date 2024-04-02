@@ -16,19 +16,15 @@ const Notebook = () => {
 
   const handleReorderItem = (newOrder: Note[], collectionId: number) => {
     context.setDataContext((prevState) => {
-      // Find the index of the collection to update
       const collectionIndex = prevState.collections.findIndex((collection) => collection.id === +collectionId);
 
-      // Make a copy of the collections array
       const newCollections = [...prevState.collections];
 
-      // Update the Notes of the specific collection
       newCollections[collectionIndex] = {
         ...newCollections[collectionIndex],
         Notes: newOrder,
       };
 
-      // Return the updated collections array
       return {
         ...prevState,
         collections: newCollections,
@@ -37,7 +33,7 @@ const Notebook = () => {
   };
   return (
     <Reorder.Group
-      className="flex w-full max-w-4xl flex-col gap-8 "
+      className="flex w-full max-w-4xl flex-col gap-8"
       values={context.dataContext.collections}
       onReorder={handleReorderGroup}
     >
@@ -45,7 +41,7 @@ const Notebook = () => {
         <Reorder.Item
           value={collection}
           key={collection.id}
-          className="flex flex-col gap-[6px] rounded-[6px] border border-[#313131] bg-[#232323] px-3 py-4"
+          className="flex flex-col gap-[6px] rounded-[6px] border border-[#313131] bg-[#232323] px-3 py-4 hover:cursor-grab active:cursor-grabbing"
         >
           <span className="pb-[8px] pl-1 text-left text-[18px] font-bold leading-6 text-white">{collection.title}</span>
           <Reorder.Group
