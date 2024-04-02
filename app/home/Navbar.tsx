@@ -13,8 +13,7 @@ const Navbar = () => {
   //create function checkSame and check if deep copy of JSON is the same as the original
   const checkSame = () => {
     return (
-      JSON.stringify(context.dataContext?.collections) ===
-      JSON.stringify(context.initialDataContext.current?.collections)
+      JSON.stringify(context.dataContext.collections) === JSON.stringify(context.initialDataContext.current.collections)
     );
   };
 
@@ -23,7 +22,33 @@ const Navbar = () => {
       <div className="flex size-full max-w-[90em] items-center justify-between">
         <Logo alternate />
         <div className="flex gap-4">
-          <button disabled={checkSame()} className="button1 flex" type="button">
+          <button
+            onClick={() => {
+              const handleSaveCollectionGroup = async () => {
+                try {
+                  const response = await fetch('https://serverexpress1-production.up.railway.app/', {
+                    method: 'POST',
+                    headers: {
+                      'Content-Type': 'application/json',
+                      Authorization: `Bearer ${localStorage.getItem('token')}`,
+                    },
+                    body: JSON.stringify(context.dataContext),
+                  });
+                  if (response.ok) {
+                    context.initialDataContext.current = context.dataContext;
+                  } else {
+                    console.error('Failed to save collection group', response);
+                  }
+                } catch (error) {
+                  console.error(error);
+                }
+              };
+              void handleSaveCollectionGroup();
+            }}
+            disabled={checkSame()}
+            className="button1 flex"
+            type="button"
+          >
             <span className="hidden md:block">Save</span>
             <IconSave />
           </button>
