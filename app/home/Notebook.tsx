@@ -1,5 +1,5 @@
 'use client';
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import DataContext from '@/app/home/DataContext';
 import { Reorder, useDragControls } from 'framer-motion';
 import { Collection, Note } from '../lib/interfaces';
@@ -60,6 +60,9 @@ const Item = ({ collection }: { collection: Collection }) => {
 };
 
 const ItemsNested = ({ note }: { note: Note }) => {
+  const [mouseDown, setMouseDown] = useState<boolean>(false);
+  console.log(mouseDown);
+
   const controls = useDragControls();
   return (
     <Reorder.Item
@@ -72,6 +75,7 @@ const ItemsNested = ({ note }: { note: Note }) => {
       <div className="flex justify-between pl-1 pr-2">
         <span>{note.description}</span>
         <ButtonDrag
+          mouseDownHandler={setMouseDown}
           func={(e) => {
             controls.start(e);
           }}
