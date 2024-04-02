@@ -1,15 +1,15 @@
 'use client';
-import { useContext, useRef, useState } from 'react';
+import { useContext, useState } from 'react';
 import DataContext from '@/app/home/DataContext';
 import { Reorder, useDragControls } from 'framer-motion';
 import { Collection, Note } from '../lib/interfaces';
 import ButtonDrag from '../components/ButtonDrag';
+import ButtonEdit from '../components/ButtonEdit';
 
 const Item = ({ collection }: { collection: Collection }) => {
+  const [editVisible, setEditVisible] = useState<boolean>(false);
   const controls = useDragControls();
   const context = useContext(DataContext);
-  const collectionId = useRef<number>(collection.id);
-  console.log(collectionId.current);
 
   const handleReorderItem = (newOrder: Note[], collectionId: number) => {
     context.setDataContext((prevState) => {
@@ -28,9 +28,14 @@ const Item = ({ collection }: { collection: Collection }) => {
       };
     });
   };
-  collectionId.current = collection.id;
   return (
     <Reorder.Item
+      onMouseEnter={() => {
+        setEditVisible(true);
+      }}
+      onMouseLeave={() => {
+        setEditVisible(false);
+      }}
       dragListener={false}
       dragControls={controls}
       value={collection}
@@ -38,7 +43,10 @@ const Item = ({ collection }: { collection: Collection }) => {
       className="flex select-none flex-col gap-[6px] rounded-[6px] border border-[#313131] bg-[#232323] px-3 py-4 "
     >
       <div className="flex justify-between px-1">
-        <span className="pb-[8px] text-left text-[18px] font-bold leading-6 text-white">{collection.title}</span>
+        <div className="flex items-center gap-3 pb-[8px]">
+          <span className="text-left text-[18px] font-bold text-white">{collection.title}</span>
+          <ButtonEdit editVisible={editVisible} />
+        </div>
         <ButtonDrag
           func={(e) => {
             controls.start(e);
@@ -62,8 +70,6 @@ const Item = ({ collection }: { collection: Collection }) => {
 };
 
 const ItemsNested = ({ note }: { note: Note }) => {
-  const [mouseDown, setMouseDown] = useState<boolean>(false);
-
   const controls = useDragControls();
   return (
     <Reorder.Item
@@ -76,7 +82,6 @@ const ItemsNested = ({ note }: { note: Note }) => {
       <div className="flex justify-between pl-1 pr-2">
         <span>{note.description}</span>
         <ButtonDrag
-          mouseDownHandler={setMouseDown}
           func={(e) => {
             controls.start(e);
           }}

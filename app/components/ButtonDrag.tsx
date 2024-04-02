@@ -1,20 +1,6 @@
-import { Dispatch, SetStateAction } from 'react';
-
-const ButtonDrag = ({
-  func,
-  mouseDownHandler,
-}: {
-  func(arg: React.PointerEvent): void;
-  mouseDownHandler?: Dispatch<SetStateAction<boolean>>;
-}) => {
+const ButtonDrag = ({ func }: { func(arg: React.PointerEvent): void }) => {
   return (
     <div
-      onMouseDown={() => {
-        mouseDownHandler && mouseDownHandler(true);
-      }}
-      onMouseUp={() => {
-        mouseDownHandler && mouseDownHandler(false);
-      }}
       className="size-[20px] hover:cursor-grab active:cursor-grabbing"
       onPointerDown={(e) => {
         e.preventDefault();
