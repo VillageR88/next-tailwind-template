@@ -6,7 +6,13 @@ import { Collection, Note } from '../lib/interfaces';
 import ButtonDrag from '../components/ButtonDrag';
 import ButtonEdit from '../components/ButtonEdit';
 
-const Item = ({ collection }: { collection: Collection }) => {
+const Item = ({
+  collection,
+  setPage,
+}: {
+  collection: Collection;
+  setPage: React.Dispatch<React.SetStateAction<number | null>>;
+}) => {
   const [editVisible, setEditVisible] = useState<boolean>(false);
   const controls = useDragControls();
   const context = useContext(DataContext);
@@ -28,6 +34,7 @@ const Item = ({ collection }: { collection: Collection }) => {
       };
     });
   };
+
   return (
     <Reorder.Item
       onMouseEnter={() => {
@@ -45,7 +52,7 @@ const Item = ({ collection }: { collection: Collection }) => {
       <div className="flex justify-between px-1">
         <div className="flex items-center gap-3 pb-[8px]">
           <span className="text-left text-[18px] font-bold text-white">{collection.title}</span>
-          <ButtonEdit editVisible={editVisible} />
+          <ButtonEdit collectionId={collection.id} editVisible={editVisible} setPage={setPage} />
         </div>
         <ButtonDrag
           func={(e) => {
@@ -70,9 +77,16 @@ const Item = ({ collection }: { collection: Collection }) => {
 };
 
 const ItemsNested = ({ note }: { note: Note }) => {
+  const [dragVisible, setDragVisible] = useState<boolean>(false);
   const controls = useDragControls();
   return (
     <Reorder.Item
+      onMouseEnter={() => {
+        setDragVisible(true);
+      }}
+      onMouseLeave={() => {
+        setDragVisible(false);
+      }}
       dragListener={false}
       dragControls={controls}
       value={note}
@@ -82,6 +96,7 @@ const ItemsNested = ({ note }: { note: Note }) => {
       <div className="flex justify-between pl-1 pr-2">
         <span>{note.description}</span>
         <ButtonDrag
+          dragVisible={dragVisible}
           func={(e) => {
             controls.start(e);
           }}
@@ -91,7 +106,7 @@ const ItemsNested = ({ note }: { note: Note }) => {
   );
 };
 
-const Notebook = () => {
+const Notebook = ({ setPage }: { setPage: React.Dispatch<React.SetStateAction<number | null>> }) => {
   const context = useContext(DataContext);
 
   const handleReorderGroup = (newOrder: Collection[]) => {
@@ -108,7 +123,7 @@ const Notebook = () => {
       onReorder={handleReorderGroup}
     >
       {context.dataContext.collections.map((collection) => {
-        return <Item key={collection.id} collection={collection} />;
+        return <Item key={collection.id} collection={collection} setPage={setPage} />;
       })}
     </Reorder.Group>
   );

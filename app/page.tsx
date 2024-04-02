@@ -56,7 +56,7 @@ export default function Home() {
     </div>
   ) : (
     token.current !== null && (
-      <div className="flex min-h-[100dvh] w-full flex-col items-center justify-start md:min-h-screen">
+      <div className="flex min-h-[100dvh] w-full flex-col items-center justify-start overflow-hidden text-clip md:min-h-screen">
         <DataContext.Provider value={{ dataContext, setDataContext, initialDataContext }}>
           <Navbar />
           <Main />

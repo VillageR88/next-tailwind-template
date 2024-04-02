@@ -1,6 +1,17 @@
-const ButtonEdit = ({ editVisible }: { editVisible: boolean }) => (
+const ButtonEdit = ({
+  collectionId,
+  editVisible,
+  setPage,
+}: {
+  collectionId: number;
+  editVisible: boolean;
+  setPage: React.Dispatch<React.SetStateAction<number | null>>;
+}) => (
   <button
-    className={`${editVisible ? 'flex' : 'flex md:hidden'} items-center gap-1 fill-white text-white transition hover:fill-[orange] hover:text-[orange]`}
+    onClick={() => {
+      setPage(collectionId);
+    }}
+    className={`${editVisible ? 'opacity-100' : 'md:opacity-0'} flex items-center gap-1 fill-white text-white transition hover:fill-[orange] hover:text-[orange]`}
   >
     <span className="pr-1 text-white">-</span>
     <svg xmlns="http://www.w3.org/2000/svg" height="18" viewBox="0 -960 960 960" width="18">
