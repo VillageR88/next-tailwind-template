@@ -1,5 +1,5 @@
 'use client';
-import { useContext, useState } from 'react';
+import { useContext, useRef, useState } from 'react';
 import DataContext from '@/app/home/DataContext';
 import { Reorder, useDragControls } from 'framer-motion';
 import { Collection, Note } from '../lib/interfaces';
@@ -8,6 +8,8 @@ import ButtonDrag from '../components/ButtonDrag';
 const Item = ({ collection }: { collection: Collection }) => {
   const controls = useDragControls();
   const context = useContext(DataContext);
+  const collectionId = useRef<number>(collection.id);
+  console.log(collectionId.current);
 
   const handleReorderItem = (newOrder: Note[], collectionId: number) => {
     context.setDataContext((prevState) => {
@@ -26,7 +28,7 @@ const Item = ({ collection }: { collection: Collection }) => {
       };
     });
   };
-
+  collectionId.current = collection.id;
   return (
     <Reorder.Item
       dragListener={false}
@@ -61,7 +63,6 @@ const Item = ({ collection }: { collection: Collection }) => {
 
 const ItemsNested = ({ note }: { note: Note }) => {
   const [mouseDown, setMouseDown] = useState<boolean>(false);
-  console.log(mouseDown);
 
   const controls = useDragControls();
   return (
