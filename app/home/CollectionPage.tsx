@@ -11,7 +11,7 @@ const CollectionPage = ({
 }) => {
   const context = useContext(DataContext);
   return (
-    <div className="flex w-full max-w-4xl flex-col gap-4">
+    <div className="flex w-full max-w-4xl flex-col gap-6">
       <div className="flex select-none flex-col gap-[6px] rounded-[6px] border border-[#313131] bg-[#232323] px-3 py-4 ">
         <div className="flex justify-between px-1">
           <div className="flex items-center gap-3 pb-[8px]">
