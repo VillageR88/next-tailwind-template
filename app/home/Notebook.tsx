@@ -2,11 +2,12 @@
 import { useContext } from 'react';
 import DataContext from '@/app/home/DataContext';
 import { Reorder } from 'framer-motion';
+import { Collection } from '../lib/interfaces';
 
 const Notebook = () => {
   const context = useContext(DataContext);
 
-  const handleReorder = (newOrder: any) => {
+  const handleReorder = (newOrder: Collection[]) => {
     context.setDataContext((prevState) => ({
       ...prevState,
       collections: newOrder,
