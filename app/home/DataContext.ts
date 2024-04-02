@@ -1,11 +1,11 @@
 import { CollectionGroup } from '@/app/lib/interfaces';
-import { MutableRefObject, createContext } from 'react';
+import { Dispatch, MutableRefObject, createContext } from 'react';
 
 const DataContext = createContext(
   {} as {
-    dataContext: null | CollectionGroup;
-    setDataContext: React.Dispatch<React.SetStateAction<null | CollectionGroup>>;
-    initialDataContext: MutableRefObject<CollectionGroup | null>;
+    dataContext: CollectionGroup;
+    setDataContext: Dispatch<React.SetStateAction<CollectionGroup>>;
+    initialDataContext: MutableRefObject<CollectionGroup>;
   },
 );
 

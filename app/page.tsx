@@ -11,10 +11,10 @@ import DataContext from './home/DataContext';
 export default function Home() {
   const [loading, setLoading] = useState(false);
   const token = useRef<string | null>(null);
-  const [dataContext, setDataContext] = useState<null | CollectionGroup>(null);
-  const initialDataContext = useRef<null | CollectionGroup>(null);
-  console.log(dataContext?.collections);
-  console.log(initialDataContext.current?.collections);
+  const [dataContext, setDataContext] = useState<CollectionGroup>({ collections: [] });
+  const initialDataContext = useRef<CollectionGroup>({ collections: [] });
+  console.log(dataContext.collections);
+  console.log(initialDataContext.current.collections);
   const router = useRouter();
   useEffect(() => {
     const tokenTemp = localStorage.getItem('token');
