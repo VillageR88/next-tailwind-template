@@ -24,7 +24,7 @@ const CollectionPage = ({
           {context.dataContext.collections[page - 1].Notes.map((note) => (
             <div className="rounded-[6px] bg-[#1C1C1C] p-[10px] text-white" key={note.id}>
               <div className="flex justify-between pl-1 pr-2">
-                <p>{note.description}</p>
+                <span>{note.description}</span>
               </div>
             </div>
           ))}
@@ -37,7 +37,7 @@ const CollectionPage = ({
         }}
       >
         <IconReturn />
-        <span className="pl-1">Return</span>
+        <span className="hidden pl-1 md:block">Return</span>
       </button>
     </div>
   );
