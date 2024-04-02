@@ -8,6 +8,7 @@ import ButtonDrag from '../components/ButtonDrag';
 const Item = ({ collection }: { collection: Collection }) => {
   const controls = useDragControls();
   const context = useContext(DataContext);
+
   const handleReorderItem = (newOrder: Note[], collectionId: number) => {
     context.setDataContext((prevState) => {
       const collectionIndex = prevState.collections.findIndex((collection) => collection.id === +collectionId);
@@ -25,6 +26,7 @@ const Item = ({ collection }: { collection: Collection }) => {
       };
     });
   };
+
   return (
     <Reorder.Item
       dragListener={false}
@@ -50,11 +52,31 @@ const Item = ({ collection }: { collection: Collection }) => {
         className="flex flex-col gap-2"
       >
         {collection.Notes.map((note) => (
-          <Reorder.Item value={note} key={note.id} className="rounded-[6px] bg-[#1C1C1C] p-[10px] text-white">
-            {note.description}
-          </Reorder.Item>
+          <ItemsNested key={note.id} note={note} />
         ))}
       </Reorder.Group>
+    </Reorder.Item>
+  );
+};
+
+const ItemsNested = ({ note }: { note: Note }) => {
+  const controls = useDragControls();
+  return (
+    <Reorder.Item
+      dragListener={false}
+      dragControls={controls}
+      value={note}
+      key={note.id}
+      className="rounded-[6px] bg-[#1C1C1C] p-[10px] text-white"
+    >
+      <div className="flex justify-between pl-1 pr-2">
+        <span>{note.description}</span>
+        <ButtonDrag
+          func={(e) => {
+            controls.start(e);
+          }}
+        />
+      </div>
     </Reorder.Item>
   );
 };
