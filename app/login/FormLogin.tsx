@@ -1,5 +1,5 @@
 'use client';
-import { Dispatch, SetStateAction, useState } from 'react';
+import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 import imageEmail from '@/public/assets/images/mail_FILL0_wght400_GRAD0_opsz24.svg';
@@ -18,13 +18,17 @@ enum ErrorType {
 const FormLogin = ({ setLoading }: { setLoading: Dispatch<SetStateAction<boolean>> }) => {
   const [email, setEmail] = useState<string>('');
   const [errorGlobal, setErrorGlobal] = useState<string>('');
-  console.log(errorGlobal);
   const [password, setPassword] = useState<string>('');
   const router = useRouter();
 
   const SubmitButton = () => {
     const { pending } = useFormStatus();
-    if (pending) setLoading(true);
+    useEffect(() => {
+      if (pending) {
+        setLoading(true);
+      }
+    }, [pending]);
+
     return (
       <button className="button2 group size-full" type="submit">
         <div className="button2Inner gap-[2px]">
@@ -34,6 +38,7 @@ const FormLogin = ({ setLoading }: { setLoading: Dispatch<SetStateAction<boolean
       </button>
     );
   };
+
   return (
     <form
       id="form-login"
