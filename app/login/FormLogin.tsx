@@ -7,6 +7,8 @@ import imageLock from '@/public/assets/images/lock_FILL0_wght400_GRAD0_opsz24.sv
 import imagePersonAdd from '@/public/assets/images/person_add_FILL0_wght400_GRAD0_opsz24.svg';
 import imageLockReset from '@/public/assets/images/lock_reset_FILL0_wght400_GRAD0_opsz24.svg';
 import IconLogin from '../components/IconLogin';
+import handleSubmit from './handleSubmit';
+import { useFormStatus } from 'react-dom';
 
 enum ErrorType {
   failedLogin = 'Verify your email and password.',
@@ -16,38 +18,42 @@ enum ErrorType {
 const FormLogin = ({ setLoading }: { setLoading: Dispatch<SetStateAction<boolean>> }) => {
   const [email, setEmail] = useState<string>('');
   const [errorGlobal, setErrorGlobal] = useState<string>('');
+  console.log(errorGlobal);
   const [password, setPassword] = useState<string>('');
   const router = useRouter();
-  async function handleSubmit() {
-    setLoading(true);
-    try {
-      const response = await fetch('https://serverexpress1-production.up.railway.app/login', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ email, password }),
-      });
-      if (response.ok) {
-        const { token } = (await response.json()) as { token: string };
-        localStorage.setItem('token', token);
-        router.push('/');
-      } else {
-        setLoading(false);
-        console.error('Failed to log in', response);
-        setErrorGlobal(ErrorType.failedLogin);
-      }
-    } catch (error) {
-      console.error(error);
-      setLoading(false);
-      setErrorGlobal(ErrorType.errorOccurred);
-    }
-  }
+
+  const SubmitButton = () => {
+    const { pending } = useFormStatus();
+    if (pending) setLoading(true);
+    return (
+      <button className="button2 group size-full" type="submit">
+        <div className="button2Inner gap-[2px]">
+          <span>Login</span>
+          <IconLogin />
+        </div>
+      </button>
+    );
+  };
   return (
     <form
       id="form-login"
       action={() => {
-        void handleSubmit();
+        handleSubmit({ email, password })
+          .then((e) => {
+            if (e)
+              if (e === 'unsuccessful') {
+                console.log(e);
+                setLoading(false);
+                setErrorGlobal(ErrorType.failedLogin);
+              } else {
+                localStorage.setItem('token', e);
+                router.push('/');
+              }
+          })
+          .catch(() => {
+            setLoading(false);
+            setErrorGlobal(ErrorType.errorOccurred);
+          });
       }}
       className="flex size-full flex-col gap-6"
     >
@@ -109,12 +115,7 @@ const FormLogin = ({ setLoading }: { setLoading: Dispatch<SetStateAction<boolean
         />
       </div>
       <div className="flex flex-col">
-        <button className="button2 group size-full" type="submit">
-          <div className="button2Inner gap-[2px]">
-            <span>Login</span>
-            <IconLogin />
-          </div>
-        </button>
+        <SubmitButton />
         <div className="flex h-0 justify-center">
           <span className="mt-[16px] px-1 text-sm text-[#ff3333]">{errorGlobal}</span>
         </div>
