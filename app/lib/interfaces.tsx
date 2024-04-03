@@ -1,3 +1,5 @@
+'use server';
+
 interface Note {
   id: number;
   title: string;

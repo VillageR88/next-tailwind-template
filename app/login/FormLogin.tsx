@@ -46,8 +46,7 @@ const FormLogin = ({ setLoading }: { setLoading: Dispatch<SetStateAction<boolean
   return (
     <form
       id="form-login"
-      onSubmit={(e) => {
-        e.preventDefault();
+      action={() => {
         void handleSubmit();
       }}
       className="flex size-full flex-col gap-6"
