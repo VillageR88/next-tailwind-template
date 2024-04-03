@@ -1,5 +1,4 @@
-'use client';
-import { useContext, useState } from 'react';
+import { useContext } from 'react';
 import DataContext from '@/app/home/DataContext';
 import { Reorder, useDragControls } from 'framer-motion';
 import { Collection, Note } from '../lib/interfaces';
@@ -13,7 +12,6 @@ const Item = ({
   collection: Collection;
   setPage: React.Dispatch<React.SetStateAction<number | null>>;
 }) => {
-  const [editVisible, setEditVisible] = useState<boolean>(false);
   const controls = useDragControls();
   const context = useContext(DataContext);
 
@@ -37,24 +35,19 @@ const Item = ({
 
   return (
     <Reorder.Item
-      onMouseEnter={() => {
-        setEditVisible(true);
-      }}
-      onMouseLeave={() => {
-        setEditVisible(false);
-      }}
       dragListener={false}
       dragControls={controls}
       value={collection}
       key={collection.id}
-      className="flex select-none flex-col gap-[6px] rounded-[6px] border border-[#313131] bg-[#232323] px-3 py-4 "
+      className="group/group2 flex select-none flex-col gap-[6px] rounded-[6px] border border-[#313131] bg-[#232323] px-3 py-4 "
     >
       <div className="flex justify-between px-1">
         <div className="flex items-center gap-3 pb-[8px]">
           <span className="text-left text-[18px] font-bold text-white">{collection.title}</span>
-          <ButtonEdit collectionId={collection.id} editVisible={editVisible} setPage={setPage} />
+          <ButtonEdit collectionId={collection.id} setPage={setPage} />
         </div>
         <ButtonDrag
+          alwaysVisible
           func={(e) => {
             controls.start(e);
           }}
@@ -77,26 +70,18 @@ const Item = ({
 };
 
 const ItemsNested = ({ note }: { note: Note }) => {
-  const [dragVisible, setDragVisible] = useState<boolean>(false);
   const controls = useDragControls();
   return (
     <Reorder.Item
-      onMouseEnter={() => {
-        setDragVisible(true);
-      }}
-      onMouseLeave={() => {
-        setDragVisible(false);
-      }}
       dragListener={false}
       dragControls={controls}
       value={note}
       key={note.id}
-      className="rounded-[6px] bg-[#1C1C1C] p-[10px] text-white"
+      className="group rounded-[6px] bg-[#1C1C1C] p-[10px] text-white"
     >
       <div className="flex justify-between pl-1 pr-2">
         <span>{note.description}</span>
         <ButtonDrag
-          dragVisible={dragVisible}
           func={(e) => {
             controls.start(e);
           }}

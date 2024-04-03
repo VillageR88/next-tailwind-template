@@ -1,8 +1,7 @@
-const ButtonDrag = ({ func, dragVisible }: { func(arg: React.PointerEvent): void; dragVisible?: boolean }) => {
+const ButtonDrag = ({ func, alwaysVisible }: { func(arg: React.PointerEvent): void; alwaysVisible?: boolean }) => {
   return (
     <div
-      // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
-      className={`${dragVisible ?? dragVisible === undefined ? 'opacity-100' : 'md:opacity-0'} size-[20px] transition hover:cursor-grab active:cursor-grabbing`}
+      className={`size-[20px] transition hover:cursor-grab active:cursor-grabbing group-hover:opacity-100 ${!alwaysVisible && 'md:opacity-0'}`}
       onPointerDown={(e) => {
         e.preventDefault();
         func(e);

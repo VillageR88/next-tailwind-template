@@ -1,4 +1,3 @@
-'use client';
 import Logo from '../components/Logo';
 import { useRouter } from 'next/navigation';
 import { useContext } from 'react';
