@@ -10,7 +10,7 @@ import DataContext from './home/DataContext';
 
 export default function Home() {
   const [loading, setLoading] = useState(false);
-  const token = useRef<string | null>(null);
+  const [token, setToken] = useState<string | null>(null);
   const [dataContext, setDataContext] = useState<CollectionGroup>({ collections: [] });
   const initialDataContext = useRef<CollectionGroup>({ collections: [] });
   const router = useRouter();
@@ -19,7 +19,7 @@ export default function Home() {
     if (!tokenTemp) {
       router.push('/login');
     } else {
-      token.current = tokenTemp;
+      setToken(tokenTemp);
     }
   }, [router]);
 
@@ -30,7 +30,7 @@ export default function Home() {
         const response = await fetch('https://serverexpress1-production.up.railway.app/', {
           method: 'GET',
           headers: {
-            Authorization: `Bearer ${token.current}`,
+            Authorization: `Bearer ${token}`,
           },
         });
         if (response.ok) {
@@ -45,7 +45,7 @@ export default function Home() {
       }
       setLoading(false);
     };
-    if (token.current) {
+    if (token) {
       void handleLoadCollectionGroup();
     }
   }, [token]);
@@ -55,7 +55,7 @@ export default function Home() {
       <RotatingLines width="200" strokeColor="orange" />
     </div>
   ) : (
-    token.current !== null && (
+    token !== null && (
       <div className="flex min-h-[100dvh] w-full flex-col items-center justify-start overflow-hidden text-clip md:min-h-screen">
         <DataContext.Provider value={{ dataContext, setDataContext, initialDataContext }}>
           <Navbar />
