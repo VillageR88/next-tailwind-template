@@ -1,19 +1,20 @@
 'use server';
 
-async function handleLoadCollectionGroup({ email, password }: { email: string; password: string }) {
+import { CollectionGroup } from '@/app/lib/interfaces';
+
+async function handleLoadCollectionGroup({ token }: { token: string }) {
   try {
-    const response = await fetch('https://serverexpress1-production.up.railway.app/login', {
-      method: 'POST',
+    const response = await fetch('https://serverexpress1-production.up.railway.app/', {
+      method: 'GET',
       headers: {
-        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
       },
-      body: JSON.stringify({ email, password }),
     });
     if (response.ok) {
-      const { token } = (await response.json()) as { token: string };
-      return token;
+      const data = (await response.json()) as CollectionGroup;
+      return data;
     } else {
-      return 'unsuccessful';
+      console.error('Failed to load collection group', response);
     }
   } catch (error) {
     console.error(error);
