@@ -5,6 +5,7 @@ import DataContext from '@/app/home/DataContext';
 import IconSave from '../components/IconSave';
 import IconUndo from '../components/IconUndo';
 import IconLogout from '../components/IconLogout';
+import { CollectionGroup } from '@/app/lib/interfaces';
 
 const Navbar = () => {
   const router = useRouter();
@@ -23,6 +24,7 @@ const Navbar = () => {
         <div className="flex gap-4">
           <button
             onClick={() => {
+              //document.body.style.cursor = 'wait';
               const handleSaveCollectionGroup = async () => {
                 try {
                   const response = await fetch('https://serverexpress1-production.up.railway.app/', {
@@ -34,7 +36,9 @@ const Navbar = () => {
                     body: JSON.stringify(context.dataContext),
                   });
                   if (response.ok) {
-                    context.initialDataContext.current = context.dataContext;
+                    const newData = JSON.parse(JSON.stringify(context.dataContext)) as CollectionGroup;
+                    context.initialDataContext.current = newData;
+                    context.setDataContext(newData);
                   } else {
                     console.error('Failed to save collection group', response);
                   }
@@ -42,6 +46,7 @@ const Navbar = () => {
                   console.error(error);
                 }
               };
+
               void handleSaveCollectionGroup();
             }}
             disabled={checkSame()}
