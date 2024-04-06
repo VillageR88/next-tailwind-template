@@ -5,12 +5,12 @@ import DataContext from '@/app/home/DataContext';
 import IconSave from '../components/IconSave';
 import IconUndo from '../components/IconUndo';
 import IconLogout from '../components/IconLogout';
-import { CollectionGroup } from '@/app/lib/interfaces';
+import handleSaveCollectionGroup from './handleSaveCollectionGroup';
+import { CollectionGroup } from '../lib/interfaces';
 
 const Navbar = () => {
   const router = useRouter();
   const context = useContext(DataContext);
-  //create function checkSame and check if deep copy of JSON is the same as the original
   const checkSame = () => {
     return (
       JSON.stringify(context.dataContext.collections) === JSON.stringify(context.initialDataContext.current.collections)
@@ -24,30 +24,24 @@ const Navbar = () => {
         <div className="flex gap-4">
           <button
             onClick={() => {
-              //document.body.style.cursor = 'wait';
-              const handleSaveCollectionGroup = async () => {
-                try {
-                  const response = await fetch('https://serverexpress1-production.up.railway.app/', {
-                    method: 'POST',
-                    headers: {
-                      'Content-Type': 'application/json',
-                      Authorization: `Bearer ${localStorage.getItem('token')}`,
-                    },
-                    body: JSON.stringify(context.dataContext),
-                  });
-                  if (response.ok) {
+              const style = document.createElement('style');
+              style.innerHTML = `* { cursor: wait}`;
+              document.head.appendChild(style);
+              const token = localStorage.getItem('token');
+              if (!token) return;
+              handleSaveCollectionGroup({ data: context.dataContext, token: token })
+                .then((res) => {
+                  if (res) {
                     const newData = JSON.parse(JSON.stringify(context.dataContext)) as CollectionGroup;
                     context.initialDataContext.current = newData;
                     context.setDataContext(newData);
-                  } else {
-                    console.error('Failed to save collection group', response);
                   }
-                } catch (error) {
+                  document.head.removeChild(style);
+                })
+                .catch((error) => {
                   console.error(error);
-                }
-              };
-
-              void handleSaveCollectionGroup();
+                  document.head.removeChild(style);
+                });
             }}
             disabled={checkSame()}
             className="button1 flex"

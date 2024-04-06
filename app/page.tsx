@@ -7,7 +7,7 @@ import Navbar from './home/Navbar';
 import Main from './home/Main';
 import { CollectionGroup } from '@/app/lib/interfaces';
 import DataContext from './home/DataContext';
-import handleLoadCollectionGroup from '@/app/handleLoadCollectionGroup';
+import handleLoadCollectionGroup from '@/app/home/handleLoadCollectionGroup';
 
 export default function Home() {
   const [loading, setLoading] = useState(false);
