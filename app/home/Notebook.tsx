@@ -10,9 +10,11 @@ import handleSaveCollectionGroup from './handleSaveCollectionGroup';
 const Item = ({
   collection,
   setPage,
+  index,
 }: {
   collection: Collection;
   setPage: React.Dispatch<React.SetStateAction<number | null>>;
+  index: number;
 }) => {
   const controls = useDragControls();
   const context = useContext(DataContext);
@@ -55,7 +57,7 @@ const Item = ({
               context.initialDataContext.current = newData({ data: context.dataContext });
               context.setDataContext(newData({ data: context.dataContext }));
             }}
-            collectionId={collection.id}
+            collectionId={index + 1}
             setPage={setPage}
           />
         </div>
@@ -120,8 +122,8 @@ const Notebook = ({ setPage }: { setPage: React.Dispatch<React.SetStateAction<nu
       values={context.dataContext.collections}
       onReorder={handleReorderGroup}
     >
-      {context.dataContext.collections.map((collection) => {
-        return <Item key={collection.id} collection={collection} setPage={setPage} />;
+      {context.dataContext.collections.map((collection, index) => {
+        return <Item index={index} key={collection.id} collection={collection} setPage={setPage} />;
       })}
     </Reorder.Group>
   );
