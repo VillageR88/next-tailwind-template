@@ -1,7 +1,7 @@
 import { useContext } from 'react';
 import DataContext from '@/app/home/DataContext';
 import { Reorder, useDragControls } from 'framer-motion';
-import { Collection, Note } from '../lib/interfaces';
+import { Collection, CollectionGroup, Note } from '../lib/interfaces';
 import ButtonDrag from '../components/ButtonDrag';
 import ButtonEdit from '../components/ButtonEdit';
 
@@ -44,7 +44,15 @@ const Item = ({
       <div className="flex justify-between px-1">
         <div className="flex items-center gap-3 pb-[8px]">
           <span className="text-left text-[18px] font-bold text-white">{collection.title}</span>
-          <ButtonEdit collectionId={collection.id} setPage={setPage} />
+          <ButtonEdit
+            autosave={() => {
+              const newData = JSON.parse(JSON.stringify(context.dataContext)) as CollectionGroup;
+              context.initialDataContext.current = newData;
+              context.setDataContext(newData);
+            }}
+            collectionId={collection.id}
+            setPage={setPage}
+          />
         </div>
         <ButtonDrag
           alwaysVisible

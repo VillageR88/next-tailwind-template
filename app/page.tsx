@@ -27,7 +27,7 @@ export default function Home() {
   useEffect(() => {
     if (token) {
       setLoading(true);
-      handleLoadCollectionGroup({ token })
+      handleLoadCollectionGroup({ token: token })
         .then((data) => {
           if (!data) return;
           setDataContext(data);

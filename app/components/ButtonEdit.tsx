@@ -1,12 +1,15 @@
 const ButtonEdit = ({
   collectionId,
   setPage,
+  autosave,
 }: {
   collectionId: number;
   setPage: React.Dispatch<React.SetStateAction<number | null>>;
+  autosave?(): void;
 }) => (
   <button
     onClick={() => {
+      autosave && autosave();
       setPage(collectionId);
     }}
     className={`flex items-center gap-1 fill-white text-white transition hover:fill-[orange] hover:text-[orange] group-hover/group2:opacity-100 md:opacity-0`}

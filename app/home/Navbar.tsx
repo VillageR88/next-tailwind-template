@@ -63,6 +63,9 @@ const Navbar = () => {
           </button>
           <button
             onClick={() => {
+              const token = localStorage.getItem('token');
+              if (!token) return;
+              void handleSaveCollectionGroup({ data: context.dataContext, token: token });
               localStorage.removeItem('token');
               router.push('/login');
             }}
