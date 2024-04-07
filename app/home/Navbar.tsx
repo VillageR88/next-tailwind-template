@@ -6,7 +6,7 @@ import IconSave from '../components/IconSave';
 import IconUndo from '../components/IconUndo';
 import IconLogout from '../components/IconLogout';
 import handleSaveCollectionGroup from './handleSaveCollectionGroup';
-import { CollectionGroup } from '../lib/interfaces';
+import newData from '../lib/newData';
 
 const Navbar = () => {
   const router = useRouter();
@@ -15,19 +15,6 @@ const Navbar = () => {
     return (
       JSON.stringify(context.dataContext.collections) === JSON.stringify(context.initialDataContext.current.collections)
     );
-  };
-
-  const newData = () => {
-    const newData = JSON.parse(JSON.stringify(context.dataContext)) as CollectionGroup;
-    for (const collection of newData.collections) {
-      collection.id = newData.collections.indexOf(collection) + 1;
-    }
-    for (const collection of newData.collections) {
-      for (const note of collection.Notes) {
-        note.id = collection.Notes.indexOf(note) + 1;
-      }
-    }
-    return newData;
   };
 
   return (
@@ -42,11 +29,11 @@ const Navbar = () => {
               document.head.appendChild(style);
               const token = localStorage.getItem('token');
               if (!token) return;
-              handleSaveCollectionGroup({ data: newData(), token: token })
+              handleSaveCollectionGroup({ data: newData({ data: context.dataContext }), token: token })
                 .then((res) => {
                   if (res) {
-                    context.initialDataContext.current = newData();
-                    context.setDataContext(newData);
+                    context.initialDataContext.current = newData({ data: context.dataContext });
+                    context.setDataContext(newData({ data: context.dataContext }));
                   }
                   document.head.removeChild(style);
                 })
@@ -77,7 +64,7 @@ const Navbar = () => {
             onClick={() => {
               const token = localStorage.getItem('token');
               if (!token) return;
-              void handleSaveCollectionGroup({ data: newData(), token: token });
+              void handleSaveCollectionGroup({ data: newData({ data: context.dataContext }), token: token });
               localStorage.removeItem('token');
               router.push('/login');
             }}
