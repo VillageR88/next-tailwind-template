@@ -5,6 +5,7 @@ import { Collection, Note } from '../lib/interfaces';
 import ButtonDrag from '../components/ButtonDrag';
 import ButtonEdit from '../components/ButtonEdit';
 import newData from '../lib/newData';
+import handleSaveCollectionGroup from './handleSaveCollectionGroup';
 
 const Item = ({
   collection,
@@ -48,6 +49,9 @@ const Item = ({
           <span className="text-left text-[18px] font-bold text-white">{collection.title}</span>
           <ButtonEdit
             autosave={() => {
+              const token = localStorage.getItem('token');
+              if (!token) return;
+              void handleSaveCollectionGroup({ data: newData({ data: context.dataContext }), token: token });
               context.initialDataContext.current = newData({ data: context.dataContext });
               context.setDataContext(newData({ data: context.dataContext }));
             }}

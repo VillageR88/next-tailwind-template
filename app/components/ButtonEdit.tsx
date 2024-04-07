@@ -11,6 +11,7 @@ const ButtonEdit = ({
     onClick={() => {
       autosave && autosave();
       setPage(collectionId);
+      console.log(collectionId);
     }}
     className={`flex items-center gap-1 fill-white text-white transition hover:fill-[orange] hover:text-[orange] group-hover/group2:opacity-100 md:opacity-0`}
   >
