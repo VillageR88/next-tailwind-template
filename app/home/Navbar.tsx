@@ -17,6 +17,19 @@ const Navbar = () => {
     );
   };
 
+  const newData = () => {
+    const newData = JSON.parse(JSON.stringify(context.dataContext)) as CollectionGroup;
+    for (const collection of newData.collections) {
+      collection.id = newData.collections.indexOf(collection) + 1;
+    }
+    for (const collection of newData.collections) {
+      for (const note of collection.Notes) {
+        note.id = collection.Notes.indexOf(note) + 1;
+      }
+    }
+    return newData;
+  };
+
   return (
     <nav className="flex w-full justify-center border-b border-[#313131] bg-[#1C1C1C] px-8 py-4">
       <div className="flex size-full max-w-[90em] items-center justify-between">
@@ -24,24 +37,15 @@ const Navbar = () => {
         <div className="flex gap-4">
           <button
             onClick={() => {
-              const newData = JSON.parse(JSON.stringify(context.dataContext)) as CollectionGroup;
-              for (const collection of newData.collections) {
-                collection.id = newData.collections.indexOf(collection) + 1;
-              }
-              for (const collection of newData.collections) {
-                for (const note of collection.Notes) {
-                  note.id = collection.Notes.indexOf(note) + 1;
-                }
-              }
               const style = document.createElement('style');
               style.innerHTML = `* { cursor: wait}`;
               document.head.appendChild(style);
               const token = localStorage.getItem('token');
               if (!token) return;
-              handleSaveCollectionGroup({ data: newData, token: token })
+              handleSaveCollectionGroup({ data: newData(), token: token })
                 .then((res) => {
                   if (res) {
-                    context.initialDataContext.current = newData;
+                    context.initialDataContext.current = newData();
                     context.setDataContext(newData);
                   }
                   document.head.removeChild(style);
@@ -73,7 +77,7 @@ const Navbar = () => {
             onClick={() => {
               const token = localStorage.getItem('token');
               if (!token) return;
-              void handleSaveCollectionGroup({ data: context.dataContext, token: token });
+              void handleSaveCollectionGroup({ data: newData(), token: token });
               localStorage.removeItem('token');
               router.push('/login');
             }}
