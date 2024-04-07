@@ -7,6 +7,7 @@ import IconUndo from '../components/IconUndo';
 import IconLogout from '../components/IconLogout';
 import handleSaveCollectionGroup from './handleSaveCollectionGroup';
 import newData from '../lib/newData';
+import { CollectionGroup } from '../lib/interfaces';
 
 const Navbar = () => {
   const router = useRouter();
@@ -32,8 +33,9 @@ const Navbar = () => {
               handleSaveCollectionGroup({ data: newData({ data: context.dataContext }), token: token })
                 .then((res) => {
                   if (res) {
-                    context.initialDataContext.current = newData({ data: context.dataContext });
-                    context.setDataContext(newData({ data: context.dataContext }));
+                    const stringifiedData = JSON.parse(JSON.stringify(context.dataContext)) as CollectionGroup;
+                    context.initialDataContext.current = stringifiedData;
+                    context.setDataContext(stringifiedData);
                   }
                   document.head.removeChild(style);
                 })
