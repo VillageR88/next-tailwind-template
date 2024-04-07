@@ -14,6 +14,7 @@ const Item = ({
 }) => {
   const controls = useDragControls();
   const context = useContext(DataContext);
+  console.log('context', context.dataContext.collections);
 
   const handleReorderItem = (newOrder: Note[], collectionId: number) => {
     context.setDataContext((prevState) => {

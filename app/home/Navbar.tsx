@@ -24,15 +24,23 @@ const Navbar = () => {
         <div className="flex gap-4">
           <button
             onClick={() => {
+              const newData = JSON.parse(JSON.stringify(context.dataContext)) as CollectionGroup;
+              for (const collection of newData.collections) {
+                collection.id = newData.collections.indexOf(collection) + 1;
+              }
+              for (const collection of newData.collections) {
+                for (const note of collection.Notes) {
+                  note.id = collection.Notes.indexOf(note) + 1;
+                }
+              }
               const style = document.createElement('style');
               style.innerHTML = `* { cursor: wait}`;
               document.head.appendChild(style);
               const token = localStorage.getItem('token');
               if (!token) return;
-              handleSaveCollectionGroup({ data: context.dataContext, token: token })
+              handleSaveCollectionGroup({ data: newData, token: token })
                 .then((res) => {
                   if (res) {
-                    const newData = JSON.parse(JSON.stringify(context.dataContext)) as CollectionGroup;
                     context.initialDataContext.current = newData;
                     context.setDataContext(newData);
                   }
