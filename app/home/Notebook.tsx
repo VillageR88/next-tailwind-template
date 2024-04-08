@@ -6,6 +6,7 @@ import ButtonDrag from '../components/ButtonDrag';
 import ButtonEdit from '../components/ButtonEdit';
 import newData from '../lib/newData';
 import handleSaveCollectionGroup from './handleSaveCollectionGroup';
+import IconAdd from '../components/IconAdd';
 
 const Item = ({
   collection,
@@ -91,7 +92,7 @@ const ItemsNested = ({ note }: { note: Note }) => {
       dragControls={controls}
       value={note}
       key={note.id}
-      className="group rounded-[6px] bg-[#1C1C1C] p-[10px] text-white"
+      className="group/group3 rounded-[6px] bg-[#1C1C1C] p-[10px] text-white"
     >
       <div className="flex justify-between pl-1 pr-2">
         <span>{note.description}</span>
@@ -116,15 +117,26 @@ const Notebook = ({ setPage }: { setPage: React.Dispatch<React.SetStateAction<nu
   };
 
   return (
-    <Reorder.Group
-      className="flex w-full max-w-4xl flex-col gap-8"
-      values={context.dataContext.collections}
-      onReorder={handleReorderGroup}
-    >
-      {context.dataContext.collections.map((collection, index) => {
-        return <Item index={index} key={collection.id} collection={collection} setPage={setPage} />;
-      })}
-    </Reorder.Group>
+    <div className="flex w-full max-w-4xl flex-col gap-6">
+      <Reorder.Group
+        className="flex w-full flex-col gap-8"
+        values={context.dataContext.collections}
+        onReorder={handleReorderGroup}
+      >
+        {context.dataContext.collections.map((collection, index) => {
+          return <Item index={index} key={collection.id} collection={collection} setPage={setPage} />;
+        })}
+      </Reorder.Group>
+      <button
+        className="button1 flex pt-[1px]"
+        onClick={() => {
+          setPage(null);
+        }}
+      >
+        <IconAdd />
+        <span className="hidden pl-1 pt-[1px] md:block">Add</span>
+      </button>
+    </div>
   );
 };
 export default Notebook;

@@ -35,7 +35,7 @@ const CollectionPage = ({
         </div>
       </div>
       <button
-        className="button1 flex"
+        className="button1 flex pt-[3px]"
         onClick={() => {
           setPage(null);
         }}
