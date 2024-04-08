@@ -130,7 +130,18 @@ const Notebook = ({ setPage }: { setPage: React.Dispatch<React.SetStateAction<nu
       <button
         className="button1 flex pt-[1px]"
         onClick={() => {
-          setPage(null);
+          context.setDataContext((prevState) => {
+            const newNotebook = [...prevState.collections];
+            newNotebook.push({
+              id: newNotebook.length + 1,
+              title: 'New Collection',
+              Notes: [],
+            });
+            return {
+              ...prevState,
+              collections: newNotebook,
+            };
+          });
         }}
       >
         <IconAdd />
