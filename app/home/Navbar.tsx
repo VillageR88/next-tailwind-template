@@ -42,9 +42,8 @@ const Navbar = () => {
               handleSaveCollectionGroup({ data: newData({ data: safeContext() }), token: token })
                 .then((res) => {
                   if (res) {
-                    const stringifiedData = JSON.parse(JSON.stringify(safeContext())) as CollectionGroup;
-                    context.initialDataContext.current = stringifiedData;
-                    context.setDataContext(stringifiedData);
+                    context.initialDataContext.current = JSON.parse(JSON.stringify(safeContext())) as CollectionGroup;
+                    context.setDataContext(JSON.parse(JSON.stringify(safeContext())) as CollectionGroup);
                   }
                   document.head.removeChild(style);
                 })
