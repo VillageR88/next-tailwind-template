@@ -3,10 +3,9 @@ import DataContext from '@/app/home/DataContext';
 import { Reorder, useDragControls } from 'framer-motion';
 import { Collection, Note } from '../lib/interfaces';
 import ButtonDrag from '../components/ButtonDrag';
-import ButtonEdit from '../components/ButtonEdit';
-import newData from '../lib/newData';
-import handleSaveCollectionGroup from './handleSaveCollectionGroup';
 import IconAdd from '../components/IconAdd';
+import handleSaveCollectionGroup from './handleSaveCollectionGroup';
+import newData from '../lib/newData';
 
 const Item = ({
   collection,
@@ -48,18 +47,19 @@ const Item = ({
     >
       <div className="flex justify-between px-1">
         <div className="flex items-center gap-3 pb-[8px]">
-          <span className="text-left text-[18px] font-bold text-white">{collection.title}</span>
-          <ButtonEdit
-            autosave={() => {
+          <button
+            onClick={() => {
+              setPage(index + 1);
               const token = localStorage.getItem('token');
               if (!token) return;
               void handleSaveCollectionGroup({ data: newData({ data: context.dataContext }), token: token });
               context.initialDataContext.current = newData({ data: context.dataContext });
               context.setDataContext(newData({ data: context.dataContext }));
             }}
-            collectionId={index + 1}
-            setPage={setPage}
-          />
+            className="text-left text-[18px] font-bold text-white transition hover:text-[orange]"
+          >
+            {collection.title}
+          </button>
         </div>
         <ButtonDrag
           alwaysVisible
