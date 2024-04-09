@@ -1,5 +1,5 @@
 import DataContext from './DataContext';
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import IconReturn from '../components/IconReturn';
 import ButtonAdd from '../components/ButtonAdd';
 import ButtonDelete from '../components/ButtonDelete';
@@ -15,13 +15,43 @@ const CollectionPage = ({
   setPage: React.Dispatch<React.SetStateAction<number | null>>;
 }) => {
   const context = useContext(DataContext);
+  const [titleEditable, setTitleEditable] = useState<boolean>(false);
   return (
     <div className="flex w-full max-w-4xl flex-col gap-6">
       <div className="group flex select-none flex-col gap-[6px] rounded-[6px] border border-[#313131] bg-[#232323] px-3 py-4 ">
         <div className="flex justify-between px-1">
-          <button className="pb-[8px] text-left text-[18px] font-bold text-white transition hover:text-[orange]">
-            {context.dataContext.collections[page - 1].title}
-          </button>
+          {!titleEditable ? (
+            <button
+              onClick={() => {
+                setTitleEditable(true);
+              }}
+              className="pb-[8px] text-left text-[18px] font-bold text-white transition hover:text-[orange]"
+            >
+              {context.dataContext.collections[page - 1].title}
+            </button>
+          ) : (
+            <input
+              autoFocus
+              onKeyDown={(e) => {
+                if (e.key === 'Enter') {
+                  setTitleEditable(false);
+                }
+              }}
+              type="text"
+              value={context.dataContext.collections[page - 1].title}
+              onChange={(e) => {
+                const newCollections = context.dataContext.collections.map((collection) => {
+                  if (collection.id === page) {
+                    collection.title = e.target.value;
+                  }
+                  return collection;
+                });
+                const newDataContext = { collections: newCollections };
+                context.setDataContext(newDataContext);
+              }}
+              className="h-fit w-full border-none bg-transparent p-0 text-left text-[18px] font-bold text-white transition"
+            />
+          )}
           <div className="flex gap-2 pb-3">
             <ButtonAdd
               alwaysVisible
@@ -81,6 +111,14 @@ const CollectionPage = ({
         className="button1 flex pt-[3px]"
         onClick={() => {
           setPage(null);
+          const token = localStorage.getItem('token');
+          if (!token) return;
+          context.initialDataContext.current = newData({ data: context.dataContext });
+          context.setDataContext(newData({ data: context.dataContext }));
+          void handleSaveCollectionGroup({
+            data: newData({ data: context.dataContext }),
+            token: token,
+          });
         }}
       >
         <IconReturn />
