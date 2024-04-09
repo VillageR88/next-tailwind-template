@@ -30,10 +30,19 @@ const Navbar = () => {
               document.head.appendChild(style);
               const token = localStorage.getItem('token');
               if (!token) return;
-              handleSaveCollectionGroup({ data: newData({ data: context.dataContext }), token: token })
+              const safeContext = () => {
+                const safe = JSON.parse(JSON.stringify(context.dataContext)) as CollectionGroup;
+                safe.collections.forEach((collection) => {
+                  if (collection.title.length === 0) {
+                    collection.title = 'Untitled Collection';
+                  }
+                });
+                return safe;
+              };
+              handleSaveCollectionGroup({ data: newData({ data: safeContext() }), token: token })
                 .then((res) => {
                   if (res) {
-                    const stringifiedData = JSON.parse(JSON.stringify(context.dataContext)) as CollectionGroup;
+                    const stringifiedData = JSON.parse(JSON.stringify(safeContext())) as CollectionGroup;
                     context.initialDataContext.current = stringifiedData;
                     context.setDataContext(stringifiedData);
                   }

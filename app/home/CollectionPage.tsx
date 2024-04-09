@@ -25,7 +25,7 @@ const CollectionPage = ({
               onClick={() => {
                 setTitleEditable(true);
               }}
-              className="pb-[8px] text-left text-[18px] font-bold text-white transition hover:text-[orange]"
+              className="max-w-[92%] truncate pb-[8px] text-left text-[18px] font-bold text-white transition hover:text-[orange]"
             >
               {context.dataContext.collections[page - 1].title}
             </button>
@@ -34,6 +34,11 @@ const CollectionPage = ({
               autoFocus
               onKeyDown={(e) => {
                 if (e.key === 'Enter') {
+                  //if current input length is 0 return
+                  if (e.currentTarget.value.length === 0) {
+                    e.currentTarget.value = 'Untitled Collection';
+                    return;
+                  }
                   setTitleEditable(false);
                 }
               }}
@@ -49,7 +54,7 @@ const CollectionPage = ({
                 const newDataContext = { collections: newCollections };
                 context.setDataContext(newDataContext);
               }}
-              className="h-fit w-full border-none bg-transparent p-0 text-left text-[18px] font-bold text-white transition"
+              className="h-fit w-[92%] border-none bg-transparent p-0 text-left text-[18px] font-bold text-white transition"
             />
           )}
           <div className="flex gap-2 pb-3">
