@@ -16,6 +16,7 @@ const CollectionPage = ({
 }) => {
   const context = useContext(DataContext);
   const [titleEditable, setTitleEditable] = useState<boolean>(false);
+  const [noteEditable, setNoteEditable] = useState<null | number>(null);
   return (
     <div className="flex w-full max-w-4xl flex-col gap-6">
       <div className="group flex select-none flex-col gap-[6px] rounded-[6px] border border-[#313131] bg-[#232323] px-3 py-4 ">
@@ -96,10 +97,45 @@ const CollectionPage = ({
           </div>
         </div>
         <div className="flex flex-col gap-2">
-          {context.dataContext.collections[page - 1].Notes.map((note) => (
-            <div className="rounded-[6px] bg-[#1C1C1C] p-[10px] text-white" key={note.id}>
+          {context.dataContext.collections[page - 1].Notes.map((note, index) => (
+            <div className="rounded-[6px] bg-[#1C1C1C] p-[10px]" key={note.id}>
               <div className="flex justify-between pl-1 pr-2">
-                <span>{note.description}</span>
+                {noteEditable === index ? (
+                  <input
+                    autoFocus
+                    className="h-fit w-[92%] border-none bg-transparent p-0 text-left text-white transition"
+                    type="text"
+                    value={note.description}
+                    onChange={(e) => {
+                      const newCollections = context.dataContext.collections.map((collection) => {
+                        if (collection.id === page) {
+                          collection.Notes[index].description = e.target.value;
+                        }
+                        return collection;
+                      });
+                      const newDataContext = { collections: newCollections };
+                      context.setDataContext(newDataContext);
+                    }}
+                    onKeyDown={(e) => {
+                      if (e.key === 'Enter') {
+                        if (e.currentTarget.value.length === 0) {
+                          e.currentTarget.value = 'Untitled Note';
+                          return;
+                        }
+                        setNoteEditable(null);
+                      }
+                    }}
+                  />
+                ) : (
+                  <button
+                    onClick={() => {
+                      setNoteEditable(index);
+                    }}
+                    className="text-white transition hover:text-[orange]"
+                  >
+                    {note.description}
+                  </button>
+                )}
               </div>
             </div>
           ))}
