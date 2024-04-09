@@ -73,14 +73,7 @@ const CollectionPage = ({
                 });
                 const newDataContext = { collections: newCollections };
                 const stringifiedData = JSON.parse(JSON.stringify(newDataContext)) as CollectionGroup;
-                //context.initialDataContext.current = stringifiedData;
                 context.setDataContext(stringifiedData);
-                //const token = localStorage.getItem('token');
-                //if (!token) return;
-                //void handleSaveCollectionGroup({
-                //  data: newData({ data: newDataContext }),
-                //  token: token,
-                //});
               }}
             />
             <ButtonDelete
@@ -118,10 +111,19 @@ const CollectionPage = ({
           setPage(null);
           const token = localStorage.getItem('token');
           if (!token) return;
-          context.initialDataContext.current = newData({ data: context.dataContext });
-          context.setDataContext(newData({ data: context.dataContext }));
+          const safeContext = () => {
+            const safe = JSON.parse(JSON.stringify(context.dataContext)) as CollectionGroup;
+            safe.collections.forEach((collection) => {
+              if (collection.title.length === 0) {
+                collection.title = 'Untitled Collection';
+              }
+            });
+            return safe;
+          };
+          context.initialDataContext.current = newData({ data: safeContext() });
+          context.setDataContext(newData({ data: safeContext() }));
           void handleSaveCollectionGroup({
-            data: newData({ data: context.dataContext }),
+            data: newData({ data: safeContext() }),
             token: token,
           });
         }}
