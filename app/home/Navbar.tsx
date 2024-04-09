@@ -75,7 +75,16 @@ const Navbar = () => {
             onClick={() => {
               const token = localStorage.getItem('token');
               if (!token) return;
-              void handleSaveCollectionGroup({ data: newData({ data: context.dataContext }), token: token });
+              const safeContext = () => {
+                const safe = JSON.parse(JSON.stringify(context.dataContext)) as CollectionGroup;
+                safe.collections.forEach((collection) => {
+                  if (collection.title.length === 0) {
+                    collection.title = 'Untitled Collection';
+                  }
+                });
+                return safe;
+              };
+              void handleSaveCollectionGroup({ data: newData({ data: safeContext() }), token: token });
               localStorage.removeItem('token');
               router.push('/login');
             }}
