@@ -7,6 +7,7 @@ import handleSaveCollectionGroup from './handleSaveCollectionGroup';
 import newData from '../lib/newData';
 import { CollectionGroup } from '../lib/interfaces';
 import { Reorder, useDragControls } from 'framer-motion';
+import ButtonDrag from '../components/ButtonDrag';
 
 const CollectionPage = ({
   page,
@@ -15,6 +16,7 @@ const CollectionPage = ({
   page: number;
   setPage: React.Dispatch<React.SetStateAction<number | null>>;
 }) => {
+  const controls = useDragControls();
   const context = useContext(DataContext);
   const [titleEditable, setTitleEditable] = useState<boolean>(false);
   const [noteEditable, setNoteEditable] = useState<null | number>(null);
@@ -97,9 +99,28 @@ const CollectionPage = ({
             />
           </div>
         </div>
-        <div className="flex flex-col gap-2">
+        <Reorder.Group
+          values={context.dataContext.collections[page - 1].Notes}
+          onReorder={(newOrder) => {
+            const newCollections = context.dataContext.collections.map((collection) => {
+              if (collection.id === page) {
+                collection.Notes = newOrder;
+              }
+              return collection;
+            });
+            const newDataContext = { collections: newCollections };
+            context.setDataContext(newDataContext);
+          }}
+          className="flex flex-col gap-2"
+        >
           {context.dataContext.collections[page - 1].Notes.map((note, index) => (
-            <div className="rounded-[6px] bg-[#1C1C1C] p-[10px]" key={note.id}>
+            <Reorder.Item
+              dragListener={false}
+              dragControls={controls}
+              value={note}
+              className="rounded-[6px] bg-[#1C1C1C] p-[10px]"
+              key={note.id}
+            >
               <div className="flex justify-between pl-1 pr-2">
                 {noteEditable === index ? (
                   <input
@@ -136,11 +157,17 @@ const CollectionPage = ({
                   >
                     {note.description}
                   </button>
-                )}
+                )}{' '}
+                <ButtonDrag
+                  alwaysVisible
+                  func={(e) => {
+                    controls.start(e);
+                  }}
+                />
               </div>
-            </div>
+            </Reorder.Item>
           ))}
-        </div>
+        </Reorder.Group>
       </div>
       <button
         className="button1 flex pt-[3px]"

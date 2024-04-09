@@ -96,11 +96,13 @@ const ItemsNested = ({ note }: { note: Note }) => {
     >
       <div className="flex justify-between pl-1 pr-2">
         <span>{note.description}</span>
-        <ButtonDrag
-          func={(e) => {
-            controls.start(e);
-          }}
-        />
+        {/*
+          <ButtonDrag
+            func={(e) => {
+              controls.start(e);
+            }}
+          />
+          */}
       </div>
     </Reorder.Item>
   );
