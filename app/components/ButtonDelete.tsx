@@ -1,7 +1,7 @@
 const ButtonDelete = ({ func, alwaysVisible }: { func(): void; alwaysVisible?: boolean }) => {
   return (
     <button
-      className={`size-[20px] fill-white transition hover:fill-[orange] group-hover:opacity-100 ${!alwaysVisible && 'md:opacity-0'}`}
+      className={`fill-white transition hover:fill-[orange] group-hover:opacity-100 ${!alwaysVisible && 'md:opacity-0'}`}
       onClick={func}
       style={{ touchAction: 'none' }}
     >

@@ -2,6 +2,7 @@ import DataContext from './DataContext';
 import { useContext } from 'react';
 import IconReturn from '../components/IconReturn';
 import ButtonRename from '../components/ButtonRename';
+import ButtonAdd from '../components/ButtonAdd';
 import ButtonDelete from '../components/ButtonDelete';
 import handleSaveCollectionGroup from './handleSaveCollectionGroup';
 import newData from '../lib/newData';
@@ -25,25 +26,50 @@ const CollectionPage = ({
             </span>
             <ButtonRename />
           </div>
-          <ButtonDelete
-            alwaysVisible
-            func={() => {
-              const newCollections = context.dataContext.collections.filter((collection) => collection.id !== page);
-              const newDataContext = { collections: newCollections };
-              console.log(newDataContext);
-              console.log(context.dataContext);
-              const stringifiedData = JSON.parse(JSON.stringify(newDataContext)) as CollectionGroup;
-              context.initialDataContext.current = stringifiedData;
-              context.setDataContext(stringifiedData);
-              const token = localStorage.getItem('token');
-              if (!token) return;
-              void handleSaveCollectionGroup({
-                data: newData({ data: newDataContext }),
-                token: token,
-              });
-              setPage(null);
-            }}
-          />
+          <div className="flex gap-2 pb-3">
+            <ButtonAdd
+              alwaysVisible
+              func={() => {
+                const newCollections = context.dataContext.collections.map((collection) => {
+                  if (collection.id === page) {
+                    collection.Notes.push({
+                      id: collection.Notes.length + 1,
+                      description: 'New Note',
+                      title: '',
+                    });
+                  }
+                  return collection;
+                });
+                const newDataContext = { collections: newCollections };
+                const stringifiedData = JSON.parse(JSON.stringify(newDataContext)) as CollectionGroup;
+                //context.initialDataContext.current = stringifiedData;
+                context.setDataContext(stringifiedData);
+                //const token = localStorage.getItem('token');
+                //if (!token) return;
+                //void handleSaveCollectionGroup({
+                //  data: newData({ data: newDataContext }),
+                //  token: token,
+                //});
+              }}
+            />
+            <ButtonDelete
+              alwaysVisible
+              func={() => {
+                const newCollections = context.dataContext.collections.filter((collection) => collection.id !== page);
+                const newDataContext = { collections: newCollections };
+                const stringifiedData = JSON.parse(JSON.stringify(newDataContext)) as CollectionGroup;
+                context.initialDataContext.current = stringifiedData;
+                context.setDataContext(stringifiedData);
+                const token = localStorage.getItem('token');
+                if (!token) return;
+                void handleSaveCollectionGroup({
+                  data: newData({ data: newDataContext }),
+                  token: token,
+                });
+                setPage(null);
+              }}
+            />
+          </div>
         </div>
         <div className="flex flex-col gap-2">
           {context.dataContext.collections[page - 1].Notes.map((note) => (
