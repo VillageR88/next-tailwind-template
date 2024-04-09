@@ -6,6 +6,7 @@ import ButtonDelete from '../components/ButtonDelete';
 import handleSaveCollectionGroup from './handleSaveCollectionGroup';
 import newData from '../lib/newData';
 import { CollectionGroup } from '../lib/interfaces';
+import { Reorder, useDragControls } from 'framer-motion';
 
 const CollectionPage = ({
   page,

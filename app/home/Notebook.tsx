@@ -118,24 +118,21 @@ const Notebook = ({ setPage }: { setPage: React.Dispatch<React.SetStateAction<nu
 
   return (
     <div className="flex w-full max-w-4xl flex-col gap-6">
-      {context.dataContext.collections && (
-        <Reorder.Group
-          className="flex w-full flex-col gap-8"
-          values={context.dataContext.collections}
-          onReorder={handleReorderGroup}
-        >
-          {context.dataContext.collections.map((collection, index) => {
-            return <Item index={index} key={collection.id} collection={collection} setPage={setPage} />;
-          })}
-        </Reorder.Group>
-      )}
+      <Reorder.Group
+        className="flex w-full flex-col gap-8"
+        values={context.dataContext.collections}
+        onReorder={handleReorderGroup}
+      >
+        {context.dataContext.collections.map((collection, index) => {
+          return <Item index={index} key={collection.id} collection={collection} setPage={setPage} />;
+        })}
+      </Reorder.Group>
+
       <button
         className="button1 flex pt-[1px]"
         onClick={() => {
           context.setDataContext((prevState) => {
-            let newNotebook;
-            if (prevState.collections) newNotebook = [...prevState.collections];
-            else newNotebook = [];
+            const newNotebook = [...prevState.collections];
             newNotebook.push({
               id: newNotebook.length + 1,
               title: 'New Collection',
