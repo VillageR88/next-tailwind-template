@@ -2,6 +2,6 @@
 import { cookies } from 'next/headers';
 
 export default async function clearToken() {
-  'use server';
+  await Promise.resolve();
   cookies().delete('token');
 }
