@@ -8,11 +8,6 @@ import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation';
 import SubmitButton from './SubmitButton';
 
-enum ErrorType {
-  failedLogin = 'Verify your email and password.',
-  errorOccurred = 'An error occurred. Try again later',
-}
-
 export default function FormLogin() {
   async function createInvoice(formData: FormData) {
     'use server';
@@ -93,12 +88,7 @@ export default function FormLogin() {
           type="password"
         />
       </div>
-      <div className="flex flex-col">
-        <SubmitButton />
-        <div className="flex h-0 justify-center">
-          {/*<span className="mt-[16px] px-1 text-sm text-[#ff3333]">{errorGlobal}</span>*/}
-        </div>
-      </div>
+      <SubmitButton />
     </form>
   );
 }
