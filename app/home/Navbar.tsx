@@ -1,6 +1,6 @@
 import Logo from '../components/Logo';
 import { useRouter } from 'next/navigation';
-import { useContext } from 'react';
+import { useContext, useRef } from 'react';
 import DataContext from '@/app/home/DataContext';
 import IconSave from '../components/IconSave';
 import IconUndo from '../components/IconUndo';
@@ -11,6 +11,7 @@ import { CollectionGroup } from '../lib/interfaces';
 import clearToken from './clearToken';
 
 const Navbar = ({ token }: { token: string }) => {
+  const logoutRef = useRef<HTMLButtonElement>(null);
   const router = useRouter();
   const context = useContext(DataContext);
   const checkSame = () => {
@@ -70,7 +71,9 @@ const Navbar = ({ token }: { token: string }) => {
             <IconUndo />
           </button>
           <button
+            ref={logoutRef}
             onClick={() => {
+              if (logoutRef.current) logoutRef.current.disabled = true;
               const style = document.createElement('style');
               style.innerHTML = `* { cursor: wait}`;
               document.head.appendChild(style);
