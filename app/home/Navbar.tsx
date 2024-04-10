@@ -82,6 +82,7 @@ const Navbar = ({ token }: { token: string }) => {
               };
               void handleSaveCollectionGroup({ data: newData({ data: safeContext() }), token: token });
               void clearToken();
+
               router.push('/login');
             }}
             className="button2 group"
