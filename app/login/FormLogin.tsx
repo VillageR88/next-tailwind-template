@@ -4,52 +4,41 @@ import imageLock from '@/public/assets/images/lock_FILL0_wght400_GRAD0_opsz24.sv
 import imagePersonAdd from '@/public/assets/images/person_add_FILL0_wght400_GRAD0_opsz24.svg';
 import imageLockReset from '@/public/assets/images/lock_reset_FILL0_wght400_GRAD0_opsz24.svg';
 import handleSubmit from './handleSubmit';
-import IconLogin from '../components/IconLogin';
 import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation';
+import SubmitButton from './SubmitButton';
 
 enum ErrorType {
   failedLogin = 'Verify your email and password.',
   errorOccurred = 'An error occurred. Try again later',
 }
 
-async function createInvoice(formData: FormData) {
-  'use server';
-  const rawFormData = {
-    email: formData.get('email'),
-    password: formData.get('password'),
-  };
-  await handleSubmit({
-    email: rawFormData.email as string,
-    password: rawFormData.password as string,
-  })
-    .then((e) => {
-      if (e)
-        if (e === 'unsuccessful') {
-        } else {
-          cookies().set('token', e);
-        }
-    })
-    .catch((e) => {
-      console.log(e);
-      console.log('error occurred');
-    });
-
-  redirect(`/`);
-}
-
-const SubmitButton = () => {
-  return (
-    <button className="button2 group size-full" type="submit">
-      <div className="button2Inner gap-[2px]">
-        <span>Login</span>
-        <IconLogin />
-      </div>
-    </button>
-  );
-};
-
 export default function FormLogin() {
+  async function createInvoice(formData: FormData) {
+    'use server';
+
+    const rawFormData = {
+      email: formData.get('email'),
+      password: formData.get('password'),
+    };
+    await handleSubmit({
+      email: rawFormData.email as string,
+      password: rawFormData.password as string,
+    })
+      .then((e) => {
+        if (e)
+          if (e === 'unsuccessful') {
+          } else {
+            cookies().set('token', e);
+          }
+      })
+      .catch((e) => {
+        console.log(e);
+        console.log('error occurred');
+      });
+    redirect(`/`);
+  }
+
   return (
     <form action={createInvoice} id="form-login" className="flex size-full flex-col gap-6">
       <div className="flex flex-col gap-2">
