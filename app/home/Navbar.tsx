@@ -10,7 +10,7 @@ import newData from '../lib/newData';
 import { CollectionGroup } from '../lib/interfaces';
 import clearToken from './clearToken';
 
-const Navbar = () => {
+const Navbar = ({ token }: { token: string }) => {
   const router = useRouter();
   const context = useContext(DataContext);
   const checkSame = () => {
@@ -29,7 +29,6 @@ const Navbar = () => {
               const style = document.createElement('style');
               style.innerHTML = `* { cursor: wait}`;
               document.head.appendChild(style);
-              const token = localStorage.getItem('token');
               if (!token) return;
               const safeContext = () => {
                 const safe = JSON.parse(JSON.stringify(context.dataContext)) as CollectionGroup;
@@ -75,7 +74,6 @@ const Navbar = () => {
             onClick={() => {
               void clearToken();
               router.push('/login');
-              const token = localStorage.getItem('token');
               if (!token) return;
               const safeContext = () => {
                 const safe = JSON.parse(JSON.stringify(context.dataContext)) as CollectionGroup;

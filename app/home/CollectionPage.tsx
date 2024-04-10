@@ -10,9 +10,11 @@ import { Reorder, useDragControls } from 'framer-motion';
 import ButtonDrag from '../components/ButtonDrag';
 
 const CollectionPage = ({
+  token,
   page,
   setPage,
 }: {
+  token: string;
   page: number;
   setPage: React.Dispatch<React.SetStateAction<number | null>>;
 }) => {
@@ -88,7 +90,6 @@ const CollectionPage = ({
                 const stringifiedData = JSON.parse(JSON.stringify(newDataContext)) as CollectionGroup;
                 context.initialDataContext.current = stringifiedData;
                 context.setDataContext(stringifiedData);
-                const token = localStorage.getItem('token');
                 if (!token) return;
                 void handleSaveCollectionGroup({
                   data: newData({ data: newDataContext }),
@@ -173,7 +174,6 @@ const CollectionPage = ({
         className="button1 flex pt-[3px]"
         onClick={() => {
           setPage(null);
-          const token = localStorage.getItem('token');
           if (!token) return;
           const safeContext = () => {
             const safe = JSON.parse(JSON.stringify(context.dataContext)) as CollectionGroup;

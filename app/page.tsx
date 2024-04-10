@@ -14,7 +14,6 @@ export default function Home() {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
   const [token, setToken] = useState<string | null>(null);
-  console.log('token', token);
   const [dataContext, setDataContext] = useState<CollectionGroup>({ collections: [] });
   const initialDataContext = useRef<CollectionGroup>({ collections: [] });
   useEffect(() => {
@@ -48,8 +47,8 @@ export default function Home() {
     token !== null && (
       <div className="flex min-h-[100dvh] w-full flex-col items-center justify-start overflow-hidden text-clip md:min-h-screen">
         <DataContext.Provider value={{ dataContext, setDataContext, initialDataContext }}>
-          <Navbar />
-          <Main />
+          <Navbar token={token} />
+          <Main token={token} />
         </DataContext.Provider>
       </div>
     )
