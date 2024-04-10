@@ -1,19 +1,11 @@
-'use client';
-
-import { useState } from 'react';
-import { RotatingLines } from 'react-loader-spinner';
+import { Suspense } from 'react';
 import FormLogin from './FormLogin';
 import Logo from '../components/Logo';
 
 export default function Login() {
-  const [loading, setLoading] = useState(false);
-
   return (
     <div className="flex min-h-[100dvh] w-full flex-col items-center justify-center px-8 py-10 font-instrumentSans md:min-h-screen">
-      {loading && <RotatingLines width="200" strokeColor="orange" />}
-      <div
-        className={`${loading ? 'hidden' : 'flex'} w-full max-w-[500px] flex-col items-center justify-between gap-3 `}
-      >
+      <div className={`flex w-full max-w-[500px] flex-col items-center justify-between gap-3 `}>
         <header className="flex w-full justify-start">
           <Logo />
         </header>
@@ -22,7 +14,9 @@ export default function Login() {
             <h1 className="leading-[32px]">Login</h1>
           </div>
           <div className="size-full">
-            <FormLogin setLoading={setLoading} />
+            <Suspense fallback={<p>Loading...</p>}>
+              <FormLogin />
+            </Suspense>
           </div>
         </main>
       </div>

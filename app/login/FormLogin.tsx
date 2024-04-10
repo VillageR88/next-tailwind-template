@@ -1,67 +1,58 @@
-'use client';
-import { Dispatch, SetStateAction, useEffect, useState } from 'react';
-import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 import imageEmail from '@/public/assets/images/mail_FILL0_wght400_GRAD0_opsz24.svg';
 import imageLock from '@/public/assets/images/lock_FILL0_wght400_GRAD0_opsz24.svg';
 import imagePersonAdd from '@/public/assets/images/person_add_FILL0_wght400_GRAD0_opsz24.svg';
 import imageLockReset from '@/public/assets/images/lock_reset_FILL0_wght400_GRAD0_opsz24.svg';
-import IconLogin from '../components/IconLogin';
 import handleSubmit from './handleSubmit';
-import { useFormStatus } from 'react-dom';
+import IconLogin from '../components/IconLogin';
+import { cookies } from 'next/headers';
+import { redirect } from 'next/navigation';
 
 enum ErrorType {
   failedLogin = 'Verify your email and password.',
   errorOccurred = 'An error occurred. Try again later',
 }
 
-const FormLogin = ({ setLoading }: { setLoading: Dispatch<SetStateAction<boolean>> }) => {
-  const [email, setEmail] = useState<string>('');
-  const [errorGlobal, setErrorGlobal] = useState<string>('');
-  const [password, setPassword] = useState<string>('');
-  const router = useRouter();
-
-  const SubmitButton = () => {
-    const { pending } = useFormStatus();
-    useEffect(() => {
-      if (pending) {
-        setLoading(true);
-      }
-    }, [pending]);
-
-    return (
-      <button className="button2 group size-full" type="submit">
-        <div className="button2Inner gap-[2px]">
-          <span>Login</span>
-          <IconLogin />
-        </div>
-      </button>
-    );
+async function createInvoice(formData: FormData) {
+  'use server';
+  const rawFormData = {
+    email: formData.get('email'),
+    password: formData.get('password'),
   };
+  await handleSubmit({
+    email: rawFormData.email as string,
+    password: rawFormData.password as string,
+  })
+    .then((e) => {
+      if (e)
+        if (e === 'unsuccessful') {
+        } else {
+          console.log('login successful');
+          cookies().set('token', e);
+        }
+    })
+    .catch((e) => {
+      console.log(e);
+      console.log('error occurred');
+    });
 
+  redirect(`/`);
+}
+
+const SubmitButton = () => {
   return (
-    <form
-      id="form-login"
-      action={() => {
-        handleSubmit({ email, password })
-          .then((e) => {
-            if (e)
-              if (e === 'unsuccessful') {
-                console.log(e);
-                setLoading(false);
-                setErrorGlobal(ErrorType.failedLogin);
-              } else {
-                localStorage.setItem('token', e);
-                router.push('/');
-              }
-          })
-          .catch(() => {
-            setLoading(false);
-            setErrorGlobal(ErrorType.errorOccurred);
-          });
-      }}
-      className="flex size-full flex-col gap-6"
-    >
+    <button className="button2 group size-full" type="submit">
+      <div className="button2Inner gap-[2px]">
+        <span>Login</span>
+        <IconLogin />
+      </div>
+    </button>
+  );
+};
+
+export default function FormLogin() {
+  return (
+    <form action={createInvoice} id="form-login" className="flex size-full flex-col gap-6">
       <div className="flex flex-col gap-2">
         <div className="flex justify-between px-1">
           <label className="flex w-fit items-center gap-2" htmlFor="email">
@@ -78,12 +69,9 @@ const FormLogin = ({ setLoading }: { setLoading: Dispatch<SetStateAction<boolean
           </button>
         </div>
         <input
+          name="email"
           required
-          value={email}
           autoComplete="email"
-          onChange={(e) => {
-            setEmail(e.target.value);
-          }}
           placeholder="example@domain.com"
           className="w-full"
           id="email"
@@ -107,13 +95,10 @@ const FormLogin = ({ setLoading }: { setLoading: Dispatch<SetStateAction<boolean
           </button>
         </div>
         <input
+          name="password"
           required
           minLength={8}
-          value={password}
           autoComplete="current-password"
-          onChange={(e) => {
-            setPassword(e.target.value);
-          }}
           placeholder="Enter your password"
           id="password"
           type="password"
@@ -122,10 +107,9 @@ const FormLogin = ({ setLoading }: { setLoading: Dispatch<SetStateAction<boolean
       <div className="flex flex-col">
         <SubmitButton />
         <div className="flex h-0 justify-center">
-          <span className="mt-[16px] px-1 text-sm text-[#ff3333]">{errorGlobal}</span>
+          {/*<span className="mt-[16px] px-1 text-sm text-[#ff3333]">{errorGlobal}</span>*/}
         </div>
       </div>
     </form>
   );
-};
-export default FormLogin;
+}

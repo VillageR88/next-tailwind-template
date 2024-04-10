@@ -1,27 +1,27 @@
 'use client';
 
 import { useEffect, useState, useRef } from 'react';
-import { useRouter } from 'next/navigation';
 import { RotatingLines } from 'react-loader-spinner';
 import Navbar from './home/Navbar';
 import Main from './home/Main';
 import { CollectionGroup } from '@/app/lib/interfaces';
 import DataContext from './home/DataContext';
 import handleLoadCollectionGroup from '@/app/home/handleLoadCollectionGroup';
+import checkToken from './home/checkToken';
+import { useRouter } from 'next/navigation';
 
 export default function Home() {
+  const router = useRouter();
   const [loading, setLoading] = useState(false);
   const [token, setToken] = useState<string | null>(null);
+  console.log('token', token);
   const [dataContext, setDataContext] = useState<CollectionGroup>({ collections: [] });
   const initialDataContext = useRef<CollectionGroup>({ collections: [] });
-  const router = useRouter();
   useEffect(() => {
-    const tokenTemp = localStorage.getItem('token');
-    if (!tokenTemp) {
-      router.push('/login');
-    } else {
-      setToken(tokenTemp);
-    }
+    void checkToken().then((token) => {
+      if (token) setToken(token.value);
+      else router.push('/login');
+    });
   }, [router]);
 
   useEffect(() => {

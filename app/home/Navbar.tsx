@@ -8,6 +8,7 @@ import IconLogout from '../components/IconLogout';
 import handleSaveCollectionGroup from './handleSaveCollectionGroup';
 import newData from '../lib/newData';
 import { CollectionGroup } from '../lib/interfaces';
+import clearToken from './clearToken';
 
 const Navbar = () => {
   const router = useRouter();
@@ -72,6 +73,8 @@ const Navbar = () => {
           </button>
           <button
             onClick={() => {
+              void clearToken();
+              router.push('/login');
               const token = localStorage.getItem('token');
               if (!token) return;
               const safeContext = () => {
@@ -84,8 +87,7 @@ const Navbar = () => {
                 return safe;
               };
               void handleSaveCollectionGroup({ data: newData({ data: safeContext() }), token: token });
-              localStorage.removeItem('token');
-              router.push('/login');
+              void clearToken();
             }}
             className="button2 group"
             type="submit"
