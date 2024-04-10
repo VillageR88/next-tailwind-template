@@ -71,6 +71,9 @@ const Navbar = ({ token }: { token: string }) => {
           </button>
           <button
             onClick={() => {
+              const style = document.createElement('style');
+              style.innerHTML = `* { cursor: wait}`;
+              document.head.appendChild(style);
               const safeContext = () => {
                 const safe = JSON.parse(JSON.stringify(context.dataContext)) as CollectionGroup;
                 safe.collections.forEach((collection) => {
@@ -82,6 +85,7 @@ const Navbar = ({ token }: { token: string }) => {
               };
               void handleSaveCollectionGroup({ data: newData({ data: safeContext() }), token: token });
               void clearToken().then(() => {
+                document.head.removeChild(style);
                 router.push('/login');
               });
             }}

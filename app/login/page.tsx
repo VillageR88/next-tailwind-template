@@ -1,4 +1,3 @@
-import { Suspense } from 'react';
 import FormLogin from './FormLogin';
 import Logo from '../components/Logo';
 
@@ -14,9 +13,7 @@ export default function Login() {
             <h1 className="leading-[32px]">Login</h1>
           </div>
           <div className="size-full">
-            <Suspense fallback={<p>Loading...</p>}>
-              <FormLogin />
-            </Suspense>
+            <FormLogin />
           </div>
         </main>
       </div>

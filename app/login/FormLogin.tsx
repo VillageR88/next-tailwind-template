@@ -27,7 +27,6 @@ async function createInvoice(formData: FormData) {
       if (e)
         if (e === 'unsuccessful') {
         } else {
-          console.log('login successful');
           cookies().set('token', e);
         }
     })
