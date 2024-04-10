@@ -36,10 +36,11 @@ export default function FormLogin() {
         console.log(e);
         console.log('error occurred');
       });
-    redirect(`/`);
+    if (cookies().get('token')) redirect('/');
   }
 
   return (
+    // eslint-disable-next-line @typescript-eslint/no-misused-promises
     <form action={createInvoice} id="form-login" className="flex size-full flex-col gap-6">
       <div className="flex flex-col gap-2">
         <div className="flex justify-between px-1">
