@@ -1,6 +1,8 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import themeChanger from './themeChanger';
+import themeGet from './themeGet';
 
 enum Theme {
   dark = 'dark',
@@ -8,22 +10,28 @@ enum Theme {
 }
 
 export default function ButtonTheme() {
-  const storageTheme = localStorage.getItem('theme');
-  const [theme, setTheme] = useState<Theme>(storageTheme as Theme);
+  const [theme, setTheme] = useState<Theme>(Theme.dark);
   useEffect(() => {
-    if (theme === Theme.dark) {
-      setTheme(Theme.dark);
-      localStorage.setItem('theme', Theme.dark);
-    } else {
-      setTheme(Theme.light);
-      localStorage.setItem('theme', Theme.light);
-    }
-  }, [theme]);
+    console.log(
+      'themeGet',
+      themeGet().then((res) => {
+        if (res) setTheme(res.value as Theme);
+      }),
+    );
+  }, []);
+  const handleLight = () => {
+    setTheme(Theme.light);
+    void themeChanger({ theme: Theme.light });
+  };
+  const handleDark = () => {
+    setTheme(Theme.dark);
+    void themeChanger({ theme: Theme.dark });
+  };
 
   return (
     <button
       onClick={() => {
-        theme === Theme.dark ? setTheme(Theme.light) : setTheme(Theme.dark);
+        theme === Theme.dark ? handleLight() : handleDark();
       }}
       className="fill-white pr-2 transition hover:fill-[orange]"
     >
