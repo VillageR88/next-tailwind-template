@@ -1,6 +1,3 @@
-import Image from 'next/image';
-import editNote from '@/public/assets/images/edit_note_FILL0_wght400_GRAD0_opsz24.svg';
-
 const Logo = ({ alternate }: { alternate?: boolean }) => (
   <div className="flex items-start justify-center gap-2">
     <svg
@@ -14,11 +11,13 @@ const Logo = ({ alternate }: { alternate?: boolean }) => (
     </svg>
     <div className="flex">
       <span
+        // eslint-disable-next-line tailwindcss/classnames-order
         className={`${alternate ? 'hidden md:block' : 'text-3xl'} font-bold text-[darkorange] md:text-4xl dark:text-[orange]`}
       >
         My
       </span>
       <span
+        // eslint-disable-next-line tailwindcss/classnames-order
         className={`${alternate ? 'hidden md:block' : 'text-3xl'} font-medium transition md:text-4xl dark:text-white`}
       >
         Notebook

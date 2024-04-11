@@ -1,5 +1,3 @@
-import Image from 'next/image';
-import imageLockReset from '@/public/assets/images/lock_reset_FILL0_wght400_GRAD0_opsz24.svg';
 import handleSubmit from './handleSubmit';
 import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation';

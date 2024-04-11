@@ -25,11 +25,11 @@ html {
 }
 
 .button2 {
-  @apply flex h-[44px] min-w-[50px] items-center justify-center overflow-hidden rounded-[6px] border-[orange] bg-gradient-to-b from-[orange] to-[#b97b08] text-[16px] font-extrabold tracking-[1px] transition hover:border md:min-w-[110px];
+  @apply flex h-[44px] min-w-[50px] items-center justify-center overflow-hidden rounded-[6px] dark:border-[orange] border-[darkorange] bg-gradient-to-b from-[darkorange] to-[#d57703] dark:to-[#b97b08] text-[16px] font-extrabold tracking-[1px] transition hover:border md:min-w-[110px] dark:from-[orange];
 }
 
 .button2Inner {
-  @apply flex size-full items-center justify-center bg-[#1C1C1C]/0 fill-white text-white transition group-hover:bg-[#232323]/100 group-hover:fill-[orange] group-hover:text-[orange];
+  @apply flex size-full items-center justify-center bg-[#1C1C1C]/0 fill-white text-white transition group-hover:bg-[white]/100 dark:group-hover:bg-[#232323]/100 group-hover:fill-[darkorange] dark:group-hover:text-[orange] group-hover:text-[darkorange];
 }
 
 h1 {
@@ -53,14 +53,14 @@ label {
 }
 
 input {
-  @apply h-[45px] transition rounded-[6px] border-[orange] bg-[#FAFAFA] p-4 outline-none dark:bg-[#1C1C1C] dark:text-white;
+  @apply h-[45px] rounded-[6px] border-[orange] bg-[#f7f7f7] p-4 outline-none transition dark:bg-[#1C1C1C] dark:text-white;
 }
 
 input:-webkit-autofill,
 input:-webkit-autofill:hover,
 input:-webkit-autofill:focus,
 input:-webkit-autofill:active {
-  @apply shadow-[0_0_0_30px_white_inset] dark:shadow-[0_0_0_30px_#1c1c1c_inset];
+  @apply shadow-[0_0_0_30px_#f7f7f7_inset] dark:shadow-[0_0_0_30px_#1c1c1c_inset];
   -webkit-text-fill-color: white;
   -webkit-background-clip: text;
   -webkit-border-radius: 6px;
