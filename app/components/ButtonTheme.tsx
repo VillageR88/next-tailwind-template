@@ -10,15 +10,17 @@ enum Theme {
 }
 
 export default function ButtonTheme() {
-  const [theme, setTheme] = useState<Theme>(Theme.dark);
+  const [theme, setTheme] = useState<Theme | null>(null);
   useEffect(() => {
-    console.log(
-      'themeGet',
-      themeGet().then((res) => {
+    if (theme) return;
+    themeGet()
+      .then((res) => {
         if (res) setTheme(res.value as Theme);
-      }),
-    );
-  }, []);
+      })
+      .catch((e) => {
+        console.error(e);
+      });
+  }, [theme]);
   const handleLight = () => {
     setTheme(Theme.light);
     void themeChanger({ theme: Theme.light });
