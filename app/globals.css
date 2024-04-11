@@ -53,14 +53,14 @@ label {
 }
 
 input {
-  @apply h-[45px] rounded-[6px] border-[orange] bg-white p-4 outline-none dark:bg-[#1C1C1C] dark:text-white;
+  @apply h-[45px] transition rounded-[6px] border-[orange] bg-[#FAFAFA] p-4 outline-none dark:bg-[#1C1C1C] dark:text-white;
 }
 
 input:-webkit-autofill,
 input:-webkit-autofill:hover,
 input:-webkit-autofill:focus,
 input:-webkit-autofill:active {
-  @apply dark:shadow-[0_0_0_30px_#1c1c1c_inset] shadow-[0_0_0_30px_white_inset];
+  @apply shadow-[0_0_0_30px_white_inset] dark:shadow-[0_0_0_30px_#1c1c1c_inset];
   -webkit-text-fill-color: white;
   -webkit-background-clip: text;
   -webkit-border-radius: 6px;

@@ -10,7 +10,7 @@ export default function Login() {
           <Logo />
           <ButtonTheme />
         </header>
-        <main className="mt-[10px] flex min-h-full w-full flex-col gap-[48px] rounded-[6px] border border-[orange] px-8 pb-14 pt-10 transition dark:border-[#313131] dark:bg-[#232323]">
+        <main className="mt-[10px] flex min-h-full w-full flex-col gap-[48px] rounded-[6px] border border-[#f1f1f1] bg-[white] px-8 pb-14 pt-10 transition dark:border-[#313131] dark:bg-[#232323]">
           <div className="flex h-full items-start">
             <h1 className="leading-[32px]">Login</h1>
           </div>
