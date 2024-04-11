@@ -1,8 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
-import themeChanger from './themeChanger';
-import themeGet from './themeGet';
+import { useEffect, useState } from 'react';
 
 enum Theme {
   dark = 'dark',
@@ -12,22 +10,35 @@ enum Theme {
 export default function ButtonTheme() {
   const [theme, setTheme] = useState<Theme | null>(null);
   useEffect(() => {
-    if (theme) return;
-    themeGet()
-      .then((res) => {
-        if (res) setTheme(res.value as Theme);
-      })
-      .catch((e) => {
-        console.error(e);
-      });
+    if (theme === null) {
+      const value = localStorage.getItem('theme');
+      if (value === Theme.dark || value === Theme.light) setTheme(value as Theme);
+      else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        setTheme(Theme.dark);
+      } else {
+        setTheme(Theme.light);
+      }
+    }
   }, [theme]);
+
+  useEffect(() => {
+    if (theme !== null) {
+      //prefered
+      if (theme === Theme.dark) {
+        document.documentElement.classList.add('dark');
+      } else {
+        document.documentElement.classList.remove('dark');
+      }
+    }
+  }, [theme]);
+
   const handleLight = () => {
     setTheme(Theme.light);
-    void themeChanger({ theme: Theme.light });
+    localStorage.setItem('theme', Theme.light);
   };
   const handleDark = () => {
     setTheme(Theme.dark);
-    void themeChanger({ theme: Theme.dark });
+    localStorage.setItem('theme', Theme.dark);
   };
 
   return (

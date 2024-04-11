@@ -20,6 +20,7 @@ const config: Config = {
     },
   },
   plugins: [],
+  darkMode: 'class', // Add this line
 };
 
 export default config;
