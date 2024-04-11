@@ -6,7 +6,9 @@ const Logo = ({ alternate }: { alternate?: boolean }) => (
     <Image src={editNote as string} alt="edit_note" width={45} height={45} />
     <div className="flex">
       <span className={`${alternate ? 'hidden md:block' : 'text-3xl'} font-bold text-[orange] md:text-4xl`}>My</span>
-      <span className={`${alternate ? 'hidden md:block' : 'text-3xl'} font-medium text-white md:text-4xl`}>
+      <span
+        className={`${alternate ? 'hidden md:block' : 'text-3xl'} font-medium transition md:text-4xl dark:text-white`}
+      >
         Notebook
       </span>
     </div>

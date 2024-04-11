@@ -33,34 +33,34 @@ html {
 }
 
 h1 {
-  @apply text-3xl font-medium text-white md:text-4xl;
+  @apply text-3xl font-medium transition md:text-4xl dark:text-white;
 }
 
 h2 {
-  @apply text-3xl font-medium text-white;
+  @apply text-3xl font-medium transition dark:text-white;
 }
 
 h3 {
-  @apply text-2xl font-medium text-white;
+  @apply text-2xl font-medium transition dark:text-white;
 }
 
 p {
-  @apply text-[14px] text-white md:text-[16px];
+  @apply text-[14px] transition md:text-[16px] dark:text-white;
 }
 
 label {
-  @apply text-[14px] font-medium text-white md:text-[16px];
+  @apply text-[14px] font-medium transition md:text-[16px] dark:text-white;
 }
 
 input {
-  @apply h-[45px] rounded-[6px] border-[orange] bg-[#1C1C1C] p-4 text-white outline-none;
+  @apply h-[45px] rounded-[6px] border-[orange] bg-white p-4 outline-none dark:bg-[#1C1C1C] dark:text-white;
 }
 
 input:-webkit-autofill,
 input:-webkit-autofill:hover,
 input:-webkit-autofill:focus,
 input:-webkit-autofill:active {
-  -webkit-box-shadow: 0 0 0 30px #1c1c1c inset;
+  @apply dark:shadow-[0_0_0_30px_#1c1c1c_inset] shadow-[0_0_0_30px_white_inset];
   -webkit-text-fill-color: white;
   -webkit-background-clip: text;
   -webkit-border-radius: 6px;

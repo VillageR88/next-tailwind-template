@@ -23,7 +23,6 @@ export default function ButtonTheme() {
 
   useEffect(() => {
     if (theme !== null) {
-      //prefered
       if (theme === Theme.dark) {
         document.documentElement.classList.add('dark');
       } else {
@@ -46,7 +45,7 @@ export default function ButtonTheme() {
       onClick={() => {
         theme === Theme.dark ? handleLight() : handleDark();
       }}
-      className="fill-white pr-2 transition hover:fill-[orange]"
+      className="pr-2 transition hover:fill-[orange] dark:fill-white dark:hover:fill-[orange]"
     >
       {theme === Theme.dark ? (
         <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24">
