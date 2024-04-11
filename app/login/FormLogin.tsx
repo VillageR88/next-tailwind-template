@@ -24,7 +24,7 @@ export default function FormLogin() {
         if (e)
           if (e === 'unsuccessful') {
           } else {
-            cookies().set('token', e);
+            cookies().set({ name: 'token', value: e, httpOnly: true });
           }
       })
       .catch((e) => {
