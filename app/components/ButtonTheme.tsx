@@ -1,7 +1,6 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import themeChanger from '@/app/lib/themeChanger';
 
 enum Theme {
   dark = 'dark',
@@ -25,6 +24,7 @@ export default function ButtonTheme() {
 
   useEffect(() => {
     if (theme !== null) {
+      document.documentElement.classList.remove('hidden');
       if (theme === Theme.dark) {
         document.documentElement.classList.add('dark');
       } else {
@@ -33,7 +33,7 @@ export default function ButtonTheme() {
     }
   }, [theme]);
 
-  useEffect(() => {
+  /*  useEffect(() => {
     const handleBeforeUnload = () => {
       console.log('The site is being closed');
       if (theme === null) return;
@@ -44,7 +44,7 @@ export default function ButtonTheme() {
     return () => {
       window.removeEventListener('beforeunload', handleBeforeUnload);
     };
-  }, [theme]);
+  }, [theme]);*/
 
   const handleLight = () => {
     setTheme(Theme.light);
