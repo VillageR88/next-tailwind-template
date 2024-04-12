@@ -9,6 +9,7 @@ import handleSaveCollectionGroup from './handleSaveCollectionGroup';
 import newData from '../lib/newData';
 import { CollectionGroup } from '../lib/interfaces';
 import clearToken from './clearToken';
+import ButtonTheme from '../components/ButtonTheme';
 
 const Navbar = ({ token }: { token: string }) => {
   const logoutRef = useRef<HTMLButtonElement>(null);
@@ -21,9 +22,12 @@ const Navbar = ({ token }: { token: string }) => {
   };
 
   return (
-    <nav className="flex w-full justify-center border-b border-[#313131] bg-[#1C1C1C] px-8 py-4">
+    <nav className="flex w-full justify-center  border-[#313131]  px-8 py-4">
       <div className="flex size-full max-w-[90em] items-center justify-between">
-        <Logo alternate />
+        <div className="flex items-center gap-6">
+          <Logo alternate />
+          <ButtonTheme />
+        </div>
         <div className="flex gap-4">
           <button
             onClick={() => {

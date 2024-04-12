@@ -15,6 +15,7 @@ export default function ButtonTheme() {
       const value = localStorage.getItem('theme');
       if (value === Theme.dark || value === Theme.light) setTheme(value as Theme);
       else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.documentElement.classList.add('dark');
         setTheme(Theme.dark);
       } else {
         setTheme(Theme.light);
