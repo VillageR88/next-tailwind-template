@@ -71,7 +71,7 @@ export default function FormLogin() {
           required
           autoComplete="email"
           placeholder="example@domain.com"
-          className="w-full"
+          className="transition"
           id="email"
           type="email"
           pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
@@ -112,6 +112,7 @@ export default function FormLogin() {
           </button>
         </div>
         <input
+          className="transition"
           name="password"
           required
           minLength={8}

@@ -48,14 +48,14 @@ label {
 }
 
 input {
-  @apply h-[45px] rounded-[6px] border-[orange] bg-[#f7f7f7] p-4 outline-none transition dark:bg-[#1C1C1C] dark:text-white;
+  @apply h-[45px] rounded-[6px] border border-[#d4d2d2]  p-4 outline-none transition dark:border-[#1C1C1C] dark:bg-[#1C1C1C] dark:text-white;
 }
 
 input:-webkit-autofill,
 input:-webkit-autofill:hover,
 input:-webkit-autofill:focus,
 input:-webkit-autofill:active {
-  @apply shadow-[0_0_0_30px_#f7f7f7_inset] dark:shadow-[0_0_0_30px_#1c1c1c_inset] dark:['&::-webkit-text-fill-color']:text-black;
+  @apply shadow-[0_0_0_30px_white_inset] transition dark:shadow-[0_0_0_30px_#1c1c1c_inset];
   -webkit-text-fill-color: black;
   -webkit-background-clip: text;
   background-clip: text;
