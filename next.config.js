@@ -10,10 +10,10 @@ const nextConfig = {
   reactStrictMode: true,
 };
 
-if (process.env.NODE_ENV !== 'development') {
-  nextConfig.assetPrefix = '/serverTestApp';
-  nextConfig.basePath = '/serverTestApp';
-}
+//if (process.env.NODE_ENV !== 'development') {
+//  nextConfig.assetPrefix = '/serverTestApp';
+//  nextConfig.basePath = '/serverTestApp';
+//}
 
 
 module.exports = nextConfig;
