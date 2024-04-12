@@ -43,7 +43,7 @@ const Item = ({
       dragControls={controls}
       value={collection}
       key={collection.id}
-      className="group/group2 flex select-none flex-col gap-[6px] rounded-[6px] border border-[#313131] bg-[#232323] px-3 py-4 "
+      className="group/group2 flex select-none flex-col gap-[6px] rounded-[6px] border border-[#f5f5f5] bg-white px-3 py-4 drop-shadow-sm dark:border-[#313131]  dark:bg-[#232323] "
     >
       <div className="flex justify-between px-1">
         <div className="flex items-center gap-3 pb-[8px]">
@@ -56,7 +56,7 @@ const Item = ({
               context.initialDataContext.current = newData({ data: context.dataContext });
               context.setDataContext(newData({ data: context.dataContext }));
             }}
-            className="text-left text-[18px] font-bold text-white transition hover:text-[orange]"
+            className="text-left text-[18px] font-bold  hover:text-[orange] dark:text-white"
           >
             {collection.title}
           </button>
@@ -92,7 +92,7 @@ const ItemsNested = ({ note }: { note: Note }) => {
       dragControls={controls}
       value={note}
       key={note.id}
-      className="group/group3 rounded-[6px] bg-[#1C1C1C] p-[10px] text-white"
+      className="group/group3 rounded-[6px] border p-[10px] dark:border-[#1C1C1C] dark:bg-[#1C1C1C] dark:text-white"
     >
       <div className="flex justify-between pl-1 pr-2">
         <span>{note.description}</span>

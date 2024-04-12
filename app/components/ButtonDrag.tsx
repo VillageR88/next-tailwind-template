@@ -8,7 +8,13 @@ const ButtonDrag = ({ func, alwaysVisible }: { func(arg: React.PointerEvent): vo
       }}
       style={{ touchAction: 'none' }}
     >
-      <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24" fill="white">
+      <svg
+        className="transition dark:fill-white"
+        xmlns="http://www.w3.org/2000/svg"
+        height="24"
+        viewBox="0 -960 960 960"
+        width="24"
+      >
         <path d="M160-360v-80h640v80H160Zm0-160v-80h640v80H160Z" />
       </svg>
     </div>
