@@ -8,11 +8,11 @@
 }
 
 .button1 {
-  @apply h-[44px] w-[50px] items-center justify-center gap-[2px] rounded-[6px] border border-[#636262] bg-gradient-to-b fill-white text-[16px] font-extrabold tracking-[1px] text-white transition disabled:opacity-25 md:w-[110px];
+  @apply h-[44px] w-[50px] items-center justify-center gap-[2px] rounded-[6px] border-2 border-[#636262] bg-gradient-to-b fill-white text-[16px] font-extrabold tracking-[1px] transition disabled:opacity-25 dark:border-[1px] dark:text-white md:w-[110px];
 }
 
 .button1:not([disabled]):hover {
-  @apply fill-[orange] hover:border-[orange] hover:text-[orange];
+  @apply border-2 border-[darkorange] fill-[darkorange] text-[darkorange] transition dark:border dark:border-[orange] dark:fill-[orange] dark:text-[orange];
 }
 
 .button1:disabled:hover {
@@ -20,7 +20,7 @@
 }
 
 .button2 {
-  @apply flex h-[44px] min-w-[50px] items-center justify-center overflow-hidden rounded-[6px] border-[darkorange] bg-gradient-to-b from-[darkorange] to-[#d57703] text-[16px] font-extrabold tracking-[1px] transition hover:border dark:border-[orange] dark:from-[orange] dark:to-[#b97b08] md:min-w-[110px];
+  @apply flex h-[44px] min-w-[50px] items-center justify-center overflow-hidden rounded-[6px] border-[darkorange] bg-gradient-to-b from-[darkorange] to-[#d57703] text-[16px] font-extrabold tracking-[1px] transition hover:border-2 dark:border-[orange] dark:from-[orange] dark:to-[#b97b08] dark:hover:border md:min-w-[110px];
 }
 
 .button2Inner {
