@@ -37,7 +37,8 @@
     ".next/types/**/*.ts",
     "build/types/**/*.ts",
     "assets.d.ts",
-    "serverTestApp/types/**/*.ts"
+    "serverTestApp/types/**/*.ts",
+    "serverApp/types/**/*.ts"
   ],
   "exclude": [
     "node_modules"

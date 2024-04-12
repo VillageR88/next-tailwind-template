@@ -3,11 +3,10 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "start": "next dev -p 36969",
+    "dev": "next dev",
     "build": "next build",
-    "serve": "npx -y serve -s build -p 36969",
-    "lint": "tsc && next lint",
-    "lint:fix": "next lint --fix"
+    "start": "next start",
+    "lint": "next lint"
   },
   "dependencies": {
     "framer-motion": "^11.0.24",
