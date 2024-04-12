@@ -24,14 +24,14 @@ const CollectionPage = ({
   const [noteEditable, setNoteEditable] = useState<null | number>(null);
   return (
     <div className="flex w-full max-w-4xl flex-col gap-6">
-      <div className="group flex select-none flex-col gap-[6px] rounded-[6px] border border-[#313131] bg-[#232323] px-3 py-4 ">
+      <div className="group flex select-none flex-col gap-[6px] rounded-[6px] border border-[#f5f5f5] bg-white  px-3  py-4 drop-shadow-sm dark:border-[#313131] dark:bg-[#232323] ">
         <div className="flex justify-between px-1">
           {!titleEditable ? (
             <button
               onClick={() => {
                 setTitleEditable(true);
               }}
-              className="max-w-[92%] truncate pb-[8px] text-left text-[18px] font-bold text-white transition hover:text-[orange]"
+              className="max-w-[92%] truncate pb-[8px] text-left text-[18px] font-bold transition hover:text-[darkorange] dark:text-white dark:hover:text-[orange]"
             >
               {context.dataContext.collections[page - 1].title}
             </button>
@@ -60,7 +60,7 @@ const CollectionPage = ({
                 const newDataContext = { collections: newCollections };
                 context.setDataContext(newDataContext);
               }}
-              className="h-fit w-[92%] border-none bg-transparent p-0 text-left text-[18px] font-bold text-white transition"
+              className="h-fit w-[92%] border-2 bg-transparent p-0 text-left text-[18px] font-bold transition dark:text-white"
             />
           )}
           <div className="flex gap-2 pb-3">
@@ -119,14 +119,14 @@ const CollectionPage = ({
               dragListener={false}
               dragControls={controls}
               value={note}
-              className="rounded-[6px] bg-[#1C1C1C] p-[10px]"
+              className="rounded-[6px] border-2 p-[10px] dark:border-[#1C1C1C] dark:bg-[#1C1C1C]"
               key={note.id}
             >
               <div className="flex justify-between pl-1 pr-2">
                 {noteEditable === index ? (
                   <input
                     autoFocus
-                    className="h-fit w-[92%] border-none bg-transparent p-0 text-left text-white transition"
+                    className="h-fit w-[92%] border-none bg-transparent p-0 text-left transition dark:text-white"
                     type="text"
                     value={note.description}
                     onChange={(e) => {
@@ -154,11 +154,11 @@ const CollectionPage = ({
                     onClick={() => {
                       setNoteEditable(index);
                     }}
-                    className="text-white transition hover:text-[orange]"
+                    className="font-semibold transition hover:text-[darkorange] dark:font-normal dark:text-white dark:hover:text-[orange]"
                   >
                     {note.description}
                   </button>
-                )}{' '}
+                )}
                 <ButtonDrag
                   alwaysVisible
                   func={(e) => {
