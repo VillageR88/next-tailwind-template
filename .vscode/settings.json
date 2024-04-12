@@ -23,5 +23,6 @@
     "unoptimized",
     "webp",
     "wght"
-  ]
+  ],
+  "postcss.validate": true
 }

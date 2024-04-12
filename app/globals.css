@@ -7,11 +7,6 @@
   src: url('/assets/fonts/instrumentSans/InstrumentSans-VariableFont_wdth,wght.ttf') format('truetype');
 }
 
-html {
-  /* dark scroll bars */
-  /* color-scheme: dark; */
-}
-
 .button1 {
   @apply h-[44px] w-[50px] items-center justify-center gap-[2px] rounded-[6px] border border-[#636262] bg-gradient-to-b fill-white text-[16px] font-extrabold tracking-[1px] text-white transition disabled:opacity-25 md:w-[110px];
 }
@@ -25,15 +20,15 @@ html {
 }
 
 .button2 {
-  @apply flex h-[44px] min-w-[50px] items-center justify-center overflow-hidden rounded-[6px] dark:border-[orange] border-[darkorange] bg-gradient-to-b from-[darkorange] to-[#d57703] dark:to-[#b97b08] text-[16px] font-extrabold tracking-[1px] transition hover:border md:min-w-[110px] dark:from-[orange];
+  @apply flex h-[44px] min-w-[50px] items-center justify-center overflow-hidden rounded-[6px] border-[darkorange] bg-gradient-to-b from-[darkorange] to-[#d57703] text-[16px] font-extrabold tracking-[1px] transition hover:border dark:border-[orange] dark:from-[orange] dark:to-[#b97b08] md:min-w-[110px];
 }
 
 .button2Inner {
-  @apply flex size-full items-center justify-center bg-[#1C1C1C]/0 fill-white text-white transition group-hover:bg-[white]/100 dark:group-hover:bg-[#232323]/100 group-hover:fill-[darkorange] dark:group-hover:text-[orange] group-hover:text-[darkorange];
+  @apply flex size-full items-center justify-center bg-[#1C1C1C]/0 fill-white text-white transition group-hover:bg-[white]/100 group-hover:fill-[darkorange] group-hover:text-[darkorange] dark:group-hover:bg-[#232323]/100 dark:group-hover:text-[orange];
 }
 
 h1 {
-  @apply text-3xl font-medium transition md:text-4xl dark:text-white;
+  @apply text-3xl font-medium transition dark:text-white md:text-4xl;
 }
 
 h2 {
@@ -45,11 +40,11 @@ h3 {
 }
 
 p {
-  @apply text-[14px] transition md:text-[16px] dark:text-white;
+  @apply text-[14px] transition dark:text-white md:text-[16px];
 }
 
 label {
-  @apply text-[14px] font-medium transition md:text-[16px] dark:text-white;
+  @apply text-[14px] font-medium transition dark:text-white md:text-[16px];
 }
 
 input {
@@ -60,8 +55,14 @@ input:-webkit-autofill,
 input:-webkit-autofill:hover,
 input:-webkit-autofill:focus,
 input:-webkit-autofill:active {
-  @apply shadow-[0_0_0_30px_#f7f7f7_inset] dark:shadow-[0_0_0_30px_#1c1c1c_inset];
-  -webkit-text-fill-color: white;
+  @apply shadow-[0_0_0_30px_#f7f7f7_inset] dark:shadow-[0_0_0_30px_#1c1c1c_inset] dark:['&::-webkit-text-fill-color']:text-black;
+  -webkit-text-fill-color: black;
   -webkit-background-clip: text;
+  background-clip: text;
   -webkit-border-radius: 6px;
+  border-radius: 6px;
+  -webkit-text-size-adjust: none;
+}
+:is(.dark) input:-webkit-autofill {
+  -webkit-text-fill-color: white;
 }
