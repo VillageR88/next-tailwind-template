@@ -16,13 +16,13 @@ export default function Home() {
   const [token, setToken] = useState<string | null>(null);
   const [dataContext, setDataContext] = useState<CollectionGroup>({ collections: [] });
   const initialDataContext = useRef<CollectionGroup>({ collections: [] });
+
   useEffect(() => {
     void checkToken().then((token) => {
       if (token) setToken(token.value);
       else router.push('/login');
     });
   }, [router]);
-
   useEffect(() => {
     if (token) {
       setLoading(true);
@@ -39,6 +39,7 @@ export default function Home() {
         });
     }
   }, [token]);
+
   return loading ? (
     <div className="flex min-h-[100dvh] w-full flex-col items-center justify-center md:min-h-screen">
       <RotatingLines width="200" strokeColor="orange" />
