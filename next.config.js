@@ -6,13 +6,13 @@ const nextConfig = {
   //output: 'export',
   images: { unoptimized: true },
   trailingSlash: true,
-  distDir: 'serverTestApp',
+  distDir: 'build',
   reactStrictMode: true,
 };
 
 //if (process.env.NODE_ENV !== 'development') {
-//  nextConfig.assetPrefix = '/serverTestApp';
-//  nextConfig.basePath = '/serverTestApp';
+// nextConfig.assetPrefix = '/server/app';
+// nextConfig.basePath = '/server/app';
 //}
 
 
