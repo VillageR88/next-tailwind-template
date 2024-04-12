@@ -92,7 +92,7 @@ const ItemsNested = ({ note }: { note: Note }) => {
       dragControls={controls}
       value={note}
       key={note.id}
-      className="group/group3 rounded-[6px] border-2 p-[10px] font-semibold dark:border-[#1C1C1C] dark:bg-[#1C1C1C] dark:font-normal dark:text-white"
+      className="group/group3 rounded-[6px] border border-[rgba(0,0,0,0.2)]  p-[10px] font-semibold dark:border-[#1C1C1C] dark:bg-[#1C1C1C] dark:font-normal dark:text-white"
     >
       <div className="flex justify-between pl-1 pr-2">
         <span>{note.description}</span>
