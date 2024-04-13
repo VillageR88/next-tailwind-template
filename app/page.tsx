@@ -1,7 +1,6 @@
 'use client';
 
 import { useEffect, useState, useContext } from 'react';
-import { RotatingLines } from 'react-loader-spinner';
 import Navbar from './home/Navbar';
 import Main from './home/Main';
 import { DataContext } from './_providers/DataContext';
@@ -44,11 +43,7 @@ export default function Home() {
     }
   }, [initialDataContext, loading, setDataContext, token]);
 
-  return loading ? (
-    <div className="flex min-h-[100dvh] w-full flex-col items-center justify-center md:min-h-screen">
-      <RotatingLines width="200" strokeColor="orange" />
-    </div>
-  ) : (
+  return (
     token !== null && (
       <div className="flex min-h-[100dvh] w-full flex-col items-center justify-start overflow-hidden text-clip md:min-h-screen">
         <Navbar token={token} />
