@@ -1,5 +1,6 @@
 import './globals.css';
 import type { Metadata } from 'next';
+import DataContext from '@/app/home/DataContext';
 
 export const metadata: Metadata = {
   title: 'My App',
@@ -16,7 +17,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"></link>
       </head>
       <body className={'bg-[#f7f7f7] transition dark:bg-[#1C1C1C]'}>
-        <div>{children}</div>
+        <DataContext>{children}</DataContext>
       </body>
     </html>
   );

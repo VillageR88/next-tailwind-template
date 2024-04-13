@@ -5,7 +5,7 @@ import ButtonTheme from '../components/ButtonTheme';
 export default function Login() {
   return (
     <div className="flex min-h-[100dvh] w-full flex-col items-center justify-center px-8 py-10 font-instrumentSans md:min-h-screen">
-      <div className={`flex w-full max-w-[500px] flex-col items-center justify-between gap-3 `}>
+      <div className={`flex w-full max-w-[500px] flex-col items-center justify-between gap-3`}>
         <header className="flex w-full justify-between dark:drop-shadow-none">
           <Logo />
           <ButtonTheme />

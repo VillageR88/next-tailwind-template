@@ -1,7 +1,7 @@
 import Logo from '../components/Logo';
 import { useRouter } from 'next/navigation';
 import { useContext, useRef } from 'react';
-import DataContext from '@/app/home/DataContext';
+import { DataContext } from '@/app/home/DataContext';
 import IconSave from '../components/IconSave';
 import IconUndo from '../components/IconUndo';
 import IconLogout from '../components/IconLogout';
@@ -14,11 +14,9 @@ import ButtonTheme from '../components/ButtonTheme';
 const Navbar = ({ token }: { token: string }) => {
   const logoutRef = useRef<HTMLButtonElement>(null);
   const router = useRouter();
-  const context = useContext(DataContext);
+  const { dataContext, initialDataContext, setDataContext } = useContext(DataContext);
   const checkSame = () => {
-    return (
-      JSON.stringify(context.dataContext.collections) === JSON.stringify(context.initialDataContext.current.collections)
-    );
+    return JSON.stringify(dataContext.collections) === JSON.stringify(initialDataContext.current.collections);
   };
 
   return (
@@ -35,7 +33,7 @@ const Navbar = ({ token }: { token: string }) => {
               style.innerHTML = `* { cursor: wait}`;
               document.head.appendChild(style);
               const safeContext = () => {
-                const safe = JSON.parse(JSON.stringify(context.dataContext)) as CollectionGroup;
+                const safe = JSON.parse(JSON.stringify(dataContext)) as CollectionGroup;
                 safe.collections.forEach((collection) => {
                   if (collection.title.length === 0) {
                     collection.title = 'Untitled Collection';
@@ -46,8 +44,8 @@ const Navbar = ({ token }: { token: string }) => {
               handleSaveCollectionGroup({ data: newData({ data: safeContext() }), token: token })
                 .then((res) => {
                   if (res) {
-                    context.initialDataContext.current = JSON.parse(JSON.stringify(safeContext())) as CollectionGroup;
-                    context.setDataContext(JSON.parse(JSON.stringify(safeContext())) as CollectionGroup);
+                    initialDataContext.current = JSON.parse(JSON.stringify(safeContext())) as CollectionGroup;
+                    setDataContext(JSON.parse(JSON.stringify(safeContext())) as CollectionGroup);
                   }
                   document.head.removeChild(style);
                 })
@@ -65,7 +63,7 @@ const Navbar = ({ token }: { token: string }) => {
           </button>
           <button
             onClick={() => {
-              context.setDataContext(context.initialDataContext.current);
+              setDataContext(initialDataContext.current);
             }}
             disabled={checkSame()}
             className="button1 flex"
@@ -82,7 +80,7 @@ const Navbar = ({ token }: { token: string }) => {
               style.innerHTML = `* { cursor: wait}`;
               document.head.appendChild(style);
               const safeContext = () => {
-                const safe = JSON.parse(JSON.stringify(context.dataContext)) as CollectionGroup;
+                const safe = JSON.parse(JSON.stringify(dataContext)) as CollectionGroup;
                 safe.collections.forEach((collection) => {
                   if (collection.title.length === 0) {
                     collection.title = 'Untitled Collection';

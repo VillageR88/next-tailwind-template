@@ -1,4 +1,4 @@
-import DataContext from './DataContext';
+import { DataContext } from './DataContext';
 import { useContext, useState } from 'react';
 import IconReturn from '../components/IconReturn';
 import ButtonAdd from '../components/ButtonAdd';
@@ -19,7 +19,7 @@ const CollectionPage = ({
   setPage: React.Dispatch<React.SetStateAction<number | null>>;
 }) => {
   const controls = useDragControls();
-  const context = useContext(DataContext);
+  const { dataContext, initialDataContext, setDataContext } = useContext(DataContext);
   const [titleEditable, setTitleEditable] = useState<boolean>(false);
   const [noteEditable, setNoteEditable] = useState<null | number>(null);
   return (
@@ -33,7 +33,7 @@ const CollectionPage = ({
               }}
               className="max-w-[92%] truncate pb-[8px] text-left text-[18px] font-bold transition hover:text-[darkorange] dark:text-white dark:hover:text-[orange]"
             >
-              {context.dataContext.collections[page - 1].title}
+              {dataContext.collections[page - 1].title}
             </button>
           ) : (
             <input
@@ -49,16 +49,16 @@ const CollectionPage = ({
                 }
               }}
               type="text"
-              value={context.dataContext.collections[page - 1].title}
+              value={dataContext.collections[page - 1].title}
               onChange={(e) => {
-                const newCollections = context.dataContext.collections.map((collection) => {
+                const newCollections = dataContext.collections.map((collection) => {
                   if (collection.id === page) {
                     collection.title = e.target.value;
                   }
                   return collection;
                 });
                 const newDataContext = { collections: newCollections };
-                context.setDataContext(newDataContext);
+                setDataContext(newDataContext);
               }}
               className="h-fit w-[92%] border-2 bg-transparent p-0 text-left text-[18px] font-bold transition dark:text-white"
             />
@@ -67,7 +67,7 @@ const CollectionPage = ({
             <ButtonAdd
               alwaysVisible
               func={() => {
-                const newCollections = context.dataContext.collections.map((collection) => {
+                const newCollections = dataContext.collections.map((collection) => {
                   if (collection.id === page) {
                     collection.Notes.push({
                       id: Math.floor(Math.random() * 1000000),
@@ -79,17 +79,17 @@ const CollectionPage = ({
                 });
                 const newDataContext = { collections: newCollections };
                 const stringifiedData = JSON.parse(JSON.stringify(newDataContext)) as CollectionGroup;
-                context.setDataContext(stringifiedData);
+                setDataContext(stringifiedData);
               }}
             />
             <ButtonDelete
               alwaysVisible
               func={() => {
-                const newCollections = context.dataContext.collections.filter((collection) => collection.id !== page);
+                const newCollections = dataContext.collections.filter((collection) => collection.id !== page);
                 const newDataContext = { collections: newCollections };
                 const stringifiedData = JSON.parse(JSON.stringify(newDataContext)) as CollectionGroup;
-                context.initialDataContext.current = stringifiedData;
-                context.setDataContext(stringifiedData);
+                initialDataContext.current = stringifiedData;
+                setDataContext(stringifiedData);
                 if (!token) return;
                 void handleSaveCollectionGroup({
                   data: newData({ data: newDataContext }),
@@ -101,20 +101,20 @@ const CollectionPage = ({
           </div>
         </div>
         <Reorder.Group
-          values={context.dataContext.collections[page - 1].Notes}
+          values={dataContext.collections[page - 1].Notes}
           onReorder={(newOrder) => {
-            const newCollections = context.dataContext.collections.map((collection) => {
+            const newCollections = dataContext.collections.map((collection) => {
               if (collection.id === page) {
                 collection.Notes = newOrder;
               }
               return collection;
             });
             const newDataContext = { collections: newCollections };
-            context.setDataContext(newDataContext);
+            setDataContext(newDataContext);
           }}
           className="flex flex-col gap-2"
         >
-          {context.dataContext.collections[page - 1].Notes.map((note, index) => (
+          {dataContext.collections[page - 1].Notes.map((note, index) => (
             <Reorder.Item
               dragListener={false}
               dragControls={controls}
@@ -130,14 +130,14 @@ const CollectionPage = ({
                     type="text"
                     value={note.description}
                     onChange={(e) => {
-                      const newCollections = context.dataContext.collections.map((collection) => {
+                      const newCollections = dataContext.collections.map((collection) => {
                         if (collection.id === page) {
                           collection.Notes[index].description = e.target.value;
                         }
                         return collection;
                       });
                       const newDataContext = { collections: newCollections };
-                      context.setDataContext(newDataContext);
+                      setDataContext(newDataContext);
                     }}
                     onKeyDown={(e) => {
                       if (e.key === 'Enter') {
@@ -176,7 +176,7 @@ const CollectionPage = ({
           setPage(null);
           if (!token) return;
           const safeContext = () => {
-            const safe = JSON.parse(JSON.stringify(context.dataContext)) as CollectionGroup;
+            const safe = JSON.parse(JSON.stringify(dataContext)) as CollectionGroup;
             safe.collections.forEach((collection) => {
               if (collection.title.length === 0) {
                 collection.title = 'Untitled Collection';
@@ -184,8 +184,8 @@ const CollectionPage = ({
             });
             return safe;
           };
-          context.initialDataContext.current = newData({ data: safeContext() });
-          context.setDataContext(newData({ data: safeContext() }));
+          initialDataContext.current = newData({ data: safeContext() });
+          setDataContext(newData({ data: safeContext() }));
           void handleSaveCollectionGroup({
             data: newData({ data: safeContext() }),
             token: token,

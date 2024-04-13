@@ -1,5 +1,5 @@
 import { useContext } from 'react';
-import DataContext from '@/app/home/DataContext';
+import { DataContext } from '@/app/home/DataContext';
 import { Reorder, useDragControls } from 'framer-motion';
 import { Collection, Note } from '../lib/interfaces';
 import ButtonDrag from '../components/ButtonDrag';
@@ -109,10 +109,10 @@ const ItemsNested = ({ note }: { note: Note }) => {
 };
 
 const Notebook = ({ setPage }: { setPage: React.Dispatch<React.SetStateAction<number | null>> }) => {
-  const context = useContext(DataContext);
+  const { dataContext, setDataContext } = useContext(DataContext);
 
   const handleReorderGroup = (newOrder: Collection[]) => {
-    context.setDataContext((prevState) => ({
+    setDataContext((prevState) => ({
       ...prevState,
       collections: newOrder,
     }));
@@ -122,10 +122,10 @@ const Notebook = ({ setPage }: { setPage: React.Dispatch<React.SetStateAction<nu
     <div className="flex w-full max-w-4xl flex-col gap-6">
       <Reorder.Group
         className="flex w-full flex-col gap-8"
-        values={context.dataContext.collections}
+        values={dataContext.collections}
         onReorder={handleReorderGroup}
       >
-        {context.dataContext.collections.map((collection, index) => {
+        {dataContext.collections.map((collection, index) => {
           return <Item index={index} key={collection.id} collection={collection} setPage={setPage} />;
         })}
       </Reorder.Group>
@@ -133,7 +133,7 @@ const Notebook = ({ setPage }: { setPage: React.Dispatch<React.SetStateAction<nu
       <button
         className="button1 flex pt-[1px]"
         onClick={() => {
-          context.setDataContext((prevState) => {
+          setDataContext((prevState) => {
             const newNotebook = [...prevState.collections];
             newNotebook.push({
               id: newNotebook.length + 1,
