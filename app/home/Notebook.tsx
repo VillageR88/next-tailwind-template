@@ -17,10 +17,9 @@ const Item = ({
   index: number;
 }) => {
   const controls = useDragControls();
-  const context = useContext(DataContext);
-
+  const { dataContext, initialDataContext, setDataContext } = useContext(DataContext);
   const handleReorderItem = (newOrder: Note[], collectionId: number) => {
-    context.setDataContext((prevState) => {
+    setDataContext((prevState) => {
       const collectionIndex = prevState.collections.findIndex((collection) => collection.id === +collectionId);
 
       const newCollections = [...prevState.collections];
@@ -52,9 +51,9 @@ const Item = ({
               setPage(index + 1);
               const token = localStorage.getItem('token');
               if (!token) return;
-              void handleSaveCollectionGroup({ data: newData({ data: context.dataContext }), token: token });
-              context.initialDataContext.current = newData({ data: context.dataContext });
-              context.setDataContext(newData({ data: context.dataContext }));
+              void handleSaveCollectionGroup({ data: newData({ data: dataContext }), token: token });
+              initialDataContext.current = newData({ data: dataContext });
+              setDataContext(newData({ data: dataContext }));
             }}
             className="text-left text-[18px] font-bold transition-colors duration-[150ms] hover:text-[darkorange] dark:text-white dark:hover:text-[orange]"
           >

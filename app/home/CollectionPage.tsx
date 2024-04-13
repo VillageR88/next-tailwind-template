@@ -70,7 +70,7 @@ const CollectionPage = ({
                 const newCollections = dataContext.collections.map((collection) => {
                   if (collection.id === page) {
                     collection.Notes.push({
-                      id: Math.floor(Math.random() * 1000000),
+                      id: collection.Notes.length + 1,
                       description: 'New Note',
                       title: '',
                     });
@@ -78,8 +78,7 @@ const CollectionPage = ({
                   return collection;
                 });
                 const newDataContext = { collections: newCollections };
-                const stringifiedData = JSON.parse(JSON.stringify(newDataContext)) as CollectionGroup;
-                setDataContext(stringifiedData);
+                setDataContext(JSON.parse(JSON.stringify(newDataContext)) as CollectionGroup);
               }}
             />
             <ButtonDelete
@@ -87,12 +86,13 @@ const CollectionPage = ({
               func={() => {
                 const newCollections = dataContext.collections.filter((collection) => collection.id !== page);
                 const newDataContext = { collections: newCollections };
-                const stringifiedData = JSON.parse(JSON.stringify(newDataContext)) as CollectionGroup;
-                initialDataContext.current = stringifiedData;
-                setDataContext(stringifiedData);
+                initialDataContext.current = newData({
+                  data: JSON.parse(JSON.stringify(newDataContext)) as CollectionGroup,
+                });
+                setDataContext(newData({ data: JSON.parse(JSON.stringify(newDataContext)) as CollectionGroup }));
                 if (!token) return;
                 void handleSaveCollectionGroup({
-                  data: newData({ data: newDataContext }),
+                  data: newData({ data: JSON.parse(JSON.stringify(newDataContext)) as CollectionGroup }),
                   token: token,
                 });
                 setPage(null);

@@ -8,6 +8,7 @@ import { DataContext } from './_providers/DataContext';
 import handleLoadCollectionGroup from '@/app/home/handleLoadCollectionGroup';
 import checkToken from './home/checkToken';
 import { useRouter } from 'next/navigation';
+import { CollectionGroup } from './lib/interfaces';
 
 export default function Home() {
   const { initialDataContext, setDataContext } = useContext(DataContext);
@@ -16,19 +17,24 @@ export default function Home() {
   const [token, setToken] = useState<string | null>(null);
 
   useEffect(() => {
-    void checkToken().then((e) => {
-      if (e) setToken(e);
-      else router.push('/login');
-    });
-  }, [router]);
-  useEffect(() => {
-    if (token) {
+    if (!token) {
       setLoading(true);
+      void checkToken().then((e) => {
+        if (e) setToken(e);
+        else router.push('/login');
+      });
+    }
+  }, [router, token]);
+  useEffect(() => {
+    if (token && loading) {
       handleLoadCollectionGroup({ token: token })
         .then((data) => {
-          if (!data) return;
-          setDataContext(data);
-          initialDataContext.current = data;
+          if (!data) {
+            setLoading(false);
+            return;
+          }
+          setDataContext(JSON.parse(JSON.stringify(data)) as CollectionGroup);
+          initialDataContext.current = JSON.parse(JSON.stringify(data)) as CollectionGroup;
           setLoading(false);
         })
         .catch((error) => {
@@ -36,7 +42,7 @@ export default function Home() {
           setLoading(false);
         });
     }
-  }, [initialDataContext, setDataContext, token]);
+  }, [initialDataContext, loading, setDataContext, token]);
 
   return loading ? (
     <div className="flex min-h-[100dvh] w-full flex-col items-center justify-center md:min-h-screen">
