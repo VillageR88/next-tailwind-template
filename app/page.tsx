@@ -16,8 +16,8 @@ export default function Home() {
   const [token, setToken] = useState<string | null>(null);
 
   useEffect(() => {
-    void checkToken().then((token) => {
-      if (token) setToken(token.value);
+    void checkToken().then((e) => {
+      if (e) setToken(e);
       else router.push('/login');
     });
   }, [router]);
