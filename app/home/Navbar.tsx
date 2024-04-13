@@ -1,7 +1,7 @@
 import Logo from '../components/Logo';
 import { useRouter } from 'next/navigation';
 import { useContext, useRef } from 'react';
-import { DataContext } from '@/app/home/DataContext';
+import { DataContext } from '@/app/_providers/DataContext';
 import IconSave from '../components/IconSave';
 import IconUndo from '../components/IconUndo';
 import IconLogout from '../components/IconLogout';

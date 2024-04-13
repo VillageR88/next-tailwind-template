@@ -1,5 +1,5 @@
 import { useContext } from 'react';
-import { DataContext } from '@/app/home/DataContext';
+import { DataContext } from '@/app/_providers/DataContext';
 import { Reorder, useDragControls } from 'framer-motion';
 import { Collection, Note } from '../lib/interfaces';
 import ButtonDrag from '../components/ButtonDrag';

@@ -1,7 +1,7 @@
-import { DataContext } from './DataContext';
+import { DataContext } from '../_providers/DataContext';
 import { useContext, useState } from 'react';
 import IconReturn from '../components/IconReturn';
-import ButtonAdd from '../components/ButtonAdd';
+import ButtonAdd from '../ButtonAdd';
 import ButtonDelete from '../components/ButtonDelete';
 import handleSaveCollectionGroup from './handleSaveCollectionGroup';
 import newData from '../lib/newData';

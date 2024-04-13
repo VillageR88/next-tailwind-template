@@ -1,6 +1,6 @@
 import './globals.css';
 import type { Metadata } from 'next';
-import DataContext from '@/app/home/DataContext';
+import DataContext from '@/app/_providers/DataContext';
 
 export const metadata: Metadata = {
   title: 'My App',

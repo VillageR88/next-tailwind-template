@@ -1,17 +1,16 @@
 'use client';
 
-import { useEffect, useState, useRef, useContext } from 'react';
+import { useEffect, useState, useContext } from 'react';
 import { RotatingLines } from 'react-loader-spinner';
 import Navbar from './home/Navbar';
 import Main from './home/Main';
-import { CollectionGroup } from '@/app/lib/interfaces';
-import DataContext from './home/DataContext';
+import { DataContext } from './_providers/DataContext';
 import handleLoadCollectionGroup from '@/app/home/handleLoadCollectionGroup';
 import checkToken from './home/checkToken';
 import { useRouter } from 'next/navigation';
 
 export default function Home() {
-  const data = useContext(DataContext);
+  const { initialDataContext, setDataContext } = useContext(DataContext);
   const router = useRouter();
   const [loading, setLoading] = useState(false);
   const [token, setToken] = useState<string | null>(null);
@@ -37,7 +36,7 @@ export default function Home() {
           setLoading(false);
         });
     }
-  }, [token]);
+  }, [initialDataContext, setDataContext, token]);
 
   return loading ? (
     <div className="flex min-h-[100dvh] w-full flex-col items-center justify-center md:min-h-screen">
