@@ -5,7 +5,8 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start",
+    "start": "next dev -p 36969",
+    "serve": "npx -y serve -s build -p 36969",
     "lint": "next lint"
   },
   "dependencies": {
