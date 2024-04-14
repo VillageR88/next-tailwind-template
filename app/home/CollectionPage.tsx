@@ -116,7 +116,7 @@ const CollectionPage = ({
         >
           {dataContext.collections[page - 1].Notes.map((note, index) => (
             <Reorder.Item
-              dragListener={false}
+              //dragListener={false}
               dragControls={controls}
               value={note}
               className="rounded-[6px] border border-[rgba(0,0,0,0.2)] p-[10px] dark:border-[#1C1C1C] dark:bg-[#1C1C1C]"
