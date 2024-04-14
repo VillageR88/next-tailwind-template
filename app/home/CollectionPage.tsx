@@ -126,7 +126,7 @@ const CollectionPage = ({
                 {noteEditable === index ? (
                   <input
                     autoFocus
-                    className="tracking-[-0.3px] h-fit w-[92%] border-none bg-transparent p-0 text-left font-semibold outline-none transition dark:font-normal dark:tracking-normal dark:text-white"
+                    className="h-fit w-[92%] border-none bg-transparent p-0 text-left font-semibold tracking-[-0.3px] outline-none transition dark:font-normal dark:tracking-normal dark:text-white"
                     type="text"
                     value={note.description}
                     onChange={(e) => {
