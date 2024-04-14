@@ -13,18 +13,19 @@ const CollectionPage = ({
   token,
   collectionPage,
   setCollectionPage,
+  setNotePage,
 }: {
   token: string;
   collectionPage: number;
   setCollectionPage: React.Dispatch<React.SetStateAction<number | null>>;
+  setNotePage: React.Dispatch<React.SetStateAction<number | null>>;
 }) => {
   const controls = useDragControls();
   const { dataContext, initialDataContext, setDataContext } = useContext(DataContext);
   const [titleEditable, setTitleEditable] = useState<boolean>(false);
-  const [noteEditable, setNoteEditable] = useState<null | number>(null);
   return (
     <div className="flex w-full max-w-4xl flex-col gap-6">
-      <div className="group flex select-none flex-col gap-[6px] rounded-[6px] border border-[#f5f5f5] bg-white  px-3  py-4 drop-shadow-sm dark:border-[#313131] dark:bg-[#232323] ">
+      <div className="group flex select-none flex-col gap-[6px] rounded-[6px] border border-[#f5f5f5] bg-white px-3 py-4 drop-shadow-sm dark:border-[#313131] dark:bg-[#232323] ">
         <div className="flex justify-between px-1">
           {!titleEditable ? (
             <button
@@ -72,7 +73,7 @@ const CollectionPage = ({
                     collection.Notes.push({
                       id: collection.Notes.length + 1,
                       title: 'New Note',
-                      description: '',
+                      description: 'Add a description here',
                     });
                   }
                   return collection;
@@ -114,7 +115,7 @@ const CollectionPage = ({
           }}
           className="flex flex-col gap-2"
         >
-          {dataContext.collections[collectionPage - 1].Notes.map((note, index) => (
+          {dataContext.collections[collectionPage - 1].Notes.map((note) => (
             <Reorder.Item
               //dragListener={false}
               dragControls={controls}
@@ -123,42 +124,15 @@ const CollectionPage = ({
               key={note.id}
             >
               <div className="flex justify-between pl-1 pr-2">
-                {noteEditable === index ? (
-                  <input
-                    autoFocus
-                    className="h-fit w-[92%] border-none bg-transparent p-0 text-left font-semibold tracking-[-0.3px] outline-none transition dark:font-normal dark:tracking-normal dark:text-white"
-                    type="text"
-                    value={note.title}
-                    onChange={(e) => {
-                      const newCollections = dataContext.collections.map((collection) => {
-                        if (collection.id === collectionPage) {
-                          collection.Notes[index].title = e.target.value;
-                        }
-                        return collection;
-                      });
-                      const newDataContext = { collections: newCollections };
-                      setDataContext(newDataContext);
-                    }}
-                    onKeyDown={(e) => {
-                      if (e.key === 'Enter') {
-                        if (e.currentTarget.value.length === 0) {
-                          e.currentTarget.value = 'Untitled Note';
-                          return;
-                        }
-                        setNoteEditable(null);
-                      }
-                    }}
-                  />
-                ) : (
-                  <button
-                    onClick={() => {
-                      setNoteEditable(index);
-                    }}
-                    className="font-semibold tracking-[-0.3px] transition hover:text-[darkorange] dark:font-normal dark:tracking-normal dark:text-white dark:hover:text-[orange]"
-                  >
-                    {note.title}
-                  </button>
-                )}
+                <button
+                  onClick={() => {
+                    setNotePage(note.id);
+                  }}
+                  className="font-semibold tracking-[-0.3px] transition hover:text-[darkorange] dark:font-normal dark:tracking-normal dark:text-white dark:hover:text-[orange]"
+                >
+                  {note.title}
+                </button>
+
                 <ButtonDrag
                   alwaysVisible
                   func={(e) => {
