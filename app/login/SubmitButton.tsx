@@ -4,9 +4,9 @@ import IconLogin from '@/app/components/IconLogin';
 import { useContext, useEffect, useState } from 'react';
 import { useFormStatus } from 'react-dom';
 import checkToken from '../home/checkToken';
-import checkData from '../home/checkData';
+//import checkData from '../home/checkData';
 import { DataContext } from '../_providers/DataContext';
-import { CollectionGroup } from '../lib/interfaces';
+//import { CollectionGroup } from '../lib/interfaces';
 import { useRouter } from 'next/navigation';
 
 enum ErrorType {
