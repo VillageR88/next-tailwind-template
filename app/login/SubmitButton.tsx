@@ -33,7 +33,7 @@ export default function SubmitButton() {
             return e;
           } else setErrorGlobal(ErrorType.failedLogin);
         });
-        checkData()
+        /*checkData()
           .then((data) => {
             if (data) {
               setDataContext(JSON.parse(data) as CollectionGroup);
@@ -45,6 +45,7 @@ export default function SubmitButton() {
             console.error(error);
             setErrorGlobal(ErrorType.errorOccurred);
           });
+          */
       };
     }
   }, [initialDataContext, pending, router, setDataContext, setLoaded, setToken]);

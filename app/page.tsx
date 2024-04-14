@@ -10,8 +10,7 @@ import { useRouter } from 'next/navigation';
 import { CollectionGroup } from './lib/interfaces';
 
 export default function Home() {
-  const { initialDataContext, setDataContext, dataContext, loaded } = useContext(DataContext);
-  console.log(dataContext);
+  const { initialDataContext, setDataContext, loaded } = useContext(DataContext);
   const router = useRouter();
   const [loading, setLoading] = useState(false);
   const [token, setToken] = useState<string | null>(null);
@@ -50,7 +49,7 @@ export default function Home() {
   return (
     token !== null && (
       <div className="flex min-h-[100dvh] w-full flex-col items-center justify-start overflow-hidden text-clip md:min-h-screen">
-        <Navbar token={token} />
+        <Navbar loading={loading} token={token} />
         <Main token={token} />
       </div>
     )

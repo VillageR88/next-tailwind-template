@@ -11,7 +11,7 @@ import { CollectionGroup } from '../lib/interfaces';
 import clearToken from './clearToken';
 import ButtonTheme from '../components/ButtonTheme';
 
-const Navbar = ({ token }: { token: string }) => {
+const Navbar = ({ token, loading }: { token: string; loading: boolean }) => {
   const logoutRef = useRef<HTMLButtonElement>(null);
   const router = useRouter();
   const { dataContext, initialDataContext, setDataContext, setLoaded } = useContext(DataContext);
@@ -73,6 +73,7 @@ const Navbar = ({ token }: { token: string }) => {
             <IconUndo />
           </button>
           <button
+            disabled={loading}
             ref={logoutRef}
             onClick={() => {
               if (logoutRef.current) logoutRef.current.disabled = true;
