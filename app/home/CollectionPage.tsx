@@ -60,7 +60,7 @@ const CollectionPage = ({
                 const newDataContext = { collections: newCollections };
                 setDataContext(newDataContext);
               }}
-              className="h-fit w-[92%] border-2 bg-transparent p-0 text-left text-[18px] font-bold transition dark:text-white"
+              className="h-fit w-[92%] border-none bg-transparent p-0 text-left text-[18px] font-bold outline-none transition dark:text-white"
             />
           )}
           <div className="flex gap-2 pb-3">
@@ -126,7 +126,7 @@ const CollectionPage = ({
                 {noteEditable === index ? (
                   <input
                     autoFocus
-                    className="h-fit w-[92%] border-none bg-transparent p-0 text-left transition dark:text-white"
+                    className="tracking-[-0.3px] h-fit w-[92%] border-none bg-transparent p-0 text-left font-semibold outline-none transition dark:font-normal dark:tracking-normal dark:text-white"
                     type="text"
                     value={note.description}
                     onChange={(e) => {
@@ -154,7 +154,7 @@ const CollectionPage = ({
                     onClick={() => {
                       setNoteEditable(index);
                     }}
-                    className="font-semibold transition hover:text-[darkorange] dark:font-normal dark:text-white dark:hover:text-[orange]"
+                    className="font-semibold tracking-[-0.3px] transition hover:text-[darkorange] dark:font-normal dark:tracking-normal dark:text-white dark:hover:text-[orange]"
                   >
                     {note.description}
                   </button>
