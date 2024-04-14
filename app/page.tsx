@@ -10,7 +10,8 @@ import { useRouter } from 'next/navigation';
 import { CollectionGroup } from './lib/interfaces';
 
 export default function Home() {
-  const { initialDataContext, setDataContext } = useContext(DataContext);
+  const { initialDataContext, setDataContext, dataContext, loaded } = useContext(DataContext);
+  console.log(dataContext);
   const router = useRouter();
   const [loading, setLoading] = useState(false);
   const [token, setToken] = useState<string | null>(null);
@@ -20,12 +21,15 @@ export default function Home() {
       setLoading(true);
       void checkToken().then((e) => {
         if (e) setToken(e);
-        else router.push('/login');
+        else {
+          console.log('pushing to login');
+          router.push('/login');
+        }
       });
     }
   }, [router, token]);
   useEffect(() => {
-    if (token && loading) {
+    if (token && loading && !loaded) {
       handleLoadCollectionGroup({ token: token })
         .then((data) => {
           if (!data) {
@@ -41,7 +45,7 @@ export default function Home() {
           setLoading(false);
         });
     }
-  }, [initialDataContext, loading, setDataContext, token]);
+  }, [initialDataContext, loaded, loading, setDataContext, token]);
 
   return (
     token !== null && (
