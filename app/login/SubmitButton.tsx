@@ -3,11 +3,11 @@
 import IconLogin from '@/app/components/IconLogin';
 import { useContext, useEffect, useState } from 'react';
 import { useFormStatus } from 'react-dom';
-import checkToken from '../home/checkToken';
+//import checkToken from '../home/checkToken';
 //import checkData from '../home/checkData';
 import { DataContext } from '../_providers/DataContext';
 //import { CollectionGroup } from '../lib/interfaces';
-import { useRouter } from 'next/navigation';
+//import { useRouter } from 'next/navigation';
 
 enum ErrorType {
   failedLogin = 'Verify your email and password',
@@ -15,7 +15,7 @@ enum ErrorType {
 }
 
 export default function SubmitButton() {
-  const router = useRouter();
+  //const router = useRouter();
   const { setDataContext, setToken, setLoaded, initialDataContext } = useContext(DataContext);
   const [errorGlobal, setErrorGlobal] = useState<string>('');
   const { pending } = useFormStatus();
@@ -26,13 +26,14 @@ export default function SubmitButton() {
       document.head.appendChild(style);
       return () => {
         document.head.removeChild(style);
+        setErrorGlobal(ErrorType.failedLogin); /*
         void checkToken().then((e) => {
           if (e) {
             setToken(e);
             router.push('/');
             return e;
           } else setErrorGlobal(ErrorType.failedLogin);
-        });
+        });*/
         /*checkData()
           .then((data) => {
             if (data) {
@@ -48,7 +49,7 @@ export default function SubmitButton() {
           */
       };
     }
-  }, [initialDataContext, pending, router, setDataContext, setLoaded, setToken]);
+  }, [initialDataContext, pending, setDataContext, setLoaded, setToken]);
 
   return (
     <div className="flex flex-col">

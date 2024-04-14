@@ -1,6 +1,7 @@
 import handleSubmit from './handleSubmit';
 import { cookies } from 'next/headers';
 import SubmitButton from './SubmitButton';
+import { redirect } from 'next/navigation';
 //import handleLoadCollectionGroup from '../home/handleLoadCollectionGroup';
 
 export default function FormLogin() {
@@ -39,6 +40,7 @@ export default function FormLogin() {
         console.error(error);
       });
       */
+    redirect('/');
   }
 
   return (
