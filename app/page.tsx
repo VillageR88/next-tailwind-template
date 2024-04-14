@@ -42,12 +42,11 @@ export default function Home() {
     }
   }, [initialDataContext, router, setDataContext, token]);
 
-  return (
-    token !== null && (
+  if (token !== null)
+    return (
       <div className="flex min-h-[100dvh] w-full flex-col items-center justify-start overflow-hidden text-clip md:min-h-screen">
         <Navbar loading={loading} token={token} />
         <Main token={token} />
       </div>
-    )
-  );
+    );
 }
