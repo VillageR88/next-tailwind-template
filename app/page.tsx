@@ -46,7 +46,7 @@ export default function Home() {
     return (
       <div className="flex min-h-[100dvh] w-full flex-col items-center justify-start overflow-hidden text-clip md:min-h-screen">
         <Navbar loading={loading} token={token} />
-        <Main token={token} />
+        <Main loading={loading} token={token} />
       </div>
     );
 }

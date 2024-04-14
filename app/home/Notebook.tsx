@@ -6,6 +6,7 @@ import ButtonDrag from '../components/ButtonDrag';
 import IconAdd from '../components/IconAdd';
 import handleSaveCollectionGroup from './handleSaveCollectionGroup';
 import newData from '../lib/newData';
+import { RotatingLines } from 'react-loader-spinner';
 
 const Item = ({
   collection,
@@ -107,7 +108,13 @@ const ItemsNested = ({ note }: { note: Note }) => {
   );
 };
 
-const Notebook = ({ setPage }: { setPage: React.Dispatch<React.SetStateAction<number | null>> }) => {
+const Notebook = ({
+  setPage,
+  loading,
+}: {
+  setPage: React.Dispatch<React.SetStateAction<number | null>>;
+  loading: boolean;
+}) => {
   const { dataContext, setDataContext } = useContext(DataContext);
 
   const handleReorderGroup = (newOrder: Collection[]) => {
@@ -117,6 +124,16 @@ const Notebook = ({ setPage }: { setPage: React.Dispatch<React.SetStateAction<nu
     }));
   };
 
+  if (loading) {
+    //if root contains dark class const color = 'white' else 'black'
+    const value = localStorage.getItem('theme');
+    const color = value === 'dark' ? 'white' : 'black';
+    return (
+      <div className="mt-24">
+        <RotatingLines strokeColor={color} width="200" />
+      </div>
+    );
+  }
   return (
     <div className="flex w-full max-w-4xl flex-col gap-6">
       <Reorder.Group
