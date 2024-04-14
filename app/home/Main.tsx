@@ -9,7 +9,7 @@ const Main = ({ token, loading }: { token: string; loading: boolean }) => {
       {page ? (
         <CollectionPage token={token} page={page} setPage={setPage} />
       ) : (
-        <Notebook loading={loading} setPage={setPage} />
+        <Notebook token={token} loading={loading} setPage={setPage} />
       )}
     </main>
   );

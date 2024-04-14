@@ -1,7 +1,7 @@
 import { useContext } from 'react';
 import { DataContext } from '@/app/_providers/DataContext';
 import { Reorder, useDragControls } from 'framer-motion';
-import { Collection, Note } from '../lib/interfaces';
+import { Collection, CollectionGroup, Note } from '../lib/interfaces';
 import ButtonDrag from '../components/ButtonDrag';
 import IconAdd from '../components/IconAdd';
 import handleSaveCollectionGroup from './handleSaveCollectionGroup';
@@ -12,10 +12,12 @@ const Item = ({
   collection,
   setPage,
   index,
+  token,
 }: {
   collection: Collection;
   setPage: React.Dispatch<React.SetStateAction<number | null>>;
   index: number;
+  token: string;
 }) => {
   const controls = useDragControls();
   const { dataContext, initialDataContext, setDataContext } = useContext(DataContext);
@@ -50,9 +52,14 @@ const Item = ({
           <button
             onClick={() => {
               setPage(index + 1);
-              const token = localStorage.getItem('token');
+              console.log('token', token);
               if (!token) return;
-              void handleSaveCollectionGroup({ data: newData({ data: dataContext }), token: token });
+              console.log('dataContext', dataContext);
+              void handleSaveCollectionGroup({
+                data: newData({ data: JSON.parse(JSON.stringify(dataContext)) as CollectionGroup }),
+                token: token,
+              });
+
               initialDataContext.current = newData({ data: dataContext });
               setDataContext(newData({ data: dataContext }));
             }}
@@ -111,9 +118,11 @@ const ItemsNested = ({ note }: { note: Note }) => {
 const Notebook = ({
   setPage,
   loading,
+  token,
 }: {
   setPage: React.Dispatch<React.SetStateAction<number | null>>;
   loading: boolean;
+  token: string;
 }) => {
   const { dataContext, setDataContext } = useContext(DataContext);
 
@@ -142,7 +151,7 @@ const Notebook = ({
         onReorder={handleReorderGroup}
       >
         {dataContext.collections.map((collection, index) => {
-          return <Item index={index} key={collection.id} collection={collection} setPage={setPage} />;
+          return <Item token={token} index={index} key={collection.id} collection={collection} setPage={setPage} />;
         })}
       </Reorder.Group>
 
