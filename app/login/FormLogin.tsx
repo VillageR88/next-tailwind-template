@@ -1,7 +1,7 @@
 import handleSubmit from './handleSubmit';
 import { cookies } from 'next/headers';
 import SubmitButton from './SubmitButton';
-import handleLoadCollectionGroup from '../home/handleLoadCollectionGroup';
+//import handleLoadCollectionGroup from '../home/handleLoadCollectionGroup';
 
 export default function FormLogin() {
   async function createInvoice(formData: FormData) {
@@ -28,7 +28,7 @@ export default function FormLogin() {
         console.log('error occurred');
       });
     if (!cookieToken) return;
-
+    /*
     await handleLoadCollectionGroup({ token: cookieToken })
       .then((data) => {
         if (data) {
@@ -38,6 +38,7 @@ export default function FormLogin() {
       .catch((error) => {
         console.error(error);
       });
+      */
   }
 
   return (
