@@ -1,9 +1,8 @@
 'use client';
 
 import IconLogin from '@/app/components/IconLogin';
-import { useContext, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useFormStatus } from 'react-dom';
-import { DataContext } from '../_providers/DataContext';
 
 enum ErrorType {
   failedLogin = 'Verify your email and password',
@@ -11,7 +10,6 @@ enum ErrorType {
 }
 
 export default function SubmitButton() {
-  const { setDataContext, setToken, initialDataContext } = useContext(DataContext);
   const [errorGlobal, setErrorGlobal] = useState<string>('');
   const { pending } = useFormStatus();
   useEffect(() => {
@@ -24,7 +22,7 @@ export default function SubmitButton() {
         setErrorGlobal(ErrorType.failedLogin);
       };
     }
-  }, [initialDataContext, pending, setDataContext, setToken]);
+  }, [pending]);
 
   return (
     <div className="flex flex-col">
