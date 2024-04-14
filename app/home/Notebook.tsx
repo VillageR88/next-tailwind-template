@@ -127,7 +127,7 @@ const Notebook = ({
   if (loading) {
     //if root contains dark class const color = 'white' else 'black'
     const value = localStorage.getItem('theme');
-    const color = value === 'dark' ? 'white' : 'black';
+    const color = value === 'dark' ? 'orange' : 'darkorange';
     return (
       <div className="mt-24">
         <RotatingLines strokeColor={color} width="200" />

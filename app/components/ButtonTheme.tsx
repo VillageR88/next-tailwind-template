@@ -19,16 +19,20 @@ export default function ButtonTheme() {
       } else {
         setTheme(Theme.light);
       }
+      document.documentElement.classList.remove('hidden');
     }
   }, [theme]);
 
   useEffect(() => {
     if (theme !== null) {
-      document.documentElement.classList.remove('hidden');
       if (theme === Theme.dark) {
         document.documentElement.classList.add('dark');
+        localStorage.setItem('theme', Theme.dark);
+        setTheme(Theme.dark);
       } else {
         document.documentElement.classList.remove('dark');
+        localStorage.setItem('theme', Theme.light);
+        setTheme(Theme.light);
       }
     }
   }, [theme]);
@@ -46,19 +50,10 @@ export default function ButtonTheme() {
     };
   }, [theme]);*/
 
-  const handleLight = () => {
-    setTheme(Theme.light);
-    localStorage.setItem('theme', Theme.light);
-  };
-  const handleDark = () => {
-    setTheme(Theme.dark);
-    localStorage.setItem('theme', Theme.dark);
-  };
-
   return (
     <button
       onClick={() => {
-        theme === Theme.dark ? handleLight() : handleDark();
+        theme === Theme.dark ? setTheme(Theme.light) : setTheme(Theme.dark);
       }}
       className="pr-2 transition hover:fill-[darkorange] dark:fill-white dark:hover:fill-[orange]"
     >
