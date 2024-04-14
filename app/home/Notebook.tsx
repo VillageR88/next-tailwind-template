@@ -48,7 +48,7 @@ const Item = ({
       className="group/group2 flex select-none flex-col gap-[6px] rounded-[6px] border border-[#f5f5f5] bg-white px-3 py-4 drop-shadow-sm dark:border-[#313131]  dark:bg-[#232323] "
     >
       <div className="flex justify-between px-1">
-        <div className="flex items-center gap-3 pb-[8px]">
+        <div className="flex max-w-[90%] items-center gap-3 pb-[8px]">
           <button
             onClick={() => {
               setPage(index + 1);
@@ -61,7 +61,7 @@ const Item = ({
               initialDataContext.current = newData({ data: dataContext });
               setDataContext(newData({ data: dataContext }));
             }}
-            className="text-left text-[18px] font-bold transition-colors duration-[150ms] hover:text-[darkorange] dark:text-white dark:hover:text-[orange]"
+            className="truncate text-left text-[18px] font-bold transition-colors duration-[150ms] hover:text-[darkorange] dark:text-white dark:hover:text-[orange]"
           >
             {collection.title}
           </button>
