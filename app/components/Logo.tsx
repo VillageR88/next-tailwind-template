@@ -1,5 +1,5 @@
 const Logo = ({ alternate }: { alternate?: boolean }) => (
-  <div className={`${alternate ? 'hidden md:flex' : 'flex'} items-start justify-center gap-2`}>
+  <div className="flex items-start justify-center gap-2">
     <svg
       className="fill-[darkorange] dark:fill-[rgb(255,165,0)] dark:drop-shadow-none"
       xmlns="http://www.w3.org/2000/svg"
@@ -12,13 +12,13 @@ const Logo = ({ alternate }: { alternate?: boolean }) => (
     <div className="flex">
       <span
         // eslint-disable-next-line tailwindcss/classnames-order
-        className="text-3xl font-bold text-[darkorange] dark:text-[orange] md:text-4xl"
+        className={`${alternate ? 'hidden md:block' : 'text-3xl'} font-bold text-[darkorange] dark:text-[orange] md:text-4xl`}
       >
         My
       </span>
       <span
         // eslint-disable-next-line tailwindcss/classnames-order
-        className="text-3xl font-medium transition dark:text-white md:text-4xl"
+        className={`${alternate ? 'hidden md:block' : 'text-3xl'} font-medium transition dark:text-white md:text-4xl`}
       >
         Notebook
       </span>
