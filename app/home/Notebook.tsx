@@ -10,12 +10,12 @@ import { RotatingLines } from 'react-loader-spinner';
 
 const Item = ({
   collection,
-  setPage,
+  setCollectionPage,
   index,
   token,
 }: {
   collection: Collection;
-  setPage: React.Dispatch<React.SetStateAction<number | null>>;
+  setCollectionPage: React.Dispatch<React.SetStateAction<number | null>>;
   index: number;
   token: string;
 }) => {
@@ -51,7 +51,7 @@ const Item = ({
         <div className="flex max-w-[90%] items-center gap-3 pb-[8px]">
           <button
             onClick={() => {
-              setPage(index + 1);
+              setCollectionPage(index + 1);
               if (!token) return;
               void handleSaveCollectionGroup({
                 data: newData({ data: JSON.parse(JSON.stringify(dataContext)) as CollectionGroup }),
@@ -100,7 +100,7 @@ const ItemsNested = ({ note }: { note: Note }) => {
       className="group/group3 rounded-[6px] border border-[rgba(0,0,0,0.2)] p-[10px] font-semibold  tracking-[-0.3px] dark:border-[#1C1C1C] dark:bg-[#1C1C1C] dark:font-normal dark:tracking-normal dark:text-white"
     >
       <div className="flex justify-between pl-1 pr-2">
-        <span>{note.description}</span>
+        <span>{note.title}</span>
         {/*
           <ButtonDrag
             func={(e) => {
@@ -114,11 +114,11 @@ const ItemsNested = ({ note }: { note: Note }) => {
 };
 
 const Notebook = ({
-  setPage,
+  setCollectionPage,
   loading,
   token,
 }: {
-  setPage: React.Dispatch<React.SetStateAction<number | null>>;
+  setCollectionPage: React.Dispatch<React.SetStateAction<number | null>>;
   loading: boolean;
   token: string;
 }) => {
@@ -149,7 +149,15 @@ const Notebook = ({
         onReorder={handleReorderGroup}
       >
         {dataContext.collections.map((collection, index) => {
-          return <Item token={token} index={index} key={collection.id} collection={collection} setPage={setPage} />;
+          return (
+            <Item
+              token={token}
+              index={index}
+              key={collection.id}
+              collection={collection}
+              setCollectionPage={setCollectionPage}
+            />
+          );
         })}
       </Reorder.Group>
 

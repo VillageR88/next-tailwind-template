@@ -11,12 +11,12 @@ import ButtonDrag from '../components/ButtonDrag';
 
 const CollectionPage = ({
   token,
-  page,
-  setPage,
+  collectionPage,
+  setCollectionPage,
 }: {
   token: string;
-  page: number;
-  setPage: React.Dispatch<React.SetStateAction<number | null>>;
+  collectionPage: number;
+  setCollectionPage: React.Dispatch<React.SetStateAction<number | null>>;
 }) => {
   const controls = useDragControls();
   const { dataContext, initialDataContext, setDataContext } = useContext(DataContext);
@@ -33,7 +33,7 @@ const CollectionPage = ({
               }}
               className="max-w-[80%] truncate pb-[8px] text-left text-[18px] font-bold transition hover:text-[darkorange] dark:text-white dark:hover:text-[orange]"
             >
-              {dataContext.collections[page - 1].title}
+              {dataContext.collections[collectionPage - 1].title}
             </button>
           ) : (
             <input
@@ -49,10 +49,10 @@ const CollectionPage = ({
                 }
               }}
               type="text"
-              value={dataContext.collections[page - 1].title}
+              value={dataContext.collections[collectionPage - 1].title}
               onChange={(e) => {
                 const newCollections = dataContext.collections.map((collection) => {
-                  if (collection.id === page) {
+                  if (collection.id === collectionPage) {
                     collection.title = e.target.value;
                   }
                   return collection;
@@ -68,11 +68,11 @@ const CollectionPage = ({
               alwaysVisible
               func={() => {
                 const newCollections = dataContext.collections.map((collection) => {
-                  if (collection.id === page) {
+                  if (collection.id === collectionPage) {
                     collection.Notes.push({
                       id: collection.Notes.length + 1,
-                      description: 'New Note',
-                      title: '',
+                      title: 'New Note',
+                      description: '',
                     });
                   }
                   return collection;
@@ -84,7 +84,7 @@ const CollectionPage = ({
             <ButtonDelete
               alwaysVisible
               func={() => {
-                const newCollections = dataContext.collections.filter((collection) => collection.id !== page);
+                const newCollections = dataContext.collections.filter((collection) => collection.id !== collectionPage);
                 const newDataContext = { collections: newCollections };
                 initialDataContext.current = newData({
                   data: JSON.parse(JSON.stringify(newDataContext)) as CollectionGroup,
@@ -95,16 +95,16 @@ const CollectionPage = ({
                   data: newData({ data: JSON.parse(JSON.stringify(newDataContext)) as CollectionGroup }),
                   token: token,
                 });
-                setPage(null);
+                setCollectionPage(null);
               }}
             />
           </div>
         </div>
         <Reorder.Group
-          values={dataContext.collections[page - 1].Notes}
+          values={dataContext.collections[collectionPage - 1].Notes}
           onReorder={(newOrder) => {
             const newCollections = dataContext.collections.map((collection) => {
-              if (collection.id === page) {
+              if (collection.id === collectionPage) {
                 collection.Notes = newOrder;
               }
               return collection;
@@ -114,12 +114,12 @@ const CollectionPage = ({
           }}
           className="flex flex-col gap-2"
         >
-          {dataContext.collections[page - 1].Notes.map((note, index) => (
+          {dataContext.collections[collectionPage - 1].Notes.map((note, index) => (
             <Reorder.Item
               //dragListener={false}
               dragControls={controls}
               value={note}
-              className="rounded-[6px] border border-[rgba(0,0,0,0.2)] p-[10px] dark:border-[#1C1C1C] dark:bg-[#1C1C1C]"
+              className="rounded-[6px] border border-[rgba(0,0,0,0.2)] bg-white p-[10px] dark:border-[#1C1C1C] dark:bg-[#1C1C1C]"
               key={note.id}
             >
               <div className="flex justify-between pl-1 pr-2">
@@ -128,11 +128,11 @@ const CollectionPage = ({
                     autoFocus
                     className="h-fit w-[92%] border-none bg-transparent p-0 text-left font-semibold tracking-[-0.3px] outline-none transition dark:font-normal dark:tracking-normal dark:text-white"
                     type="text"
-                    value={note.description}
+                    value={note.title}
                     onChange={(e) => {
                       const newCollections = dataContext.collections.map((collection) => {
-                        if (collection.id === page) {
-                          collection.Notes[index].description = e.target.value;
+                        if (collection.id === collectionPage) {
+                          collection.Notes[index].title = e.target.value;
                         }
                         return collection;
                       });
@@ -156,7 +156,7 @@ const CollectionPage = ({
                     }}
                     className="font-semibold tracking-[-0.3px] transition hover:text-[darkorange] dark:font-normal dark:tracking-normal dark:text-white dark:hover:text-[orange]"
                   >
-                    {note.description}
+                    {note.title}
                   </button>
                 )}
                 <ButtonDrag
@@ -173,7 +173,7 @@ const CollectionPage = ({
       <button
         className="button1 flex pt-[3px]"
         onClick={() => {
-          setPage(null);
+          setCollectionPage(null);
           if (!token) return;
           const safeContext = () => {
             const safe = JSON.parse(JSON.stringify(dataContext)) as CollectionGroup;
