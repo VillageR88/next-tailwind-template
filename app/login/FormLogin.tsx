@@ -2,7 +2,6 @@ import handleSubmit from './handleSubmit';
 import { cookies } from 'next/headers';
 import SubmitButton from './SubmitButton';
 import { redirect } from 'next/navigation';
-//import handleLoadCollectionGroup from '../home/handleLoadCollectionGroup';
 
 export default function FormLogin() {
   async function createInvoice(formData: FormData) {
@@ -29,17 +28,6 @@ export default function FormLogin() {
         console.log('error occurred');
       });
     if (!cookieToken) return;
-    /*
-    await handleLoadCollectionGroup({ token: cookieToken })
-      .then((data) => {
-        if (data) {
-          cookies().set({ name: 'data', value: JSON.stringify(data), httpOnly: true });
-        }
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-      */
     redirect('/');
   }
 

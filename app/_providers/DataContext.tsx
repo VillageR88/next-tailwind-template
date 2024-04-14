@@ -9,19 +9,14 @@ export const DataContext = createContext(
     initialDataContext: React.MutableRefObject<CollectionGroup>;
     token: string | null;
     setToken: React.Dispatch<React.SetStateAction<string | null>>;
-    loaded: boolean;
-    setLoaded: React.Dispatch<React.SetStateAction<boolean>>;
   },
 );
 export default function Provider({ children }: { children: React.ReactNode }) {
   const [dataContext, setDataContext] = useState<CollectionGroup>({ collections: [] });
   const initialDataContext = useRef<CollectionGroup>({ collections: [] });
   const [token, setToken] = useState<string | null>(null);
-  const [loaded, setLoaded] = useState<boolean>(false);
   return (
-    <DataContext.Provider
-      value={{ dataContext, setDataContext, initialDataContext, token, setToken, loaded, setLoaded }}
-    >
+    <DataContext.Provider value={{ dataContext, setDataContext, initialDataContext, token, setToken }}>
       {children}
     </DataContext.Provider>
   );

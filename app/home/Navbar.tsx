@@ -14,7 +14,7 @@ import ButtonTheme from '../components/ButtonTheme';
 const Navbar = ({ token, loading }: { token: string; loading: boolean }) => {
   const logoutRef = useRef<HTMLButtonElement>(null);
   const router = useRouter();
-  const { dataContext, initialDataContext, setDataContext, setLoaded } = useContext(DataContext);
+  const { dataContext, initialDataContext, setDataContext } = useContext(DataContext);
   const checkSame = () => {
     return JSON.stringify(dataContext.collections) === JSON.stringify(initialDataContext.current.collections);
   };
@@ -92,8 +92,6 @@ const Navbar = ({ token, loading }: { token: string; loading: boolean }) => {
               void handleSaveCollectionGroup({ data: newData({ data: safeContext() }), token: token });
               void clearToken().then(() => {
                 document.head.removeChild(style);
-                setLoaded(false);
-
                 router.push('/login');
               });
             }}

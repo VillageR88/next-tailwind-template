@@ -10,7 +10,7 @@ import { useRouter } from 'next/navigation';
 import { CollectionGroup } from './lib/interfaces';
 
 export default function Home() {
-  const { initialDataContext, setDataContext, loaded } = useContext(DataContext);
+  const { initialDataContext, setDataContext } = useContext(DataContext);
   const router = useRouter();
   const [loading, setLoading] = useState(false);
   const [token, setToken] = useState<string | null>(null);
@@ -19,32 +19,28 @@ export default function Home() {
     if (!token) {
       setLoading(true);
       void checkToken().then((e) => {
-        if (e) setToken(e);
-        else {
+        if (e) {
+          setToken(e);
+          handleLoadCollectionGroup({ token: e })
+            .then((data) => {
+              if (!data) {
+                setLoading(false);
+              }
+              setDataContext(JSON.parse(JSON.stringify(data)) as CollectionGroup);
+              initialDataContext.current = JSON.parse(JSON.stringify(data)) as CollectionGroup;
+              setLoading(false);
+            })
+            .catch((error) => {
+              console.error(error);
+              setLoading(false);
+            });
+        } else {
           console.log('pushing to login');
           router.push('/login');
         }
       });
     }
-  }, [router, token]);
-  useEffect(() => {
-    if (token && loading && !loaded) {
-      handleLoadCollectionGroup({ token: token })
-        .then((data) => {
-          if (!data) {
-            setLoading(false);
-            return;
-          }
-          setDataContext(JSON.parse(JSON.stringify(data)) as CollectionGroup);
-          initialDataContext.current = JSON.parse(JSON.stringify(data)) as CollectionGroup;
-          setLoading(false);
-        })
-        .catch((error) => {
-          console.error(error);
-          setLoading(false);
-        });
-    }
-  }, [initialDataContext, loaded, loading, setDataContext, token]);
+  }, [initialDataContext, router, setDataContext, token]);
 
   return (
     token !== null && (
