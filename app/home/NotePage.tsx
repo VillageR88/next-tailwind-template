@@ -1,8 +1,8 @@
 import { Dispatch, SetStateAction, useContext, useState } from 'react';
 import IconReturn from '../components/IconReturn';
 import { DataContext } from '../_providers/DataContext';
-import ButtonAdd from '../ButtonAdd';
 import ButtonDelete from '../components/ButtonDelete';
+import handleSaveCollectionGroup from './handleSaveCollectionGroup';
 
 export default function NotePage({
   token,
@@ -66,49 +66,30 @@ export default function NotePage({
                   }
                   return collection;
                 });
-                const newDataContext = { collections: newCollections };
-                setDataContext(newDataContext);
+                setDataContext({ collections: newCollections });
               }}
               className="h-fit w-[84%] border-none bg-transparent p-0 text-left text-[18px] font-bold outline-none transition dark:text-white"
             />
           )}
           <div className="flex gap-2 pb-3">
-            <ButtonAdd
-              alwaysVisible
-              func={() => {
-                /*
-                const newCollections = dataContext.collections.map((collection) => {
-                  if (collection.id === collectionPage) {
-                    collection.Notes.push({
-                      id: collection.Notes.length + 1,
-                      title: 'New Note',
-                      description: 'Add a description here',
-                    });
-                  }
-                  return collection;
-                });
-                const newDataContext = { collections: newCollections };
-                setDataContext(JSON.parse(JSON.stringify(newDataContext)) as CollectionGroup);
-            */
-              }}
-            />
             <ButtonDelete
               alwaysVisible
               func={() => {
-                /*
-                const newCollections = dataContext.collections.filter((collection) => collection.id !== collectionPage);
-                const newDataContext = { collections: newCollections };
-                initialDataContext.current = newData({
-                  data: JSON.parse(JSON.stringify(newDataContext)) as CollectionGroup,
+                const newNotes = dataContext.collections[collectionPage - 1].notes.filter(
+                  (note) => note.id !== notePage,
+                );
+                const newCollections = dataContext.collections.map((collection) => {
+                  if (collection.id === collectionPage) {
+                    collection.notes = newNotes;
+                  }
+                  return collection;
                 });
-                setDataContext(newData({ data: JSON.parse(JSON.stringify(newDataContext)) as CollectionGroup }));
-                if (!token) return;
+                setDataContext({ collections: newCollections });
                 void handleSaveCollectionGroup({
-                  data: newData({ data: JSON.parse(JSON.stringify(newDataContext)) as CollectionGroup }),
+                  data: { collections: newCollections },
                   token: token,
                 });
-                setNotePage(null);   
-                */
+                setNotePage(null);
               }}
             />
           </div>

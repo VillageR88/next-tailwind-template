@@ -58,8 +58,7 @@ const CollectionPage = ({
                   }
                   return collection;
                 });
-                const newDataContext = { collections: newCollections };
-                setDataContext(newDataContext);
+                setDataContext({ collections: newCollections });
               }}
               className="h-fit w-[84%] border-none bg-transparent p-0 text-left text-[18px] font-bold outline-none transition dark:text-white"
             />
