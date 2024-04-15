@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction, useContext, useState } from 'react';
+import { Dispatch, SetStateAction, useContext, useState, useRef, useEffect } from 'react';
 import IconReturn from '../components/IconReturn';
 import { DataContext } from '../_providers/DataContext';
 import ButtonDelete from '../components/ButtonDelete';
@@ -19,6 +19,25 @@ export default function NotePage({
 }) {
   const [titleEditable, setTitleEditable] = useState(false);
   const { dataContext, setDataContext, initialDataContext } = useContext(DataContext);
+  const textareaRef = useRef<HTMLTextAreaElement>(null);
+  useEffect(() => {
+    const textarea = textareaRef.current;
+    if (textarea) {
+      textarea.style.height = 'auto';
+      textarea.style.height = textarea.scrollHeight + 'px';
+    }
+    if (textarea) {
+      const resize = () => {
+        textarea.style.height = 'auto';
+        textarea.style.height = textarea.scrollHeight + 'px';
+      };
+      textarea.addEventListener('input', resize);
+      return () => {
+        textarea.removeEventListener('input', resize);
+      };
+    }
+  }, []);
+
   return (
     <div className="flex w-full max-w-4xl flex-col gap-6">
       <div className="group flex select-none flex-col gap-[6px] rounded-[6px] border border-[#f5f5f5] bg-white px-3 py-4 drop-shadow-sm dark:border-[#313131] dark:bg-[#232323]">
@@ -88,6 +107,7 @@ export default function NotePage({
         </div>
         <div className="size-full px-1">
           <textarea
+            ref={textareaRef}
             name="text"
             value={dataContext.collections[collectionPage - 1].notes[notePage - 1].description}
             onChange={(e) => {
@@ -104,7 +124,7 @@ export default function NotePage({
               });
               setDataContext({ collections: newCollections });
             }}
-            className=" min-h-10 w-full border-none bg-transparent pt-2 text-left text-black outline-none transition dark:text-white"
+            className="w-full border-none bg-transparent pt-2 text-left text-black outline-none transition dark:text-white"
           />
         </div>
       </div>
