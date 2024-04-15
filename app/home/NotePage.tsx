@@ -86,6 +86,27 @@ export default function NotePage({
             />
           </div>
         </div>
+        <div className="size-full px-1">
+          <textarea
+            name="text"
+            value={dataContext.collections[collectionPage - 1].notes[notePage - 1].description}
+            onChange={(e) => {
+              const newCollections = dataContext.collections.map((collection) => {
+                if (collection.id === collectionPage) {
+                  collection.notes.map((note) => {
+                    if (note.id === notePage) {
+                      note.description = e.target.value;
+                    }
+                    return note;
+                  });
+                }
+                return collection;
+              });
+              setDataContext({ collections: newCollections });
+            }}
+            className=" min-h-10 w-full border-none bg-transparent pt-2 text-left text-black outline-none transition dark:text-white"
+          />
+        </div>
       </div>
       <button
         className="button1 flex pt-[3px]"
