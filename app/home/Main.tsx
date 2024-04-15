@@ -4,14 +4,12 @@ import CollectionPage from './CollectionPage';
 import NotePage from './NotePage';
 
 const Main = ({ token, loading }: { token: string; loading: boolean }) => {
-  console.log(token);
-
   const [collectionPage, setCollectionPage] = useState<number | null>(null);
   const [notePage, setNotePage] = useState<number | null>(null);
 
   return (
     <main className="flex w-full justify-center  px-8 py-12">
-      {notePage ? (
+      {notePage && collectionPage ? (
         <NotePage token={token} collectionPage={collectionPage} notePage={notePage} setNotePage={setNotePage} />
       ) : collectionPage ? (
         <CollectionPage

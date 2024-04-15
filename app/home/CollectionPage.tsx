@@ -70,8 +70,8 @@ const CollectionPage = ({
               func={() => {
                 const newCollections = dataContext.collections.map((collection) => {
                   if (collection.id === collectionPage) {
-                    collection.Notes.push({
-                      id: collection.Notes.length + 1,
+                    collection.notes.push({
+                      id: collection.notes.length + 1,
                       title: 'New Note',
                       description: 'Add a description here',
                     });
@@ -102,11 +102,11 @@ const CollectionPage = ({
           </div>
         </div>
         <Reorder.Group
-          values={dataContext.collections[collectionPage - 1].Notes}
+          values={dataContext.collections[collectionPage - 1].notes}
           onReorder={(newOrder) => {
             const newCollections = dataContext.collections.map((collection) => {
               if (collection.id === collectionPage) {
-                collection.Notes = newOrder;
+                collection.notes = newOrder;
               }
               return collection;
             });
@@ -115,7 +115,7 @@ const CollectionPage = ({
           }}
           className="flex flex-col gap-2"
         >
-          {dataContext.collections[collectionPage - 1].Notes.map((note) => (
+          {dataContext.collections[collectionPage - 1].notes.map((note) => (
             <Reorder.Item
               //dragListener={false}
               dragControls={controls}

@@ -29,7 +29,7 @@ const Item = ({
 
       newCollections[collectionIndex] = {
         ...newCollections[collectionIndex],
-        Notes: newOrder,
+        notes: newOrder,
       };
 
       return {
@@ -78,10 +78,10 @@ const Item = ({
           handleReorderItem(newOrder, collection.id);
         }}
         key={collection.id}
-        values={collection.Notes}
+        values={collection.notes}
         className="flex flex-col gap-2"
       >
-        {collection.Notes.map((note) => (
+        {collection.notes.map((note) => (
           <ItemsNested key={note.id} note={note} />
         ))}
       </Reorder.Group>
@@ -169,7 +169,7 @@ const Notebook = ({
             newNotebook.push({
               id: newNotebook.length + 1,
               title: 'New Collection',
-              Notes: [],
+              notes: [],
             });
             return {
               ...prevState,

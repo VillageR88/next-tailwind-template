@@ -9,7 +9,7 @@ interface Note {
 interface Collection {
   id: number;
   title: string;
-  Notes: Note[];
+  notes: Note[];
 }
 
 interface CollectionGroup {

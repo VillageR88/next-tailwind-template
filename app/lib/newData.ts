@@ -6,8 +6,8 @@ const newData = ({ data }: { data: CollectionGroup }) => {
     collection.id = newData.collections.indexOf(collection) + 1;
   }
   for (const collection of newData.collections) {
-    for (const note of collection.Notes) {
-      note.id = collection.Notes.indexOf(note) + 1;
+    for (const note of collection.notes) {
+      note.id = collection.notes.indexOf(note) + 1;
     }
   }
   return newData;
