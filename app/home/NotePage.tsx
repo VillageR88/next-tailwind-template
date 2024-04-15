@@ -3,6 +3,8 @@ import IconReturn from '../components/IconReturn';
 import { DataContext } from '../_providers/DataContext';
 import ButtonDelete from '../components/ButtonDelete';
 import handleSaveCollectionGroup from './handleSaveCollectionGroup';
+import newData from '../lib/newData';
+import { CollectionGroup } from '../lib/interfaces';
 
 export default function NotePage({
   token,
@@ -15,9 +17,8 @@ export default function NotePage({
   notePage: number;
   setNotePage: Dispatch<SetStateAction<number | null>>;
 }) {
-  token; //TODO: Remove this line after adding token to the function
   const [titleEditable, setTitleEditable] = useState(false);
-  const { dataContext, setDataContext } = useContext(DataContext);
+  const { dataContext, setDataContext, initialDataContext } = useContext(DataContext);
   return (
     <div className="flex w-full max-w-4xl flex-col gap-6">
       <div className="group flex select-none flex-col gap-[6px] rounded-[6px] border border-[#f5f5f5] bg-white px-3 py-4 drop-shadow-sm dark:border-[#313131] dark:bg-[#232323]">
@@ -46,15 +47,6 @@ export default function NotePage({
               type="text"
               value={dataContext.collections[collectionPage - 1].notes[notePage - 1].title}
               onChange={(e) => {
-                /*const newCollections = dataContext.collections.map((collection) => {
-                  if (collection.id === collectionPage) {
-                    collection.title = e.target.value;
-                  }
-                  return collection;
-                });
-                const newDataContext = { collections: newCollections };
-                setDataContext(newDataContext);
-                */
                 const newCollections = dataContext.collections.map((collection) => {
                   if (collection.id === collectionPage) {
                     collection.notes.map((note) => {
@@ -98,15 +90,12 @@ export default function NotePage({
       <button
         className="button1 flex pt-[3px]"
         onClick={() => {
-          /*
-         
-          setCollectionPage(null);
-          if (!token) return;
+          setNotePage(null);
           const safeContext = () => {
             const safe = JSON.parse(JSON.stringify(dataContext)) as CollectionGroup;
-            safe.collections.forEach((collection) => {
-              if (collection.title.length === 0) {
-                collection.title = 'Untitled Collection';
+            safe.collections[collectionPage - 1].notes.forEach((note) => {
+              if (note.title.length === 0) {
+                note.title = 'Untitled Note';
               }
             });
             return safe;
@@ -117,8 +106,6 @@ export default function NotePage({
             data: newData({ data: safeContext() }),
             token: token,
           });
-        */
-          setNotePage(null);
         }}
       >
         <IconReturn />
