@@ -5,10 +5,9 @@ import { DataContext } from '@/app/_providers/DataContext';
 import IconSave from '../components/IconSave';
 import IconUndo from '../components/IconUndo';
 import IconLogout from '../components/IconLogout';
-import handleSaveCollectionGroup from './handleSaveCollectionGroup';
-import newData from '../lib/newData';
+import { handleSaveCollectionGroup, clearToken } from '@/app/lib/functionsServer';
+import { newData } from '@/app/lib/functionsClient';
 import { CollectionGroup } from '../lib/interfaces';
-import clearToken from './clearToken';
 import ButtonTheme from '../components/ButtonTheme';
 
 const Navbar = ({ token, loading }: { token: string; loading: boolean }) => {
@@ -38,6 +37,14 @@ const Navbar = ({ token, loading }: { token: string; loading: boolean }) => {
                   if (collection.title.length === 0) {
                     collection.title = 'Untitled Collection';
                   }
+                  collection.notes.forEach((note) => {
+                    if (note.title.length === 0) {
+                      note.title = 'Untitled Note';
+                    }
+                    if (note.description.length === 0) {
+                      note.description = 'Add a description here';
+                    }
+                  });
                 });
                 return safe;
               };
@@ -86,6 +93,14 @@ const Navbar = ({ token, loading }: { token: string; loading: boolean }) => {
                   if (collection.title.length === 0) {
                     collection.title = 'Untitled Collection';
                   }
+                  collection.notes.forEach((note) => {
+                    if (note.title.length === 0) {
+                      note.title = 'Untitled Note';
+                    }
+                    if (note.description.length === 0) {
+                      note.description = 'Add a description here';
+                    }
+                  });
                 });
                 return safe;
               };

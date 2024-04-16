@@ -4,8 +4,8 @@ import { useEffect, useState, useContext } from 'react';
 import Navbar from './home/Navbar';
 import Main from './home/Main';
 import { DataContext } from './_providers/DataContext';
-import handleLoadCollectionGroup from '@/app/home/handleLoadCollectionGroup';
-import checkToken from './home/checkToken';
+import { handleLoadCollectionGroup } from '@/app/lib/functionsServer';
+import { checkToken } from '@/app/lib/functionsServer';
 import { useRouter } from 'next/navigation';
 import { CollectionGroup } from './lib/interfaces';
 

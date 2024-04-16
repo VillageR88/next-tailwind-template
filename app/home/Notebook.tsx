@@ -4,8 +4,8 @@ import { Reorder, useDragControls } from 'framer-motion';
 import { Collection, CollectionGroup, Note } from '../lib/interfaces';
 import ButtonDrag from '../components/ButtonDrag';
 import IconAdd from '../components/IconAdd';
-import handleSaveCollectionGroup from './handleSaveCollectionGroup';
-import newData from '../lib/newData';
+import { handleSaveCollectionGroup } from '@/app/lib/functionsServer';
+import { newData } from '@/app/lib/functionsClient';
 import { RotatingLines } from 'react-loader-spinner';
 
 const Item = ({

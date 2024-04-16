@@ -3,8 +3,8 @@ import { useContext, useState, useRef, useEffect } from 'react';
 import IconReturn from '../components/IconReturn';
 import ButtonAdd from '../ButtonAdd';
 import ButtonDelete from '../components/ButtonDelete';
-import handleSaveCollectionGroup from './handleSaveCollectionGroup';
-import newData from '../lib/newData';
+import { handleSaveCollectionGroup } from '@/app/lib/functionsServer';
+import { newData } from '@/app/lib/functionsClient';
 import { CollectionGroup } from '../lib/interfaces';
 import { Reorder, useDragControls } from 'framer-motion';
 import ButtonDrag from '../components/ButtonDrag';
@@ -160,7 +160,6 @@ const CollectionPage = ({
         className="button1 flex pt-[3px]"
         onClick={() => {
           setCollectionPage(null);
-          if (!token) return;
           const safeContext = () => {
             const safe = JSON.parse(JSON.stringify(dataContext)) as CollectionGroup;
             safe.collections.forEach((collection) => {

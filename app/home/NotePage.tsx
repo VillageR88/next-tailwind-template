@@ -2,8 +2,8 @@ import { Dispatch, SetStateAction, useContext, useState, useRef, useEffect } fro
 import IconReturn from '../components/IconReturn';
 import { DataContext } from '../_providers/DataContext';
 import ButtonDelete from '../components/ButtonDelete';
-import handleSaveCollectionGroup from './handleSaveCollectionGroup';
-import newData from '../lib/newData';
+import { handleSaveCollectionGroup } from '@/app/lib/functionsServer';
+import { newData } from '@/app/lib/functionsClient';
 import { CollectionGroup } from '../lib/interfaces';
 
 export default function NotePage({
