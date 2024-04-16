@@ -139,6 +139,12 @@ const CollectionPage = ({
                 <button
                   onClick={() => {
                     setNotePage(note.id);
+                    void handleSaveCollectionGroup({
+                      data: newData({ data: JSON.parse(JSON.stringify(dataContext)) as CollectionGroup }),
+                      token: token,
+                    });
+                    initialDataContext.current = newData({ data: dataContext });
+                    setDataContext(newData({ data: dataContext }));
                   }}
                   className="font-semibold tracking-[-0.3px] transition hover:text-[darkorange] dark:font-normal dark:tracking-normal dark:text-white dark:hover:text-[orange]"
                 >

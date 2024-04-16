@@ -49,7 +49,6 @@ const Item = ({
           <button
             onClick={() => {
               setCollectionPage(index + 1);
-              if (!token) return;
               void handleSaveCollectionGroup({
                 data: newData({ data: JSON.parse(JSON.stringify(dataContext)) as CollectionGroup }),
                 token: token,
