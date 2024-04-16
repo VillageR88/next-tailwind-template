@@ -145,9 +145,17 @@ export default function NotePage({
           setNotePage(null);
           const safeContext = () => {
             const safe = JSON.parse(JSON.stringify(dataContext)) as CollectionGroup;
+            safe.collections.forEach((collection) => {
+              if (collection.title.length === 0) {
+                collection.title = 'Untitled Collection';
+              }
+            });
             safe.collections[collectionPage - 1].notes.forEach((note) => {
               if (note.title.length === 0) {
                 note.title = 'Untitled Note';
+              }
+              if (note.description.length === 0) {
+                note.description = 'Add a description here';
               }
             });
             return safe;
