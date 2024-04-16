@@ -31,28 +31,18 @@ const Navbar = ({ token, loading }: { token: string; loading: boolean }) => {
               const style = document.createElement('style');
               style.innerHTML = `* { cursor: wait}`;
               document.head.appendChild(style);
-              const safeContext = () => {
-                const safe = JSON.parse(JSON.stringify(dataContext)) as CollectionGroup;
-                safe.collections.forEach((collection) => {
-                  if (collection.title.length === 0) {
-                    collection.title = 'Untitled Collection';
-                  }
-                  collection.notes.forEach((note) => {
-                    if (note.title.length === 0) {
-                      note.title = 'Untitled Note';
-                    }
-                    if (note.description.length === 0) {
-                      note.description = 'Add a description here';
-                    }
-                  });
-                });
-                return safe;
-              };
-              handleSaveCollectionGroup({ data: newData({ data: safeContext() }), token: token })
+              handleSaveCollectionGroup({
+                data: newData({ data: safeContext({ dataContext: dataContext }) }),
+                token: token,
+              })
                 .then((res) => {
                   if (res) {
-                    initialDataContext.current = JSON.parse(JSON.stringify(safeContext())) as CollectionGroup;
-                    setDataContext(JSON.parse(JSON.stringify(safeContext())) as CollectionGroup);
+                    initialDataContext.current = JSON.parse(
+                      JSON.stringify(safeContext({ dataContext: dataContext })),
+                    ) as CollectionGroup;
+                    setDataContext(
+                      JSON.parse(JSON.stringify(safeContext({ dataContext: dataContext }))) as CollectionGroup,
+                    );
                   }
                   document.head.removeChild(style);
                 })

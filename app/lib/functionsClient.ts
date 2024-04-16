@@ -1,6 +1,5 @@
 import { CollectionGroup } from './interfaces';
 
-//TODO
 export const safeContext = ({ dataContext }: { dataContext: CollectionGroup }) => {
   const safe = JSON.parse(JSON.stringify(dataContext)) as CollectionGroup;
   safe.collections.forEach((collection) => {
@@ -19,7 +18,6 @@ export const safeContext = ({ dataContext }: { dataContext: CollectionGroup }) =
   return safe;
 };
 
-//TODO
 export const newData = ({ data }: { data: CollectionGroup }) => {
   const newData = JSON.parse(JSON.stringify(data)) as CollectionGroup;
   newData.collections.forEach((collection, index) => {
