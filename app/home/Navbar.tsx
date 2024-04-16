@@ -6,7 +6,7 @@ import IconSave from '../components/IconSave';
 import IconUndo from '../components/IconUndo';
 import IconLogout from '../components/IconLogout';
 import { handleSaveCollectionGroup, clearToken } from '@/app/lib/functionsServer';
-import { newData } from '@/app/lib/functionsClient';
+import { newData, safeContext } from '@/app/lib/functionsClient';
 import { CollectionGroup } from '../lib/interfaces';
 import ButtonTheme from '../components/ButtonTheme';
 
@@ -87,24 +87,10 @@ const Navbar = ({ token, loading }: { token: string; loading: boolean }) => {
               const style = document.createElement('style');
               style.innerHTML = `* { cursor: wait}`;
               document.head.appendChild(style);
-              const safeContext = () => {
-                const safe = JSON.parse(JSON.stringify(dataContext)) as CollectionGroup;
-                safe.collections.forEach((collection) => {
-                  if (collection.title.length === 0) {
-                    collection.title = 'Untitled Collection';
-                  }
-                  collection.notes.forEach((note) => {
-                    if (note.title.length === 0) {
-                      note.title = 'Untitled Note';
-                    }
-                    if (note.description.length === 0) {
-                      note.description = 'Add a description here';
-                    }
-                  });
-                });
-                return safe;
-              };
-              void handleSaveCollectionGroup({ data: newData({ data: safeContext() }), token: token });
+              void handleSaveCollectionGroup({
+                data: newData({ data: safeContext({ dataContext: dataContext }) }),
+                token: token,
+              });
               void clearToken().then(() => {
                 document.head.removeChild(style);
                 router.push('/login');

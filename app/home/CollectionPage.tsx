@@ -4,7 +4,7 @@ import IconReturn from '../components/IconReturn';
 import ButtonAdd from '../ButtonAdd';
 import ButtonDelete from '../components/ButtonDelete';
 import { handleSaveCollectionGroup } from '@/app/lib/functionsServer';
-import { newData } from '@/app/lib/functionsClient';
+import { newData, safeContext } from '@/app/lib/functionsClient';
 import { CollectionGroup } from '../lib/interfaces';
 import { Reorder, useDragControls } from 'framer-motion';
 import ButtonDrag from '../components/ButtonDrag';
@@ -160,19 +160,10 @@ const CollectionPage = ({
         className="button1 flex pt-[3px]"
         onClick={() => {
           setCollectionPage(null);
-          const safeContext = () => {
-            const safe = JSON.parse(JSON.stringify(dataContext)) as CollectionGroup;
-            safe.collections.forEach((collection) => {
-              if (collection.title.length === 0) {
-                collection.title = 'Untitled Collection';
-              }
-            });
-            return safe;
-          };
-          initialDataContext.current = newData({ data: safeContext() });
-          setDataContext(newData({ data: safeContext() }));
+          initialDataContext.current = newData({ data: safeContext({ dataContext: dataContext }) });
+          setDataContext(newData({ data: safeContext({ dataContext: dataContext }) }));
           void handleSaveCollectionGroup({
-            data: newData({ data: safeContext() }),
+            data: newData({ data: safeContext({ dataContext: dataContext }) }),
             token: token,
           });
         }}

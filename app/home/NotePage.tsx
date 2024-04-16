@@ -3,8 +3,7 @@ import IconReturn from '../components/IconReturn';
 import { DataContext } from '../_providers/DataContext';
 import ButtonDelete from '../components/ButtonDelete';
 import { handleSaveCollectionGroup } from '@/app/lib/functionsServer';
-import { newData } from '@/app/lib/functionsClient';
-import { CollectionGroup } from '../lib/interfaces';
+import { newData, safeContext } from '@/app/lib/functionsClient';
 
 export default function NotePage({
   token,
@@ -143,27 +142,10 @@ export default function NotePage({
         className="button1 flex pt-[3px]"
         onClick={() => {
           setNotePage(null);
-          const safeContext = () => {
-            const safe = JSON.parse(JSON.stringify(dataContext)) as CollectionGroup;
-            safe.collections.forEach((collection) => {
-              if (collection.title.length === 0) {
-                collection.title = 'Untitled Collection';
-              }
-            });
-            safe.collections[collectionPage - 1].notes.forEach((note) => {
-              if (note.title.length === 0) {
-                note.title = 'Untitled Note';
-              }
-              if (note.description.length === 0) {
-                note.description = 'Add a description here';
-              }
-            });
-            return safe;
-          };
-          initialDataContext.current = newData({ data: safeContext() });
-          setDataContext(newData({ data: safeContext() }));
+          initialDataContext.current = newData({ data: safeContext({ dataContext: dataContext }) });
+          setDataContext(newData({ data: safeContext({ dataContext: dataContext }) }));
           void handleSaveCollectionGroup({
-            data: newData({ data: safeContext() }),
+            data: newData({ data: safeContext({ dataContext: dataContext }) }),
             token: token,
           });
         }}
