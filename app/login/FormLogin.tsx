@@ -76,7 +76,7 @@ export default function FormLogin() {
           className="regularInput transition"
           id="email"
           type="email"
-          pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
+          pattern="[a-z0-9._%+\-]+@[a-z0-9.\-]+\.[a-z]{2,}$"
         />
       </div>
       <div className="flex flex-col gap-2">
