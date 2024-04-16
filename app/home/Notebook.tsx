@@ -24,14 +24,11 @@ const Item = ({
   const handleReorderItem = (newOrder: Note[], collectionId: number) => {
     setDataContext((prevState) => {
       const collectionIndex = prevState.collections.findIndex((collection) => collection.id === +collectionId);
-
       const newCollections = [...prevState.collections];
-
       newCollections[collectionIndex] = {
         ...newCollections[collectionIndex],
         notes: newOrder,
       };
-
       return {
         ...prevState,
         collections: newCollections,
@@ -57,7 +54,6 @@ const Item = ({
                 data: newData({ data: JSON.parse(JSON.stringify(dataContext)) as CollectionGroup }),
                 token: token,
               });
-
               initialDataContext.current = newData({ data: dataContext });
               setDataContext(newData({ data: dataContext }));
             }}
@@ -88,7 +84,6 @@ const Item = ({
     </Reorder.Item>
   );
 };
-
 const ItemsNested = ({ note }: { note: Note }) => {
   const controls = useDragControls();
   return (
@@ -112,7 +107,6 @@ const ItemsNested = ({ note }: { note: Note }) => {
     </Reorder.Item>
   );
 };
-
 const Notebook = ({
   setCollectionPage,
   loading,
@@ -132,7 +126,6 @@ const Notebook = ({
   };
 
   if (loading) {
-    //if root contains dark class const color = 'white' else 'black'
     const value = localStorage.getItem('theme');
     const color = value === 'dark' ? 'orange' : 'darkorange';
     return (
@@ -160,7 +153,6 @@ const Notebook = ({
           );
         })}
       </Reorder.Group>
-
       <button
         className="button1 flex pt-[1px]"
         onClick={() => {
