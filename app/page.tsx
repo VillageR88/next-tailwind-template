@@ -35,7 +35,6 @@ export default function Home() {
               setLoading(false);
             });
         } else {
-          console.log('pushing to login');
           router.push('/login');
         }
       });

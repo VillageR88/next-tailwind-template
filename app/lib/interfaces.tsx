@@ -12,8 +12,10 @@ interface Collection {
   notes: Note[];
 }
 
+type SubmitButtonType = 'login' | 'createAccount';
+
 interface CollectionGroup {
   collections: Collection[];
 }
 
-export type { CollectionGroup, Collection, Note };
+export type { CollectionGroup, Collection, Note, SubmitButtonType };
