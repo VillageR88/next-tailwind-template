@@ -37,6 +37,17 @@ export default function NotePage({
       };
     }
   }, []);
+  useEffect(() => {
+    const clickListener = () => {
+      if (textareaRef.current?.value.length === 0) {
+        textareaRef.current.value = 'Add a description here';
+      }
+    };
+    document.addEventListener('click', clickListener);
+    return () => {
+      document.removeEventListener('click', clickListener);
+    };
+  }, []);
 
   return (
     <div className="flex w-full max-w-4xl flex-col gap-6">
@@ -124,7 +135,7 @@ export default function NotePage({
               });
               setDataContext({ collections: newCollections });
             }}
-            className="w-full border-none bg-transparent pt-2 text-left text-black outline-none transition dark:text-white"
+            className="w-full resize-none border-none bg-transparent pt-2 text-left text-black outline-none transition dark:text-white"
           />
         </div>
       </div>

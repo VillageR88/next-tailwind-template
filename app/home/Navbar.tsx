@@ -63,7 +63,7 @@ const Navbar = ({ token, loading }: { token: string; loading: boolean }) => {
           </button>
           <button
             onClick={() => {
-              setDataContext(initialDataContext.current);
+              setDataContext(JSON.parse(JSON.stringify(initialDataContext.current)) as CollectionGroup);
             }}
             disabled={checkSame()}
             className="button1 flex"
