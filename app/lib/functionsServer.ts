@@ -22,9 +22,16 @@ export const clearToken = async () => {
   cookies().delete('token');
 };
 
+let server;
+if (process.env.NODE_ENV === 'production') {
+  server = 'https://serverexpress1-production.up.railway.app/';
+} else {
+  server = 'http://192.168.1.104:3000/';
+}
+
 export const handleLoadCollectionGroup = async ({ token }: { token: string }) => {
   try {
-    const response = await fetch('https://serverexpress1-production.up.railway.app/', {
+    const response = await fetch(server, {
       method: 'GET',
       headers: {
         Authorization: `Bearer ${token}`,
@@ -43,7 +50,7 @@ export const handleLoadCollectionGroup = async ({ token }: { token: string }) =>
 
 export const handleSaveCollectionGroup = async ({ data, token }: { data: CollectionGroup; token: string }) => {
   try {
-    const response = await fetch('https://serverexpress1-production.up.railway.app/', {
+    const response = await fetch(server, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -65,7 +72,7 @@ export const handleSaveCollectionGroup = async ({ data, token }: { data: Collect
 
 export const handleSubmit = async ({ email, password }: { email: string; password: string }) => {
   try {
-    const response = await fetch('https://serverexpress1-production.up.railway.app/login', {
+    const response = await fetch(`${server}login`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
