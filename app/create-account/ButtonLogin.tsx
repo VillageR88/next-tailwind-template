@@ -1,13 +1,14 @@
 'use client';
 
 import { useRouter } from 'next/navigation';
+import { Routes } from '../routes';
 
 const ButtonLogin = () => {
   const router = useRouter();
   return (
     <button
       onClick={() => {
-        router.push('/login');
+        router.push(Routes.login);
       }}
       type="button"
       className="group flex items-center gap-[6px] text-[14px] font-semibold tracking-[-0.17px] text-[darkorange] dark:font-normal dark:tracking-normal dark:text-[orange]"

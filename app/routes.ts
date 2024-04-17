@@ -1,3 +1,5 @@
 export enum Routes {
-  index = '/',
+  createAccount = '/create-account',
+  login = '/login',
+  home = '/',
 }

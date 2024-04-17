@@ -4,6 +4,7 @@ import IconLogin from '@/app/components/IconLogin';
 import { useEffect, useState } from 'react';
 import { useFormStatus } from 'react-dom';
 import { SubmitButtonType } from '@/app/lib/interfaces';
+import { createMouseLoader, startMouseLoader, stopMouseLoader } from '../lib/functionsClient';
 
 const submitButtonProps = {
   login: {
@@ -30,11 +31,10 @@ export default function SubmitButton({ type }: { type: SubmitButtonType }) {
   const { pending } = useFormStatus();
   useEffect(() => {
     if (pending) {
-      const style = document.createElement('style');
-      style.innerHTML = `* { cursor: wait}`;
-      document.head.appendChild(style);
+      const mouseLoader = createMouseLoader();
+      startMouseLoader({ mouseLoader: mouseLoader });
       return () => {
-        document.head.removeChild(style);
+        stopMouseLoader({ mouseLoader: mouseLoader });
         setErrorGlobal(ErrorType.failedLogin);
       };
     }

@@ -1,3 +1,4 @@
+'use client';
 import { CollectionGroup } from './interfaces';
 
 export const safeContext = ({ dataContext }: { dataContext: CollectionGroup }) => {
@@ -27,4 +28,18 @@ export const newData = ({ data }: { data: CollectionGroup }) => {
     });
   });
   return newData;
+};
+
+export const createMouseLoader = () => {
+  const style = document.createElement('style');
+  return style;
+};
+
+export const startMouseLoader = ({ mouseLoader }: { mouseLoader: HTMLStyleElement }) => {
+  mouseLoader.innerHTML = `* { cursor: wait}`;
+  document.head.appendChild(mouseLoader);
+};
+
+export const stopMouseLoader = ({ mouseLoader }: { mouseLoader: HTMLStyleElement }) => {
+  document.head.removeChild(mouseLoader);
 };

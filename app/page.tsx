@@ -8,6 +8,7 @@ import { handleLoadCollectionGroup } from '@/app/lib/functionsServer';
 import { checkToken } from '@/app/lib/functionsServer';
 import { useRouter } from 'next/navigation';
 import { CollectionGroup } from './lib/interfaces';
+import { Routes } from './routes';
 
 export default function Home() {
   const { initialDataContext, setDataContext } = useContext(DataContext);
@@ -35,7 +36,7 @@ export default function Home() {
               setLoading(false);
             });
         } else {
-          router.push('/login');
+          router.push(Routes.login);
         }
       });
     }

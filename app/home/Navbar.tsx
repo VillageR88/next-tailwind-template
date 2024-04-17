@@ -6,9 +6,10 @@ import IconSave from '../components/IconSave';
 import IconUndo from '../components/IconUndo';
 import IconLogout from '../components/IconLogout';
 import { handleSaveCollectionGroup, clearToken } from '@/app/lib/functionsServer';
-import { newData, safeContext } from '@/app/lib/functionsClient';
+import { newData, safeContext, createMouseLoader, startMouseLoader, stopMouseLoader } from '@/app/lib/functionsClient';
 import { CollectionGroup } from '../lib/interfaces';
 import ButtonTheme from '../components/ButtonTheme';
+import { Routes } from '../routes';
 
 const Navbar = ({ token, loading }: { token: string; loading: boolean }) => {
   const logoutRef = useRef<HTMLButtonElement>(null);
@@ -28,9 +29,8 @@ const Navbar = ({ token, loading }: { token: string; loading: boolean }) => {
         <div className="flex gap-4">
           <button
             onClick={() => {
-              const style = document.createElement('style');
-              style.innerHTML = `* { cursor: wait}`;
-              document.head.appendChild(style);
+              const mouseLoader = createMouseLoader();
+              startMouseLoader({ mouseLoader: mouseLoader });
               handleSaveCollectionGroup({
                 data: newData({ data: safeContext({ dataContext: dataContext }) }),
                 token: token,
@@ -44,11 +44,11 @@ const Navbar = ({ token, loading }: { token: string; loading: boolean }) => {
                       JSON.parse(JSON.stringify(safeContext({ dataContext: dataContext }))) as CollectionGroup,
                     );
                   }
-                  document.head.removeChild(style);
+                  stopMouseLoader({ mouseLoader: mouseLoader });
                 })
                 .catch((error) => {
                   console.error(error);
-                  document.head.removeChild(style);
+                  stopMouseLoader({ mouseLoader: mouseLoader });
                 });
             }}
             disabled={checkSame()}
@@ -74,16 +74,15 @@ const Navbar = ({ token, loading }: { token: string; loading: boolean }) => {
             ref={logoutRef}
             onClick={() => {
               if (logoutRef.current) logoutRef.current.disabled = true;
-              const style = document.createElement('style');
-              style.innerHTML = `* { cursor: wait}`;
-              document.head.appendChild(style);
+              const mouseLoader = createMouseLoader();
+              startMouseLoader({ mouseLoader: mouseLoader });
               void handleSaveCollectionGroup({
                 data: newData({ data: safeContext({ dataContext: dataContext }) }),
                 token: token,
               });
               void clearToken().then(() => {
-                document.head.removeChild(style);
-                router.push('/login');
+                stopMouseLoader({ mouseLoader: mouseLoader });
+                router.push(Routes.login);
               });
             }}
             className="button2 group"

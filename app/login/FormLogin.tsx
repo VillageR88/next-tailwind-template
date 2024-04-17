@@ -1,8 +1,9 @@
-import handleSubmit from './handleSubmit';
+import { handleSubmit } from '@/app/lib/functionsServer';
 import { cookies } from 'next/headers';
 import SubmitButton from '../components/SubmitButton';
 import ButtonCreateAccount from './ButtonCreateAccount';
 import { redirect } from 'next/navigation';
+import { Routes } from '../routes';
 
 export default function FormLogin() {
   async function createInvoice(formData: FormData) {
@@ -29,7 +30,7 @@ export default function FormLogin() {
         console.log('error occurred');
       });
     if (!cookieToken) return;
-    redirect('/');
+    redirect(Routes.home);
   }
 
   return (
