@@ -89,3 +89,34 @@ export const handleSubmit = async ({ email, password }: { email: string; passwor
     console.error(error);
   }
 };
+
+export const handleCreateAccount = async ({
+  email,
+  password,
+  passwordConfirm,
+}: {
+  email: string;
+  password: string;
+  passwordConfirm: string;
+}) => {
+  try {
+    const response = await fetch(`${server}create-account`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ email, password, passwordConfirm }),
+    });
+
+    if (response.ok) {
+      const { token } = (await response.json()) as { token: string };
+      return token;
+    } else {
+      const error = await response.text();
+      console.log(error);
+      return 'unsuccessful';
+    }
+  } catch (error) {
+    console.error(error);
+  }
+};

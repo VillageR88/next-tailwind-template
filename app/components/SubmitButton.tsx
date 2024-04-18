@@ -23,6 +23,7 @@ const submitButtonProps = {
 
 enum ErrorType {
   failedLogin = 'Verify your email and password',
+  failedCreateAccount = 'Verify your email, password and password confirmation',
   errorOccurred = 'An error occurred. Try again later',
 }
 
@@ -35,10 +36,10 @@ export default function SubmitButton({ type }: { type: SubmitButtonType }) {
       startMouseLoader({ mouseLoader: mouseLoader });
       return () => {
         stopMouseLoader({ mouseLoader: mouseLoader });
-        setErrorGlobal(ErrorType.failedLogin);
+        setErrorGlobal(type === 'login' ? ErrorType.failedLogin : ErrorType.failedCreateAccount);
       };
     }
-  }, [pending]);
+  }, [pending, type]);
 
   return (
     <div className="flex flex-col">

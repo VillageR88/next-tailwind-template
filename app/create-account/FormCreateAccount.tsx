@@ -1,25 +1,28 @@
-//import handleSubmit from './handleSubmit';
-//import { cookies } from 'next/headers';
+import { handleCreateAccount } from '../lib/functionsServer';
+import { cookies } from 'next/headers';
 import SubmitButton from '../components/SubmitButton';
 import ButtonLogin from './ButtonLogin';
+import { redirect } from 'next/navigation';
+import { Routes } from '../routes';
 
 export default function FormCreateAccount() {
   // eslint-disable-next-line @typescript-eslint/require-await
   async function createInvoice(formData: FormData) {
     'use server';
-    formData;
-    return null;
-    /*
+
     const rawFormData = {
       email: formData.get('email'),
       password: formData.get('password'),
+      passwordConfirm: formData.get('passwordConfirm'),
     };
-  
-    const cookieToken = await handleSubmit({
+
+    const cookieToken = await handleCreateAccount({
       email: rawFormData.email as string,
       password: rawFormData.password as string,
+      passwordConfirm: rawFormData.passwordConfirm as string,
     })
       .then((e) => {
+        console.log(e);
         if (e)
           if (e === 'unsuccessful') {
           } else {
@@ -32,8 +35,7 @@ export default function FormCreateAccount() {
         console.log('error occurred');
       });
     if (!cookieToken) return;
-    redirect('/');
-    */
+    redirect(Routes.home);
   }
 
   return (
