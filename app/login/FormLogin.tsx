@@ -9,21 +9,15 @@ export default function FormLogin() {
   async function createInvoice(formData: FormData) {
     'use server';
 
-    const rawFormData = {
-      email: formData.get('email'),
-      password: formData.get('password'),
-    };
     const cookieToken = await handleSubmit({
-      email: rawFormData.email as string,
-      password: rawFormData.password as string,
+      email: formData.get('email') as string,
+      password: formData.get('password') as string,
     })
       .then((e) => {
-        if (e)
-          if (e === 'unsuccessful') {
-          } else {
-            cookies().set({ name: 'token', value: e, httpOnly: true });
-            return e;
-          }
+        if (e && e !== 'unsuccessful') {
+          cookies().set({ name: 'token', value: e, httpOnly: true });
+          return e;
+        }
       })
       .catch((e) => {
         console.log(e);
