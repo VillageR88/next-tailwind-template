@@ -113,7 +113,7 @@ export const handleCreateAccount = async ({
       return token;
     } else {
       const error = await response.text();
-      console.log(error);
+      console.error(error);
       return 'unsuccessful';
     }
   } catch (error) {

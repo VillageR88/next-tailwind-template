@@ -22,7 +22,6 @@ export default function FormCreateAccount() {
       passwordConfirm: rawFormData.passwordConfirm as string,
     })
       .then((e) => {
-        console.log(e);
         if (e)
           if (e === 'unsuccessful') {
           } else {
@@ -31,8 +30,7 @@ export default function FormCreateAccount() {
           }
       })
       .catch((e) => {
-        console.log(e);
-        console.log('error occurred');
+        console.error(e);
       });
     if (!cookieToken) return;
     redirect(Routes.home);
