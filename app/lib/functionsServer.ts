@@ -126,8 +126,7 @@ export const handleCreateAccount = async ({
 interface ErrorMessage {
   error: string;
 }
-export async function createInvoice(prev: ErrorMessage, formData: FormData): Promise<ErrorMessage> {
-  'use server';
+export async function createInvoiceCreateEmail(prev: ErrorMessage, formData: FormData): Promise<ErrorMessage> {
   const rawFormData = {
     email: formData.get('email'),
     password: formData.get('password'),
@@ -145,7 +144,7 @@ export async function createInvoice(prev: ErrorMessage, formData: FormData): Pro
     passwordConfirm: rawFormData.passwordConfirm as string,
   })
     .then((e) => {
-      if (!e) return 'prev';
+      if (!e) return 'Server error';
       if (e === 'unsuccessful') {
         return { error: 'Failed to create account' };
       } else if (e === 'exists') {
@@ -157,8 +156,27 @@ export async function createInvoice(prev: ErrorMessage, formData: FormData): Pro
     })
     .catch((e) => {
       console.error(e);
+      return 'Server error';
     });
   if (response !== 'pass') return response as ErrorMessage;
+  redirect(Routes.home);
+}
 
+export async function createInvoiceLogin(prev: ErrorMessage, formData: FormData): Promise<ErrorMessage> {
+  const response = await handleSubmit({
+    email: formData.get('email') as string,
+    password: formData.get('password') as string,
+  })
+    .then((e) => {
+      if (e && e !== 'unsuccessful') {
+        cookies().set({ name: 'token', value: e, httpOnly: true });
+        return ' ';
+      }
+    })
+    .catch((e) => {
+      console.log(e);
+      console.log('error occurred');
+    });
+  if (!response) return { error: 'Failed to login' };
   redirect(Routes.home);
 }

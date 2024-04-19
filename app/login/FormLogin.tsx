@@ -1,35 +1,18 @@
-import { handleSubmit } from '@/app/lib/functionsServer';
-import { cookies } from 'next/headers';
+'use client';
+
+import { createInvoiceLogin } from '../lib/functionsServer';
 import SubmitButton from '../components/SubmitButton';
 import ButtonCreateAccount from './ButtonCreateAccount';
-import { redirect } from 'next/navigation';
-import { Routes } from '../routes';
+import { useFormState } from 'react-dom';
 
 export default function FormLogin() {
-  async function createInvoice(formData: FormData) {
-    'use server';
-
-    const cookieToken = await handleSubmit({
-      email: formData.get('email') as string,
-      password: formData.get('password') as string,
-    })
-      .then((e) => {
-        if (e && e !== 'unsuccessful') {
-          cookies().set({ name: 'token', value: e, httpOnly: true });
-          return e;
-        }
-      })
-      .catch((e) => {
-        console.log(e);
-        console.log('error occurred');
-      });
-    if (!cookieToken) return;
-    redirect(Routes.home);
+  interface ErrorMessage {
+    error: string;
   }
+  const [state, action] = useFormState<ErrorMessage, FormData>(createInvoiceLogin, { error: '' });
 
   return (
-    // eslint-disable-next-line @typescript-eslint/no-misused-promises
-    <form action={createInvoice} id="form-login" className="flex size-full flex-col gap-6">
+    <form action={action} id="form-login" className="flex size-full flex-col gap-6">
       <div className="flex flex-col gap-2">
         <div className="flex justify-between px-1">
           <label className="flex w-fit items-center gap-2" htmlFor="email">
@@ -102,7 +85,7 @@ export default function FormLogin() {
           type="password"
         />
       </div>
-      <SubmitButton type="login" />
+      <SubmitButton state={state.error} type="login" />
     </form>
   );
 }

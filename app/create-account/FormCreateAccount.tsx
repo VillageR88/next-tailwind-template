@@ -1,5 +1,5 @@
 'use client';
-import { createInvoice } from '../lib/functionsServer';
+import { createInvoiceCreateEmail } from '../lib/functionsServer';
 import SubmitButton from '../components/SubmitButton';
 import ButtonLogin from './ButtonLogin';
 import { useFormState } from 'react-dom';
@@ -8,9 +8,8 @@ export default function FormCreateAccount() {
   interface ErrorMessage {
     error: string;
   }
-  const [state, action] = useFormState<ErrorMessage, FormData>(createInvoice, { error: '' });
+  const [state, action] = useFormState<ErrorMessage, FormData>(createInvoiceCreateEmail, { error: '' });
   return (
-    // eslint-disable-next-line @typescript-eslint/no-misused-promises
     <form action={action} id="form-login" className="flex size-full flex-col gap-6">
       <div className="flex flex-col gap-2">
         <div className="flex justify-between px-1">
