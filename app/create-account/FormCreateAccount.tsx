@@ -1,41 +1,8 @@
-import { handleCreateAccount } from '../lib/functionsServer';
-import { cookies } from 'next/headers';
+import { createInvoice } from '../lib/functionsServer';
 import SubmitButton from '../components/SubmitButton';
 import ButtonLogin from './ButtonLogin';
-import { redirect } from 'next/navigation';
-import { Routes } from '../routes';
 
 export default function FormCreateAccount() {
-  // eslint-disable-next-line @typescript-eslint/require-await
-  async function createInvoice(formData: FormData) {
-    'use server';
-
-    const rawFormData = {
-      email: formData.get('email'),
-      password: formData.get('password'),
-      passwordConfirm: formData.get('passwordConfirm'),
-    };
-
-    const cookieToken = await handleCreateAccount({
-      email: rawFormData.email as string,
-      password: rawFormData.password as string,
-      passwordConfirm: rawFormData.passwordConfirm as string,
-    })
-      .then((e) => {
-        if (e)
-          if (e === 'unsuccessful') {
-          } else {
-            cookies().set({ name: 'token', value: e, httpOnly: true });
-            return e;
-          }
-      })
-      .catch((e) => {
-        console.error(e);
-      });
-    if (!cookieToken) return;
-    redirect(Routes.home);
-  }
-
   return (
     // eslint-disable-next-line @typescript-eslint/no-misused-promises
     <form action={createInvoice} id="form-login" className="flex size-full flex-col gap-6">
