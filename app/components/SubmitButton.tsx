@@ -1,7 +1,7 @@
 'use client';
 
 import IconLogin from '@/app/components/IconLogin';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useFormStatus } from 'react-dom';
 import { SubmitButtonType } from '@/app/lib/interfaces';
 import { createMouseLoader, startMouseLoader, stopMouseLoader } from '../lib/functionsClient';
@@ -21,14 +21,7 @@ const submitButtonProps = {
   },
 };
 
-enum ErrorType {
-  failedLogin = 'Verify your email and password',
-  failedCreateAccount = 'Verify your email, password and password confirmation',
-  errorOccurred = 'An error occurred. Try again later',
-}
-
-export default function SubmitButton({ type }: { type: SubmitButtonType }) {
-  const [errorGlobal, setErrorGlobal] = useState<string>('');
+export default function SubmitButton({ type, state }: { type: SubmitButtonType; state?: string }) {
   const { pending } = useFormStatus();
   useEffect(() => {
     if (pending) {
@@ -36,7 +29,6 @@ export default function SubmitButton({ type }: { type: SubmitButtonType }) {
       startMouseLoader({ mouseLoader: mouseLoader });
       return () => {
         stopMouseLoader({ mouseLoader: mouseLoader });
-        setErrorGlobal(type === 'login' ? ErrorType.failedLogin : ErrorType.failedCreateAccount);
       };
     }
   }, [pending, type]);
@@ -53,7 +45,7 @@ export default function SubmitButton({ type }: { type: SubmitButtonType }) {
       </div>
       <div className="flex h-0 justify-center">
         <span className="mt-[16px] px-1 text-sm font-semibold tracking-[-0.18px] text-[#ff3333] dark:font-normal dark:tracking-normal">
-          {errorGlobal}
+          {state}
         </span>
       </div>
     </div>

@@ -116,38 +116,49 @@ export const handleCreateAccount = async ({
     } else {
       const error = await response.text();
       console.error(error);
-      return 'unsuccessful';
+      if (error === 'User already exists') return 'exists';
+      else return 'unsuccessful';
     }
   } catch (error) {
     console.error(error);
   }
 };
-
-export async function createInvoice(formData: FormData) {
+interface ErrorMessage {
+  error: string;
+}
+export async function createInvoice(prev: ErrorMessage, formData: FormData): Promise<ErrorMessage> {
   'use server';
-
   const rawFormData = {
     email: formData.get('email'),
     password: formData.get('password'),
     passwordConfirm: formData.get('passwordConfirm'),
   };
 
-  const cookieToken = await handleCreateAccount({
+  if (rawFormData.password !== rawFormData.passwordConfirm)
+    return {
+      error: 'Passwords do not match',
+    };
+
+  const response = await handleCreateAccount({
     email: rawFormData.email as string,
     password: rawFormData.password as string,
     passwordConfirm: rawFormData.passwordConfirm as string,
   })
     .then((e) => {
-      if (e)
-        if (e === 'unsuccessful') {
-        } else {
-          cookies().set({ name: 'token', value: e, httpOnly: true });
-          return e;
-        }
+      if (!e) return 'prev';
+      if (e === 'unsuccessful') {
+        return { error: 'Failed to create account' };
+      } else if (e === 'exists') {
+        return { error: 'User already exists' };
+      } else {
+        cookies().set({ name: 'token', value: e, httpOnly: true });
+        return 'pass';
+      }
     })
     .catch((e) => {
       console.error(e);
     });
-  if (!cookieToken) return;
+  if (response !== 'pass') return response as ErrorMessage;
+
   redirect(Routes.home);
 }

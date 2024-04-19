@@ -1,11 +1,17 @@
+'use client';
 import { createInvoice } from '../lib/functionsServer';
 import SubmitButton from '../components/SubmitButton';
 import ButtonLogin from './ButtonLogin';
+import { useFormState } from 'react-dom';
 
 export default function FormCreateAccount() {
+  interface ErrorMessage {
+    error: string;
+  }
+  const [state, action] = useFormState<ErrorMessage, FormData>(createInvoice, { error: '' });
   return (
     // eslint-disable-next-line @typescript-eslint/no-misused-promises
-    <form action={createInvoice} id="form-login" className="flex size-full flex-col gap-6">
+    <form action={action} id="form-login" className="flex size-full flex-col gap-6">
       <div className="flex flex-col gap-2">
         <div className="flex justify-between px-1">
           <label className="flex w-fit items-center gap-2" htmlFor="email">
@@ -84,7 +90,7 @@ export default function FormCreateAccount() {
           type="password"
         />
       </div>
-      {<SubmitButton type="createAccount" />}
+      {<SubmitButton state={state.error} type="createAccount" />}
     </form>
   );
 }
