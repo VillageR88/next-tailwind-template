@@ -1,7 +1,7 @@
 'use client';
 
 import { createInvoiceLogin } from '../lib/functionsServer';
-import SubmitButton from '../components/SubmitButton';
+import ButtonSubmit from '../components/ButtonSubmit';
 import ButtonCreateAccount from './ButtonCreateAccount';
 import { useFormState } from 'react-dom';
 import ModuleEmail from '../components/ModuleEmail';
@@ -18,7 +18,7 @@ export default function FormLogin() {
     <form action={action} id="form-login" className="flex size-full flex-col gap-6">
       <ModuleEmail Button={ButtonCreateAccount} />
       <ModulePassword Button={ButtonResetPassword} />
-      <SubmitButton state={state.error} type="login" />
+      <ButtonSubmit state={state.error} type="login" />
     </form>
   );
 }

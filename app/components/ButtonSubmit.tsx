@@ -3,7 +3,7 @@
 import IconLogin from '@/app/components/IconLogin';
 import { useEffect } from 'react';
 import { useFormStatus } from 'react-dom';
-import { SubmitButtonType } from '@/app/lib/interfaces';
+import { TButtonSubmit } from '@/app/lib/interfaces';
 import { createMouseLoader, startMouseLoader, stopMouseLoader } from '../lib/functionsClient';
 
 const submitButtonProps = {
@@ -21,7 +21,7 @@ const submitButtonProps = {
   },
 };
 
-export default function SubmitButton({ type, state }: { type: SubmitButtonType; state?: string }) {
+export default function ButtonSubmit({ type, state }: { type: TButtonSubmit; state?: string }) {
   const { pending } = useFormStatus();
   useEffect(() => {
     if (pending) {
