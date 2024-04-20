@@ -34,7 +34,7 @@ export default function FormLogin() {
           required
           autoComplete="email"
           placeholder="example@domain.com"
-          className="regularInput transition"
+          className="regularInput "
           id="email"
           type="email"
           pattern="[a-z0-9._%+\-]+@[a-z0-9.\-]+\.[a-z]{2,}$"
@@ -75,7 +75,7 @@ export default function FormLogin() {
           </button>
         </div>
         <input
-          className="regularInput transition"
+          className="regularInput "
           name="password"
           required
           minLength={8}

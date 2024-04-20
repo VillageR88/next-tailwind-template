@@ -7,6 +7,7 @@
   src: url('/assets/fonts/instrumentSans/InstrumentSans-VariableFont_wdth,wght.ttf') format('truetype');
 }
 
+
 .button1 {
   @apply h-[44px] w-[50px] items-center justify-center gap-[2px] rounded-[6px] border border-[#636262] bg-gradient-to-b text-[16px] font-extrabold tracking-[1px] transition disabled:opacity-25 dark:border-[1px] dark:fill-white dark:text-white md:w-[110px];
 }
@@ -48,14 +49,14 @@ label {
 }
 
 .regularInput {
-  @apply h-[45px] rounded-[6px] border border-[rgba(0,0,0,0.2)] p-4 outline-none transition dark:border-[#1C1C1C] dark:bg-[#1C1C1C] dark:text-white;
+  @apply h-[45px] rounded-[6px] border border-[rgba(0,0,0,0.2)] p-4 outline-none dark:border-[#1C1C1C] dark:bg-[#1C1C1C] dark:text-white;
 }
 
 input:-webkit-autofill,
 input:-webkit-autofill:hover,
 input:-webkit-autofill:focus,
 input:-webkit-autofill:active {
-  @apply shadow-[0_0_0_30px_white_inset] transition dark:shadow-[0_0_0_30px_#1c1c1c_inset];
+  @apply shadow-[0_0_0_30px_white_inset] dark:shadow-[0_0_0_30px_#1c1c1c_inset];
   -webkit-text-fill-color: black;
   -webkit-background-clip: text;
   background-clip: text;

@@ -32,7 +32,7 @@ export default function FormCreateAccount() {
           required
           autoComplete="email"
           placeholder="example@domain.com"
-          className="regularInput transition"
+          className="regularInput"
           id="email"
           type="email"
           pattern="[a-z0-9._%+\-]+@[a-z0-9.\-]+\.[a-z]{2,}$"
@@ -54,7 +54,7 @@ export default function FormCreateAccount() {
           </label>
         </div>
         <input
-          className="regularInput transition"
+          className="regularInput"
           name="password"
           required
           minLength={8}
@@ -80,7 +80,7 @@ export default function FormCreateAccount() {
           </label>
         </div>
         <input
-          className="regularInput transition"
+          className="regularInput"
           name="passwordConfirm"
           required
           minLength={8}
