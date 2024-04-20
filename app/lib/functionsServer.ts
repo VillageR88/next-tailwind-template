@@ -5,12 +5,8 @@ import { CollectionGroup } from './interfaces';
 import { redirect } from 'next/navigation';
 import { Routes } from '../routes';
 
-export const checkData = async () => {
-  await Promise.resolve();
-  const data = cookies().get('data')?.value;
-  if (!data) return null;
-  return data;
-};
+const server = process.env.SERVER;
+if (!server) throw new Error('Server not defined');
 
 export const checkToken = async () => {
   const token = cookies().get('token')?.value;
@@ -23,13 +19,6 @@ export const clearToken = async () => {
   await Promise.resolve();
   cookies().delete('token');
 };
-
-let server;
-if (process.env.NODE_ENV === 'production') {
-  server = 'https://serverexpress1-production.up.railway.app/';
-} else {
-  server = 'http://192.168.1.104:3000/';
-}
 
 export const handleLoadCollectionGroup = async ({ token }: { token: string }) => {
   try {

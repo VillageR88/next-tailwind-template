@@ -6,7 +6,7 @@ export default function ButtonResetPassword() {
     <Link href={Routes.resetPassword}>
       <button
         type="button"
-        className="group flex items-center gap-[6px] text-[14px] font-semibold tracking-[-0.19px] text-[darkorange] dark:font-normal dark:tracking-normal dark:text-[orange]"
+        className="group flex items-center gap-[6px] text-[14px] font-semibold tracking-[-0.19px] text-[darkorange] active:cursor-wait dark:font-normal dark:tracking-normal dark:text-[orange]"
       >
         <svg
           className="fill-[darkorange] dark:fill-[orange]"
