@@ -28,7 +28,7 @@
 }
 
 h1 {
-  @apply text-3xl font-medium transition dark:text-white md:text-4xl;
+  @apply text-4xl font-medium transition dark:text-white;
 }
 
 h2 {
