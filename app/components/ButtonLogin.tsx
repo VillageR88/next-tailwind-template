@@ -21,7 +21,7 @@ const ButtonLogin = () => {
         </svg>
         <div className="flex flex-col">
           <span className="hidden leading-[13px] md:block">Back to login</span>
-          <span className="block leading-[13px] md:hidden">new account</span>
+          <span className="block leading-[13px] md:hidden">login</span>
           <div className="h-[1px] w-full transition group-hover:bg-[darkorange] dark:group-hover:bg-[orange]"></div>
         </div>
       </button>
