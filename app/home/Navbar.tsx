@@ -20,7 +20,7 @@ const Navbar = ({ token, loading }: { token: string; loading: boolean }) => {
   };
 
   return (
-    <nav className="flex w-full justify-center border-[#313131] px-8 py-4">
+    <nav className="flex w-full justify-center border-[#313131] px-6 py-4">
       <div className="flex size-full max-w-[90em] items-center justify-between">
         <div className="flex items-center gap-2 md:gap-6">
           <Logo alternate />
