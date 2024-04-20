@@ -19,7 +19,7 @@ export default function ButtonResetPassword() {
         </svg>
         <div className="flex flex-col">
           <span className="hidden leading-[13px] md:block">Reset my password</span>
-          <span className="block leading-[1px] md:hidden">reset</span>
+          <span className="block leading-[13px] md:hidden">reset</span>
           <div className="h-[1px] w-full transition group-hover:bg-[darkorange] dark:group-hover:bg-[orange]"></div>
         </div>
       </button>
