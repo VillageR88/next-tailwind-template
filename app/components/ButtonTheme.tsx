@@ -36,6 +36,12 @@ export default function ButtonTheme() {
       }
     }
   }, [theme]);
+  useEffect(() => {
+    if (theme !== null && !document.body.classList.contains('transition')) document.body.classList.add('transition');
+    return () => {
+      document.body.classList.remove('transition');
+    };
+  }, [theme]);
 
   /*  useEffect(() => {
     const handleBeforeUnload = () => {
