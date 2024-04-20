@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 
 enum Theme {
   dark = 'dark',
@@ -8,7 +8,24 @@ enum Theme {
 }
 
 export default function ButtonTheme() {
+  const ref = useRef<HTMLButtonElement>(null);
   const [theme, setTheme] = useState<Theme | null>(null);
+  useEffect(() => {
+    const constantMouseRef = ref.current;
+    if (!constantMouseRef) return;
+    const handleMouseEnter = () => {
+      document.documentElement.classList.add('themeHover');
+    };
+    const handleMouseLeave = () => {
+      document.documentElement.classList.remove('themeHover');
+    };
+    constantMouseRef.addEventListener('mouseenter', handleMouseEnter);
+    constantMouseRef.addEventListener('mouseleave', handleMouseLeave);
+    return () => {
+      constantMouseRef.removeEventListener('mouseenter', handleMouseEnter);
+      constantMouseRef.removeEventListener('mouseleave', handleMouseLeave);
+    };
+  }, [theme]);
   useEffect(() => {
     if (theme === null) {
       const value = localStorage.getItem('theme');
@@ -58,6 +75,7 @@ export default function ButtonTheme() {
 
   return (
     <button
+      ref={ref}
       onClick={() => {
         theme === Theme.dark ? setTheme(Theme.light) : setTheme(Theme.dark);
       }}

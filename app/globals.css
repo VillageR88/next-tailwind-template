@@ -7,7 +7,6 @@
   src: url('/assets/fonts/instrumentSans/InstrumentSans-VariableFont_wdth,wght.ttf') format('truetype');
 }
 
-
 .button1 {
   @apply h-[44px] w-[50px] items-center justify-center gap-[2px] rounded-[6px] border border-[#636262] bg-gradient-to-b text-[16px] font-extrabold tracking-[1px] transition disabled:opacity-25 dark:border-[1px] dark:fill-white dark:text-white md:w-[110px];
 }
@@ -50,6 +49,10 @@ label {
 
 .regularInput {
   @apply h-[45px] rounded-[6px] border border-[rgba(0,0,0,0.2)] p-4 outline-none dark:border-[#1C1C1C] dark:bg-[#1C1C1C] dark:text-white;
+}
+
+.themeHover .regularInput {
+  @apply transition;
 }
 
 input:-webkit-autofill,
