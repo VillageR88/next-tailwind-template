@@ -2,11 +2,9 @@
 
 import { createInvoiceLogin } from '../lib/functionsServer';
 import ButtonSubmit from '../components/ButtonSubmit';
-import ButtonCreateAccount from '../components/ButtonCreateAccount';
+import ButtonLogin from '../components/ButtonLogin';
 import { useFormState } from 'react-dom';
 import ModuleEmail from '../components/ModuleEmail';
-import ModulePassword from '../components/ModulePassword';
-import ButtonResetPassword from '@/app/components/ButtonResetPassword';
 
 export default function FormLogin() {
   interface ErrorMessage {
@@ -16,9 +14,8 @@ export default function FormLogin() {
 
   return (
     <form action={action} id="form-login" className="flex size-full flex-col gap-6">
-      <ModuleEmail Button={ButtonCreateAccount} />
-      <ModulePassword Button={ButtonResetPassword} />
-      <ButtonSubmit state={state.error} type="login" />
+      <ModuleEmail Button={ButtonLogin} />
+      <ButtonSubmit state={state.error} type="resetPassword" />
     </form>
   );
 }

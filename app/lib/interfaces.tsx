@@ -12,7 +12,7 @@ interface Collection {
   notes: Note[];
 }
 
-type TButtonSubmit = 'login' | 'createAccount';
+type TButtonSubmit = 'login' | 'createAccount' | 'resetPassword';
 
 interface CollectionGroup {
   collections: Collection[];

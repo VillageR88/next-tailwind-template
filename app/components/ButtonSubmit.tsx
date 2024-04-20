@@ -19,6 +19,10 @@ const submitButtonProps = {
       </svg>
     ),
   },
+  resetPassword: {
+    title: 'Reset Password',
+    icon: null,
+  },
 };
 
 export default function ButtonSubmit({ type, state }: { type: TButtonSubmit; state?: string }) {
