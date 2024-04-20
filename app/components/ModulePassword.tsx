@@ -1,4 +1,4 @@
-export default function ModulePassword() {
+export default function ModulePassword({ Button }: { Button?: () => JSX.Element }) {
   return (
     <div className="flex flex-col gap-2">
       <div className="flex justify-between px-1">
@@ -14,6 +14,7 @@ export default function ModulePassword() {
           </svg>
           <span>Password</span>
         </label>
+        {Button && <Button />}
       </div>
       <input
         className="regularInput"
