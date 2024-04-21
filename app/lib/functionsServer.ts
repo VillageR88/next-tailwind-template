@@ -61,26 +61,6 @@ export const handleSaveCollectionGroup = async ({ data, token }: { data: Collect
   }
 };
 
-export const handleSubmit = async ({ email, password }: { email: string; password: string }) => {
-  try {
-    const response = await fetch(`${server}login`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ email, password }),
-    });
-    if (response.ok) {
-      const { token } = (await response.json()) as { token: string };
-      return token;
-    } else {
-      return 'unsuccessful';
-    }
-  } catch (error) {
-    console.error(error);
-  }
-};
-
 export const handleCreateAccount = async ({
   email,
   password,
@@ -152,20 +132,30 @@ export async function createInvoiceCreateEmail(prev: ErrorMessage, formData: For
 }
 
 export async function createInvoiceLogin(prev: ErrorMessage, formData: FormData): Promise<ErrorMessage> {
-  const response = await handleSubmit({
-    email: formData.get('email') as string,
-    password: formData.get('password') as string,
-  })
-    .then((e) => {
-      if (e && e !== 'unsuccessful') {
-        cookies().set({ name: 'token', value: e, httpOnly: true });
-        return ' ';
-      }
-    })
-    .catch((e) => {
-      console.log(e);
-      console.log('error occurred');
+  let response;
+  try {
+    response = await fetch(`${server}login`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        email: formData.get('email'),
+        password: formData.get('password'),
+      }),
     });
-  if (!response) return { error: 'Failed to login' };
-  redirect(Routes.home);
+    if (response.ok) {
+      const { token } = (await response.json()) as { token: string };
+      cookies().set({ name: 'token', value: token, httpOnly: true });
+      return { error: '' };
+    } else {
+      return { error: 'Failed to login' };
+    }
+  } catch (error) {
+    return { error: 'Server error' };
+  } finally {
+    if (response?.status === 200) {
+      redirect(Routes.home);
+    }
+  }
 }
