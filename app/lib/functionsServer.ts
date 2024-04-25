@@ -126,3 +126,27 @@ export async function createInvoiceLogin(prev: ErrorMessage, formData: FormData)
     }
   }
 }
+
+export async function createInvoiceResetPassword(prev: ErrorMessage, formData: FormData): Promise<ErrorMessage> {
+  let response;
+  try {
+    response = await fetch(`${server}reset-password`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        email: formData.get('email'),
+      }),
+    });
+    if (response.ok) {
+      return { error: 'success' };
+    } else {
+      return {
+        error: 'success',
+      };
+    }
+  } catch (error) {
+    return { error: 'Server error' };
+  }
+}
