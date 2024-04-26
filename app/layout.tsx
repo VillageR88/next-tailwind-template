@@ -3,9 +3,9 @@ import type { Metadata } from 'next';
 import DataContext from '@/app/_providers/DataContext';
 
 export const metadata: Metadata = {
-  title: 'My App',
-  applicationName: 'My App',
-  description: 'My App',
+  title: 'MyNotebook',
+  description: 'Designed for efficient note-taking and task management.',
+  //applicationName: 'My App',
 } as const;
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
