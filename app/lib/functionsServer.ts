@@ -80,7 +80,6 @@ export async function createInvoiceCreateEmail(prev: ErrorMessage, formData: For
       body: JSON.stringify({
         email: formData.get('email'),
         password: formData.get('password'),
-        passwordConfirm: formData.get('passwordConfirm'),
       }),
     });
 
@@ -127,10 +126,10 @@ export async function createInvoiceLogin(prev: ErrorMessage, formData: FormData)
   }
 }
 
-export async function createInvoiceResetPassword(prev: ErrorMessage, formData: FormData): Promise<ErrorMessage> {
+export async function createInvoiceResetRequest(prev: ErrorMessage, formData: FormData): Promise<ErrorMessage> {
   let response;
   try {
-    response = await fetch(`${server}reset-password`, {
+    response = await fetch(`${server}reset-password/request`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -148,5 +147,42 @@ export async function createInvoiceResetPassword(prev: ErrorMessage, formData: F
     }
   } catch (error) {
     return { error: 'Server error' };
+  }
+}
+
+export async function createInvoiceReset(prev: ErrorMessage, formData: FormData, token: string) {
+  if (formData.get('password') !== formData.get('passwordConfirm'))
+    return {
+      error: 'Passwords do not match',
+    };
+
+  let response;
+  try {
+    response = await fetch(`${server}reset-password/reset/${token}`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        password: formData.get('password'),
+        token: token,
+      }),
+    });
+
+    if (response.ok) {
+      const { token } = (await response.json()) as { token: string };
+      cookies().set({ name: 'token', value: token, httpOnly: true });
+      return { error: 'success' };
+    } else {
+      return {
+        error: 'Failed to reset password',
+      };
+    }
+  } catch (error) {
+    return { error: 'Server error' };
+  } finally {
+    if (response?.status === 200) {
+      redirect(Routes.home);
+    }
   }
 }

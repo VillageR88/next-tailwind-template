@@ -1,5 +1,5 @@
 import FormReset from './FormReset';
-import LayoutAccount from '../components/LayoutAccount';
+import LayoutAccount from '../../../components/LayoutAccount';
 
 export default function Login() {
   return (
