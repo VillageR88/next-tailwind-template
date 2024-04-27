@@ -18,4 +18,8 @@ interface CollectionGroup {
   collections: Collection[];
 }
 
-export type { CollectionGroup, Collection, Note, TButtonSubmit };
+interface Message {
+  message: string;
+}
+
+export type { CollectionGroup, Collection, Note, TButtonSubmit, Message };

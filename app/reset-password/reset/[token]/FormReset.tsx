@@ -5,6 +5,7 @@ import ButtonSubmit from '../../../components/ButtonSubmit';
 import { useFormState } from 'react-dom';
 import ModulePassword from '../../../components/ModulePassword';
 import ModulePasswordConfirm from '@/app/components/ModulePasswordConfirm';
+import type { Message } from '../../../lib/interfaces';
 
 export default function FormReset() {
   let token: string;
@@ -12,13 +13,10 @@ export default function FormReset() {
     token = window.location.pathname.split('/')[3];
   }
 
-  interface ErrorMessage {
-    error: string;
-  }
-  const [state, action] = useFormState<ErrorMessage, FormData>(
+  const [state, action] = useFormState<Message, FormData>(
     (state, payload) => createInvoiceReset(state, payload, token),
     {
-      error: '',
+      message: '',
     },
   );
 
@@ -26,7 +24,7 @@ export default function FormReset() {
     <form action={action} id="form-login" className="flex size-full flex-col gap-6">
       <ModulePassword newPassword />
       <ModulePasswordConfirm />
-      <ButtonSubmit state={state.error} type="resetPassword" />
+      <ButtonSubmit state={state.message} type="resetPassword" />
     </form>
   );
 }

@@ -6,18 +6,16 @@ import ModuleEmail from '../components/ModuleEmail';
 import ModulePassword from '../components/ModulePassword';
 import ModulePasswordConfirm from '../components/ModulePasswordConfirm';
 import ButtonLogin from '../components/ButtonLogin';
+import type { Message } from '../lib/interfaces';
 
 export default function FormCreateAccount() {
-  interface ErrorMessage {
-    error: string;
-  }
-  const [state, action] = useFormState<ErrorMessage, FormData>(createInvoiceCreateEmail, { error: '' });
+  const [state, action] = useFormState<Message, FormData>(createInvoiceCreateEmail, { message: '' });
   return (
     <form action={action} id="form-createAccount" className="flex size-full flex-col gap-6">
       <ModuleEmail Button={ButtonLogin} />
       <ModulePassword />
       <ModulePasswordConfirm />
-      <ButtonSubmit state={state.error} type="createAccount" />
+      <ButtonSubmit state={state.message} type="createAccount" />
     </form>
   );
 }

@@ -42,7 +42,7 @@ const Item = ({
       dragControls={controls}
       value={collection}
       key={collection.id}
-      className="group/group2 flex select-none flex-col gap-[6px] rounded-[6px] border border-[#f5f5f5] bg-white px-3 py-4 drop-shadow-sm dark:border-[#313131]  dark:bg-[#232323] "
+      className="group/group2 flex select-none flex-col gap-[6px] rounded-[6px] border border-[#f5f5f5] bg-white px-3 py-4 drop-shadow-sm transition-colors dark:border-[#313131]  dark:bg-[#232323] "
     >
       <div className="flex justify-between px-1">
         <div className="flex max-w-[90%] items-center gap-3 pb-[8px]">

@@ -4,6 +4,7 @@ import { cookies } from 'next/headers';
 import { CollectionGroup } from './interfaces';
 import { redirect } from 'next/navigation';
 import { Routes } from '../routes';
+import type { Message } from '@/app/lib/interfaces';
 
 const server = process.env.SERVER;
 if (!server) throw new Error('Server not defined');
@@ -61,14 +62,10 @@ export const handleSaveCollectionGroup = async ({ data, token }: { data: Collect
   }
 };
 
-interface ErrorMessage {
-  error: string;
-}
-
-export async function createInvoiceCreateEmail(prev: ErrorMessage, formData: FormData): Promise<ErrorMessage> {
+export async function createInvoiceCreateEmail(prev: Message, formData: FormData): Promise<Message> {
   if (formData.get('password') !== formData.get('passwordConfirm'))
     return {
-      error: 'Passwords do not match',
+      message: 'Passwords do not match',
     };
   let response;
   try {
@@ -86,18 +83,18 @@ export async function createInvoiceCreateEmail(prev: ErrorMessage, formData: For
     if (response.ok) {
       const { token } = (await response.json()) as { token: string };
       cookies().set({ name: 'token', value: token, httpOnly: true });
-      return { error: '' };
+      return { message: '' };
     }
   } catch (error) {
-    return { error: 'Server error' };
+    return { message: 'Server error' };
   } finally {
     if (response?.status === 200) redirect(Routes.home);
-    else if (response?.status === 400) return { error: 'User already exists' };
-    else return { error: 'Server error' };
+    else if (response?.status === 400) return { message: 'User already exists' };
+    else return { message: 'Server error' };
   }
 }
 
-export async function createInvoiceLogin(prev: ErrorMessage, formData: FormData): Promise<ErrorMessage> {
+export async function createInvoiceLogin(prev: Message, formData: FormData): Promise<Message> {
   let response;
   try {
     response = await fetch(`${server}login`, {
@@ -113,12 +110,12 @@ export async function createInvoiceLogin(prev: ErrorMessage, formData: FormData)
     if (response.ok) {
       const { token } = (await response.json()) as { token: string };
       cookies().set({ name: 'token', value: token, httpOnly: true });
-      return { error: '' };
+      return { message: '' };
     } else {
-      return { error: 'Failed to login' };
+      return { message: 'Invalid credentials' };
     }
   } catch (error) {
-    return { error: 'Server error' };
+    return { message: 'Server error' };
   } finally {
     if (response?.status === 200) {
       redirect(Routes.home);
@@ -126,7 +123,7 @@ export async function createInvoiceLogin(prev: ErrorMessage, formData: FormData)
   }
 }
 
-export async function createInvoiceResetRequest(prev: ErrorMessage, formData: FormData): Promise<ErrorMessage> {
+export async function createInvoiceResetRequest(prev: Message, formData: FormData): Promise<Message> {
   let response;
   try {
     response = await fetch(`${server}reset-password/request`, {
@@ -139,21 +136,21 @@ export async function createInvoiceResetRequest(prev: ErrorMessage, formData: Fo
       }),
     });
     if (response.ok) {
-      return { error: 'success' };
+      return { message: 'success' };
     } else {
       return {
-        error: 'success',
+        message: 'success',
       };
     }
   } catch (error) {
-    return { error: 'Server error' };
+    return { message: 'Server error' };
   }
 }
 
-export async function createInvoiceReset(prev: ErrorMessage, formData: FormData, token: string) {
+export async function createInvoiceReset(prev: Message, formData: FormData, token: string): Promise<Message> {
   if (formData.get('password') !== formData.get('passwordConfirm'))
     return {
-      error: 'Passwords do not match',
+      message: 'Passwords do not match',
     };
 
   let response;
@@ -172,14 +169,14 @@ export async function createInvoiceReset(prev: ErrorMessage, formData: FormData,
     if (response.ok) {
       const { token } = (await response.json()) as { token: string };
       cookies().set({ name: 'token', value: token, httpOnly: true });
-      return { error: 'success' };
+      return { message: 'success' };
     } else {
       return {
-        error: 'Failed to reset password',
+        message: 'Failed to reset password',
       };
     }
   } catch (error) {
-    return { error: 'Server error' };
+    return { message: 'Server error' };
   } finally {
     if (response?.status === 200) {
       redirect(Routes.home);
