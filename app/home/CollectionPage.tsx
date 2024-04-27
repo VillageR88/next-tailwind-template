@@ -44,7 +44,7 @@ const CollectionPage = ({
               onClick={() => {
                 setTitleEditable(true);
               }}
-              className="max-w-[80%] truncate pb-[8px] text-left text-[18px] font-bold transition hover:text-[darkorange] dark:text-white dark:hover:text-[orange]"
+              className="max-w-[80%] truncate pb-[8px] text-left text-[18px] font-bold transition-colors hover:text-[darkorange] dark:text-white dark:hover:text-[orange]"
             >
               {dataContext.collections[collectionPage - 1].title}
             </button>
@@ -73,7 +73,7 @@ const CollectionPage = ({
                 });
                 setDataContext({ collections: newCollections });
               }}
-              className="h-fit w-[84%] border-none bg-transparent p-0 text-left text-[18px] font-bold outline-none transition dark:text-white"
+              className="h-fit w-[84%] border-none bg-transparent p-0 text-left text-[18px] font-bold outline-none transition-colors dark:text-white"
             />
           )}
           <div className="flex gap-2 pb-3">
@@ -146,7 +146,7 @@ const CollectionPage = ({
                     initialDataContext.current = newData({ data: dataContext });
                     setDataContext(newData({ data: dataContext }));
                   }}
-                  className="font-semibold tracking-[-0.3px] transition hover:text-[darkorange] dark:font-normal dark:tracking-normal dark:text-white dark:hover:text-[orange]"
+                  className="font-semibold tracking-[-0.3px] transition-colors hover:text-[darkorange] dark:font-normal dark:tracking-normal dark:text-white dark:hover:text-[orange]"
                 >
                   {note.title}
                 </button>

@@ -56,7 +56,7 @@ const Item = ({
               initialDataContext.current = newData({ data: dataContext });
               setDataContext(newData({ data: dataContext }));
             }}
-            className="truncate text-left text-[18px] font-bold duration-[150ms] hover:text-[darkorange] dark:text-white dark:hover:text-[orange]"
+            className="truncate text-left text-[18px] font-bold transition-colors hover:text-[darkorange] dark:text-white dark:hover:text-[orange]"
           >
             {collection.title}
           </button>
@@ -91,10 +91,12 @@ const ItemsNested = ({ note }: { note: Note }) => {
       dragControls={controls}
       value={note}
       key={note.id}
-      className="group/group3 rounded-[6px] border border-[rgba(0,0,0,0.2)] p-[10px] font-semibold tracking-[-0.3px] transition-colors duration-[0ms] dark:border-[#1C1C1C] dark:bg-[#1C1C1C] dark:font-normal dark:tracking-normal dark:text-white dark:transition-colors"
+      className="group/group3 rounded-[6px] border border-[rgba(0,0,0,0.2)] bg-white p-[10px] transition-colors dark:border-[#1C1C1C] dark:bg-[#1C1C1C]"
     >
       <div className="flex justify-between pl-1 pr-2">
-        <span>{note.title}</span>
+        <span className="font-semibold tracking-[-0.3px] transition-colors dark:font-normal dark:tracking-normal dark:text-white">
+          {note.title}
+        </span>
         {/*
           <ButtonDrag
             func={(e) => {
