@@ -132,7 +132,7 @@ const CollectionPage = ({
               //dragListener={false}
               dragControls={controls}
               value={note}
-              className="rounded-[6px] border border-[rgba(0,0,0,0.2)] bg-white p-[10px] dark:border-[#1C1C1C] dark:bg-[#1C1C1C]"
+              className="rounded-[6px] border border-[rgba(0,0,0,0.2)] bg-white p-[10px] transition-colors dark:border-[#1C1C1C] dark:bg-[#1C1C1C]"
               key={note.id}
             >
               <div className="flex justify-between pl-1 pr-2">
